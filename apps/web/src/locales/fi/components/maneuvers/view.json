@@ -1,0 +1,16 @@
+{
+  "window": "Alkaen {from} ja päättyen {to}.",
+  "intro": "Pelaajien ja klaanien sijoitukset Mainepisteiden mukaan.",
+  "no-edition": "Tälle palvelimelle ei ole vielä tallennettu yhtään kautta.",
+  "not-started": "Sijoitukset ovat avoinna {date}.",
+  "not-started-undated": "Sijoitukset eivät ole vielä avoinna.",
+  "tank-cutoff": "Ajoneuvoraja",
+  "tank-cutoff-hint": "Sijalla {places} olevan pelaajan hallussa olevat Mainepisteet.",
+  "clan-cutoff": "Kultaraja",
+  "clan-cutoff-hint": "Sijalla {places} olevan klaanin hallussa olevat Mainepisteet.",
+  "ranked-players": "Sijoittuneet pelaajat",
+  "ranked-clans": "Sijoittuneet klaanit",
+  "players": "Pelaajat",
+  "clans": "Klaanit",
+  "recomputed": "Laskettu uudelleen {at}"
+}

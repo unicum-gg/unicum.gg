@@ -1,0 +1,16 @@
+{
+  "window": "Od {from} do {to}.",
+  "intro": "Poredak igrača i klanova, rangiran prema Bodovima slave.",
+  "no-edition": "Nijedno izdanje još nije zabilježeno za ovaj server.",
+  "not-started": "Poredak će biti otvoren {date}.",
+  "not-started-undated": "Poredak još nije otvoren.",
+  "tank-cutoff": "Prag za vozilo",
+  "tank-cutoff-hint": "Bodovi slave koje je zadržao igrač na {places}. mjestu.",
+  "clan-cutoff": "Prag za zlato",
+  "clan-cutoff-hint": "Bodovi slave koje je zadržao klan na {places}. mjestu.",
+  "ranked-players": "Rangirani igrači",
+  "ranked-clans": "Rangirani klanovi",
+  "players": "Igrači",
+  "clans": "Klana",
+  "recomputed": "Ponovo izračunato {at}"
+}

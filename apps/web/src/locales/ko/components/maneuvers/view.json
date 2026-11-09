@@ -1,0 +1,16 @@
+{
+  "window": "{from}에서 {to}까지.",
+  "intro": "명예 점수에 따른 플레이어 및 클랜 순위입니다.",
+  "no-edition": "이 서버에는 아직 기록된 에디션이 없습니다.",
+  "not-started": "순위는 {date}에 열립니다.",
+  "not-started-undated": "순위는 아직 열리지 않았습니다.",
+  "tank-cutoff": "차량 컷오프",
+  "tank-cutoff-hint": "{places}위 플레이어가 보유한 명예 점수입니다.",
+  "clan-cutoff": "골드 컷오프",
+  "clan-cutoff-hint": "{places}위 클랜이 보유한 명예 점수입니다.",
+  "ranked-players": "순위권 플레이어",
+  "ranked-clans": "순위권 클랜",
+  "players": "플레이어",
+  "clans": "클랜",
+  "recomputed": "{at}에 재계산됨"
+}

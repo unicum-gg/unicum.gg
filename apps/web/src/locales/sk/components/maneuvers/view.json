@@ -1,0 +1,16 @@
+{
+  "window": "Od {from} do {to}.",
+  "intro": "Poradie hráčov a klanov zoradené podľa bodov slávy.",
+  "no-edition": "Pre tento server zatiaľ nebol zaznamenaný žiadny ročník.",
+  "not-started": "Poradie sa otvára {date}.",
+  "not-started-undated": "Poradie ešte nie je otvorené.",
+  "tank-cutoff": "Prag vozidiel",
+  "tank-cutoff-hint": "Body slávy v lasti hráča na {places}. mieste.",
+  "clan-cutoff": "Prag zlata",
+  "clan-cutoff-hint": "Body slávy v lasti klanu na {places}. mieste.",
+  "ranked-players": "Hodnotení hráči",
+  "ranked-clans": "Hodnotené klany",
+  "players": "Hráči",
+  "clans": "Clany",
+  "recomputed": "Prepočítané {at}"
+}

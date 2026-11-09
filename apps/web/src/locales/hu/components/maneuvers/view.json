@@ -1,0 +1,16 @@
+{
+  "window": "Kezdő időpont: {from}, záró időpont: {to}.",
+  "intro": "Játékosok és klánok ranglistája, Dicsőségpontok alapján rangsorolva.",
+  "no-edition": "Ezen a szerveren még nincs rögzített kiadás.",
+  "not-started": "A ranglista ekkor nyílik meg: {date}.",
+  "not-started-undated": "A ranglista még nem nyitott.",
+  "tank-cutoff": "Járműküszöbérték",
+  "tank-cutoff-hint": "A {places}. helyen álló játékos által megszerzett Dicsőségpontok.",
+  "clan-cutoff": "Aranyküszöbérték",
+  "clan-cutoff-hint": "A {places}. helyen álló klán által megszerzett Dicsőségpontok.",
+  "ranked-players": "Rangsorolt játékosok",
+  "ranked-clans": "Rangsorolt klánok",
+  "players": "Játékosok",
+  "clans": "Klánok",
+  "recomputed": "Újraszámítva ekkor: {at}"
+}

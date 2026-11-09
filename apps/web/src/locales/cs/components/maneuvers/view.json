@@ -1,0 +1,16 @@
+{
+  "window": "Od {from} do {to}.",
+  "intro": "Pořadí hráčů a klanů seřazené podle Body slávy.",
+  "no-edition": "Pro tento server zatím nebyla zaznamenána žádná edice.",
+  "not-started": "Pořadí bude otevřeno {date}.",
+  "not-started-undated": "Pořadí zatím není otevřené.",
+  "tank-cutoff": "Hranice vozidla",
+  "tank-cutoff-hint": "Body slávy vlastněné hráčem na {places}. místě.",
+  "clan-cutoff": "Hranice zlaťáků",
+  "clan-cutoff-hint": "Body slávy vlastněné klanem na {places}. místě.",
+  "ranked-players": "Hráči v žebříčku",
+  "ranked-clans": "Klany v žebříčku",
+  "players": "Hráči",
+  "clans": "Klany",
+  "recomputed": "Přepočítáno {at}"
+}

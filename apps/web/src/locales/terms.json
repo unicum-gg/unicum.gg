@@ -838,7 +838,11 @@
     "length": "المدة",
     "ones": "الواحدات",
     "premium": "مميز",
-    "Change": "تغيير"
+    "Change": "تغيير",
+    "Defeats": "الهزائم",
+    "Fame": "الشهرة",
+    "Fame Points": "نقاط الشهرة",
+    "Ranked players": "اللاعبون المصنفون"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1680,7 +1684,11 @@
     "length": "працягласць",
     "ones": "адзінкі",
     "premium": "прэміум",
-    "Change": "Змена"
+    "Change": "Змена",
+    "Defeats": "Паразы",
+    "Fame": "Слава",
+    "Fame Points": "Ачкі славы",
+    "Ranked players": "Рэйтынгавыя гульцы"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -2738,7 +2746,10 @@
     "ones": "такива",
     "premium": "премиум",
     "Platoon": "Взвод",
-    "Change": "Промяна"
+    "Change": "Промяна",
+    "Fame": "Слава",
+    "Fame Points": "Точки за слава",
+    "Ranked players": "Класирани играчи"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -3588,7 +3599,11 @@
     "length": "trajanje",
     "ones": "oni",
     "premium": "premium",
-    "Change": "Promijeni"
+    "Change": "Promijeni",
+    "Defeats": "Porazi",
+    "Fame": "Slava",
+    "Fame Points": "Bodovi slave",
+    "Ranked players": "Rangirani igrači"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -4657,7 +4672,10 @@
     "ones": "jedničky",
     "premium": "prémiové",
     "Platoon": "Četa",
-    "Change": "Změnit"
+    "Change": "Změnit",
+    "Fame": "Sláva",
+    "Fame Points": "Body slávy",
+    "Ranked players": "Hráči v žebříčku"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -5732,7 +5750,10 @@
     "ones": "dem",
     "premium": "premium",
     "Platoon": "Deling",
-    "Change": "Ændring"
+    "Change": "Ændring",
+    "Fame": "Berømmelse",
+    "Fame Points": "Berømmelsespoint",
+    "Ranked players": "Rangerede spillere"
   },
   "de": {
     "(optional)": "(optional)",
@@ -6800,7 +6821,10 @@
     "ones": "Gefechte",
     "premium": "Premium",
     "Platoon": "Zug",
-    "Change": "Änderung"
+    "Change": "Änderung",
+    "Fame": "Ruhm",
+    "Fame Points": "Ruhmpunkte",
+    "Ranked players": "Ranglistenspieler"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -7874,7 +7898,10 @@
     "ones": "μονάδες",
     "premium": "premium",
     "Platoon": "Ουλαμός",
-    "Change": "Αλλαγή"
+    "Change": "Αλλαγή",
+    "Fame": "Φήμη",
+    "Fame Points": "Πόντοι Φήμης",
+    "Ranked players": "Παίκτες κατάταξης"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -8928,7 +8955,10 @@
     "ones": "unos",
     "premium": "premium",
     "Platoon": "Pelotón",
-    "Change": "Cambio"
+    "Change": "Cambio",
+    "Fame": "Fama",
+    "Fame Points": "Puntos de fama",
+    "Ranked players": "Jugadores clasificados"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -10007,7 +10037,10 @@
     "ones": "kappaleet",
     "premium": "premium",
     "Platoon": "Osasto",
-    "Change": "Muutos"
+    "Change": "Muutos",
+    "Fame": "Maine",
+    "Fame Points": "Mainepisteet",
+    "Ranked players": "Sijoittuneet pelaajat"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -11065,7 +11098,10 @@
     "ones": "ceux",
     "premium": "premium",
     "Platoon": "Peloton",
-    "Change": "Changement"
+    "Change": "Changement",
+    "Fame": "Renommée",
+    "Fame Points": "Points de renommée",
+    "Ranked players": "Joueurs classés"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -11908,7 +11944,11 @@
     "length": "अवधि",
     "ones": "वाले",
     "premium": "प्रीमियम",
-    "Change": "बदलाव"
+    "Change": "बदलाव",
+    "Defeats": "हार",
+    "Fame": "प्रसिद्धि",
+    "Fame Points": "प्रसिद्धि अंक",
+    "Ranked players": "रैंक वाले खिलाड़ी"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -12980,7 +13020,10 @@
     "ones": "one",
     "premium": "premium",
     "Platoon": "Vod",
-    "Change": "Promijeni"
+    "Change": "Promijeni",
+    "Fame": "Slava",
+    "Fame Points": "Bodovi slave",
+    "Ranked players": "Rangirani igrači"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -14054,7 +14097,10 @@
     "ones": "egyesek",
     "premium": "prémium",
     "Platoon": "Szakasz",
-    "Change": "Módosítás"
+    "Change": "Módosítás",
+    "Fame": "Dicsőség",
+    "Fame Points": "Dicsőségpontok",
+    "Ranked players": "Rangsorolt játékosok"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -15124,7 +15170,10 @@
     "ones": "quelli",
     "premium": "premium",
     "Platoon": "Plotone",
-    "Change": "Modifica"
+    "Change": "Modifica",
+    "Fame": "Fama",
+    "Fame Points": "Punti fama",
+    "Ranked players": "Giocatori classificati"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -16201,7 +16250,10 @@
     "ones": "もの",
     "premium": "プレミアム",
     "Platoon": "小隊",
-    "Change": "変更"
+    "Change": "変更",
+    "Fame": "名声",
+    "Fame Points": "名声ポイント",
+    "Ranked players": "ランキングプレイヤー"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -17045,7 +17097,11 @@
     "length": "Ұзақтығы",
     "ones": "Бірліктер",
     "premium": "Премиум",
-    "Change": "Өзгерту"
+    "Change": "Өзгерту",
+    "Defeats": "Жеңілістер",
+    "Fame": "Даңқ",
+    "Fame Points": "Даңқ ұпайлары",
+    "Ranked players": "Рейтингтегі ойыншылар"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -18126,7 +18182,11 @@
     "ones": "것들",
     "premium": "프리미엄",
     "Platoon": "소대",
-    "Change": "변경"
+    "Change": "변경",
+    "Defeats": "패배",
+    "Fame": "명예",
+    "Fame Points": "명예 점수",
+    "Ranked players": "순위권 플레이어"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -19203,7 +19263,10 @@
     "ones": "vienetai",
     "premium": "premium",
     "Platoon": "Būrys",
-    "Change": "Keisti"
+    "Change": "Keisti",
+    "Fame": "Šlovė",
+    "Fame Points": "Šlovės taškai",
+    "Ranked players": "Reitinguojami žaidėjai"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -20266,7 +20329,10 @@
     "ones": "tie",
     "premium": "premium",
     "Platoon": "Vads",
-    "Change": "Mainīt"
+    "Change": "Mainīt",
+    "Fame": "Slava",
+    "Fame Points": "Slavas punkti",
+    "Ranked players": "Ranga spēlētāji"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -21345,7 +21411,10 @@
     "ones": "exemplaren",
     "premium": "premium",
     "Platoon": "Peloton",
-    "Change": "Wijziging"
+    "Change": "Wijziging",
+    "Fame": "Roem",
+    "Fame Points": "Roempunten",
+    "Ranked players": "Gerangschikte spelers"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -22415,7 +22484,10 @@
     "ones": "enere",
     "premium": "premium",
     "Platoon": "Tropp",
-    "Change": "Endre"
+    "Change": "Endre",
+    "Fame": "Berømmelse",
+    "Fame Points": "Berømmelsespoeng",
+    "Ranked players": "Rangerte spillere"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -23482,7 +23554,10 @@
     "ones": "te",
     "premium": "premium",
     "Platoon": "Pluton",
-    "Change": "Zmień"
+    "Change": "Zmień",
+    "Fame": "Sława",
+    "Fame Points": "Punkty sławy",
+    "Ranked players": "Gracze w rankingu"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -24542,7 +24617,10 @@
     "ones": "uns",
     "premium": "premium",
     "Platoon": "Pelotão",
-    "Change": "Alteração"
+    "Change": "Alteração",
+    "Fame": "Fama",
+    "Fame Points": "Pontos de fama",
+    "Ranked players": "Jogadores classificados"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -25602,7 +25680,10 @@
     "ones": "cele",
     "premium": "premium",
     "Platoon": "Pluton",
-    "Change": "Schimbare"
+    "Change": "Schimbare",
+    "Fame": "Faimă",
+    "Fame Points": "Puncte de faimă",
+    "Ranked players": "Jucători clasați"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -26650,7 +26731,10 @@
     "ones": "те",
     "premium": "премиум",
     "Platoon": "Взвод",
-    "Change": "Изменить"
+    "Change": "Изменить",
+    "Fame": "Слава",
+    "Fame Points": "Очки славы",
+    "Ranked players": "Рейтинговые игроки"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -27496,7 +27580,11 @@
     "length": "dolžina",
     "ones": "tisti",
     "premium": "premium",
-    "Change": "Zmena"
+    "Change": "Zmena",
+    "Defeats": "Prehry",
+    "Fame": "Sláva",
+    "Fame Points": "Body slávy",
+    "Ranked players": "Hodnotení hráči"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -28570,7 +28658,10 @@
     "ones": "oni",
     "premium": "premium",
     "Platoon": "Vod",
-    "Change": "Promena"
+    "Change": "Promena",
+    "Fame": "Slava",
+    "Fame Points": "Poeni slave",
+    "Ranked players": "Rangirani igrači"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -29649,7 +29740,10 @@
     "ones": "ettor",
     "premium": "premium",
     "Platoon": "Pluton",
-    "Change": "Ändra"
+    "Change": "Ändra",
+    "Fame": "Ära",
+    "Fame Points": "Ärepoäng",
+    "Ranked players": "Rankade spelare"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -30724,7 +30818,10 @@
     "ones": "รายการ",
     "premium": "พรีเมียม",
     "Platoon": "หมวดรถถัง",
-    "Change": "เปลี่ยน"
+    "Change": "เปลี่ยน",
+    "Fame": "ชื่อเสียง",
+    "Fame Points": "คะแนนชื่อเสียง",
+    "Ranked players": "ผู้เล่นที่มีอันดับ"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -31570,7 +31667,11 @@
     "length": "haba",
     "ones": "mga iyon",
     "premium": "premium",
-    "Change": "Pagbabago"
+    "Change": "Pagbabago",
+    "Defeats": "Mga pagkatalo",
+    "Fame": "Katanyagan",
+    "Fame Points": "Mga puntos ng katanyagan",
+    "Ranked players": "Mga manlalaro ayon sa ranggo"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -32641,7 +32742,10 @@
     "ones": "olanlar",
     "premium": "premium",
     "Platoon": "Takım",
-    "Change": "Değiştir"
+    "Change": "Değiştir",
+    "Fame": "Şöhret",
+    "Fame Points": "Şöhret Puanları",
+    "Ranked players": "Sıralamadaki oyuncular"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -33705,7 +33809,10 @@
     "ones": "ті",
     "premium": "преміум",
     "Platoon": "Взвод",
-    "Change": "Зміна"
+    "Change": "Зміна",
+    "Fame": "Слава",
+    "Fame Points": "Очки слави",
+    "Ranked players": "Рейтингові гравці"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -34758,7 +34865,10 @@
     "ones": "các mục",
     "premium": "premium",
     "Platoon": "Trung đội",
-    "Change": "Thay đổi"
+    "Change": "Thay đổi",
+    "Fame": "Danh tiếng",
+    "Fame Points": "Điểm Danh tiếng",
+    "Ranked players": "Người chơi xếp hạng"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -35833,6 +35943,9 @@
     "ones": "那些",
     "premium": "高级",
     "Platoon": "组队模式",
-    "Change": "更改"
+    "Change": "更改",
+    "Fame": "名望",
+    "Fame Points": "名望点数",
+    "Ranked players": "排名玩家"
   }
 }

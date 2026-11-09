@@ -15,7 +15,7 @@
     "empty": "Týmto filtrom nezodpovedá žiadna bitka.",
     "result": {
       "win": "Zmage",
-      "loss": "prehry",
+      "loss": "Prehry",
       "draw": "Remízy"
     }
   },

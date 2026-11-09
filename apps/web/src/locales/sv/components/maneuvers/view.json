@@ -1,0 +1,16 @@
+{
+  "window": "Från {from} till {to}.",
+  "intro": "Spelar- och klanställningar, rankade efter Ärepoäng.",
+  "no-edition": "Ingen upplaga har ännu registrerats för denna server.",
+  "not-started": "Ställningarna öppnar {date}.",
+  "not-started-undated": "Ställningarna är inte öppna ännu.",
+  "tank-cutoff": "Fordonsgräns",
+  "tank-cutoff-hint": "Ärepoäng som spelaren på plats {places} har.",
+  "clan-cutoff": "Guldgräns",
+  "clan-cutoff-hint": "Ärepoäng som klanen på plats {places} har.",
+  "ranked-players": "Rankade spelare",
+  "ranked-clans": "Rankade klaner",
+  "players": "Spelare",
+  "clans": "Klaner",
+  "recomputed": "Omberäknad {at}"
+}

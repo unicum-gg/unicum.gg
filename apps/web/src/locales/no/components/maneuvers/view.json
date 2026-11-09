@@ -1,0 +1,16 @@
+{
+  "window": "Fra {from} til {to}.",
+  "intro": "Rangering for spillere og klaner, rangert etter Berømmelsespoeng.",
+  "no-edition": "Ingen utgave er registrert for denne serveren ennå.",
+  "not-started": "Rangeringen åpner {date}.",
+  "not-started-undated": "Rangeringen er ikke åpen ennå.",
+  "tank-cutoff": "Kjøretøygrense",
+  "tank-cutoff-hint": "Berømmelsespoeng holdt av spilleren på {places}. plass.",
+  "clan-cutoff": "Gold-grense",
+  "clan-cutoff-hint": "Berømmelsespoeng holdt av klanen på {places}. plass.",
+  "ranked-players": "Rangerte spillere",
+  "ranked-clans": "Rangerte klaner",
+  "players": "Spillere",
+  "clans": "Klaner",
+  "recomputed": "Beregnet på nytt {at}"
+}

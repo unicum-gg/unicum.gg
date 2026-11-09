@@ -1,0 +1,16 @@
+{
+  "window": "Od {from} do {to}.",
+  "intro": "Klasyfikacja graczy i klanów uporządkowana według Punktów sławy.",
+  "no-edition": "Nie zarejestrowano jeszcze żadnej edycji na tym serwerze.",
+  "not-started": "Klasyfikacja otwiera się {date}.",
+  "not-started-undated": "Klasyfikacja nie jest jeszcze otwarta.",
+  "tank-cutoff": "Próg pojazdu",
+  "tank-cutoff-hint": "Punkty sławy posiadane przez gracza na {places}. miejscu.",
+  "clan-cutoff": "Próg złota",
+  "clan-cutoff-hint": "Punkty sławy posiadane przez klan na {places}. miejscu.",
+  "ranked-players": "Gracze w rankingu",
+  "ranked-clans": "Klany w rankingu",
+  "players": "Gracze",
+  "clans": "Klany",
+  "recomputed": "Obliczone ponownie {at}"
+}

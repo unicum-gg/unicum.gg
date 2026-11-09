@@ -1,0 +1,16 @@
+{
+  "window": "Von {from} bis {to}.",
+  "intro": "Rangliste der Spieler und Clans, nach Ruhmpunkten geordnet.",
+  "no-edition": "Für diesen Server wurde noch keine Ausgabe aufgezeichnet.",
+  "not-started": "Die Rangliste ist ab {date} offen.",
+  "not-started-undated": "Die Rangliste ist noch nicht offen.",
+  "tank-cutoff": "Fahrzeug-Schwellenwert",
+  "tank-cutoff-hint": "Ruhmpunkte des Spielers auf Platz {places}.",
+  "clan-cutoff": "Gold-Schwellenwert",
+  "clan-cutoff-hint": "Ruhmpunkte des Clans auf Platz {places}.",
+  "ranked-players": "Ranglistenspieler",
+  "ranked-clans": "Gewertete Clans",
+  "players": "Spieler",
+  "clans": "Clans",
+  "recomputed": "Neu berechnet: {at}"
+}
