@@ -1,0 +1,16 @@
+{
+  "window": "Từ {from} đến {to}.",
+  "intro": "Bảng xếp hạng người chơi và Clan, được xếp hạng theo Điểm Danh tiếng.",
+  "no-edition": "Chưa có phiên bản nào được ghi nhận cho máy chủ này.",
+  "not-started": "Bảng xếp hạng mở vào {date}.",
+  "not-started-undated": "Bảng xếp hạng chưa mở.",
+  "tank-cutoff": "Ngưỡng xe tăng",
+  "tank-cutoff-hint": "Điểm Danh tiếng do người chơi ở vị trí thứ {places} sở hữu.",
+  "clan-cutoff": "Ngưỡng Gold",
+  "clan-cutoff-hint": "Điểm Danh tiếng do Clan ở vị trí thứ {places} sở hữu.",
+  "ranked-players": "Người chơi xếp hạng",
+  "ranked-clans": "Các Clan xếp hạng",
+  "players": "Người chơi",
+  "clans": "Các Clan",
+  "recomputed": "Đã tính toán lại {at}"
+}

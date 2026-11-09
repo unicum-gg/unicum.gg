@@ -1,0 +1,16 @@
+{
+  "window": "Fra {from} til {to}.",
+  "intro": "Spiller- og klanplaceringer, rangeret efter Berømmelsespoint.",
+  "no-edition": "Der er endnu ikke registreret nogen udgave for denne server.",
+  "not-started": "Placeringerne åbner den {date}.",
+  "not-started-undated": "Placeringerne er ikke åbne endnu.",
+  "tank-cutoff": "Køretøjsgrænse",
+  "tank-cutoff-hint": "Berømmelsespoint afholdt af spilleren på {places}. plads.",
+  "clan-cutoff": "Guldgrænse",
+  "clan-cutoff-hint": "Berømmelsespoint afholdt af klanen på {places}. plads.",
+  "ranked-players": "Rangerede spillere",
+  "ranked-clans": "Rangerede klaner",
+  "players": "Spillere",
+  "clans": "Klaner",
+  "recomputed": "Genberegnet {at}"
+}

@@ -1,0 +1,16 @@
+{
+  "window": "De {from} à {to}.",
+  "intro": "Classement des joueurs et des clans, classé selon les Points de renommée.",
+  "no-edition": "Aucune édition n’a encore été enregistrée pour ce serveur.",
+  "not-started": "Le classement ouvrira le {date}.",
+  "not-started-undated": "Le classement n’est pas encore ouvert.",
+  "tank-cutoff": "Seuil du véhicule",
+  "tank-cutoff-hint": "Points de renommée obtenus par le joueur à la {places}e place.",
+  "clan-cutoff": "Seuil des pièces d’or",
+  "clan-cutoff-hint": "Points de renommée obtenus par le clan à la {places}e place.",
+  "ranked-players": "Joueurs classés",
+  "ranked-clans": "Clans classés",
+  "players": "Joueurs",
+  "clans": "Clans",
+  "recomputed": "Recalculé à {at}"
+}

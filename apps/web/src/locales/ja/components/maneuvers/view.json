@@ -1,0 +1,16 @@
+{
+  "window": "{from}から{to}まで。",
+  "intro": "名声ポイント順のプレイヤーとクランの順位です。",
+  "no-edition": "このサーバーではまだ開催回が記録されていません。",
+  "not-started": "順位は{date}に開きます。",
+  "not-started-undated": "順位はまだ開いていません。",
+  "tank-cutoff": "車両ボーダー",
+  "tank-cutoff-hint": "順位が{places}位のプレイヤーが所持する名声ポイント。",
+  "clan-cutoff": "ゴールドボーダー",
+  "clan-cutoff-hint": "順位が{places}位のクランが所持する名声ポイント。",
+  "ranked-players": "ランキングプレイヤー",
+  "ranked-clans": "ランククラン",
+  "players": "プレイヤー",
+  "clans": "クラン",
+  "recomputed": "{at}に再算出"
+}

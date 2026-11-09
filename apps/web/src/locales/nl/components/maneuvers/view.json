@@ -1,0 +1,16 @@
+{
+  "window": "Van {from} tot {to}.",
+  "intro": "Klassementen van spelers en clans, gerangschikt op Roempunten.",
+  "no-edition": "Er is nog geen editie voor deze server geregistreerd.",
+  "not-started": "De klassementen zijn open vanaf {date}.",
+  "not-started-undated": "De klassementen zijn nog niet open.",
+  "tank-cutoff": "Voertuiggrens",
+  "tank-cutoff-hint": "Roempunten behaald door de speler op de {places}e plaats.",
+  "clan-cutoff": "Goudgrens",
+  "clan-cutoff-hint": "Roempunten behaald door de clan op de {places}e plaats.",
+  "ranked-players": "Gerangschikte spelers",
+  "ranked-clans": "Gerangschikte clans",
+  "players": "Spelers",
+  "clans": "Clans",
+  "recomputed": "Opnieuw berekend op {at}"
+}
