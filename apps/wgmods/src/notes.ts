@@ -1,8 +1,10 @@
 // A release's Markdown notes, as the plain text the hub shows.
 //
-// The hub renders a change log as bare text, so a `### Added` heading and its
-// dashes reach the reader as typed. Its own form also stops a change log at
-// 1000 characters, so a long release keeps what fits and says what it left out.
+// The hub renders a change log as bare text in one paragraph, so a `### Added`
+// reaches the reader as typed and line breaks fold into spaces: each item keeps
+// its dash because that is what still separates them on the page. Its own form
+// also stops a change log at 1000 characters, so a long release keeps what fits
+// and says what it left out.
 const MAX_LENGTH = 1000;
 
 type Section = { heading: string; items: string[] };
@@ -37,12 +39,10 @@ function parse(markdown: string): { intro: string[]; sections: Section[] } {
   return { intro, sections };
 }
 
-const sentence = (text: string) => (/[.!?]$/.test(text) ? text : `${text}.`);
-
 export function plainNotes(markdown: string): string {
   const { intro, sections } = parse(markdown);
   const render = (kept: Section[], left: number) =>
-    [intro.join(" "), ...kept.filter((section) => section.items.length).map((section) => `${section.heading}: ${section.items.map(sentence).join(" ")}`), left ? `And ${left} smaller ${left === 1 ? "change" : "changes"}.` : ""]
+    [intro.join(" "), ...kept.filter((section) => section.items.length).map((section) => `${section.heading}:\n${section.items.map((text) => `- ${text}`).join("\n")}`), left ? `And ${left} smaller ${left === 1 ? "change" : "changes"}.` : ""]
       .filter(Boolean)
       .join("\n\n");
 

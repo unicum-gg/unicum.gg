@@ -78,6 +78,8 @@ export async function reviewReport(context: BrowserContext): Promise<string[]> {
   return lines;
 }
 
+const REWRITE = new Set(["0.8.0", "0.7.1", "0.7.0", "0.6.0", "0.5.2", "0.5.1", "0.5.0", "0.4.0"]);
+
 const newestFirst = (a: { version: string }, b: { version: string }) =>
   b.version.localeCompare(a.version, undefined, { numeric: true });
 
@@ -109,7 +111,12 @@ export async function syncChangeLog(
   if ([0, 2].includes(before.state)) throw new Error(`the mod is in state ${before.state}, not saved from here`);
   const listed = new Set((before.change_log ?? []).map((entry: { version: string }) => entry.version));
   const missing = releases.filter((release) => !listed.has(release.version));
-  if (!missing.length) return { added: [], moved: false };
+  const rewritten = (before.change_log ?? []).map((entry: { version: string; body: string }) => {
+    const release = releases.find((candidate) => candidate.version === entry.version);
+    return release && REWRITE.has(entry.version) ? { ...entry, body: release.body } : entry;
+  });
+  const stale = rewritten.filter((entry: { body: string }, index: number) => entry.body !== before.change_log[index].body);
+  if (!missing.length && !stale.length) return { added: [], moved: false };
 
   fs.writeFileSync(path.join(config.dataDir, `mod-before-${Date.now()}.json`), JSON.stringify(before));
   const saved = await context.request.put(`${HUB}/api/mods/${config.modId}/`, {
@@ -118,7 +125,7 @@ export async function syncChangeLog(
       status: before.status,
       tags: before.tags,
       author_name: before.author_name || null,
-      change_log: [...(before.change_log ?? []), ...missing.map((release) => ({ ...release, date: "" }))].sort(newestFirst),
+      change_log: [...rewritten, ...missing.map((release) => ({ ...release, date: "" }))].sort(newestFirst),
       screenshots: (before.screenshots ?? []).map((entry: { id: number; source: string }, position: number) => ({
         screenshot: entry.id,
         source: entry.source,
@@ -141,7 +148,7 @@ export async function syncChangeLog(
   const lost = missing.filter((release) => !now.has(release.version)).map((release) => release.version);
   if (lost.length) throw new Error(`saved, but the change log still lacks ${lost.join(", ")}`);
   return {
-    added: missing.map((release) => release.version),
+    added: [...missing, ...stale].map((release: { version: string }) => release.version),
     moved: untouched(before) !== untouched(after) || before.state !== after.state,
   };
 }
