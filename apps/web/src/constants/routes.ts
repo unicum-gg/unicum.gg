@@ -66,6 +66,14 @@ const ROUTES = {
     region === Region.EU
       ? "/players/onslaught"
       : pathcat("/:region/players/onslaught", { region }),
+  // Maneuvers, the recurring Stronghold clan event. Not under /players or
+  // /clans: it publishes one board of each, they are read together, and filing
+  // it under either would hide half of it from the reader who came for the
+  // other.
+  MANEUVERS: (region: Region) =>
+    region === Region.EU
+      ? "/maneuvers"
+      : pathcat("/:region/maneuvers", { region }),
   // The Marks of Excellence board: who holds the most three-mark guns. Its own
   // section rather than a sort of the overall board, because it ranks a count
   // of achievements rather than a career average and the two put entirely

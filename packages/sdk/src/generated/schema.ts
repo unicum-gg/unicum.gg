@@ -659,6 +659,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/maneuvers": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Maneuvers event boards
+         * @description The region's current Maneuvers edition, the recurring Stronghold clan event: its dates and reward cutoffs, the player and clan boards ranked by Fame Points, and what it currently costs to hold a rewarded place. Both boards describe the same instant. Cached ~1 min server-side.
+         */
+        get: operations["get-{region}-maneuvers"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/{region}/clans/{tag}": {
         parameters: {
             query?: never;
@@ -4006,6 +4026,63 @@ export interface components {
              */
             mode?: "random" | "onslaught" | "skirmish" | "advance";
             language?: Record<string, never>;
+        };
+        /** @description The current Maneuvers edition for a region: its frame, both boards, and what a rewarded place costs right now. */
+        ManeuversBoardResponse: {
+            /** @description Null when no edition has ever been recorded for the region. */
+            edition: components["schemas"]["ManeuversEdition"] | null;
+            /** @description Null before the edition opens, when neither board carries anybody yet. */
+            standing: components["schemas"]["ManeuversStanding"] | null;
+            players: components["schemas"]["ManeuversPlayerEntry"][];
+            clans: components["schemas"]["ManeuversClanEntry"][];
+        };
+        /** @description One clan on the Maneuvers board. */
+        ManeuversClanEntry: {
+            place: number;
+            clanId: number;
+            tag: string | null;
+            name: string | null;
+            famePoints: number;
+            victories: number;
+            defeats: number;
+        };
+        /** @description The edition being run, and what it rewards. */
+        ManeuversEdition: {
+            /** @description The edition's own identifier, e.g. the autumn 2026 one. Stable for the whole edition, and what every other row is keyed by. */
+            eventName: string;
+            startDate: string | null;
+            endDate: string | null;
+            /** @description Tiers the edition is played at. */
+            vehicleLevels: number[];
+            /** @description How many places on the player board are rewarded with a vehicle. Set per region and changed between editions. */
+            tankRewardPositions: number | null;
+            /** @description How many places on the clan board are rewarded with gold from the clan treasury. */
+            clanGoldPositions: number | null;
+        };
+        /** @description One player on the Maneuvers board. */
+        ManeuversPlayerEntry: {
+            place: number;
+            accountId: number;
+            nickname: string | null;
+            clanId: number | null;
+            clanTag: string | null;
+            /** @description The ranking metric, cumulative over the edition. */
+            famePoints: number;
+            victories: number;
+            defeats: number;
+        };
+        /** @description Both boards as a whole at one instant: how many hold a place, and what a rewarded place costs. */
+        ManeuversStanding: {
+            /** @description When the source last recomputed both boards. Not when we read them: two reads between two recomputations describe the same instant. */
+            capturedAt: string;
+            playerCount: number;
+            clanCount: number;
+            /** @description Fame Points held by the player at the last rewarded place: what it currently costs to hold a vehicle place. Null before the board is deep enough to have one. */
+            tankCutoffPoints: number | null;
+            /** @description Fame Points held by the clan at the last gold-rewarded place. */
+            clanGoldCutoffPoints: number | null;
+            topPlayerPoints: number | null;
+            topClanPoints: number | null;
         };
         mapAxisAnswer: {
             axis: components["schemas"]["mapRatingAxisField"];
@@ -9086,6 +9163,32 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ClanLanguagesResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-maneuvers": {
+        parameters: {
+            query?: {
+                /** @description Rows per board, 1-1000 (default 100). */
+                limit?: number;
+            };
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ManeuversBoardResponse"];
                 };
             };
         };

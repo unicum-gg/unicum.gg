@@ -1030,6 +1030,14 @@ class RegionClient {
     return ns;
   }
 
+  /** Maneuvers event boards */
+  maneuvers(limit?: NonNullable<QueryOf<"/{region}/maneuvers">>["limit"]) {
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/maneuvers", { region: this.region }, { limit }),
+      () => this.api.GET("/{region}/maneuvers", { params: { path: { region: this.region }, query: { limit } } }),
+    );
+  }
+
   /** Credits and experience by battle mode */
   modesEconomy() {
     return handle(
