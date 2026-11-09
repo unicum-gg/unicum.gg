@@ -91,6 +91,28 @@ export function battleIdIn(header: ReplayHeader): string | null {
 }
 
 /**
+ * The accounts the results name, which is everyone who was in the battle.
+ *
+ * Searched in the block's own text rather than parsed out of it, for the
+ * reason `battleIdIn` above does the same: a 60-player Frontline battle's
+ * results are half a megabyte of JSON, and the only question asked of them
+ * here is which accounts they name.
+ *
+ * Keyed on the field name, so a number that happens to equal an account id
+ * somewhere else in the block cannot answer for it.
+ */
+export function accountsIn(header: ReplayHeader): Set<number> {
+  const named = new Set<number>();
+  for (const text of header.texts.slice(1)) {
+    for (const found of text.matchAll(/"accountDBID"\s*:\s*"?(\d{1,20})"?/g)) {
+      const id = Number(found[1]);
+      if (Number.isSafeInteger(id) && id > 0) named.add(id);
+    }
+  }
+  return named;
+}
+
+/**
  * The JSON blocks only, without touching the encrypted stream.
  *
  * Split out because the two readers want very different things. A viewer in

@@ -1,12 +1,16 @@
 import { createHash } from "node:crypto";
 import * as z from "zod";
 import {
+  accountsIn,
   battleIdIn,
   readReplay,
   readReplayHeader,
   ReplayError,
 } from "@unicum.gg/shared";
-import { normaliseBattleId } from "@unicum.gg/core/battles/ingest";
+import {
+  normaliseBattleId,
+  startsInRange,
+} from "@unicum.gg/core/battles/ingest";
 import {
   assembleReplay,
   attachReplay,
@@ -32,7 +36,14 @@ export enum ReplayRefusal {
   NotCollected = "not_collected",
   /** The archive is at its quota. Stop offering files until told otherwise. */
   ArchiveFull = "archive_full",
-  /** The battle is not in the database, so there is nothing to attach it to. */
+  /**
+   * The battle is not in the database yet, and could still be reported.
+   *
+   * Not final: the mod sends a battle before its replay, so this means the
+   * two crossed and the next attempt will find the row. A battle too old for
+   * the table to hold at all is no longer refused, since no row will ever
+   * arrive for it; that file is archived unattached instead.
+   */
   UnknownBattle = "unknown_battle",
   /** The sender was not in this battle. */
   NotAPlayer = "not_a_player",
@@ -189,9 +200,27 @@ export async function POST(
     startedAt,
     account.accountId,
   );
-  if (!target) return refuse(ReplayRefusal.UnknownBattle);
-  if (!target.wasThere) return refuse(ReplayRefusal.NotAPlayer);
-  if (target.storedKey) return refuse(ReplayRefusal.AlreadyStored);
+  if (target) {
+    if (!target.wasThere) return refuse(ReplayRefusal.NotAPlayer);
+    if (target.storedKey) return refuse(ReplayRefusal.AlreadyStored);
+  } else if (await startsInRange(account.region, startedAt)) {
+    // The battle can still be reported, and the mod sends it before its
+    // replay, so the two merely crossed. Refusing is what keeps the file
+    // attached to its row: archived now, the row that arrives next would
+    // point at nothing while the object sat beside it unreferenced.
+    return refuse(ReplayRefusal.UnknownBattle);
+  }
+  // Otherwise the battle is older than the months the table holds, so no row
+  // will ever exist for it, and refusing would lose the file for good while it
+  // still sits on the player's disk. It is archived unattached: the key is the
+  // replay's own region, date and arena id, which needs no row, and anything
+  // we read out of a replay can be read again from the archived file the day
+  // there is a row to hang it on.
+  //
+  // What the row carried was the proof that the sender was one of the thirty.
+  // Without a row that proof comes from the file, below, at the trust level the
+  // battle report path already works at: the client supplies the results that
+  // say who was there.
 
   const body = replayBody.safeParse(await req.json().catch(() => null));
   if (!body.success) {
@@ -262,12 +291,17 @@ export async function POST(
   // wrong thirty people, which is the kind of wrong that is never noticed
   // again once it is in the archive.
   try {
-    const named = battleIdIn(readReplayHeader(bytes));
+    const header = readReplayHeader(bytes);
+    const named = battleIdIn(header);
     // Null means the file names no battle at all, which is what an unfinished
     // recording looks like: the block carrying the id is only written when the
     // battle ends.
     if (named === null || normaliseBattleId(named) !== arenaUniqueId) {
       return refuse(ReplayRefusal.NotThisBattle);
+    }
+    // With no row to read `player_ids` off, the file answers who was there.
+    if (!target && !accountsIn(header).has(account.accountId)) {
+      return refuse(ReplayRefusal.NotAPlayer);
     }
   } catch (err) {
     if (err instanceof ReplayError) return refuse(ReplayRefusal.NotThisBattle);
@@ -278,14 +312,16 @@ export async function POST(
   // have placed the same file. Cheap to ask, and it saves writing a megabyte
   // over an identical one.
   if (await replayExists(key)) {
-    await attachReplay(account.region, arenaUniqueId, startedAt, key);
+    if (target) await attachReplay(account.region, arenaUniqueId, startedAt, key);
     // Still read, even though the file is not written again. The loadout is
     // keyed on the battle and the VEHICLE, so a second reporter contributes
     // their own vehicle's, which the first could not see; and a file stored
     // before this was collected at all has none, so an offer of it backfills.
     // The insert ignores conflicts, so offering the same one twice is free.
     // The positions are rewritten whole, so a second offer is free too.
-    await writeDerived(account.region, arenaUniqueId, startedAt, bytes);
+    // Only with a row: both are keyed on the battle, and an archived file can
+    // be read again the day one exists.
+    if (target) await writeDerived(account.region, arenaUniqueId, startedAt, bytes);
     return refuse(ReplayRefusal.AlreadyStored);
   }
 
@@ -305,8 +341,9 @@ export async function POST(
 
   // The row is written after the object, never before: a key that points at
   // nothing is worse than an object nobody references, because only the first
-  // produces a broken download for a reader.
-  await attachReplay(account.region, arenaUniqueId, startedAt, key);
+  // produces a broken download for a reader. With no row there is nothing to
+  // write, and an object nobody references yet is the whole point.
+  if (target) await attachReplay(account.region, arenaUniqueId, startedAt, key);
 
   // What the recorder had fitted, written down now rather than decoded again
   // on every read. This is the one moment the bytes are already in memory, and
@@ -321,7 +358,10 @@ export async function POST(
   // And where the recorder's team set up and dealt its damage from, for the
   // map's minimap, out of the same decode: the positions are in the packets
   // this already reads.
-  await writeDerived(account.region, arenaUniqueId, startedAt, bytes);
+  //
+  // Both are keyed on the battle, so with no row there is nowhere to put them.
+  // Nothing is lost that the archived file cannot give again.
+  if (target) await writeDerived(account.region, arenaUniqueId, startedAt, bytes);
   // The pieces have nothing left to say once the whole is stored.
   if (split) await discardReplayParts(key, split.count);
 
