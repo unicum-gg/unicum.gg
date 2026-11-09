@@ -295,35 +295,3 @@ export function tankSnapshotsToTankStats(
     },
   }));
 }
-
-export function diffTanks(
-  current: TankStats[],
-  past: TankSnapshotMap,
-): TankStats[] {
-  const out: TankStats[] = [];
-  for (const t of current) {
-    const p = past.get(t.tank_id);
-    if (!p) continue;
-    const battlesDiff = t.all.battles - p.battles;
-    if (battlesDiff <= 0) continue;
-    out.push({
-      tank_id: t.tank_id,
-      mark_of_mastery: t.mark_of_mastery,
-      all: {
-        battles: battlesDiff,
-        wins: t.all.wins - p.wins,
-        damage_dealt: t.all.damage_dealt - p.damageDealt,
-        spotted: t.all.spotted - p.spotted,
-        frags: t.all.frags - p.frags,
-        dropped_capture_points:
-          t.all.dropped_capture_points - p.droppedCapturePoints,
-        radio_assisted_damage:
-          t.all.radio_assisted_damage - p.radioAssistedDamage,
-        track_assisted_damage:
-          t.all.track_assisted_damage - p.trackAssistedDamage,
-        xp: t.all.xp - (p.xp ?? 0),
-      },
-    });
-  }
-  return out;
-}
