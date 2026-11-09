@@ -138,7 +138,7 @@ export default async function ModPage({
                 hands over the newest build and the line below names the hub
                 for whoever wants the reviewed one. */}
             <a
-              href={modArchiveUrl(versions.latest)}
+              href={modArchiveUrl(versions.archive)}
               className={cn(
                 buttonVariants({ variant: "primary" }),
                 "h-10 gap-2 px-5 text-base",

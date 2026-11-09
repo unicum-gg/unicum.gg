@@ -17,11 +17,14 @@ import APP from "@/constants/app";
 export type ModVersions = {
   /** The newest release, e.g. "0.2.0", or null when GitHub could not be read. */
   latest: string | null;
+  /** The newest release's zip, as that release names it, or null when unknown. */
+  archive: string | null;
   /** What the hub currently serves, or null when its API could not be read. */
   hub: string | null;
 };
 
 const GITHUB_RELEASE = "https://api.github.com/repos/unicum-gg/unicum.gg-mod/releases/latest";
+const ARCHIVE = /^unicum\.gg_.+\.zip$/;
 
 /**
  * The hub's own endpoint, the one its mod page calls to draw itself.
@@ -33,18 +36,26 @@ const GITHUB_RELEASE = "https://api.github.com/repos/unicum-gg/unicum.gg-mod/rel
  */
 const WGMODS_API = "https://wgmods.net/api/mods/7928/";
 
-async function readLatest(): Promise<string | null> {
+async function readLatest(): Promise<Pick<ModVersions, "latest" | "archive">> {
+  const unknown = { latest: null, archive: null };
   try {
     const response = await fetch(GITHUB_RELEASE, {
       headers: { Accept: "application/vnd.github+json" },
       signal: AbortSignal.timeout(5000),
     });
-    if (!response.ok) return null;
-    const body = (await response.json()) as { tag_name?: unknown };
-    // Releases are tagged `v0.2.0`; the page prints the version, not the tag.
-    return typeof body.tag_name === "string" ? body.tag_name.replace(/^v/, "") : null;
+    if (!response.ok) return unknown;
+    const body = (await response.json()) as {
+      tag_name?: unknown;
+      assets?: { name?: unknown; browser_download_url?: unknown }[];
+    };
+    const zip = body.assets?.find((asset) => typeof asset.name === "string" && ARCHIVE.test(asset.name));
+    return {
+      // Releases are tagged `v0.2.0`; the page prints the version, not the tag.
+      latest: typeof body.tag_name === "string" ? body.tag_name.replace(/^v/, "") : null,
+      archive: typeof zip?.browser_download_url === "string" ? zip.browser_download_url : null,
+    };
   } catch {
-    return null;
+    return unknown;
   }
 }
 
@@ -67,8 +78,8 @@ async function readHub(): Promise<string | null> {
 }
 
 async function readVersions(): Promise<ModVersions> {
-  const [latest, hub] = await Promise.all([readLatest(), readHub()]);
-  return { latest, hub };
+  const [release, hub] = await Promise.all([readLatest(), readHub()]);
+  return { ...release, hub };
 }
 
 /**
@@ -82,21 +93,19 @@ export const getModVersions = unstable_cache(readVersions, ["mod-versions"], {
 });
 
 /**
- * Where a download button points, given the version it just read.
+ * Where a download button points, given the zip the release listed.
  *
  * Straight at the versioned asset, so what lands in the player's downloads is
- * `unicum.gg_0.2.0.zip` and says which build it is. The alternative was a
- * second copy published under a fixed name, which `releases/latest/download`
- * could resolve without knowing the version; it would have handed everyone a
- * `unicum.gg.zip` that names nothing, and cost a duplicate of the archive on
- * every release. Reading the version first costs one cached call and keeps the
- * file honest.
+ * `unicum.gg_0.9.0_wot_2.4.1.1.zip` and says which build it is and for which
+ * client. The alternative was a second copy published under a fixed name, which
+ * `releases/latest/download` could resolve without reading anything; it would
+ * have handed everyone a `unicum.gg.zip` that names nothing, and cost a
+ * duplicate of the archive on every release. The URL is read rather than built
+ * because the client in the name is only known to the build.
  *
- * Without a version there is nothing to point at, so the link falls back to
- * the releases page: one click more, and still the right build.
+ * Without one there is nothing to point at, so the link falls back to the
+ * releases page: one click more, and still the right build.
  */
-export function modArchiveUrl(version: string | null): string {
-  const releases = `${APP.EXTERNAL.MOD_SOURCE}/releases`;
-  if (!version) return `${releases}/latest`;
-  return `${releases}/download/v${version}/unicum.gg_${version}.zip`;
+export function modArchiveUrl(archive: string | null): string {
+  return archive ?? `${APP.EXTERNAL.MOD_SOURCE}/releases/latest`;
 }

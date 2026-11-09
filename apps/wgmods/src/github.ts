@@ -8,7 +8,7 @@ import type { Release, ReleaseNotes } from "./hub.js";
 import { plainNotes } from "./notes.js";
 
 const API = "https://api.github.com";
-const ZIP = /^unicum\.gg_(\d+\.\d+\.\d+)\.zip$/;
+const ZIP = /^unicum\.gg_\d+\.\d+\.\d+(_wot_\d+(\.\d+){3})?\.zip$/;
 
 /** release.yml signs the body as `sha256=<hex hmac>`, like GitHub's own webhooks. */
 export function verifySignature(body: Buffer, header: string | undefined): boolean {
@@ -43,7 +43,7 @@ export async function readRelease(tag: string): Promise<Release> {
   };
   if (release.draft) throw new Error(`${tag} is a draft`);
   const asset = release.assets.find((entry) => ZIP.test(entry.name));
-  if (!asset) throw new Error(`${tag} carries no unicum.gg_<version>.zip`);
+  if (!asset) throw new Error(`${tag} carries no unicum.gg_<version>_wot_<client>.zip`);
   const bytes = Buffer.from(await (await get(asset.browser_download_url)).arrayBuffer());
   return {
     version: tag.slice(1),

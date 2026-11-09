@@ -24,6 +24,28 @@ globalThis.__wotOnlineCache = {};
 globalThis.__wotOnlineListeners ??= {};
 globalThis.__wotOnlineIntervals = {};
 
+function listenersOf(region: Region): Set<(p: OnlinePayload) => void> {
+  return (globalThis.__wotOnlineListeners[region] ??= new Set());
+}
+
+/**
+ * Start this region's poll unless it is already running.
+ *
+ * Paired with `stopPollingIfIdle`, and the pairing is the whole point. The
+ * interval used to outlive every stream it was started for, the only
+ * `clearInterval` on this map being the HMR cleanup above, so the first request
+ * for a region on a worker made that worker call Wargaming every POLL_MS for
+ * the life of the process, with nobody connected and nothing to hand the
+ * payload to. Five PM2 workers across three regions is fifteen such pollers,
+ * about five WG calls a second, permanently, against a budget shared with every
+ * cron. And `wgn/servers/info` is deliberately absent from the SDK's
+ * static-cache allowlist, since it answers the current instant and caching it
+ * would defeat the feature, so each of those ticks was a real HTTP call rather
+ * than a cache read.
+ *
+ * The listener set IS the reference count, so the invariant is that an interval
+ * exists for a region exactly while a stream is open on it.
+ */
 function ensurePolling(region: Region): void {
   if (globalThis.__wotOnlineIntervals[region]) return;
   // Skip a tick while the previous poll is still in flight. `setInterval` fires
@@ -52,6 +74,25 @@ function ensurePolling(region: Region): void {
 }
 
 /**
+ * Stop this region's poll once its last stream has gone.
+ *
+ * The cached payload is deliberately kept. It is what seeds a connection
+ * arriving during a WG outage, which is the case the poll's own null handling
+ * exists for, and clearing it here would give that case up to save nothing. The
+ * cost is that a value left behind by an idle gap is stale by the length of that
+ * gap, which is why `ensurePolling` polls once immediately instead of waiting
+ * out its first interval: the reader is seeded from the cache and corrected
+ * within one WG round trip.
+ */
+function stopPollingIfIdle(region: Region): void {
+  if (listenersOf(region).size > 0) return;
+  const interval = globalThis.__wotOnlineIntervals[region];
+  if (!interval) return;
+  clearInterval(interval);
+  delete globalThis.__wotOnlineIntervals[region];
+}
+
+/**
  * Players online stream
  * @description Server-sent events (SSE) of the region's live player count. Each event's data is a JSON object with the region total and the per-server breakdown, pushed whenever the count refreshes (about every 3 seconds).
  * @pathParams regionParams
@@ -66,10 +107,12 @@ export async function GET(
   const { region: regionParam } = await params;
   if (!isRegion(regionParam)) return new Response("invalid_region", { status: 400 });
   const region = regionParam;
-  ensurePolling(region);
 
   const encoder = new TextEncoder();
   let heartbeat: NodeJS.Timeout | null = null;
+  // Assigned by `start`, which runs while the stream is being constructed, so
+  // it is in place before anything can end the stream.
+  let teardown = (): void => {};
   const stream = new ReadableStream({
     start(controller) {
       function send(payload: OnlinePayload) {
@@ -86,8 +129,8 @@ export async function GET(
         send(globalThis.__wotOnlineCache[region]);
       }
 
-      globalThis.__wotOnlineListeners[region] ??= new Set();
-      globalThis.__wotOnlineListeners[region].add(send);
+      listenersOf(region).add(send);
+      ensurePolling(region);
 
       heartbeat = setInterval(() => {
         try {
@@ -97,9 +140,26 @@ export async function GET(
         }
       }, HEARTBEAT_MS);
 
-      req.signal.addEventListener("abort", () => {
+      // Both ways a stream can end have to run this, and either one can be the
+      // one that fires: `cancel` is the consumer letting go of the readable, the
+      // abort signal is the client going away, and a disconnect can raise both.
+      // Removing the listener on the abort path alone left a stream ended
+      // through `cancel` with its closure still in the set, called on every tick
+      // for the life of the process and throwing into the empty catch above.
+      // Guarded so it runs once, because it decides whether the region still has
+      // a reader and counting one departure twice would stop a poll the others
+      // are still waiting on.
+      let gone = false;
+      teardown = () => {
+        if (gone) return;
+        gone = true;
         if (heartbeat) clearInterval(heartbeat);
-        globalThis.__wotOnlineListeners[region]?.delete(send);
+        listenersOf(region).delete(send);
+        stopPollingIfIdle(region);
+      };
+
+      req.signal.addEventListener("abort", () => {
+        teardown();
         try {
           controller.close();
         } catch {
@@ -108,7 +168,7 @@ export async function GET(
       });
     },
     cancel() {
-      if (heartbeat) clearInterval(heartbeat);
+      teardown();
     },
   });
 

@@ -1,4 +1,4 @@
-import { and, asc, desc, eq, lt, notInArray, or, sql } from "drizzle-orm";
+import { and, desc, eq, lt, notInArray, or, sql } from "drizzle-orm";
 import {
   TIER_FLOORS,
   TOP_PLAYERS_MIN_BATTLES,
@@ -17,7 +17,7 @@ import { db } from "@unicum.gg/core/db";
 import type { TankStats } from "@unicum.gg/core/wargaming/wot/tanks";
 import { TopPlayersPeriod } from "@unicum.gg/core/wargaming/wot/players/top/period";
 import type { Region } from "@unicum.gg/wargaming";
-import { diffTanks } from "./tanks";
+import { tankPeriod } from "./tank-periods";
 
 /** What a rating over a set of battles needs besides the battles. */
 export type RatingContext = {
@@ -89,10 +89,13 @@ export function rateTanks(recent: TankStats[], ctx: RatingContext): WindowRating
 /**
  * What a player fought in each vehicle over the last `windowMs`.
  *
- * Per tank we take the newest snapshot older than the cutoff, or (for players
- * tracked less than the window) the oldest snapshot other than the current
- * one, so a short history still reflects the games played instead of coming
- * back empty. Mirrors the player-page period baseline in initial-data.ts.
+ * The same baseline rule as the profile's period columns (see
+ * `loadPlayerInitialData`) and the same diff (`tankPeriod`), so a board and the
+ * profile count the same battles: per tank, the newest row older than the
+ * cutoff or, for a player tracked for less than the window, the newest row of
+ * their first fetch. A tank with neither was first played inside the window and
+ * all of its battles count. The old rule fell through to each tank's own oldest
+ * row, which dropped those battles from the boards and the clan columns.
  */
 async function windowDiff(
   region: Region,
@@ -102,7 +105,6 @@ async function windowDiff(
 ): Promise<TankStats[]> {
   const tankSnapshots = tankSnapshotsByRegion[region];
   const cutoff = new Date(Date.now() - windowMs);
-  const cutoffTs = sql`${cutoff.toISOString()}::timestamptz`;
   const rows = await db
     .selectDistinctOn([tankSnapshots.tankId], {
       tankId: tankSnapshots.tankId,
@@ -124,20 +126,17 @@ async function windowDiff(
         eq(tankSnapshots.playerId, playerId),
         or(
           lt(tankSnapshots.takenAt, cutoff),
-          sql`${tankSnapshots.takenAt} < (SELECT MAX(ts2.taken_at) FROM ${tankSnapshots} ts2 WHERE ts2.player_id = ${playerId} AND ts2.tank_id = ${tankSnapshots.tankId})`,
+          sql`${tankSnapshots.takenAt} <= (SELECT MIN(ts2.taken_at) + interval '1 minute' FROM ${tankSnapshots} ts2 WHERE ts2.player_id = ${playerId})`,
         ),
       ),
     )
     .orderBy(
       tankSnapshots.tankId,
-      sql`(${tankSnapshots.takenAt} < ${cutoffTs}) DESC`,
-      sql`CASE WHEN ${tankSnapshots.takenAt} < ${cutoffTs} THEN ${tankSnapshots.takenAt} END DESC`,
-      asc(tankSnapshots.takenAt),
+      desc(tankSnapshots.takenAt),
       // Same-`taken_at` tie-break: battles is monotonic per tank (see
       // carryForwardMarks).
       desc(tankSnapshots.battles),
     );
-  if (rows.length === 0) return [];
   const baseline = new Map(
     rows.map((r) => [
       r.tankId,
@@ -175,7 +174,7 @@ async function windowDiff(
       },
     ]),
   );
-  return diffTanks(tanks, baseline);
+  return tankPeriod(tanks, baseline, null)?.tanks ?? [];
 }
 
 /**
