@@ -18,7 +18,7 @@ import {
 import type { TankStats, TankStatsWithModes } from "@unicum.gg/core/wargaming/wot/tanks";
 import { writePlayerMarkCounts } from "./mark-counts";
 import { fetchPlayerMarksOnGun } from "./marks";
-import { bulkInsertTankSnapshots, diffTanks } from "./tanks";
+import { bulkInsertTankSnapshots } from "./tanks";
 import { bulkUpsertTankModes } from "./tank-modes";
 import { upsertPlayerArchivedModes } from "./archived-modes";
 import { computeDueAt } from "./refresh-policy";

@@ -21,7 +21,7 @@ export type PeriodStats = {
   d30: PlayerPeriodStats | null;
 };
 
-// Same idea for the per-tank breakdown (each entry is a diffTanks result).
+// Same idea for the per-tank breakdown (each entry is a tankPeriod result).
 export type PeriodTanks = {
   h24: TankStats[] | null;
   d7: TankStats[] | null;
