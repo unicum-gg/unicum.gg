@@ -14,6 +14,7 @@ export enum PlayerBoard {
   Overall = "overall",
   Rampage = "rampage",
   Onslaught = "onslaught",
+  Maneuvers = "maneuvers",
   Marks = "marks",
 }
 

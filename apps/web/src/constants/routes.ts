@@ -66,14 +66,19 @@ const ROUTES = {
     region === Region.EU
       ? "/players/onslaught"
       : pathcat("/:region/players/onslaught", { region }),
-  // Maneuvers, the recurring Stronghold clan event. Not under /players or
-  // /clans: it publishes one board of each, they are read together, and filing
-  // it under either would hide half of it from the reader who came for the
-  // other.
-  MANEUVERS: (region: Region) =>
+  // Maneuvers, the recurring Stronghold clan event. Mirrors Onslaught: a player
+  // board filed under /players (reached from the player mode tabs) and a clan
+  // board under /clans, each wearing its own section's chrome rather than a
+  // page of its own. The two are one edition read from two angles, so each page
+  // links across to the other.
+  PLAYERS_MANEUVERS: (region: Region) =>
     region === Region.EU
-      ? "/maneuvers"
-      : pathcat("/:region/maneuvers", { region }),
+      ? "/players/maneuvers"
+      : pathcat("/:region/players/maneuvers", { region }),
+  CLANS_MANEUVERS: (region: Region) =>
+    region === Region.EU
+      ? "/clans/maneuvers"
+      : pathcat("/:region/clans/maneuvers", { region }),
   // The Marks of Excellence board: who holds the most three-mark guns. Its own
   // section rather than a sort of the overall board, because it ranks a count
   // of achievements rather than a career average and the two put entirely

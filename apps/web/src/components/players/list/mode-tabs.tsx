@@ -61,6 +61,13 @@ export async function PlayersModeTabs({
             {battleTypeName(BattleType.Onslaught, tGame)}
           </Link>
           <Link
+            href={ROUTES.PLAYERS_MANEUVERS(region)}
+            prefetch="intent"
+            className={tabItemClass(active === PlayerBoard.Maneuvers)}
+          >
+            {tGame("battle-formats.maneuvers")}
+          </Link>
+          <Link
             href={ROUTES.PLAYERS_RAMPAGE(region)}
             prefetch="intent"
             className={tabItemClass(active === PlayerBoard.Rampage)}
