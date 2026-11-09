@@ -24,7 +24,7 @@ export const tankIdentity = z
     }),
     variant: z.string().nullable().meta({
       description:
-        "The parallel catalogue this vehicle comes from, spelled as the suffix its name ends with (\"IGR\" for the retired cybercafe reissues). Null for a normal vehicle.",
+        "The parallel catalogue this vehicle comes from, spelled as the suffix its name ends with (\"IGR\" for the retired cybercafe reissues), or \"EVENT\" for a vehicle that exists only inside an event mode, whose name carries no suffix. Null for a normal vehicle.",
     }),
     // Optional: the dataset endpoints carry it, the changes feed (which is
     // about what already shipped) has no use for it.

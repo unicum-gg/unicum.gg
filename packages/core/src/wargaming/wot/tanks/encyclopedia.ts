@@ -1,10 +1,15 @@
 import { sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
-import { type NewVehicle, vehiclesByRegion, type VehicleMeta } from "@unicum.gg/shared";
+import {
+  type NewVehicle,
+  vehiclesByRegion,
+  type VehicleMeta,
+} from "@unicum.gg/shared";
 import { Region } from "@unicum.gg/wargaming";
 import {
   catalogueNaming,
   fetchCommonTestVehicles,
+  eventNaming,
   fetchEventVehicles,
   fetchVehicleCatalog,
 } from "@unicum.gg/core/wargaming/wot/tanks/wotsrc";
@@ -132,19 +137,21 @@ export async function refreshVehicles(region: Region): Promise<number> {
   // everything downstream (slugs, detail, search) then works on them for free,
   // and the flag is what the few places that must exclude them read.
   //
-  // An event's vehicles join it so a battle fought in one can name it, and are
-  // hidden so nothing else does: they exist only inside their event, bots and
-  // bosses included, and have no page, no slug and no place in a list.
+  // An event's vehicles join it so a battle fought in one can name it. Those it
+  // offers its players are in the catalogue, behind a filter of their own; its
+  // bots and bosses stay hidden.
+  const regularNames = new Set(regular.map((v) => catalogueNaming(v).shortName));
   const rows: NewVehicle[] = [
-    ...regular.map((v) => ({ v, hidden: false })),
-    ...events.filter((v) => !known.has(v.tankId)).map((v) => ({ v, hidden: true })),
-  ].map(({ v, hidden }) => ({
+    ...regular.map((v) => ({ v, naming: catalogueNaming(v) })),
+    ...events
+      .filter((v) => !known.has(v.tankId))
+      .map((v) => ({ v, naming: eventNaming(v, regularNames) })),
+  ].map(({ v, naming }) => ({
     tankId: v.tankId,
     tier: v.tier,
     type: v.type,
     nation: v.nation,
-    ...catalogueNaming(v),
-    ...(hidden ? { isHidden: true } : {}),
+    ...naming,
     tag: v.tag,
     isPremium: v.isPremium,
     isWheeled: v.isWheeled,

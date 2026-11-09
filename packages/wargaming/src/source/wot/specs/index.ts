@@ -5,6 +5,8 @@ import { Region } from "../../../region";
 import type { Transport } from "../../../client/transport";
 import { RateLimit } from "../../../client/rate-limiter";
 import { fetchNations } from "../nations";
+import { EVENT_PACKS } from "../vehicles";
+import { WargamingHttpError } from "../../../client/transport";
 import {
   branchFor,
   fetchBranchVersion,
@@ -42,6 +44,18 @@ export type WotSrcCustomization = {
   customDefaultCamouflage: boolean;
 };
 
+/** The tag the client gives the vehicles an event mode offers its players. */
+const EVENT_PLAYABLE_TAG = "mode_hidden";
+
+const mainBase = (nation: string) => `sources/res/scripts/item_defs/vehicles/${nation}`;
+
+const packBase = (pack: string, nation: string) =>
+  `sources/res/${pack}/scripts/item_defs/vehicles/${nation}`;
+
+/** A file a pack does not ship, which is an answer rather than a failure. */
+const isMissing = (err: unknown) =>
+  err instanceof WargamingHttpError && err.status === 404;
+
 /**
  * Vehicle specs from the IzeBerg/wot-src client-scripts mirror. Loops all
  * nations with the shared component files fetched once per nation, and derives
@@ -69,13 +83,71 @@ export class SourceSpecsResource {
     });
     const results = await Promise.all(
       nations.map((nation, idx) =>
-        this.#nation(branch, nation, idx, parser).catch((err) => {
+        this.#nation(branch, nation, idx, parser, mainBase(nation)).catch((err) => {
           console.error(`[wotsrc-specs-${this.region}] ${nation} failed:`, err);
           return [] as WotSrcSpec[];
         }),
       ),
     );
     return results.flat();
+  }
+
+  /**
+   * The specifications of the vehicles players field in an event mode, read
+   * from the mode's own definitions. Its bots and bosses are left out: only
+   * the vehicles the client offers a player carry `mode_hidden`.
+   */
+  async eventCatalog(): Promise<WotSrcSpec[]> {
+    const branch = branchFor(this.region);
+    const nations = await fetchNations(this.t, branch);
+    const parser = new XMLParser({
+      ignoreAttributes: true,
+      parseTagValue: false,
+      trimValues: true,
+      ignoreDeclaration: true,
+    });
+    const results = await Promise.all(
+      EVENT_PACKS.flatMap((pack) =>
+        nations.map((nation, idx) =>
+          this.#nation(branch, nation, idx, parser, packBase(pack, nation), (tags) =>
+            tags.split(/\s+/).includes(EVENT_PLAYABLE_TAG),
+          ).catch((err) => {
+            if (!isMissing(err)) {
+              console.error(`[wotsrc-specs-${this.region}] ${pack}/${nation} failed:`, err);
+            }
+            return [] as WotSrcSpec[];
+          }),
+        ),
+      ),
+    );
+    return results.flat();
+  }
+
+  /**
+   * The definitions folder holding a vehicle: the main one, or the event pack
+   * that declares it. The main one first, so a normal vehicle costs nothing.
+   */
+  async #baseOf(
+    branch: WotSrcBranch,
+    nation: string,
+    localId: number,
+    parser: XMLParser,
+  ): Promise<string> {
+    const main = mainBase(nation);
+    for (const base of [main, ...EVENT_PACKS.map((pack) => packBase(pack, nation))]) {
+      const xml = await this.#text(rawUrl(branch, `${base}/list.xml`)).catch((err) => {
+        if (isMissing(err)) return null;
+        throw err;
+      });
+      if (xml === null) continue;
+      const declared = Object.values(this.#root(parser, xml)).some(
+        (entry) =>
+          isObject(entry) &&
+          Number.parseInt(String(entry.id ?? "").trim(), 10) === localId,
+      );
+      if (declared) return base;
+    }
+    return main;
   }
 
   async #text(url: string): Promise<string> {
@@ -102,8 +174,9 @@ export class SourceSpecsResource {
     nation: string,
     nationIdx: number,
     parser: XMLParser,
+    base: string,
+    keep?: (tags: string) => boolean,
   ): Promise<WotSrcSpec[]> {
-    const base = `sources/res/scripts/item_defs/vehicles/${nation}`;
     const comp = (c: string) => this.#text(rawUrl(branch, `${base}/components/${c}.xml`));
     const [listXml, gunsXml, shellsXml, turretsXml, enginesXml, chassisXml, radiosXml, fuelXml] =
       await Promise.all([
@@ -136,6 +209,7 @@ export class SourceSpecsResource {
       if (!Number.isFinite(localId)) continue;
       const type = this.#extractType(entry.tags);
       if (!type) continue;
+      if (keep && !keep(String(entry.tags ?? ""))) continue;
       try {
         const vehXml = await this.#text(rawUrl(branch, `${base}/${tag}.xml`));
         const root = this.#root(parser, vehXml);
@@ -177,7 +251,7 @@ export class SourceSpecsResource {
       trimValues: true,
       ignoreDeclaration: true,
     });
-    const base = `sources/res/scripts/item_defs/vehicles/${nation}`;
+    const base = await this.#baseOf(branch, nation, localId, parser);
     const comp = (c: string) => this.#text(rawUrl(branch, `${base}/components/${c}.xml`));
     const [listXml, gunsXml, shellsXml, turretsXml, enginesXml, chassisXml, radiosXml, fuelXml] =
       await Promise.all([
@@ -369,7 +443,7 @@ export class SourceSpecsResource {
       trimValues: true,
       ignoreDeclaration: true,
     });
-    const base = `sources/res/scripts/item_defs/vehicles/${nation}`;
+    const base = await this.#baseOf(branch, nation, localId, parser);
     const list = this.#root(
       parser,
       await this.#text(rawUrl(branch, `${base}/list.xml`)),

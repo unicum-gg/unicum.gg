@@ -107,7 +107,7 @@ function extractRole(tags: string | undefined): string | null {
  * The client's event modes, each shipping its own `item_defs` under
  * `res/<pack>/` beside the main one. What they declare is in no other list.
  */
-const EVENT_PACKS = ["halloween", "last_stand", "story_mode"] as const;
+export const EVENT_PACKS = ["halloween", "last_stand", "story_mode"] as const;
 
 /**
  * Vehicle catalogue from the IzeBerg/wot-src GitHub mirror (the actual game

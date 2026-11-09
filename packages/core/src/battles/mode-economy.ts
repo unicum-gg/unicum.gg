@@ -9,6 +9,7 @@ import {
   type ModeEconomy,
   type ModeEconomyRow,
   modeEconomyByRegion,
+  EVENT_VEHICLE_VARIANT,
   vehiclesByRegion,
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
@@ -88,7 +89,7 @@ export async function aggregateModeEconomy(region: Region): Promise<AggregateRow
                   THEN b.personal END AS personal
       FROM b
       CROSS JOIN LATERAL jsonb_array_elements(b.vehicles) v
-      LEFT JOIN ${vehicles} veh ON veh.tank_id = (v->>'tank')::int AND NOT veh.is_hidden
+      LEFT JOIN ${vehicles} veh ON veh.tank_id = (v->>'tank')::int AND veh.variant IS DISTINCT FROM ${EVENT_VEHICLE_VARIANT}
       WHERE v ? 'account'
     )
     SELECT mode, tier,

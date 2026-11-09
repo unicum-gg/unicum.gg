@@ -344,13 +344,15 @@ function computeFreeXp(graph: Map<number, ResearchNode>): Map<number, FreeXp> {
  */
 export async function refreshTankSpecs(): Promise<number> {
   const eu = wg.region(Region.EU);
-  const [live, test, liveVersion, testVersion, graph] = await Promise.all([
+  const [live, test, events, liveVersion, testVersion, graph] = await Promise.all([
     eu.source.specs.catalog(),
     // Unreleased vehicles have specifications on the test branch and nowhere
     // else, and those are the whole point of showing them: a player wants to
     // read the gun and the armour before the tank ships. Failing to read the
     // branch (no test running) simply leaves the live catalogue as it was.
     eu.source.specs.catalog(WotSrcBranch.CT).catch(() => []),
+    // The vehicles an event offers its players, which have a page like any other.
+    eu.source.specs.eventCatalog().catch(() => []),
     eu.source.specs.branchVersion(BRANCH_BY_REGION[Region.EU]).catch(() => null),
     eu.source.specs.branchVersion(WotSrcBranch.CT).catch(() => null),
     fetchResearchGraph(),
@@ -393,7 +395,8 @@ export async function refreshTankSpecs(): Promise<number> {
 
   const known = new Set(live.map((v) => v.tankId));
   const testOnly = usableTest.filter((v) => !known.has(v.tankId));
-  const catalog = [...live, ...testOnly];
+  const regular = new Set([...known, ...testOnly.map((v) => v.tankId)]);
+  const catalog = [...live, ...testOnly, ...events.filter((v) => !regular.has(v.tankId))];
   const commonTest = new Set(testOnly.map((v) => v.tankId));
 
   // What the test build changes about vehicles that already exist. Fails soft:

@@ -40,6 +40,8 @@ export type FilterableTank = {
   isCommonTest?: boolean;
   /** How many characteristics the test build changes on this vehicle. */
   testChanges?: number;
+  /** Exists only inside an event mode. */
+  isEvent?: boolean;
   /** Marks of Excellence on the gun (0-3), and the Mark of Mastery badge
    * (0-4). Only a player's garage carries these, so like the Common Test fields
    * above they are optional and their controls hide themselves when nothing
@@ -92,6 +94,11 @@ export type TankFilters<T> = {
   setTestOnly: (v: boolean) => void;
   /** Whether a test is running at all, so the control can hide itself. */
   hasTestChanges: boolean;
+  /** Show the event modes' vehicles INSTEAD of the regular ones. */
+  eventOnly: boolean;
+  setEventOnly: (v: boolean) => void;
+  /** Whether the list holds any, so the control can hide itself. */
+  hasEvents: boolean;
   /** Marks on the gun to keep, 0 meaning "no mark yet". Empty means no filter. */
   moeSel: Set<number>;
   toggleMoe: (v: number) => void;
@@ -164,6 +171,9 @@ export function useTankFilters<T extends FilterableTank>(
   // Kept out of `categorySel` on purpose: a test vehicle is still standard,
   // premium or reward, so this is a second axis rather than a fourth category.
   const [testOnly, setTestOnly] = useState(false);
+  // Off by default and exclusive: these vehicles sit outside the game's tiers
+  // and carry no statistics, so mixed in they would only pad every tier.
+  const [eventOnly, setEventOnly] = useState(false);
   const [moeSel, setMoeSel] = useState<Set<number>>(() => new Set());
   const [momSel, setMomSel] = useState<Set<number>>(() => new Set());
   const [garageSel, setGarageSel] = useState<Set<string>>(() => new Set());
@@ -172,6 +182,7 @@ export function useTankFilters<T extends FilterableTank>(
     () => items.some((t) => t.isCommonTest || (t.testChanges ?? 0) > 0),
     [items],
   );
+  const hasEvents = useMemo(() => items.some((t) => t.isEvent), [items]);
   const hasMoe = useMemo(() => items.some((t) => t.gunMarks != null), [items]);
   const hasMom = useMemo(
     () => items.some((t) => t.masteryBadge != null),
@@ -206,6 +217,7 @@ export function useTankFilters<T extends FilterableTank>(
     const cat = parseSet(params.get("cat"));
     if (cat.size) setCategorySel(cat);
     if (params.get("test") === "1") setTestOnly(true);
+    if (params.get("event") === "1") setEventOnly(true);
     const moe = parseNumSet(params.get("moe"));
     if (moe.size) setMoeSel(moe);
     const mom = parseNumSet(params.get("mom"));
@@ -238,6 +250,7 @@ export function useTankFilters<T extends FilterableTank>(
     // through `setStr`. Without it the Common Test chip was the one filter a
     // link could not carry.
     setOrDel("test", testOnly ? "1" : "");
+    setOrDel("event", eventOnly ? "1" : "");
     setOrDel("moe", setStr(moeSel));
     setOrDel("mom", setStr(momSel));
     setOrDel("garage", setStr(garageSel));
@@ -263,6 +276,7 @@ export function useTankFilters<T extends FilterableTank>(
     rolesSel,
     categorySel,
     testOnly,
+    eventOnly,
     moeSel,
     momSel,
     garageSel,
@@ -331,6 +345,7 @@ export function useTankFilters<T extends FilterableTank>(
       }
       // Either side of a Common Test: a vehicle it adds, or one it rebalances.
       if (testOnly && !t.isCommonTest && !(t.testChanges ?? 0)) return false;
+      if (!!t.isEvent !== (hasEvents && eventOnly)) return false;
       // Gated on the list actually carrying marks, so a `?moe=` left on the URL
       // (a shared link, a back-navigation from a profile) cannot empty the tank
       // catalogue through a chip row that is not on screen to clear it. A null
@@ -384,6 +399,8 @@ export function useTankFilters<T extends FilterableTank>(
     rolesSel,
     categorySel,
     testOnly,
+    eventOnly,
+    hasEvents,
     moeSel,
     momSel,
     garageSel,
@@ -408,8 +425,11 @@ export function useTankFilters<T extends FilterableTank>(
       categorySel,
       toggleCategory: (c) => toggleSet(setCategorySel, c),
       testOnly,
+      eventOnly,
       setTestOnly,
       hasTestChanges,
+      setEventOnly,
+      hasEvents,
       moeSel,
       toggleMoe: (v) => toggleSet(setMoeSel, v),
       momSel,

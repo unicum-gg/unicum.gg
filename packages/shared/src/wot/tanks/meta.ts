@@ -28,6 +28,7 @@ export type VehicleMeta = {
    * of its name ("IGR"), or null for a normal one. The name carries it so slugs
    * and lists stay unambiguous; this field is what lets the page mark it as a
    * term rather than leave an unexplained acronym in the title.
+   * `EVENT_VEHICLE_VARIANT` marks an event mode's vehicle.
    */
   variant: string | null;
   role: string | null;
@@ -53,3 +54,12 @@ export function computeAvgTier(
   }
   return total > 0 ? weighted / total : null;
 }
+
+/**
+ * `VehicleMeta.variant` for a vehicle that exists only inside an event mode.
+ *
+ * Unlike "IGR" it is not spelled in the name: the event names its vehicles
+ * itself. The catalogue offers these behind a filter of their own, and nothing
+ * that compares vehicles by tier may count them.
+ */
+export const EVENT_VEHICLE_VARIANT = "EVENT";

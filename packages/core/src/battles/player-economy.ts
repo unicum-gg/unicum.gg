@@ -7,6 +7,7 @@ import {
   MODE_ECONOMY_WINDOW_DAYS,
   type PlayerModeEconomy,
   type PlayerModeEconomyRow,
+  EVENT_VEHICLE_VARIANT,
   vehiclesByRegion,
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
@@ -85,7 +86,7 @@ export async function playerModeEconomy(
            coalesce(sum((b.personal->>'ammoCost')::bigint), 0) AS ammo,
            coalesce(sum((b.personal->>'suppliesCost')::bigint), 0) AS supplies
     FROM b
-    LEFT JOIN ${vehicles} veh ON veh.tank_id = (b.own->>'tank')::int AND NOT veh.is_hidden
+    LEFT JOIN ${vehicles} veh ON veh.tank_id = (b.own->>'tank')::int AND veh.variant IS DISTINCT FROM ${EVENT_VEHICLE_VARIANT}
     GROUP BY b.battle_type, 2`);
 
   // Folded by the mode's name, so the game's variants of one mode are one row,

@@ -2,6 +2,7 @@
 // client index (lazy-loaded tabs), so both turn the same bulk-endpoint responses
 // into the same row shape. No "use client" / no SDK here — callers do the
 // fetching (buildSafe on the server, SWR on the client) and pass the results in.
+import { EVENT_VEHICLE_VARIANT } from "@unicum.gg/shared";
 import type { TankSpecRow } from "@/components/tanks/list/spec-columns";
 import { TankTab } from "@/components/tanks/list/tabs";
 
@@ -54,6 +55,8 @@ export type TankListItem = {
   isCommonTest: boolean;
   /** How many characteristics the Common Test build changes on this vehicle. */
   testChanges: number;
+  /** Exists only inside an event mode. */
+  isEvent: boolean;
   stats: TankStatsRow | null;
   specs: TankSpecRow | null;
   mastery: MasteryRow | null;
@@ -102,6 +105,7 @@ type RawIdentity = {
   isReward: boolean;
   isCommonTest: boolean;
   testChanges?: number;
+  variant?: string | null;
 };
 
 function base(i: RawIdentity): TankListItem {
@@ -119,6 +123,7 @@ function base(i: RawIdentity): TankListItem {
     isReward: i.isReward,
     isCommonTest: i.isCommonTest,
     testChanges: i.testChanges ?? 0,
+    isEvent: i.variant === EVENT_VEHICLE_VARIANT,
     stats: null,
     specs: null,
     mastery: null,

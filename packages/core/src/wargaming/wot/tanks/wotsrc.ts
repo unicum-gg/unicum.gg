@@ -1,3 +1,4 @@
+import { EVENT_VEHICLE_VARIANT } from "@unicum.gg/shared";
 import { poFilename, WotSrcBranch, type Region } from "@unicum.gg/wargaming";
 import { wg } from "../../client";
 
@@ -91,4 +92,37 @@ export function catalogueNaming(
     variant,
     isHidden: false,
   };
+}
+
+/**
+ * How an event mode's vehicle enters our catalogue.
+ *
+ * Only the ones the client offers a player are shown (`mode_hidden`, which no
+ * bot or boss carries), so the catalogue is not half full of the event's
+ * opponents. A slug collision renames BOTH vehicles, so an event vehicle named
+ * like a real one (Last Stand's "T-44") takes its mode as a suffix, or `/tanks/t-44`
+ * would move the day the event ships.
+ */
+export function eventNaming(
+  v: Pick<WotSrcVehicleRow, "name" | "shortName" | "nameSource" | "tags">,
+  regularNames: Set<string>,
+): { name: string; shortName: string; variant: string; isHidden: boolean } {
+  const shortName = v.shortName || v.name;
+  const named = regularNames.has(shortName) ? suffixOf(v.nameSource) : "";
+  return {
+    name: `${v.name}${named}`,
+    shortName: `${shortName}${named}`,
+    variant: EVENT_VEHICLE_VARIANT,
+    isHidden: !v.tags.includes("mode_hidden"),
+  };
+}
+
+/** ` Last Stand`, from the catalogue a pack names its vehicles in. */
+function suffixOf(nameSource: string | null): string {
+  const pack = nameSource?.split(".")[0];
+  if (!pack) return "";
+  return ` ${pack
+    .split("_")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ")}`;
 }

@@ -187,6 +187,14 @@ export function TankFilterBar<T>({
               </TooltipContent>
             </Tooltip>
           )}
+          {filters.hasEvents && (
+            <Chip
+              active={filters.eventOnly}
+              onClick={() => filters.setEventOnly(!filters.eventOnly)}
+            >
+              {tOwn("event")}
+            </Chip>
+          )}
         </TooltipProvider>
       </ChipRow>
       {/* Marks and badges: only a player's own garage carries them, so on the
