@@ -1,4 +1,6 @@
 import { isRegion } from "@unicum.gg/wargaming";
+import { attachClanBadges } from "@/services/clans/attach-badges";
+import { attachPlayerCrests } from "@/services/players/attach-badges";
 import { jsonResponse } from "@/services/openapi/json-response";
 import { measured } from "@/services/perf";
 import {
@@ -34,5 +36,20 @@ async function GET__perf(
     region,
     Number.isFinite(limit) ? limit : DEFAULT_LIMIT,
   );
-  return jsonResponse(ManeuversBoardResponse, board);
+  // Crests and placings are attached here, at the API boundary, rather than in
+  // the cached board read: they live in the auth and ranking tables, not the
+  // event's own, and a few batched indexed lookups keep the whole page's rows
+  // in step with who is verified or where a clan sits on the other boards.
+  const [players, decoratedClans] = await Promise.all([
+    attachPlayerCrests(region, board.players),
+    attachClanBadges(
+      region,
+      board.clans.map((c) => ({ ...c, clan_id: c.clanId })),
+    ),
+  ]);
+  const clans = decoratedClans.map(({ clan_id, ...rest }) => {
+    void clan_id;
+    return rest;
+  });
+  return jsonResponse(ManeuversBoardResponse, { ...board, players, clans });
 }

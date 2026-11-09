@@ -1,9 +1,8 @@
 import { BoardUpdated } from "@/components/board-updated";
 import { ManeuversClansBoard } from "@/components/clans/list/maneuvers/board";
 import { Interpolate } from "@/components/interpolate";
-import Link from "@/components/link";
+import { ManeuversBoardSwitch } from "@/components/maneuvers-board-switch";
 import { Panel, PanelContent, PanelSeparator } from "@/components/panel";
-import ROUTES from "@/constants/routes";
 import { dateFormat } from "@/lib/format";
 import { getTranslation } from "@/lib/translations.server";
 import { buildSafe, unicum } from "@/services/sdk";
@@ -62,15 +61,9 @@ export async function ManeuversClansView({
           <p className="mx-auto mt-4 max-w-2xl text-fd-muted-foreground">
             {t("intro", { maneuvers, region: REGION_LABEL[region] })}
           </p>
-          <p className="mt-3 text-sm">
-            <Link
-              href={ROUTES.PLAYERS_MANEUVERS(region)}
-              prefetch="intent"
-              className="text-brand hover:underline"
-            >
-              {t("see-players")}
-            </Link>
-          </p>
+          <div className="mt-6 flex justify-center">
+            <ManeuversBoardSwitch current="clans" region={region} locale={locale} />
+          </div>
           {windowLine ? (
             <p className="mt-3 text-sm text-fd-muted-foreground">{windowLine}</p>
           ) : null}

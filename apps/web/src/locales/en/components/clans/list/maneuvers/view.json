@@ -1,7 +1,6 @@
 {
   "heading": "Top clans in <accent>{maneuvers}</accent>",
   "intro": "{maneuvers} is World of Tanks’ recurring Stronghold clan event. The {region} clan standings, ranked by Fame Points, straight from the game’s own board.",
-  "see-players": "Player standings →",
   "window": "{from} to {to}.",
   "no-edition": "No edition has been recorded for this server yet.",
   "not-started": "The board opens on {date}.",
@@ -9,5 +8,9 @@
   "clan-cutoff": "Gold cutoff",
   "clan-cutoff-hint": "Fame Points held by the clan in {places}th place.",
   "ranked-clans": "Ranked clans",
-  "recomputed": "Recomputed at {at}"
+  "recomputed": "Recomputed at {at}",
+  "board": "Top {count} clans",
+  "place": "#",
+  "clan": "Clan",
+  "fame-points": "Fame Points"
 }

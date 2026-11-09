@@ -1,7 +1,6 @@
 {
   "heading": "Top players in <accent>{maneuvers}</accent>",
   "intro": "{maneuvers} is World of Tanks’ recurring Stronghold clan event. The {region} player standings, ranked by Fame Points, straight from the game’s own board.",
-  "see-clans": "Clan standings →",
   "window": "{from} to {to}.",
   "no-edition": "No edition has been recorded for this server yet.",
   "not-started": "The board opens on {date}.",
@@ -9,5 +8,9 @@
   "tank-cutoff": "Vehicle cutoff",
   "tank-cutoff-hint": "Fame Points held by the player in {places}th place.",
   "ranked-players": "Ranked players",
-  "recomputed": "Recomputed at {at}"
+  "recomputed": "Recomputed at {at}",
+  "board": "Top {count} players",
+  "place": "#",
+  "player": "Player",
+  "fame-points": "Fame Points"
 }

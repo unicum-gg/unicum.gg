@@ -4,6 +4,7 @@
 // holds: the generator resolves a schema's local consts by NAME across files, so
 // a bare `entry` or `row` would silently merge with another endpoint's.
 import { z } from "zod";
+import { clanRankBadge } from "@/services/openapi/schemas";
 
 export const maneuversQuery = z.object({
   limit: z.coerce.number().int().min(1).max(1000).optional().meta({
@@ -68,11 +69,27 @@ const maneuversPlayerEntry = z
     nickname: z.string().nullable(),
     clanId: z.number().nullable(),
     clanTag: z.string().nullable(),
+    clanColor: z.string().nullable().meta({
+      description:
+        "The clan's brand colour, so the tag reads in it. Null for a clan we have never crawled.",
+    }),
     famePoints: z.number().meta({
       description: "The ranking metric, cumulative over the edition.",
     }),
     victories: z.number(),
     defeats: z.number(),
+    // The public crests, attached at the API boundary (see the player badge
+    // resolver). Present on every row with falsy defaults, like the other
+    // leaderboards, so the client reads them without a per-field guard.
+    isVerified: z.boolean(),
+    isSupporter: z.boolean(),
+    twitchLogin: z.string().nullable(),
+    tournamentWins: z.number(),
+    tournamentFeaturedWins: z.number(),
+    tournamentBestTitle: z.string().nullable(),
+    onslaughtBestTier: z.string().nullable(),
+    onslaughtBestRank: z.number().nullable(),
+    onslaughtSeasons: z.number(),
   })
   .meta({
     id: "ManeuversPlayerEntry",
@@ -85,9 +102,19 @@ const maneuversClanEntry = z
     clanId: z.number(),
     tag: z.string().nullable(),
     name: z.string().nullable(),
+    color: z.string().nullable().meta({
+      description: "The clan's brand colour. Null for a clan we have never crawled.",
+    }),
+    emblem: z.string().nullable().meta({
+      description: "The clan's emblem URL, or empty/null when we hold none.",
+    }),
     famePoints: z.number(),
     victories: z.number(),
     defeats: z.number(),
+    badges: z.array(clanRankBadge).optional().meta({
+      description:
+        "Leaderboard placings the clan currently holds, best rank first. Omitted when it holds none.",
+    }),
   })
   .meta({
     id: "ManeuversClanEntry",

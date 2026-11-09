@@ -2,6 +2,7 @@ import { asc, desc, eq } from "drizzle-orm";
 import { unstable_cache } from "next/cache";
 import { db } from "@unicum.gg/core/db";
 import {
+  clansByRegion,
   maneuversClansByRegion,
   maneuversEditionsByRegion,
   maneuversPlayersByRegion,
@@ -58,6 +59,10 @@ export type ManeuversPlayerRow = {
   nickname: string | null;
   clanId: number | null;
   clanTag: string | null;
+  /** The clan's brand colour, from our own clan table when we know the clan, so
+   * the tag reads in the clan's colour like it does on every other board. Null
+   * for a clan we have never seen. */
+  clanColor: string | null;
   famePoints: number;
   victories: number;
   defeats: number;
@@ -68,6 +73,11 @@ export type ManeuversClanRow = {
   clanId: number;
   tag: string | null;
   name: string | null;
+  /** Brand colour and emblem, from our own clan table, so the row wears the
+   * crest and colour the rest of the site gives the clan. Null/empty for a clan
+   * we have never seen. */
+  color: string | null;
+  emblem: string | null;
   famePoints: number;
   victories: number;
   defeats: number;
@@ -105,7 +115,12 @@ async function readBoard(
 
   const snapshots = maneuversSnapshotsByRegion[region];
   const players = maneuversPlayersByRegion[region];
-  const clans = maneuversClansByRegion[region];
+  const maneuversClans = maneuversClansByRegion[region];
+  // Our own clan table, joined for the brand colour and emblem the board rows
+  // wear. The board only stores the tag and name it saw, so a clan's colour has
+  // to come from here; a clan we have never crawled simply joins to nulls and
+  // the row falls back to a bare tag, like any board does for an unknown clan.
+  const clanTable = clansByRegion[region];
 
   const [[snapshot], playerRows, clanRows] = await Promise.all([
     db
@@ -115,16 +130,40 @@ async function readBoard(
       .orderBy(desc(snapshots.capturedAt))
       .limit(1),
     db
-      .select()
+      .select({
+        place: players.place,
+        accountId: players.accountId,
+        nickname: players.nickname,
+        clanId: players.clanId,
+        clanTag: players.clanTag,
+        clanColor: clanTable.color,
+        famePoints: players.famePoints,
+        victories: players.victories,
+        defeats: players.defeats,
+      })
       .from(players)
+      .leftJoin(clanTable, eq(clanTable.id, players.clanId))
       .where(eq(players.eventName, edition.eventName))
       .orderBy(asc(players.place))
       .limit(limit),
     db
-      .select()
-      .from(clans)
-      .where(eq(clans.eventName, edition.eventName))
-      .orderBy(asc(clans.place))
+      .select({
+        place: maneuversClans.place,
+        clanId: maneuversClans.clanId,
+        storedTag: maneuversClans.tag,
+        storedName: maneuversClans.name,
+        knownTag: clanTable.tag,
+        knownName: clanTable.name,
+        color: clanTable.color,
+        emblem: clanTable.emblem,
+        famePoints: maneuversClans.famePoints,
+        victories: maneuversClans.victories,
+        defeats: maneuversClans.defeats,
+      })
+      .from(maneuversClans)
+      .leftJoin(clanTable, eq(clanTable.id, maneuversClans.clanId))
+      .where(eq(maneuversClans.eventName, edition.eventName))
+      .orderBy(asc(maneuversClans.place))
       .limit(limit),
   ]);
 
@@ -154,6 +193,7 @@ async function readBoard(
       nickname: row.nickname,
       clanId: row.clanId,
       clanTag: row.clanTag,
+      clanColor: row.clanColor,
       famePoints: row.famePoints,
       victories: row.victories,
       defeats: row.defeats,
@@ -161,8 +201,13 @@ async function readBoard(
     clans: clanRows.map((row) => ({
       place: row.place,
       clanId: row.clanId,
-      tag: row.tag,
-      name: row.name,
+      // Our own clan record is authoritative when we have it (the board stores
+      // whatever tag/name it saw at capture, which can lag a rename); the
+      // stored value is the fallback for a clan we have never crawled.
+      tag: row.knownTag ?? row.storedTag,
+      name: row.knownName ?? row.storedName,
+      color: row.color,
+      emblem: row.emblem,
       famePoints: row.famePoints,
       victories: row.victories,
       defeats: row.defeats,
