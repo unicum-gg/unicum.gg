@@ -22,11 +22,23 @@ import type { Region } from "@unicum.gg/wargaming";
  * recomputing per request would only re-derive the same numbers.
  */
 
-// Well under the sampling interval, so a fresh sample reaches the page in about
-// a minute rather than waiting out a cache keyed to the same cadence (which
-// would double the worst-case staleness, sampling plus caching). The live
-// header does not go through here at all: it reads Wargaming over SSE.
-const REVALIDATE_SECONDS = 60;
+// The sampler's own cadence, which is also what the servers pages declare.
+//
+// It must not be shorter than theirs, and that is the whole reason this is 300
+// rather than the 60 it was: the runtime SDK loopback dispatches a page's call
+// to the route handler IN PROCESS, so this cache runs inside the page's render
+// scope and Next takes the minimum revalidate across it. At 60 the pages served
+// `s-maxage=60` while declaring 300, regenerating five times more often than
+// they say, and nothing on either page hinted at it (measured at the origin on
+// 2026-11-09, `/servers` answering 60 against its own `revalidate = 300`).
+//
+// The 60 was chosen to keep the worst-case staleness at six minutes rather than
+// ten, sampling plus caching. That reasoning is sound and buys nothing here:
+// every figure on the page is a curve spanning at least 24 hours, so four
+// minutes is invisible on it, and the one live number is the top bar's count,
+// which reads Wargaming over SSE and never passes through this file. Paying a
+// page regeneration for it was paying for freshness no reader can see.
+const REVALIDATE_SECONDS = 300;
 
 /**
  * `unstable_cache` round-trips its value through JSON, so on a cache hit every
