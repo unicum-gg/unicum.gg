@@ -42,8 +42,6 @@ export function ManeuversPlayersTable({
             <TableHead className="w-16">{t("place")}</TableHead>
             <TableHead>{t("player")}</TableHead>
             <TableHead className="text-right">{t("fame-points")}</TableHead>
-            <TableHead className="text-right">{t("victories")}</TableHead>
-            <TableHead className="text-right">{t("defeats")}</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -80,12 +78,6 @@ export function ManeuversPlayersTable({
               </TableCell>
               <TableCell className="text-right font-medium tabular-nums">
                 {num(INT_FORMAT).format(row.famePoints)}
-              </TableCell>
-              <TableCell className="text-right tabular-nums">
-                {num(INT_FORMAT).format(row.victories)}
-              </TableCell>
-              <TableCell className="text-right tabular-nums">
-                {num(INT_FORMAT).format(row.defeats)}
               </TableCell>
             </TableRow>
           ))}
