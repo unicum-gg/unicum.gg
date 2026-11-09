@@ -2763,8 +2763,8 @@ export interface components {
             count: number;
             /** @description Whether the round costs gold. */
             premium: boolean;
-            /** @description The round's icon. */
-            image: string;
+            /** @description The round's icon, or null for a round no catalogue holds. */
+            image: string | null;
         };
         BattleLoadoutSlot: {
             /** @description The item's name in the reader's language, or null for a free slot. Position is kept, so a free slot is an entry rather than a gap: a device's grade and category depend on the slot it sits in. */
@@ -5443,7 +5443,7 @@ export interface components {
             shells?: {
                 /** @description AP, APCR, HEAT or HE, in the reader's language. */
                 name: string;
-                image: string;
+                image: string | null;
             }[];
             /** @description The field modifications this vehicle carried, as pictures, in the tree's own order so two players on one tank can be compared position by position. Present far more often than the fitted loadout: a recording carries these for everyone who has any, about twelve of the thirty. */
             fieldMods?: components["schemas"]["loadoutSlot"][];

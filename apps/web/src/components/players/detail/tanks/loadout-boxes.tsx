@@ -54,7 +54,8 @@ export interface LoadoutShellView {
   kind: string;
   count: number;
   premium: boolean;
-  image: string;
+  /** Null for a round no catalogue holds. */
+  image: string | null;
 }
 
 /** One seat: who is in it, then what they were taught. */
@@ -200,7 +201,9 @@ export function LoadoutShellBox({
       accent={shell.premium && shell.count > 0}
       dimmed={shell.count === 0}
     >
-      <Picture src={shell.image} alt={shell.kind} size={Math.round(size * 0.65)} />
+      {shell.image ? (
+        <Picture src={shell.image} alt={shell.kind} size={Math.round(size * 0.65)} />
+      ) : null}
       <span className="absolute -right-1 -bottom-1.5 rounded bg-fd-background px-0.5 text-[10px] leading-tight font-medium tabular-nums">
         {shell.count}
       </span>

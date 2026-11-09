@@ -1,5 +1,10 @@
 import { crewRoleBadgeUrl, type Region } from "@unicum.gg/wargaming";
-import { iconUrl } from "@unicum.gg/shared";
+import {
+  eventItemPicture,
+  iconUrl,
+  UNKNOWN_ITEM,
+  UNKNOWN_SHELL,
+} from "@unicum.gg/shared";
 import type { BattleDetail, BattleLoadout } from "@unicum.gg/core/battles/read";
 import { fieldModSlots } from "@unicum.gg/core/wargaming/wot/tanks/field-mods";
 import {
@@ -23,7 +28,7 @@ export type NamedBattleLoadout = {
   optDevices: NamedSlot[];
   boosters: NamedSlot[];
   consumables: NamedSlot[];
-  shells: { kind: string; count: number; premium: boolean; image: string }[];
+  shells: { kind: string; count: number; premium: boolean; image: string | null }[];
   fieldMods: NamedSlot[];
   crew: {
     role: string;
@@ -69,13 +74,20 @@ export async function nameBattleLoadouts(
   const tankOf = (participant: Participant, loadout: BattleLoadout) =>
     loadout.tankId ?? participant.tank?.id ?? null;
 
-  const [{ t: tEquipment }, { t: tPerks }, { t: tRoles }, { t: tGame }] =
-    await Promise.all([
-      getTranslation("game/equipment", locale),
-      getTranslation("game/crew-perks", locale),
-      getTranslation("game/crew-roles", locale),
-      getTranslation("game/vocabulary", locale),
-    ]);
+  const [
+    { t: tEquipment },
+    { t: tPerks },
+    { t: tRoles },
+    { t: tGame },
+    { t: tBattles },
+  ] = await Promise.all([
+    getTranslation("game/equipment", locale),
+    getTranslation("game/crew-perks", locale),
+    getTranslation("game/crew-roles", locale),
+    getTranslation("game/vocabulary", locale),
+    getTranslation("components/players/detail/overview/battles", locale),
+  ]);
+  const unknownItem = tBattles("unknown-item");
 
   // One catalogue per tank, fetched once however many lives that tank had.
   // The pictures are a fact about the vehicle, not about the battle.
@@ -139,13 +151,17 @@ export async function nameBattleLoadouts(
    * A key under the `unknown:` prefix is an item this deployment's catalogues
    * do not hold at all, which the decoder keeps rather than turning into a null
    * so that a filled slot is never drawn as an empty one. Neither source can
-   * name it, so it is shown as itself.
+   * name it, and its number means nothing to a reader, so it is called what
+   * it is.
    */
   const slot = (
     key: string | null,
     icons: Map<string, LoadoutIcon> | undefined,
   ): NamedSlot => {
     if (!key) return { name: null, image: null, overlay: null };
+    if (key.startsWith(UNKNOWN_ITEM)) {
+      return { name: unknownItem, image: null, overlay: null };
+    }
     const entry = icons?.get(key);
     const translated = tEquipment(key);
     return {
@@ -154,7 +170,7 @@ export async function nameBattleLoadouts(
       // list carries only the grades the encyclopedia lists for it, and it is
       // not complete, so a grade the player really fitted can be missing from
       // it. The picture is the family's in any case.
-      image: devicePicture(icons ?? new Map(), key),
+      image: eventItemPicture(key) ?? devicePicture(icons ?? new Map(), key),
       overlay: gradeOverlay(entry),
     };
   };
@@ -170,10 +186,14 @@ export async function nameBattleLoadouts(
       shells: loadout.shells.map((shell) => ({
         // AP, APCR, HEAT, HE, in the reader's language. The same block the
         // tank pages read, so the two call a round by the same name.
-        kind: tGame(`shells.${shell.type}`) || shell.type,
+        kind:
+          shell.type === UNKNOWN_SHELL
+            ? unknownItem
+            : tGame(`shells.${shell.type}`) || shell.type,
         count: shell.count,
         premium: shell.premium,
-        image: `${AMMO_ICONS}/${shell.type}.png`,
+        // No file exists for a kind the catalogues do not hold.
+        image: shell.type === UNKNOWN_SHELL ? null : `${AMMO_ICONS}/${shell.type}.png`,
       })),
       fieldMods: (mods.get(modKey(tank, loadout.fieldModsPacked)) ?? []).map(
         (mod) => {

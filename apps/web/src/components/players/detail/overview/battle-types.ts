@@ -103,7 +103,7 @@ export type BattleLoadoutView = {
   optDevices: BattleLoadoutSlot[];
   boosters: BattleLoadoutSlot[];
   consumables: BattleLoadoutSlot[];
-  shells: { kind: string; count: number; premium: boolean; image: string }[];
+  shells: { kind: string; count: number; premium: boolean; image: string | null }[];
   fieldMods: BattleLoadoutSlot[];
   crew: {
     role: string;

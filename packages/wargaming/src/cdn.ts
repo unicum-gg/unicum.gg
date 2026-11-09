@@ -24,6 +24,12 @@ export function mirrorContourIconUrl(nation: string, tag: string): string {
   return iconUrl(`vehicle/contour/${nation}-${tag}.png`, ASSETS_BRANCH_CT);
 }
 
+/** An event vehicle's contour icon, which WG's CDN does not publish. The client
+ * files what an event pack adds under `.extend`. */
+export function eventContourIconUrl(nation: string, tag: string): string {
+  return iconUrl(`vehicle/contour/${nation}-${tag}.extend.png`);
+}
+
 export function tankIconUrl(region: Region, tag: string): string {
   const slug = tag.toLowerCase();
   return `https://${HOST[region]}/dcont/tankopedia_images/${slug}/${slug}_icon.svg`;

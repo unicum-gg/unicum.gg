@@ -5,6 +5,7 @@ import { Region } from "@unicum.gg/wargaming";
 import {
   catalogueNaming,
   fetchCommonTestVehicles,
+  fetchEventVehicles,
   fetchVehicleCatalog,
 } from "@unicum.gg/core/wargaming/wot/tanks/wotsrc";
 
@@ -120,19 +121,30 @@ export async function getVehicleEncyclopedia(
  */
 export async function refreshVehicles(region: Region): Promise<number> {
   const table = vehiclesByRegion[region];
-  const [catalog, commonTest] = await Promise.all([
+  const [catalog, commonTest, events] = await Promise.all([
     fetchVehicleCatalog(region),
     fetchCommonTestVehicles(region),
+    fetchEventVehicles(region),
   ]);
+  const regular = [...catalog, ...commonTest.values()];
+  const known = new Set(regular.map((v) => v.tankId));
   // Test vehicles join the same catalogue rather than a table of their own:
   // everything downstream (slugs, detail, search) then works on them for free,
   // and the flag is what the few places that must exclude them read.
-  const rows: NewVehicle[] = [...catalog, ...commonTest.values()].map((v) => ({
+  //
+  // An event's vehicles join it so a battle fought in one can name it, and are
+  // hidden so nothing else does: they exist only inside their event, bots and
+  // bosses included, and have no page, no slug and no place in a list.
+  const rows: NewVehicle[] = [
+    ...regular.map((v) => ({ v, hidden: false })),
+    ...events.filter((v) => !known.has(v.tankId)).map((v) => ({ v, hidden: true })),
+  ].map(({ v, hidden }) => ({
     tankId: v.tankId,
     tier: v.tier,
     type: v.type,
     nation: v.nation,
     ...catalogueNaming(v),
+    ...(hidden ? { isHidden: true } : {}),
     tag: v.tag,
     isPremium: v.isPremium,
     isWheeled: v.isWheeled,

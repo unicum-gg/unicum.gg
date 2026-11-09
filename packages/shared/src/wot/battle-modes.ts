@@ -108,6 +108,18 @@ export function modeLabel(bonusType: number): string | null {
 }
 
 /**
+ * Whether a battle is one of the Halloween event's. Its arena declares `ctf` as
+ * a placeholder, so its gameplay says nothing about how it was played.
+ */
+export function isHalloweenBattle(bonusType: number): boolean {
+  return (
+    bonusType === BattleMode.Halloween ||
+    bonusType === BattleMode.HalloweenMedium ||
+    bonusType === BattleMode.HalloweenHard
+  );
+}
+
+/**
  * The gameplay a battle was played under, as the client names it.
  *
  * The mode says which queue it came from; this says what the teams were doing

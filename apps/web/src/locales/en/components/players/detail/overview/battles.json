@@ -4,6 +4,7 @@
   "seen-by": "seen by {count}",
   "died": "Destroyed in this battle",
   "unknown-vehicle": "Unknown vehicle",
+  "unknown-item": "Unknown item",
   "empty-heading": "Share your battles",
   "example": "Example",
   "see-all": "See all {count} battles",

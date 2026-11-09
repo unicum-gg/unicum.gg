@@ -1,5 +1,10 @@
 import type { Region } from "@unicum.gg/wargaming";
-import { iconUrl } from "@unicum.gg/shared";
+import {
+  eventItemPicture,
+  iconUrl,
+  UNKNOWN_ITEM,
+  UNKNOWN_SHELL,
+} from "@unicum.gg/shared";
 import type { PlayerBattle } from "@unicum.gg/core/battles/read";
 import {
   devicePicture,
@@ -46,10 +51,12 @@ export async function pictureBattleRows(
   // The dictionaries that name equipment, so the preview boxes can carry a
   // tooltip. In the language the URL names, so the answer stays one per URL
   // and a shared cache cannot hand one reader another's.
-  const [{ t: tEquipment }, { t: tGame }] = await Promise.all([
+  const [{ t: tEquipment }, { t: tGame }, { t: tBattles }] = await Promise.all([
     getTranslation("game/equipment", served),
     getTranslation("game/vocabulary", served),
+    getTranslation("components/players/detail/overview/battles", served),
   ]);
+  const unknownItem = tBattles("unknown-item");
   // The field modifications, resolved once per (vehicle, packed value).
   // Keyed on both because the same tank with a different tree position is a
   // different answer, and because a player's twenty battles on one tank with
@@ -105,7 +112,7 @@ export async function pictureBattleRows(
       const tank = battle.own.tank;
       const icons = tank === null ? undefined : pictures.get(tank);
       const slots = tank === null ? 0 : (pairs.get(tank) ?? 0);
-      const name = namer(tEquipment, icons);
+      const name = namer(tEquipment, icons, unknownItem);
       return {
         ...battle,
         startedAt: battle.startedAt.toISOString(),
@@ -125,10 +132,16 @@ export async function pictureBattleRows(
         // is called the same thing everywhere.
         ...(shells?.length
           ? {
-              shells: shells.map((kind) => ({
-                name: tGame(`shells.${kind}`) || kind,
-                image: `${AMMO_ICONS}/${kind}.png`,
-              })),
+              shells: shells.map((kind) =>
+                // A round no catalogue holds has no kind to name or picture.
+                // The slot stays, because it is still a round in the rack.
+                kind === UNKNOWN_SHELL
+                  ? { name: unknownItem, image: null }
+                  : {
+                      name: tGame(`shells.${kind}`) || kind,
+                      image: `${AMMO_ICONS}/${kind}.png`,
+                    },
+              ),
             }
           : {}),
         ...(fieldModsPacked?.length
@@ -175,13 +188,17 @@ export async function pictureBattleRows(
  * catalogue carries Wargaming's encyclopedia name, which is English on this
  * region, while the dictionary is the game client's own and is translated. A
  * missing key comes back AS the key from these dictionaries, which is how they
- * report a gap, so that is what the comparison tests.
+ * report a gap, so that is what the comparison tests. A key under the `unknown:`
+ * prefix is an item neither source holds, and its number means nothing to a
+ * reader.
  */
 function namer(
   tEquipment: (key: string) => string,
   icons: Map<string, LoadoutIcon> | undefined,
+  unknownItem: string,
 ) {
   return (key: string): string => {
+    if (key.startsWith(UNKNOWN_ITEM)) return unknownItem;
     const translated = tEquipment(key);
     if (translated !== key) return translated;
     return icons?.get(key)?.name || key;
@@ -221,7 +238,7 @@ function pictured(
     return {
       filled: true,
       name: name(key),
-      image: icons ? devicePicture(icons, key) : null,
+      image: eventItemPicture(key) ?? (icons ? devicePicture(icons, key) : null),
       // The grade badge and the category dots, so a row draws a device the
       // same way the tank page does. They were missing while this built its
       // own square instead of using the shared one, and a Bounty Rammer was

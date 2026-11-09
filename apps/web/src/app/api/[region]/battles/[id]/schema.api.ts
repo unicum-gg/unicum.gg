@@ -29,7 +29,9 @@ export const BattleLoadoutShell = z.object({
   }),
   count: z.number().meta({ description: "How many were loaded." }),
   premium: z.boolean().meta({ description: "Whether the round costs gold." }),
-  image: z.string().meta({ description: "The round's icon." }),
+  image: z.string().nullable().meta({
+    description: "The round's icon, or null for a round no catalogue holds.",
+  }),
 });
 
 /** One crew seat, with what it was taught. */

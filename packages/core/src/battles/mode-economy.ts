@@ -57,8 +57,8 @@ export function modeOfBattleType() {
  * nothing (training rooms, Fun Random) is left out by the `HAVING` rather than
  * by a list of modes. A record is one account's vehicle in one battle, the
  * whole battle for a player who respawned in several; bots (no account) are
- * left out, and a vehicle the catalogue does not hold (an event's) sits at
- * tier 0. The uploader's own economy is joined onto their
+ * left out, and an event's vehicle sits at tier 0 (its declared tier says
+ * nothing a Random vehicle of that tier could be compared with). The uploader's own economy is joined onto their
  * record alone: `personal` belongs to the first id in `reported_by`, and its
  * `credits` is the gross (premium and bonuses in, bills not yet paid), so the
  * three bills are subtracted here to get what landed in the account.
@@ -88,7 +88,7 @@ export async function aggregateModeEconomy(region: Region): Promise<AggregateRow
                   THEN b.personal END AS personal
       FROM b
       CROSS JOIN LATERAL jsonb_array_elements(b.vehicles) v
-      LEFT JOIN ${vehicles} veh ON veh.tank_id = (v->>'tank')::int
+      LEFT JOIN ${vehicles} veh ON veh.tank_id = (v->>'tank')::int AND NOT veh.is_hidden
       WHERE v ? 'account'
     )
     SELECT mode, tier,

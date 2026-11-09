@@ -13,6 +13,7 @@ import {
 } from "@phosphor-icons/react";
 import {
   gameplayLabel,
+  isHalloweenBattle,
   minimapUrl,
   modeLabel,
   RatingMetric,
@@ -99,7 +100,7 @@ export type PlayerBattleRow = {
   /** Consumables carried, by slot. */
   consumables?: LoadoutSlotView[];
   /** The rounds loaded, named and pictured, without their counts. */
-  shells?: { name: string; image: string }[];
+  shells?: { name: string; image: string | null }[];
   /** The field modifications carried, in the tree's own order. */
   fieldMods?: LoadoutSlotView[];
   own: {
@@ -210,9 +211,12 @@ export function PlayerBattlesTable({
         const rating = battle.rating[metric];
         const title = mapName(battle.map, battle.map, tMaps);
         const mode = modeLabel(battle.battleType);
-        // Not beside Onslaught, where `comp7` is the mode saying itself twice.
+        // Not beside Onslaught, where `comp7` is the mode saying itself twice,
+        // nor beside an event, whose arena only declares a placeholder.
         const play =
-          mode === null || battle.gameplay === "comp7"
+          mode === null ||
+          battle.gameplay === "comp7" ||
+          isHalloweenBattle(battle.battleType)
             ? null
             : gameplayLabel(battle.gameplay);
         const length = clock(battle.duration);
@@ -293,6 +297,7 @@ export function PlayerBattlesTable({
                           region={region}
                           tag={battle.tank.tag}
                           type={battle.tank.type}
+                          nation={battle.tank.nation}
                           className="h-3 w-auto shrink-0 object-contain"
                         />
                         {battle.tank.slug ? (
@@ -330,6 +335,7 @@ export function PlayerBattlesTable({
                       region={region}
                       tag={battle.tank.tag}
                       type={battle.tank.type}
+                      nation={battle.tank.nation}
                       className="h-3.5 w-auto shrink-0 object-contain"
                     />
                     {battle.tank.slug && nickname ? (

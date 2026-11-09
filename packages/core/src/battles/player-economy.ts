@@ -60,8 +60,8 @@ export async function playerModeEconomy(
   const vehicles = vehiclesByRegion[region];
   // Every mode the player was paid in, events included: a battle that carries
   // no credits (training rooms, Fun Random) drops out on `personal ? 'credits'`
-  // on its own. A vehicle the catalogue does not hold (an event's) is kept at
-  // tier 0 rather than lost to the join.
+  // on its own. An event's vehicle is kept at tier 0, apart from the tier it
+  // declares, rather than lost to the join.
   const rows = await db.execute<AggregateRow>(sql`
     WITH b AS (
       SELECT b.battle_type, b.duration, b.winner_team, b.personal,
@@ -85,7 +85,7 @@ export async function playerModeEconomy(
            coalesce(sum((b.personal->>'ammoCost')::bigint), 0) AS ammo,
            coalesce(sum((b.personal->>'suppliesCost')::bigint), 0) AS supplies
     FROM b
-    LEFT JOIN ${vehicles} veh ON veh.tank_id = (b.own->>'tank')::int
+    LEFT JOIN ${vehicles} veh ON veh.tank_id = (b.own->>'tank')::int AND NOT veh.is_hidden
     GROUP BY b.battle_type, 2`);
 
   // Folded by the mode's name, so the game's variants of one mode are one row,

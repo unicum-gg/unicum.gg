@@ -1,6 +1,6 @@
 import { XMLParser } from "fast-xml-parser";
 import { Region } from "../../region";
-import type { Transport } from "../../client/transport";
+import { WargamingHttpError, type Transport } from "../../client/transport";
 import { RateLimit } from "../../client/rate-limiter";
 import { loadPo } from "./localization";
 import { fetchNations } from "./nations";
@@ -104,6 +104,12 @@ function extractRole(tags: string | undefined): string | null {
 }
 
 /**
+ * The client's event modes, each shipping its own `item_defs` under
+ * `res/<pack>/` beside the main one. What they declare is in no other list.
+ */
+const EVENT_PACKS = ["halloween", "last_stand", "story_mode"] as const;
+
+/**
  * Vehicle catalogue from the IzeBerg/wot-src GitHub mirror (the actual game
  * client scripts). Includes tanks WG removed from sale but that still appear
  * in player stats. ~22 raw fetches in parallel.
@@ -125,10 +131,52 @@ export class SourceVehiclesResource {
     });
     const results = await Promise.all(
       nations.map((nation, idx) =>
-        this.#nation(branch, nation, idx, parser).catch((err) => {
+        this.#nation(
+          branch,
+          nation,
+          idx,
+          parser,
+          `sources/res/scripts/item_defs/vehicles/${nation}/list.xml`,
+        ).catch((err) => {
           console.error(`[wotsrc-${this.region}] ${nation} failed:`, err);
           return [] as WotSrcVehicle[];
         }),
+      ),
+    );
+    return results.flat();
+  }
+
+  /**
+   * The vehicles only an event mode fields: its own tanks and its bots.
+   *
+   * A nation a pack has no vehicle of has no file there, so a 404 is an answer
+   * rather than a failure.
+   */
+  async eventCatalog(): Promise<WotSrcVehicle[]> {
+    const branch = branchFor(this.region);
+    const nations = await fetchNations(this.t, branch);
+    const parser = new XMLParser({
+      ignoreAttributes: true,
+      parseTagValue: false,
+      trimValues: true,
+      commentPropName: false,
+    });
+    const results = await Promise.all(
+      EVENT_PACKS.flatMap((pack) =>
+        nations.map((nation, idx) =>
+          this.#nation(
+            branch,
+            nation,
+            idx,
+            parser,
+            `sources/res/${pack}/scripts/item_defs/vehicles/${nation}/list.xml`,
+          ).catch((err) => {
+            if (!(err instanceof WargamingHttpError && err.status === 404)) {
+              console.error(`[wotsrc-${this.region}] ${pack}/${nation} failed:`, err);
+            }
+            return [] as WotSrcVehicle[];
+          }),
+        ),
       ),
     );
     return results.flat();
@@ -146,6 +194,7 @@ export class SourceVehiclesResource {
     nation: string,
     nationIdx: number,
     parser: XMLParser,
+    listPath: string,
   ): Promise<WotSrcVehicle[]> {
     const nationFile = poFilename(nation);
     // Through `loadPo`, like every other source resource, so a vehicle only
@@ -158,9 +207,7 @@ export class SourceVehiclesResource {
     // per (branch, file), so the collection pass below reuses this very promise
     // instead of paying a second sequential round trip.
     const nationPo = po(nationFile);
-    const xmlText = await this.#text(
-      rawUrl(branch, `sources/res/scripts/item_defs/vehicles/${nation}/list.xml`),
-    );
+    const xmlText = await this.#text(rawUrl(branch, listPath));
     const parsed = parser.parse(xmlText) as RawListXml;
     // Parsed once, here: the ids and the two references are read by both the
     // file-collection pass and the emit loop below.

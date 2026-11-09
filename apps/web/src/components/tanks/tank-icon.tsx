@@ -5,6 +5,7 @@ import { useState } from "react";
 import {
   type Region,
   defaultTankIconUrl,
+  eventContourIconUrl,
   mirrorContourIconUrl,
   tankIconUrl,
 } from "@unicum.gg/wargaming";
@@ -20,7 +21,8 @@ export function TankIcon({
   region: Region;
   tag: string;
   type: string;
-  /** Needed only to key the mirror icon of an unreleased vehicle. */
+  /** Keys the mirror icon of a vehicle WG's CDN has nothing for: an unreleased
+   * one, or (tried after the CDN) an event mode's. */
   nation?: string;
   isCommonTest?: boolean;
   className?: string;
@@ -31,13 +33,18 @@ export function TankIcon({
     isCommonTest && nation
       ? mirrorContourIconUrl(nation, tag)
       : tankIconUrl(region, tag);
-  const fallback = defaultTankIconUrl(region, type);
-  // Track which `primary` URL we last got an error for. When the row's
-  // identity changes (sort / filter / different tank), `primary` changes and
-  // `failedFor` no longer matches, so we automatically go back to the new
-  // primary — no effect-driven reset needed.
-  const [failedFor, setFailedFor] = useState<string | null>(null);
-  const src = failedFor === primary ? fallback : primary;
+  const candidates = [
+    primary,
+    ...(nation && !isCommonTest ? [eventContourIconUrl(nation, tag)] : []),
+    defaultTankIconUrl(region, type),
+  ];
+  // Track which URLs failed. When the row's identity changes (sort / filter /
+  // different tank), its URLs no longer match the list, so we automatically go
+  // back to the new primary, with no effect-driven reset needed.
+  const [failed, setFailed] = useState<string[]>([]);
+  const src =
+    candidates.find((candidate) => !failed.includes(candidate)) ??
+    candidates[candidates.length - 1];
 
   return (
     <Image
@@ -45,7 +52,7 @@ export function TankIcon({
       alt=""
       width={28}
       height={14}
-      onError={() => setFailedFor(primary)}
+      onError={() => setFailed((list) => [...list, src])}
       className={className}
     />
   );

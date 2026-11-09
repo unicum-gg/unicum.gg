@@ -695,6 +695,7 @@ function TeamTable({
                       region={region}
                       tag={p.tank.tag}
                       type={p.tank.type}
+                      nation={p.tank.nation}
                       className="h-3 w-auto shrink-0 object-contain"
                     />
                     <span className="truncate">

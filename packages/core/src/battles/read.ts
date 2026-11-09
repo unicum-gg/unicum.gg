@@ -23,6 +23,8 @@ import {
   type VehicleMeta,
   type WN8Expected,
   type WNXExpected,
+  resolveStoredItem,
+  resolveStoredShell,
 } from "@unicum.gg/shared";
 import { db } from "@unicum.gg/core/db";
 import {
@@ -410,7 +412,7 @@ function battleRows(region: Region, accountId: number) {
         opt_devices: (string | null)[] | null;
         boosters: (string | null)[] | null;
         consumables: (string | null)[] | null;
-        shells: { type: string }[] | null;
+        shells: { id: number; type: string }[] | null;
         field_mods_packed: number[] | null;
       } | null>`(
         SELECT to_jsonb(l) FROM ${loadouts} l
@@ -479,7 +481,7 @@ async function assembleBattles(
       ...(row.loadout
         ? {
             ...(row.loadout.opt_devices?.length
-              ? { devices: row.loadout.opt_devices }
+              ? { devices: row.loadout.opt_devices.map(resolveStoredItem) }
               : {}),
             // By slot, empty ones included: a directive slot left free is
             // part of the build, and drawn as a free slot like a free device
@@ -488,15 +490,19 @@ async function assembleBattles(
             // empty rather than holding a free slot. Every vehicle has one, so
             // a battle that carries a loadout shows it free.
             ...(row.loadout.boosters?.length
-              ? { boosters: row.loadout.boosters }
+              ? { boosters: row.loadout.boosters.map(resolveStoredItem) }
               : row.loadout.opt_devices?.length
                 ? { boosters: [null] }
                 : {}),
             ...(row.loadout.consumables?.length
-              ? { consumables: row.loadout.consumables }
+              ? { consumables: row.loadout.consumables.map(resolveStoredItem) }
               : {}),
             ...(row.loadout.shells?.length
-              ? { shells: row.loadout.shells.map((shell) => shell.type) }
+              ? {
+                  shells: row.loadout.shells.map(
+                    (shell) => resolveStoredShell(shell).type,
+                  ),
+                }
               : {}),
             ...(row.loadout.field_mods_packed?.length
               ? { fieldModsPacked: row.loadout.field_mods_packed }
@@ -878,10 +884,10 @@ async function loadoutsOf(
     const list = out.get(row.vehicleId) ?? [];
     list.push({
       life: row.life,
-      optDevices: row.optDevices ?? [],
-      boosters: row.boosters ?? [],
-      consumables: row.consumables ?? [],
-      shells: row.shells ?? [],
+      optDevices: (row.optDevices ?? []).map(resolveStoredItem),
+      boosters: (row.boosters ?? []).map(resolveStoredItem),
+      consumables: (row.consumables ?? []).map(resolveStoredItem),
+      shells: (row.shells ?? []).map(resolveStoredShell),
       crew: row.crew ?? [],
       tankId: row.tankId,
       fieldModsPacked: row.fieldModsPacked ?? [],

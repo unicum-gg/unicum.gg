@@ -272,7 +272,7 @@ export const playerBattle = z
           name: z.string().meta({
             description: "AP, APCR, HEAT or HE, in the reader's language.",
           }),
-          image: z.string(),
+          image: z.string().nullable(),
         }),
       )
       .optional()

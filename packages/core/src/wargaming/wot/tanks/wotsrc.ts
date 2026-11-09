@@ -7,6 +7,9 @@ import type { WotSrcVehicle as WotSrcVehicleRow } from "@unicum.gg/wargaming";
 export const fetchVehicleCatalog = (region: Region, branch?: WotSrcBranch) =>
   wg.region(region).source.vehicles.catalog(branch);
 
+export const fetchEventVehicles = (region: Region) =>
+  wg.region(region).source.vehicles.eventCatalog();
+
 /**
  * The vehicles the Common Test client has and this region's live one does not.
  *

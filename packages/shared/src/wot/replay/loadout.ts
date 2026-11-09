@@ -13,6 +13,7 @@ import {
   ITEM_TYPE,
   splitIntCompactDescr,
 } from "./loadout-catalogue";
+import { EVENT_EQUIPMENTS, UNKNOWN_ITEM, UNKNOWN_SHELL } from "./loadout-event-items";
 import { SHELLS } from "./loadout-shells";
 
 /**
@@ -493,15 +494,15 @@ function deviceLayouts(setups: Map<unknown, unknown>): DevicesLayout[] {
  * page shows the marker rather than a gap, and a count of them is how you know
  * the catalogue needs regenerating.
  */
-export const UNKNOWN_ITEM = "unknown:";
-
 function slots(values: number[], type: number): (string | null)[] {
   return values.map((intCD) => {
     if (!intCD) return null;
     const { type: kind, id } = splitIntCompactDescr(intCD);
     if (kind !== type) return `${UNKNOWN_ITEM}${intCD}`;
-    const table = type === ITEM_TYPE.optionalDevice ? OPTIONAL_DEVICES : EQUIPMENTS;
-    return table[id] ?? `${UNKNOWN_ITEM}${intCD}`;
+    if (type === ITEM_TYPE.optionalDevice) {
+      return OPTIONAL_DEVICES[id] ?? `${UNKNOWN_ITEM}${intCD}`;
+    }
+    return EQUIPMENTS[id] ?? EVENT_EQUIPMENTS[id]?.[0] ?? `${UNKNOWN_ITEM}${intCD}`;
   });
 }
 
@@ -520,7 +521,7 @@ function pairs(values: number[]): LoadoutShell[] {
     out.push({
       id: intCD,
       name: entry ? entry[0] : `${UNKNOWN_ITEM}${intCD}`,
-      type: entry ? entry[1] : "UNKNOWN",
+      type: entry ? entry[1] : UNKNOWN_SHELL,
       premium: entry ? entry[2] === 1 : false,
       count,
     });
