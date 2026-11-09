@@ -41,6 +41,8 @@ import {
   parseSkillTreeDescriptions,
   parseSkillTreeNames,
   parseTankParams,
+  rawUrl,
+  WotSrcBranch,
   type GameLanguage,
 } from "@unicum.gg/wargaming";
 import { GROUPS } from "../src/components/tanks/detail/specifications/characteristics/rows";
@@ -164,6 +166,38 @@ async function read(
   const response = await fetch(url);
   if (!response.ok) throw new Error(`${url}: HTTP ${response.status}`);
   return response.text();
+}
+
+/** The event modes whose arenas and items are named in catalogues of their own. */
+const EVENT_PACKS = ["halloween", "last_stand", "story_mode"];
+
+/**
+ * The names the event modes add, in English.
+ *
+ * The published branch does not carry these catalogues, so the live client's own
+ * English stands in for every language, and any catalogue that does name one
+ * wins over it. A pack that does not ship a catalogue has no file: a 404 is an
+ * answer, anything else is a failed read and must not write the files.
+ */
+async function eventCatalogues() {
+  const read = async (pack: string, file: string) => {
+    const url = rawUrl(
+      WotSrcBranch.EU,
+      `sources/res/text/lc_messages/${pack}.${file}.extend.po`,
+    );
+    const response = await fetch(url);
+    if (response.status === 404) return "";
+    if (!response.ok) throw new Error(`${url}: HTTP ${response.status}`);
+    return response.text();
+  };
+  const [arenas, artefacts] = await Promise.all([
+    Promise.all(EVENT_PACKS.map((pack) => read(pack, "arenas"))),
+    Promise.all(EVENT_PACKS.map((pack) => read(pack, "artefacts"))),
+  ]);
+  return {
+    maps: Object.assign({}, ...arenas.map((text) => parseArenaCatalogue(text).maps)),
+    equipment: Object.assign({}, ...artefacts.map((text) => parseNamedCatalogue(text).names)),
+  } as { maps: Record<string, string>; equipment: Record<string, string> };
 }
 
 /** Everything one language contributes, from the catalogues that carry it. */
@@ -538,10 +572,19 @@ async function main(): Promise<void> {
   const owned = readJson(GAME_OWNED_PATH) as GameOwnedKeys;
   const englishParams = englishTankParams();
 
+  const events = eventCatalogues();
   for (const [locale, language] of entries) {
     let catalogue: Awaited<ReturnType<typeof catalogueFor>> | null = null;
     try {
-      catalogue = await catalogueFor(language);
+      const [own, event] = await Promise.all([catalogueFor(language), events]);
+      catalogue = {
+        ...own,
+        arenas: { ...own.arenas, maps: { ...event.maps, ...own.arenas.maps } },
+        artefacts: {
+          ...own.artefacts,
+          names: { ...event.equipment, ...own.artefacts.names },
+        },
+      };
     } catch (error) {
       // One language failing must not drop the others. Held back rather than
       // printed here: every language failing is one fact (the branch is
