@@ -1,0 +1,13 @@
+{
+  "heading": "Geriausi žaidėjai per <accent>{maneuvers}</accent>",
+  "intro": "{maneuvers} yra pasikartojantis World of Tanks Tvirtovės klanų įvykis. Žaidėjų įskaita regione {region}, reitinguojama pagal Šlovės taškus, tiesiai iš paties žaidimo lentelės.",
+  "see-clans": "Klanų įskaita →",
+  "window": "Nuo {from} iki {to}.",
+  "no-edition": "Šiame serveryje dar neužfiksuotas nė vienas leidimas.",
+  "not-started": "Lentelė bus atidaryta {date}.",
+  "not-started-undated": "Lentelė dar neatidaryta.",
+  "tank-cutoff": "Transporto priemonės riba",
+  "tank-cutoff-hint": "Žaidėjo, užimančio {places} vietą, turimi Šlovės taškai.",
+  "ranked-players": "Reitinguojami žaidėjai",
+  "recomputed": "Perskaičiuota {at}"
+}

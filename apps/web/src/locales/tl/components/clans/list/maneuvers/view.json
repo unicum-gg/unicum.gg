@@ -1,0 +1,13 @@
+{
+  "heading": "Mga nangungunang klan sa <accent>{maneuvers}</accent>",
+  "intro": "Ang {maneuvers} ay isang paulit-ulit na kaganapan ng klan sa Stronghold ng World of Tanks. Ang ranggo ng klano sa {region}, na niranggo ayon sa Mga puntos ng katanyagan, ay tuwid mula sa sariling talahanayan ng ranggo ng laro.",
+  "see-players": "Ranggo ng mga manlalaro →",
+  "window": "{from} hanggang {to}.",
+  "no-edition": "Wala pang edisyong naitala para sa server na ito.",
+  "not-started": "Binubuksan ang talahanayan ng ranggo sa {date}.",
+  "not-started-undated": "Hindi pa binubuksan ang talahanayan ng ranggo.",
+  "clan-cutoff": "Hangganan ng gold",
+  "clan-cutoff-hint": "Mga puntos ng katanyagan na taglay ng klano sa ika-{places} na lugar.",
+  "ranked-clans": "Mga klan ayon sa ranggo",
+  "recomputed": "Muling nakalkula sa {at}"
+}

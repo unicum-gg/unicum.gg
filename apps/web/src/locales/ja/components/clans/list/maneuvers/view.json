@@ -1,0 +1,13 @@
+{
+  "heading": "<accent>{maneuvers}</accent>のトップクラン",
+  "intro": "{maneuvers}はWorld of Tanksで定期開催される拠点クランイベントです。名声ポイント順の{region}クラン順位を、ゲーム本体のランキングからそのまま確認できます。",
+  "see-players": "プレイヤー順位 →",
+  "window": "{from}から{to}まで。",
+  "no-edition": "このサーバーではまだエディションが記録されていません。",
+  "not-started": "ランキングは{date}に開きます。",
+  "not-started-undated": "ランキングはまだ開いていません。",
+  "clan-cutoff": "ゴールドボーダー",
+  "clan-cutoff-hint": "{places}位のクランが所持している名声ポイント。",
+  "ranked-clans": "ランキングクラン",
+  "recomputed": "再算出：{at}"
+}

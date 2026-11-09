@@ -1,0 +1,13 @@
+{
+  "heading": "<accent>{maneuvers}</accent> 中的顶级玩家",
+  "intro": "{maneuvers} 是 World of Tanks 周期性的要塞军团活动。{region} 玩家排名按名望点数排列，数据直接来自游戏榜单。",
+  "see-clans": "军团排名 →",
+  "window": "{from} 至 {to}。",
+  "no-edition": "此服务器尚未记录任何届次。",
+  "not-started": "榜单将于 {date} 打开。",
+  "not-started-undated": "榜单尚未打开。",
+  "tank-cutoff": "车辆门槛",
+  "tank-cutoff-hint": "排名第 {places} 名的玩家持有的名望点数。",
+  "ranked-players": "排名玩家",
+  "recomputed": "于 {at} 重新计算"
+}

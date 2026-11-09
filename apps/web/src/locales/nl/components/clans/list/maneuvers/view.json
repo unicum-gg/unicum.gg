@@ -1,0 +1,13 @@
+{
+  "heading": "<accent>Top clans</accent> in {maneuvers}",
+  "intro": "{maneuvers} is het terugkerende clan-evenement Bolwerk van World of Tanks. De klassementen van clans in {region}, gerangschikt op Roempunten, rechtstreeks uit het eigen klassement van het spel.",
+  "see-players": "Klassementen van spelers →",
+  "window": "{from} tot {to}.",
+  "no-edition": "Er is nog geen editie voor deze server geregistreerd.",
+  "not-started": "Het klassement opent op {date}.",
+  "not-started-undated": "Het klassement is nog niet geopend.",
+  "clan-cutoff": "Goudgrens",
+  "clan-cutoff-hint": "Roempunten die de clan op plaats {places} heeft behaald.",
+  "ranked-clans": "Gerangschikte clans",
+  "recomputed": "Opnieuw berekend om {at}"
+}

@@ -1,0 +1,13 @@
+{
+  "heading": "Geriausi klanai per <accent>{maneuvers}</accent>",
+  "intro": "{maneuvers} yra pasikartojantis World of Tanks Tvirtovės klanų įvykis. Klanų įskaita regione {region}, reitinguojama pagal Šlovės taškus, tiesiai iš paties žaidimo lentelės.",
+  "see-players": "Žaidėjų įskaita →",
+  "window": "Nuo {from} iki {to}.",
+  "no-edition": "Šiame serveryje dar neužfiksuotas nė vienas leidimas.",
+  "not-started": "Lentelė bus atidaryta {date}.",
+  "not-started-undated": "Lentelė dar neatidaryta.",
+  "clan-cutoff": "Aukso riba",
+  "clan-cutoff-hint": "Klano, užimančio {places} vietą, turimi Šlovės taškai.",
+  "ranked-clans": "Reitinguojami klanai",
+  "recomputed": "Perskaičiuota {at}"
+}

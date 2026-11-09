@@ -1,0 +1,13 @@
+{
+  "heading": "Bang hội hàng đầu trong <accent>{maneuvers}</accent>",
+  "intro": "{maneuvers} là sự kiện Clan Pháo đài định kỳ của World of Tanks. Bảng xếp hạng Clan khu vực {region}, được xếp hạng theo Điểm Danh tiếng, thẳng từ bảng xếp hạng của trò chơi.",
+  "see-players": "Bảng xếp hạng người chơi →",
+  "window": "{from} đến {to}.",
+  "no-edition": "Chưa có phiên bản nào được ghi nhận cho máy chủ này.",
+  "not-started": "Bảng xếp hạng mở vào {date}.",
+  "not-started-undated": "Bảng xếp hạng chưa mở.",
+  "clan-cutoff": "Ngưỡng Gold",
+  "clan-cutoff-hint": "Điểm Danh tiếng do Clan ở vị trí thứ {places} sở hữu.",
+  "ranked-clans": "Các Clan xếp hạng",
+  "recomputed": "Đã tính toán lại lúc {at}"
+}

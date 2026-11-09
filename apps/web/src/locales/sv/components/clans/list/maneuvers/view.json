@@ -1,0 +1,13 @@
+{
+  "heading": "Toppklaner i <accent>{maneuvers}</accent>",
+  "intro": "{maneuvers} är World of Tanks återkommande klanevenemang i Befästning. Klanställningarna för {region}, rankade efter Ärepoäng, direkt från spelets egen topplista.",
+  "see-players": "Spelarställningar →",
+  "window": "{from} till {to}.",
+  "no-edition": "Ingen upplaga har ännu registrerats för denna server.",
+  "not-started": "Topplistan öppnar {date}.",
+  "not-started-undated": "Topplistan har inte öppnat ännu.",
+  "clan-cutoff": "Guldgräns",
+  "clan-cutoff-hint": "Ärepoäng som innehas av klanen på plats {places}.",
+  "ranked-clans": "Rankade klaner",
+  "recomputed": "Omberäknad kl. {at}"
+}

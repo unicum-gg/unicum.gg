@@ -1,0 +1,13 @@
+{
+  "heading": "Parhaat pelaajat tapahtumassa <accent>{maneuvers}</accent>",
+  "intro": "{maneuvers} on World of Tanksin toistuva Linnoitus-klaanitapahtuma. {region}-alueen pelaajasijoitukset, rankattuina Mainepisteiden mukaan, suoraan pelin omasta tulostaulukosta.",
+  "see-clans": "Klaanien sijoitukset →",
+  "window": "{from} - {to}.",
+  "no-edition": "Tälle palvelimelle ei ole vielä tallennettu versiota.",
+  "not-started": "Tulostaulukko avautuu {date}.",
+  "not-started-undated": "Tulostaulukko ei ole vielä avautunut.",
+  "tank-cutoff": "Ajoneuvon raja",
+  "tank-cutoff-hint": "Sijalla {places} olevan pelaajan hallussa olevat Mainepisteet.",
+  "ranked-players": "Sijoittuneet pelaajat",
+  "recomputed": "Laskettu uudelleen ajankohtana {at}"
+}
