@@ -5,8 +5,14 @@ import {
   clansByRegion,
   LanguageSource,
   playersByRegion,
+  TankBattleMode,
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
+import {
+  vehicleRecords,
+  type VehiclePair,
+  type VehicleRecord,
+} from "../players/vehicle-records";
 import { discoverClansBackground } from "../discovery/clans";
 import { discoverPlayersBackground } from "../discovery/players";
 import {
@@ -73,6 +79,15 @@ export type EntityResolution = {
    * itself lands in `clans`, so a tag costs one lookup rather than a lookup and
    * then a second request. */
   tags: Record<string, number>;
+  /**
+   * What each player asked about does on the vehicle they were asked about.
+   *
+   * A list rather than a field on the player, because the pair is the key: the
+   * same account can be asked about on two vehicles, and a field would make
+   * the second answer overwrite the first. Empty unless `vehicles` was asked
+   * for, so every caller that had this answer before still gets exactly it.
+   */
+  vehicles: VehicleRecord[];
 };
 
 /** How many entries one call resolves per kind. Re-exported rather than
@@ -101,7 +116,15 @@ const MAX_DISCOVERIES_PER_CALL = 25;
  */
 export async function resolveEntities(
   region: Region,
-  ids: { players: number[]; clans: number[]; tags: string[] },
+  ids: {
+    players: number[];
+    clans: number[];
+    tags: string[];
+    /** (account, vehicle) pairs to describe, and the mode to describe them
+     * over. Absent means the roster alone, as this answered before. */
+    vehicles?: VehiclePair[];
+    mode?: TankBattleMode | null;
+  },
 ): Promise<EntityResolution> {
   // Tags first: a tag resolves to a clan id, and that clan is then resolved
   // alongside the ones asked for by id, so a caller mixing the two forms never
@@ -115,10 +138,16 @@ export async function resolveEntities(
     new Set([...ids.clans, ...Object.values(tags)]),
   ).slice(0, MAX_IDS_PER_KIND);
 
-  const [languages, players, clans] = await Promise.all([
+  const [languages, players, clans, vehicles] = await Promise.all([
     resolveLanguages(region, { players: ids.players, clans: clanIds }),
     loadPlayers(region, ids.players),
     loadClans(region, clanIds),
+    // Alongside the roster rather than after it: the per-vehicle read keys on
+    // its own pairs and needs nothing the three beside it produce, and a
+    // battle is waiting on the whole answer.
+    ids.vehicles?.length
+      ? vehicleRecords(region, ids.vehicles, ids.mode ?? null)
+      : Promise.resolve([] as VehicleRecord[]),
   ]);
 
   for (const [id, row] of Object.entries(players.players)) {
@@ -161,7 +190,7 @@ export async function resolveEntities(
       .slice(0, MAX_DISCOVERIES_PER_CALL),
   );
 
-  return { players: players.players, clans, tags };
+  return { players: players.players, clans, tags, vehicles };
 }
 
 /** The language block is flattened onto the entity rather than nested, since a

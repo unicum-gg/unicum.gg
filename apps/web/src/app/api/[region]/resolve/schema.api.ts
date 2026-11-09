@@ -1,7 +1,8 @@
 // Co-located response schema (`.api.ts` so next-openapi-gen scans it).
 import { z } from "zod";
 import { MAX_IDS_PER_KIND } from "@unicum.gg/core/resolve";
-import { LanguageSource } from "@unicum.gg/shared";
+import { MAX_VEHICLE_PAIRS } from "@unicum.gg/core/players/vehicle-records";
+import { LanguageSource, TankBattleMode } from "@unicum.gg/shared";
 import type { EnumMeta } from "@/services/openapi/schemas";
 
 /**
@@ -34,6 +35,21 @@ export const resolveQuery = z.object({
     .array(z.string())
     .optional()
     .meta({ description: "Clan tags, case-insensitive. Up to 100." }),
+  vehicles: z
+    .array(z.string())
+    .optional()
+    .meta({
+      description:
+        "`<account id>:<vehicle id>` pairs, up to 60. Each one is answered in `vehicles` with what that account has done on that vehicle. The vehicle id is Wargaming's `tank_id`, which is the game client's own compact descriptor, so a client reads it off the roster it is drawing.",
+    }),
+  mode: z
+    .enum(TankBattleMode)
+    .optional()
+    .meta({
+      description:
+        "Which mode the `vehicles` figures should cover. Omitted, they cover every mode together. Frontline, Onslaught and Steel Hunter are absent on purpose: Wargaming publishes no per-vehicle statistics for them at all, so a client in one of those battles omits this and reads the whole record.",
+      "x-enum-source": "TANK_BATTLE_MODE",
+    } as EnumMeta),
 });
 
 const ratingWindow = z
@@ -128,12 +144,61 @@ const resolvedClan = z
  * a null `languageSource`, which is the difference between "unknown" and
  * "nothing to say".
  */
+const resolvedVehicle = z
+  .object({
+    accountId: z.number(),
+    tankId: z.number(),
+    scope: z.enum(["mode", "overall"]).meta({
+      description:
+        "`mode` when the figures cover the mode asked for, `overall` when they cover every mode together, which is the answer when no mode was asked for.",
+    }),
+    mode: z
+      .enum(TankBattleMode)
+      .nullable()
+      .meta({
+        description: "The mode the figures cover, null when they cover all of them.",
+        "x-enum-source": "TANK_BATTLE_MODE",
+      } as EnumMeta),
+    battles: z.number(),
+    winrate: z.number().nullable().meta({
+      description: "Percentage, 0 to 100. Null when the scope holds no battles.",
+    }),
+    avgDamage: z.number().nullable(),
+    avgXp: z.number().nullable(),
+    survival: z.number().nullable().meta({
+      description:
+        "Percentage of battles survived. Null where the source does not count them, which is the oldest vehicle snapshots.",
+    }),
+    ratings: z
+      .object({
+        wn7: z.number().nullable(),
+        wn8: z.number().nullable(),
+        wnx: z.number().nullable(),
+      })
+      .meta({
+        description:
+          "The three WN ratings for these battles alone. All null outside Random Battles and the whole record: the expected values they are built against are measured on Random Battles, so running another mode's counters through them would produce a number that looks like a rating and is not. PR and WTR have no per-vehicle value at all, which is why a per-vehicle reader falls back to a WN rating.",
+      }),
+    updatedAt: z.date().nullable().meta({
+      description: "When the fetch these counters came from landed.",
+    }),
+  })
+  .meta({
+    id: "ResolvedVehicle",
+    description:
+      "What one account has done on one vehicle. Keyed by the pair rather than nested under the player, because the same account can be asked about on two vehicles.",
+  });
+
 export const ResolveResponse = z.object({
   players: z.record(z.string(), resolvedPlayer),
   clans: z.record(z.string(), resolvedClan),
   tags: z.record(z.string(), z.number()).meta({
     description:
       "Tag to clan id, echoing back the tag as it was written. The clan itself is in `clans`, so a detachment list costs one request rather than one lookup per row and then a second request.",
+  }),
+  vehicles: z.array(resolvedVehicle).meta({
+    description:
+      "One entry per `vehicles` pair we hold an answer for. Empty when none was asked for. A pair whose account or vehicle we hold nothing for is absent rather than present with zeroes: never played is not played badly.",
   }),
 });
 
@@ -144,3 +209,10 @@ export type DocumentedMaxIdsInSync = typeof MAX_IDS_PER_KIND extends 100
   ? true
   : "MAX_IDS_PER_KIND moved: update the three `Up to 100` descriptions above and the route's @description";
 export const documentedMaxIdsInSync: DocumentedMaxIdsInSync = true;
+
+/** The same guard for the pair ceiling, which `vehicles` spells out above. */
+export type DocumentedMaxVehiclesInSync =
+  typeof MAX_VEHICLE_PAIRS extends 60
+    ? true
+    : "MAX_VEHICLE_PAIRS moved: update the `up to 60` in the `vehicles` description above";
+export const documentedMaxVehiclesInSync: DocumentedMaxVehiclesInSync = true;
