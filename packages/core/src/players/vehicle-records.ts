@@ -167,6 +167,29 @@ function asTankStats(tankId: number, c: Counters): TankStats {
   } as TankStats;
 }
 
+/**
+ * A timestamp as a Date, whatever the driver handed over.
+ *
+ * `db.execute` is a raw read: drizzle's column types do not apply to it, so a
+ * `timestamptz` arrives as Postgres's own text (`2026-06-09 03:11:54.7+00`)
+ * rather than as a Date, and the response then carried that spelling while
+ * every other date the API serves is ISO. Measured on the live endpoint the
+ * day this shipped.
+ *
+ * The two substitutions are what makes that text ISO: a `T` for the space,
+ * and minutes on an offset written as `+00`, which `Date` is entitled to
+ * reject. Null for anything that still does not parse, because a wrong date
+ * is worse than no date.
+ */
+function asDate(value: unknown): Date | null {
+  if (value instanceof Date) return value;
+  if (typeof value !== "string") return null;
+  const at = new Date(
+    value.replace(" ", "T").replace(/([+-]\d{2})$/, "$1:00"),
+  );
+  return Number.isNaN(at.getTime()) ? null : at;
+}
+
 function ratio(part: number, whole: number): number | null {
   return whole > 0 ? (part / whole) * 100 : null;
 }
@@ -230,7 +253,7 @@ export async function vehicleRecords(
       Array<{
         player_id: number;
         tank_id: number;
-        taken_at: Date;
+        taken_at: string | Date;
         battles: number;
         wins: number;
         damage_dealt: number;
@@ -258,7 +281,7 @@ export async function vehicleRecords(
         player_id: number;
         tank_id: number;
         mode: string;
-        updated_at: Date;
+        updated_at: string | Date;
         battles: number;
         wins: number;
         damage_dealt: number;
@@ -291,7 +314,7 @@ export async function vehicleRecords(
       trackAssistedDamage: Number(row.track_assisted_damage),
       xp: row.xp == null ? null : Number(row.xp),
       survivedBattles: row.survived_battles,
-      updatedAt: row.taken_at,
+      updatedAt: asDate(row.taken_at),
     });
   }
 
@@ -311,7 +334,7 @@ export async function vehicleRecords(
       trackAssistedDamage: Number(row.track_assisted_damage),
       xp: row.xp == null ? null : Number(row.xp),
       survivedBattles: row.survived_battles,
-      updatedAt: row.updated_at,
+      updatedAt: asDate(row.updated_at),
     });
   }
 
