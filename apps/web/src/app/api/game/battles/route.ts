@@ -184,7 +184,7 @@ export async function POST(req: Request): Promise<Response> {
       continue;
     }
     const startedAt = new Date(battle.startedAt * 1000);
-    if (!startsInRange(startedAt, now)) {
+    if (!(await startsInRange(account.region, startedAt, now))) {
       refuse(
         id,
         startedAt.getTime() > now.getTime()

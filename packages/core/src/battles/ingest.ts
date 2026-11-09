@@ -46,32 +46,6 @@ export type BattleIngestResult = {
 };
 
 /**
- * The earliest battle the table can take, which is the start of last month.
- *
- * Mirrors the migration's own `date_trunc('month', now()) - interval '1 month'`
- * (see `drizzle/0120_battles.sql`): that is the first monthly partition, and a
- * battle older than it lands in the DEFAULT partition. Landing there is the
- * one way this shape fails quietly, because the write succeeds and the month
- * that row belonged to can then never be attached.
- *
- * Derived rather than a fixed number of days back, because a fixed window is
- * wrong on the days it matters: thirty days before the 1st of March is the
- * 30th of January, a month with no partition.
- *
- * It is a floor that moves, and the oldest partition does not, so a battle
- * queued for two months can become unstorable while its partition still sits
- * there empty. That is deliberate: the alternative is letting a client name
- * any date it likes and asking the database to make room, which is a way to
- * create partitions on demand. The mod is told `too_old` by name so it stops
- * offering it.
- */
-function earliestAccepted(now: Date): Date {
-  return new Date(
-    Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - 1, 1, 0, 0, 0, 0),
-  );
-}
-
-/**
  * A day ahead, for the gap between Wargaming's clock and ours.
  *
  * `started_at` comes from the battle's server-side `arenaCreateTime`, so a
@@ -79,14 +53,96 @@ function earliestAccepted(now: Date): Date {
  */
 const FUTURE_TOLERANCE_MS = 24 * 60 * 60 * 1000;
 
-/** Whether this battle's start falls inside the months the table holds. */
-export function startsInRange(startedAt: Date, now: Date = new Date()): boolean {
+/** The months a region's table holds, as a half-open `[from, to)`. */
+type PartitionRange = { from: Date; to: Date };
+
+/** How long the partition list is reused before Postgres is asked again. */
+const PARTITIONS_TTL_MS = 10 * 60 * 1000;
+
+const partitionsByRegion = new Map<
+  Region,
+  { range: PartitionRange | null; at: number }
+>();
+
+function monthStart(year: number, month: number): Date {
+  return new Date(Date.UTC(year, month, 1, 0, 0, 0, 0));
+}
+
+/**
+ * The months this region's table has a partition for, asked of Postgres.
+ *
+ * Read from the partition NAMES, which carry the month
+ * (`eu_battles_2026_09`), rather than from `relpartbound`. The DEFAULT
+ * partition's name does not match, and that is the point: it is the one
+ * partition nothing may rely on, since a row landing there blocks ATTACH of
+ * the month it belonged to, which is why `battles_partition_gap` exists.
+ *
+ * Cached, because the answer changes only when a migration runs while the
+ * question is asked once per battle a client reports.
+ */
+async function partitionRange(region: Region): Promise<PartitionRange | null> {
+  const held = partitionsByRegion.get(region);
+  if (held && Date.now() - held.at < PARTITIONS_TTL_MS) return held.range;
+  const rows = (await db.execute(sql`
+    SELECT child.relname AS name
+    FROM pg_inherits
+    JOIN pg_class AS child ON child.oid = pg_inherits.inhrelid
+    JOIN pg_class AS parent ON parent.oid = pg_inherits.inhparent
+    WHERE parent.relname = ${`${region}_battles`}
+  `)) as unknown as Array<{ name: string }>;
+  const months: Array<[number, number]> = [];
+  for (const row of rows) {
+    const named = /_(\d{4})_(\d{2})$/.exec(row.name);
+    if (named) months.push([Number(named[1]), Number(named[2]) - 1]);
+  }
+  months.sort((left, right) => left[0] - right[0] || left[1] - right[1]);
+  const first = months[0];
+  const last = months[months.length - 1];
+  const range =
+    first && last
+      ? {
+          from: monthStart(first[0], first[1]),
+          to: monthStart(last[0], last[1] + 1),
+        }
+      : null;
+  partitionsByRegion.set(region, { range, at: Date.now() });
+  return range;
+}
+
+/**
+ * Whether this battle's start falls inside the months the table holds.
+ *
+ * The months are read from the table, and that reading is the whole of this
+ * function's history. It used to mirror the migration's own
+ * `date_trunc('month', now()) - interval '1 month'`
+ * (`drizzle/0120_battles.sql`), which the migration evaluates ONCE when it is
+ * applied while this evaluated it on every request, so the two drift apart by
+ * a month for every month that passes. Measured on 2026-11-09 against
+ * partitions starting at 2026-09: every battle from September was refused as
+ * `too_old` for a month whose partition sat there empty, and one player's
+ * replay folder alone held 1,159 of them.
+ *
+ * The concern that put the mirror there stands, and is answered: nothing here
+ * lets a client's date make the database find room for it. The client names a
+ * date, this asks which months exist, and a date outside them is refused.
+ * Creating a partition stays a migration we write.
+ *
+ * Fails open when no month-named partition is found at all. The table is then
+ * not in the shape this expects, and refusing every battle would stop the
+ * whole write path over one introspection query; the DEFAULT partition keeps
+ * the row and the gap view reports it.
+ */
+export async function startsInRange(
+  region: Region,
+  startedAt: Date,
+  now: Date = new Date(),
+): Promise<boolean> {
   const at = startedAt.getTime();
   if (!Number.isFinite(at)) return false;
-  return (
-    at >= earliestAccepted(now).getTime() &&
-    at <= now.getTime() + FUTURE_TOLERANCE_MS
-  );
+  if (at > now.getTime() + FUTURE_TOLERANCE_MS) return false;
+  const range = await partitionRange(region);
+  if (!range) return true;
+  return at >= range.from.getTime() && at < range.to.getTime();
 }
 
 /**
