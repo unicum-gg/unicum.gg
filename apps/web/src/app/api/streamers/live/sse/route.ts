@@ -50,6 +50,9 @@ export function GET(req: Request): Response {
   const sends = ensureWired();
   const encoder = new TextEncoder();
   let heartbeat: NodeJS.Timeout | null = null;
+  // Assigned by `start`, which runs while the stream is being constructed, so
+  // it is in place before anything can end the stream.
+  let teardown = (): void => {};
   const stream = new ReadableStream({
     start(controller) {
       const send: Send = (streamers) => {
@@ -74,9 +77,29 @@ export function GET(req: Request): Response {
         }
       }, HEARTBEAT_MS);
 
-      req.signal.addEventListener("abort", () => {
+      // Both ways a stream can end have to run this, and either one can be the
+      // one that fires: `cancel` is the consumer letting go of the readable, the
+      // abort signal is the client going away, and a disconnect can raise both.
+      // Dropping the listener on the abort path alone left a stream ended
+      // through `cancel` with its closure still in this set, enqueued onto a
+      // closed controller on every publish for the life of the process and
+      // throwing into the empty catch above. Nothing here reads the set as a
+      // reference count, the subscription being per process and deliberately
+      // left wired, so what leaked was one dead closure per such stream rather
+      // than a poll nobody stopped, which is what the same defect cost the
+      // players-online route. Guarded so it runs once even though a Set delete
+      // is idempotent, because the two routes ending a stream the same way is
+      // what stops this diverging again.
+      let gone = false;
+      teardown = () => {
+        if (gone) return;
+        gone = true;
         if (heartbeat) clearInterval(heartbeat);
         sends.delete(send);
+      };
+
+      req.signal.addEventListener("abort", () => {
+        teardown();
         try {
           controller.close();
         } catch {
@@ -85,7 +108,7 @@ export function GET(req: Request): Response {
       });
     },
     cancel() {
-      if (heartbeat) clearInterval(heartbeat);
+      teardown();
     },
   });
 
