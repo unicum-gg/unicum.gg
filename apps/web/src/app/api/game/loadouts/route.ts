@@ -58,7 +58,23 @@ export async function POST(req: Request): Promise<Response> {
 
   const parsed = loadoutsUploadBody.safeParse(await req.json().catch(() => null));
   if (!parsed.success) {
-    return Response.json({ error: "invalid_body" }, { status: 400 });
+    // Which field, not just that there was one. `invalid_body` on its own
+    // sent a reader to the batch the mod keeps on disk and a schema in
+    // another repository to find a gun name three characters past a cap,
+    // and the path was the whole answer: `loadouts.1.modules.gun.name`.
+    // Paths and codes only, never the values: the request is the caller's
+    // own and they can read it, and a message carrying 113 characters of
+    // gun name back would be its own kind of unhelpful.
+    return Response.json(
+      {
+        error: "invalid_body",
+        issues: parsed.error.issues.slice(0, 8).map((issue) => ({
+          path: issue.path.join("."),
+          code: issue.code,
+        })),
+      },
+      { status: 400 },
+    );
   }
   const { loadouts, sold, marks, garage } = parsed.data;
 

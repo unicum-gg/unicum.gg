@@ -15,7 +15,25 @@ import { MAX_LOADOUTS_PER_UPLOAD } from "@unicum.gg/core/tanks/loadouts";
  * empty equipment slot arrives as null between two filled ones.
  */
 
-const name = z.string().min(1).max(64);
+/**
+ * A name as the game spells it: a module, a crew skill, a device, a shell.
+ *
+ * 192 rather than the 64 this started at, which is where it broke. The game
+ * fits `tankId` 32529 -- `Pz_Kpfw_Neu` in its own files -- with a gun called
+ * `_120_mm_Glattrohr_Panzerkanone_Muster_70_mit_Zusatzkammern_Mundungsgeschwindigkeitsmessbasis_und_Zunderstellgerat`,
+ * 113 characters of it. Measured on 2026-11-09 from a real refused batch:
+ * one player bringing that vehicle lost their WHOLE sweep, because the
+ * upload stops at the first batch the server will not take and every
+ * vehicle behind it in the carousel went unsent with it.
+ *
+ * Found the way both earlier surprises in this schema were, from the batch
+ * `_keep_rejected` leaves on the player's disk, which is what that function
+ * is for.
+ *
+ * Still bounded, because these are identifiers and not prose: a little
+ * under twice the longest one anybody has measured.
+ */
+const name = z.string().min(1).max(192);
 const slots = z.array(name.nullable()).max(8);
 
 const shell = z.object({
