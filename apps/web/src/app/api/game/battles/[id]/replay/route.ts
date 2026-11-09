@@ -26,7 +26,10 @@ import {
 import { storeLoadoutsFromContainer } from "@unicum.gg/core/battles/loadouts";
 import { storePositionsFromContainer } from "@unicum.gg/core/maps/positions";
 import { consumeQuota } from "@unicum.gg/core/lib/request-quota";
-import { provenAccount } from "@/services/game/proven-account";
+import {
+  accountProof,
+  notAuthenticated,
+} from "@/services/game/proven-account";
 
 export const dynamic = "force-dynamic";
 
@@ -165,10 +168,9 @@ export async function POST(
     );
   }
 
-  const account = await provenAccount(req);
-  if (!account) {
-    return Response.json({ error: "not_authenticated" }, { status: 401 });
-  }
+  const proof = await accountProof(req);
+  if (!("account" in proof)) return notAuthenticated(proof.refusal);
+  const account = proof.account;
 
   const arenaUniqueId = normaliseBattleId((await context.params).id);
   const startedAtSeconds = Number(

@@ -1,9 +1,30 @@
 import { wgIdentityFromAccountKey, type WgIdentity } from "@unicum.gg/shared";
-import { accountBehindGameToken } from "@unicum.gg/core/auth/game-client-account";
+import { verifyGameToken } from "@unicum.gg/core/auth/game-client-account";
 import { wargamingAccountOf } from "@unicum.gg/core/game-link";
 import { gameClientUser } from "@/services/game";
 
 export type ProvenAccount = WgIdentity;
+
+/**
+ * The account a request speaks for, or what would not prove it.
+ *
+ * The refusal exists because `not_authenticated` on its own told a client
+ * nothing it could act on, and the mod writes the body it gets into the game
+ * log: a player whose uploads stopped had a line that named the symptom and
+ * no cause. Every value names something about the caller's own proof, so
+ * none of it is about anyone else:
+ *
+ *   no_proof         neither a bearer secret nor a token and a region
+ *   bearer_unknown   a secret that names no link, which is what a link
+ *                    revoked on the site looks like from here
+ *   bad_region       a region header no realm answers to
+ *   wg:<CODE>        Wargaming's own verdict on the client's token
+ *   wg_http:<status> Wargaming answered, but not with an answer
+ *   wg_unreachable   Wargaming did not answer at all
+ */
+export type AccountProof =
+  | { account: ProvenAccount }
+  | { refusal: string };
 
 /**
  * The Wargaming account a game-mod request may speak for, or null.
@@ -32,15 +53,39 @@ export type ProvenAccount = WgIdentity;
  * should check what it was handed against what the payload itself says (the
  * battle endpoint does, against the cluster in the results).
  */
-export async function provenAccount(
-  req: Request,
-): Promise<ProvenAccount | null> {
+export async function accountProof(req: Request): Promise<AccountProof> {
   const linked = await linkedAccount(req);
-  if (linked) return linked;
+  if (linked) return { account: linked };
   const token = req.headers.get("x-wargaming-token");
   const region = req.headers.get("x-wargaming-region");
-  if (!token || !region) return null;
-  return accountBehindGameToken(region, token);
+  if (!token || !region) {
+    // A bearer that got this far reached us and named no link, which is a
+    // different thing from a client that sent no proof at all: the first is
+    // what a link revoked on the site looks like, and the mod forgets its
+    // own secret on being told.
+    return {
+      refusal: req.headers.get("authorization")
+        ? "bearer_unknown"
+        : "no_proof",
+    };
+  }
+  const verdict = await verifyGameToken(region, token);
+  return "account" in verdict
+    ? { account: verdict.account }
+    : { refusal: verdict.refused };
+}
+
+/**
+ * The one 401 the mod ever sees, carrying what refused it.
+ *
+ * `error` is left exactly as it was: it is what a client matches on, and a
+ * reason beside it is additional rather than instead.
+ */
+export function notAuthenticated(refusal: string): Response {
+  return Response.json(
+    { error: "not_authenticated", reason: refusal },
+    { status: 401 },
+  );
 }
 
 /** The account behind a linked client's bearer secret, when there is one. */

@@ -7,7 +7,10 @@ import {
 } from "@unicum.gg/core/tanks/loadouts";
 import { recordModGarage } from "@unicum.gg/core/players/garage";
 import { consumeQuota } from "@unicum.gg/core/lib/request-quota";
-import { provenAccount } from "@/services/game/proven-account";
+import {
+  accountProof,
+  notAuthenticated,
+} from "@/services/game/proven-account";
 import { loadoutsUploadBody } from "./body";
 
 export const dynamic = "force-dynamic";
@@ -34,14 +37,13 @@ const UPLOAD_QUOTA = { limit: 20, windowSeconds: 3600 };
  * theirs, so a nickname in the body would be worthless: anyone could fill the
  * site with invented builds under the names that matter most.
  *
- * So the account is proven rather than claimed, by `provenAccount`, which is
+ * So the account is proven rather than claimed, by `accountProof`, which is
  * where the two ways of proving it are written down.
  */
 export async function POST(req: Request): Promise<Response> {
-  const account = await provenAccount(req);
-  if (!account) {
-    return Response.json({ error: "not_authenticated" }, { status: 401 });
-  }
+  const proof = await accountProof(req);
+  if (!("account" in proof)) return notAuthenticated(proof.refusal);
+  const account = proof.account;
 
   const quota = await consumeQuota(
     `loadouts:${account.region}:${account.accountId}`,
@@ -101,10 +103,9 @@ export async function POST(req: Request): Promise<Response> {
  * state nearly free for both sides. The first upload is still the whole thing.
  */
 export async function GET(req: Request): Promise<Response> {
-  const account = await provenAccount(req);
-  if (!account) {
-    return Response.json({ error: "not_authenticated" }, { status: 401 });
-  }
+  const proof = await accountProof(req);
+  if (!("account" in proof)) return notAuthenticated(proof.refusal);
+  const account = proof.account;
   const stamps = await listLoadoutStamps(account.region, account.accountId);
   return Response.json(
     {
@@ -132,10 +133,9 @@ export async function GET(req: Request): Promise<Response> {
  * cost to manage, and a request refused here leaves their data published.
  */
 export async function DELETE(req: Request): Promise<Response> {
-  const account = await provenAccount(req);
-  if (!account) {
-    return Response.json({ error: "not_authenticated" }, { status: 401 });
-  }
+  const proof = await accountProof(req);
+  if (!("account" in proof)) return notAuthenticated(proof.refusal);
+  const account = proof.account;
   try {
     const forgotten = await forgetAllTankLoadouts(
       account.region,

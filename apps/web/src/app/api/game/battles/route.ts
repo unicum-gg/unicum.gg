@@ -6,7 +6,10 @@ import {
   startsInRange,
 } from "@unicum.gg/core/battles/ingest";
 import { consumeQuota } from "@unicum.gg/core/lib/request-quota";
-import { provenAccount } from "@/services/game/proven-account";
+import {
+  accountProof,
+  notAuthenticated,
+} from "@/services/game/proven-account";
 import {
   battleBody,
   battlesUploadEnvelope,
@@ -77,7 +80,7 @@ const MAX_BODY_BYTES = 1_500_000;
  *
  * What it does about it:
  *
- * - the sender's account is proven, by `provenAccount`, as everywhere the mod
+ * - the sender's account is proven, by `accountProof`, as everywhere the mod
  *   writes;
  * - the battle must **name that account among its players**. A proven account
  *   may report the battles it played in, which is the only claim it is in a
@@ -106,10 +109,9 @@ export async function POST(req: Request): Promise<Response> {
     return Response.json({ error: "body_too_large" }, { status: 413 });
   }
 
-  const account = await provenAccount(req);
-  if (!account) {
-    return Response.json({ error: "not_authenticated" }, { status: 401 });
-  }
+  const proof = await accountProof(req);
+  if (!("account" in proof)) return notAuthenticated(proof.refusal);
+  const account = proof.account;
 
   // Only the envelope. A 400 here means the request is not an upload at all,
   // which is the one case where refusing everything is the right answer.
