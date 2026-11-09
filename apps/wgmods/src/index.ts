@@ -10,7 +10,7 @@ import fs from "node:fs";
 import { config } from "./config.js";
 import { ensureLoggedIn, loggedIn, securityTokenExpiry, showLogin, withBrowser } from "./browser.js";
 import { readRelease, verifySignature } from "./github.js";
-import { addVersion, hasVersion } from "./hub.js";
+import { addVersion, hasVersion, reviewReport } from "./hub.js";
 import { loginLink, notify } from "./notify.js";
 import { serveRemote, upgradeRemote } from "./remote.js";
 import { readState, updateState } from "./state.js";
@@ -93,6 +93,11 @@ async function keepAlive(): Promise<void> {
     });
     if (state.alerted.loggedOut) await notify("wgmods is logged in again.");
   }
+  // Said on every pass because nothing else does: the hub sends no notice when
+  // a version is refused. A failed read must not cost the pass its publish.
+  await withBrowser(reviewReport)
+    .then((lines) => lines.forEach((line) => log(`hub: ${line}`)))
+    .catch((error) => console.error("[wgmods] reading the review state failed", error));
   if (state.pending) await publish(state.pending);
 }
 

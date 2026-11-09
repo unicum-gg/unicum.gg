@@ -11,6 +11,9 @@ const UPLOAD = `${HUB}/api/mods/mod_file_upload`;
 // Not a nested route and not a write on the mod: a PATCH carrying `versions`
 // answers 200 and adds nothing.
 const VERSIONS = `${HUB}/api/mods/versions/`;
+const COMMENTS = () => `${HUB}/api/mods/comments/?mod_id=${config.modId}`;
+// How the hub numbers a version's review (MOD_VERSION_STATUS in its own bundle).
+const VERSION_STATUS = ["in review", "published", "rejected"];
 // The edit page carries the client versions it offers inside a JS string
 // literal, where every quote is the six characters ".
 const GAME_VERSIONS = /(?:\\u0022|")gameVersions(?:\\u0022|")\s*:\s*(\[.*?\])/s;
@@ -51,6 +54,24 @@ async function gameVersionId(context: BrowserContext, client: string): Promise<n
 export async function hasVersion(context: BrowserContext, version: string): Promise<boolean> {
   const mod = await json(context, OWNER());
   return (mod.versions ?? []).some((entry: { version?: unknown }) => String(entry.version) === version);
+}
+
+/**
+ * Where every version stands with the reviewers, and what they said. Only the
+ * owner's view holds it: the public one lists what has already been accepted,
+ * so a version waiting or refused looks exactly like one never sent.
+ */
+export async function reviewReport(context: BrowserContext): Promise<string[]> {
+  const mod = await json(context, OWNER());
+  const comments = await json(context, COMMENTS());
+  const lines = [`mod state ${mod.state}, status ${mod.status}, owner fields: ${Object.keys(mod).join(", ")}`];
+  for (const entry of mod.versions ?? []) {
+    const review = VERSION_STATUS[entry.status] ?? `status ${entry.status}`;
+    lines.push(`${entry.version}: ${review}, security ${entry.security_status}, client ${entry.game_version?.version}, created ${entry.created_at}, notes ${String(entry.change_log ?? "").length} chars`);
+  }
+  lines.push(`change log list: ${(mod.change_log ?? []).map((entry: { version?: unknown }) => entry.version).join(", ")}`);
+  lines.push(`comments: ${JSON.stringify(comments).slice(0, 6000)}`);
+  return lines;
 }
 
 /** Upload the archive and create the version. Wargaming reviews it before it shows. */
