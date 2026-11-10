@@ -168,6 +168,11 @@ async function startCrons(): Promise<void> {
     "@unicum.gg/core/wargaming/wot/players/onslaught-watchdog"
   );
   startOnslaughtWatchdogCron();
+
+  const { startManeuversWatchdogCron } = await import(
+    "@unicum.gg/core/maneuvers/watchdog"
+  );
+  startManeuversWatchdogCron();
 }
 
 // WG egress rate meter. The proxy only sees opaque CONNECT tunnels, so the
