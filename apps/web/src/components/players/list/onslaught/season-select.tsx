@@ -56,7 +56,7 @@ export function OnslaughtSeasonSelect({
     <Select value={current ?? latest ?? undefined} onValueChange={onChange}>
       <SelectTrigger
         size="sm"
-        className="h-8 w-56 bg-transparent text-xs dark:bg-transparent"
+        className="w-56 rounded-md bg-transparent py-0 text-xs data-[size=sm]:h-7 dark:bg-transparent"
       >
         <SelectValue />
       </SelectTrigger>

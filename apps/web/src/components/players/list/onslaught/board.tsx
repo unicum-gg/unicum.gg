@@ -208,7 +208,6 @@ export function OnslaughtBoard({
           key={rank}
           active={tierSel.has(rank)}
           onClick={() => toggleTier(rank)}
-          className="flex h-full items-center py-0"
         >
           <span className="inline-flex items-center gap-1.5">
             <Image
@@ -237,7 +236,6 @@ export function OnslaughtBoard({
           key={bucket}
           active={activitySel.has(bucket)}
           onClick={() => toggleActivity(bucket)}
-          className="flex h-full items-center py-0"
         >
           <span className="inline-flex items-center gap-1.5">
             {tOwn(`activity.${bucket}`)}
