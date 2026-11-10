@@ -33,6 +33,12 @@
     "players-marks": {
       "description": "Kenellä on hallussaan eniten kolmen merkin tykkejä"
     },
+    "players-maneuvers": {
+      "description": "Linnoitus-tapahtuman Mainepisteiden sijoitukset"
+    },
+    "clans-maneuvers": {
+      "description": "Linnoitus-tapahtuman klaanien sijoitukset"
+    },
     "players-onslaught": {
       "description": "Rankatun Rynnistyksen sijoituslista"
     },

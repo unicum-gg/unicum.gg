@@ -2,6 +2,7 @@
   "heading": "Legjobb játékosok, <accent>{maneuvers}</accent> szerint",
   "intro": "{maneuvers} a World of Tanks visszatérő Erődítmény-kláneseménye. A {region} régió játékosranglistája Dicsőségpontok szerint rangsorolva, egyenesen a játék saját ranglistájáról.",
   "no-edition": "Ezen a szerveren még nincs rögzített kiadás.",
+  "not-recorded": "{edition} nem lett rögzítve ezen a szerveren. A játék nem tart meg ranglistát egy kiadás vége után, ezért nem jeleníthető meg olyan kiadás, amelyet senki sem rögzített a futása közben.",
   "not-started": "A ranglista ekkor nyílik meg: {date}.",
   "not-started-undated": "A ranglista még nem nyílt meg.",
   "board": "Legjobb {count} játékos",

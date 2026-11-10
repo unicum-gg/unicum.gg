@@ -1,0 +1,8 @@
+{
+  "seasons": {
+    "spring": "Jarná {year}",
+    "summer": "Letná {year}",
+    "autumn": "Jesenná {year}"
+  },
+  "window": "{edition}: od {from} do {to}."
+}

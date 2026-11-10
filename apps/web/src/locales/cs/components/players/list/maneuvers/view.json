@@ -2,6 +2,7 @@
   "heading": "Nejlepší hráči v <accent>{maneuvers}</accent>",
   "intro": "{maneuvers} je opakující se klanová událost Pevnost ve World of Tanks. Pořadí hráčů v regionu {region}, seřazené podle Bodů slávy, přímo z vlastního žebříčku hry.",
   "no-edition": "Na tomto serveru zatím nebyla zaznamenána žádná edice.",
+  "not-recorded": "{edition} nebyla na tomto serveru zaznamenána. Hra po skončení edice neuchovává žádné pořadí, takže edici, kterou během jejího průběhu nikdo nezaznamenal, nelze zobrazit.",
   "not-started": "Žebříček se otevírá {date}.",
   "not-started-undated": "Žebříček se zatím neotevřel.",
   "board": "Nejlepších {count} hráčů",

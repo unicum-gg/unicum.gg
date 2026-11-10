@@ -1,0 +1,7 @@
+{
+  "seasons": {
+    "spring": "Tavaszi {year}",
+    "autumn": "Őszi {year}"
+  },
+  "window": "{edition}: {from} és {to} között."
+}

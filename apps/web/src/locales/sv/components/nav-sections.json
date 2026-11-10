@@ -33,6 +33,12 @@
     "players-marks": {
       "description": "Vem håller flest kanoner med tre märken"
     },
+    "players-maneuvers": {
+      "description": "Ärepoängsställningar för evenemanget Befästning"
+    },
+    "clans-maneuvers": {
+      "description": "Klanställningar för evenemanget Befästning"
+    },
     "players-onslaught": {
       "description": "Rankningsstege för Pansarstorm"
     },

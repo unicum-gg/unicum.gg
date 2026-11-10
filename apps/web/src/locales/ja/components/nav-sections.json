@@ -33,6 +33,12 @@
     "players-marks": {
       "description": "3マークの砲を最も多く保有しているプレイヤー"
     },
+    "players-maneuvers": {
+      "description": "拠点イベントの名声ポイント順位"
+    },
+    "clans-maneuvers": {
+      "description": "拠点イベントのクラン順位"
+    },
     "players-onslaught": {
       "description": "ランク戦オンスロートのランキング"
     },

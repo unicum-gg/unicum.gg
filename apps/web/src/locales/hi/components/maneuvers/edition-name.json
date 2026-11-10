@@ -1,0 +1,8 @@
+{
+  "seasons": {
+    "spring": "वसंत {year}",
+    "summer": "ग्रीष्म {year}",
+    "autumn": "शरद {year}"
+  },
+  "window": "{edition}: {from} से {to} तक।"
+}

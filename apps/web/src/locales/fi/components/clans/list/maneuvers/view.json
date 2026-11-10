@@ -2,6 +2,7 @@
   "heading": "Parhaat klaanit tapahtumassa <accent>{maneuvers}</accent>",
   "intro": "{maneuvers} on World of Tanksin toistuva Linnoitus-klaanitapahtuma. {region}-alueen klaanisijoitukset, rankattuina Mainepisteiden mukaan, suoraan pelin omasta tulostaulukosta.",
   "no-edition": "Tälle palvelimelle ei ole vielä tallennettu versiota.",
+  "not-recorded": "Kaudesta {edition} ei ole tallennettua tietoa tällä palvelimella. Peli ei säilytä sijoituksia kauden päätyttyä, joten kautta, jota kukaan ei tallentanut sen aikana, ei voi näyttää.",
   "not-started": "Tulostaulukko avautuu {date}.",
   "not-started-undated": "Tulostaulukko ei ole vielä avautunut.",
   "board": "Parhaat {count} klaania",

@@ -1,0 +1,14 @@
+{
+  "title-live": "Løpet så langt",
+  "title-ended": "Slik gikk løpet",
+  "cutoff": {
+    "players": "Grense for å tjene kjøretøyet",
+    "clans": "Grense for å tjene gull"
+  },
+  "ranked": {
+    "players": "Rangerte spillere",
+    "clans": "Rangerte klaner"
+  },
+  "fame-points": "Berømmelsespoeng",
+  "no-curve": "Kurven starter når tavlen er registrert to ganger."
+}

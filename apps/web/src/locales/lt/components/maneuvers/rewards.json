@@ -1,0 +1,22 @@
+{
+  "title": "Atlygiai",
+  "intro": {
+    "players": "Pirmosios {places} vietos žaidėjų lentelėje laimi transporto priemonę. Apdovanojamų vietų numeris nustatomas kiekvienam serveriui ir keičiasi iš vieno etapo į kitą.",
+    "clans": "Pirmosios {places} vietos klanų lentelėje laimi aukso klano iždui. Apdovanojamų vietų numeris nustatomas kiekvienam serveriui ir keičiasi iš vieno etapo į kitą."
+  },
+  "reward": "Atlygis",
+  "places": "Vietos",
+  "holders": "Turimi",
+  "reward-name": {
+    "players": "Transporto priemonė",
+    "clans": "Auksas",
+    "none": "Atlygio nėra"
+  },
+  "range": "Nuo {from} iki {to}",
+  "from": "Nuo {from} ir toliau",
+  "open": "{held}, dar {open} atidaryti",
+  "count": {
+    "players": "{count} žaidėjų",
+    "clans": "{count} klanų"
+  }
+}

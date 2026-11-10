@@ -2,6 +2,7 @@
   "heading": "Top spillere i <accent>{maneuvers}</accent>",
   "intro": "{maneuvers} er World of Tanks’ tilbagevendende Højborg-begivenhed for klaner. Spillerplaceringerne i {region}, rangeret efter Berømmelsespoint, lige fra spillets egen rangliste.",
   "no-edition": "Ingen udgave er endnu registreret for denne server.",
+  "not-recorded": "{edition} blev ikke registreret på denne server. Spillet beholder ingen placeringer, når en udgave slutter, så en udgave, som ingen registrerede, mens den kørte, kan ikke vises.",
   "not-started": "Ranglisten åbner den {date}.",
   "not-started-undated": "Ranglisten er endnu ikke åbnet.",
   "board": "Top {count} spillere",

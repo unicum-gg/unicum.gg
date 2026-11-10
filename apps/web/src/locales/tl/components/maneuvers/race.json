@@ -1,0 +1,14 @@
+{
+  "title-live": "Ang takbo sa ngayon",
+  "title-ended": "Kung paano nagpunta ang takbo",
+  "cutoff": {
+    "players": "Hangganan para kumita ng sasakyan",
+    "clans": "Hangganan para kumita ng gold"
+  },
+  "ranked": {
+    "players": "Mga manlalaro ayon sa ranggo",
+    "clans": "Mga klano ayon sa ranggo"
+  },
+  "fame-points": "Mga puntos ng katanyagan",
+  "no-curve": "Magsisimula ang kurba kapag dalawang beses nang naitala ang talahanayan ng ranggo."
+}

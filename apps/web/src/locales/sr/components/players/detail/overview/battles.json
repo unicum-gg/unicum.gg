@@ -33,7 +33,7 @@
     "survived": "Preživeo",
     "xp": "XP",
     "medals": "Medalje",
-    "vehicle": "возило"
+    "vehicle": "Vozilo"
   },
   "detail-unavailable": "Sastav ove bitke nije mogao da se učita.",
   "team": "Tim {team}",

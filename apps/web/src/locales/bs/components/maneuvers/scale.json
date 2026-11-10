@@ -1,0 +1,11 @@
+{
+  "description": {
+    "players": "Kolona Bodova slave obojena je prema tome koliko visoko mjesto zauzima među svim rangiranim igračima, na istim percentilima kao i druge skale rejtinga na stranici. Mjesta ispod prate rang-listu kako se popunjava.",
+    "clans": "Kolona Bodova slave obojena je prema tome koliko visoko mjesto zauzima među svim rangiranim klanovima, na istim percentilima kao i druge skale rejtinga na stranici. Mjesta ispod prate rang-listu kako se popunjava."
+  },
+  "share": "Poredak",
+  "places": "Mjesta",
+  "top": "Najboljih {share}",
+  "rest": "Ostatak",
+  "range": "Od {from} do {to}"
+}

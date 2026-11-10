@@ -1,0 +1,14 @@
+{
+  "title-live": "La course jusqu’à présent",
+  "title-ended": "Déroulement de la course",
+  "cutoff": {
+    "players": "Limite pour gagner le véhicule",
+    "clans": "Limite pour gagner de l’or"
+  },
+  "ranked": {
+    "players": "Joueurs classés",
+    "clans": "Clans classés"
+  },
+  "fame-points": "Points de renommée",
+  "no-curve": "La courbe commence une fois que le classement a été enregistré deux fois."
+}

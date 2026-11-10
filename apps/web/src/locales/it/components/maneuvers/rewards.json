@@ -1,0 +1,22 @@
+{
+  "title": "Ricompense",
+  "intro": {
+    "players": "I primi {places} piazzamenti nella classifica dei giocatori vincono un veicolo. Il numero di piazzamenti premiati viene stabilito per ogni server e varia da un’edizione all’altra.",
+    "clans": "I primi {places} piazzamenti nella classifica dei clan vincono oro per il tesoro del clan. Il numero di piazzamenti premiati viene stabilito per ogni server e varia da un’edizione all’altra."
+  },
+  "reward": "Ricompensa",
+  "places": "Piazzamenti",
+  "holders": "Posseduti da",
+  "reward-name": {
+    "players": "Veicolo",
+    "clans": "Oro",
+    "none": "Nessuna ricompensa"
+  },
+  "range": "Da {from} a {to}",
+  "from": "Da {from} in poi",
+  "open": "{held}, {open} ancora aperti",
+  "count": {
+    "players": "{count} giocatori",
+    "clans": "{count} clan"
+  }
+}

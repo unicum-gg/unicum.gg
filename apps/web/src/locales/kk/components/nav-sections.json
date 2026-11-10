@@ -33,6 +33,12 @@
     "players-marks": {
       "description": "Үш белгісі бар ең көп зеңбіректерді кім иеленеді"
     },
+    "players-maneuvers": {
+      "description": "Бекініс оқиғасындағы Даңқ ұпайлары рейтингтері"
+    },
+    "clans-maneuvers": {
+      "description": "Бекініс оқиғасындағы клан рейтингтері"
+    },
     "players-onslaught": {
       "description": "Рейтингтік Шабуыл сатысы"
     },

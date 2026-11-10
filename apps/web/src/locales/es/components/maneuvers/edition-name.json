@@ -1,0 +1,8 @@
+{
+  "seasons": {
+    "spring": "Primavera {year}",
+    "summer": "Verano {year}",
+    "autumn": "Otoño {year}"
+  },
+  "window": "{edition}: de {from} a {to}."
+}

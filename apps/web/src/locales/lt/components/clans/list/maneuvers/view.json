@@ -2,6 +2,7 @@
   "heading": "Geriausi klanai per <accent>{maneuvers}</accent>",
   "intro": "{maneuvers} yra pasikartojantis World of Tanks Tvirtovės klanų įvykis. Klanų įskaita regione {region}, reitinguojama pagal Šlovės taškus, tiesiai iš paties žaidimo lentelės.",
   "no-edition": "Šiame serveryje dar neužfiksuotas nė vienas leidimas.",
+  "not-recorded": "{edition} šiame serveryje nebuvo užfiksuotas. Žaidimas pasibaigus etapui neišlaiko jokios įskaitos, todėl etapas, kurio niekas neužfiksavo jam vykstant, negali būti rodomas.",
   "not-started": "Lentelė bus atidaryta {date}.",
   "not-started-undated": "Lentelė dar neatidaryta.",
   "board": "Geriausi {count} klanai",

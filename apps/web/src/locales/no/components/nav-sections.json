@@ -33,6 +33,12 @@
     "players-marks": {
       "description": "Hvem holder flest kanoner med tre merker"
     },
+    "players-maneuvers": {
+      "description": "Rangering for Berømmelsespoeng i Festning-hendelsen"
+    },
+    "clans-maneuvers": {
+      "description": "Klanrangering for Festning-hendelsen"
+    },
     "players-onslaught": {
       "description": "Rangert Onslaught-stige"
     },

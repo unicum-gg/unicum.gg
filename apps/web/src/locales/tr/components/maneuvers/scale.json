@@ -1,0 +1,11 @@
+{
+  "description": {
+    "players": "Şöhret Puanları sütunu, tüm sıralamalı oyuncular arasındaki sıralama yüksekliğine göre, sitenin diğer puan ölçekleriyle aynı yüzdelik dilimlerde renklendirilir. Aşağıdaki dereceler, tablo doldukça tabloyu takip eder.",
+    "clans": "Şöhret Puanları sütunu, tüm sıralamalı klanlar arasındaki sıralama yüksekliğine göre, sitenin diğer puan ölçekleriyle aynı yüzdelik dilimlerde renklendirilir. Aşağıdaki dereceler, tablo doldukça tabloyu takip eder."
+  },
+  "share": "Sıralama",
+  "places": "Dereceler",
+  "top": "İlk {share}",
+  "rest": "Geri kalanı",
+  "range": "{from} ile {to} arası"
+}

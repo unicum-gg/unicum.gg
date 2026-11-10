@@ -842,7 +842,14 @@
     "Defeats": "الهزائم",
     "Fame": "الشهرة",
     "Fame Points": "نقاط الشهرة",
-    "Ranked players": "اللاعبون المصنفون"
+    "Ranked players": "اللاعبون المصنفون",
+    "Gold": "الذهب",
+    "Places": "المراكز",
+    "Vehicle": "المركبة",
+    "coloured": "ملوّن",
+    "edition": "النسخة",
+    "ends": "ينتهي",
+    "places": "المراكز"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1688,7 +1695,14 @@
     "Defeats": "Паразы",
     "Fame": "Слава",
     "Fame Points": "Ачкі славы",
-    "Ranked players": "Рэйтынгавыя гульцы"
+    "Ranked players": "Рэйтынгавыя гульцы",
+    "Gold": "Золата",
+    "Places": "Месцы",
+    "Vehicle": "Тэхніка",
+    "coloured": "каляровы",
+    "edition": "выданне",
+    "ends": "завяршаецца",
+    "places": "месцы"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -2749,7 +2763,15 @@
     "Change": "Промяна",
     "Fame": "Слава",
     "Fame Points": "Точки за слава",
-    "Ranked players": "Класирани играчи"
+    "Ranked players": "Класирани играчи",
+    "Earn": "Спечели",
+    "SUMMER": "ЛЕТЕН",
+    "Places": "Места",
+    "Vehicle": "Машина",
+    "coloured": "оцветен",
+    "edition": "издание",
+    "ends": "край",
+    "places": "места"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -3603,7 +3625,14 @@
     "Defeats": "Porazi",
     "Fame": "Slava",
     "Fame Points": "Bodovi slave",
-    "Ranked players": "Rangirani igrači"
+    "Ranked players": "Rangirani igrači",
+    "Gold": "Zlato",
+    "Places": "Mjesta",
+    "Vehicle": "Vozilo",
+    "coloured": "obojeno",
+    "edition": "izdanje",
+    "ends": "završava",
+    "places": "mjesta"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -4675,7 +4704,15 @@
     "Change": "Změnit",
     "Fame": "Sláva",
     "Fame Points": "Body slávy",
-    "Ranked players": "Hráči v žebříčku"
+    "Ranked players": "Hráči v žebříčku",
+    "Earn": "Získat",
+    "SUMMER": "LETNÍ",
+    "Places": "Umístění",
+    "Vehicle": "Vozidlo",
+    "coloured": "barevný",
+    "edition": "edice",
+    "ends": "končí",
+    "places": "umístění"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -5753,7 +5790,15 @@
     "Change": "Ændring",
     "Fame": "Berømmelse",
     "Fame Points": "Berømmelsespoint",
-    "Ranked players": "Rangerede spillere"
+    "Ranked players": "Rangerede spillere",
+    "Earn": "Optjen",
+    "SUMMER": "SOMMER",
+    "Places": "Pladser",
+    "Vehicle": "Køretøj",
+    "coloured": "farvet",
+    "edition": "udgave",
+    "ends": "slutter",
+    "places": "pladser"
   },
   "de": {
     "(optional)": "(optional)",
@@ -6824,7 +6869,15 @@
     "Change": "Änderung",
     "Fame": "Ruhm",
     "Fame Points": "Ruhmpunkte",
-    "Ranked players": "Ranglistenspieler"
+    "Ranked players": "Ranglistenspieler",
+    "Earn": "Verdienen",
+    "SUMMER": "SOMMER",
+    "Places": "Plätze",
+    "Vehicle": "Fahrzeug",
+    "coloured": "farbig",
+    "edition": "Ausgabe",
+    "ends": "endet",
+    "places": "Plätze"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -7901,7 +7954,15 @@
     "Change": "Αλλαγή",
     "Fame": "Φήμη",
     "Fame Points": "Πόντοι Φήμης",
-    "Ranked players": "Παίκτες κατάταξης"
+    "Ranked players": "Παίκτες κατάταξης",
+    "Earn": "Κέρδος",
+    "SUMMER": "ΚΑΛΟΚΑΙΡΙ",
+    "Places": "Θέσεις",
+    "Vehicle": "Όχημα",
+    "coloured": "χρωματισμένο",
+    "edition": "έκδοση",
+    "ends": "λήξη",
+    "places": "θέσεις"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -8958,7 +9019,15 @@
     "Change": "Cambio",
     "Fame": "Fama",
     "Fame Points": "Puntos de fama",
-    "Ranked players": "Jugadores clasificados"
+    "Ranked players": "Jugadores clasificados",
+    "Earn": "Ganar",
+    "SUMMER": "VERANO",
+    "Places": "Puestos",
+    "Vehicle": "Vehículo",
+    "coloured": "coloreado",
+    "edition": "edición",
+    "ends": "finaliza",
+    "places": "puestos"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -10040,7 +10109,15 @@
     "Change": "Muutos",
     "Fame": "Maine",
     "Fame Points": "Mainepisteet",
-    "Ranked players": "Sijoittuneet pelaajat"
+    "Ranked players": "Sijoittuneet pelaajat",
+    "Earn": "Ansaitse",
+    "SUMMER": "KESÄ",
+    "Places": "Sijat",
+    "Vehicle": "Ajoneuvo",
+    "coloured": "värillinen",
+    "edition": "kausi",
+    "ends": "päättyy",
+    "places": "sijat"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -11101,7 +11178,15 @@
     "Change": "Changement",
     "Fame": "Renommée",
     "Fame Points": "Points de renommée",
-    "Ranked players": "Joueurs classés"
+    "Ranked players": "Joueurs classés",
+    "Earn": "Obtenir",
+    "SUMMER": "ESTIVAL",
+    "Places": "Places",
+    "Vehicle": "Char",
+    "coloured": "coloré",
+    "edition": "édition",
+    "ends": "fin",
+    "places": "places"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -11948,7 +12033,14 @@
     "Defeats": "हार",
     "Fame": "प्रसिद्धि",
     "Fame Points": "प्रसिद्धि अंक",
-    "Ranked players": "रैंक वाले खिलाड़ी"
+    "Ranked players": "रैंक वाले खिलाड़ी",
+    "Gold": "गोल्ड",
+    "Places": "स्थान",
+    "Vehicle": "टैंक",
+    "coloured": "रंगीन",
+    "edition": "संस्करण",
+    "ends": "समाप्ति",
+    "places": "स्थान"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -13023,7 +13115,15 @@
     "Change": "Promijeni",
     "Fame": "Slava",
     "Fame Points": "Bodovi slave",
-    "Ranked players": "Rangirani igrači"
+    "Ranked players": "Rangirani igrači",
+    "Earn": "Zaradi",
+    "SUMMER": "LJETO",
+    "Places": "Mjesta",
+    "Vehicle": "Vozilo",
+    "coloured": "obojeno",
+    "edition": "izdanje",
+    "ends": "završava",
+    "places": "mjesta"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -14100,7 +14200,15 @@
     "Change": "Módosítás",
     "Fame": "Dicsőség",
     "Fame Points": "Dicsőségpontok",
-    "Ranked players": "Rangsorolt játékosok"
+    "Ranked players": "Rangsorolt játékosok",
+    "Earn": "Szerezz",
+    "SUMMER": "NYÁRI",
+    "Places": "Helyezések",
+    "Vehicle": "Jármű",
+    "coloured": "színes",
+    "edition": "kiadás",
+    "ends": "véget ér",
+    "places": "helyezések"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -15173,7 +15281,15 @@
     "Change": "Modifica",
     "Fame": "Fama",
     "Fame Points": "Punti fama",
-    "Ranked players": "Giocatori classificati"
+    "Ranked players": "Giocatori classificati",
+    "Earn": "Ottieni",
+    "SUMMER": "ESTIVA",
+    "Places": "Piazzamenti",
+    "Vehicle": "Carro armato",
+    "coloured": "colorato",
+    "edition": "edizione",
+    "ends": "termina",
+    "places": "piazzamenti"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -16253,7 +16369,15 @@
     "Change": "変更",
     "Fame": "名声",
     "Fame Points": "名声ポイント",
-    "Ranked players": "ランキングプレイヤー"
+    "Ranked players": "ランキングプレイヤー",
+    "Earn": "取得",
+    "SUMMER": "夏季",
+    "Places": "順位",
+    "Vehicle": "車輌",
+    "coloured": "色付き",
+    "edition": "開催回",
+    "ends": "終了日",
+    "places": "位"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -17101,7 +17225,14 @@
     "Defeats": "Жеңілістер",
     "Fame": "Даңқ",
     "Fame Points": "Даңқ ұпайлары",
-    "Ranked players": "Рейтингтегі ойыншылар"
+    "Ranked players": "Рейтингтегі ойыншылар",
+    "Gold": "Алтын",
+    "Places": "Орындар",
+    "Vehicle": "Техника",
+    "coloured": "түсті",
+    "edition": "шығарылым",
+    "ends": "аяқталуы",
+    "places": "орындар"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -18186,7 +18317,15 @@
     "Defeats": "패배",
     "Fame": "명예",
     "Fame Points": "명예 점수",
-    "Ranked players": "순위권 플레이어"
+    "Ranked players": "순위권 플레이어",
+    "Earn": "전쟁 채권",
+    "SUMMER": "하계",
+    "Places": "등수",
+    "Vehicle": "전차",
+    "coloured": "색상",
+    "edition": "시즌",
+    "ends": "종료",
+    "places": "등수"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -19266,7 +19405,15 @@
     "Change": "Keisti",
     "Fame": "Šlovė",
     "Fame Points": "Šlovės taškai",
-    "Ranked players": "Reitinguojami žaidėjai"
+    "Ranked players": "Reitinguojami žaidėjai",
+    "Earn": "Užsitarnauti",
+    "SUMMER": "VASAROS",
+    "Places": "Vietos",
+    "Vehicle": "Transporto priemonė",
+    "coloured": "spalvotas",
+    "edition": "etapas",
+    "ends": "baigiasi",
+    "places": "vietos"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -20332,7 +20479,15 @@
     "Change": "Mainīt",
     "Fame": "Slava",
     "Fame Points": "Slavas punkti",
-    "Ranked players": "Ranga spēlētāji"
+    "Ranked players": "Ranga spēlētāji",
+    "Earn": "Nopelnīt",
+    "SUMMER": "VASARAS",
+    "Places": "Vietas",
+    "Vehicle": "Tanks",
+    "coloured": "iekrāsots",
+    "edition": "izdevums",
+    "ends": "beidzas",
+    "places": "vietas"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -21414,7 +21569,15 @@
     "Change": "Wijziging",
     "Fame": "Roem",
     "Fame Points": "Roempunten",
-    "Ranked players": "Gerangschikte spelers"
+    "Ranked players": "Gerangschikte spelers",
+    "Earn": "Verdienen",
+    "SUMMER": "ZOMER",
+    "Places": "Plaatsen",
+    "Vehicle": "Voertuig",
+    "coloured": "gekleurd",
+    "edition": "editie",
+    "ends": "eindigt",
+    "places": "plaatsen"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -22487,7 +22650,15 @@
     "Change": "Endre",
     "Fame": "Berømmelse",
     "Fame Points": "Berømmelsespoeng",
-    "Ranked players": "Rangerte spillere"
+    "Ranked players": "Rangerte spillere",
+    "Earn": "Tjen",
+    "SUMMER": "SOMMER",
+    "Places": "Plasser",
+    "Vehicle": "Kjøretøy",
+    "coloured": "farget",
+    "edition": "utgave",
+    "ends": "slutter",
+    "places": "plasser"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -23557,7 +23728,15 @@
     "Change": "Zmień",
     "Fame": "Sława",
     "Fame Points": "Punkty sławy",
-    "Ranked players": "Gracze w rankingu"
+    "Ranked players": "Gracze w rankingu",
+    "Earn": "Zdobądź",
+    "SUMMER": "LATO",
+    "Places": "Miejsca",
+    "Vehicle": "Pojazd",
+    "coloured": "kolorowe",
+    "edition": "edycja",
+    "ends": "kończy się",
+    "places": "miejsca"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -24620,7 +24799,15 @@
     "Change": "Alteração",
     "Fame": "Fama",
     "Fame Points": "Pontos de fama",
-    "Ranked players": "Jogadores classificados"
+    "Ranked players": "Jogadores classificados",
+    "Earn": "Ganhar",
+    "SUMMER": "VERÃO",
+    "Places": "Lugares",
+    "Vehicle": "Veículo",
+    "coloured": "colorido",
+    "edition": "edição",
+    "ends": "termina",
+    "places": "lugares"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -25683,7 +25870,15 @@
     "Change": "Schimbare",
     "Fame": "Faimă",
     "Fame Points": "Puncte de faimă",
-    "Ranked players": "Jucători clasați"
+    "Ranked players": "Jucători clasați",
+    "Earn": "Câștigă",
+    "SUMMER": "VARĂ",
+    "Places": "Locuri",
+    "Vehicle": "Vehicul",
+    "coloured": "colorat",
+    "edition": "ediție",
+    "ends": "se încheie",
+    "places": "locuri"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -26734,7 +26929,15 @@
     "Change": "Изменить",
     "Fame": "Слава",
     "Fame Points": "Очки славы",
-    "Ranked players": "Рейтинговые игроки"
+    "Ranked players": "Рейтинговые игроки",
+    "Earn": "Заслужить",
+    "SUMMER": "ЛЕТНИЙ",
+    "Places": "Места",
+    "Vehicle": "Танк",
+    "coloured": "цветной",
+    "edition": "сезон",
+    "ends": "окончание",
+    "places": "места"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -27584,7 +27787,14 @@
     "Defeats": "Prehry",
     "Fame": "Sláva",
     "Fame Points": "Body slávy",
-    "Ranked players": "Hodnotení hráči"
+    "Ranked players": "Hodnotení hráči",
+    "Gold": "Zlato",
+    "Places": "Mesta",
+    "Vehicle": "Vozilo",
+    "coloured": "obarvano",
+    "edition": "izdaja",
+    "ends": "konča se",
+    "places": "mesta"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -28661,7 +28871,15 @@
     "Change": "Promena",
     "Fame": "Slava",
     "Fame Points": "Poeni slave",
-    "Ranked players": "Rangirani igrači"
+    "Ranked players": "Rangirani igrači",
+    "Earn": "Zaradi",
+    "SUMMER": "LETNJA",
+    "Places": "Mesta",
+    "Vehicle": "Vozilo",
+    "coloured": "obojeno",
+    "edition": "izdanje",
+    "ends": "ističe",
+    "places": "mesta"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -29743,7 +29961,15 @@
     "Change": "Ändra",
     "Fame": "Ära",
     "Fame Points": "Ärepoäng",
-    "Ranked players": "Rankade spelare"
+    "Ranked players": "Rankade spelare",
+    "Earn": "Tjäna",
+    "SUMMER": "SOMMAR",
+    "Places": "Placeringar",
+    "Vehicle": "Fordon",
+    "coloured": "färgade",
+    "edition": "upplaga",
+    "ends": "slutar",
+    "places": "placeringar"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -30821,7 +31047,15 @@
     "Change": "เปลี่ยน",
     "Fame": "ชื่อเสียง",
     "Fame Points": "คะแนนชื่อเสียง",
-    "Ranked players": "ผู้เล่นที่มีอันดับ"
+    "Ranked players": "ผู้เล่นที่มีอันดับ",
+    "Earn": "หาได้",
+    "SUMMER": "ฤดูร้อน",
+    "Places": "อันดับ",
+    "Vehicle": "รถถัง",
+    "coloured": "มีสี",
+    "edition": "รอบ",
+    "ends": "สิ้นสุด",
+    "places": "อันดับ"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -31671,7 +31905,14 @@
     "Defeats": "Mga pagkatalo",
     "Fame": "Katanyagan",
     "Fame Points": "Mga puntos ng katanyagan",
-    "Ranked players": "Mga manlalaro ayon sa ranggo"
+    "Ranked players": "Mga manlalaro ayon sa ranggo",
+    "Gold": "Ginto",
+    "Places": "Mga puwesto",
+    "Vehicle": "Tangke",
+    "coloured": "may kulay",
+    "edition": "edisyon",
+    "ends": "nagtatapos",
+    "places": "mga puwesto"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -32745,7 +32986,15 @@
     "Change": "Değiştir",
     "Fame": "Şöhret",
     "Fame Points": "Şöhret Puanları",
-    "Ranked players": "Sıralamadaki oyuncular"
+    "Ranked players": "Sıralamadaki oyuncular",
+    "Earn": "Kazanın",
+    "SUMMER": "YAZ",
+    "Places": "Dereceler",
+    "Vehicle": "Tank",
+    "coloured": "renkli",
+    "edition": "sezon",
+    "ends": "bitiş",
+    "places": "dereceler"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -33812,7 +34061,15 @@
     "Change": "Зміна",
     "Fame": "Слава",
     "Fame Points": "Очки слави",
-    "Ranked players": "Рейтингові гравці"
+    "Ranked players": "Рейтингові гравці",
+    "Earn": "Здобути",
+    "SUMMER": "ЛІТНІЙ",
+    "Places": "Місця",
+    "Vehicle": "Техніка",
+    "coloured": "кольоровий",
+    "edition": "видання",
+    "ends": "завершення",
+    "places": "місця"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -34868,7 +35125,15 @@
     "Change": "Thay đổi",
     "Fame": "Danh tiếng",
     "Fame Points": "Điểm Danh tiếng",
-    "Ranked players": "Người chơi xếp hạng"
+    "Ranked players": "Người chơi xếp hạng",
+    "Earn": "Lấy",
+    "SUMMER": "MÙA HÈ",
+    "Places": "Vị trí",
+    "Vehicle": "Xe tăng",
+    "coloured": "có màu",
+    "edition": "đợt",
+    "ends": "kết thúc",
+    "places": "vị trí"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -35946,6 +36211,14 @@
     "Change": "更改",
     "Fame": "名望",
     "Fame Points": "名望点数",
-    "Ranked players": "排名玩家"
+    "Ranked players": "排名玩家",
+    "Earn": "获得",
+    "SUMMER": "草地",
+    "Places": "名次",
+    "Vehicle": "坦克",
+    "coloured": "彩色",
+    "edition": "赛季",
+    "ends": "结束",
+    "places": "名次"
   }
 }

@@ -1,0 +1,8 @@
+{
+  "seasons": {
+    "spring": "Lente {year}",
+    "summer": "Zomer {year}",
+    "autumn": "Herfst {year}"
+  },
+  "window": "{edition}: van {from} tot {to}."
+}

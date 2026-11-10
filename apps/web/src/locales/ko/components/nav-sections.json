@@ -33,6 +33,12 @@
     "players-marks": {
       "description": "증표 3개 주포를 가장 많이 보유한 플레이어는 누구인가"
     },
+    "players-maneuvers": {
+      "description": "요새 이벤트의 명예 점수 순위"
+    },
+    "clans-maneuvers": {
+      "description": "요새 이벤트의 클랜 순위"
+    },
     "players-onslaught": {
       "description": "랭크 격전 순위"
     },

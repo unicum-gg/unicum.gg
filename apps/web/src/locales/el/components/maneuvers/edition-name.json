@@ -1,0 +1,8 @@
+{
+  "seasons": {
+    "spring": "Άνοιξη {year}",
+    "summer": "Καλοκαίρι {year}",
+    "autumn": "Φθινόπωρο {year}"
+  },
+  "window": "{edition}: από {from} έως {to}."
+}

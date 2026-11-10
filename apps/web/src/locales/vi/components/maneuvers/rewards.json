@@ -1,0 +1,22 @@
+{
+  "title": "Phần thưởng",
+  "intro": {
+    "players": "Những người ở {places} vị trí đầu tiên trên bảng xếp hạng người chơi sẽ nhận được một xe tăng. Số vị trí được trao thưởng được thiết lập riêng cho từng máy chủ và thay đổi từ đợt này sang đợt khác.",
+    "clans": "Các Clan ở {places} vị trí đầu tiên trên bảng xếp hạng Clan sẽ nhận được vàng cho kho bạc của Clan. Số vị trí được trao thưởng được thiết lập riêng cho từng máy chủ và thay đổi từ đợt này sang đợt khác."
+  },
+  "reward": "Phần thưởng",
+  "places": "Vị trí",
+  "holders": "Sở hữu bởi",
+  "reward-name": {
+    "players": "Xe tăng",
+    "clans": "Gold",
+    "none": "Không có phần thưởng"
+  },
+  "range": "{from} đến {to}",
+  "from": "Từ {from} trở đi",
+  "open": "{held}, vẫn còn {open} vị trí mở",
+  "count": {
+    "players": "{count} người chơi",
+    "clans": "{count} Clan"
+  }
+}

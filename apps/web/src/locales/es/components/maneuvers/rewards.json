@@ -1,0 +1,22 @@
+{
+  "title": "Recompensas",
+  "intro": {
+    "players": "Los primeros {places} puestos de la clasificación de jugadores ganan un vehículo. El número de puestos con recompensa se establece por servidor y cambia de una edición a otra.",
+    "clans": "Los primeros {places} puestos de la clasificación de clanes ganan oro para la tesorería del clan. El número de puestos con recompensa se establece por servidor y cambia de una edición a otra."
+  },
+  "reward": "Recompensa",
+  "places": "Puestos",
+  "holders": "En manos de",
+  "reward-name": {
+    "players": "Vehículo",
+    "clans": "Oro",
+    "none": "Sin recompensa"
+  },
+  "range": "De {from} a {to}",
+  "from": "Desde {from}",
+  "open": "{held}, {open} aún abiertos",
+  "count": {
+    "players": "{count} jugadores",
+    "clans": "{count} clanes"
+  }
+}

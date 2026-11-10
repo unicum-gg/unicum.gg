@@ -33,6 +33,12 @@
     "players-marks": {
       "description": "من يملك أكبر عدد من المدافع ذات علامات التميز الثلاث"
     },
+    "players-maneuvers": {
+      "description": "ترتيب نقاط الشهرة في حدث المعقل"
+    },
+    "clans-maneuvers": {
+      "description": "ترتيب العشائر في حدث المعقل"
+    },
     "players-onslaught": {
       "description": "سلم الهجوم التصنيفي"
     },

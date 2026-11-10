@@ -33,6 +33,12 @@
     "players-marks": {
       "description": "谁持有最多三标炮管"
     },
+    "players-maneuvers": {
+      "description": "要塞活动的名望点数排名"
+    },
+    "clans-maneuvers": {
+      "description": "要塞活动的军团排名"
+    },
     "players-onslaught": {
       "description": "天梯战排名阶梯"
     },

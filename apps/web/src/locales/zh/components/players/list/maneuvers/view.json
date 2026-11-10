@@ -2,6 +2,7 @@
   "heading": "<accent>{maneuvers}</accent> 中的顶级玩家",
   "intro": "{maneuvers} 是 World of Tanks 周期性的要塞军团活动。{region} 玩家排名按名望点数排列，数据直接来自游戏榜单。",
   "no-edition": "此服务器尚未记录任何届次。",
+  "not-recorded": "{edition} 在此服务器上没有被记录。赛季结束后，游戏不会保留排名，因此无法显示运行期间无人记录的赛季。",
   "not-started": "榜单将于 {date} 打开。",
   "not-started-undated": "榜单尚未打开。",
   "board": "顶级玩家（数量：{count}）",

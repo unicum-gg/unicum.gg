@@ -2,6 +2,7 @@
   "heading": "Top clãs em <accent>{maneuvers}</accent>",
   "intro": "{maneuvers} é o evento recorrente de clãs da Fortaleza de World of Tanks. A classificação de clãs da {region}, classificada por Pontos de fama, direto da própria classificação do jogo.",
   "no-edition": "Nenhuma edição foi registrada para este servidor até o momento.",
+  "not-recorded": "{edition} não foi registrada neste servidor. O jogo não mantém nenhuma classificação quando uma edição termina, portanto uma edição que ninguém capturou enquanto estava em andamento não pode ser exibida.",
   "not-started": "A classificação abre em {date}.",
   "not-started-undated": "A classificação ainda não está aberta.",
   "board": "Top {count} clãs",

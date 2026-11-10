@@ -33,6 +33,12 @@
     "players-marks": {
       "description": "Hvem har flest kanoner med tre mærker"
     },
+    "players-maneuvers": {
+      "description": "Placeringer i Berømmelsespoint for Højborg-begivenheden"
+    },
+    "clans-maneuvers": {
+      "description": "Klanplaceringer for Højborg-begivenheden"
+    },
     "players-onslaught": {
       "description": "Rangeret Onslaught-rangliste"
     },

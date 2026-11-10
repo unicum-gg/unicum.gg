@@ -1,0 +1,14 @@
+{
+  "title-live": "Clasamentul de până acum",
+  "title-ended": "Cum s-a desfășurat competiția",
+  "cutoff": {
+    "players": "Prag pentru a câștiga vehiculul",
+    "clans": "Prag pentru a câștiga aur"
+  },
+  "ranked": {
+    "players": "Jucători clasați",
+    "clans": "Clanuri clasate"
+  },
+  "fame-points": "Puncte de faimă",
+  "no-curve": "Curba începe după ce clasamentul a fost înregistrat de două ori."
+}

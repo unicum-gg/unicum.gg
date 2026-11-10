@@ -1,0 +1,8 @@
+{
+  "seasons": {
+    "spring": "Весна {year}",
+    "summer": "Літо {year}",
+    "autumn": "Осінь {year}"
+  },
+  "window": "{edition}: з {from} до {to}."
+}

@@ -2,6 +2,7 @@
   "heading": "Mga nangungunang klan sa <accent>{maneuvers}</accent>",
   "intro": "Ang {maneuvers} ay isang paulit-ulit na kaganapan ng klan sa Stronghold ng World of Tanks. Ang ranggo ng klano sa {region}, na niranggo ayon sa Mga puntos ng katanyagan, ay tuwid mula sa sariling talahanayan ng ranggo ng laro.",
   "no-edition": "Wala pang edisyong naitala para sa server na ito.",
+  "not-recorded": "Hindi naitala ang {edition} sa server na ito. Walang pinapanatiling ranggo ang laro kapag nagtatapos ang isang edisyon, kaya hindi maaaring ipakita ang edisyong walang sinumang nakapagtala habang isinasagawa ito.",
   "not-started": "Binubuksan ang talahanayan ng ranggo sa {date}.",
   "not-started-undated": "Hindi pa binubuksan ang talahanayan ng ranggo.",
   "board": "Mga nangungunang {count} clan",

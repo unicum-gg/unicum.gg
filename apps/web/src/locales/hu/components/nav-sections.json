@@ -33,6 +33,12 @@
     "players-marks": {
       "description": "Kinél van a legtöbb háromjeles ágyú"
     },
+    "players-maneuvers": {
+      "description": "Az Erődítmény eseményének Dicsőségpontok szerinti ranglistája"
+    },
+    "clans-maneuvers": {
+      "description": "Az Erődítmény eseményének klánranglistája"
+    },
     "players-onslaught": {
       "description": "Roham ranglétra"
     },

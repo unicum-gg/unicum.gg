@@ -2,6 +2,7 @@
   "heading": "Najbolji klanovi u <accent>{maneuvers}</accent>",
   "intro": "{maneuvers} je периодични klanski događaj Утврђење у игри World of Tanks. Пласман кланова у {region}, рангиран према Poeni slave, директно са табеле саме игре.",
   "no-edition": "За овај сервер још није забележено ниједно издање.",
+  "not-recorded": "{edition} nije забележено на овом серверу. Игра не задржава пласман када издање истекне, па издање које нико није забележио док је трајало не може бити приказано.",
   "not-started": "Отварање табеле је {date}.",
   "not-started-undated": "Табела још није отворена.",
   "board": "Najboljih {count} klanova",

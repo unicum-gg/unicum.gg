@@ -1,0 +1,14 @@
+{
+  "title-live": "Priebeh súťaže",
+  "title-ended": "Ako súťaž dopadla",
+  "cutoff": {
+    "players": "Prag na získanie vozidla",
+    "clans": "Prag na získanie zlata"
+  },
+  "ranked": {
+    "players": "Hodnotení hráči",
+    "clans": "Hodnotené klany"
+  },
+  "fame-points": "Body slávy",
+  "no-curve": "Krivulja začína po druhom zaznamenaní lestvice."
+}

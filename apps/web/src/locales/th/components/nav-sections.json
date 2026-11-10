@@ -33,6 +33,12 @@
     "players-marks": {
       "description": "ใครครอบครองปืนที่มีเครื่องหมายสามอันมากที่สุด"
     },
+    "players-maneuvers": {
+      "description": "อันดับคะแนนชื่อเสียงของกิจกรรมฐานที่มั่น"
+    },
+    "clans-maneuvers": {
+      "description": "อันดับแคลนของกิจกรรมฐานที่มั่น"
+    },
     "players-onslaught": {
       "description": "ตารางอันดับการบุกรุกแบบจัดอันดับ"
     },

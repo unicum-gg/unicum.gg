@@ -1,0 +1,14 @@
+{
+  "title-live": "Dosavadní průběh závodu",
+  "title-ended": "Jak závod probíhal",
+  "cutoff": {
+    "players": "Hranice pro získání vozidla",
+    "clans": "Hranice pro získání zlaťáků"
+  },
+  "ranked": {
+    "players": "Hráči v žebříčku",
+    "clans": "Klany v žebříčku"
+  },
+  "fame-points": "Body slávy",
+  "no-curve": "Křivka začíná, jakmile byl žebříček dvakrát zaznamenán."
+}

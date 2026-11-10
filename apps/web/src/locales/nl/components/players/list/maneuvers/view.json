@@ -2,6 +2,7 @@
   "heading": "<accent>Top spelers</accent> in {maneuvers}",
   "intro": "{maneuvers} is het terugkerende clan-evenement Bolwerk van World of Tanks. De klassementen van spelers in {region}, gerangschikt op Roempunten, rechtstreeks uit het eigen klassement van het spel.",
   "no-edition": "Er is nog geen editie voor deze server geregistreerd.",
+  "not-recorded": "{edition} is niet geregistreerd op deze server. Het spel behoudt geen klassementen zodra een editie eindigt, dus een editie die niemand tijdens de looptijd heeft vastgelegd, kan niet worden weergegeven.",
   "not-started": "Het klassement opent op {date}.",
   "not-started-undated": "Het klassement is nog niet geopend.",
   "board": "Top {count} spelers",

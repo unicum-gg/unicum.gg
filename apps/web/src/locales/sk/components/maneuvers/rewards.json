@@ -1,0 +1,22 @@
+{
+  "title": "Odmeny",
+  "intro": {
+    "players": "Prvých {places} miest na hráčskej lestvici získava vozidlo. Číslo odmeňovaných miest sa určuje pre každý server samostatne a mení sa z jednej edície na druhú.",
+    "clans": "Prvých {places} miest na klanovej lestvici získava zlato do klanovej pokladnice. Číslo odmeňovaných miest sa určuje pre každý server samostatne a mení sa z jednej edície na druhú."
+  },
+  "reward": "Odmena",
+  "places": "Mesta",
+  "holders": "V lasti",
+  "reward-name": {
+    "players": "Vozidlo",
+    "clans": "Zlato",
+    "none": "Žiadna odmena"
+  },
+  "range": "{from} až {to}",
+  "from": "Od {from}",
+  "open": "{held}, ešte {open} na otvorenie",
+  "count": {
+    "players": "{count} hráčov",
+    "clans": "{count} klanov"
+  }
+}

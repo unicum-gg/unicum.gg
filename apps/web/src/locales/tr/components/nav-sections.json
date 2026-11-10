@@ -33,6 +33,12 @@
     "players-marks": {
       "description": "En çok üç işaretli topu kim tutuyor"
     },
+    "players-maneuvers": {
+      "description": "Tahkimat etkinliğinin Şöhret Puanları sıralamaları"
+    },
+    "clans-maneuvers": {
+      "description": "Tahkimat etkinliğinin klan sıralamaları"
+    },
     "players-onslaught": {
       "description": "Dereceli Hücum merdiveni"
     },

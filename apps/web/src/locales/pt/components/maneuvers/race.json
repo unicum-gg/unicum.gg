@@ -1,0 +1,14 @@
+{
+  "title-live": "A corrida até agora",
+  "title-ended": "Como foi a corrida",
+  "cutoff": {
+    "players": "Limite para conquistar o veículo",
+    "clans": "Limite para conquistar ouro"
+  },
+  "ranked": {
+    "players": "Jogadores classificados",
+    "clans": "Clãs classificados"
+  },
+  "fame-points": "Pontos de fama",
+  "no-curve": "A curva começa quando a classificação é registrada duas vezes."
+}

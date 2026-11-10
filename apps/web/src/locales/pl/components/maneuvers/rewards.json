@@ -1,0 +1,22 @@
+{
+  "title": "Nagrody",
+  "intro": {
+    "players": "Pierwsze {places} miejsc w tabeli graczy wygrywają pojazd. Liczba nagradzanych miejsc jest ustalana dla każdego serwera i zmienia się w zależności od edycji.",
+    "clans": "Pierwsze {places} miejsc w tabeli klanów wygrywają złoto do skarbca klanu. Liczba nagradzanych miejsc jest ustalana dla każdego serwera i zmienia się w zależności od edycji."
+  },
+  "reward": "Nagroda",
+  "places": "Miejsca",
+  "holders": "Posiadane przez",
+  "reward-name": {
+    "players": "Pojazd",
+    "clans": "Złoto",
+    "none": "Brak nagrody"
+  },
+  "range": "{from} do {to}",
+  "from": "Od {from}",
+  "open": "{held}, {open} nadal otwartych",
+  "count": {
+    "players": "{count} graczy",
+    "clans": "{count} klanów"
+  }
+}

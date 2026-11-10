@@ -1,0 +1,22 @@
+{
+  "title": "奖励",
+  "intro": {
+    "players": "玩家榜单中的前 {places} 个名次可获得一辆坦克。奖励名次的数量由各服务器设定，并会随赛季变更。",
+    "clans": "军团榜单中的前 {places} 个名次可为军团仓库赢得金币。奖励名次的数量由各服务器设定，并会随赛季变更。"
+  },
+  "reward": "奖励",
+  "places": "名次",
+  "holders": "持有者",
+  "reward-name": {
+    "players": "坦克",
+    "clans": "黄金",
+    "none": "无奖励"
+  },
+  "range": "{from}至{to}",
+  "from": "{from}及以后",
+  "open": "已持有：{held}，仍有 {open} 个名次开放",
+  "count": {
+    "players": "{count} 名玩家",
+    "clans": "{count} 个军团"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "title": "Belöningar",
+  "intro": {
+    "players": "De första {places} placeringarna på spelarens topplista vinner ett fordon. Antalet belönade placeringar fastställs per server och ändras från en upplaga till nästa.",
+    "clans": "De första {places} placeringarna på klanens topplista vinner guld till klankassan. Antalet belönade placeringar fastställs per server och ändras från en upplaga till nästa."
+  },
+  "reward": "Belöning",
+  "places": "Placeringar",
+  "holders": "Hålls av",
+  "reward-name": {
+    "players": "Fordon",
+    "clans": "Guld",
+    "none": "Ingen belöning"
+  },
+  "range": "{from} till {to}",
+  "from": "{from} och framåt",
+  "open": "{held} hållna, {open} fortfarande öppna",
+  "count": {
+    "players": "{count} spelare",
+    "clans": "{count} klaner"
+  }
+}

@@ -33,6 +33,12 @@
     "players-marks": {
       "description": "Wie de meeste kanonnen met drie markeringen in bezit heeft"
     },
+    "players-maneuvers": {
+      "description": "Klassementen op basis van Roempunten van het Bolwerk-evenement"
+    },
+    "clans-maneuvers": {
+      "description": "Clanklassementen van het Bolwerk-evenement"
+    },
     "players-onslaught": {
       "description": "Klassement voor gerangschikte Bestorming"
     },

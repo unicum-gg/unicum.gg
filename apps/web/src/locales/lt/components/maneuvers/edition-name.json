@@ -1,0 +1,8 @@
+{
+  "seasons": {
+    "spring": "Pavasaris {year}",
+    "summer": "Vasara {year}",
+    "autumn": "Ruduo {year}"
+  },
+  "window": "{edition}: nuo {from} iki {to}."
+}

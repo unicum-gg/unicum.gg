@@ -33,6 +33,12 @@
     "players-marks": {
       "description": "Wer die meisten Geschütze mit 3 Marks hält"
     },
+    "players-maneuvers": {
+      "description": "Rangliste der Ruhmpunkte im Festungsereignis"
+    },
+    "clans-maneuvers": {
+      "description": "Clanrangliste des Festungsereignisses"
+    },
     "players-onslaught": {
       "description": "Rangliste für Ansturm"
     },

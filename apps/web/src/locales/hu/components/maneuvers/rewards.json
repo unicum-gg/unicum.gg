@@ -1,0 +1,22 @@
+{
+  "title": "Jutalmak",
+  "intro": {
+    "players": "A játékosok ranglistáján az első {places} helyezést elérők járművet nyernek. A jutalmazott helyezések számát szerverenként állítják be, és kiadásonként változik.",
+    "clans": "A klánok ranglistáján az első {places} helyezést elérő klánok aranyat nyernek a klán kincstárába. A jutalmazott helyezések számát szerverenként állítják be, és kiadásonként változik."
+  },
+  "reward": "Jutalom",
+  "places": "Helyezések",
+  "holders": "Megszerzők",
+  "reward-name": {
+    "players": "Jármű",
+    "clans": "Arany",
+    "none": "Nincs jutalom"
+  },
+  "range": "{from} és {to} között",
+  "from": "{from}-tól kezdődően",
+  "open": "Megszerzett: {held}, még nyitott: {open}",
+  "count": {
+    "players": "{count} játékos",
+    "clans": "{count} klán"
+  }
+}

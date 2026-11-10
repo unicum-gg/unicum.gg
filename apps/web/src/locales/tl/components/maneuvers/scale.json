@@ -1,0 +1,11 @@
+{
+  "description": {
+    "players": "May kulay ang kolum ng Mga puntos ng katanyagan batay sa taas ng puwesto sa hanay ng lahat ng niranggong manlalaro, gamit ang parehong mga percentile tulad ng iba pang iskala ng rating ng website. Sumusunod ang mga puwesto sa ibaba habang napupunan ang talahanayan ng ranggo.",
+    "clans": "May kulay ang kolum ng Mga puntos ng katanyagan batay sa taas ng puwesto sa hanay ng lahat ng niranggong klano, gamit ang parehong mga percentile tulad ng iba pang iskala ng rating ng website. Sumusunod ang mga puwesto sa ibaba habang napupunan ang talahanayan ng ranggo."
+  },
+  "share": "Puwesto",
+  "places": "Mga puwesto",
+  "top": "Nangungunang {share}",
+  "rest": "Iba pa",
+  "range": "{from} hanggang {to}"
+}

@@ -1,0 +1,14 @@
+{
+  "title-live": "Dosadašnji tok trke",
+  "title-ended": "Kako je trka prošla",
+  "cutoff": {
+    "players": "Prag za zaradu vozila",
+    "clans": "Prag za zaradu zlata"
+  },
+  "ranked": {
+    "players": "Rangirani igrači",
+    "clans": "Rangirani klanovi"
+  },
+  "fame-points": "Bodovi slave",
+  "no-curve": "Kriva počinje kada je rang-lista zabilježena dva puta."
+}

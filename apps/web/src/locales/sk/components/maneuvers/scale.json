@@ -1,0 +1,11 @@
+{
+  "description": {
+    "players": "Stĺpec Body slávy je obarvano podľa toho, aké vysoké miesto zaujíma medzi všetkými hodnotenými hráčmi, na rovnakých percentiloch ako ostatné hodnotiace lestvice stránky. Nižšie uvedené mesta sledujú lestvicu podľa jej naplnenia.",
+    "clans": "Stĺpec Body slávy je obarvano podľa toho, aké vysoké miesto zaujíma medzi všetkými hodnotenými klanmi, na rovnakých percentiloch ako ostatné hodnotiace lestvice stránky. Nižšie uvedené mesta sledujú lestvicu podľa jej naplnenia."
+  },
+  "share": "Umiestnenie",
+  "places": "Mesta",
+  "top": "Najlepších {share}",
+  "rest": "Zvyšok",
+  "range": "{from} až {to}"
+}

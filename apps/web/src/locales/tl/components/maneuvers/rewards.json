@@ -1,0 +1,22 @@
+{
+  "title": "Mga gantimpala",
+  "intro": {
+    "players": "Ang unang {places} mga puwesto sa talahanayan ng ranggo ng mga manlalaro ay mananalo ng sasakyan. Itinatakda ang numero ng mga puwestong may gantimpala para sa bawat server at may mga pagbabago ito sa bawat edisyon.",
+    "clans": "Ang unang {places} mga puwesto sa talahanayan ng ranggo ng mga klano ay mananalo ng gold para sa kabang-yaman ng klano. Itinatakda ang numero ng mga puwestong may gantimpala para sa bawat server at may mga pagbabago ito sa bawat edisyon."
+  },
+  "reward": "Gantimpala",
+  "places": "Mga puwesto",
+  "holders": "May hawak",
+  "reward-name": {
+    "players": "Tangke",
+    "clans": "Ginto",
+    "none": "Walang gantimpala"
+  },
+  "range": "{from} hanggang {to}",
+  "from": "Mula {from} pataas",
+  "open": "{held}, {open} pa ang bukas",
+  "count": {
+    "players": "{count} mga manlalaro",
+    "clans": "{count} mga clan"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "title-live": "目前的竞争情况",
+  "title-ended": "竞争结果",
+  "cutoff": {
+    "players": "获得坦克的门槛",
+    "clans": "获得金币的门槛"
+  },
+  "ranked": {
+    "players": "排名玩家",
+    "clans": "排名军团"
+  },
+  "fame-points": "名望点数",
+  "no-curve": "榜单被记录两次后，曲线才会开始。"
+}

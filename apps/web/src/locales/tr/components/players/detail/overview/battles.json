@@ -33,7 +33,7 @@
     "survived": "Hayatta",
     "xp": "XP",
     "medals": "Madalya",
-    "vehicle": "Araç"
+    "vehicle": "Tank"
   },
   "detail-unavailable": "Bu savaşın kadrosu yüklenemedi.",
   "team": "Ekip {team}",

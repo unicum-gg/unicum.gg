@@ -1,0 +1,22 @@
+{
+  "title": "Odměny",
+  "intro": {
+    "players": "Prvních {places} umístění v žebříčku hráčů získá vozidlo. Číslo odměňovaných umístění se určuje pro každý server zvlášť a mezi edicemi se mění.",
+    "clans": "Prvních {places} umístění v žebříčku klanů získá zlaťáky do klanové pokladnice. Číslo odměňovaných umístění se určuje pro každý server zvlášť a mezi edicemi se mění."
+  },
+  "reward": "Odměna",
+  "places": "Umístění",
+  "holders": "Vlastněné",
+  "reward-name": {
+    "players": "Vozidlo",
+    "clans": "Zlaťáky",
+    "none": "Žádná odměna"
+  },
+  "range": "Od {from} do {to}",
+  "from": "{from} a dále",
+  "open": "{held}, {open} stále otevřených",
+  "count": {
+    "players": "{count} hráčů",
+    "clans": "{count} klanů"
+  }
+}

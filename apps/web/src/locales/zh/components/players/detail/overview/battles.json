@@ -33,7 +33,7 @@
     "survived": "存活",
     "xp": "XP",
     "medals": "奖牌",
-    "vehicle": "车辆"
+    "vehicle": "坦克"
   },
   "detail-unavailable": "无法加载此战斗的名单。",
   "team": "队伍 {team}",

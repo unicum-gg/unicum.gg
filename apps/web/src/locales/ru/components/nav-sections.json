@@ -33,6 +33,12 @@
     "players-marks": {
       "description": "Кто владеет наибольшим количеством орудий с тремя отметками"
     },
+    "players-maneuvers": {
+      "description": "Рейтинг Очков славы события «Укрепрайон»"
+    },
+    "clans-maneuvers": {
+      "description": "Рейтинг кланов события «Укрепрайон»"
+    },
     "players-onslaught": {
       "description": "Рейтинговая таблица Натиска"
     },

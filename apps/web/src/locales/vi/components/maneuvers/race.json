@@ -1,0 +1,14 @@
+{
+  "title-live": "Tình hình cuộc đua hiện tại",
+  "title-ended": "Diễn biến cuộc đua",
+  "cutoff": {
+    "players": "Mốc để kiếm được xe tăng",
+    "clans": "Mốc để kiếm được vàng"
+  },
+  "ranked": {
+    "players": "Người chơi xếp hạng",
+    "clans": "Các Clan xếp hạng"
+  },
+  "fame-points": "Điểm Danh tiếng",
+  "no-curve": "Đường cong bắt đầu sau khi bảng xếp hạng được ghi nhận hai lần."
+}

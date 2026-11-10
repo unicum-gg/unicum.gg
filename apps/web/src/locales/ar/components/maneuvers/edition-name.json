@@ -1,0 +1,8 @@
+{
+  "seasons": {
+    "spring": "ربيع {year}",
+    "summer": "صيف {year}",
+    "autumn": "خريف {year}"
+  },
+  "window": "{edition}: من {from} إلى {to}."
+}

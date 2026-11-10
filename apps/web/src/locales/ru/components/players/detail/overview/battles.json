@@ -33,7 +33,7 @@
     "survived": "В живых",
     "xp": "XP",
     "medals": "Медали",
-    "vehicle": "Техника"
+    "vehicle": "Танк"
   },
   "detail-unavailable": "Не удалось загрузить состав этого боя.",
   "team": "Команда {team}",

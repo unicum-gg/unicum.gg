@@ -1,0 +1,11 @@
+{
+  "description": {
+    "players": "A Dicsőségpontok oszlopa annak alapján színezett, hogy egy helyezés milyen magas minden rangsorolt játékos között, ugyanazon százalékos határok szerint, mint a webhely többi értékelési skálája. Az alábbi helyezések a ranglista kitöltésével párhuzamosan követik annak állását.",
+    "clans": "A Dicsőségpontok oszlopa annak alapján színezett, hogy egy helyezés milyen magas minden rangsorolt klán között, ugyanazon százalékos határok szerint, mint a webhely többi értékelési skálája. Az alábbi helyezések a ranglista kitöltésével párhuzamosan követik annak állását."
+  },
+  "share": "Helyezés",
+  "places": "Helyezések",
+  "top": "A legjobb {share}",
+  "rest": "A többi",
+  "range": "{from} és {to} között"
+}

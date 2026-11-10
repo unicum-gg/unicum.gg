@@ -33,6 +33,12 @@
     "players-marks": {
       "description": "सबसे अधिक तीन-निशान वाली तोपें किसके पास हैं"
     },
+    "players-maneuvers": {
+      "description": "गढ़ इवेंट की प्रसिद्धि अंक रैंकिंग"
+    },
+    "clans-maneuvers": {
+      "description": "गढ़ इवेंट की क्लान रैंकिंग"
+    },
     "players-onslaught": {
       "description": "रैंक्ड ऑन्स्लॉट सीढ़ी"
     },

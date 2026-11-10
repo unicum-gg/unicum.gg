@@ -1,0 +1,22 @@
+{
+  "title": "Apmaksāšanas",
+  "intro": {
+    "players": "Pirmās {places} vietas spēlētāju tabulā iegūst transportlīdzekli. Apbalvoto vietu skaits tiek noteikts katram serverim un mainās no viena izdevuma uz nākamo.",
+    "clans": "Pirmās {places} vietas klanu tabulā iegūst zeltu klana kasē. Apbalvoto vietu skaits tiek noteikts katram serverim un mainās no viena izdevuma uz nākamo."
+  },
+  "reward": "Apmaksāšana",
+  "places": "Vietas",
+  "holders": "Iegūtās",
+  "reward-name": {
+    "players": "Tanks",
+    "clans": "Zelts",
+    "none": "Nav apmaksāšanas"
+  },
+  "range": "No {from} līdz {to}",
+  "from": "{from} un tālāk",
+  "open": "Iegūtās: {held}, vēl atvērtas {open}",
+  "count": {
+    "players": "{count} spēlētāju",
+    "clans": "{count} klanu"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "title-live": "La gara finora",
+  "title-ended": "Com’è andata la gara",
+  "cutoff": {
+    "players": "Limite per guadagnare il veicolo",
+    "clans": "Limite per guadagnare oro"
+  },
+  "ranked": {
+    "players": "Giocatori classificati",
+    "clans": "Clan classificati"
+  },
+  "fame-points": "Punti fama",
+  "no-curve": "La curva inizia dopo che la classifica è stata registrata due volte."
+}

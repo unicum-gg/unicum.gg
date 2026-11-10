@@ -1,0 +1,14 @@
+{
+  "title-live": "Līdzšinējā sacensību norise",
+  "title-ended": "Kā noritēja sacensības",
+  "cutoff": {
+    "players": "Slieksnis transportlīdzekļa nopelnīšanai",
+    "clans": "Slieksnis zelta nopelnīšanai"
+  },
+  "ranked": {
+    "players": "Ranga spēlētāji",
+    "clans": "Ranga klani"
+  },
+  "fame-points": "Slavas punkti",
+  "no-curve": "Līkne sākas, kad tabula ir reģistrēta divreiz."
+}

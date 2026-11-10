@@ -1,0 +1,11 @@
+{
+  "description": {
+    "players": "Sloupec Bodů slávy je barevný podle toho, jak vysoké je umístění mezi všemi hodnocenými hráči, ve stejných percentilech jako ostatní hodnoticí stupnice webu. Níže uvedená umístění sledují žebříček, jak se plní.",
+    "clans": "Sloupec Bodů slávy je barevný podle toho, jak vysoké je umístění mezi všemi hodnocenými klany, ve stejných percentilech jako ostatní hodnoticí stupnice webu. Níže uvedená umístění sledují žebříček, jak se plní."
+  },
+  "share": "Pořadí",
+  "places": "Umístění",
+  "top": "Nejlepších {share}",
+  "rest": "Zbytek",
+  "range": "Od {from} do {to}"
+}

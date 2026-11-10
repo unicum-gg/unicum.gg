@@ -1,0 +1,14 @@
+{
+  "title-live": "A verseny eddigi állása",
+  "title-ended": "A verseny menete",
+  "cutoff": {
+    "players": "A jármű megszerzésének küszöbértéke",
+    "clans": "Az arany megszerzésének küszöbértéke"
+  },
+  "ranked": {
+    "players": "Rangsorolt játékosok",
+    "clans": "Rangsorolt klánok"
+  },
+  "fame-points": "Dicsőségpontok",
+  "no-curve": "A görbe akkor kezdődik, amikor a ranglistát kétszer rögzítették."
+}

@@ -33,6 +33,12 @@
     "players-marks": {
       "description": "Tko drži najviše topova s tri oznake"
     },
+    "players-maneuvers": {
+      "description": "Poredak Bodova slave za događaj Utvrde"
+    },
+    "clans-maneuvers": {
+      "description": "Poredak klanova za događaj Utvrde"
+    },
     "players-onslaught": {
       "description": "Ljestvica rangirane Navale"
     },

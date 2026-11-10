@@ -1,0 +1,22 @@
+{
+  "title": "Belohnungen",
+  "intro": {
+    "players": "Die ersten {places} Plätze in der Rangliste der Spieler gewinnen ein Fahrzeug. Die Anzahl der belohnten Plätze wird für jeden Server festgelegt und ändert sich von Ausgabe zu Ausgabe.",
+    "clans": "Die ersten {places} Plätze in der Clanrangliste gewinnen Gold für die Clanschatzkammer. Die Anzahl der belohnten Plätze wird für jeden Server festgelegt und ändert sich von Ausgabe zu Ausgabe."
+  },
+  "reward": "Belohnung",
+  "places": "Plätze",
+  "holders": "Gehalten von",
+  "reward-name": {
+    "players": "Fahrzeug",
+    "clans": "Gold",
+    "none": "Keine Belohnung"
+  },
+  "range": "{from} bis {to}",
+  "from": "Ab {from}",
+  "open": "{held}, {open} noch offen",
+  "count": {
+    "players": "{count} Spieler",
+    "clans": "{count} Clans"
+  }
+}

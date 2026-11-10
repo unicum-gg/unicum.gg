@@ -1,0 +1,14 @@
+{
+  "title-live": "De race tot nu toe",
+  "title-ended": "Verloop van de race",
+  "cutoff": {
+    "players": "Grens om het voertuig te verdienen",
+    "clans": "Grens om Goud te verdienen"
+  },
+  "ranked": {
+    "players": "Gerangschikte spelers",
+    "clans": "Gerangschikte clans"
+  },
+  "fame-points": "Roempunten",
+  "no-curve": "De curve begint zodra het klassement twee keer is geregistreerd."
+}

@@ -1,0 +1,7 @@
+{
+  "gain": "24h",
+  "gain-hint": "Viimeisen 24 tuntia kestäneen ajanjakson aikana ansaitut Mainepisteet.",
+  "move": "Siirto",
+  "move-hint": "Viimeisen 24 tuntia kestäneen ajanjakson aikana nousseet tai menetetyt sijat.",
+  "new": "Uusi"
+}

@@ -1,0 +1,22 @@
+{
+  "title": "Nagradne igre",
+  "intro": {
+    "players": "Prvih {places} mjesta na ljestvici igrača osvaja vozilo. Broj nagrađenih mjesta određuje se za svaki poslužitelj i mijenja se od izdanja do izdanja.",
+    "clans": "Prvih {places} mjesta na ljestvici klanova osvaja zlato za klansku riznicu. Broj nagrađenih mjesta određuje se za svaki poslužitelj i mijenja se od izdanja do izdanja."
+  },
+  "reward": "Nagradna igra",
+  "places": "Mjesta",
+  "holders": "Drže",
+  "reward-name": {
+    "players": "Vozilo",
+    "clans": "Zlato",
+    "none": "Nema nagrade"
+  },
+  "range": "{from} do {to}",
+  "from": "Od {from} nadalje",
+  "open": "{held}, {open} još uvijek otvoreno",
+  "count": {
+    "players": "{count} igrača",
+    "clans": "{count} klanova"
+  }
+}

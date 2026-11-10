@@ -1,0 +1,14 @@
+{
+  "title-live": "Şimdiye kadarki yarış",
+  "title-ended": "Yarış nasıl gitti",
+  "cutoff": {
+    "players": "Araç kazanma eşiği",
+    "clans": "Altın kazanma eşiği"
+  },
+  "ranked": {
+    "players": "Sıralamadaki oyuncular",
+    "clans": "Sıralamalı klanlar"
+  },
+  "fame-points": "Şöhret Puanları",
+  "no-curve": "Eğri, tablo iki kez kaydedildiğinde başlar."
+}

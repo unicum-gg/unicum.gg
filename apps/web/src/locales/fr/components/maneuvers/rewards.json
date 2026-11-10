@@ -1,0 +1,22 @@
+{
+  "title": "Récompenses",
+  "intro": {
+    "players": "Les {places} premières places du classement des joueurs remportent un véhicule. Le nombre de places récompensées est défini pour chaque serveur et change d’une édition à l’autre.",
+    "clans": "Les {places} premières places du classement des clans remportent de l’or pour la trésorerie du clan. Le nombre de places récompensées est défini pour chaque serveur et change d’une édition à l’autre."
+  },
+  "reward": "Récompense",
+  "places": "Places",
+  "holders": "Obtenu par",
+  "reward-name": {
+    "players": "Char",
+    "clans": "Pièces d’or",
+    "none": "Aucune récompense"
+  },
+  "range": "De {from} à {to}",
+  "from": "À partir de {from}",
+  "open": "{held}, {open} encore ouvertes",
+  "count": {
+    "players": "{count} joueurs",
+    "clans": "{count} clans"
+  }
+}

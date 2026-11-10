@@ -2,6 +2,7 @@
   "heading": "Mejores jugadores en <accent>{maneuvers}</accent>",
   "intro": "{maneuvers} es el evento recurrente de clanes de Fortaleza de World of Tanks. La clasificación de jugadores de {region}, clasificada por Puntos de fama, directamente desde la propia clasificación del juego.",
   "no-edition": "Todavía no se ha registrado ninguna edición para este servidor.",
+  "not-recorded": "{edition} no fue registrado en este servidor. El juego no conserva ninguna clasificación cuando finaliza una edición, por lo que no se puede mostrar una edición que nadie registró mientras estaba activa.",
   "not-started": "La clasificación se abre el {date}.",
   "not-started-undated": "La clasificación todavía no se ha abierto.",
   "board": "Mejores {count} jugadores",

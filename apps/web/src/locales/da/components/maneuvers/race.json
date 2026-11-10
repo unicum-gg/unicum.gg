@@ -1,0 +1,14 @@
+{
+  "title-live": "Løbet indtil videre",
+  "title-ended": "Sådan gik løbet",
+  "cutoff": {
+    "players": "Grænse for at optjene køretøjet",
+    "clans": "Grænse for at optjene guld"
+  },
+  "ranked": {
+    "players": "Rangerede spillere",
+    "clans": "Rangerede klaner"
+  },
+  "fame-points": "Berømmelsespoint",
+  "no-curve": "Kurven starter, når ranglisten er blevet registreret to gange."
+}

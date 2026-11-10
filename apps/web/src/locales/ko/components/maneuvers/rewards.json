@@ -1,0 +1,22 @@
+{
+  "title": "보상",
+  "intro": {
+    "players": "플레이어 리더보드의 상위 {places}등은 전차를 획득합니다. 보상을 받는 등수의 수는 서버별로 정해지며 시즌마다 변경됩니다.",
+    "clans": "클랜 리더보드의 상위 {places}등은 클랜 금고에 사용할 골드를 획득합니다. 보상을 받는 등수의 수는 서버별로 정해지며 시즌마다 변경됩니다."
+  },
+  "reward": "보상",
+  "places": "등수",
+  "holders": "보유",
+  "reward-name": {
+    "players": "전차",
+    "clans": "골드",
+    "none": "보상 없음"
+  },
+  "range": "{from}부터 {to}까지",
+  "from": "{from}부터",
+  "open": "{held} 보유, 아직 {open}개 열림",
+  "count": {
+    "players": "{count}명의 플레이어들",
+    "clans": "{count}개의 클랜"
+  }
+}

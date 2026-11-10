@@ -33,6 +33,12 @@
     "players-marks": {
       "description": "Cine deține cele mai multe tunuri cu trei semne"
     },
+    "players-maneuvers": {
+      "description": "Clasamente cu Puncte de faimă ale evenimentului Fortăreață"
+    },
+    "clans-maneuvers": {
+      "description": "Clasamente ale clanurilor în cadrul evenimentului Fortăreață"
+    },
     "players-onslaught": {
       "description": "Clasamentul Violență"
     },

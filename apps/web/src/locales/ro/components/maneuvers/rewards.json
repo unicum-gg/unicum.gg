@@ -1,0 +1,22 @@
+{
+  "title": "Recompense",
+  "intro": {
+    "players": "Primele {places} locuri din clasamentul jucătorilor câștigă un vehicul. Numărul locurilor recompensate este stabilit pentru fiecare server și se schimbă de la o ediție la alta.",
+    "clans": "Primele {places} locuri din clasamentul clanurilor câștigă aur pentru trezoreria clanului. Numărul locurilor recompensate este stabilit pentru fiecare server și se schimbă de la o ediție la alta."
+  },
+  "reward": "Recompensă",
+  "places": "Locuri",
+  "holders": "Deținute de",
+  "reward-name": {
+    "players": "Vehicul",
+    "clans": "Aur",
+    "none": "Fără recompensă"
+  },
+  "range": "De la {from} la {to}",
+  "from": "De la {from} în sus",
+  "open": "{held}, încă {open} deschise",
+  "count": {
+    "players": "{count} jucători",
+    "clans": "{count} clanuri"
+  }
+}

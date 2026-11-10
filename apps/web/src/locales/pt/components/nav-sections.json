@@ -33,6 +33,12 @@
     "players-marks": {
       "description": "Quem mantém mais canhões com três marcas"
     },
+    "players-maneuvers": {
+      "description": "Classificação de Pontos de fama do evento Fortaleza"
+    },
+    "clans-maneuvers": {
+      "description": "Classificação de clãs do evento Fortaleza"
+    },
     "players-onslaught": {
       "description": "classificação do Massacre classificatório"
     },

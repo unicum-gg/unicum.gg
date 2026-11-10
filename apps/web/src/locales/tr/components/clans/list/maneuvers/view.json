@@ -2,6 +2,7 @@
   "heading": "<accent>{maneuvers}</accent> içindeki en iyi klanlar",
   "intro": "{maneuvers}, World of Tanks’ın düzenli olarak tekrarlanan Tahkimat klan etkinliğidir. Şöhret Puanlarına göre sıralanmış {region} bölgesindeki klan sıralamaları, doğrudan oyunun kendi tablosundan.",
   "no-edition": "Bu sunucuda henüz hiçbir sürüm kaydedilmedi.",
+  "not-recorded": "{edition} bu sunucuda kaydedilmedi. Oyun, bir sezon sona erdiğinde sıralamaları tutmuyor, bu nedenle devam ederken hiç kimsenin kaydetmediği bir sezon gösterilemez.",
   "not-started": "Tablo {date} tarihinde açılır.",
   "not-started-undated": "Tablo henüz açılmadı.",
   "board": "En iyi {count} klan",

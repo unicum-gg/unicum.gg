@@ -1,0 +1,14 @@
+{
+  "title-live": "Der bisherige Verlauf",
+  "title-ended": "Der Verlauf der Wertung",
+  "cutoff": {
+    "players": "Platzgrenze zum Verdienen des Fahrzeugs",
+    "clans": "Platzgrenze zum Verdienen von Gold"
+  },
+  "ranked": {
+    "players": "Ranglistenspieler",
+    "clans": "Gewertete Clans"
+  },
+  "fame-points": "Ruhmpunkte",
+  "no-curve": "Die Kurve beginnt, sobald die Rangliste zweimal aufgezeichnet wurde."
+}

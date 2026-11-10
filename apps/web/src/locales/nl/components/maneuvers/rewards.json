@@ -1,0 +1,22 @@
+{
+  "title": "Beloningen",
+  "intro": {
+    "players": "De eerste {places} plaatsen in het spelersklassement winnen een voertuig. Het aantal plaatsen waaraan een beloning wordt toegekend, wordt per server bepaald en verschilt per editie.",
+    "clans": "De eerste {places} plaatsen in het clanklassement winnen Goud voor de clanvoorraad. Het aantal plaatsen waaraan een beloning wordt toegekend, wordt per server bepaald en verschilt per editie."
+  },
+  "reward": "Beloning",
+  "places": "Plaatsen",
+  "holders": "Behaald door",
+  "reward-name": {
+    "players": "Voertuig",
+    "clans": "Goud",
+    "none": "Geen beloning"
+  },
+  "range": "Van {from} tot {to}",
+  "from": "Vanaf {from}",
+  "open": "{held}, {open} nog open",
+  "count": {
+    "players": "{count} spelers",
+    "clans": "{count} clans"
+  }
+}

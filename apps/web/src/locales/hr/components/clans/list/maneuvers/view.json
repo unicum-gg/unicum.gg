@@ -2,6 +2,7 @@
   "heading": "Najbolje klanske jedinice u <accent>{maneuvers}</accent>",
   "intro": "{maneuvers} je ponavljajući klanski događaj Utvrde u igri World of Tanks. Poredak klanova regije {region}, rangiran prema Bodovima slave, izravno s ljestvice same igre.",
   "no-edition": "Za ovaj poslužitelj još nije zabilježeno nijedno izdanje.",
+  "not-recorded": "{edition} nije zabilježeno na ovom poslužitelju. Igra ne zadržava poredak nakon završetka izdanja, pa izdanje koje nitko nije zabilježio dok je trajalo ne može biti prikazano.",
   "not-started": "Ljestvica se otvara {date}.",
   "not-started-undated": "Ljestvica se još nije otvorila.",
   "board": "Najboljih {count} klanskih jedinica",

@@ -33,6 +33,12 @@
     "players-marks": {
       "description": "Хто утримує найбільше гармат із трьома відмітками"
     },
+    "players-maneuvers": {
+      "description": "Рейтинг за Очками слави в події «Укріпрайон»"
+    },
+    "clans-maneuvers": {
+      "description": "Рейтинг кланів у події «Укріпрайон»"
+    },
     "players-onslaught": {
       "description": "Рейтингова таблиця Натиску"
     },

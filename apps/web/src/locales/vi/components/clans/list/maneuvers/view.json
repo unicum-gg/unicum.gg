@@ -2,6 +2,7 @@
   "heading": "Bang hội hàng đầu trong <accent>{maneuvers}</accent>",
   "intro": "{maneuvers} là sự kiện Clan Pháo đài định kỳ của World of Tanks. Bảng xếp hạng Clan khu vực {region}, được xếp hạng theo Điểm Danh tiếng, thẳng từ bảng xếp hạng của trò chơi.",
   "no-edition": "Chưa có phiên bản nào được ghi nhận cho máy chủ này.",
+  "not-recorded": "{edition} không được ghi nhận trên máy chủ này. Trò chơi không giữ bảng xếp hạng sau khi một đợt kết thúc, vì vậy một đợt mà không ai ghi lại khi đang diễn ra không thể hiển thị.",
   "not-started": "Bảng xếp hạng mở vào {date}.",
   "not-started-undated": "Bảng xếp hạng chưa mở.",
   "board": "Bang hội hàng đầu: {count}",

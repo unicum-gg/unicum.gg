@@ -33,6 +33,12 @@
     "players-marks": {
       "description": "Кой притежава най-много оръдия с три знака"
     },
+    "players-maneuvers": {
+      "description": "Класиране по Точки за слава в събитието Укрепление"
+    },
+    "clans-maneuvers": {
+      "description": "Класиране на клановете в събитието Укрепление"
+    },
     "players-onslaught": {
       "description": "Стълбица на ранговата Атака"
     },

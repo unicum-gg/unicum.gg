@@ -33,6 +33,12 @@
     "players-marks": {
       "description": "Ποιος κρατά τα περισσότερα πυροβόλα με τρία σήματα"
     },
+    "players-maneuvers": {
+      "description": "Κατάταξη Πόντων Φήμης στην εκδήλωση Οχυρώσεις"
+    },
+    "clans-maneuvers": {
+      "description": "Κατάταξη κλαν στην εκδήλωση Οχυρώσεις"
+    },
     "players-onslaught": {
       "description": "Πίνακας κατάταξης Επέλασης"
     },

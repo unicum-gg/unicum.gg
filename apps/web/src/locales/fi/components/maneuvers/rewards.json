@@ -1,0 +1,22 @@
+{
+  "title": "Palkkiot",
+  "intro": {
+    "players": "Pelaajatulostaulukon ensimmäiset {places} sijaa voittavat ajoneuvon. Palkittavien sijojen määrä määritetään palvelinkohtaisesti, ja se muuttuu kaudesta toiseen.",
+    "clans": "Klaanitulostaulukon ensimmäiset {places} sijaa voittavat kultaa klaanin kassaan. Palkittavien sijojen määrä määritetään palvelinkohtaisesti, ja se muuttuu kaudesta toiseen."
+  },
+  "reward": "Palkkio",
+  "places": "Sijat",
+  "holders": "Hallussa",
+  "reward-name": {
+    "players": "Ajoneuvo",
+    "clans": "Kulta",
+    "none": "Ei palkkiota"
+  },
+  "range": "Välillä {from} ja {to}",
+  "from": "{from} alkaen",
+  "open": "{held}, {open} vielä avoinna",
+  "count": {
+    "players": "{count} pelaajaa",
+    "clans": "{count} klaania"
+  }
+}

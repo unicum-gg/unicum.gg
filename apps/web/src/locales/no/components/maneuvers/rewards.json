@@ -1,0 +1,22 @@
+{
+  "title": "Belønninger",
+  "intro": {
+    "players": "De første {places} plassene på spillertavlen vinner et kjøretøy. Antallet belønnede plasser fastsettes per server og endres fra én utgave til den neste.",
+    "clans": "De første {places} plassene på klanens tavle vinner gull til klanens skattkammer. Antallet belønnede plasser fastsettes per server og endres fra én utgave til den neste."
+  },
+  "reward": "Belønning",
+  "places": "Plasser",
+  "holders": "Holdt av",
+  "reward-name": {
+    "players": "Kjøretøy",
+    "clans": "Gold",
+    "none": "Ingen belønning"
+  },
+  "range": "{from} til {to}",
+  "from": "{from} og videre",
+  "open": "{held}, {open} fortsatt åpne",
+  "count": {
+    "players": "{count} spillere",
+    "clans": "{count} klaner"
+  }
+}

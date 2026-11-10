@@ -1,0 +1,14 @@
+{
+  "title-live": "Dosadašnji tijek utrke",
+  "title-ended": "Kako je utrka prošla",
+  "cutoff": {
+    "players": "Prag za zaradu vozila",
+    "clans": "Prag za zaradu zlata"
+  },
+  "ranked": {
+    "players": "Rangirani igrači",
+    "clans": "Rangirani klanovi"
+  },
+  "fame-points": "Bodovi slave",
+  "no-curve": "Krivulja počinje nakon što je ljestvica zabilježena dvaput."
+}

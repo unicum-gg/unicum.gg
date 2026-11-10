@@ -1,0 +1,14 @@
+{
+  "title-live": "Dabartinė lenktynių eiga",
+  "title-ended": "Kaip vyko lenktynės",
+  "cutoff": {
+    "players": "Transporto priemonės uždirbimo riba",
+    "clans": "Aukso uždirbimo riba"
+  },
+  "ranked": {
+    "players": "Reitinguojami žaidėjai",
+    "clans": "Reitinguojami klanai"
+  },
+  "fame-points": "Šlovės taškai",
+  "no-curve": "Kreivė pradedama, kai lentelė užfiksuojama du kartus."
+}

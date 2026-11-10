@@ -1,0 +1,11 @@
+{
+  "description": {
+    "players": "De kolom Roempunten wordt gekleurd op basis van hoe hoog een plaats staat onder alle gerangschikte spelers, met dezelfde percentielen als de andere beoordelingsschalen van de site. De plaatsen hieronder volgen het klassement naarmate het zich vult.",
+    "clans": "De kolom Roempunten wordt gekleurd op basis van hoe hoog een plaats staat onder alle gerangschikte clans, met dezelfde percentielen als de andere beoordelingsschalen van de site. De plaatsen hieronder volgen het klassement naarmate het zich vult."
+  },
+  "share": "Positie",
+  "places": "Plaatsen",
+  "top": "Top {share}",
+  "rest": "De rest",
+  "range": "Van {from} tot {to}"
+}

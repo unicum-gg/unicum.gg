@@ -1,0 +1,11 @@
+{
+  "description": {
+    "players": "Die Spalte Ruhmpunkte wird danach eingefärbt, wie hoch ein Platz unter allen gewerteten Spielern ist, nach denselben Perzentilen wie die anderen Wertungsskalen der Website. Die folgenden Plätze richten sich danach, wie sich die Rangliste füllt.",
+    "clans": "Die Spalte Ruhmpunkte wird danach eingefärbt, wie hoch ein Platz unter allen gewerteten Clans ist, nach denselben Perzentilen wie die anderen Wertungsskalen der Website. Die folgenden Plätze richten sich danach, wie sich die Rangliste füllt."
+  },
+  "share": "Platzierung",
+  "places": "Plätze",
+  "top": "Beste {share}",
+  "rest": "Der Rest",
+  "range": "{from} bis {to}"
+}

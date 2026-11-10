@@ -1,0 +1,8 @@
+{
+  "seasons": {
+    "spring": "Mùa xuân {year}",
+    "summer": "Mùa hè {year}",
+    "autumn": "Mùa thu {year}"
+  },
+  "window": "{edition}: từ {from} đến {to}."
+}

@@ -33,6 +33,12 @@
     "players-marks": {
       "description": "Kuriem ir visvairāk trīs atzīmju lielgabalu"
     },
+    "players-maneuvers": {
+      "description": "Slavas punktu klasifikācija Stronghold notikumā"
+    },
+    "clans-maneuvers": {
+      "description": "Klanu klasifikācija Stronghold notikumā"
+    },
     "players-onslaught": {
       "description": "Ranga Uzbrukuma līderu saraksts"
     },

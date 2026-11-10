@@ -1,0 +1,22 @@
+{
+  "title": "Ödüller",
+  "intro": {
+    "players": "Oyuncu tablosundaki ilk {places} dereceye girenler bir araç kazanır. Ödül verilen derece sayısı sunucu başına belirlenir ve sezondan sezona değişiklik gösterir.",
+    "clans": "Klan tablosundaki ilk {places} dereceye giren klanlar, klan hazinesi için altın kazanır. Ödül verilen derece sayısı sunucu başına belirlenir ve sezondan sezona değişiklik gösterir."
+  },
+  "reward": "Ödül",
+  "places": "Dereceler",
+  "holders": "Sahip olunan",
+  "reward-name": {
+    "players": "Tank",
+    "clans": "Altın",
+    "none": "Ödül yok"
+  },
+  "range": "{from} ile {to} arası",
+  "from": "{from} ve sonrası",
+  "open": "{held}, {open} hâlâ açık",
+  "count": {
+    "players": "{count} oyuncu",
+    "clans": "{count} klan"
+  }
+}

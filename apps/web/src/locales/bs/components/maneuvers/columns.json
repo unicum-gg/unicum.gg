@@ -1,0 +1,7 @@
+{
+  "gain": "24h",
+  "gain-hint": "Bodovi slave zarađeni tokom posljednja 24 sata.",
+  "move": "Potez",
+  "move-hint": "Mjesta ostvarena usponom ili izgubljena tokom posljednja 24 sata.",
+  "new": "Novo"
+}

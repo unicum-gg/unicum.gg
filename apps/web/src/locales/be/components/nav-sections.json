@@ -33,6 +33,12 @@
     "players-marks": {
       "description": "Хто валодае найбольшай колькасцю гармат з трыма знакамі"
     },
+    "players-maneuvers": {
+      "description": "Рэйтынгі па ачках славы ў падзеі «Умацаваны раён»"
+    },
+    "clans-maneuvers": {
+      "description": "Рэйтынгі кланаў у падзеі «Умацаваны раён»"
+    },
     "players-onslaught": {
       "description": "Рэйтынгавая табліца Наступу"
     },

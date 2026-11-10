@@ -2,6 +2,7 @@
   "heading": "Najbolji igrači u <accent>{maneuvers}</accent>",
   "intro": "{maneuvers} je ponavljajući klanski događaj Utvrde u igri World of Tanks. Poredak igrača u regiji {region}, rangiran prema Bodovima slave, pravo sa rang-liste iz igre.",
   "no-edition": "Za ovaj server još nije zabilježeno nijedno izdanje.",
+  "not-recorded": "Izdanje {edition} nije zabilježeno na ovom serveru. Igra zadržava poredak samo dok izdanje traje, pa se izdanje koje niko nije zabilježio dok je trajalo ne može prikazati.",
   "not-started": "Rang-lista se otvara {date}.",
   "not-started-undated": "Rang-lista još nije otvorena.",
   "board": "Najbolji igrači ({count})",

@@ -1,0 +1,8 @@
+{
+  "seasons": {
+    "spring": "Көктем {year}",
+    "summer": "Жаз {year}",
+    "autumn": "Күз {year}"
+  },
+  "window": "{edition}: {from} бастап {to} дейін."
+}

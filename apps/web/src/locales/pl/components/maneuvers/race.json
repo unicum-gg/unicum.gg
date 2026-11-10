@@ -1,0 +1,14 @@
+{
+  "title-live": "Dotychczasowy przebieg rywalizacji",
+  "title-ended": "Jak przebiegła rywalizacja",
+  "cutoff": {
+    "players": "Próg zdobycia pojazdu",
+    "clans": "Próg zdobycia złota"
+  },
+  "ranked": {
+    "players": "Gracze w rankingu",
+    "clans": "Klany w rankingu"
+  },
+  "fame-points": "Punkty sławy",
+  "no-curve": "Krzywa rozpoczyna się po dwukrotnym zarejestrowaniu tabeli."
+}

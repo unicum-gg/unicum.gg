@@ -33,6 +33,12 @@
     "players-marks": {
       "description": "Ко има највише topova са три ознаке"
     },
+    "players-maneuvers": {
+      "description": "Пласман Poena slave у догађају Утврђење"
+    },
+    "clans-maneuvers": {
+      "description": "Пласман кланова у догађају Утврђење"
+    },
     "players-onslaught": {
       "description": "Ранг-листа рангираног Juriš-а"
     },

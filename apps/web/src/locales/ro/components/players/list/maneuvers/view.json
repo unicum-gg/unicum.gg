@@ -2,6 +2,7 @@
   "heading": "Jucători de top în <accent>{maneuvers}</accent>",
   "intro": "{maneuvers} este evenimentul recurent de clan Fortăreață din World of Tanks. Clasamentele jucătorilor din {region}, clasate după Puncte de faimă, direct din clasamentul propriu al jocului.",
   "no-edition": "Nicio ediție nu a fost înregistrată încă pentru acest server.",
+  "not-recorded": "{edition} nu a fost înregistrată pe acest server. Jocul nu păstrează clasamentele după ce o ediție se încheie, astfel că o ediție pe care nimeni nu a înregistrat-o cât timp s-a desfășurat nu poate fi afișată.",
   "not-started": "Clasamentul se deschide la {date}.",
   "not-started-undated": "Clasamentul nu s-a deschis încă.",
   "board": "Jucători de top ({count})",

@@ -1,0 +1,11 @@
+{
+  "description": {
+    "players": "Slavas punktu kolonna ir iekrāsota atbilstoši tam, cik augsta ir vieta starp visiem ranžētajiem spēlētājiem, izmantojot tādas pašas procentiles kā citos vietnes vērtējumu mērogos. Tālāk norādītās vietas seko tabulai, kad tā aizpildās.",
+    "clans": "Slavas punktu kolonna ir iekrāsota atbilstoši tam, cik augsta ir vieta starp visiem ranžētajiem klaniem, izmantojot tādas pašas procentiles kā citos vietnes vērtējumu mērogos. Tālāk norādītās vietas seko tabulai, kad tā aizpildās."
+  },
+  "share": "Daļa",
+  "places": "Vietas",
+  "top": "Labākie {share}",
+  "rest": "Pārējais",
+  "range": "No {from} līdz {to}"
+}

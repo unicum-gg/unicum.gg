@@ -33,6 +33,12 @@
     "players-marks": {
       "description": "Ai sở hữu nhiều pháo có ba dấu nhất"
     },
+    "players-maneuvers": {
+      "description": "Bảng xếp hạng Điểm Danh tiếng của sự kiện Pháo đài"
+    },
+    "clans-maneuvers": {
+      "description": "Bảng xếp hạng Clan của sự kiện Pháo đài"
+    },
     "players-onslaught": {
       "description": "Bảng xếp hạng Cường kích"
     },

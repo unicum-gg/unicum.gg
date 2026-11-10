@@ -33,6 +33,12 @@
     "players-marks": {
       "description": "Quién tiene más cañones con tres marcas"
     },
+    "players-maneuvers": {
+      "description": "Clasificación de Puntos de fama del evento de Fortaleza"
+    },
+    "clans-maneuvers": {
+      "description": "Clasificación de clanes del evento de Fortaleza"
+    },
     "players-onslaught": {
       "description": "Clasificación de Asedio por Rango"
     },

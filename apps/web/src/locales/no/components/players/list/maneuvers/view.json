@@ -2,6 +2,7 @@
   "heading": "Topp spillere i <accent>{maneuvers}</accent>",
   "intro": "{maneuvers} er World of Tanks’ tilbakevendende klanhendelse i Festning. Rangeringen for spillere i {region}, rangert etter Berømmelsespoeng, rett fra spillets egen tavle.",
   "no-edition": "Ingen utgave er registrert for denne serveren ennå.",
+  "not-recorded": "{edition} ble ikke registrert på denne serveren. Spillet beholder ingen rangering når en utgave slutter, så en utgave som ingen registrerte mens den pågikk, kan ikke vises.",
   "not-started": "Tavlen åpner {date}.",
   "not-started-undated": "Tavlen har ikke åpnet ennå.",
   "board": "Topp {count} spillere",

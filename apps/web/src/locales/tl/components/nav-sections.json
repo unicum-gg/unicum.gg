@@ -33,6 +33,12 @@
     "players-marks": {
       "description": "Sino ang may hawak ng pinakamaraming baril na may tatlong marka"
     },
+    "players-maneuvers": {
+      "description": "Mga ranggo ng Mga puntos ng katanyagan sa kaganapang Stronghold"
+    },
+    "clans-maneuvers": {
+      "description": "Mga ranggo ng mga klano sa kaganapang Stronghold"
+    },
     "players-onslaught": {
       "description": "Talaan ng ranggo ng Sugod"
     },

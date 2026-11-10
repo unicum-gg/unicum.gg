@@ -1,0 +1,11 @@
+{
+  "description": {
+    "players": "Kolonnen med Berømmelsespoint er farvet efter, hvor høj en placering er blandt alle rangerede spillere, på samme percentiler som webstedets øvrige vurderingsskalaer. Placeringerne nedenfor følger ranglisten, efterhånden som den fylder.",
+    "clans": "Kolonnen med Berømmelsespoint er farvet efter, hvor høj en placering er blandt alle rangerede klaner, på samme percentiler som webstedets øvrige vurderingsskalaer. Placeringerne nedenfor følger ranglisten, efterhånden som den fylder."
+  },
+  "share": "Placering",
+  "places": "Pladser",
+  "top": "De bedste {share}",
+  "rest": "Resten",
+  "range": "{from} til {to}"
+}

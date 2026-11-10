@@ -1,0 +1,14 @@
+{
+  "title-live": "Kilpailu tähän asti",
+  "title-ended": "Miten kilpailu meni",
+  "cutoff": {
+    "players": "Ajoneuvon ansaitsemisen raja",
+    "clans": "Kullan ansaitsemisen raja"
+  },
+  "ranked": {
+    "players": "Sijoittuneet pelaajat",
+    "clans": "Sijoittuneet klaanit"
+  },
+  "fame-points": "Mainepisteet",
+  "no-curve": "Käyrä alkaa, kun tulostaulukko on tallennettu kahdesti."
+}

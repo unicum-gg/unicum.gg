@@ -2,6 +2,7 @@
   "heading": "Najlepšie clany v <accent>{maneuvers}</accent>",
   "intro": "{maneuvers} je opakujúca sa klanová udalosť Pevnosť v hre World of Tanks. Poradie klanov v regióne {region}, zoradené podľa Bodov slávy, priamo z vlastnej hernej lestvice.",
   "no-edition": "Pre tento server zatiaľ nebola zaznamenaná žiadna edícia.",
+  "not-recorded": "{edition} nebola na tomto serveri zaznamenaná. Hra po skončení vydania neuchováva žiadne poradie, takže vydanie, ktoré počas svojho trvania nikto nezaznamenal, nie je možné zobraziť.",
   "not-started": "Lestvica bude otvorená {date}.",
   "not-started-undated": "Lestvica ešte nebola otvorená.",
   "board": "Najlepších {count} klanov",

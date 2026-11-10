@@ -33,6 +33,12 @@
     "players-marks": {
       "description": "Chi possiede il maggior numero di cannoni con tre marchi"
     },
+    "players-maneuvers": {
+      "description": "Classifiche dei Punti fama dell’evento Roccaforte"
+    },
+    "clans-maneuvers": {
+      "description": "Classifiche dei clan dell’evento Roccaforte"
+    },
     "players-onslaught": {
       "description": "Classifica di Aggressione classificata"
     },

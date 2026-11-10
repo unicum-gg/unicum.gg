@@ -1,0 +1,11 @@
+{
+  "description": {
+    "players": "La colonne des Points de renommée est colorée selon le rang occupé parmi tous les joueurs classés, selon les mêmes percentiles que les autres échelles de notation du site. Les places ci-dessous suivent le classement au fur et à mesure qu’il se remplit.",
+    "clans": "La colonne des Points de renommée est colorée selon le rang occupé parmi tous les clans classés, selon les mêmes percentiles que les autres échelles de notation du site. Les places ci-dessous suivent le classement au fur et à mesure qu’il se remplit."
+  },
+  "share": "Classement",
+  "places": "Places",
+  "top": "Top {share}",
+  "rest": "Le reste",
+  "range": "De {from} à {to}"
+}

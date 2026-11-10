@@ -1,0 +1,8 @@
+{
+  "seasons": {
+    "spring": "Tagsibol {year}",
+    "summer": "Tag-init {year}",
+    "autumn": "Taglagas {year}"
+  },
+  "window": "{edition}: mula {from} hanggang {to}."
+}

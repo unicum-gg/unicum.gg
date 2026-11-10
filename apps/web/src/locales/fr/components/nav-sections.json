@@ -33,6 +33,12 @@
     "players-marks": {
       "description": "Qui détient le plus de canons avec trois marques"
     },
+    "players-maneuvers": {
+      "description": "Classement des Points de renommée de l’événement Bastion"
+    },
+    "clans-maneuvers": {
+      "description": "Classement des clans de l’événement Bastion"
+    },
     "players-onslaught": {
       "description": "Échelon classé de l’Offensive"
     },

@@ -33,6 +33,12 @@
     "players-marks": {
       "description": "Kto posiada najwięcej dział z trzema odznakami"
     },
+    "players-maneuvers": {
+      "description": "Klasyfikacja Punktów sławy w wydarzeniu Twierdza"
+    },
+    "clans-maneuvers": {
+      "description": "Klasyfikacja klanów w wydarzeniu Twierdza"
+    },
     "players-onslaught": {
       "description": "Drabinka rankingowa w trybie Natarcie"
     },

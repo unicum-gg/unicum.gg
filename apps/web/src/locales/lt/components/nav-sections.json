@@ -33,6 +33,12 @@
     "players-marks": {
       "description": "Kas turi daugiausia pabūklų su trimis ženklais"
     },
+    "players-maneuvers": {
+      "description": "Tvirtovės įvykio Šlovės taškų įskaita"
+    },
+    "clans-maneuvers": {
+      "description": "Tvirtovės įvykio klanų įskaita"
+    },
     "players-onslaught": {
       "description": "Reitinginio Prasiveržimo lyderių lentelė"
     },

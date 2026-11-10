@@ -1,0 +1,8 @@
+{
+  "seasons": {
+    "spring": "İlkbahar {year}",
+    "summer": "Yaz {year}",
+    "autumn": "Sonbahar {year}"
+  },
+  "window": "{edition}: {from} ile {to} arası."
+}

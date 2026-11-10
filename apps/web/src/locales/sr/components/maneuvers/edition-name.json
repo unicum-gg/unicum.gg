@@ -1,0 +1,8 @@
+{
+  "seasons": {
+    "spring": "Пролеће {year}",
+    "summer": "Лето {year}",
+    "autumn": "Јесен {year}"
+  },
+  "window": "{edition}: од {from} до {to}."
+}

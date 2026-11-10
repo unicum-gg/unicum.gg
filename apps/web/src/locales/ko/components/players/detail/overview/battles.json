@@ -33,7 +33,7 @@
     "survived": "생존",
     "xp": "XP",
     "medals": "훈장",
-    "vehicle": "차량"
+    "vehicle": "전차"
   },
   "detail-unavailable": "이 전투의 명단을 불러올 수 없습니다.",
   "team": "팀 {team}",

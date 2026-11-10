@@ -33,6 +33,12 @@
     "players-marks": {
       "description": "Kto drží najviac topov s tromi značkami"
     },
+    "players-maneuvers": {
+      "description": "Poradie podľa Bodov slávy v udalosti Pevnosť"
+    },
+    "clans-maneuvers": {
+      "description": "Klanové poradie v udalosti Pevnosť"
+    },
     "players-onslaught": {
       "description": "Hodnotené poradie režimu Ofenzíva"
     },

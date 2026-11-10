@@ -1,0 +1,8 @@
+{
+  "seasons": {
+    "spring": "{year}년 봄",
+    "summer": "{year}년 하계",
+    "autumn": "{year}년 가을"
+  },
+  "window": "{edition}: {from}부터 {to}까지."
+}
