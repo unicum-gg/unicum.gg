@@ -78,6 +78,12 @@ export function navSections(
           description: t("links.players-onslaught.description"),
         },
         {
+          id: "players-maneuvers",
+          label: tGame("battle-formats.maneuvers"),
+          href: ROUTES.PLAYERS_MANEUVERS(region),
+          description: t("links.players-maneuvers.description"),
+        },
+        {
           id: "players-rampage",
           label: tGame("player-modes.rampage"),
           href: ROUTES.PLAYERS_RAMPAGE(region),
@@ -106,6 +112,12 @@ export function navSections(
           label: tGame("features.stronghold"),
           href: ROUTES.STRONGHOLD(region, StrongholdTier.T10),
           description: t("links.stronghold.description"),
+        },
+        {
+          id: "clans-maneuvers",
+          label: tGame("battle-formats.maneuvers"),
+          href: ROUTES.CLANS_MANEUVERS(region),
+          description: t("links.clans-maneuvers.description"),
         },
       ],
     },

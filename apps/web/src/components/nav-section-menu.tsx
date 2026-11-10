@@ -5,6 +5,7 @@ import type { ReactNode } from "react";
 import { usePathname } from "@/hooks/use-pathname";
 import { regionFromPathname } from "@unicum.gg/wargaming";
 import {
+  BinocularsIcon,
   ChartLineUpIcon,
   ChatsCircleIcon,
   CoinsIcon,
@@ -41,6 +42,9 @@ const LINK_ICON: Record<string, ReactNode> = {
   "players-marks": <MedalIcon />,
   "players-onslaught": <SwordIcon />,
   "players-rampage": <CrosshairIcon />,
+  // One glyph for the event on both boards, like the marks above.
+  "players-maneuvers": <BinocularsIcon />,
+  "clans-maneuvers": <BinocularsIcon />,
   "top-clans": <UsersThreeIcon />,
   stronghold: <ShieldIcon />,
   advances: <FlagBannerIcon />,

@@ -33,6 +33,12 @@
     "players-marks": {
       "description": "Who holds the most three-mark guns"
     },
+    "players-maneuvers": {
+      "description": "Fame Points standings of the Stronghold event"
+    },
+    "clans-maneuvers": {
+      "description": "Clan standings of the Stronghold event"
+    },
     "players-onslaught": {
       "description": "Ranked Onslaught ladder"
     },
