@@ -33,11 +33,11 @@ import { TournamentTeamStatus, type Region } from "@unicum.gg/wargaming";
 import type { TournamentPrizeTier, TournamentTeam } from "./record";
 import { placeSpans, type PlaceSpan } from "./placements";
 import { prizeBands, rewardFor, rewardLine } from "./rewards";
+import { useTournamentMetric } from "@/hooks/use-tournament-metric";
 import {
   ratingColor,
   ratingOf,
   recentRatingOf,
-  useTournamentMetric,
 } from "./team-rating";
 import {
   nextSort,

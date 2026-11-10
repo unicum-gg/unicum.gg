@@ -27,12 +27,12 @@ import type {
   TournamentTeam,
 } from "./record";
 import { ClanTag } from "@/components/entity/clan-tag";
+import { useTournamentMetric } from "@/hooks/use-tournament-metric";
 import {
   clansByTeam,
   ratingColor,
   ratingsByTeam,
   type TournamentMetric,
-  useTournamentMetric,
 } from "./team-rating";
 import {
   CARD_H,

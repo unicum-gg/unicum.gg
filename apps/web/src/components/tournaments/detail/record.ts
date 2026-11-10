@@ -148,3 +148,63 @@ export type TournamentRecord = {
    * mirror. */
   mirroredAt: Date;
 };
+
+/**
+ * What a team's page shows OF the tournament the team played in.
+ *
+ * A projection rather than the record itself, because the view that renders it
+ * is `"use client"`: every prop crossing that boundary is serialised into the
+ * RSC flight data, and that payload is what a prerendered page's ISR entry
+ * stores. Two fields are the whole weight of a tournament, measured 2026-11-10
+ * on the EU championship 5000000079 (10,113,923 octets, 7,647 teams): `stages`
+ * is 6,765,383 of it and `teams` 3,337,841, which is 99.9%, against 10,358 for
+ * every other field put together. Neither is rendered here. What the page needs
+ * from them is derived on the server and passed beside this, as the team's run,
+ * its place in the final order and its rank in the field: 7.8 KB of props on
+ * average over those 7,647 teams, 15.6 KB on the heaviest, against 9,877 KB.
+ *
+ * `Pick` rather than a shape of its own so a field cannot drift from the record
+ * it is a view of.
+ */
+export type TournamentTeamContext = Pick<
+  TournamentRecord,
+  | "id"
+  | "title"
+  | "status"
+  | "gameModes"
+  | "tierFrom"
+  | "tierTo"
+  | "minPlayersInTeam"
+  | "maxPlayersInTeam"
+  | "confirmedTeams"
+  | "schedule"
+  | "startAt"
+  | "prizeTiers"
+  | "mapPool"
+  | "logoUrl"
+  | "mirroredAt"
+>;
+
+/** The projection above, built field by field so adding one to the record
+ * cannot widen what a team page ships to the browser by accident. */
+export function tournamentTeamContext(
+  tournament: TournamentRecord,
+): TournamentTeamContext {
+  return {
+    id: tournament.id,
+    title: tournament.title,
+    status: tournament.status,
+    gameModes: tournament.gameModes,
+    tierFrom: tournament.tierFrom,
+    tierTo: tournament.tierTo,
+    minPlayersInTeam: tournament.minPlayersInTeam,
+    maxPlayersInTeam: tournament.maxPlayersInTeam,
+    confirmedTeams: tournament.confirmedTeams,
+    schedule: tournament.schedule,
+    startAt: tournament.startAt,
+    prizeTiers: tournament.prizeTiers,
+    mapPool: tournament.mapPool,
+    logoUrl: tournament.logoUrl,
+    mirroredAt: tournament.mirroredAt,
+  };
+}

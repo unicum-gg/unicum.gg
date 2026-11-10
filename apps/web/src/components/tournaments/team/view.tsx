@@ -29,10 +29,6 @@ import {
   teamFormat,
 } from "@unicum.gg/shared";
 import { REGION_LABEL, type Region } from "@unicum.gg/wargaming";
-import {
-  finalPlacements,
-  placeSpans,
-} from "@/components/tournaments/detail/placements";
 import { roundLabel } from "@/components/tournaments/detail/layout";
 import {
   bestOfLabel,
@@ -40,8 +36,12 @@ import {
 } from "@/components/tournaments/detail/match-format";
 import { mapPoolIndex, type PoolMapRef } from "@/components/tournaments/detail/map-pool";
 import { MatchMinimap } from "@/components/tournaments/detail/match-minimap";
-import type { TournamentRecord, TournamentTeam } from "@/components/tournaments/detail/record";
-import { TeamSlot, teamRun, type TeamMatch } from "@/components/tournaments/detail/team-run";
+import type {
+  TournamentTeam,
+  TournamentTeamContext,
+} from "@/components/tournaments/detail/record";
+import type { TeamRatingStandings } from "@/components/tournaments/detail/team-rating";
+import { TeamSlot, type TeamMatch } from "@/components/tournaments/detail/team-run";
 import { TeamRosterTable, type RosterEntry } from "./roster-table";
 import { TeamMetrics, TeamResult } from "./result";
 import { Hint } from "@/components/hint";
@@ -246,11 +246,26 @@ export function TournamentTeamView({
   region,
   tournament,
   team,
+  run,
+  place,
+  placedTeams,
+  standings,
   roster,
 }: {
   region: Region;
-  tournament: TournamentRecord;
+  /** The tournament as this page shows it, which is deliberately not the whole
+   * record: see `TournamentTeamContext` for the two fields it leaves behind and
+   * what they weigh. */
+  tournament: TournamentTeamContext;
   team: TournamentTeam;
+  /** Every tie this team played, in order, read off the bracket on the server. */
+  run: TeamMatch[];
+  /** Where the tournament placed them, absent while it is undecided. */
+  place: number | undefined;
+  /** How many teams it placed, the floor for the field size. */
+  placedTeams: number;
+  /** The roster's rank in the field, on each metric. */
+  standings: TeamRatingStandings;
   /** The roster joined onto the accounts behind it. Null when the roster read
    * failed, in which case the page still renders the run. */
   roster: RosterEntry[] | null;
@@ -261,18 +276,6 @@ export function TournamentTeamView({
   const { t: tMaps } = useTranslation("game/maps");
   const { t } = useTranslation("components/tournaments/team/view");
   const ord = useOrdinal();
-  const placements = new Map(
-    finalPlacements(tournament.stages).map((p) => [p.teamId, p.position]),
-  );
-  const placement = placements.get(team.id);
-  // A knockout stores a tie at its LOWEST place (both beaten semi-finalists are
-  // recorded as 4), and a ranking is written at its best: two teams tied for
-  // third are both 3rd.
-  const shown =
-    placement === undefined
-      ? undefined
-      : (placeSpans(placements).get(placement)?.from ?? placement);
-  const run = teamRun(tournament, team.id);
   // Built from the pool, where the arena ids behind the organiser's map names
   // were already resolved, so a minimap opens the same view the tournament's
   // own map grid does.
@@ -314,20 +317,20 @@ export function TournamentTeamView({
                   menu before. A team the tournament never placed keeps the
                   generic mark rather than an empty box. */}
               <div className="flex size-24 shrink-0 flex-col items-center justify-center gap-1 border-r border-fd-border p-3">
-                {shown === undefined ? (
+                {place === undefined ? (
                   <UsersThreeIcon className="size-8 text-fd-muted-foreground" />
                 ) : (
                   <>
-                    {shown <= 3 && (
-                      <RankMedal rank={shown as 1 | 2 | 3} className="h-7" />
+                    {place <= 3 && (
+                      <RankMedal rank={place as 1 | 2 | 3} className="h-7" />
                     )}
                     <span
                       className={cn(
                         "font-heading font-bold tabular-nums",
-                        shown <= 3 ? "text-sm" : "text-2xl",
+                        place <= 3 ? "text-sm" : "text-2xl",
                       )}
                     >
-                      {ord(shown)}
+                      {ord(place)}
                     </span>
                   </>
                 )}
@@ -432,7 +435,11 @@ export function TournamentTeamView({
             {/* Rightmost in the header row, where a clan page carries its own
                 averages: they describe the roster, not the draw, so they belong
                 to the identity rather than to the result under it. */}
-            <TeamMetrics tournament={tournament} team={team} />
+            <TeamMetrics
+              tournament={tournament}
+              team={team}
+              standings={standings}
+            />
             </div>
           </header>
           {/* Under the identity, what the run came to. It sits in the header
@@ -441,8 +448,8 @@ export function TournamentTeamView({
           <TeamResult
             tournament={tournament}
             run={run}
-            place={shown}
-            placedTeams={placements.size}
+            place={place}
+            placedTeams={placedTeams}
           />
           {/* When our copy was read, which is the one fact on this page that is
               about US rather than about the team: Wargaming publishes no such

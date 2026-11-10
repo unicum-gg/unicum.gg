@@ -10,17 +10,17 @@ import {
   RATING_METRIC_LABEL,
   winrateColor,
 } from "@unicum.gg/shared";
-import { TournamentTeamStatus } from "@unicum.gg/wargaming";
 import { prizeForPlace } from "@/components/tournaments/detail/prize-tiers";
+import { useTournamentMetric } from "@/hooks/use-tournament-metric";
 import {
   ratingColor,
   ratingOf,
   recentRatingOf,
-  useTournamentMetric,
+  type TeamRatingStandings,
 } from "@/components/tournaments/detail/team-rating";
 import type {
-  TournamentRecord,
   TournamentTeam,
+  TournamentTeamContext,
 } from "@/components/tournaments/detail/record";
 import type { TeamMatch } from "@/components/tournaments/detail/team-run";
 import { cn } from "@/lib/utils";
@@ -116,9 +116,14 @@ function MetricColumn({
 export function TeamMetrics({
   tournament,
   team,
+  standings,
 }: {
-  tournament: TournamentRecord;
+  tournament: TournamentTeamContext;
   team: TournamentTeam;
+  /** Where this roster ranks in the field, on each metric, computed on the
+   * server: the ranking needs every team's averages, which is a third of a
+   * tournament's payload and nothing this header renders. */
+  standings: TeamRatingStandings;
 }) {
   const { num } = useFormat();
   const { t } = useTranslation("components/tournaments/team/result");
@@ -130,23 +135,7 @@ export function TeamMetrics({
   // archived draw is reading history, and current form is not part of it.
   const scouting =
     isTournamentOpen(tournament.status) || isTournamentLive(tournament.status);
-  // The field is the teams that were actually entered in the bracket. A daily
-  // draws far more registrations than it confirms (a 29-team draw took 29 of
-  // 44), and a team that never made the minimum roster never played anyone, so
-  // ranking against it pads the denominator with teams that were not there. The
-  // fallback covers a tournament still forming, where nothing is confirmed yet.
-  const entered = tournament.teams.filter(
-    (t) => t.status === TournamentTeamStatus.Confirmed,
-  );
-  const field = entered.length > 0 ? entered : tournament.teams;
-  // Ranked against the teams we can rate, not the whole field: a team with no
-  // rated player is not "last", it is unmeasured, and counting it would move
-  // everyone else's rank.
-  const rated = field
-    .map((t) => ratingOf(t, metric))
-    .filter((v): v is number => v !== null);
-  const rank =
-    rating === null ? null : rated.filter((v) => v > rating).length + 1;
+  const { rank, rated } = standings[metric];
   const winrate = team.avgWinrate;
 
   if (rating === null && recent === null && winrate === null) return null;
@@ -180,7 +169,7 @@ export function TeamMetrics({
               : t("avg-metric-rank", {
                   metric: RATING_METRIC_LABEL[metric],
                   rank: ord(rank),
-                  size: rated.length,
+                  size: rated,
                 })
           }
           value={num(INT_FORMAT).format(rating)}
@@ -218,7 +207,7 @@ export function TeamResult({
   /** How many teams the tournament placed, the floor for the field size. */
   placedTeams,
 }: {
-  tournament: TournamentRecord;
+  tournament: TournamentTeamContext;
   run: TeamMatch[];
   place: number | undefined;
   placedTeams: number;

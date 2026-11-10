@@ -16,10 +16,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
-import {
-  type TournamentMetric,
-  useTournamentMetric,
-} from "@/components/tournaments/detail/team-rating";
+import { useTournamentMetric } from "@/hooks/use-tournament-metric";
+import type { TournamentMetric } from "@/components/tournaments/detail/team-rating";
 import {
   RATING_COLOR_CLASS,
   RATING_METRIC_LABEL,
