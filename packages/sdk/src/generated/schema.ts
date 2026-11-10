@@ -8,7 +8,7 @@ export interface paths {
         };
         /**
          * Maneuvers event boards
-         * @description The region's current Maneuvers edition, the recurring Stronghold clan event: its dates and reward cutoffs, the player and clan boards ranked by Fame Points, and what it currently costs to hold a rewarded place. Both boards describe the same instant. Cached ~1 min server-side.
+         * @description A Maneuvers edition for the region (the current one unless `edition` names another), the recurring Stronghold clan event: its dates and reward cutoffs, the player and clan boards ranked by Fame Points, and what it currently costs to hold a rewarded place. Both boards describe the same instant. Cached ~1 min server-side.
          */
         get: operations["get-{region}-maneuvers"];
         put?: never;
@@ -111,6 +111,26 @@ export interface paths {
          * @description Clan leaderboard for a region.
          */
         get: operations["get-{region}-clans-top"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/maneuvers/history": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Maneuvers edition history
+         * @description How a Maneuvers edition's boards moved while it ran: what it cost to hold a vehicle place on the player board and a gold place on the clan board, and how many held a place, capture by capture. The game serves only the current instant and keeps no history, so this series exists because we recorded it.
+         */
+        get: operations["get-{region}-maneuvers-history"];
         put?: never;
         post?: never;
         delete?: never;
@@ -4027,9 +4047,11 @@ export interface components {
             mode?: "random" | "onslaught" | "skirmish" | "advance";
             language?: Record<string, never>;
         };
-        /** @description The current Maneuvers edition for a region: its frame, both boards, and what a rewarded place costs right now. */
+        /** @description One Maneuvers edition for a region: its frame, both boards, and what a rewarded place costs right now. */
         ManeuversBoardResponse: {
-            /** @description Null when no edition has ever been recorded for the region. */
+            /** @description Every edition the event has run, newest first, flagged with whether we hold its standings. */
+            editions: components["schemas"]["ManeuversEditionRef"][];
+            /** @description The edition served. Null when the requested one was never recorded, or when the region holds none. */
             edition: components["schemas"]["ManeuversEdition"] | null;
             /** @description Null before the edition opens, when neither board carries anybody yet. */
             standing: components["schemas"]["ManeuversStanding"] | null;
@@ -4047,6 +4069,10 @@ export interface components {
             /** @description The clan's emblem URL, or empty/null when we hold none. */
             emblem: string | null;
             famePoints: number;
+            /** @description Fame Points gained over the last 24 hours. Null until the edition's captures reach back a day. */
+            gain24h: number | null;
+            /** @description Places climbed over the last 24 hours, negative when the clan fell. Null when it held no place a day ago, or the captures do not reach back that far. */
+            placeChange24h: number | null;
             victories: number;
             defeats: number;
             /** @description Leaderboard placings the clan currently holds, best rank first. Omitted when it holds none. */
@@ -4065,6 +4091,30 @@ export interface components {
             /** @description How many places on the clan board are rewarded with gold from the clan treasury. */
             clanGoldPositions: number | null;
         };
+        /** @description One edition of the event, recorded or not. */
+        ManeuversEditionRef: {
+            /** @description The edition's identifier, e.g. `stronghold_event_2026_autumn`: its year and season. */
+            eventName: string;
+            /** @description Whether its standings were recorded. The source keeps no history, so an edition nobody captured while it ran is listed but empty. */
+            available: boolean;
+        };
+        /** @description Both boards at one recorded instant. */
+        ManeuversHistoryPoint: {
+            /** @description The source's recalculation instant, in epoch seconds. */
+            t: number;
+            playerCount: number;
+            clanCount: number;
+            /** @description Fame Points held at the last vehicle-rewarded place on the player board at that instant. */
+            tankCutoffPoints: number | null;
+            /** @description Fame Points held at the last gold-rewarded place on the clan board at that instant. */
+            clanGoldCutoffPoints: number | null;
+        };
+        /** @description How a Maneuvers edition's boards moved while it ran: what a rewarded place cost and how many held one, capture by capture. */
+        ManeuversHistoryResponse: {
+            eventName: string;
+            /** @description One point per capture, oldest first. */
+            points: components["schemas"]["ManeuversHistoryPoint"][];
+        };
         /** @description One player on the Maneuvers board. */
         ManeuversPlayerEntry: {
             place: number;
@@ -4076,6 +4126,10 @@ export interface components {
             clanColor: string | null;
             /** @description The ranking metric, cumulative over the edition. */
             famePoints: number;
+            /** @description Fame Points gained over the last 24 hours, measured between two captures a day apart. Null until the edition's captures reach back a day. */
+            gain24h: number | null;
+            /** @description Places climbed over the last 24 hours, negative when the player fell. Null when they held no place a day ago, or the captures do not reach back that far. */
+            placeChange24h: number | null;
             victories: number;
             defeats: number;
             isVerified: boolean;
@@ -8267,6 +8321,8 @@ export interface operations {
             query?: {
                 /** @description Rows per board, 1-1000 (default 100). */
                 limit?: number;
+                /** @description The edition to read, by its identifier (an `eventName` from `editions`). Defaults to the newest edition recorded. */
+                edition?: string;
             };
             header?: never;
             path: {
@@ -8419,6 +8475,32 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["TopClansResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-maneuvers-history": {
+        parameters: {
+            query?: {
+                /** @description The edition to read, by its identifier. Defaults to the newest edition recorded. */
+                edition?: string;
+            };
+            header?: never;
+            path: {
+                /** @example example */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ManeuversHistoryResponse"];
                 };
             };
         };

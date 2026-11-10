@@ -1,0 +1,22 @@
+{
+  "title": "Rewards",
+  "intro": {
+    "players": "The first {places} places on the player board win a vehicle. The number of rewarded places is set per server and changes from one edition to the next.",
+    "clans": "The first {places} places on the clan board win gold for the clan treasury. The number of rewarded places is set per server and changes from one edition to the next."
+  },
+  "reward": "Reward",
+  "places": "Places",
+  "holders": "Held by",
+  "reward-name": {
+    "players": "Vehicle",
+    "clans": "Gold",
+    "none": "No reward"
+  },
+  "range": "{from} to {to}",
+  "from": "{from} onwards",
+  "open": "{held}, {open} still open",
+  "count": {
+    "players": "{count} players",
+    "clans": "{count} clans"
+  }
+}

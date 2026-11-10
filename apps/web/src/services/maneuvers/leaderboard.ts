@@ -3,12 +3,14 @@ import { unstable_cache } from "next/cache";
 import { db } from "@unicum.gg/core/db";
 import {
   clansByRegion,
+  maneuversEditionHistory,
   maneuversClansByRegion,
   maneuversEditionsByRegion,
   maneuversPlayersByRegion,
   maneuversSnapshotsByRegion,
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
+import { type Baseline, readGains } from "@/services/maneuvers/gains";
 
 /**
  * Maneuvers: the recurring Stronghold clan event, read out of the tables a
@@ -64,6 +66,12 @@ export type ManeuversPlayerRow = {
    * for a clan we have never seen. */
   clanColor: string | null;
   famePoints: number;
+  /** Fame Points gained over the last 24 hours, null until the edition's
+   * captures reach back a day. */
+  gain24h: number | null;
+  /** Places climbed over the last 24 hours (negative when it fell), null when
+   * it held no place a day ago or the captures do not reach back that far. */
+  placeChange24h: number | null;
   victories: number;
   defeats: number;
 };
@@ -79,11 +87,21 @@ export type ManeuversClanRow = {
   color: string | null;
   emblem: string | null;
   famePoints: number;
+  gain24h: number | null;
+  placeChange24h: number | null;
   victories: number;
   defeats: number;
 };
 
+/** One entry of the edition picker: every edition the event has run, and
+ * whether we recorded its standings. */
+export type ManeuversEditionRef = {
+  eventName: string;
+  available: boolean;
+};
+
 export type ManeuversBoard = {
+  editions: ManeuversEditionRef[];
   edition: ManeuversEdition | null;
   standing: ManeuversStanding | null;
   players: ManeuversPlayerRow[];
@@ -97,20 +115,30 @@ export const MAX_LIMIT = 1000;
 async function readBoard(
   region: Region,
   limit: number,
+  eventName: string | null,
 ): Promise<ManeuversBoard> {
   const editions = maneuversEditionsByRegion[region];
 
-  // The newest edition is the one being played, or the last one that was. An
-  // edition that has ended keeps its rows, so the page shows a final table
-  // rather than an empty one once an edition closes.
-  const [edition] = await db
+  // Every edition we hold, newest first. The newest is the one being played, or
+  // the last one that was: an edition that has ended keeps its rows, so the
+  // page shows a final table rather than an empty one once an edition closes.
+  const held = await db
     .select()
     .from(editions)
-    .orderBy(desc(editions.startDate))
-    .limit(1);
+    .orderBy(desc(editions.startDate));
+  const editionRefs = maneuversEditionHistory(held.map((e) => e.eventName));
+  const edition = eventName
+    ? held.find((e) => e.eventName === eventName)
+    : held[0];
 
   if (!edition) {
-    return { edition: null, standing: null, players: [], clans: [] };
+    return {
+      editions: editionRefs,
+      edition: null,
+      standing: null,
+      players: [],
+      clans: [],
+    };
   }
 
   const snapshots = maneuversSnapshotsByRegion[region];
@@ -167,7 +195,23 @@ async function readBoard(
       .limit(limit),
   ]);
 
+  const gains = await readGains(
+    region,
+    edition.eventName,
+    playerRows.map((r) => r.accountId),
+    clanRows.map((r) => r.clanId),
+  );
+  // An id with no capture at the baseline was not on the board yet, so it
+  // gained everything it holds and has no earlier place to move from.
+  const gain = (map: Map<number, Baseline> | undefined, id: number, points: number) =>
+    map ? points - (map.get(id)?.famePoints ?? 0) : null;
+  const move = (map: Map<number, Baseline> | undefined, id: number, place: number) => {
+    const before = map?.get(id);
+    return before ? before.place - place : null;
+  };
+
   return {
+    editions: editionRefs,
     edition: {
       eventName: edition.eventName,
       startDate: edition.startDate?.toISOString() ?? null,
@@ -195,6 +239,8 @@ async function readBoard(
       clanTag: row.clanTag,
       clanColor: row.clanColor,
       famePoints: row.famePoints,
+      gain24h: gain(gains?.players, row.accountId, row.famePoints),
+      placeChange24h: move(gains?.players, row.accountId, row.place),
       victories: row.victories,
       defeats: row.defeats,
     })),
@@ -209,6 +255,8 @@ async function readBoard(
       color: row.color,
       emblem: row.emblem,
       famePoints: row.famePoints,
+      gain24h: gain(gains?.clans, row.clanId, row.famePoints),
+      placeChange24h: move(gains?.clans, row.clanId, row.place),
       victories: row.victories,
       defeats: row.defeats,
     })),
@@ -223,10 +271,16 @@ const readBoardCached = unstable_cache(readBoard, ["maneuvers-board"], {
   revalidate: 60,
 });
 
+/**
+ * One edition's boards, the newest when `eventName` is null. An edition we do
+ * not hold answers with `edition: null` and empty boards, beside the full
+ * edition list, so the picker still renders.
+ */
 export function getManeuversBoard(
   region: Region,
   limit: number = DEFAULT_LIMIT,
+  eventName: string | null = null,
 ): Promise<ManeuversBoard> {
   const clamped = Math.min(Math.max(Math.trunc(limit) || DEFAULT_LIMIT, 1), MAX_LIMIT);
-  return readBoardCached(region, clamped);
+  return readBoardCached(region, clamped, eventName);
 }

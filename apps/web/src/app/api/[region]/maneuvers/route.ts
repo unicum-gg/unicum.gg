@@ -11,7 +11,7 @@ import { ManeuversBoardResponse } from "./schema.api";
 
 /**
  * Maneuvers event boards
- * @description The region's current Maneuvers edition, the recurring Stronghold clan event: its dates and reward cutoffs, the player and clan boards ranked by Fame Points, and what it currently costs to hold a rewarded place. Both boards describe the same instant. Cached ~1 min server-side.
+ * @description A Maneuvers edition for the region (the current one unless `edition` names another), the recurring Stronghold clan event: its dates and reward cutoffs, the player and clan boards ranked by Fame Points, and what it currently costs to hold a rewarded place. Both boards describe the same instant. Cached ~1 min server-side.
  * @pathParams regionParams
  * @queryParams maneuversQuery
  * @response ManeuversBoardResponse
@@ -29,12 +29,14 @@ async function GET__perf(
   if (!isRegion(region)) {
     return Response.json({ error: "invalid_region" }, { status: 400 });
   }
-  const raw = new URL(req.url).searchParams.get("limit");
+  const search = new URL(req.url).searchParams;
+  const raw = search.get("limit");
   const limit = raw ? Number(raw) : DEFAULT_LIMIT;
 
   const board = await getManeuversBoard(
     region,
     Number.isFinite(limit) ? limit : DEFAULT_LIMIT,
+    search.get("edition") || null,
   );
   // Crests and placings are attached here, at the API boundary, rather than in
   // the cached board read: they live in the auth and ranking tables, not the

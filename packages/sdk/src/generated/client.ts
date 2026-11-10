@@ -1031,10 +1031,18 @@ class RegionClient {
   }
 
   /** Maneuvers event boards */
-  maneuvers(limit?: NonNullable<QueryOf<"/{region}/maneuvers">>["limit"]) {
+  maneuvers(query?: QueryOf<"/{region}/maneuvers">) {
     return handle(
-      buildUrl(this.baseUrl, "/{region}/maneuvers", { region: this.region }, { limit }),
-      () => this.api.GET("/{region}/maneuvers", { params: { path: { region: this.region }, query: { limit } } }),
+      buildUrl(this.baseUrl, "/{region}/maneuvers", { region: this.region }, query),
+      () => this.api.GET("/{region}/maneuvers", { params: { path: { region: this.region }, query } }),
+    );
+  }
+
+  /** Maneuvers edition history */
+  maneuversHistory(edition?: NonNullable<QueryOf<"/{region}/maneuvers/history">>["edition"]) {
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/maneuvers/history", { region: this.region }, { edition }),
+      () => this.api.GET("/{region}/maneuvers/history", { params: { path: { region: this.region }, query: { edition } } }),
     );
   }
 

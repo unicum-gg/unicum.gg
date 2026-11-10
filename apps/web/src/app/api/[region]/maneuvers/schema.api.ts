@@ -10,7 +10,27 @@ export const maneuversQuery = z.object({
   limit: z.coerce.number().int().min(1).max(1000).optional().meta({
     description: "Rows per board, 1-1000 (default 100).",
   }),
+  edition: z.string().optional().meta({
+    description:
+      "The edition to read, by its identifier (an `eventName` from `editions`). Defaults to the newest edition recorded.",
+  }),
 });
+
+const maneuversEditionRef = z
+  .object({
+    eventName: z.string().meta({
+      description:
+        "The edition's identifier, e.g. `stronghold_event_2026_autumn`: its year and season.",
+    }),
+    available: z.boolean().meta({
+      description:
+        "Whether its standings were recorded. The source keeps no history, so an edition nobody captured while it ran is listed but empty.",
+    }),
+  })
+  .meta({
+    id: "ManeuversEditionRef",
+    description: "One edition of the event, recorded or not.",
+  });
 
 const maneuversEdition = z
   .object({
@@ -76,6 +96,14 @@ const maneuversPlayerEntry = z
     famePoints: z.number().meta({
       description: "The ranking metric, cumulative over the edition.",
     }),
+    gain24h: z.number().nullable().meta({
+      description:
+        "Fame Points gained over the last 24 hours, measured between two captures a day apart. Null until the edition's captures reach back a day.",
+    }),
+    placeChange24h: z.number().nullable().meta({
+      description:
+        "Places climbed over the last 24 hours, negative when the player fell. Null when they held no place a day ago, or the captures do not reach back that far.",
+    }),
     victories: z.number(),
     defeats: z.number(),
     // The public crests, attached at the API boundary (see the player badge
@@ -109,6 +137,14 @@ const maneuversClanEntry = z
       description: "The clan's emblem URL, or empty/null when we hold none.",
     }),
     famePoints: z.number(),
+    gain24h: z.number().nullable().meta({
+      description:
+        "Fame Points gained over the last 24 hours. Null until the edition's captures reach back a day.",
+    }),
+    placeChange24h: z.number().nullable().meta({
+      description:
+        "Places climbed over the last 24 hours, negative when the clan fell. Null when it held no place a day ago, or the captures do not reach back that far.",
+    }),
     victories: z.number(),
     defeats: z.number(),
     badges: z.array(clanRankBadge).optional().meta({
@@ -126,8 +162,13 @@ const maneuversClanEntry = z
 // with it and the whole `.meta` is dropped.
 export const ManeuversBoardResponse = z
   .object({
+    editions: z.array(maneuversEditionRef).meta({
+      description:
+        "Every edition the event has run, newest first, flagged with whether we hold its standings.",
+    }),
     edition: maneuversEdition.nullable().meta({
-      description: "Null when no edition has ever been recorded for the region.",
+      description:
+        "The edition served. Null when the requested one was never recorded, or when the region holds none.",
     }),
     standing: maneuversStanding.nullable().meta({
       description:
@@ -138,5 +179,5 @@ export const ManeuversBoardResponse = z
   })
   .meta({
     description:
-      "The current Maneuvers edition for a region: its frame, both boards, and what a rewarded place costs right now.",
+      "One Maneuvers edition for a region: its frame, both boards, and what a rewarded place costs right now.",
   });

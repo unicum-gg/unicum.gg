@@ -1,5 +1,6 @@
 export * from "./assets";
 export * from "./reserves";
+export * from "./fame-points";
 export * from "./equipment";
 export * from "./field-mods";
 export * from "./loadouts";
@@ -37,3 +38,4 @@ export * from "./tournament-placements";
 export * from "./language-flags";
 export * from "./rating-scales";
 export * from "./onslaught-forecast";
+export * from "./maneuvers-editions";

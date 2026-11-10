@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/table";
 import { GlossaryLabel } from "@/components/glossary/label";
 import { RatingBandName } from "@/components/rating-band-name";
+import { RATING_BAND_KEY } from "@/components/rating-band-key";
 import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 import {
@@ -30,19 +31,6 @@ type TierRow = {
   tier: string;
   wr: string;
   mr: string;
-};
-
-/** The band words, darkest to brightest, matching the ascending thresholds. */
-const TIER_KEY: Record<RatingColor, string> = {
-  [RatingColor.VeryBad]: "very-bad",
-  [RatingColor.Bad]: "bad",
-  [RatingColor.BelowAvg]: "below-avg",
-  [RatingColor.Average]: "average",
-  [RatingColor.Good]: "good",
-  [RatingColor.VeryGood]: "very-good",
-  [RatingColor.Super]: "super",
-  [RatingColor.Excellent]: "excellent",
-  [RatingColor.Top]: "top",
 };
 
 /**
@@ -77,7 +65,7 @@ const TIERS: TierRow[] = (() => {
   return mr.bands
     .map((band, i) => ({
       color: band.color,
-      tier: TIER_KEY[band.color],
+      tier: RATING_BAND_KEY[band.color],
       wr: range(wr.bands[i], i === 0, wr.unit),
       mr: range(band, i === 0, mr.unit),
     }))

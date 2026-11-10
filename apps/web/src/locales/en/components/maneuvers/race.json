@@ -1,0 +1,14 @@
+{
+  "title-live": "The race so far",
+  "title-ended": "How the race went",
+  "cutoff": {
+    "players": "Cutoff to earn the vehicle",
+    "clans": "Cutoff to earn gold"
+  },
+  "ranked": {
+    "players": "Ranked players",
+    "clans": "Ranked clans"
+  },
+  "fame-points": "Fame Points",
+  "no-curve": "The curve starts once the board has been recorded twice."
+}

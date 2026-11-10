@@ -1,0 +1,11 @@
+{
+  "description": {
+    "players": "The Fame Points column is coloured by how high a place stands among every ranked player, on the same percentiles as the site's other rating scales. The places below follow the board as it fills up.",
+    "clans": "The Fame Points column is coloured by how high a place stands among every ranked clan, on the same percentiles as the site's other rating scales. The places below follow the board as it fills up."
+  },
+  "share": "Standing",
+  "places": "Places",
+  "top": "Top {share}",
+  "rest": "The rest",
+  "range": "{from} to {to}"
+}
