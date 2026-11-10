@@ -83,19 +83,21 @@ export function Provider({
     [fuma],
   );
 
-  // Only what this route's own tree can read reaches the browser, derived from
-  // the import graph (`getClientDictionaries`), so a namespace the derivation
-  // did not see arrives absent and the component renders its own keys. The
-  // locale suite checks the call sites, which covers every namespace read
-  // through the hook; this covers the rest, on the first dev render of the page
-  // that reads it, which is sooner than a reader would find it.
+  // The chrome's loader, and the last one a lookup falls through to: a route's
+  // own strings are layered over it by `DictionaryScope`. So a namespace
+  // reaching this without being in the chrome is one the route's scope did not
+  // carry, and the component is about to render its own keys. The locale suite
+  // checks the call sites against the scopes, which covers every namespace read
+  // through the hook; this covers the rest (a `const`, a list of names, an
+  // index into the dictionary set) on the first dev render of the page that
+  // reads it, which is sooner than a reader would find it.
   const load = useCallback(
     (_locale: string, namespace: string) => {
       const dictionary = dictionaries[namespace as Namespace];
       if (!dictionary && process.env.NODE_ENV === "development") {
         console.error(
-          `[locales] "${namespace}" never reached the browser, so its keys will render raw. ` +
-            `Add it to the client set by naming it in a client-reachable file, or read it on the server.`,
+          `[locales] "${namespace}" is in neither the chrome nor this route's scope, so its keys will render raw. ` +
+            `Run \`pnpm --filter @unicum.gg/web locale-scopes\`, or read it on the server.`,
         );
       }
       return dictionary;

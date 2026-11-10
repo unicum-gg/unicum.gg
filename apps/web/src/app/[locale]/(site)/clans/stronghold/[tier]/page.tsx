@@ -9,6 +9,7 @@ import {
   StrongholdPeriod,
   StrongholdTier,
 } from "@unicum.gg/shared";
+import { withDictionaries } from "@/components/dictionaries";
 
 function parseTier(tier: string): StrongholdTier {
   return (Object.values(StrongholdTier) as string[]).includes(tier)
@@ -56,11 +57,16 @@ export async function generateMetadata({
   });
 }
 
-export default async function EuStrongholdPage({
+async function EuStrongholdPage({
   params,
 }: {
-  params: Promise<{ tier: string }>;
+  params: Promise<{ locale: string; tier: string }>;
 }) {
   const { tier } = await params;
   return <StrongholdLeaderboardPage region={Region.EU} tierParam={tier} />;
 }
+
+export default withDictionaries(
+  "[locale]/(site)/clans/stronghold/[tier]",
+  EuStrongholdPage,
+);

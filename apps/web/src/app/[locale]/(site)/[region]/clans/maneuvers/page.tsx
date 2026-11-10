@@ -7,6 +7,7 @@ import { constructMetadata } from "@/lib/metadata";
 import { getTranslation } from "@/lib/translations.server";
 import { localizePath } from "@/lib/translations";
 import { isRegion, Region, REGION_LABEL } from "@unicum.gg/wargaming";
+import { withDictionaries } from "@/components/dictionaries";
 
 // ISR like the player half; same reasoning for the 5-minute window.
 export const dynamic = "force-static";
@@ -42,7 +43,7 @@ export async function generateMetadata({
   return maneuversClansMetadata(region, locale);
 }
 
-export default async function Page({
+async function Page({
   params,
 }: {
   params: Promise<{ locale: string; region: string }>;
@@ -53,3 +54,8 @@ export default async function Page({
     redirect(localizePath(ROUTES.CLANS_MANEUVERS(Region.EU), locale));
   return <ManeuversClansView locale={locale} region={region} />;
 }
+
+export default withDictionaries(
+  "[locale]/(site)/[region]/clans/maneuvers",
+  Page,
+);

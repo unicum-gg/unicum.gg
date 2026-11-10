@@ -7,6 +7,7 @@ import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
 import { getTranslation } from "@/lib/translations.server";
 import { isRegion, Region, REGION_LABEL } from "@unicum.gg/wargaming";
+import { withDictionaries } from "@/components/dictionaries";
 
 // ISR like the other map landings: prerendered, revalidated in the background.
 export const dynamic = "force-static";
@@ -43,7 +44,7 @@ export async function generateMetadata({
   return mapCommunityMetadata(region, locale);
 }
 
-export default async function Page({
+async function Page({
   params,
 }: {
   params: Promise<{ locale: string; region: string }>;
@@ -54,3 +55,8 @@ export default async function Page({
     redirect(localizePath(ROUTES.MAPS_COMMUNITY(Region.EU), locale));
   return <MapCommunityView locale={locale} region={region} />;
 }
+
+export default withDictionaries(
+  "[locale]/(site)/[region]/maps/community",
+  Page,
+);

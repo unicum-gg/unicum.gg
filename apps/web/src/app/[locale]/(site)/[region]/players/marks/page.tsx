@@ -7,6 +7,7 @@ import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
 import { getTranslation } from "@/lib/translations.server";
 import { isRegion, Region, REGION_LABEL } from "@unicum.gg/wargaming";
+import { withDictionaries } from "@/components/dictionaries";
 
 // ISR, like the boards beside it: prerendered HTML revalidated in the
 // background, so navigation stays instant while the counts follow the refreshes
@@ -55,7 +56,7 @@ export async function generateMetadata({
   return playerMarksMetadata(region, locale);
 }
 
-export default async function Page({
+async function Page({
   params,
 }: {
   params: Promise<{ locale: string; region: string }>;
@@ -74,3 +75,5 @@ export default async function Page({
     />
   );
 }
+
+export default withDictionaries("[locale]/(site)/[region]/players/marks", Page);

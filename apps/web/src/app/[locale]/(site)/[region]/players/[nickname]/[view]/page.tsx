@@ -6,6 +6,7 @@ import {
 } from "@/app/[locale]/(site)/[region]/players/[nickname]/page";
 import { playerViewFromSegment } from "@/components/players/detail/tabs";
 import { isRegion } from "@unicum.gg/wargaming";
+import { withDictionaries } from "@/components/dictionaries";
 
 // One route per reachable profile view (the eight battle modes, plus Tanks and
 // Value), so each is a page of its own with matching metadata instead of a
@@ -28,7 +29,7 @@ export async function generateMetadata({
   return playerMetadata(region, nickname, playerView, locale);
 }
 
-export default async function PlayerViewPage({
+async function PlayerViewPage({
   params,
 }: {
   params: Promise<{ locale: string; region: string; nickname: string; view: string }>;
@@ -46,3 +47,8 @@ export default async function PlayerViewPage({
     locale,
   );
 }
+
+export default withDictionaries(
+  "[locale]/(site)/[region]/players/[nickname]/[view]",
+  PlayerViewPage,
+);

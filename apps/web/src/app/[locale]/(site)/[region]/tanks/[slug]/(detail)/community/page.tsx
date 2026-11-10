@@ -12,6 +12,7 @@ import { TankDetailTab } from "@/components/tanks/detail/tabs";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import { tankReviewsSchema } from "@/lib/schema-org";
+import { withDictionaries } from "@/components/dictionaries";
 
 // The Community tab as its own route, so a render builds this tab alone instead
 // of all of them (see tabs.ts). Same ISR settings as the base page: the verdict
@@ -31,7 +32,7 @@ export async function generateMetadata({
   return tankMetadata(region, slug, TankDetailTab.Community, locale);
 }
 
-export default async function TankCommunityPage({
+async function TankCommunityPage({
   params,
 }: {
   params: Promise<{ locale: string; region: string; slug: string }>;
@@ -78,3 +79,8 @@ export default async function TankCommunityPage({
     </>
   );
 }
+
+export default withDictionaries(
+  "[locale]/(site)/[region]/tanks/[slug]/(detail)/community",
+  TankCommunityPage,
+);

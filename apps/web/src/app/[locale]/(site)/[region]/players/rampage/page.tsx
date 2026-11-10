@@ -7,6 +7,7 @@ import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
 import { getTranslation } from "@/lib/translations.server";
 import { isRegion, Region, REGION_LABEL } from "@unicum.gg/wargaming";
+import { withDictionaries } from "@/components/dictionaries";
 
 export const dynamic = "force-static";
 export const revalidate = 1800;
@@ -50,7 +51,7 @@ export async function generateMetadata({
   return rampageMetadata(region, locale);
 }
 
-export default async function Page({
+async function Page({
   params,
 }: {
   params: Promise<{ locale: string; region: string }>;
@@ -60,3 +61,8 @@ export default async function Page({
   if (region === Region.EU) redirect(localizePath(ROUTES.PLAYERS_RAMPAGE(Region.EU), locale));
   return <RampageView locale={locale} region={region} page={1} />;
 }
+
+export default withDictionaries(
+  "[locale]/(site)/[region]/players/rampage",
+  Page,
+);

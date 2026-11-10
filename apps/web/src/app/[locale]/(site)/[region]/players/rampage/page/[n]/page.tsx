@@ -8,6 +8,7 @@ import { paginatedMetadata } from "@/lib/metadata";
 import { parsePageNumber } from "@/lib/page-number";
 import { localizePath } from "@/lib/translations";
 import { isRegion, Region } from "@unicum.gg/wargaming";
+import { withDictionaries } from "@/components/dictionaries";
 
 // One page of the section above, at `/page/<n>`.
 //
@@ -39,7 +40,7 @@ export async function generateMetadata({
   return paginatedMetadata(await rampageMetadata(region, locale), { page, locale });
 }
 
-export default async function Page({
+async function Page({
   params,
 }: {
   params: Promise<{ locale: string; region: string; n: string }>;
@@ -58,3 +59,8 @@ export default async function Page({
     <RampageView locale={locale} region={region} page={page} />
   );
 }
+
+export default withDictionaries(
+  "[locale]/(site)/[region]/players/rampage/page/[n]",
+  Page,
+);

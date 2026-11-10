@@ -228,28 +228,30 @@ export const getPreferredLocale = createGetPreferredLocale({
 /**
  * Namespaces the browser must never receive, whatever the code does.
  *
- * Every namespace is handed to the client provider as one dictionary set, so a
- * namespace costs its own weight on EVERY page rather than on the pages that
- * read it. These seven are the heavy ones, each read in exactly one place:
+ * A namespace in the chrome costs its own weight on EVERY page rather than on
+ * the pages that read it. These seven are the heavy ones, each read in exactly
+ * one place:
  * `game/map-descriptions` is 20 KB of map blurbs that only a map's own page
  * shows, and the equipment, crew-perk and skill-tree families name a tank's
  * loadout and its upgrades, which only a tank page reads. They were 40% of the
  * payload on pages that never touch them.
  *
- * **What actually decides whether a namespace crosses the wire is now derived**
- * from the import graph (`CLIENT_NAMESPACES`, written by
- * `scripts/generate-locales`), so the catalogue follows the code with nobody
- * keeping a list: three quarters of it is copy only the server renders. This
- * list stays because the derivation errs towards shipping, and because it errs
- * on these seven in particular: it reads namespace names as string literals in
- * client-reachable files, and the literals right below this comment are in a
- * module client components import, so the derivation sees all seven and would
- * ship every one of them.
+ * **What actually decides whether a namespace crosses the wire is derived** from
+ * the import graph, route by route (`CHROME_NAMESPACES` and `ROUTE_NAMESPACES`,
+ * written by `scripts/generate-locale-scopes`), so the catalogue follows the
+ * code with nobody keeping a list: a page carries 44 KB of French on average
+ * against the 263 KB every one of them used to.
  *
- * They are resolved on the server, where `getTranslation` still sees them, and
- * stripped before the dictionaries cross the wire. A client component that
- * reads one gets its key back, which is why `tests/validation/locales` fails if
- * a `"use client"` file names one.
+ * This list stays because that derivation errs towards shipping, and because it
+ * errs on these seven in particular: it reads namespace names as string
+ * literals in client-reachable files, and the literals right below this comment
+ * are in a module client components import for `Locale`, so it sees all seven
+ * and would put 98 KB of them in the chrome. Subtracted at generation rather
+ * than on the read path, so the generated lists are honest about what they ship.
+ *
+ * They are resolved on the server, where `getTranslation` still sees them. A
+ * client component that reads one gets its key back, which is why
+ * `tests/validation/locales` fails if a `"use client"` file names one.
  */
 export const SERVER_ONLY_NAMESPACES: readonly string[] = [
   "game/map-descriptions",

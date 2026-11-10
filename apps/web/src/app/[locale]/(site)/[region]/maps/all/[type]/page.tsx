@@ -7,6 +7,7 @@ import {
 import { battleTypeFromSegment } from "@/components/maps/list/tabs";
 import { BattleType } from "@unicum.gg/shared";
 import { isRegion, Region } from "@unicum.gg/wargaming";
+import { withDictionaries } from "@/components/dictionaries";
 
 // One route per battle type, so each is a real indexable page with its own
 // heading, title and description instead of a `?type=` filter Google treats as
@@ -40,7 +41,7 @@ export async function generateMetadata({
   return mapsIndexMetadata(region, battleType, locale);
 }
 
-export default async function MapsBattleTypePage({
+async function MapsBattleTypePage({
   params,
 }: {
   params: Promise<{ locale: string; region: string; type: string }>;
@@ -51,3 +52,8 @@ export default async function MapsBattleTypePage({
   if (!battleType) notFound();
   return renderMapsIndex(region, locale, battleType);
 }
+
+export default withDictionaries(
+  "[locale]/(site)/[region]/maps/all/[type]",
+  MapsBattleTypePage,
+);

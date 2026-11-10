@@ -7,6 +7,7 @@ import {
 import { TankMarksMastery } from "@/components/tanks/detail/marks/mastery";
 import { TankDetailTab } from "@/components/tanks/detail/tabs";
 import { isRegion } from "@unicum.gg/wargaming";
+import { withDictionaries } from "@/components/dictionaries";
 
 // The Marks tab as its own route, so a render builds this tab alone instead of
 // all three (see tabs.ts). Same ISR settings as the base page.
@@ -22,7 +23,7 @@ export async function generateMetadata({
   return tankMetadata(region, slug, TankDetailTab.Marks, locale);
 }
 
-export default async function TankMarksPage({
+async function TankMarksPage({
   params,
 }: {
   params: Promise<{ locale: string; region: string; slug: string }>;
@@ -41,3 +42,8 @@ export default async function TankMarksPage({
     />
   );
 }
+
+export default withDictionaries(
+  "[locale]/(site)/[region]/tanks/[slug]/(detail)/marks",
+  TankMarksPage,
+);

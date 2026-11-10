@@ -12,6 +12,7 @@ import {
   loadMapVideos,
   mapTabCounts,
 } from "@/app/[locale]/(site)/[region]/maps/[slug]/detail";
+import { Dictionaries } from "@/components/dictionaries";
 
 /**
  * What every tab of a map page shares: the name, the minimap and the tab bar.
@@ -67,17 +68,22 @@ export default async function MapLayout({
     recordedModes.length > 0 ? await loadMapPositions(region, detail.slug) : null;
 
   return (
-    <MapShell
-      detail={{
-        ...detail,
-        description: mapDescription(detail.arenaId, detail.description, tBlurbs),
-      }}
-      region={region}
-      positions={positions}
-      available={availableMapTabs(history, statistics)}
-      counts={mapTabCounts(detail, videos, history, statistics)}
+    <Dictionaries
+      locale={locale}
+      scope="[locale]/(site)/[region]/maps/[slug]/(detail)/layout"
     >
-      {children}
-    </MapShell>
+      <MapShell
+        detail={{
+          ...detail,
+          description: mapDescription(detail.arenaId, detail.description, tBlurbs),
+        }}
+        region={region}
+        positions={positions}
+        available={availableMapTabs(history, statistics)}
+        counts={mapTabCounts(detail, videos, history, statistics)}
+      >
+        {children}
+      </MapShell>
+    </Dictionaries>
   );
 }

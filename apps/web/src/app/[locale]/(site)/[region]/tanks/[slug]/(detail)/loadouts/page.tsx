@@ -8,6 +8,7 @@ import {
 } from "@/app/[locale]/(site)/[region]/tanks/[slug]/(detail)/page";
 import { LoadoutsTab } from "@/components/tanks/detail/loadouts";
 import { TankDetailTab } from "@/components/tanks/detail/tabs";
+import { withDictionaries } from "@/components/dictionaries";
 
 // The Loadouts tab as its own route, like every other tab, so a render builds
 // this one alone (see tabs.ts). ISR on the same window as the rest: an upload
@@ -27,7 +28,7 @@ export async function generateMetadata({
   return tankMetadata(region, slug, TankDetailTab.Loadouts, locale);
 }
 
-export default async function TankLoadoutsPage({
+async function TankLoadoutsPage({
   params,
 }: {
   params: Promise<{ locale: string; region: string; slug: string }>;
@@ -50,3 +51,8 @@ export default async function TankLoadoutsPage({
     />
   );
 }
+
+export default withDictionaries(
+  "[locale]/(site)/[region]/tanks/[slug]/(detail)/loadouts",
+  TankLoadoutsPage,
+);

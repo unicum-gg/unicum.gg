@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { maneuversPlayersMetadata } from "@/app/[locale]/(site)/[region]/players/maneuvers/page";
 import { ManeuversPlayersView } from "@/components/players/list/maneuvers/view";
 import { Region } from "@unicum.gg/wargaming";
+import { withDictionaries } from "@/components/dictionaries";
 
 export const dynamic = "force-static";
 export const revalidate = 300;
@@ -17,7 +18,7 @@ export async function generateMetadata({
   return maneuversPlayersMetadata(Region.EU, locale);
 }
 
-export default async function Page({
+async function Page({
   params,
 }: {
   params: Promise<{ locale: string }>;
@@ -25,3 +26,5 @@ export default async function Page({
   const { locale } = await params;
   return <ManeuversPlayersView locale={locale} region={Region.EU} />;
 }
+
+export default withDictionaries("[locale]/(site)/players/maneuvers", Page);

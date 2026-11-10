@@ -10,6 +10,7 @@ import { holesTests } from "./holes";
 import { completenessTests } from "./completeness";
 import { namingTests } from "./naming";
 import { qualityTests } from "./quality";
+import { scopeTests } from "./scopes";
 import { structureTests } from "./structure";
 import { usageTests } from "./usage";
 import { vocabularyTests } from "./vocabulary";
@@ -75,6 +76,7 @@ export function localesTests() {
   namingTests();
   qualityTests();
   usageTests();
+  scopeTests();
   boundaryTests();
   copyTests();
   holesTests();

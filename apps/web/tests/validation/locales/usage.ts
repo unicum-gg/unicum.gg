@@ -11,7 +11,6 @@ import {
   SRC_DIR,
 } from ".";
 import { SERVER_ONLY_NAMESPACES } from "../../../src/lib/translations";
-import { CLIENT_NAMESPACES } from "../../../src/locales/generated/client-namespaces";
 
 const CALL = /(?:useTranslation|getTranslation)\(\s*"([^"]+)"/g;
 /** Only the client half: `getTranslation` runs on the server by construction. */
@@ -79,45 +78,6 @@ export function usageTests() {
         leaked,
         [],
         "A server-only namespace is stripped before the dictionaries cross the wire, so `useTranslation` on one returns the key. Resolve it in a server component and pass the string down.",
-      );
-    });
-
-    /**
-     * The other half of the same failure, and the one the derivation can cause.
-     *
-     * What crosses the wire is `CLIENT_NAMESPACES`, written by
-     * `scripts/generate-locales` from the import graph: it keeps a namespace
-     * whose name appears as a string literal in a file the browser bundle can
-     * reach. That is deliberately looser than "is passed to `useTranslation`",
-     * because several are not (the partners page holds its namespace in a
-     * `const`, `components/fumadocs` is read by indexing the dictionary set),
-     * and it errs towards shipping for exactly that reason.
-     *
-     * It can still be wrong the other way, by missing an import edge, and the
-     * consequence is a client component rendering its own keys on one page. So
-     * the call sites are checked against the list: this would have failed
-     * loudly on a resolver that stopped following, instead of shipping a page
-     * of slugs.
-     */
-    test("every namespace a client component reads is shipped", () => {
-      const shipped = new Set(CLIENT_NAMESPACES as readonly string[]);
-      const stripped: string[] = [];
-      for (const file of sourceFiles(SRC_DIR)) {
-        const content = fs.readFileSync(file, "utf-8");
-        if (!/^\s*["']use client["']/m.test(content)) continue;
-        for (const match of content.matchAll(CLIENT_CALL)) {
-          // A server-only namespace is refused by the test above, which says
-          // what to do about it; reporting it twice would hide that advice.
-          if (SERVER_ONLY_NAMESPACES.includes(match[1])) continue;
-          if (!shipped.has(match[1])) {
-            stripped.push(`${path.relative(SRC_DIR, file)}: ${match[1]}`);
-          }
-        }
-      }
-      assert.deepStrictEqual(
-        stripped.sort(),
-        [],
-        "These are read in the browser and stripped before the dictionaries cross the wire, so they render as their own keys. Run `tsx scripts/generate-locales.ts`; if that does not fix it, the derivation is not seeing how this file is reached.",
       );
     });
 

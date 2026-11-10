@@ -7,6 +7,7 @@ import {
 import { battleTypeFromSegment } from "@/components/maps/list/tabs";
 import { BattleType } from "@unicum.gg/shared";
 import { Region } from "@unicum.gg/wargaming";
+import { withDictionaries } from "@/components/dictionaries";
 
 // EU shortcut: /maps/all/:type mirrors /eu/maps/all/:type.
 //
@@ -37,7 +38,7 @@ export async function generateMetadata({
   return mapsIndexMetadata(Region.EU, battleType, locale);
 }
 
-export default async function MapsBattleTypePageEU({
+async function MapsBattleTypePageEU({
   params,
 }: {
   params: Promise<{ locale: string; type: string }>;
@@ -47,3 +48,8 @@ export default async function MapsBattleTypePageEU({
   if (!battleType) notFound();
   return renderMapsIndex(Region.EU, locale, battleType);
 }
+
+export default withDictionaries(
+  "[locale]/(site)/maps/all/[type]",
+  MapsBattleTypePageEU,
+);

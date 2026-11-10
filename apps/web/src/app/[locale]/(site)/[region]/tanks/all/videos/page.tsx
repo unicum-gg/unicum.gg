@@ -6,6 +6,7 @@ import {
 } from "@/app/[locale]/(site)/[region]/tanks/page";
 import { TankTab } from "@/components/tanks/list/tabs";
 import { isRegion } from "@unicum.gg/wargaming";
+import { withDictionaries } from "@/components/dictionaries";
 
 // The videos tab as its own route, like the other four (see
 // components/tanks/list/tabs.ts). Same ISR settings as the base index: the list
@@ -23,7 +24,7 @@ export async function generateMetadata({
   return tanksIndexMetadata(region, TankTab.Videos, locale);
 }
 
-export default async function TanksVideosPage({
+async function TanksVideosPage({
   params,
 }: {
   params: Promise<{ locale: string; region: string }>;
@@ -32,3 +33,8 @@ export default async function TanksVideosPage({
   if (!isRegion(region)) notFound();
   return renderTanksIndex(region, locale, TankTab.Videos);
 }
+
+export default withDictionaries(
+  "[locale]/(site)/[region]/tanks/all/videos",
+  TanksVideosPage,
+);

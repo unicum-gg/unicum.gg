@@ -5,6 +5,7 @@ import { TankChangesView } from "@/components/tanks/list/changes/view";
 import { paginatedMetadata } from "@/lib/metadata";
 import { parsePageNumber } from "@/lib/page-number";
 import { Region } from "@unicum.gg/wargaming";
+import { withDictionaries } from "@/components/dictionaries";
 
 // One page of the section above, at `/page/<n>`.
 //
@@ -39,7 +40,7 @@ export async function generateMetadata({
   });
 }
 
-export default async function Page({
+async function Page({
   params,
 }: {
   params: Promise<{ locale: string; n: string }>;
@@ -51,3 +52,5 @@ export default async function Page({
     <TankChangesView locale={locale} region={Region.EU} page={page} />
   );
 }
+
+export default withDictionaries("[locale]/(site)/tanks/changes/page/[n]", Page);

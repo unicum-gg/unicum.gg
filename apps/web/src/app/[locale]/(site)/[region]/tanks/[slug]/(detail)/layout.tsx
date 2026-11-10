@@ -14,6 +14,7 @@ import {
 } from "@/app/[locale]/(site)/[region]/tanks/[slug]/detail";
 import { VehicleFirstPaint } from "@/components/tanks/detail/viewer/first-paint";
 import { heroShells } from "@/components/tanks/detail/viewer/shell-rules";
+import { Dictionaries } from "@/components/dictionaries";
 
 /**
  * What every tab of a tank page shares: the hero, the tab bar, and the video
@@ -37,10 +38,10 @@ export default async function TankLayout({
   params,
   children,
 }: {
-  params: Promise<{ region: string; slug: string }>;
+  params: Promise<{ locale: string; region: string; slug: string }>;
   children: React.ReactNode;
 }) {
-  const { region, slug } = await params;
+  const { locale, region, slug } = await params;
   if (!isRegion(region)) notFound();
 
   const detail = await loadTankDetail(region, slug);
@@ -62,66 +63,71 @@ export default async function TankLayout({
   const tankUrl = `${APP.URL}${ROUTES.TANK(region, detail.slug)}`;
 
   return (
-    <>
-      {/* Named before anything else in the markup, since what it is worth is
-          entirely how early the browser reads it. Defaulted like the fields
-          below: the payload is cached for a day and served by an API that can
-          be a deploy behind this render. */}
-      <VehicleFirstPaint model={detail.model ?? null} />
-      <JsonLd
-        data={tankSchema({
-          name: meta.name,
-          url: tankUrl,
-          description: `${meta.name}, tier ${tierLabel} ${meta.nation.toUpperCase()} in World of Tanks. Server-average stats, best players and WN8/WNX expected values on ${region.toUpperCase()}.`,
-          image: meta.bigIcon,
-          tier: meta.tier,
-          nation: meta.nation,
-          type: meta.type,
-          isPremium: meta.isPremium,
-          // Only ever the plain mean and the real counts: `aggregateRating` is
-          // a claim about what this page says, and the shrunk mean is a sort
-          // key that appears nowhere on it.
-          rating: {
-            average: rating.overall,
-            votes: rating.votes,
-            reviews: rating.reviewCount,
-          },
-        })}
-      />
-      <JsonLd
-        data={breadcrumbSchema([
-          { name: APP.NAME, url: `${APP.URL}${ROUTES.HOME(region)}` },
-          { name: "Tanks", url: `${APP.URL}${ROUTES.TANKS(region)}` },
-          { name: meta.name, url: tankUrl },
-        ])}
-      />
-      <TankShell
-        region={region}
-        slug={detail.slug}
-        tankId={detail.tankId}
-        meta={meta}
-        // The same answer the preload above was built from, so the hero reads
-        // the build whose files are already on their way rather than resolving
-        // one of its own.
-        model={detail.model ?? null}
-        specs={detail.specs as unknown as TankSpec | null}
-        videos={videos}
-        available={availableTabs(detail)}
-        rating={{ overall: rating.overall, votes: rating.votes }}
-        basedOn={detail.basedOn}
-        builds={detail.configs?.map((c) => ({ modules: c.modules, keys: c.keys }))}
-        mechanic={detail.mechanic}
-        // Defaulted rather than assumed: the detail payload is cached for a day
-        // and served by an API that can be one deploy behind this render, so a
-        // field this young has to be allowed to be missing.
-        // Cast like every other enum crossing the API: the payload carries the
-        // value as a string and a TS string enum is nominal, so the two are the
-        // same characters and not the same type.
-        paintLock={(detail.paintLock ?? null) as PaintLock | null}
-        shells={heroShells(detail)}
-      >
-        {children}
-      </TankShell>
-    </>
+    <Dictionaries
+      locale={locale}
+      scope="[locale]/(site)/[region]/tanks/[slug]/(detail)/layout"
+    >
+      <>
+        {/* Named before anything else in the markup, since what it is worth is
+            entirely how early the browser reads it. Defaulted like the fields
+            below: the payload is cached for a day and served by an API that can
+            be a deploy behind this render. */}
+        <VehicleFirstPaint model={detail.model ?? null} />
+        <JsonLd
+          data={tankSchema({
+            name: meta.name,
+            url: tankUrl,
+            description: `${meta.name}, tier ${tierLabel} ${meta.nation.toUpperCase()} in World of Tanks. Server-average stats, best players and WN8/WNX expected values on ${region.toUpperCase()}.`,
+            image: meta.bigIcon,
+            tier: meta.tier,
+            nation: meta.nation,
+            type: meta.type,
+            isPremium: meta.isPremium,
+            // Only ever the plain mean and the real counts: `aggregateRating` is
+            // a claim about what this page says, and the shrunk mean is a sort
+            // key that appears nowhere on it.
+            rating: {
+              average: rating.overall,
+              votes: rating.votes,
+              reviews: rating.reviewCount,
+            },
+          })}
+        />
+        <JsonLd
+          data={breadcrumbSchema([
+            { name: APP.NAME, url: `${APP.URL}${ROUTES.HOME(region)}` },
+            { name: "Tanks", url: `${APP.URL}${ROUTES.TANKS(region)}` },
+            { name: meta.name, url: tankUrl },
+          ])}
+        />
+        <TankShell
+          region={region}
+          slug={detail.slug}
+          tankId={detail.tankId}
+          meta={meta}
+          // The same answer the preload above was built from, so the hero reads
+          // the build whose files are already on their way rather than resolving
+          // one of its own.
+          model={detail.model ?? null}
+          specs={detail.specs as unknown as TankSpec | null}
+          videos={videos}
+          available={availableTabs(detail)}
+          rating={{ overall: rating.overall, votes: rating.votes }}
+          basedOn={detail.basedOn}
+          builds={detail.configs?.map((c) => ({ modules: c.modules, keys: c.keys }))}
+          mechanic={detail.mechanic}
+          // Defaulted rather than assumed: the detail payload is cached for a day
+          // and served by an API that can be one deploy behind this render, so a
+          // field this young has to be allowed to be missing.
+          // Cast like every other enum crossing the API: the payload carries the
+          // value as a string and a TS string enum is nominal, so the two are the
+          // same characters and not the same type.
+          paintLock={(detail.paintLock ?? null) as PaintLock | null}
+          shells={heroShells(detail)}
+        >
+          {children}
+        </TankShell>
+      </>
+    </Dictionaries>
   );
 }

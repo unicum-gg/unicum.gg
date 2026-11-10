@@ -10,6 +10,7 @@ import { MapStatisticsTab } from "@/components/maps/detail/statistics";
 import { MapDetailTab } from "@/components/maps/detail/tabs";
 import { mapName } from "@/components/game-name";
 import { getTranslation } from "@/lib/translations.server";
+import { withDictionaries } from "@/components/dictionaries";
 
 // The Statistics tab as its own route, so a render builds this tab alone (see
 // tabs.ts). ISR on the vehicle Loadouts tab's window: a battle lands when a
@@ -30,7 +31,7 @@ export async function generateMetadata({
   return mapMetadata(region, slug, MapDetailTab.Statistics, locale);
 }
 
-export default async function MapStatisticsPage({
+async function MapStatisticsPage({
   params,
 }: {
   params: Promise<{ locale: string; region: string; slug: string }>;
@@ -52,3 +53,8 @@ export default async function MapStatisticsPage({
     />
   );
 }
+
+export default withDictionaries(
+  "[locale]/(site)/[region]/maps/[slug]/(detail)/statistics",
+  MapStatisticsPage,
+);

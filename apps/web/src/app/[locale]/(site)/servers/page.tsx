@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { serversMetadata } from "@/app/[locale]/(site)/[region]/servers/page";
 import { ServersView } from "@/components/servers";
 import { Region } from "@unicum.gg/wargaming";
+import { withDictionaries } from "@/components/dictionaries";
 
 // EU shortcut: /servers renders the same page as /eu/servers. ISR on the same
 // window as the regional one.
@@ -17,7 +18,7 @@ export async function generateMetadata({
   return serversMetadata(Region.EU, locale);
 }
 
-export default async function ServersPageEU({
+async function ServersPageEU({
   params,
 }: {
   params: Promise<{ locale: string }>;
@@ -25,3 +26,5 @@ export default async function ServersPageEU({
   const { locale } = await params;
   return <ServersView locale={locale} region={Region.EU} />;
 }
+
+export default withDictionaries("[locale]/(site)/servers", ServersPageEU);

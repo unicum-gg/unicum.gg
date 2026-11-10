@@ -14,6 +14,7 @@ import {
   PanelTitle,
 } from "@/components/panel";
 import { getTranslation } from "@/lib/translations.server";
+import { withDictionaries } from "@/components/dictionaries";
 
 /**
  * One battle, on a page of its own.
@@ -28,7 +29,7 @@ import { getTranslation } from "@/lib/translations.server";
  * second rendering of a battle would be a second place for the replay viewer,
  * the rosters and the report to drift apart.
  */
-export default async function BattlePage({
+async function BattlePage({
   params,
   searchParams,
 }: {
@@ -100,3 +101,8 @@ export default async function BattlePage({
     </div>
   );
 }
+
+export default withDictionaries(
+  "[locale]/(site)/[region]/battles/[id]",
+  BattlePage,
+);

@@ -6,6 +6,7 @@ import { constructMetadata } from "@/lib/metadata";
 import { getTranslation } from "@/lib/translations.server";
 import { Region, REGION_LABEL } from "@unicum.gg/wargaming";
 import { languageDisplayName } from "@/lib/language-name";
+import { withDictionaries } from "@/components/dictionaries";
 
 export async function generateMetadata({
   params,
@@ -33,7 +34,7 @@ export async function generateMetadata({
   });
 }
 
-export default async function Page({
+async function Page({
   params,
 }: {
   params: Promise<{ locale: string; language: string }>;
@@ -51,3 +52,8 @@ export default async function Page({
 
 export const dynamic = "force-static";
 export const revalidate = 1800;
+
+export default withDictionaries(
+  "[locale]/(site)/players/marks/lang/[language]",
+  Page,
+);

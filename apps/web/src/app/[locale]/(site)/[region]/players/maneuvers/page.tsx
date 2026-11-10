@@ -7,6 +7,7 @@ import { constructMetadata } from "@/lib/metadata";
 import { getTranslation } from "@/lib/translations.server";
 import { localizePath } from "@/lib/translations";
 import { isRegion, Region, REGION_LABEL } from "@unicum.gg/wargaming";
+import { withDictionaries } from "@/components/dictionaries";
 
 // ISR like the other boards. Shorter than the 30-minute leaderboards: an
 // edition runs for two weeks and its cutoff moves during a prime time, which is
@@ -45,7 +46,7 @@ export async function generateMetadata({
   return maneuversPlayersMetadata(region, locale);
 }
 
-export default async function Page({
+async function Page({
   params,
 }: {
   params: Promise<{ locale: string; region: string }>;
@@ -56,3 +57,8 @@ export default async function Page({
     redirect(localizePath(ROUTES.PLAYERS_MANEUVERS(Region.EU), locale));
   return <ManeuversPlayersView locale={locale} region={region} />;
 }
+
+export default withDictionaries(
+  "[locale]/(site)/[region]/players/maneuvers",
+  Page,
+);

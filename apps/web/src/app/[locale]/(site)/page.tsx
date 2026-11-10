@@ -1,4 +1,5 @@
 import { HomePage } from "@/components/home/home-page";
+import { withDictionaries } from "@/components/dictionaries";
 
 
 // ISR: served as prerendered HTML and revalidated in the background, so
@@ -19,7 +20,7 @@ import { HomePage } from "@/components/home/home-page";
 export const dynamic = "force-static";
 export const revalidate = 600;
 
-export default async function Page({
+async function Page({
   params,
 }: {
   params: Promise<{ locale: string }>;
@@ -28,3 +29,5 @@ export default async function Page({
   return <HomePage locale={locale} />;
 }
 
+
+export default withDictionaries("[locale]/(site)", Page);

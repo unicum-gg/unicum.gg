@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { mapCommunityMetadata } from "@/app/[locale]/(site)/[region]/maps/community/page";
 import { MapCommunityView } from "@/components/maps/list/community/view";
 import { Region } from "@unicum.gg/wargaming";
+import { withDictionaries } from "@/components/dictionaries";
 
 // EU shortcut: /maps/community renders the same board as /eu/maps/community.
 export const dynamic = "force-static";
@@ -19,7 +20,7 @@ export async function generateMetadata({
   return mapCommunityMetadata(Region.EU, locale);
 }
 
-export default async function MapCommunityPageEU({
+async function MapCommunityPageEU({
   params,
 }: {
   params: Promise<{ locale: string }>;
@@ -27,3 +28,8 @@ export default async function MapCommunityPageEU({
   const { locale } = await params;
   return <MapCommunityView locale={locale} region={Region.EU} />;
 }
+
+export default withDictionaries(
+  "[locale]/(site)/maps/community",
+  MapCommunityPageEU,
+);

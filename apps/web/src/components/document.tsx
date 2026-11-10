@@ -13,7 +13,7 @@ import { Toaster } from "@/components/ui/sonner";
 import STORAGE from "@/constants/storage";
 import { organizationSchema, websiteSchema } from "@/lib/schema-org";
 import { localeDir, type Locale } from "@/lib/translations";
-import { getClientDictionaries } from "@/lib/translations.server";
+import { getChromeDictionaries } from "@/lib/translations.server";
 import {
   DEFAULT_RATING_METRIC,
   RATING_METRICS,
@@ -95,9 +95,9 @@ export async function Document({
   locale: Locale;
   children: ReactNode;
 }) {
-  // Everything the browser needs, and nothing it does not: three quarters of
-  // the catalogue is copy only the server renders (see `getClientDictionaries`).
-  const dictionaries = await getClientDictionaries(locale);
+  // Only what every page shares. Each route layers its own strings over this
+  // through `Dictionaries` (see `getChromeDictionaries`).
+  const dictionaries = await getChromeDictionaries(locale);
 
   return (
     <html

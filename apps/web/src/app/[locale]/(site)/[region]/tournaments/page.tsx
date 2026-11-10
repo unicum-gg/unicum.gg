@@ -20,6 +20,7 @@ import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
 import { getTranslation } from "@/lib/translations.server";
 import { buildSafe, unicum } from "@/services/sdk";
+import { withDictionaries } from "@/components/dictionaries";
 
 // ISR like the other catalogue pages: the list moves only as tournaments open
 // and settle, and a navigation should serve prerendered HTML rather than pay a
@@ -58,7 +59,7 @@ export async function generateMetadata({
   });
 }
 
-export default async function TournamentsPage({
+async function TournamentsPage({
   params,
 }: {
   params: Promise<{ locale: string; region: string }>;
@@ -133,3 +134,8 @@ export async function renderTournaments(region: Region, locale: string) {
     </div>
   );
 }
+
+export default withDictionaries(
+  "[locale]/(site)/[region]/tournaments",
+  TournamentsPage,
+);

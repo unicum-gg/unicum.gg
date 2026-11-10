@@ -3,6 +3,7 @@ import { localizePath } from "@/lib/translations";
 import { HomePage } from "@/components/home/home-page";
 import ROUTES from "@/constants/routes";
 import { isRegion, Region } from "@unicum.gg/wargaming";
+import { withDictionaries } from "@/components/dictionaries";
 
 
 
@@ -28,7 +29,7 @@ export async function generateStaticParams() {
   return [Region.NA, Region.ASIA].map((region) => ({ region }));
 }
 
-export default async function Page({
+async function Page({
   params,
 }: {
   params: Promise<{ locale: string; region: string }>;
@@ -40,3 +41,5 @@ export default async function Page({
   return <HomePage regionOverride={region} locale={locale} />;
 }
 
+
+export default withDictionaries("[locale]/(site)/[region]", Page);

@@ -20,6 +20,7 @@ import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
 import { getTranslation } from "@/lib/translations.server";
 import { buildSafe, unicum } from "@/services/sdk";
+import { withDictionaries } from "@/components/dictionaries";
 
 // ISR like the other landings: prerendered HTML, revalidated in the background.
 // The search + filters are read client-side (MapsGallery), so the page needs no
@@ -61,7 +62,7 @@ export async function generateMetadata({
   return mapsIndexMetadata(region, BATTLE_ALL, locale);
 }
 
-export default async function MapsIndexPage({
+async function MapsIndexPage({
   params,
 }: {
   params: Promise<{ locale: string; region: string }>;
@@ -122,3 +123,5 @@ export async function renderMapsIndex(
     </div>
   );
 }
+
+export default withDictionaries("[locale]/(site)/[region]/maps", MapsIndexPage);

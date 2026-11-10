@@ -5,6 +5,7 @@ import { ServersView } from "@/components/servers";
 import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
 import { getTranslation } from "@/lib/translations.server";
+import { withDictionaries } from "@/components/dictionaries";
 
 // ISR like the other landings: prerendered HTML, revalidated in the background.
 // The range switcher is read client-side (ServersDashboard), so the page needs
@@ -44,7 +45,7 @@ export async function generateMetadata({
   return serversMetadata(region, locale);
 }
 
-export default async function ServersPage({
+async function ServersPage({
   params,
 }: {
   params: Promise<{ region: string; locale: string }>;
@@ -53,3 +54,8 @@ export default async function ServersPage({
   if (!isRegion(region)) notFound();
   return <ServersView locale={locale} region={region} />;
 }
+
+export default withDictionaries(
+  "[locale]/(site)/[region]/servers",
+  ServersPage,
+);

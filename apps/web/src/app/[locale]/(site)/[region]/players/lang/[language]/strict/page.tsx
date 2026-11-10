@@ -8,6 +8,7 @@ import { constructMetadata } from "@/lib/metadata";
 import { getTranslation } from "@/lib/translations.server";
 import { isRegion, Region, REGION_LABEL } from "@unicum.gg/wargaming";
 import { languageDisplayName } from "@/lib/language-name";
+import { withDictionaries } from "@/components/dictionaries";
 
 export async function generateMetadata({
   params,
@@ -33,7 +34,7 @@ export async function generateMetadata({
   });
 }
 
-export default async function Page({
+async function Page({
   params,
 }: {
   params: Promise<{ locale: string; region: string; language: string }>;
@@ -54,3 +55,8 @@ export default async function Page({
 // build never depends on a running API) and cached between revalidations.
 export const dynamic = "force-static";
 export const revalidate = 1800; // 30 min, matches the detail pages (board data is materialized hourly)
+
+export default withDictionaries(
+  "[locale]/(site)/[region]/players/lang/[language]/strict",
+  Page,
+);

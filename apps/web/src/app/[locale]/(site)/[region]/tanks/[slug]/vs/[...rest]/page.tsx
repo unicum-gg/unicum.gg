@@ -25,6 +25,7 @@ import {
   vehicleRef,
 } from "@/components/tanks/compare/column-ref";
 import { unicum } from "@/services/sdk";
+import { withDictionaries } from "@/components/dictionaries";
 
 // Dynamic on purpose: the page consumes our own API through the SDK, and its
 // vehicles are an unbounded path, so there is nothing to prerender. The endpoint
@@ -110,7 +111,7 @@ export async function generateMetadata({
   });
 }
 
-export default async function CompareTanksPage({
+async function CompareTanksPage({
   params,
   searchParams,
 }: RouteParams) {
@@ -184,3 +185,8 @@ export default async function CompareTanksPage({
     </div>
   );
 }
+
+export default withDictionaries(
+  "[locale]/(site)/[region]/tanks/[slug]/vs/[...rest]",
+  CompareTanksPage,
+);

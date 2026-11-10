@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { playerMarksMetadata } from "@/app/[locale]/(site)/[region]/players/marks/page";
 import { MarksLandingView } from "@/components/players/list/marks/view";
 import { Region } from "@unicum.gg/wargaming";
+import { withDictionaries } from "@/components/dictionaries";
 
 export const dynamic = "force-static";
 export const revalidate = 1800;
@@ -18,7 +19,7 @@ export async function generateMetadata({
   return playerMarksMetadata(Region.EU, locale);
 }
 
-export default async function Page({
+async function Page({
   params,
 }: {
   params: Promise<{ locale: string }>;
@@ -33,3 +34,5 @@ export default async function Page({
     />
   );
 }
+
+export default withDictionaries("[locale]/(site)/players/marks", Page);

@@ -32,6 +32,7 @@ import type {
 import type { ClanFullInfo } from "@unicum.gg/core/wargaming/wot/clans/info";
 import type { ClanNameHistoryEntry } from "@unicum.gg/core/clans/name-history";
 import { isRegion, type Region } from "@unicum.gg/wargaming";
+import { withDictionaries } from "@/components/dictionaries";
 
 const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 
@@ -199,7 +200,7 @@ export async function generateMetadata({
   return clanMetadata(region, tag, DEFAULT_CLAN_VIEW, locale);
 }
 
-export default async function ClanPage({
+async function ClanPage({
   params,
 }: {
   params: Promise<{ locale: string; region: string; tag: string }>;
@@ -395,3 +396,8 @@ async function ClanProfileServer({
     </div>
   );
 }
+
+export default withDictionaries(
+  "[locale]/(site)/[region]/clans/[tag]",
+  ClanPage,
+);

@@ -7,6 +7,7 @@ import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
 import { getTranslation } from "@/lib/translations.server";
 import { isRegion, Region, REGION_LABEL } from "@unicum.gg/wargaming";
+import { withDictionaries } from "@/components/dictionaries";
 
 
 // ISR: served as prerendered HTML and revalidated in the background, so
@@ -45,7 +46,7 @@ export async function generateMetadata({
 }
 
 
-export default async function Page({
+async function Page({
   params,
 }: {
   params: Promise<{ locale: string; region: string }>;
@@ -56,3 +57,5 @@ export default async function Page({
   return <ClansLandingView region={region} language={null} locale={locale} />;
 }
 
+
+export default withDictionaries("[locale]/(site)/[region]/clans", Page);

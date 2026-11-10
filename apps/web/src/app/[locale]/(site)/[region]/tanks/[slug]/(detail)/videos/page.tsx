@@ -9,6 +9,7 @@ import { loadTankVideos } from "@/app/[locale]/(site)/[region]/tanks/[slug]/deta
 import { TankVideosTab } from "@/components/tanks/detail/videos";
 import { TankDetailTab } from "@/components/tanks/detail/tabs";
 import { isRegion } from "@unicum.gg/wargaming";
+import { withDictionaries } from "@/components/dictionaries";
 
 // The Videos tab as its own route, so a render builds this tab alone instead of
 // all of them (see tabs.ts). The cached shell can lag an approval and the CDN
@@ -28,7 +29,7 @@ export async function generateMetadata({
   return tankMetadata(region, slug, TankDetailTab.Videos, locale);
 }
 
-export default async function TankVideosPage({
+async function TankVideosPage({
   params,
 }: {
   params: Promise<{ locale: string; region: string; slug: string }>;
@@ -53,3 +54,8 @@ export default async function TankVideosPage({
     </>
   );
 }
+
+export default withDictionaries(
+  "[locale]/(site)/[region]/tanks/[slug]/(detail)/videos",
+  TankVideosPage,
+);

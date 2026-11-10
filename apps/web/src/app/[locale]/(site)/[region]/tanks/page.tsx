@@ -27,6 +27,7 @@ import {
   REGION_EMOJI,
   REGION_LABEL,
 } from "@unicum.gg/wargaming";
+import { withDictionaries } from "@/components/dictionaries";
 
 const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 
@@ -73,7 +74,7 @@ export async function generateMetadata({
   return tanksIndexMetadata(region, TankTab.Performances, locale);
 }
 
-export default async function TanksIndexPage({
+async function TanksIndexPage({
   params,
 }: {
   params: Promise<{ locale: string; region: string }>;
@@ -204,3 +205,8 @@ async function TanksIndexShell({
     </div>
   );
 }
+
+export default withDictionaries(
+  "[locale]/(site)/[region]/tanks",
+  TanksIndexPage,
+);

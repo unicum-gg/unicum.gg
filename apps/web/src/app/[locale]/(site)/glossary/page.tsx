@@ -10,6 +10,7 @@ import { constructMetadata } from "@/lib/metadata";
 import { getTranslation } from "@/lib/translations.server";
 import { breadcrumbSchema, definedTermSetSchema } from "@/lib/schema-org";
 import { buildSafe, unicum } from "@/services/sdk";
+import { withDictionaries } from "@/components/dictionaries";
 
 // ISR: the catalogue ships with the build, so the only thing that changes it is
 // a deploy. Prerendered here and revalidated on the same cadence as the other
@@ -42,7 +43,7 @@ export async function loadGlossary(locale: string): Promise<GlossarySummary[]> {
   return results as GlossarySummary[];
 }
 
-export default async function GlossaryPage({
+async function GlossaryPage({
   params,
 }: {
   params: Promise<{ locale: string }>;
@@ -100,3 +101,5 @@ export default async function GlossaryPage({
     </div>
   );
 }
+
+export default withDictionaries("[locale]/(site)/glossary", GlossaryPage);

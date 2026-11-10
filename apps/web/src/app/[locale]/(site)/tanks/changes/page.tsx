@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { tankChangesMetadata } from "@/app/[locale]/(site)/[region]/tanks/changes/page";
 import { TankChangesView } from "@/components/tanks/list/changes/view";
 import { Region } from "@unicum.gg/wargaming";
+import { withDictionaries } from "@/components/dictionaries";
 
 // EU shortcut: /tanks/changes renders the same feed as /eu/tanks/changes.
 export const dynamic = "force-static";
@@ -21,7 +22,7 @@ export async function generateMetadata({
   return tankChangesMetadata(Region.EU, locale);
 }
 
-export default async function TankChangesPageEU({
+async function TankChangesPageEU({
   params,
 }: {
   params: Promise<{ locale: string }>;
@@ -29,3 +30,8 @@ export default async function TankChangesPageEU({
   const { locale } = await params;
   return <TankChangesView locale={locale} region={Region.EU} page={1} />;
 }
+
+export default withDictionaries(
+  "[locale]/(site)/tanks/changes",
+  TankChangesPageEU,
+);

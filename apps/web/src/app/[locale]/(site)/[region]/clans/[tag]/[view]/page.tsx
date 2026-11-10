@@ -6,6 +6,7 @@ import {
 } from "@/app/[locale]/(site)/[region]/clans/[tag]/page";
 import { clanViewFromSegment } from "@/components/clans/detail/tabs";
 import { isRegion } from "@unicum.gg/wargaming";
+import { withDictionaries } from "@/components/dictionaries";
 
 // One route per reachable clan view (stronghold, clan-wars, tanks, manage), so
 // each is a page of its own with matching metadata instead of a `?section=` /
@@ -28,7 +29,7 @@ export async function generateMetadata({
   return clanMetadata(region, tag, clanView, locale);
 }
 
-export default async function ClanViewPage({
+async function ClanViewPage({
   params,
 }: {
   params: Promise<{ locale: string; region: string; tag: string; view: string }>;
@@ -41,3 +42,8 @@ export default async function ClanViewPage({
   if (!clanView || !clanView.segment) notFound();
   return renderClanPage(region, decodeURIComponent(tag), clanView, locale);
 }
+
+export default withDictionaries(
+  "[locale]/(site)/[region]/clans/[tag]/[view]",
+  ClanViewPage,
+);

@@ -8,6 +8,7 @@ import { constructMetadata } from "@/lib/metadata";
 import { unicum } from "@/services/sdk";
 import type { WN8Expected, WNXExpected } from "@unicum.gg/shared";
 import { isRegion } from "@unicum.gg/wargaming";
+import { withDictionaries } from "@/components/dictionaries";
 
 
 // Dynamic on purpose: the page consumes our own API through the SDK, and
@@ -67,7 +68,7 @@ export async function generateMetadata({
   });
 }
 
-export default async function ComparePlayersPage({ params }: RouteParams) {
+async function ComparePlayersPage({ params }: RouteParams) {
   const { locale, region, nickname, rest } = await params;
   if (!isRegion(region)) notFound();
 
@@ -120,3 +121,8 @@ export default async function ComparePlayersPage({ params }: RouteParams) {
     </div>
   );
 }
+
+export default withDictionaries(
+  "[locale]/(site)/[region]/players/[nickname]/vs/[...rest]",
+  ComparePlayersPage,
+);

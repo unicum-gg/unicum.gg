@@ -5,6 +5,7 @@ import { RampageView } from "@/components/players/list/rampage/view";
 import { paginatedMetadata } from "@/lib/metadata";
 import { parsePageNumber } from "@/lib/page-number";
 import { Region } from "@unicum.gg/wargaming";
+import { withDictionaries } from "@/components/dictionaries";
 
 // One page of the section above, at `/page/<n>`.
 //
@@ -39,7 +40,7 @@ export async function generateMetadata({
   });
 }
 
-export default async function Page({
+async function Page({
   params,
 }: {
   params: Promise<{ locale: string; n: string }>;
@@ -51,3 +52,8 @@ export default async function Page({
     <RampageView locale={locale} region={Region.EU} page={page} />
   );
 }
+
+export default withDictionaries(
+  "[locale]/(site)/players/rampage/page/[n]",
+  Page,
+);

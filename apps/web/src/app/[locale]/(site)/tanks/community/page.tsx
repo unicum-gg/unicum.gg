@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { tankCommunityMetadata } from "@/app/[locale]/(site)/[region]/tanks/community/page";
 import { TankCommunityView } from "@/components/tanks/list/community/view";
 import { Region } from "@unicum.gg/wargaming";
+import { withDictionaries } from "@/components/dictionaries";
 
 // EU shortcut: /tanks/community renders the same board as /eu/tanks/community.
 export const dynamic = "force-static";
@@ -21,7 +22,7 @@ export async function generateMetadata({
   return tankCommunityMetadata(Region.EU, locale);
 }
 
-export default async function TankCommunityPageEU({
+async function TankCommunityPageEU({
   params,
 }: {
   params: Promise<{ locale: string }>;
@@ -29,3 +30,8 @@ export default async function TankCommunityPageEU({
   const { locale } = await params;
   return <TankCommunityView locale={locale} region={Region.EU} page={1} />;
 }
+
+export default withDictionaries(
+  "[locale]/(site)/tanks/community",
+  TankCommunityPageEU,
+);

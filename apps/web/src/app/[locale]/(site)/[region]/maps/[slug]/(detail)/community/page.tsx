@@ -10,6 +10,7 @@ import { MapCommunityPanel } from "@/components/maps/detail/community";
 import { MapDetailTab } from "@/components/maps/detail/tabs";
 import { mapName } from "@/components/game-name";
 import { getTranslation } from "@/lib/translations.server";
+import { withDictionaries } from "@/components/dictionaries";
 
 // The Community tab as its own route, so a render builds this tab alone instead
 // of all of them (see tabs.ts). Same ISR settings as the default tab: the
@@ -36,7 +37,7 @@ export async function generateMetadata({
   return mapMetadata(region, slug, MapDetailTab.Community, locale);
 }
 
-export default async function MapCommunityPage({
+async function MapCommunityPage({
   params,
 }: {
   params: Promise<{ locale: string; region: string; slug: string }>;
@@ -63,3 +64,8 @@ export default async function MapCommunityPage({
     />
   );
 }
+
+export default withDictionaries(
+  "[locale]/(site)/[region]/maps/[slug]/(detail)/community",
+  MapCommunityPage,
+);

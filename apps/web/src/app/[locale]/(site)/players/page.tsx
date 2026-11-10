@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { playersLandingMetadata } from "@/app/[locale]/(site)/[region]/players/page";
 import { PlayersLandingView } from "@/components/players/list/view";
 import { Region } from "@unicum.gg/wargaming";
+import { withDictionaries } from "@/components/dictionaries";
 
 
 // ISR: served as prerendered HTML and revalidated in the background, so
@@ -25,7 +26,7 @@ export async function generateMetadata({
   return playersLandingMetadata(Region.EU, locale);
 }
 
-export default async function Page({
+async function Page({
   params,
 }: {
   params: Promise<{ locale: string }>;
@@ -36,3 +37,5 @@ export default async function Page({
   );
 }
 
+
+export default withDictionaries("[locale]/(site)/players", Page);

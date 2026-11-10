@@ -10,6 +10,7 @@ import { MapChangesHistory } from "@/components/maps/detail/history";
 import { MapDetailTab } from "@/components/maps/detail/tabs";
 import { mapDescription, mapName } from "@/components/game-name";
 import { getTranslation } from "@/lib/translations.server";
+import { withDictionaries } from "@/components/dictionaries";
 
 // The History tab as its own route, so a render builds this tab alone instead
 // of all of them (see tabs.ts). It only exists for a map we have recorded a
@@ -27,7 +28,7 @@ export async function generateMetadata({
   return mapMetadata(region, slug, MapDetailTab.History, locale);
 }
 
-export default async function MapHistoryPage({
+async function MapHistoryPage({
   params,
 }: {
   params: Promise<{ locale: string; region: string; slug: string }>;
@@ -70,3 +71,8 @@ export default async function MapHistoryPage({
     />
   );
 }
+
+export default withDictionaries(
+  "[locale]/(site)/[region]/maps/[slug]/(detail)/history",
+  MapHistoryPage,
+);

@@ -7,6 +7,7 @@ import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
 import { getTranslation } from "@/lib/translations.server";
 import { isRegion, Region, REGION_LABEL } from "@unicum.gg/wargaming";
+import { withDictionaries } from "@/components/dictionaries";
 
 export async function generateMetadata({
   params,
@@ -28,7 +29,7 @@ export async function generateMetadata({
 }
 
 
-export default async function CoveragePage({
+async function CoveragePage({
   params,
 }: {
   params: Promise<{ locale: string; region: string }>;
@@ -58,3 +59,8 @@ export const revalidate = 3600;
 export async function generateStaticParams() {
   return [Region.NA, Region.ASIA].map((region) => ({ region }));
 }
+
+export default withDictionaries(
+  "[locale]/(site)/[region]/coverage",
+  CoveragePage,
+);

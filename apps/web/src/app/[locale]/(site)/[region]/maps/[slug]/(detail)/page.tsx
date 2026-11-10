@@ -17,6 +17,7 @@ import {
   loadMapVideos,
   type MapDetailPayload,
 } from "@/app/[locale]/(site)/[region]/maps/[slug]/detail";
+import { withDictionaries } from "@/components/dictionaries";
 
 // ISR, not dynamic: the rendered tab is cached, so a navigation serves
 // prerendered HTML. Each tab is its own route segment, so a render builds the
@@ -158,7 +159,7 @@ export async function generateMetadata({
   return mapMetadata(region, slug, MapDetailTab.Videos, locale);
 }
 
-export default async function MapVideosPage({
+async function MapVideosPage({
   params,
 }: {
   params: Promise<{ locale: string; region: string; slug: string }>;
@@ -180,3 +181,8 @@ export default async function MapVideosPage({
     />
   );
 }
+
+export default withDictionaries(
+  "[locale]/(site)/[region]/maps/[slug]/(detail)",
+  MapVideosPage,
+);

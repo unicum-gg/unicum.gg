@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { rampageMetadata } from "@/app/[locale]/(site)/[region]/players/rampage/page";
 import { RampageView } from "@/components/players/list/rampage/view";
 import { Region } from "@unicum.gg/wargaming";
+import { withDictionaries } from "@/components/dictionaries";
 
 // ISR, like the WNX landing: prerendered HTML revalidated in the background so
 // navigation stays instant while the board follows the cron's cadence.
@@ -22,7 +23,7 @@ export async function generateMetadata({
   return rampageMetadata(Region.EU, locale);
 }
 
-export default async function Page({
+async function Page({
   params,
 }: {
   params: Promise<{ locale: string }>;
@@ -30,3 +31,5 @@ export default async function Page({
   const { locale } = await params;
   return <RampageView locale={locale} region={Region.EU} page={1} />;
 }
+
+export default withDictionaries("[locale]/(site)/players/rampage", Page);

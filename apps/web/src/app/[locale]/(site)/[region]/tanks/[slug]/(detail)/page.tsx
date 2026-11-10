@@ -42,6 +42,7 @@ import {
   loadTankVideos,
   type TankDetail,
 } from "@/app/[locale]/(site)/[region]/tanks/[slug]/detail";
+import { withDictionaries } from "@/components/dictionaries";
 
 // ISR, not dynamic: the rendered page is cached, so a navigation serves
 // prerendered HTML instead of re-running the heavy tank-view render each time
@@ -175,7 +176,7 @@ export async function generateMetadata({
   return tankMetadata(region, slug, TankDetailTab.Specifications, locale);
 }
 
-export default async function TankPage({
+async function TankPage({
   params,
 }: {
   params: Promise<{ locale: string; region: string; slug: string }>;
@@ -278,3 +279,8 @@ export async function TankVideosJsonLd({
     </>
   );
 }
+
+export default withDictionaries(
+  "[locale]/(site)/[region]/tanks/[slug]/(detail)",
+  TankPage,
+);

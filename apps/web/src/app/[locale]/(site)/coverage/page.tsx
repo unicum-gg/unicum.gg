@@ -5,6 +5,7 @@ import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
 import { getTranslation } from "@/lib/translations.server";
 import { Region, REGION_LABEL } from "@unicum.gg/wargaming";
+import { withDictionaries } from "@/components/dictionaries";
 
 export async function generateMetadata({
   params,
@@ -25,7 +26,7 @@ export async function generateMetadata({
   });
 }
 
-export default async function Page({
+async function Page({
   params,
 }: {
   params: Promise<{ locale: string }>;
@@ -45,3 +46,5 @@ export const dynamic = "force-static";
 // table, so a 60s window paid that scan every minute (and stormed the DB from a
 // cold cache). Coverage figures move daily; see the region page for the detail.
 export const revalidate = 3600;
+
+export default withDictionaries("[locale]/(site)/coverage", Page);

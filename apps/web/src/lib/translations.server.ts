@@ -9,14 +9,13 @@ import {
   type Dictionaries,
   type Namespace,
 } from "@/locales/generated";
-import { CLIENT_NAMESPACES } from "@/locales/generated/client-namespaces";
-import { composeStatLabels } from "@/lib/stat-labels";
 import {
-  DEFAULT_LOCALE,
-  isLocale,
-  Locale,
-  SERVER_ONLY_NAMESPACES,
-} from "./translations";
+  CHROME_NAMESPACES,
+  ROUTE_NAMESPACES,
+  type RouteScope,
+} from "@/locales/generated/scopes";
+import { composeStatLabels } from "@/lib/stat-labels";
+import { DEFAULT_LOCALE, isLocale, Locale } from "./translations";
 
 /**
  * The locale is always passed in, never read from `headers()`.
@@ -86,53 +85,65 @@ export function getDictionaries(locale: Locale): Promise<Dictionaries> {
 }
 
 /**
- * Everything the browser needs, and nothing it does not.
+ * What crosses the wire, and why it is two calls rather than one.
  *
- * The client provider is handed ONE dictionary set and its loader is
+ * The client provider is handed ONE dictionary set and the library's loader is
  * synchronous, so whatever a reader might ask for has to be there already:
  * there is no asking for a namespace later. That used to mean the whole
- * catalogue, 399 namespaces and 263 342 octets of French inlined in the RSC
- * payload of EVERY page, which measured 59% of a player profile's payload while
- * the page's own prose is a few kilobytes. Most of it was copy only the server
- * renders.
+ * catalogue on every page, 399 namespaces and 263 342 octets of French, which
+ * measured 59% of a player profile's payload while the page's own prose is a
+ * few kilobytes.
  *
- * Two filters, and they answer different questions. `CLIENT_NAMESPACES` is
- * derived from the import graph and says what the browser bundle CAN read, so
- * it follows the code with nobody maintaining a list. `SERVER_ONLY_NAMESPACES`
- * says what must never cross whatever the code does, which is still needed:
- * those seven are heavy, they are named in the deny list itself, and that
- * declaration lives in a module client components import, so the derivation
- * sees their names and would ship all seven. It over-includes by design, in the
- * direction where the cost is bytes rather than a raw key at a reader.
+ * So the catalogue is cut where it is read. `CHROME_NAMESPACES` is what every
+ * page shares (the navigation, the footer, the search, the badges, and the
+ * boundaries that render where a page did not), handed to the root provider;
+ * `ROUTE_NAMESPACES` is what each route adds, handed to a `DictionaryScope`
+ * that layers over it. Both are derived from the import graph by
+ * `scripts/generate-locale-scopes`, so the catalogue follows the code with
+ * nobody keeping a list. Measured on French: 33 014 octets of chrome and 41 527
+ * on average per page, against 263 342 before, and twice the saving per ISR
+ * entry since the payload is stored as well as inlined.
  *
- * Resolved once per locale per process, like the full set it is cut from: the
- * root layout renders on every page, and filtering 399 entries each time is
- * work with one possible answer.
+ * Both are resolved once per locale per process, and the route sets once per
+ * locale and route: the root layout renders on every page and a section's page
+ * renders on every entity in it, so filtering the same hundreds of entries each
+ * time is work with one possible answer.
  */
-const forClient = new Map<Locale, Promise<Dictionaries>>();
+const CACHE = new Map<string, Promise<Dictionaries>>();
 
-const shipped = new Set<string>(
-  CLIENT_NAMESPACES.filter(
-    (namespace) => !SERVER_ONLY_NAMESPACES.includes(namespace),
-  ),
-);
-
-async function buildClientDictionaries(locale: Locale): Promise<Dictionaries> {
-  const all = await getDictionaries(locale);
-  const out: Dictionaries = {};
-  for (const [namespace, dictionary] of Object.entries(all)) {
-    if (shipped.has(namespace)) out[namespace as Namespace] = dictionary;
-  }
-  return out;
-}
-
-export function getClientDictionaries(locale: Locale): Promise<Dictionaries> {
-  let pending = forClient.get(locale);
+function cut(
+  locale: Locale,
+  key: string,
+  namespaces: readonly string[],
+): Promise<Dictionaries> {
+  const cacheKey = `${locale}:${key}`;
+  let pending = CACHE.get(cacheKey);
   if (!pending) {
-    pending = buildClientDictionaries(locale);
-    forClient.set(locale, pending);
+    const wanted = new Set<string>(namespaces);
+    pending = getDictionaries(locale).then((all) => {
+      const out: Dictionaries = {};
+      for (const [namespace, dictionary] of Object.entries(all)) {
+        if (wanted.has(namespace)) out[namespace as Namespace] = dictionary;
+      }
+      return out;
+    });
+    CACHE.set(cacheKey, pending);
   }
   return pending;
+}
+
+/** What every page carries, for the root provider. */
+export function getChromeDictionaries(locale: Locale): Promise<Dictionaries> {
+  return cut(locale, "", CHROME_NAMESPACES);
+}
+
+/** What one route adds to the chrome, for its own `Dictionaries`. */
+export function getRouteDictionaries(
+  locale: string,
+  scope: RouteScope,
+): Promise<Dictionaries> {
+  const resolved = isLocale(locale) ? locale : DEFAULT_LOCALE;
+  return cut(resolved, scope, ROUTE_NAMESPACES[scope]);
 }
 
 /**

@@ -17,6 +17,7 @@ import { constructMetadata } from "@/lib/metadata";
 import { getTranslation } from "@/lib/translations.server";
 import { breadcrumbSchema, definedTermSetSchema } from "@/lib/schema-org";
 import { buildSafe, unicum } from "@/services/sdk";
+import { withDictionaries } from "@/components/dictionaries";
 
 export const dynamic = "force-static";
 export const revalidate = 3600;
@@ -58,7 +59,7 @@ export async function generateMetadata({
   });
 }
 
-export default async function GlossaryCategoryPage({
+async function GlossaryCategoryPage({
   params,
 }: {
   params: Promise<{ locale: string; category: string }>;
@@ -123,3 +124,8 @@ export default async function GlossaryCategoryPage({
     </div>
   );
 }
+
+export default withDictionaries(
+  "[locale]/(site)/glossary/category/[category]",
+  GlossaryCategoryPage,
+);

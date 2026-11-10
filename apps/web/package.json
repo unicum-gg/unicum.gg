@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "predev": "tsx scripts/generate-glossary.ts && openapi-gen generate && tsx scripts/inject-openapi-enums.ts && tsx scripts/heal-openapi-refs.ts && tsx scripts/generate-local-routes.ts && tsx scripts/generate-page-routes.ts && tsx scripts/generate-game-vocabulary.ts && tsx scripts/generate-game-locales.ts && tsx scripts/generate-locales.ts && pnpm --filter @unicum.gg/sdk generate:client",
-    "prebuild": "tsx scripts/generate-glossary.ts && openapi-gen generate && tsx scripts/inject-openapi-enums.ts && tsx scripts/heal-openapi-refs.ts && tsx scripts/generate-local-routes.ts && tsx scripts/generate-page-routes.ts && tsx scripts/generate-game-vocabulary.ts && tsx scripts/generate-game-locales.ts && tsx scripts/generate-locales.ts && pnpm --filter @unicum.gg/sdk generate:client",
+    "predev": "tsx scripts/generate-glossary.ts && openapi-gen generate && tsx scripts/inject-openapi-enums.ts && tsx scripts/heal-openapi-refs.ts && tsx scripts/generate-local-routes.ts && tsx scripts/generate-page-routes.ts && tsx scripts/generate-game-vocabulary.ts && tsx scripts/generate-game-locales.ts && tsx scripts/generate-locales.ts && tsx scripts/generate-locale-scopes.ts && pnpm --filter @unicum.gg/sdk generate:client",
+    "prebuild": "tsx scripts/generate-glossary.ts && openapi-gen generate && tsx scripts/inject-openapi-enums.ts && tsx scripts/heal-openapi-refs.ts && tsx scripts/generate-local-routes.ts && tsx scripts/generate-page-routes.ts && tsx scripts/generate-game-vocabulary.ts && tsx scripts/generate-game-locales.ts && tsx scripts/generate-locales.ts && tsx scripts/generate-locale-scopes.ts && pnpm --filter @unicum.gg/sdk generate:client",
     "openapi:generate": "openapi-gen generate && tsx scripts/inject-openapi-enums.ts && tsx scripts/heal-openapi-refs.ts",
     "openapi:watch": "openapi-gen generate --watch",
     "build": "NODE_OPTIONS=--max-old-space-size=2560 next build",
@@ -13,7 +13,7 @@
     "start": "pm2-runtime start ecosystem.config.cjs",
     "start:single": "next start",
     "lint": "eslint",
-    "postinstall": "react-flagpack && tsx scripts/generate-glossary.ts && openapi-gen generate && tsx scripts/inject-openapi-enums.ts && tsx scripts/heal-openapi-refs.ts && tsx scripts/generate-local-routes.ts && tsx scripts/generate-page-routes.ts && tsx scripts/generate-game-vocabulary.ts && tsx scripts/generate-game-locales.ts && tsx scripts/generate-locales.ts",
+    "postinstall": "react-flagpack && tsx scripts/generate-glossary.ts && openapi-gen generate && tsx scripts/inject-openapi-enums.ts && tsx scripts/heal-openapi-refs.ts && tsx scripts/generate-local-routes.ts && tsx scripts/generate-page-routes.ts && tsx scripts/generate-game-vocabulary.ts && tsx scripts/generate-game-locales.ts && tsx scripts/generate-locales.ts && tsx scripts/generate-locale-scopes.ts",
     "db:push": "node -e \"console.error('\\x1b[31m✘ db:push is forbidden on this project.\\nOur schema uses makeXxxTable(region) factories that drizzle-kit cannot see via AST analysis,\\nso push proposes DROP CASCADE on every per-region table.\\nUse: pnpm db:generate (review the SQL) then pnpm db:migrate.\\nSee AGENTS.md for details.\\x1b[0m'); process.exit(1)\"",
     "db:studio": "drizzle-kit studio",
     "db:generate": "drizzle-kit generate",
@@ -24,7 +24,8 @@
     "vocabulary": "tsx scripts/generate-game-vocabulary.ts",
     "test": "tsx --test tests/index.ts",
     "game-locales": "tsx scripts/generate-game-locales.ts",
-    "glossary:translate": "tsx scripts/generate-glossary-translations.ts"
+    "glossary:translate": "tsx scripts/generate-glossary-translations.ts",
+    "locale-scopes": "tsx scripts/generate-locale-scopes.ts"
   },
   "dependencies": {
     "@discordjs/rest": "^2.6.1",

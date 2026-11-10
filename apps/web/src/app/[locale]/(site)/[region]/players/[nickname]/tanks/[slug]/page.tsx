@@ -13,6 +13,7 @@ import { constructMetadata } from "@/lib/metadata";
 import { unicum, unicumPublic } from "@/services/sdk";
 import { isRegion } from "@unicum.gg/wargaming";
 import type { PlayerTankDetail } from "@unicum.gg/shared";
+import { withDictionaries } from "@/components/dictionaries";
 
 // One player's record on one vehicle: the Tanks view with that record open
 // beside the table, at a URL of its own so it can be linked and shared.
@@ -82,7 +83,7 @@ export async function generateMetadata({
   });
 }
 
-export default async function PlayerTankPage({
+async function PlayerTankPage({
   params,
 }: {
   params: Promise<{ locale: string; region: string; nickname: string; slug: string }>;
@@ -97,3 +98,8 @@ export default async function PlayerTankPage({
     slug,
   );
 }
+
+export default withDictionaries(
+  "[locale]/(site)/[region]/players/[nickname]/tanks/[slug]",
+  PlayerTankPage,
+);

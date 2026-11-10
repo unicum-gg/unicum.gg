@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { onslaughtMetadata } from "@/app/[locale]/(site)/[region]/players/onslaught/page";
 import { OnslaughtView } from "@/components/players/list/onslaught/view";
 import { Region } from "@unicum.gg/wargaming";
+import { withDictionaries } from "@/components/dictionaries";
 
 // ISR like the other leaderboards: the page renders the current season and is
 // cached, so it is a cheap read instead of re-rendering the whole ~4k-row board
@@ -24,7 +25,7 @@ export async function generateMetadata({
   return onslaughtMetadata(Region.EU, locale);
 }
 
-export default async function Page({
+async function Page({
   params,
 }: {
   params: Promise<{ locale: string }>;
@@ -32,3 +33,5 @@ export default async function Page({
   const { locale } = await params;
   return <OnslaughtView locale={locale} region={Region.EU} page={1} />;
 }
+
+export default withDictionaries("[locale]/(site)/players/onslaught", Page);

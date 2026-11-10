@@ -17,6 +17,7 @@ import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
 import { buildSafe, unicum } from "@/services/sdk";
 import type { RosterEntry } from "@/components/tournaments/team/roster-table";
+import { withDictionaries } from "@/components/dictionaries";
 
 // ISR on the same window as the bracket this page is a slice of. That page
 // documents why, and the two measurements it rests on apply here unchanged: the
@@ -105,10 +106,10 @@ export async function generateMetadata({
   });
 }
 
-export default async function TournamentTeamPage({
+async function TournamentTeamPage({
   params,
 }: {
-  params: Promise<{ region: string; id: string; teamId: string }>;
+  params: Promise<{ locale: string; region: string; id: string; teamId: string }>;
 }) {
   const { region, id, teamId } = await params;
   if (!isRegion(region)) notFound();
@@ -160,3 +161,8 @@ export default async function TournamentTeamPage({
     </div>
   );
 }
+
+export default withDictionaries(
+  "[locale]/(site)/[region]/tournaments/[id]/team/[teamId]",
+  TournamentTeamPage,
+);

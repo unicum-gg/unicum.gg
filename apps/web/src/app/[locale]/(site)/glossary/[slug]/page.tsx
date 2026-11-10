@@ -15,6 +15,7 @@ import { getTranslation } from "@/lib/translations.server";
 import { breadcrumbSchema, definedTermSchema } from "@/lib/schema-org";
 import { buildSafe, unicum } from "@/services/sdk";
 import { DEFAULT_LOCALE } from "@/lib/translations";
+import { withDictionaries } from "@/components/dictionaries";
 
 // ISR, and every term is prerendered: the catalogue is a few hundred entries
 // that only change on a deploy, so there is nothing to gain from generating
@@ -78,7 +79,7 @@ export async function generateMetadata({
   });
 }
 
-export default async function GlossaryTermPage({
+async function GlossaryTermPage({
   params,
 }: {
   params: Promise<{ locale: string; slug: string }>;
@@ -116,3 +117,8 @@ export default async function GlossaryTermPage({
     </>
   );
 }
+
+export default withDictionaries(
+  "[locale]/(site)/glossary/[slug]",
+  GlossaryTermPage,
+);

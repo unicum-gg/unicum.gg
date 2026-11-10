@@ -5,6 +5,7 @@ import {
 } from "@/app/[locale]/(site)/[region]/tanks/page";
 import { TankTab } from "@/components/tanks/list/tabs";
 import { Region } from "@unicum.gg/wargaming";
+import { withDictionaries } from "@/components/dictionaries";
 
 // EU shortcut: /tanks/marks-of-mastery mirrors /eu/tanks/marks-of-mastery.
 export const dynamic = "force-static";
@@ -19,7 +20,7 @@ export async function generateMetadata({
   return tanksIndexMetadata(Region.EU, TankTab.MarksOfMastery, locale);
 }
 
-export default async function TanksMasteryPageEU({
+async function TanksMasteryPageEU({
   params,
 }: {
   params: Promise<{ locale: string }>;
@@ -27,3 +28,8 @@ export default async function TanksMasteryPageEU({
   const { locale } = await params;
   return renderTanksIndex(Region.EU, locale, TankTab.MarksOfMastery);
 }
+
+export default withDictionaries(
+  "[locale]/(site)/tanks/all/marks-of-mastery",
+  TanksMasteryPageEU,
+);

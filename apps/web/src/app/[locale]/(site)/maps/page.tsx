@@ -4,6 +4,7 @@ import {
   renderMapsIndex,
 } from "@/app/[locale]/(site)/[region]/maps/page";
 import { Region } from "@unicum.gg/wargaming";
+import { withDictionaries } from "@/components/dictionaries";
 
 // EU shortcut: /maps renders the same index as /eu/maps. ISR like the other
 // landings.
@@ -21,7 +22,7 @@ export async function generateMetadata({
   });
 }
 
-export default async function MapsIndexPageEU({
+async function MapsIndexPageEU({
   params,
 }: {
   params: Promise<{ locale: string }>;
@@ -29,3 +30,5 @@ export default async function MapsIndexPageEU({
   const { locale } = await params;
   return renderMapsIndex(Region.EU, locale);
 }
+
+export default withDictionaries("[locale]/(site)/maps", MapsIndexPageEU);

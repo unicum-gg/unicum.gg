@@ -8,6 +8,7 @@ import type { TournamentRecord } from "@/components/tournaments/detail/record";
 import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
 import { unicum } from "@/services/sdk";
+import { withDictionaries } from "@/components/dictionaries";
 
 // ISR on the catalogue's own cadence, not dynamic. What this replaces rested on
 // two premises, both measured false at the origin on 2026-10-24.
@@ -80,10 +81,10 @@ export async function generateMetadata({
   });
 }
 
-export default async function TournamentPage({
+async function TournamentPage({
   params,
 }: {
-  params: Promise<{ region: string; id: string }>;
+  params: Promise<{ locale: string; region: string; id: string }>;
 }) {
   const { region, id } = await params;
   if (!isRegion(region)) notFound();
@@ -97,3 +98,8 @@ export default async function TournamentPage({
     </div>
   );
 }
+
+export default withDictionaries(
+  "[locale]/(site)/[region]/tournaments/[id]",
+  TournamentPage,
+);

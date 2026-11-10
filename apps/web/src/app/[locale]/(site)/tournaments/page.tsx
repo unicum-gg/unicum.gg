@@ -3,6 +3,7 @@ import { Region, REGION_LABEL } from "@unicum.gg/wargaming";
 import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
 import { renderTournaments } from "@/app/[locale]/(site)/[region]/tournaments/page";
+import { withDictionaries } from "@/components/dictionaries";
 
 // The region-less shortcut, the same one `/players` and `/maps` carry: a short
 // canonical URL for the section, rendering the EU catalogue. It exists because
@@ -32,7 +33,7 @@ export async function generateMetadata({
   });
 }
 
-export default async function TournamentsShortcut({
+async function TournamentsShortcut({
   params,
 }: {
   params: Promise<{ locale: string }>;
@@ -42,3 +43,8 @@ export default async function TournamentsShortcut({
   // which points here.
   return renderTournaments(Region.EU, locale);
 }
+
+export default withDictionaries(
+  "[locale]/(site)/tournaments",
+  TournamentsShortcut,
+);

@@ -4,6 +4,7 @@ import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
 import { getTranslation } from "@/lib/translations.server";
+import { Dictionaries } from "@/components/dictionaries";
 
 export async function generateMetadata({
   params,
@@ -27,6 +28,15 @@ export async function generateMetadata({
 // change with a deploy and not with the data.
 export const dynamic = "force-static";
 
-export default function Page() {
-  return <BadgesView />;
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  return (
+    <Dictionaries locale={locale} scope="[locale]/(site)/badges">
+      <BadgesView />
+    </Dictionaries>
+  );
 }

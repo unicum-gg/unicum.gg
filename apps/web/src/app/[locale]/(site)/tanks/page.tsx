@@ -5,6 +5,7 @@ import {
 } from "@/app/[locale]/(site)/[region]/tanks/page";
 import { TankTab } from "@/components/tanks/list/tabs";
 import { Region } from "@unicum.gg/wargaming";
+import { withDictionaries } from "@/components/dictionaries";
 
 // EU shortcut: /tanks renders the same index as /eu/tanks.
 // ISR like the other landings: prerendered, revalidated in the background. Each
@@ -22,7 +23,7 @@ export async function generateMetadata({
   return tanksIndexMetadata(Region.EU, TankTab.Performances, locale);
 }
 
-export default async function TanksIndexPageEU({
+async function TanksIndexPageEU({
   params,
 }: {
   params: Promise<{ locale: string }>;
@@ -30,3 +31,5 @@ export default async function TanksIndexPageEU({
   const { locale } = await params;
   return renderTanksIndex(Region.EU, locale, TankTab.Performances);
 }
+
+export default withDictionaries("[locale]/(site)/tanks", TanksIndexPageEU);

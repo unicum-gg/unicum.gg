@@ -6,6 +6,7 @@ import {
 } from "@/app/[locale]/(site)/[region]/tanks/page";
 import { TankTab } from "@/components/tanks/list/tabs";
 import { isRegion } from "@unicum.gg/wargaming";
+import { withDictionaries } from "@/components/dictionaries";
 
 // The economics tab as its own route, so the server embeds this tab's data group
 // instead of always shipping Performances and letting the client fetch on top
@@ -22,7 +23,7 @@ export async function generateMetadata({
   return tanksIndexMetadata(region, TankTab.Economics, locale);
 }
 
-export default async function TanksEconomicsPage({
+async function TanksEconomicsPage({
   params,
 }: {
   params: Promise<{ locale: string; region: string }>;
@@ -31,3 +32,8 @@ export default async function TanksEconomicsPage({
   if (!isRegion(region)) notFound();
   return renderTanksIndex(region, locale, TankTab.Economics);
 }
+
+export default withDictionaries(
+  "[locale]/(site)/[region]/tanks/all/economics",
+  TanksEconomicsPage,
+);

@@ -5,6 +5,7 @@ import { MarksLandingView } from "@/components/players/list/marks/view";
 import { paginatedMetadata } from "@/lib/metadata";
 import { parsePageNumber } from "@/lib/page-number";
 import { Region } from "@unicum.gg/wargaming";
+import { withDictionaries } from "@/components/dictionaries";
 
 // One page of the EU shortcut, at `/players/marks/page/<n>`. The proxy rewrites
 // `?page=<n>` here and sends this path back to the query form.
@@ -29,7 +30,7 @@ export async function generateMetadata({
   });
 }
 
-export default async function Page({
+async function Page({
   params,
 }: {
   params: Promise<{ locale: string; n: string }>;
@@ -46,3 +47,5 @@ export default async function Page({
     />
   );
 }
+
+export default withDictionaries("[locale]/(site)/players/marks/page/[n]", Page);

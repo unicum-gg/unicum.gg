@@ -6,6 +6,7 @@ import {
 } from "@/app/[locale]/(site)/[region]/tanks/page";
 import { TankTab } from "@/components/tanks/list/tabs";
 import { isRegion } from "@unicum.gg/wargaming";
+import { withDictionaries } from "@/components/dictionaries";
 
 // The marks-of-excellence tab as its own route, so the server embeds this tab's data group
 // instead of always shipping Performances and letting the client fetch on top
@@ -22,7 +23,7 @@ export async function generateMetadata({
   return tanksIndexMetadata(region, TankTab.MarksOfExcellence, locale);
 }
 
-export default async function TanksMoePage({
+async function TanksMoePage({
   params,
 }: {
   params: Promise<{ locale: string; region: string }>;
@@ -31,3 +32,8 @@ export default async function TanksMoePage({
   if (!isRegion(region)) notFound();
   return renderTanksIndex(region, locale, TankTab.MarksOfExcellence);
 }
+
+export default withDictionaries(
+  "[locale]/(site)/[region]/tanks/all/marks-of-excellence",
+  TanksMoePage,
+);

@@ -4,6 +4,7 @@ import ROUTES from "@/constants/routes";
 import APP from "@/constants/app";
 import { constructMetadata } from "@/lib/metadata";
 import { getTranslation } from "@/lib/translations.server";
+import { withDictionaries } from "@/components/dictionaries";
 
 export async function generateMetadata({
   params,
@@ -23,7 +24,7 @@ export async function generateMetadata({
   });
 }
 
-export default async function Page({
+async function Page({
   params,
 }: {
   params: Promise<{ locale: string }>;
@@ -39,3 +40,5 @@ export default async function Page({
 // stays live client-side, so real-time freshness is covered there.
 export const dynamic = "force-static";
 export const revalidate = 600;
+
+export default withDictionaries("[locale]/(site)/support", Page);

@@ -35,6 +35,7 @@ import { getTranslation } from "@/lib/translations.server";
 import { breadcrumbSchema } from "@/lib/schema-org";
 import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
+import { withDictionaries } from "@/components/dictionaries";
 
 
 const MCP_ENDPOINT = `${APP.URL}/api/mcp`;
@@ -190,7 +191,7 @@ function toolParams(def: (typeof TOOL_DEFS)[number]): string {
     .join(", ");
 }
 
-export default async function McpPage({
+async function McpPage({
   params,
 }: {
   params: Promise<{ locale: string }>;
@@ -370,3 +371,5 @@ export default async function McpPage({
     </div>
   );
 }
+
+export default withDictionaries("[locale]/(site)/mcp", McpPage);

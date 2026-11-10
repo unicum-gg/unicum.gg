@@ -7,6 +7,7 @@ import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
 import { getTranslation } from "@/lib/translations.server";
 import { isRegion, Region, REGION_LABEL } from "@unicum.gg/wargaming";
+import { withDictionaries } from "@/components/dictionaries";
 
 // ISR like the other leaderboards: renders the current season, cached. The
 // season selector's `?season=` is read client-side (OnslaughtBoardLive), so it
@@ -48,7 +49,7 @@ export async function generateMetadata({
   return onslaughtMetadata(region, locale);
 }
 
-export default async function Page({
+async function Page({
   params,
 }: {
   params: Promise<{ locale: string; region: string }>;
@@ -58,3 +59,8 @@ export default async function Page({
   if (region === Region.EU) redirect(localizePath(ROUTES.PLAYERS_ONSLAUGHT(Region.EU), locale));
   return <OnslaughtView locale={locale} region={region} page={1} />;
 }
+
+export default withDictionaries(
+  "[locale]/(site)/[region]/players/onslaught",
+  Page,
+);

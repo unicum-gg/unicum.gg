@@ -8,6 +8,7 @@ import {
 import { TankChangesHistory } from "@/components/tanks/detail/history";
 import { TankDetailTab } from "@/components/tanks/detail/tabs";
 import { isRegion } from "@unicum.gg/wargaming";
+import { withDictionaries } from "@/components/dictionaries";
 
 // The History tab as its own route, so a render builds this tab alone instead of
 // all of them (see tabs.ts). Same ISR settings as the base page.
@@ -23,7 +24,7 @@ export async function generateMetadata({
   return tankMetadata(region, slug, TankDetailTab.History, locale);
 }
 
-export default async function TankHistoryPage({
+async function TankHistoryPage({
   params,
 }: {
   params: Promise<{ locale: string; region: string; slug: string }>;
@@ -47,3 +48,8 @@ export default async function TankHistoryPage({
     />
   );
 }
+
+export default withDictionaries(
+  "[locale]/(site)/[region]/tanks/[slug]/(detail)/history",
+  TankHistoryPage,
+);

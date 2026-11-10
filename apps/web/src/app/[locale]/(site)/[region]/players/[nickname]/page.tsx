@@ -44,6 +44,7 @@ import {
   type StoredPlayerLoadout,
 } from "@unicum.gg/shared";
 import { type Region, isRegion } from "@unicum.gg/wargaming";
+import { withDictionaries } from "@/components/dictionaries";
 
 const PCT_FORMAT = {
   minimumFractionDigits: 1,
@@ -261,7 +262,7 @@ export async function generateMetadata({
   return playerMetadata(region, nickname, DEFAULT_PLAYER_VIEW, locale);
 }
 
-export default async function PlayerPage({
+async function PlayerPage({
   params,
 }: {
   params: Promise<{ locale: string; region: string; nickname: string }>;
@@ -595,3 +596,8 @@ async function PlayerProfileServer({
     </div>
   );
 }
+
+export default withDictionaries(
+  "[locale]/(site)/[region]/players/[nickname]",
+  PlayerPage,
+);
