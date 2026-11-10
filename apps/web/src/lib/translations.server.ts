@@ -9,8 +9,14 @@ import {
   type Dictionaries,
   type Namespace,
 } from "@/locales/generated";
+import { CLIENT_NAMESPACES } from "@/locales/generated/client-namespaces";
 import { composeStatLabels } from "@/lib/stat-labels";
-import { DEFAULT_LOCALE, isLocale, Locale } from "./translations";
+import {
+  DEFAULT_LOCALE,
+  isLocale,
+  Locale,
+  SERVER_ONLY_NAMESPACES,
+} from "./translations";
 
 /**
  * The locale is always passed in, never read from `headers()`.
@@ -75,6 +81,56 @@ export function getDictionaries(locale: Locale): Promise<Dictionaries> {
   if (!pending) {
     pending = buildDictionaries(locale);
     merged.set(locale, pending);
+  }
+  return pending;
+}
+
+/**
+ * Everything the browser needs, and nothing it does not.
+ *
+ * The client provider is handed ONE dictionary set and its loader is
+ * synchronous, so whatever a reader might ask for has to be there already:
+ * there is no asking for a namespace later. That used to mean the whole
+ * catalogue, 399 namespaces and 263 342 octets of French inlined in the RSC
+ * payload of EVERY page, which measured 59% of a player profile's payload while
+ * the page's own prose is a few kilobytes. Most of it was copy only the server
+ * renders.
+ *
+ * Two filters, and they answer different questions. `CLIENT_NAMESPACES` is
+ * derived from the import graph and says what the browser bundle CAN read, so
+ * it follows the code with nobody maintaining a list. `SERVER_ONLY_NAMESPACES`
+ * says what must never cross whatever the code does, which is still needed:
+ * those seven are heavy, they are named in the deny list itself, and that
+ * declaration lives in a module client components import, so the derivation
+ * sees their names and would ship all seven. It over-includes by design, in the
+ * direction where the cost is bytes rather than a raw key at a reader.
+ *
+ * Resolved once per locale per process, like the full set it is cut from: the
+ * root layout renders on every page, and filtering 399 entries each time is
+ * work with one possible answer.
+ */
+const forClient = new Map<Locale, Promise<Dictionaries>>();
+
+const shipped = new Set<string>(
+  CLIENT_NAMESPACES.filter(
+    (namespace) => !SERVER_ONLY_NAMESPACES.includes(namespace),
+  ),
+);
+
+async function buildClientDictionaries(locale: Locale): Promise<Dictionaries> {
+  const all = await getDictionaries(locale);
+  const out: Dictionaries = {};
+  for (const [namespace, dictionary] of Object.entries(all)) {
+    if (shipped.has(namespace)) out[namespace as Namespace] = dictionary;
+  }
+  return out;
+}
+
+export function getClientDictionaries(locale: Locale): Promise<Dictionaries> {
+  let pending = forClient.get(locale);
+  if (!pending) {
+    pending = buildClientDictionaries(locale);
+    forClient.set(locale, pending);
   }
   return pending;
 }

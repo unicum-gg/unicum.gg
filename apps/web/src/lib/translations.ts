@@ -226,20 +226,30 @@ export const getPreferredLocale = createGetPreferredLocale({
 }) as (request: LocaleRequest) => Locale;
 
 /**
- * Namespaces the browser never receives.
+ * Namespaces the browser must never receive, whatever the code does.
  *
  * Every namespace is handed to the client provider as one dictionary set, so a
  * namespace costs its own weight on EVERY page rather than on the pages that
- * read it. Three of them are large and read in exactly one place each:
+ * read it. These seven are the heavy ones, each read in exactly one place:
  * `game/map-descriptions` is 20 KB of map blurbs that only a map's own page
- * shows, and `game/equipment` and `game/crew-perks` are 21 KB naming a tank's
- * loadout, which only a tank page reads. Together they were 40% of the payload
- * on pages that never touch them.
+ * shows, and the equipment, crew-perk and skill-tree families name a tank's
+ * loadout and its upgrades, which only a tank page reads. They were 40% of the
+ * payload on pages that never touch them.
  *
- * So those three are resolved on the server, where `getTranslation` still sees
- * them, and stripped before the dictionaries cross the wire. A client component
- * that reads one gets its key back, which is why `tests/validation/locales`
- * fails if a `"use client"` file names one.
+ * **What actually decides whether a namespace crosses the wire is now derived**
+ * from the import graph (`CLIENT_NAMESPACES`, written by
+ * `scripts/generate-locales`), so the catalogue follows the code with nobody
+ * keeping a list: three quarters of it is copy only the server renders. This
+ * list stays because the derivation errs towards shipping, and because it errs
+ * on these seven in particular: it reads namespace names as string literals in
+ * client-reachable files, and the literals right below this comment are in a
+ * module client components import, so the derivation sees all seven and would
+ * ship every one of them.
+ *
+ * They are resolved on the server, where `getTranslation` still sees them, and
+ * stripped before the dictionaries cross the wire. A client component that
+ * reads one gets its key back, which is why `tests/validation/locales` fails if
+ * a `"use client"` file names one.
  */
 export const SERVER_ONLY_NAMESPACES: readonly string[] = [
   "game/map-descriptions",
@@ -251,6 +261,3 @@ export const SERVER_ONLY_NAMESPACES: readonly string[] = [
   "game/skill-tree-descriptions",
 ];
 
-/** Whether the browser is meant to hold this namespace. */
-export const isClientNamespace = (namespace: string): boolean =>
-  !SERVER_ONLY_NAMESPACES.includes(namespace);

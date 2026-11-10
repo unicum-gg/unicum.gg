@@ -83,8 +83,23 @@ export function Provider({
     [fuma],
   );
 
+  // Only what this route's own tree can read reaches the browser, derived from
+  // the import graph (`getClientDictionaries`), so a namespace the derivation
+  // did not see arrives absent and the component renders its own keys. The
+  // locale suite checks the call sites, which covers every namespace read
+  // through the hook; this covers the rest, on the first dev render of the page
+  // that reads it, which is sooner than a reader would find it.
   const load = useCallback(
-    (_locale: string, namespace: string) => dictionaries[namespace as Namespace],
+    (_locale: string, namespace: string) => {
+      const dictionary = dictionaries[namespace as Namespace];
+      if (!dictionary && process.env.NODE_ENV === "development") {
+        console.error(
+          `[locales] "${namespace}" never reached the browser, so its keys will render raw. ` +
+            `Add it to the client set by naming it in a client-reachable file, or read it on the server.`,
+        );
+      }
+      return dictionary;
+    },
     [dictionaries],
   );
 

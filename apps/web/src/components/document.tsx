@@ -12,12 +12,8 @@ import { WebMcp } from "@/components/script/webmcp";
 import { Toaster } from "@/components/ui/sonner";
 import STORAGE from "@/constants/storage";
 import { organizationSchema, websiteSchema } from "@/lib/schema-org";
-import {
-  isClientNamespace,
-  localeDir,
-  type Locale,
-} from "@/lib/translations";
-import { getDictionaries } from "@/lib/translations.server";
+import { localeDir, type Locale } from "@/lib/translations";
+import { getClientDictionaries } from "@/lib/translations.server";
 import {
   DEFAULT_RATING_METRIC,
   RATING_METRICS,
@@ -99,12 +95,9 @@ export async function Document({
   locale: Locale;
   children: ReactNode;
 }) {
-  // Everything the browser needs, and nothing it does not: the three heavy
-  // server-only namespaces stay behind (see `SERVER_ONLY_NAMESPACES`).
-  const all = await getDictionaries(locale);
-  const dictionaries = Object.fromEntries(
-    Object.entries(all).filter(([namespace]) => isClientNamespace(namespace)),
-  ) as typeof all;
+  // Everything the browser needs, and nothing it does not: three quarters of
+  // the catalogue is copy only the server renders (see `getClientDictionaries`).
+  const dictionaries = await getClientDictionaries(locale);
 
   return (
     <html

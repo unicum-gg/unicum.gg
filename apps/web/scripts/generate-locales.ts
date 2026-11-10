@@ -20,14 +20,15 @@ import {
   rmSync,
   writeFileSync,
 } from "node:fs";
-import { dirname, join, relative, sep } from "node:path";
+import { dirname, join, normalize, relative, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 import { DEFAULT_LOCALE, LOCALES } from "../src/lib/translations";
 import { statLabelKey } from "../src/components/stat-label";
 import { cataloguedLabelKeys } from "./translation-rules";
 
 const webRoot = join(dirname(fileURLToPath(import.meta.url)), "..");
-const localesRoot = join(webRoot, "src", "locales");
+const srcRoot = join(webRoot, "src");
+const localesRoot = join(srcRoot, "locales");
 const outDir = join(localesRoot, "generated");
 
 /** Every `*.json` under `dir`, as namespace paths (`layout/footer`). */
@@ -48,7 +49,110 @@ function namespacesIn(dir: string): string[] {
 }
 
 
+/** `"use client"`, which has to be the file's first statement to count. */
+const CLIENT_DIRECTIVE = /^\s*["']use client["']/m;
+/** Every static and dynamic import of a path inside the tree. */
+const IMPORT = /(?:from\s+"([^"]+)")|(?:import\(\s*"([^"]+)"\s*\))/g;
+
+/** Every `.ts`/`.tsx` under `src`, except the locale tree itself. */
+function appFiles(dir: string, out: string[] = []): string[] {
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    const full = join(dir, entry.name);
+    if (full === localesRoot) continue;
+    if (entry.isDirectory()) appFiles(full, out);
+    else if (entry.name.endsWith(".ts") || entry.name.endsWith(".tsx"))
+      out.push(full);
+  }
+  return out;
+}
+
+/** Resolve one import specifier to a file in the tree, or null if it leaves it. */
+function resolveImport(
+  specifier: string,
+  from: string,
+  files: Set<string>,
+): string | null {
+  let base: string;
+  if (specifier.startsWith("@/")) base = join(srcRoot, specifier.slice(2));
+  else if (specifier.startsWith("."))
+    base = normalize(join(dirname(from), specifier));
+  else return null;
+  for (const candidate of [
+    `${base}.tsx`,
+    `${base}.ts`,
+    join(base, "index.tsx"),
+    join(base, "index.ts"),
+  ]) {
+    if (files.has(candidate)) return candidate;
+  }
+  return null;
+}
+
+/**
+ * The namespaces the browser can actually read, which is what decides whether a
+ * namespace crosses the wire at all.
+ *
+ * Every namespace used to, because the server hands the client provider ONE
+ * dictionary set and the provider's loader is synchronous, so anything a reader
+ * might ask for has to already be there. Measured on French: 392 namespaces and
+ * 263 342 octets inlined in the RSC payload of every page, 59% of a player
+ * profile's payload, where a page's own prose is a few kilobytes. Three
+ * quarters of it was prose only the SERVER renders: a page's copy read through
+ * `getTranslation`, which never needs a browser to hold it.
+ *
+ * So the test is reachability of the BUNDLE rather than anything about the
+ * namespace: a file carrying `"use client"` is an entry point, everything it
+ * imports is in the browser with it, and a namespace ships when its name
+ * appears as a string literal in one of those files. Measured: 75 namespaces
+ * and 70 147 octets leave every page of the site.
+ *
+ * **Matched on the literal, not on `useTranslation("...")`.** The call is how
+ * nearly all of them are read, and it is not how all of them are: the partners
+ * page holds its namespace in a `const`, the game vocabulary is a list of names
+ * in `lib/game-vocabulary`, and `components/fumadocs` is read by indexing the
+ * dictionary set directly in `components/provider`. A rule keyed on the call
+ * would have stripped the last one and left the documentation chrome rendering
+ * its own keys, in the one place no page of this site renders.
+ *
+ * It over-includes by construction (a namespace named in a comment, or in a
+ * module a client component imports for a type, ships anyway), which is the
+ * direction to err in: the cost of a namespace too many is its bytes, and the
+ * cost of one too few is a raw key at a reader.
+ */
+function clientNamespaces(all: readonly string[]): string[] {
+  const paths = appFiles(srcRoot);
+  const files = new Set(paths);
+  const source = new Map(
+    paths.map((file) => [file, readFileSync(file, "utf-8")] as const),
+  );
+  const imports = new Map(
+    paths.map((file) => [
+      file,
+      [...(source.get(file) ?? "").matchAll(IMPORT)]
+        .map((match) => resolveImport(match[1] ?? match[2], file, files))
+        .filter((target): target is string => target !== null),
+    ]),
+  );
+
+  const reached = new Set<string>();
+  const stack = paths.filter((file) =>
+    CLIENT_DIRECTIVE.test(source.get(file) ?? ""),
+  );
+  while (stack.length > 0) {
+    const file = stack.pop() as string;
+    if (reached.has(file)) continue;
+    reached.add(file);
+    for (const target of imports.get(file) ?? []) {
+      if (!reached.has(target)) stack.push(target);
+    }
+  }
+
+  const bundle = [...reached].map((file) => source.get(file) ?? "").join("\n");
+  return all.filter((namespace) => bundle.includes(JSON.stringify(namespace)));
+}
+
 const namespaces = namespacesIn(join(localesRoot, DEFAULT_LOCALE));
+const client = clientNamespaces(namespaces);
 
 mkdirSync(outDir, { recursive: true });
 // A locale removed from the enum must not leave its module behind: the loader
@@ -128,6 +232,20 @@ ${[...gameNameKeys]
 `,
 );
 
+writeFileSync(
+  join(outDir, "client-namespaces.ts"),
+  `${HEADER}
+import type { Namespace } from ".";
+
+/** The namespaces the browser bundle can read, derived from the import graph by
+ * \`clientNamespaces\` in the generator, which says why. \`lib/translations.server\`
+ * strips everything else before the dictionaries cross the wire. */
+export const CLIENT_NAMESPACES: readonly Namespace[] = [
+${client.map((namespace) => `  ${JSON.stringify(namespace)},`).join("\n")}
+];
+`,
+);
+
 const namespaceUnion = namespaces.length
   ? namespaces.map((namespace) => `\n  | ${JSON.stringify(namespace)}`).join("")
   : " never";
@@ -166,5 +284,7 @@ export function loadDictionaries(locale: Locale): Promise<Dictionaries> {
 );
 
 console.log(
-  `[locales] ${namespaces.length} namespace(s) x ${LOCALES.length} locale(s), ${gameNameKeys.size} catalogued label(s) -> ${relative(webRoot, outDir)}`,
+  `[locales] ${namespaces.length} namespace(s) x ${LOCALES.length} locale(s), ` +
+    `${client.length} reaching the browser, ` +
+    `${gameNameKeys.size} catalogued label(s) -> ${relative(webRoot, outDir)}`,
 );
