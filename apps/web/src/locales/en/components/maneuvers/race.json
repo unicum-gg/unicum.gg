@@ -10,5 +10,12 @@
     "clans": "Ranked clans"
   },
   "fame-points": "Fame Points",
-  "no-curve": "The curve starts once the board has been recorded twice."
+  "no-curve": "The curve starts once the board has been recorded twice.",
+  "last-evening": "+{points} over the last evening",
+  "projected": {
+    "players": "Projected cutoff at the end",
+    "clans": "Projected gold cutoff at the end"
+  },
+  "projected-range": "Likely between {low} and {high}",
+  "projected-pending": "Projected once {count} evenings have been watched"
 }

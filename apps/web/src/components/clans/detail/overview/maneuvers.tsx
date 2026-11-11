@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import useSWR from "swr";
 import {
   ManeuversBoardKind,
+  maneuversCutoffForecast,
   maneuversBonds,
   maneuversMultiplier,
 } from "@unicum.gg/shared";
@@ -97,6 +98,14 @@ export function ClanManeuversTab({
     t: p.t,
     cutoff: p.clanGoldCutoffPoints,
   }));
+  // Where the line ends, once enough evenings have been watched to say.
+  const projected = current
+    ? (maneuversCutoffForecast(
+        cutoffs,
+        current.startDate ? Date.parse(current.startDate) / 1000 : null,
+        current.endDate ? Date.parse(current.endDate) / 1000 : null,
+      ).projection?.points ?? null)
+    : null;
   const past = (data?.editions ?? []).filter((e) => e.eventName !== current?.eventName);
 
   return (
@@ -122,6 +131,7 @@ export function ClanManeuversTab({
               href={boardHref(region, current.eventName, true)}
               edition={maneuversEditionName(current.eventName, tEdition)}
               cutoffPoints={cutoffs.at(-1)?.cutoff ?? null}
+            projectedCutoff={projected}
             />
           ) : null}
           {data && current ? (

@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import useSWR from "swr";
-import { ManeuversBoardKind } from "@unicum.gg/shared";
+import { maneuversCutoffForecast, ManeuversBoardKind } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import {
   Panel,
@@ -80,6 +80,14 @@ export function ManeuversTab({
     t: p.t,
     cutoff: p.tankCutoffPoints,
   }));
+  // Where the line ends, once enough evenings have been watched to say.
+  const projected = current
+    ? (maneuversCutoffForecast(
+        cutoffs,
+        current.startDate ? Date.parse(current.startDate) / 1000 : null,
+        current.endDate ? Date.parse(current.endDate) / 1000 : null,
+      ).projection?.points ?? null)
+    : null;
   const cutoffNow = cutoffs.at(-1)?.cutoff ?? null;
 
   if (loading && !data) {
@@ -106,6 +114,7 @@ export function ManeuversTab({
             href={boardHref(region, current.eventName, true)}
             edition={maneuversEditionName(current.eventName, tEdition)}
             cutoffPoints={cutoffNow}
+            projectedCutoff={projected}
           />
         ) : null}
         {current ? (

@@ -14,7 +14,11 @@ import { formatMoment, formatPlayers } from "@/components/servers/format";
 import { useDisplayZone } from "@/components/servers/use-display-zone";
 import { useManeuversEdition } from "@/components/maneuvers/edition-context";
 import { FamePoints } from "@/components/maneuvers/fame-points";
-import { ManeuversBoardKind } from "@unicum.gg/shared";
+import {
+  ManeuversBoardKind,
+  MANEUVERS_FORECAST_MIN_EVENINGS,
+  maneuversCutoffForecast,
+} from "@unicum.gg/shared";
 import { useFormat } from "@/hooks/use-format";
 import { useTranslation } from "@/hooks/use-translation";
 import { unicum } from "@/services/sdk";
@@ -42,7 +46,7 @@ const ManeuversRaceCharts = dynamic(
  */
 export function ManeuversRace({ kind }: { kind: ManeuversBoardKind }) {
   const { t } = useTranslation("components/maneuvers/race");
-  const { locale } = useFormat();
+  const { num, locale } = useFormat();
   const zone = useDisplayZone();
   const { region, board } = useManeuversEdition();
   const { edition, standing } = board;
@@ -78,6 +82,18 @@ export function ManeuversRace({ kind }: { kind: ManeuversBoardKind }) {
   const ranked = kind === ManeuversBoardKind.Players ? standing.playerCount : standing.clanCount;
   const capturedAt = new Date(standing.capturedAt);
   const ended = edition.endDate != null && new Date(edition.endDate) < capturedAt;
+  // Where the line ends up, from the evenings already played. Not on an
+  // edition that has ended, whose line is final.
+  const forecast = maneuversCutoffForecast(
+    samples.map((p) => ({
+      t: p.t,
+      cutoff:
+        kind === ManeuversBoardKind.Players ? p.tankCutoffPoints : p.clanGoldCutoffPoints,
+    })),
+    edition.startDate ? Date.parse(edition.startDate) / 1000 : null,
+    edition.endDate ? Date.parse(edition.endDate) / 1000 : null,
+  );
+  const fmt = num({ maximumFractionDigits: 0 });
 
   return (
     <>
@@ -91,8 +107,32 @@ export function ManeuversRace({ kind }: { kind: ManeuversBoardKind }) {
             <Cell
               title={t(`cutoff.${kind}`)}
               value={cutoff != null ? <FamePoints value={cutoff} size={22} /> : null}
-              footer={t("fame-points")}
+              footer={
+                forecast.lastEveningGain != null && !ended
+                  ? t("last-evening", { points: fmt.format(forecast.lastEveningGain) })
+                  : t("fame-points")
+              }
             />
+            {!ended && samples.length > 0 ? (
+              <Cell
+                title={t(`projected.${kind}`)}
+                value={
+                  forecast.projection ? (
+                    <FamePoints value={forecast.projection.points} size={22} />
+                  ) : null
+                }
+                footer={
+                  forecast.projection
+                    ? t("projected-range", {
+                        low: fmt.format(forecast.projection.low),
+                        high: fmt.format(forecast.projection.high),
+                      })
+                    : t("projected-pending", {
+                        count: MANEUVERS_FORECAST_MIN_EVENINGS,
+                      })
+                }
+              />
+            ) : null}
             <Cell
               title={t(`ranked.${kind}`)}
               value={formatPlayers(ranked, locale)}

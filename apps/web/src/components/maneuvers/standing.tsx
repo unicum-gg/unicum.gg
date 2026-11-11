@@ -31,6 +31,7 @@ export function ManeuversStanding({
   href,
   edition,
   cutoffPoints,
+  projectedCutoff,
 }: {
   kind: ManeuversBoardKind;
   standing: ManeuversStandingData;
@@ -38,6 +39,9 @@ export function ManeuversStanding({
   href: string;
   edition: string;
   cutoffPoints: number | null;
+  /** Where the reward line is projected to end, when enough evenings have been
+   * watched to say (`maneuversCutoffForecast`). */
+  projectedCutoff?: number | null;
 }) {
   const { t } = useTranslation("components/maneuvers/standing");
   const { num } = useFormat();
@@ -98,6 +102,19 @@ export function ManeuversStanding({
             : margin != null
               ? t(`outside-points.${kind}`, { points: fmt.format(-margin) })
               : t(`outside-places.${kind}`, { places: fmt.format(standing.place - line) })}
+        </div>
+      ) : null}
+      {projectedCutoff != null ? (
+        <div className="text-sm text-fd-muted-foreground">
+          {standing.famePoints >= projectedCutoff
+            ? t(`projected-above.${kind}`, {
+                projected: fmt.format(projectedCutoff),
+                points: fmt.format(standing.famePoints - projectedCutoff),
+              })
+            : t(`projected-short.${kind}`, {
+                projected: fmt.format(projectedCutoff),
+                points: fmt.format(projectedCutoff - standing.famePoints),
+              })}
         </div>
       ) : null}
     </div>

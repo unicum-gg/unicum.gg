@@ -26,5 +26,13 @@
   "won": {
     "players": "Vehicle earned",
     "clans": "Gold earned"
+  },
+  "projected-above": {
+    "players": "The vehicle line is projected to end near {projected} Fame Points, {points} below today’s total.",
+    "clans": "The gold line is projected to end near {projected} Fame Points, {points} below today’s total."
+  },
+  "projected-short": {
+    "players": "The vehicle line is projected to end near {projected} Fame Points: {points} more to earn by then.",
+    "clans": "The gold line is projected to end near {projected} Fame Points: {points} more to earn by then."
   }
 }
