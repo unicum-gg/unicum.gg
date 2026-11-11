@@ -64,6 +64,18 @@ on:
       # The recipe itself, which neither Coolify nor the app tree covers.
       - ".github/workflows/build-web.yml"
 
+# One build at a time on this branch, newest wins.
+#
+# Load-bearing now that the deploy is a pull of `latest`: two pushes in quick
+# succession each move that tag, and without this the slower build moves it
+# back onto the older commit after the faster one has already deployed. There
+# were six pushes to main on 2026-11-11, several minutes apart, so this is the
+# ordinary case rather than a corner of it. Cancelling also stops paying for a
+# build whose image nothing will ever deploy.
+concurrency:
+  group: build-web
+  cancel-in-progress: true
+
 env:
   IMAGE: ghcr.io/${{ github.repository }}-web
   # The production host, which the build tunnels to Postgres through.
@@ -227,3 +239,85 @@ jobs:
           echo "${{ env.IMAGE }}:${{ github.sha }}" >> "$GITHUB_STEP_SUMMARY"
           echo "${{ env.IMAGE }}:latest" >> "$GITHUB_STEP_SUMMARY"
           echo '```' >> "$GITHUB_STEP_SUMMARY"
+
+      # Telling Coolify to pull, which is what makes building here worth
+      # anything. Until 2026-11-11 this workflow published an image and nothing
+      # deployed it: the host rebuilt the same commit itself with Railpack, on
+      # the same twelve cores that serve the site.
+      #
+      # What that cost, measured that evening: a host build holds about 1.4
+      # cores for 14 to 25 minutes, and with the queue it ran most of the
+      # afternoon. The origin needs ~0.5s to render a page when the machine is
+      # calm and a Cloudflare miss was answering in 4.2 to 4.6 seconds, against
+      # 70ms on a hit. The deploy is a `docker compose pull` now.
+      #
+      # It runs after the push because Coolify can only fetch an image that
+      # exists, and Coolify re-reads the tag on every deployment of a prebuilt
+      # image, so `latest` is the commit this job has just published rather
+      # than whatever the host happens to hold. The immutable `:<sha>` tag
+      # beside it is what a rollback names.
+      #
+      # Coolify's own git webhook is OFF on this application, and it has to
+      # stay off. Left on, a push starts a deploy within seconds and pulls the
+      # image of the commit BEFORE it, ten minutes before this job has one to
+      # offer, and the site would run one commit behind for good.
+      #
+      # The instance URL and the application id are secrets for the reason
+      # CI_TUNNEL_HOST is one: this repository is public, and neither the
+      # control plane's address nor the handle that deploys the site is
+      # something to publish ourselves.
+      - name: Deploy
+        if: github.ref == 'refs/heads/main'
+        env:
+          COOLIFY_URL: ${{ secrets.COOLIFY_URL }}
+          COOLIFY_APP_UUID: ${{ secrets.COOLIFY_APP_UUID }}
+          COOLIFY_DEPLOY_TOKEN: ${{ secrets.COOLIFY_DEPLOY_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          for name in COOLIFY_URL COOLIFY_APP_UUID COOLIFY_DEPLOY_TOKEN; do
+            if [ -z "${!name}" ]; then
+              echo "$name is not set: add it as a repository secret"; exit 1
+            fi
+          done
+
+          started=$(curl -sS --fail-with-body -X POST \
+            -H "Authorization: Bearer $COOLIFY_DEPLOY_TOKEN" \
+            "$COOLIFY_URL/api/v1/deploy?uuid=$COOLIFY_APP_UUID")
+
+          deployment=$(printf '%s' "$started" | jq -r '.deployments[0].deployment_uuid // empty')
+          if [ -z "$deployment" ]; then
+            echo "Coolify accepted the call but named no deployment:"
+            printf '%s\n' "$started"
+            exit 1
+          fi
+          echo "deployment $deployment"
+
+          # Waiting rather than firing and forgetting, because the failure this
+          # pipeline has actually had is nobody noticing. A green run that
+          # deployed nothing is the same silence under a new name.
+          #
+          # The ceiling is twenty minutes against a pull and a rolling update
+          # that take about one, so reaching it means wedged rather than slow.
+          deadline=$((SECONDS + 1200))
+          status=unknown
+          while [ "$SECONDS" -lt "$deadline" ]; do
+            status=$(curl -sS -H "Authorization: Bearer $COOLIFY_DEPLOY_TOKEN" \
+              "$COOLIFY_URL/api/v1/deployments/$deployment" | jq -r '.status // "unknown"')
+            case "$status" in
+              finished)
+                echo "deployed"
+                echo "### Deployed" >> "$GITHUB_STEP_SUMMARY"
+                echo "\`${IMAGE}:${GITHUB_SHA}\`" >> "$GITHUB_STEP_SUMMARY"
+                exit 0
+                ;;
+              failed|cancelled-by-user)
+                echo "deployment $status"
+                exit 1
+                ;;
+            esac
+            sleep 10
+          done
+
+          echo "deployment still '$status' after 20 minutes"
+          exit 1

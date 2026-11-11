@@ -55,6 +55,8 @@ jobs:
     if: github.actor != 'github-actions[bot]'
     permissions:
       contents: write
+      # Dispatching the image build below, which is a write on Actions.
+      actions: write
 
     steps:
       - uses: actions/checkout@v4
@@ -124,6 +126,7 @@ jobs:
       # Committing first keeps what was paid for; the check below still fails
       # the job, so nothing ships unnoticed.
       - name: Commit
+        id: commit
         if: ${{ !cancelled() }}
         run: |
           git config user.name "github-actions[bot]"
@@ -139,13 +142,37 @@ jobs:
             # commit only ever touches generated locale files, so it replays
             # onto anything cleanly.
             for attempt in 1 2 3; do
-              if git push; then exit 0; fi
+              if git push; then
+                echo "pushed=true" >> "$GITHUB_OUTPUT"
+                exit 0
+              fi
               echo "push rejected, rebasing (attempt ${attempt})"
               git pull --rebase origin main || exit 1
             done
             echo "still rejected after three tries"
             exit 1
           fi
+
+      # The locale commit has to ask for its own build.
+      #
+      # A push made with GITHUB_TOKEN does not start another workflow, which is
+      # GitHub's recursion guard and is usually what we want. It stops being
+      # harmless the day the image CI builds is the one production runs.
+      # Measured on 2026-11-11: neither `d4ed84edb` nor `a357632c2`, both locale
+      # commits of that afternoon, had a build-web run at all, and the host
+      # built them anyway because a Coolify webhook is a GitHub webhook and
+      # obeys no such rule. With the host out of the build, every string this
+      # workflow writes would stop reaching readers, silently, since nothing
+      # fails when a build simply never happens.
+      #
+      # `workflow_dispatch` is the documented exception to that guard, so this
+      # call does create a run. It names main rather than a sha because that is
+      # what the dispatch API takes, and main's head is the commit just pushed.
+      - name: Build and deploy the locale commit
+        if: steps.commit.outputs.pushed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run build-web.yml --ref main
 
       # Fails the job on a tree the generator could not make whole, which is
       # worth knowing even though the work is already committed above.
