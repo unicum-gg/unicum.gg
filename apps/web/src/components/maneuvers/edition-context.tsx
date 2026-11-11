@@ -3,8 +3,9 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import { useSearchParams } from "next/navigation";
 import { unicum } from "@/services/sdk";
+import type { ManeuversBoardKind } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
-import { MANEUVERS_LIMIT } from "@/components/maneuvers/limit";
+import { MANEUVERS_PAGE_SIZE } from "@/components/maneuvers/limit";
 
 /** The board as the SDK hands it over, dates revived. */
 export type ManeuversData = Awaited<
@@ -13,6 +14,10 @@ export type ManeuversData = Awaited<
 
 type ManeuversEditionState = {
   region: Region;
+  /** The board this page pages through. */
+  kind: ManeuversBoardKind;
+  /** The edition's frame and the first page of its board, in the board's own
+   * order. Other pages, orders and searches are the board's to fetch. */
   board: ManeuversData;
   /** The edition `?edition=` asks for, null for the newest. */
   requested: string | null;
@@ -34,10 +39,12 @@ const ManeuversEditionContext = createContext<ManeuversEditionState | null>(null
  */
 export function ManeuversEditionProvider({
   region,
+  kind,
   initial,
   children,
 }: {
   region: Region;
+  kind: ManeuversBoardKind;
   initial: ManeuversData;
   children: ReactNode;
 }) {
@@ -55,7 +62,7 @@ export function ManeuversEditionProvider({
     let cancelled = false;
     unicum
       .region(region)
-      .maneuvers({ limit: MANEUVERS_LIMIT, edition: requested })
+      .maneuvers({ board: kind, limit: MANEUVERS_PAGE_SIZE, edition: requested })
       .then((res) => {
         if (!cancelled) setSettled({ id: requested, data: res });
       })
@@ -65,7 +72,7 @@ export function ManeuversEditionProvider({
     return () => {
       cancelled = true;
     };
-  }, [isPast, requested, region]);
+  }, [isPast, requested, region, kind]);
 
   const fetched = isPast && settled?.id === requested ? settled : null;
   // A failed fetch reads as an edition we do not hold rather than silently
@@ -78,12 +85,14 @@ export function ManeuversEditionProvider({
         standing: null,
         players: [],
         clans: [],
+        totals: { players: 0, clans: 0 },
       };
 
   return (
     <ManeuversEditionContext.Provider
       value={{
         region,
+        kind,
         board,
         requested: isPast ? requested : null,
         loading: isPast && !fetched,

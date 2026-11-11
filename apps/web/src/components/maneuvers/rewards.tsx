@@ -15,6 +15,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { ManeuversBoardKind } from "@unicum.gg/shared";
 import { useManeuversEdition } from "@/components/maneuvers/edition-context";
 import { useFormat } from "@/hooks/use-format";
 import { useTranslation } from "@/hooks/use-translation";
@@ -22,8 +23,6 @@ import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 
 const INT_FORMAT = { maximumFractionDigits: 0 } as const;
-
-export type ManeuversBoardKind = "players" | "clans";
 
 /**
  * What an edition pays, the Onslaught rank scale's twin: the rewarded places
@@ -41,11 +40,11 @@ export function ManeuversRewards({ kind }: { kind: ManeuversBoardKind }) {
   const { board } = useManeuversEdition();
   const { edition, standing } = board;
   const places =
-    kind === "players" ? edition?.tankRewardPositions : edition?.clanGoldPositions;
+    kind === ManeuversBoardKind.Players ? edition?.tankRewardPositions : edition?.clanGoldPositions;
   if (!edition || places == null) return null;
 
   const ranked = standing
-    ? kind === "players"
+    ? kind === ManeuversBoardKind.Players
       ? standing.playerCount
       : standing.clanCount
     : 0;

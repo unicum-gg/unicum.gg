@@ -4,11 +4,62 @@
 // holds: the generator resolves a schema's local consts by NAME across files, so
 // a bare `entry` or `row` would silently merge with another endpoint's.
 import { z } from "zod";
-import { clanRankBadge } from "@/services/openapi/schemas";
+import {
+  ManeuversBoardKind,
+  ManeuversOrder,
+  ManeuversSort,
+} from "@unicum.gg/shared";
+import { clanRankBadge, type EnumMeta } from "@/services/openapi/schemas";
 
 export const maneuversQuery = z.object({
+  board: z
+    .enum(ManeuversBoardKind)
+    .optional()
+    .meta({
+      description:
+        "The board to page through. Omitted, both are served, each sliced by the same `offset` and `limit`; named, the other one comes back empty.",
+      "x-enum-source": "MANEUVERS_BOARD",
+    } as EnumMeta),
   limit: z.coerce.number().int().min(1).max(1000).optional().meta({
     description: "Rows per board, 1-1000 (default 100).",
+  }),
+  offset: z.coerce.number().int().min(0).optional().meta({
+    description:
+      "Rows to skip on each board, after searching and ordering (default 0). The whole board is reachable, not only its first rows.",
+  }),
+  sort: z
+    .enum(ManeuversSort)
+    .optional()
+    .meta({
+      description:
+        "The column the boards are ordered on (default `fame-points`, the board's own order). `gain` and `move` are the last 24 hours.",
+      "x-enum-source": "MANEUVERS_SORT",
+    } as EnumMeta),
+  order: z
+    .enum(ManeuversOrder)
+    .optional()
+    .meta({
+      description:
+        "Direction of `sort` (default `desc`). Rows with no figure on the sorted column come last either way.",
+      "x-enum-source": "MANEUVERS_ORDER",
+    } as EnumMeta),
+  range: z
+    .enum(ManeuversSort)
+    .optional()
+    .meta({
+      description:
+        "The column `min` and `max` bound. A row with no figure on it (a 24h move before the captures reach back a day) is left out.",
+      "x-enum-source": "MANEUVERS_SORT",
+    } as EnumMeta),
+  min: z.coerce.number().optional().meta({
+    description: "Lowest value kept on the `range` column, inclusive.",
+  }),
+  max: z.coerce.number().optional().meta({
+    description: "Highest value kept on the `range` column, inclusive.",
+  }),
+  q: z.string().optional().meta({
+    description:
+      "Case-insensitive search: a player's nickname, or a clan's tag or name. Rows keep their real place.",
   }),
   edition: z.string().optional().meta({
     description:
@@ -176,6 +227,15 @@ export const ManeuversBoardResponse = z
     }),
     players: z.array(maneuversPlayerEntry),
     clans: z.array(maneuversClanEntry),
+    totals: z
+      .object({
+        players: z.number(),
+        clans: z.number(),
+      })
+      .meta({
+        description:
+          "Rows matching the query on each board before paging: the whole board without `q` or a range, the matches with them.",
+      }),
   })
   .meta({
     description:

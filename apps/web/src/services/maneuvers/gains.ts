@@ -22,10 +22,10 @@ const GAIN_WINDOW_MS = 24 * 60 * 60 * 1000;
  * holds. Null when the edition's captures do not reach back a day, since every
  * gain would then be measured over a shorter window than the column says.
  *
- * Asked for the listed ids only, one backward index probe each on the history
- * primary key, rather than over the whole edition: the history grows by one
- * row per ranked entry every capture, and a scan of it would cost more with
- * every day the edition runs.
+ * One backward index probe per id on the history primary key rather than a
+ * scan of the edition: the history grows with every capture, and a scan would
+ * cost more with every day the edition runs. Measured at ~100ms for EU's
+ * 15,000 players, which is what lets the whole board be read at once.
  */
 export async function readGains(
   region: Region,

@@ -1,7 +1,7 @@
 import { Interpolate } from "@/components/interpolate";
 import { ManeuversBoardSwitch } from "@/components/maneuvers-board-switch";
 import { ManeuversEditionProvider } from "@/components/maneuvers/edition-context";
-import { MANEUVERS_LIMIT } from "@/components/maneuvers/limit";
+import { MANEUVERS_PAGE_SIZE } from "@/components/maneuvers/limit";
 import { ManeuversRace } from "@/components/maneuvers/race";
 import { ManeuversRewards } from "@/components/maneuvers/rewards";
 import { ManeuversScale } from "@/components/maneuvers/scale";
@@ -12,6 +12,7 @@ import { ManeuversPlayersBoard } from "@/components/players/list/maneuvers/board
 import { PlayersModeTabs } from "@/components/players/list/mode-tabs";
 import { getTranslation } from "@/lib/translations.server";
 import { buildSafe, unicum } from "@/services/sdk";
+import { ManeuversBoardKind } from "@unicum.gg/shared";
 import { Region, REGION_EMOJI, REGION_LABEL } from "@unicum.gg/wargaming";
 
 // Shared body for /players/maneuvers (EU default) and
@@ -31,13 +32,17 @@ export async function ManeuversPlayersView({
   locale: string;
 }) {
   const board = await buildSafe(
-    () => unicum.region(region).maneuvers({ limit: MANEUVERS_LIMIT }),
+    () => unicum.region(region).maneuvers({
+        board: ManeuversBoardKind.Players,
+        limit: MANEUVERS_PAGE_SIZE,
+      }),
     {
       editions: [],
       edition: null,
       standing: null,
       players: [],
       clans: [],
+      totals: { players: 0, clans: 0 },
     },
   );
 
@@ -50,7 +55,11 @@ export async function ManeuversPlayersView({
   const maneuvers = tGame("battle-formats.maneuvers");
 
   return (
-    <ManeuversEditionProvider region={region} initial={board}>
+    <ManeuversEditionProvider
+      region={region}
+      kind={ManeuversBoardKind.Players}
+      initial={board}
+    >
       <div className="mx-auto w-full max-w-7xl">
         <Panel>
           <PanelContent className="relative px-4 py-12 text-center">
@@ -84,9 +93,9 @@ export async function ManeuversPlayersView({
         <ManeuversPlayersBoard />
         {/* Each carries its own separator, so an edition with nothing to
             show (one nobody recorded) leaves no rules over empty space. */}
-        <ManeuversRace kind="players" />
-        <ManeuversRewards kind="players" />
-        <ManeuversScale kind="players" />
+        <ManeuversRace kind={ManeuversBoardKind.Players} />
+        <ManeuversRewards kind={ManeuversBoardKind.Players} />
+        <ManeuversScale kind={ManeuversBoardKind.Players} />
       </div>
     </ManeuversEditionProvider>
   );

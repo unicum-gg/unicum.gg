@@ -14,7 +14,7 @@ import { formatMoment, formatPlayers } from "@/components/servers/format";
 import { useDisplayZone } from "@/components/servers/use-display-zone";
 import { useManeuversEdition } from "@/components/maneuvers/edition-context";
 import { FamePoints } from "@/components/maneuvers/fame-points";
-import type { ManeuversBoardKind } from "@/components/maneuvers/rewards";
+import { ManeuversBoardKind } from "@unicum.gg/shared";
 import { useFormat } from "@/hooks/use-format";
 import { useTranslation } from "@/hooks/use-translation";
 import { unicum } from "@/services/sdk";
@@ -74,8 +74,8 @@ export function ManeuversRace({ kind }: { kind: ManeuversBoardKind }) {
 
   const samples = history?.id === eventName ? history.points : [];
   const cutoff =
-    kind === "players" ? standing.tankCutoffPoints : standing.clanGoldCutoffPoints;
-  const ranked = kind === "players" ? standing.playerCount : standing.clanCount;
+    kind === ManeuversBoardKind.Players ? standing.tankCutoffPoints : standing.clanGoldCutoffPoints;
+  const ranked = kind === ManeuversBoardKind.Players ? standing.playerCount : standing.clanCount;
   const capturedAt = new Date(standing.capturedAt);
   const ended = edition.endDate != null && new Date(edition.endDate) < capturedAt;
 

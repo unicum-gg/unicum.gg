@@ -1,6 +1,10 @@
 "use client";
 
-import { famePointsScale, RATING_COLOR_CLASS } from "@unicum.gg/shared";
+import {
+  famePointsScale,
+  ManeuversBoardKind,
+  RATING_COLOR_CLASS,
+} from "@unicum.gg/shared";
 import {
   Panel,
   PanelContent,
@@ -19,7 +23,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useManeuversEdition } from "@/components/maneuvers/edition-context";
-import type { ManeuversBoardKind } from "@/components/maneuvers/rewards";
 import { useFormat } from "@/hooks/use-format";
 import { useTranslation } from "@/hooks/use-translation";
 import { styles } from "@/lib/styles";
@@ -43,7 +46,7 @@ export function ManeuversScale({ kind }: { kind: ManeuversBoardKind }) {
   const { edition, standing } = board;
   if (!edition || !standing) return null;
 
-  const ranked = kind === "players" ? standing.playerCount : standing.clanCount;
+  const ranked = kind === ManeuversBoardKind.Players ? standing.playerCount : standing.clanCount;
   const bands = famePointsScale(ranked);
   if (bands.length === 0) return null;
   const fmt = num(INT_FORMAT);

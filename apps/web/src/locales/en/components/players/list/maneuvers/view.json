@@ -5,8 +5,9 @@
   "not-recorded": "{edition} was not recorded on this server. The game keeps no standings once an edition ends, so an edition nobody captured while it ran cannot be shown.",
   "not-started": "The board opens on {date}.",
   "not-started-undated": "The board has not opened yet.",
-  "board": "Top {count} players",
+  "board": "{count} players ranked",
   "place": "#",
   "player": "Player",
-  "fame-points": "Fame Points"
+  "fame-points": "Fame Points",
+  "no-match": "No player on the board matches these filters."
 }

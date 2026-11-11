@@ -1,5 +1,4 @@
 import { asc, desc, eq } from "drizzle-orm";
-import { unstable_cache } from "next/cache";
 import { db } from "@unicum.gg/core/db";
 import {
   clansByRegion,
@@ -22,10 +21,8 @@ import { type Baseline, readGains } from "@/services/maneuvers/gains";
  * reader see a cutoff from one pass beside a ranking from the next. It is the
  * same reasoning the marks board is built on.
  *
- * Everything here is returned JSON-ready (ISO strings, no `Date`), because
- * `unstable_cache` round-trips its value through JSON: a `Date` put in comes
- * back as a string on a cache hit but not on a miss, and the two paths then
- * disagree about the shape of their own result.
+ * Everything here is returned JSON-ready (ISO strings, no `Date`), which is
+ * what the endpoint serves anyway.
  */
 
 export type ManeuversEdition = {
@@ -108,13 +105,17 @@ export type ManeuversBoard = {
   clans: ManeuversClanRow[];
 };
 
-/** Rows served by default, and the ceiling a caller can ask for. */
-export const DEFAULT_LIMIT = 100;
-export const MAX_LIMIT = 1000;
-
+/**
+ * One edition's two boards read whole, every ranked row with its day's move.
+ *
+ * Whole because a board is ordered and searched across all of it: sorting on
+ * the 24h gain or finding a nickname on page 140 cannot be answered from one
+ * page. The read is a few indexed scans of the edition's rows plus one probe
+ * per row for its baseline, ~100ms for EU's 15,000 players, so it is done once
+ * a minute per edition and every request pages through the result.
+ */
 async function readBoard(
   region: Region,
-  limit: number,
   eventName: string | null,
 ): Promise<ManeuversBoard> {
   const editions = maneuversEditionsByRegion[region];
@@ -172,8 +173,7 @@ async function readBoard(
       .from(players)
       .leftJoin(clanTable, eq(clanTable.id, players.clanId))
       .where(eq(players.eventName, edition.eventName))
-      .orderBy(asc(players.place))
-      .limit(limit),
+      .orderBy(asc(players.place)),
     db
       .select({
         place: maneuversClans.place,
@@ -191,8 +191,7 @@ async function readBoard(
       .from(maneuversClans)
       .leftJoin(clanTable, eq(clanTable.id, maneuversClans.clanId))
       .where(eq(maneuversClans.eventName, edition.eventName))
-      .orderBy(asc(maneuversClans.place))
-      .limit(limit),
+      .orderBy(asc(maneuversClans.place)),
   ]);
 
   const gains = await readGains(
@@ -263,24 +262,36 @@ async function readBoard(
   };
 }
 
-const readBoardCached = unstable_cache(readBoard, ["maneuvers-board"], {
-  // The source recomputes on its own interval and the feeder follows it, so
-  // anything finer than a pass serves the same rows twice. A minute is short
-  // enough that a reader refreshing during a prime time sees movement, and
-  // long enough that a board of a thousand rows is not rebuilt per visitor.
-  revalidate: 60,
-});
+/** How long a whole board is held: the feeder captures every five minutes,
+ * so a minute is fresh to within a fraction of a pass. */
+const BOARD_TTL_MS = 60 * 1000;
+
+const boards = new Map<string, { data: ManeuversBoard; expiresAt: number }>();
+const inFlight = new Map<string, Promise<ManeuversBoard>>();
 
 /**
- * One edition's boards, the newest when `eventName` is null. An edition we do
- * not hold answers with `edition: null` and empty boards, beside the full
- * edition list, so the picker still renders.
+ * One edition's boards whole, the newest when `eventName` is null, held in
+ * the process rather than in `unstable_cache`: the whole board is a couple of
+ * megabytes of JSON, which the shared Redis behind the data cache (2 GiB,
+ * `allkeys-lru`, shared with the ISR pages) would evict pages to hold, and a
+ * process recomputing it once a minute costs ~100ms. Concurrent misses share
+ * one read.
  */
-export function getManeuversBoard(
+export function readManeuversBoard(
   region: Region,
-  limit: number = DEFAULT_LIMIT,
   eventName: string | null = null,
 ): Promise<ManeuversBoard> {
-  const clamped = Math.min(Math.max(Math.trunc(limit) || DEFAULT_LIMIT, 1), MAX_LIMIT);
-  return readBoardCached(region, clamped, eventName);
+  const key = `${region}:${eventName ?? ""}`;
+  const hit = boards.get(key);
+  if (hit && hit.expiresAt > Date.now()) return Promise.resolve(hit.data);
+  const pending = inFlight.get(key);
+  if (pending) return pending;
+  const promise = readBoard(region, eventName)
+    .then((data) => {
+      boards.set(key, { data, expiresAt: Date.now() + BOARD_TTL_MS });
+      return data;
+    })
+    .finally(() => inFlight.delete(key));
+  inFlight.set(key, promise);
+  return promise;
 }

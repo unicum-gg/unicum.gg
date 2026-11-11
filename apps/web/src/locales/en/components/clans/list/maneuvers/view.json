@@ -5,8 +5,9 @@
   "not-recorded": "{edition} was not recorded on this server. The game keeps no standings once an edition ends, so an edition nobody captured while it ran cannot be shown.",
   "not-started": "The board opens on {date}.",
   "not-started-undated": "The board has not opened yet.",
-  "board": "Top {count} clans",
+  "board": "{count} clans ranked",
   "place": "#",
   "clan": "Clan",
-  "fame-points": "Fame Points"
+  "fame-points": "Fame Points",
+  "no-match": "No clan on the board matches these filters."
 }

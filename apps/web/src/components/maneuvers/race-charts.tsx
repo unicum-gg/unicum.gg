@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/chart";
 import { type DisplayZone, formatMoment, formatPlayers } from "@/components/servers/format";
 import type { ManeuversHistoryPoint } from "@/components/maneuvers/race";
-import type { ManeuversBoardKind } from "@/components/maneuvers/rewards";
+import { ManeuversBoardKind } from "@unicum.gg/shared";
 import { dateFormat } from "@/lib/format";
 import { useTranslation } from "@/hooks/use-translation";
 
@@ -61,8 +61,8 @@ export function ManeuversRaceCharts({
     () =>
       samples.map((p) => ({
         ms: p.t * 1000,
-        cutoff: kind === "players" ? p.tankCutoffPoints : p.clanGoldCutoffPoints,
-        ranked: kind === "players" ? p.playerCount : p.clanCount,
+        cutoff: kind === ManeuversBoardKind.Players ? p.tankCutoffPoints : p.clanGoldCutoffPoints,
+        ranked: kind === ManeuversBoardKind.Players ? p.playerCount : p.clanCount,
       })),
     [samples, kind],
   );

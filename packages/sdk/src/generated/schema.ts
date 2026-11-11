@@ -8,7 +8,7 @@ export interface paths {
         };
         /**
          * Maneuvers event boards
-         * @description A Maneuvers edition for the region (the current one unless `edition` names another), the recurring Stronghold clan event: its dates and reward cutoffs, the player and clan boards ranked by Fame Points, and what it currently costs to hold a rewarded place. Both boards describe the same instant. Cached ~1 min server-side.
+         * @description A Maneuvers edition for the region (the current one unless `edition` names another), the recurring Stronghold clan event: its dates and reward cutoffs, the player and clan boards ranked by Fame Points (paged, searchable and sortable across the whole board), and what it currently costs to hold a rewarded place. Both boards describe the same instant. Cached ~1 min server-side.
          */
         get: operations["get-{region}-maneuvers"];
         put?: never;
@@ -4057,6 +4057,11 @@ export interface components {
             standing: components["schemas"]["ManeuversStanding"] | null;
             players: components["schemas"]["ManeuversPlayerEntry"][];
             clans: components["schemas"]["ManeuversClanEntry"][];
+            /** @description Rows matching the query on each board before paging: the whole board without `q` or a range, the matches with them. */
+            totals: {
+                players: number;
+                clans: number;
+            };
         };
         /** @description One clan on the Maneuvers board. */
         ManeuversClanEntry: {
@@ -8319,8 +8324,24 @@ export interface operations {
     "get-{region}-maneuvers": {
         parameters: {
             query?: {
+                /** @description The board to page through. Omitted, both are served, each sliced by the same `offset` and `limit`; named, the other one comes back empty. */
+                board?: "players" | "clans";
                 /** @description Rows per board, 1-1000 (default 100). */
                 limit?: number;
+                /** @description Rows to skip on each board, after searching and ordering (default 0). The whole board is reachable, not only its first rows. */
+                offset?: number;
+                /** @description The column the boards are ordered on (default `fame-points`, the board's own order). `gain` and `move` are the last 24 hours. */
+                sort?: "fame-points" | "gain" | "move";
+                /** @description Direction of `sort` (default `desc`). Rows with no figure on the sorted column come last either way. */
+                order?: "desc" | "asc";
+                /** @description The column `min` and `max` bound. A row with no figure on it (a 24h move before the captures reach back a day) is left out. */
+                range?: "fame-points" | "gain" | "move";
+                /** @description Lowest value kept on the `range` column, inclusive. */
+                min?: number;
+                /** @description Highest value kept on the `range` column, inclusive. */
+                max?: number;
+                /** @description Case-insensitive search: a player's nickname, or a clan's tag or name. Rows keep their real place. */
+                q?: string;
                 /** @description The edition to read, by its identifier (an `eventName` from `editions`). Defaults to the newest edition recorded. */
                 edition?: string;
             };

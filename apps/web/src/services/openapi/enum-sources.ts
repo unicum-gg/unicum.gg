@@ -19,6 +19,11 @@ import { MapCamouflage } from "@unicum.gg/shared/wot/maps/camouflage";
 import { BattleType } from "@unicum.gg/shared/wot/maps/battle-types";
 import { ClanBoard } from "@unicum.gg/shared/clans/badges";
 import {
+  ManeuversBoardKind,
+  ManeuversOrder,
+  ManeuversSort,
+} from "@unicum.gg/shared/wot/maneuvers-query";
+import {
   StrongholdPeriod,
   StrongholdSort,
   StrongholdTier,
@@ -131,6 +136,9 @@ export const OPENAPI_ENUM_SOURCES = {
   TOURNAMENT_GAME_MODE: Object.values(TournamentGameMode),
   TOURNAMENT_BRACKET_TYPE: Object.values(BracketType),
   TOURNAMENT_TEAM_STATUS: Object.values(TournamentTeamStatus),
+  MANEUVERS_BOARD: Object.values(ManeuversBoardKind),
+  MANEUVERS_SORT: Object.values(ManeuversSort),
+  MANEUVERS_ORDER: Object.values(ManeuversOrder),
 } satisfies Record<string, readonly string[]>;
 
 /** Marker value a schema's `x-enum-source` may name. A typo is a compile error
