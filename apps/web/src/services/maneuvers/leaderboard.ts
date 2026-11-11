@@ -34,6 +34,10 @@ export type ManeuversEdition = {
   tankRewardPositions: number | null;
   /** Places rewarded with gold on the clan board, per region. */
   clanGoldPositions: number | null;
+  /** Share of the personal board that earns bonds, in percent. */
+  accountBondsPercent: number | null;
+  /** Share of the clan board whose members get a bond multiplier above one. */
+  clanBondsPercent: number | null;
 };
 
 /** Both boards as a whole at the instant the source last recomputed them. */
@@ -218,6 +222,8 @@ async function readBoard(
       vehicleLevels: edition.vehicleLevels ?? [],
       tankRewardPositions: edition.tankRewardPositions,
       clanGoldPositions: edition.clanGoldPositions,
+      accountBondsPercent: edition.accountBondsPercent,
+      clanBondsPercent: edition.clanBondsPercent,
     },
     standing: snapshot
       ? {

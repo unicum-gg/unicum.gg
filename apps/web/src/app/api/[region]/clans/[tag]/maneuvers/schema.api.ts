@@ -106,6 +106,13 @@ export const ClanManeuversResponse = z
     vehiclePositions: z.number().nullable().meta({
       description: "How many places on that player board win the vehicle.",
     }),
+    accountBondsPercent: z.number().nullable().meta({
+      description: "Share of the personal board, in percent, whose places earn bonds.",
+    }),
+    clanBondsPercent: z.number().nullable().meta({
+      description:
+        "Share of the clan board, in percent, whose members get a bond multiplier above one.",
+    }),
   })
   .meta({
     description:

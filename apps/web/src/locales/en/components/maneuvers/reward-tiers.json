@@ -1,0 +1,21 @@
+{
+  "intro": {
+    "players": "Every player in the top part of the board also earns bonds, by the tier their place falls in, multiplied by their clan’s place on the clan board. The places below follow the board as it fills up.",
+    "clans": "A clan’s place multiplies the bonds every member earns on the player board. The places below follow the board as it fills up."
+  },
+  "standing": "Standing",
+  "places": "Places",
+  "value": {
+    "players": "Bonds",
+    "clans": "Multiplier"
+  },
+  "bonds": "{bonds} bonds",
+  "top": "Top {share}",
+  "rest": "The rest",
+  "range": "{from} to {to}",
+  "legend-rule": "a top {share} place, in a top {share} clan, with at least {battles} of the event’s battles fought for it",
+  "hero-rule": "a clan in the top {share}, with {count} battles fought for it since joining",
+  "medal-place": "place {place}",
+  "medal-top": "the top {place}",
+  "medal-rule": "every member of the clan in {rule}, with {count} battles fought for it since joining"
+}

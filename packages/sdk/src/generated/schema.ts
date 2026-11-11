@@ -3168,6 +3168,10 @@ export interface components {
             playersRanked: number | null;
             /** @description How many places on that player board win the vehicle. */
             vehiclePositions: number | null;
+            /** @description Share of the personal board, in percent, whose places earn bonds. */
+            accountBondsPercent: number | null;
+            /** @description Share of the clan board, in percent, whose members get a bond multiplier above one. */
+            clanBondsPercent: number | null;
         };
         /** @description A clan member with cached WN7/WN8/WNX ratings and Wargaming's Personal Rating (`pr`) and WTR. */
         ClanMember: {
@@ -4195,6 +4199,10 @@ export interface components {
             tankRewardPositions: number | null;
             /** @description How many places on the clan board are rewarded with gold from the clan treasury. */
             clanGoldPositions: number | null;
+            /** @description Share of the personal board, in percent, whose places earn bonds (75 on the autumn 2026 edition). */
+            accountBondsPercent: number | null;
+            /** @description Share of the clan board, in percent, whose members get a bond multiplier above one (50 on the autumn 2026 edition). */
+            clanBondsPercent: number | null;
         };
         /** @description One edition of the event, recorded or not. */
         ManeuversEditionRef: {
@@ -5717,6 +5725,14 @@ export interface components {
             gain24h: number | null;
             /** @description Places climbed over the last 24 hours, negative when the player fell. Null when they held no place a day ago. */
             placeChange24h: number | null;
+            /** @description Their clan's place on the same edition's clan board, which sets their bond multiplier, badges and medal. Null when it holds none. */
+            clanPlace: number | null;
+            /** @description How many clans hold a place on that board. */
+            clansRanked: number | null;
+            /** @description Share of the personal board, in percent, whose places earn bonds. */
+            accountBondsPercent: number | null;
+            /** @description Share of the clan board, in percent, whose members get a bond multiplier above one. */
+            clanBondsPercent: number | null;
         };
         /** @description Where the player stood on one edition's board. */
         PlayerManeuversEdition: {

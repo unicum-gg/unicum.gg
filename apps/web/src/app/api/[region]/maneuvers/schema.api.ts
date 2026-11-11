@@ -102,6 +102,14 @@ const maneuversEdition = z
       description:
         "How many places on the clan board are rewarded with gold from the clan treasury.",
     }),
+    accountBondsPercent: z.number().nullable().meta({
+      description:
+        "Share of the personal board, in percent, whose places earn bonds (75 on the autumn 2026 edition).",
+    }),
+    clanBondsPercent: z.number().nullable().meta({
+      description:
+        "Share of the clan board, in percent, whose members get a bond multiplier above one (50 on the autumn 2026 edition).",
+    }),
   })
   .meta({
     id: "ManeuversEdition",

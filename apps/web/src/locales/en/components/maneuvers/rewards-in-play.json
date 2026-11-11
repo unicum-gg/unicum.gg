@@ -1,0 +1,30 @@
+{
+  "title": "Rewards in play",
+  "vehicle": "Vehicle",
+  "places-to-go": "{places} places to go",
+  "bonds": "{bonds} bonds",
+  "bonds-multiplied": "{bonds} bonds × {multiplier} clan multiplier = {total} bonds",
+  "no-bonds": "No bonds",
+  "next-tier": "{bonds} bonds {places} places higher",
+  "badge": "{badge} badge",
+  "members-badge": "{badge} badge for its members",
+  "members-medal": "{medal} medal for its members",
+  "legend": "{maneuvers} Legend",
+  "hero": "{maneuvers} Hero",
+  "legend-battles": "if at least {share} of their event battles were for this clan",
+  "legend-needs": "needs a top {share} place and a clan in the top {share}",
+  "legend-members": "for members in the top {share} of players",
+  "hero-needs": "needs a clan in the top {share}",
+  "clan-needs": "needs a place in the top {share} of clans",
+  "clan-battles": "if they played {count} battles for this clan since joining it",
+  "gold": "Gold for the clan treasury",
+  "multiplier": "×{multiplier} on its members’ bonds",
+  "medals": {
+    "winner": "{maneuvers} Winner",
+    "top-2": "{maneuvers} Top 2",
+    "top-3": "{maneuvers} Top 3",
+    "top-10": "{maneuvers} Top 10",
+    "top-100": "{maneuvers} Top 100"
+  },
+  "footnote": "By the event’s regulations, on the board as it stands. Every badge and medal also asks for battles played for the clan, which the game does not publish, so these are positions rather than awards."
+}

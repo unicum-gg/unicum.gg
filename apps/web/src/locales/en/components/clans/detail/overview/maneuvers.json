@@ -8,5 +8,7 @@
   "members-winning": "{count} currently win the vehicle",
   "place": "Place",
   "player": "Player",
-  "fame-points": "Fame Points"
+  "fame-points": "Fame Points",
+  "bonds": "Bonds",
+  "bonds-hint": "Bonds the place earns by the regulations, with the clan’s multiplier applied, if the player fought the battles it asks for"
 }

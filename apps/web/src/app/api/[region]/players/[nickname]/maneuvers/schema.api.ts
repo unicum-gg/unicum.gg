@@ -51,6 +51,20 @@ const playerManeuversCurrent = z
       description:
         "Places climbed over the last 24 hours, negative when the player fell. Null when they held no place a day ago.",
     }),
+    clanPlace: z.number().nullable().meta({
+      description:
+        "Their clan's place on the same edition's clan board, which sets their bond multiplier, badges and medal. Null when it holds none.",
+    }),
+    clansRanked: z.number().nullable().meta({
+      description: "How many clans hold a place on that board.",
+    }),
+    accountBondsPercent: z.number().nullable().meta({
+      description: "Share of the personal board, in percent, whose places earn bonds.",
+    }),
+    clanBondsPercent: z.number().nullable().meta({
+      description:
+        "Share of the clan board, in percent, whose members get a bond multiplier above one.",
+    }),
   })
   .meta({
     id: "PlayerManeuversCurrent",

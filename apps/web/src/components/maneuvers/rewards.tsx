@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/table";
 import { ManeuversBoardKind } from "@unicum.gg/shared";
 import { useManeuversEdition } from "@/components/maneuvers/edition-context";
+import { ManeuversRewardTiers } from "@/components/maneuvers/reward-tiers";
 import { useFormat } from "@/hooks/use-format";
 import { useTranslation } from "@/hooks/use-translation";
 import { styles } from "@/lib/styles";
@@ -102,6 +103,12 @@ export function ManeuversRewards({ kind }: { kind: ManeuversBoardKind }) {
               </TableRow>
             </TableBody>
           </Table>
+          <ManeuversRewardTiers
+            kind={kind}
+            ranked={ranked}
+            accountBondsPercent={edition.accountBondsPercent}
+            clanBondsPercent={edition.clanBondsPercent}
+          />
         </PanelContent>
       </Panel>
     </>

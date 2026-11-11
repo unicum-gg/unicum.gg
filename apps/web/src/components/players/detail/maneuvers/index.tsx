@@ -12,6 +12,7 @@ import {
   PanelTitle,
 } from "@/components/panel";
 import { maneuversEditionName } from "@/components/maneuvers/edition-name";
+import { ManeuversPlayerRewards } from "@/components/maneuvers/rewards-in-play";
 import {
   ManeuversPastEdition,
   ManeuversStanding,
@@ -106,6 +107,9 @@ export function ManeuversTab({
             edition={maneuversEditionName(current.eventName, tEdition)}
             cutoffPoints={cutoffNow}
           />
+        ) : null}
+        {current ? (
+          <ManeuversPlayerRewards current={current} />
         ) : (
           <div className="px-4 py-8 text-sm text-fd-muted-foreground">
             <p>

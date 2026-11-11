@@ -45,6 +45,12 @@ export type PlayerManeuvers = {
     | (PlayerManeuversEdition & {
         gain24h: number | null;
         placeChange24h: number | null;
+        /** Their clan's place on the same edition's clan board, which sets
+         * their bond multiplier, badges and medal. Null when it holds none. */
+        clanPlace: number | null;
+        clansRanked: number | null;
+        accountBondsPercent: number | null;
+        clanBondsPercent: number | null;
       })
     | null;
   /** Their climb through the newest edition, one point per capture that
@@ -131,6 +137,10 @@ export async function getPlayerManeuvers(
       ])
     : [null, []];
   const row = board?.players.find((p) => p.accountId === account.accountId);
+  const clanRow =
+    onNewest?.clanId != null
+      ? board?.clans.find((c) => c.clanId === onNewest.clanId)
+      : undefined;
 
   return {
     accountId: account.accountId,
@@ -147,6 +157,10 @@ export async function getPlayerManeuvers(
           ...onNewest,
           gain24h: row?.gain24h ?? null,
           placeChange24h: row?.placeChange24h ?? null,
+          clanPlace: clanRow?.place ?? null,
+          clansRanked: board?.standing?.clanCount ?? null,
+          accountBondsPercent: newest?.accountBondsPercent ?? null,
+          clanBondsPercent: newest?.clanBondsPercent ?? null,
         }
       : null,
     history,

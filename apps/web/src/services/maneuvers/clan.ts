@@ -47,6 +47,9 @@ export type ClanManeuvers = {
   playersRanked: number | null;
   /** Places that win the vehicle on the newest edition. */
   vehiclePositions: number | null;
+  /** The newest edition's bond shares, in percent (see `ManeuversEdition`). */
+  accountBondsPercent: number | null;
+  clanBondsPercent: number | null;
 };
 
 /**
@@ -147,6 +150,8 @@ export async function getClanManeuvers(
     members: board?.players.filter((p) => p.clanId === clanId) ?? [],
     playersRanked: newest ? (fieldOf.get(newest.eventName)?.playerCount ?? null) : null,
     vehiclePositions: newest?.tankRewardPositions ?? null,
+    accountBondsPercent: newest?.accountBondsPercent ?? null,
+    clanBondsPercent: newest?.clanBondsPercent ?? null,
   };
 }
 

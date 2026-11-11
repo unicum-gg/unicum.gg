@@ -2,13 +2,18 @@
 
 import dynamic from "next/dynamic";
 import useSWR from "swr";
-import { ManeuversBoardKind } from "@unicum.gg/shared";
+import {
+  ManeuversBoardKind,
+  maneuversBonds,
+  maneuversMultiplier,
+} from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import { TaggedTitle } from "@/components/clans/detail/tagged-title";
 import { PlayerName } from "@/components/entity/player-name";
 import { maneuversEditionName } from "@/components/maneuvers/edition-name";
 import { GainCell } from "@/components/maneuvers/columns";
 import { FamePoints, FamePointsCell } from "@/components/maneuvers/fame-points";
+import { ManeuversClanRewards } from "@/components/maneuvers/rewards-in-play";
 import {
   ManeuversPastEdition,
   ManeuversStanding,
@@ -118,7 +123,13 @@ export function ClanManeuversTab({
               edition={maneuversEditionName(current.eventName, tEdition)}
               cutoffPoints={cutoffs.at(-1)?.cutoff ?? null}
             />
-          ) : (
+          ) : null}
+          {data && current ? (
+            <ManeuversClanRewards
+              current={current}
+              clanBondsPercent={data.clanBondsPercent}
+            />
+          ) : data ? (
             <div className="px-4 py-8 text-sm text-fd-muted-foreground">
               {latest
                 ? t("no-place", {
@@ -126,7 +137,7 @@ export function ClanManeuversTab({
                   })
                 : t("no-edition")}
             </div>
-          )}
+          ) : null}
           {current && climb.length >= 2 ? (
             <ManeuversClimbChart
               climb={climb}
@@ -156,6 +167,12 @@ export function ClanManeuversTab({
           members={data.members}
           ranked={data.playersRanked ?? 0}
           vehiclePositions={data.vehiclePositions}
+          accountBondsPercent={data.accountBondsPercent}
+          multiplier={
+            current
+              ? maneuversMultiplier(current.place, current.ranked ?? 0, data.clanBondsPercent)
+              : 1
+          }
         />
       ) : null}
     </>
@@ -168,11 +185,16 @@ function ClanManeuversMembers({
   members,
   ranked,
   vehiclePositions,
+  accountBondsPercent,
+  multiplier,
 }: {
   region: Region;
   members: Member[];
   ranked: number;
   vehiclePositions: number | null;
+  accountBondsPercent: number | null;
+  /** The clan's multiplier on every member's bonds. */
+  multiplier: number;
 }) {
   const { t } = useTranslation("components/clans/detail/overview/maneuvers");
   const { t: tCols } = useTranslation("components/maneuvers/columns");
@@ -216,6 +238,9 @@ function ClanManeuversMembers({
                     {tCols("gain")}
                   </TableHead>
                 ) : null}
+                <TableHead className="w-28 text-right!" title={t("bonds-hint")}>
+                  {t("bonds")}
+                </TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -256,6 +281,12 @@ function ClanManeuversMembers({
                     <FamePoints value={m.famePoints} />
                   </FamePointsCell>
                   {measured ? <GainCell value={m.gain24h} /> : null}
+                  <TableCell className="text-right tabular-nums">
+                    {(() => {
+                      const bonds = maneuversBonds(m.place, ranked, accountBondsPercent);
+                      return bonds > 0 ? fmt.format(Math.round(bonds * multiplier)) : "—";
+                    })()}
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>

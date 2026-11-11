@@ -2,6 +2,7 @@ export * from "./assets";
 export * from "./reserves";
 export * from "./fame-points";
 export * from "./maneuvers-query";
+export * from "./maneuvers-rewards";
 export * from "./equipment";
 export * from "./field-mods";
 export * from "./loadouts";
