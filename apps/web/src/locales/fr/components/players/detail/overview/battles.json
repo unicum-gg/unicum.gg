@@ -33,7 +33,7 @@
     "survived": "En vie",
     "xp": "XP",
     "medals": "Médailles",
-    "vehicle": "Véhicule"
+    "vehicle": "Char"
   },
   "detail-unavailable": "L’effectif de cette bataille n’a pas pu être chargé.",
   "team": "Équipe {team}",

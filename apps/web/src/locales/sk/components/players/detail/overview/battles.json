@@ -33,7 +33,7 @@
     "survived": "Nažive",
     "xp": "XP",
     "medals": "Medaile",
-    "vehicle": "Vozidlo"
+    "vehicle": "Vozilo"
   },
   "detail-unavailable": "Zostavu tejto bitky sa nepodarilo načítať.",
   "team": "Tím {team}",

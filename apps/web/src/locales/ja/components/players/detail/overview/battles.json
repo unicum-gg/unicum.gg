@@ -33,7 +33,7 @@
     "survived": "生存",
     "xp": "XP",
     "medals": "勲章",
-    "vehicle": "車両"
+    "vehicle": "車輌"
   },
   "detail-unavailable": "この戦闘のロスターを読み込めませんでした。",
   "team": "チーム {team}",
