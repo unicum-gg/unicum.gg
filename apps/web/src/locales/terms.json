@@ -849,7 +849,8 @@
     "coloured": "ملوّن",
     "edition": "النسخة",
     "ends": "ينتهي",
-    "places": "المراكز"
+    "places": "المراكز",
+    "home": "الرئيسية"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1702,7 +1703,8 @@
     "coloured": "каляровы",
     "edition": "выданне",
     "ends": "завяршаецца",
-    "places": "месцы"
+    "places": "месцы",
+    "home": "галоўная"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -2771,7 +2773,8 @@
     "coloured": "оцветен",
     "edition": "издание",
     "ends": "край",
-    "places": "места"
+    "places": "места",
+    "home": "начало"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -3632,7 +3635,8 @@
     "coloured": "obojeno",
     "edition": "izdanje",
     "ends": "završava",
-    "places": "mjesta"
+    "places": "mjesta",
+    "home": "početna"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -4712,7 +4716,8 @@
     "coloured": "barevný",
     "edition": "edice",
     "ends": "končí",
-    "places": "umístění"
+    "places": "umístění",
+    "home": "domů"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -5798,7 +5803,8 @@
     "coloured": "farvet",
     "edition": "udgave",
     "ends": "slutter",
-    "places": "pladser"
+    "places": "pladser",
+    "home": "hjem"
   },
   "de": {
     "(optional)": "(optional)",
@@ -6877,7 +6883,8 @@
     "coloured": "farbig",
     "edition": "Ausgabe",
     "ends": "endet",
-    "places": "Plätze"
+    "places": "Plätze",
+    "home": "Startseite"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -7962,7 +7969,8 @@
     "coloured": "χρωματισμένο",
     "edition": "έκδοση",
     "ends": "λήξη",
-    "places": "θέσεις"
+    "places": "θέσεις",
+    "home": "αρχική"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -9027,7 +9035,8 @@
     "coloured": "coloreado",
     "edition": "edición",
     "ends": "finaliza",
-    "places": "puestos"
+    "places": "puestos",
+    "home": "inicio"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -10117,7 +10126,8 @@
     "coloured": "värillinen",
     "edition": "kausi",
     "ends": "päättyy",
-    "places": "sijat"
+    "places": "sijat",
+    "home": "etusivu"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -11186,7 +11196,8 @@
     "coloured": "coloré",
     "edition": "édition",
     "ends": "fin",
-    "places": "places"
+    "places": "places",
+    "home": "accueil"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -12040,7 +12051,8 @@
     "coloured": "रंगीन",
     "edition": "संस्करण",
     "ends": "समाप्ति",
-    "places": "स्थान"
+    "places": "स्थान",
+    "home": "होम"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -13123,7 +13135,8 @@
     "coloured": "obojeno",
     "edition": "izdanje",
     "ends": "završava",
-    "places": "mjesta"
+    "places": "mjesta",
+    "home": "početna"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -14208,7 +14221,8 @@
     "coloured": "színes",
     "edition": "kiadás",
     "ends": "véget ér",
-    "places": "helyezések"
+    "places": "helyezések",
+    "home": "kezdőlap"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -15289,7 +15303,8 @@
     "coloured": "colorato",
     "edition": "edizione",
     "ends": "termina",
-    "places": "piazzamenti"
+    "places": "piazzamenti",
+    "home": "home"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -16377,7 +16392,8 @@
     "coloured": "色付き",
     "edition": "開催回",
     "ends": "終了日",
-    "places": "位"
+    "places": "位",
+    "home": "ホーム"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -18325,7 +18341,8 @@
     "coloured": "색상",
     "edition": "시즌",
     "ends": "종료",
-    "places": "등수"
+    "places": "등수",
+    "home": "홈"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -19413,7 +19430,8 @@
     "coloured": "spalvotas",
     "edition": "etapas",
     "ends": "baigiasi",
-    "places": "vietos"
+    "places": "vietos",
+    "home": "pradžia"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -20487,7 +20505,8 @@
     "coloured": "iekrāsots",
     "edition": "izdevums",
     "ends": "beidzas",
-    "places": "vietas"
+    "places": "vietas",
+    "home": "sākums"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -21577,7 +21596,8 @@
     "coloured": "gekleurd",
     "edition": "editie",
     "ends": "eindigt",
-    "places": "plaatsen"
+    "places": "plaatsen",
+    "home": "startpagina"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -22658,7 +22678,8 @@
     "coloured": "farget",
     "edition": "utgave",
     "ends": "slutter",
-    "places": "plasser"
+    "places": "plasser",
+    "home": "hjem"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -23736,7 +23757,8 @@
     "coloured": "kolorowe",
     "edition": "edycja",
     "ends": "kończy się",
-    "places": "miejsca"
+    "places": "miejsca",
+    "home": "strona główna"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -24807,7 +24829,8 @@
     "coloured": "colorido",
     "edition": "edição",
     "ends": "termina",
-    "places": "lugares"
+    "places": "lugares",
+    "home": "início"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -25878,7 +25901,8 @@
     "coloured": "colorat",
     "edition": "ediție",
     "ends": "se încheie",
-    "places": "locuri"
+    "places": "locuri",
+    "home": "acasă"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -26937,7 +26961,8 @@
     "coloured": "цветной",
     "edition": "сезон",
     "ends": "окончание",
-    "places": "места"
+    "places": "места",
+    "home": "главная"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -27794,7 +27819,8 @@
     "coloured": "obarvano",
     "edition": "izdaja",
     "ends": "konča se",
-    "places": "mesta"
+    "places": "mesta",
+    "home": "domov"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -28879,7 +28905,8 @@
     "coloured": "obojeno",
     "edition": "izdanje",
     "ends": "ističe",
-    "places": "mesta"
+    "places": "mesta",
+    "home": "početna"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -29969,7 +29996,8 @@
     "coloured": "färgade",
     "edition": "upplaga",
     "ends": "slutar",
-    "places": "placeringar"
+    "places": "placeringar",
+    "home": "hem"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -31055,7 +31083,8 @@
     "coloured": "มีสี",
     "edition": "รอบ",
     "ends": "สิ้นสุด",
-    "places": "อันดับ"
+    "places": "อันดับ",
+    "home": "หน้าหลัก"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -32994,7 +33023,8 @@
     "coloured": "renkli",
     "edition": "sezon",
     "ends": "bitiş",
-    "places": "dereceler"
+    "places": "dereceler",
+    "home": "ana sayfa"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -34069,7 +34099,8 @@
     "coloured": "кольоровий",
     "edition": "видання",
     "ends": "завершення",
-    "places": "місця"
+    "places": "місця",
+    "home": "головна"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -35133,7 +35164,8 @@
     "coloured": "có màu",
     "edition": "đợt",
     "ends": "kết thúc",
-    "places": "vị trí"
+    "places": "vị trí",
+    "home": "trang chủ"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -36219,6 +36251,7 @@
     "coloured": "彩色",
     "edition": "赛季",
     "ends": "结束",
-    "places": "名次"
+    "places": "名次",
+    "home": "首页"
   }
 }
