@@ -5,8 +5,9 @@
   "not-recorded": "{edition} bu sunucuda kaydedilmedi. Oyun, bir sezon sona erdiğinde sıralamaları tutmuyor, bu nedenle devam ederken hiç kimsenin kaydetmediği bir sezon gösterilemez.",
   "not-started": "Tablo {date} tarihinde açılır.",
   "not-started-undated": "Tablo henüz açılmadı.",
-  "board": "En iyi {count} klan",
+  "board": "Dereceli klan sayısı: {count}",
   "place": "#",
   "clan": "Klan",
-  "fame-points": "Şöhret Puanları"
+  "fame-points": "Şöhret Puanları",
+  "no-match": "Bu filtrelerle eşleşen hiçbir klan tabloda yok."
 }

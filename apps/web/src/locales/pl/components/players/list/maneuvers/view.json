@@ -5,8 +5,9 @@
   "not-recorded": "{edition} nie została zarejestrowana na tym serwerze. Gra nie posiada żadnej klasyfikacji po zakończeniu edycji, więc edycji, której nikt nie zarejestrował w trakcie jej trwania, nie można wyświetlić.",
   "not-started": "Tabela otwiera się {date}.",
   "not-started-undated": "Tabela nie została jeszcze otwarta.",
-  "board": "Najlepsi {count} gracze",
+  "board": "{count} graczy w rankingu",
   "place": "#",
   "player": "Gracz",
-  "fame-points": "Punkty sławy"
+  "fame-points": "Punkty sławy",
+  "no-match": "Żaden gracz w tabeli nie pasuje do tych filtrów."
 }

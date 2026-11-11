@@ -5,8 +5,9 @@
   "not-recorded": "{edition} nije zabilježeno na ovom poslužitelju. Igra ne zadržava poredak nakon završetka izdanja, pa izdanje koje nitko nije zabilježio dok je trajalo ne može biti prikazano.",
   "not-started": "Ljestvica se otvara {date}.",
   "not-started-undated": "Ljestvica se još nije otvorila.",
-  "board": "Najboljih {count} klanskih jedinica",
+  "board": "{count} klanova rangirano",
   "place": "#",
   "clan": "Klan",
-  "fame-points": "Bodovi slave"
+  "fame-points": "Bodovi slave",
+  "no-match": "Nijedan klan na ljestvici ne odgovara ovim filtrima."
 }

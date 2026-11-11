@@ -5,8 +5,9 @@
   "not-recorded": "{edition}은 이 서버에 기록되지 않았습니다. 시즌이 종료되면 게임은 순위를 보유하지 않으므로, 진행 중에 아무도 기록하지 않은 시즌은 표시할 수 없습니다.",
   "not-started": "리더보드는 {date}에 열립니다.",
   "not-started-undated": "리더보드가 아직 열리지 않았습니다.",
-  "board": "상위 {count} 클랜스",
+  "board": "{count}개 클랜 랭크",
   "place": "#",
   "clan": "클랜",
-  "fame-points": "명예 점수"
+  "fame-points": "명예 점수",
+  "no-match": "이 필터에 해당하는 클랜이 리더보드에 없습니다."
 }

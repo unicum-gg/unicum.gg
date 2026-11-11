@@ -5,8 +5,9 @@
   "not-recorded": "Izdanje {edition} nije zabilježeno na ovom serveru. Igra zadržava poredak samo dok izdanje traje, pa se izdanje koje niko nije zabilježio dok je trajalo ne može prikazati.",
   "not-started": "Rang-lista se otvara {date}.",
   "not-started-undated": "Rang-lista još nije otvorena.",
-  "board": "Najbolji igrači ({count})",
+  "board": "Na rang-listi je rangirano {count} igrača",
   "place": "#",
   "player": "Igrač",
-  "fame-points": "Bodovi slave"
+  "fame-points": "Bodovi slave",
+  "no-match": "Nijedan igrač na rang-listi ne odgovara ovim filterima."
 }

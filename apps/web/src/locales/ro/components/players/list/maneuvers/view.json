@@ -5,8 +5,9 @@
   "not-recorded": "{edition} nu a fost înregistrată pe acest server. Jocul nu păstrează clasamentele după ce o ediție se încheie, astfel că o ediție pe care nimeni nu a înregistrat-o cât timp s-a desfășurat nu poate fi afișată.",
   "not-started": "Clasamentul se deschide la {date}.",
   "not-started-undated": "Clasamentul nu s-a deschis încă.",
-  "board": "Jucători de top ({count})",
+  "board": "{count} jucători clasați",
   "place": "#",
   "player": "Jucător",
-  "fame-points": "Puncte de faimă"
+  "fame-points": "Puncte de faimă",
+  "no-match": "Niciun jucător din clasament nu se potrivește cu aceste filtre."
 }

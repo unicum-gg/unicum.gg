@@ -5,8 +5,9 @@
   "not-recorded": "{edition} није забележено на овом серверу. Игра не задржава пласман када издање истекне, па издање које нико није забележио док је трајало не може бити приказано.",
   "not-started": "Отварање табеле је {date}.",
   "not-started-undated": "Табела још није отворена.",
-  "board": "Najboljih {count} igrača",
+  "board": "{count} рангираних играча",
   "place": "#",
   "player": "Igrač",
-  "fame-points": "Poeni slave"
+  "fame-points": "Poeni slave",
+  "no-match": "Ниједан играч на табели не одговара овим филтерима."
 }

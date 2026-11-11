@@ -5,8 +5,9 @@
   "not-recorded": "{edition} nem lett rögzítve ezen a szerveren. A játék nem tart meg ranglistát egy kiadás vége után, ezért nem jeleníthető meg olyan kiadás, amelyet senki sem rögzített a futása közben.",
   "not-started": "A ranglista ekkor nyílik meg: {date}.",
   "not-started-undated": "A ranglista még nem nyílt meg.",
-  "board": "Legjobb {count} játékos",
+  "board": "{count} rangsorolt játékos a ranglistán",
   "place": "#",
   "player": "Játékos",
-  "fame-points": "Dicsőségpontok"
+  "fame-points": "Dicsőségpontok",
+  "no-match": "A ranglistán egyetlen játékos sem felel meg ezeknek a szűrőknek."
 }

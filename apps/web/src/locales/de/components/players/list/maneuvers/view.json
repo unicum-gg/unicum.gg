@@ -5,8 +5,9 @@
   "not-recorded": "{edition} wurde auf diesem Server nicht aufgezeichnet. Das Spiel behält nach dem Ende einer Ausgabe keine Rangliste, daher kann eine Ausgabe, die während ihres Verlaufs niemand aufgezeichnet hat, nicht angezeigt werden.",
   "not-started": "Die Rangliste öffnet am {date}.",
   "not-started-undated": "Die Rangliste ist noch nicht geöffnet.",
-  "board": "Top-{count}-Spieler",
+  "board": "{count} spieler gewertet",
   "place": "#",
   "player": "Spieler",
-  "fame-points": "Ruhmpunkte"
+  "fame-points": "Ruhmpunkte",
+  "no-match": "Kein Spieler in der Rangliste entspricht diesen Filter."
 }

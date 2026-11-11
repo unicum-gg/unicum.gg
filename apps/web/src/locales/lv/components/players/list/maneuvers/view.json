@@ -5,8 +5,9 @@
   "not-recorded": "{edition} šajā serverī netika reģistrēts. Spēle pēc izdevuma beigām neuztur klasifikāciju, tāpēc izdevumu, ko tā norises laikā neviens nefiksēja, nevar rādīt.",
   "not-started": "Tabula atveras {date}.",
   "not-started-undated": "Tabula vēl nav atvērta.",
-  "board": "Top {count} spēlētāji",
+  "board": "Ranžēts spēlētāju skaits: {count}",
   "place": "#",
   "player": "Spēlētājs",
-  "fame-points": "Slavas punkti"
+  "fame-points": "Slavas punkti",
+  "no-match": "Neviens spēlētājs tabulā neatbilst šiem filtriem."
 }

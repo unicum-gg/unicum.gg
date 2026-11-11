@@ -5,8 +5,9 @@
   "not-recorded": "{edition} 在此服务器上没有被记录。赛季结束后，游戏不会保留排名，因此无法显示运行期间无人记录的赛季。",
   "not-started": "榜单将于 {date} 打开。",
   "not-started-undated": "榜单尚未打开。",
-  "board": "顶级玩家（数量：{count}）",
+  "board": "{count} 个玩家排名",
   "place": "#",
   "player": "玩家",
-  "fame-points": "名望点数"
+  "fame-points": "名望点数",
+  "no-match": "榜单上没有符合这些筛选条件的玩家。"
 }

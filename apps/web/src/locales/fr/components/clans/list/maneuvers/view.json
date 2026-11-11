@@ -5,8 +5,9 @@
   "not-recorded": "L’édition {edition} n’a pas été enregistrée sur ce serveur. Le jeu ne conserve aucun classement une fois une édition terminée, donc une édition que personne n’a enregistrée pendant son déroulement ne peut pas être affichée.",
   "not-started": "Le classement ouvrira le {date}.",
   "not-started-undated": "Le classement n’est pas encore ouvert.",
-  "board": "Les {count} meilleurs clans",
+  "board": "{count} clans classés",
   "place": "#",
   "clan": "Clan",
-  "fame-points": "Points de renommée"
+  "fame-points": "Points de renommée",
+  "no-match": "Aucun clan du classement ne correspond à ces filtres."
 }

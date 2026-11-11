@@ -5,8 +5,9 @@
   "not-recorded": "{edition} không được ghi nhận trên máy chủ này. Trò chơi không giữ bảng xếp hạng sau khi một đợt kết thúc, vì vậy một đợt mà không ai ghi lại khi đang diễn ra không thể hiển thị.",
   "not-started": "Bảng xếp hạng mở vào {date}.",
   "not-started-undated": "Bảng xếp hạng chưa mở.",
-  "board": "Người chơi hàng đầu: {count}",
+  "board": "{count} người chơi được xếp hạng",
   "place": "#",
   "player": "Người chơi",
-  "fame-points": "Điểm Danh tiếng"
+  "fame-points": "Điểm Danh tiếng",
+  "no-match": "Không có người chơi nào trên bảng xếp hạng phù hợp với các bộ lọc này."
 }

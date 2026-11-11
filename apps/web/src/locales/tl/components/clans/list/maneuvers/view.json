@@ -5,8 +5,9 @@
   "not-recorded": "Hindi naitala ang {edition} sa server na ito. Walang pinapanatiling ranggo ang laro kapag nagtatapos ang isang edisyon, kaya hindi maaaring ipakita ang edisyong walang sinumang nakapagtala habang isinasagawa ito.",
   "not-started": "Binubuksan ang talahanayan ng ranggo sa {date}.",
   "not-started-undated": "Hindi pa binubuksan ang talahanayan ng ranggo.",
-  "board": "Mga nangungunang {count} clan",
+  "board": "{count} mga clan ang ranked",
   "place": "#",
   "clan": "Klan",
-  "fame-points": "Mga puntos ng katanyagan"
+  "fame-points": "Mga puntos ng katanyagan",
+  "no-match": "Walang klano sa talahanayan ng ranggo ang tumutugma sa mga filter na ito."
 }

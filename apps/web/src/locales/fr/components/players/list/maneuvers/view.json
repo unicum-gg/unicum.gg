@@ -5,8 +5,9 @@
   "not-recorded": "Aucun record pour {edition} n’a été enregistré sur ce serveur. Le jeu ne conserve aucun classement une fois une édition terminée, donc le classement d’une édition que personne n’a enregistré pendant son déroulement ne peut pas être affiché.",
   "not-started": "Le classement ouvrira le {date}.",
   "not-started-undated": "Le classement n’est pas encore ouvert.",
-  "board": "Les {count} meilleurs joueurs",
+  "board": "{count} joueurs classés",
   "place": "#",
   "player": "Joueur",
-  "fame-points": "Points de renommée"
+  "fame-points": "Points de renommée",
+  "no-match": "Aucun joueur du classement ne correspond à ces filtres."
 }

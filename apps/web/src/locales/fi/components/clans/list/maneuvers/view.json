@@ -5,8 +5,9 @@
   "not-recorded": "Kaudesta {edition} ei ole tallennettua tietoa tällä palvelimella. Peli ei säilytä sijoituksia kauden päätyttyä, joten kautta, jota kukaan ei tallentanut sen aikana, ei voi näyttää.",
   "not-started": "Tulostaulukko avautuu {date}.",
   "not-started-undated": "Tulostaulukko ei ole vielä avautunut.",
-  "board": "Parhaat {count} klaania",
+  "board": "{count} rankattua klaania",
   "place": "#",
   "clan": "Klaani",
-  "fame-points": "Mainepisteet"
+  "fame-points": "Mainepisteet",
+  "no-match": "Yksikään tulostaulukon klaani ei vastaa näitä suodattimia."
 }

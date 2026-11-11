@@ -5,8 +5,9 @@
   "not-recorded": "{edition} is niet geregistreerd op deze server. Het spel behoudt geen klassementen zodra een editie eindigt, dus een editie die niemand tijdens de looptijd heeft vastgelegd, kan niet worden weergegeven.",
   "not-started": "Het klassement opent op {date}.",
   "not-started-undated": "Het klassement is nog niet geopend.",
-  "board": "Top {count} spelers",
+  "board": "{count} spelers gerangschikt",
   "place": "#",
   "player": "Speler",
-  "fame-points": "Roempunten"
+  "fame-points": "Roempunten",
+  "no-match": "Geen speler in het klassement voldoet aan deze filters."
 }

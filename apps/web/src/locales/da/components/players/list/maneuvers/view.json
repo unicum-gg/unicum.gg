@@ -5,8 +5,9 @@
   "not-recorded": "{edition} blev ikke registreret på denne server. Spillet beholder ingen placeringer, når en udgave slutter, så en udgave, som ingen registrerede, mens den kørte, kan ikke vises.",
   "not-started": "Ranglisten åbner den {date}.",
   "not-started-undated": "Ranglisten er endnu ikke åbnet.",
-  "board": "Top {count} spillere",
+  "board": "{count} spillere rangeret",
   "place": "#",
   "player": "Spiller",
-  "fame-points": "Berømmelsespoint"
+  "fame-points": "Berømmelsespoint",
+  "no-match": "Ingen spiller på ranglisten matcher disse filtre."
 }

@@ -5,8 +5,9 @@
   "not-recorded": "{edition} ble ikke registrert på denne serveren. Spillet beholder ingen rangering når en utgave slutter, så en utgave som ingen registrerte mens den pågikk, kan ikke vises.",
   "not-started": "Tavlen åpner {date}.",
   "not-started-undated": "Tavlen har ikke åpnet ennå.",
-  "board": "Topp {count} klaner",
+  "board": "{count} klaner rangert",
   "place": "#",
   "clan": "Klan",
-  "fame-points": "Berømmelsespoeng"
+  "fame-points": "Berømmelsespoeng",
+  "no-match": "Ingen klaner på tavlen samsvarer med disse filtrene."
 }

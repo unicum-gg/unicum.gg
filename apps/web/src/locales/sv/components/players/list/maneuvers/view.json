@@ -5,8 +5,9 @@
   "not-recorded": "{edition} registrerades inte på den här servern. Spelet behåller inga ställningar när en upplaga slutar, så en upplaga som ingen registrerade medan den pågick kan inte visas.",
   "not-started": "Topplistan öppnar {date}.",
   "not-started-undated": "Topplistan har inte öppnat ännu.",
-  "board": "Topp {count} spelare",
+  "board": "{count} rankade spelare",
   "place": "#",
   "player": "Spelare",
-  "fame-points": "Ärepoäng"
+  "fame-points": "Ärepoäng",
+  "no-match": "Ingen spelare på topplistan matcher dessa filter."
 }

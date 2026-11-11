@@ -5,8 +5,9 @@
   "not-recorded": "{edition} nebyla na tomto serveru zaznamenána. Hra po skončení edice neuchovává žádné pořadí, takže edici, kterou během jejího průběhu nikdo nezaznamenal, nelze zobrazit.",
   "not-started": "Žebříček se otevírá {date}.",
   "not-started-undated": "Žebříček se zatím neotevřel.",
-  "board": "Nejlepších {count} klanů",
+  "board": "{count} hodnocených klanů",
   "place": "#",
   "clan": "Klan",
-  "fame-points": "Body slávy"
+  "fame-points": "Body slávy",
+  "no-match": "Žádný klan v žebříčku nemá bitvy odpovídající těmto filtrům."
 }

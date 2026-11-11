@@ -5,8 +5,9 @@
   "not-recorded": "{edition} não foi registrada neste servidor. O jogo não mantém nenhuma classificação quando uma edição termina, portanto uma edição que ninguém capturou enquanto estava em andamento não pode ser exibida.",
   "not-started": "A classificação abre em {date}.",
   "not-started-undated": "A classificação ainda não está aberta.",
-  "board": "Top {count} jogadores",
+  "board": "{count} jogadores na classificação",
   "place": "#",
   "player": "Jogador",
-  "fame-points": "Pontos de fama"
+  "fame-points": "Pontos de fama",
+  "no-match": "Nenhum jogador na classificação tem batalhas correspondentes a estes filtros."
 }

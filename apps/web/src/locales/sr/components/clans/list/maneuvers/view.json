@@ -5,8 +5,9 @@
   "not-recorded": "{edition} nije забележено на овом серверу. Игра не задржава пласман када издање истекне, па издање које нико није забележио док је трајало не може бити приказано.",
   "not-started": "Отварање табеле је {date}.",
   "not-started-undated": "Табела још није отворена.",
-  "board": "Najboljih {count} klanova",
+  "board": "{count} рангираних кланова",
   "place": "#",
   "clan": "Klan",
-  "fame-points": "Poeni slave"
+  "fame-points": "Poeni slave",
+  "no-match": "Ниједан клан на табели не одговара овим филтерима."
 }

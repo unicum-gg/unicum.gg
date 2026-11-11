@@ -5,8 +5,9 @@
   "not-recorded": "{edition} nem lett rögzítve ezen a szerveren. A játék nem tart meg ranglistát egy kiadás vége után, ezért nem jeleníthető meg olyan kiadás, amelyet senki sem rögzített a futása közben.",
   "not-started": "A ranglista ekkor nyílik meg: {date}.",
   "not-started-undated": "A ranglista még nem nyílt meg.",
-  "board": "Legjobb {count} klán",
+  "board": "{count} rangsorolt klán a ranglistán",
   "place": "#",
   "clan": "Klán",
-  "fame-points": "Dicsőségpontok"
+  "fame-points": "Dicsőségpontok",
+  "no-match": "A ranglistán egyetlen klán sem felel meg ezeknek a szűrőknek."
 }

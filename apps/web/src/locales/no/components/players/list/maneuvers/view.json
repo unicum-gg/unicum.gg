@@ -5,8 +5,9 @@
   "not-recorded": "{edition} ble ikke registrert på denne serveren. Spillet beholder ingen rangering når en utgave slutter, så en utgave som ingen registrerte mens den pågikk, kan ikke vises.",
   "not-started": "Tavlen åpner {date}.",
   "not-started-undated": "Tavlen har ikke åpnet ennå.",
-  "board": "Topp {count} spillere",
+  "board": "{count} spillere rangert",
   "place": "#",
   "player": "Spiller",
-  "fame-points": "Berømmelsespoeng"
+  "fame-points": "Berømmelsespoeng",
+  "no-match": "Ingen spillere på tavlen samsvarer med disse filtrene."
 }

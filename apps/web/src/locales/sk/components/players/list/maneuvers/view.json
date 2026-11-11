@@ -5,8 +5,9 @@
   "not-recorded": "{edition} nebola na tomto serveri zaznamenaná. Hra po skončení vydania neuchováva žiadne poradie, takže vydanie, ktoré počas svojho trvania nikto nezaznamenal, nie je možné zobraziť.",
   "not-started": "Lestvica bude otvorená {date}.",
   "not-started-undated": "Lestvica ešte nebola otvorená.",
-  "board": "Najlepších {count} hráčov",
+  "board": "{count} hráčov na lestvici",
   "place": "#",
   "player": "Hráč",
-  "fame-points": "Body slávy"
+  "fame-points": "Body slávy",
+  "no-match": "Žiadny hráč na lestvici nezodpovedá týmto filtrom."
 }
