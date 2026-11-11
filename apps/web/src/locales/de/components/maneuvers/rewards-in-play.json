@@ -1,0 +1,30 @@
+{
+  "title": "Aktuelle Belohnungen",
+  "vehicle": "Fahrzeug",
+  "places-to-go": "Noch {places} Plätze",
+  "bonds": "{bonds} Anleihen",
+  "bonds-multiplied": "{bonds} Anleihen × {multiplier} Clan-Multiplikator = {total} Anleihen",
+  "no-bonds": "Keine Anleihen",
+  "next-tier": "{bonds} Anleihen, {places} Plätze höher",
+  "badge": "Abzeichen: {badge}",
+  "members-badge": "Abzeichen: {badge} für seine Mitglieder",
+  "members-medal": "Medaille: {medal} für seine Mitglieder",
+  "legend": "{maneuvers}-Legende",
+  "hero": "{maneuvers}-Held",
+  "legend-battles": "wenn mindestens {share} ihrer Gefechte im Ereignis für diesen Clan gespielt wurden",
+  "legend-needs": "benötigt einen Platz im oberen {share}-Anteil und einen Clan im oberen {share}-Anteil",
+  "legend-members": "für Mitglieder im oberen {share}-Anteil der spieler",
+  "hero-needs": "benötigt einen Clan im oberen {share}-Anteil",
+  "clan-needs": "benötigt einen Platz im oberen {share}-Anteil der Clans",
+  "clan-battles": "wenn sie seit dem Beitritt {count} Gefechte für diesen Clan gespielt haben",
+  "gold": "Gold für die Clan-Kasse",
+  "multiplier": "×{multiplier} auf die Anleihen seiner Mitglieder",
+  "medals": {
+    "winner": "{maneuvers}-Gewinner",
+    "top-2": "{maneuvers} Top 2",
+    "top-3": "{maneuvers} Top 3",
+    "top-10": "{maneuvers} Top 10",
+    "top-100": "{maneuvers} Top 100"
+  },
+  "footnote": "Gemäß den Regeln des Ereignisses und der aktuellen Rangliste. Jedes Abzeichen und jede Medaille setzt außerdem für den Clan gespielte Gefechte voraus, die das Spiel nicht veröffentlicht, daher handelt es sich eher um Plätze als um Belohnungen."
+}

@@ -1,0 +1,21 @@
+{
+  "intro": {
+    "players": "榜单前列的每位玩家还会根据其名次所在的等级赚取战争债券，所得数量乘以其军团在军团榜单上的名次。其余名次会随着榜单填充而跟随榜单变化。",
+    "clans": "军团的名次会作为倍率，影响其每位成员在玩家榜单上赚取的战争债券。其余名次会随着榜单填充而跟随榜单变化。"
+  },
+  "standing": "排名",
+  "places": "名次",
+  "value": {
+    "players": "战争债券",
+    "clans": "倍率"
+  },
+  "bonds": "{bonds}战争债券",
+  "top": "前{share}",
+  "rest": "其余",
+  "range": "{from}至{to}",
+  "legend-rule": "名次位于前{share}、军团位于前{share}，并且为该军团进行过至少{battles}战斗场次",
+  "hero-rule": "军团位于前{share}，并且自加入以来为该军团进行过{count}战斗场次",
+  "medal-place": "第{place}名",
+  "medal-top": "前{place}",
+  "medal-rule": "位于{rule}的军团的每位成员，并且自加入以来为该军团进行过{count}战斗场次"
+}

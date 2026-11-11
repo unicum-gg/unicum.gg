@@ -8,5 +8,7 @@
   "members-winning": "{count} šiuo metu laimi transporto priemonę",
   "place": "Vieta",
   "player": "Žaidėjas",
-  "fame-points": "Šlovės taškai"
+  "fame-points": "Šlovės taškai",
+  "bonds": "Bonai",
+  "bonds-hint": "Bonai, kuriuos vieta uždirba pagal taisykles, pritaikius klano daugiklį, jei žaidėjas sužaidė reikiamus mūšius"
 }

@@ -8,5 +8,7 @@
   "members-winning": "{count} obecnie zdobywa pojazd",
   "place": "Miejsce",
   "player": "Gracz",
-  "fame-points": "Punkty sławy"
+  "fame-points": "Punkty sławy",
+  "bonds": "Obligacje",
+  "bonds-hint": "Obligacje zdobywane za miejsce zgodnie z regulaminem, z uwzględnieniem mnożnika klanu, jeśli gracz rozegrał wymagane bitwy"
 }

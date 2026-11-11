@@ -8,5 +8,7 @@
   "members-winning": "{count} vinder aktuelt køretøjet",
   "place": "Plads",
   "player": "Spiller",
-  "fame-points": "Berømmelsespoint"
+  "fame-points": "Berømmelsespoint",
+  "bonds": "Obligationer",
+  "bonds-hint": "Obligationer, som placeringen optjener efter reglerne, med klanens multiplikator anvendt, hvis spilleren kæmpede de kampe, den spørger efter"
 }

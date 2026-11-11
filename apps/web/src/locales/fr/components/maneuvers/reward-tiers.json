@@ -1,0 +1,21 @@
+{
+  "intro": {
+    "players": "Chaque joueur situé dans la partie supérieure du classement gagne également des obligations, selon le rang correspondant à sa place, multiplié par la place de son clan dans le classement des clans. Les places suivantes suivent le classement à mesure qu’il se remplit.",
+    "clans": "La place d’un clan multiplie les obligations que chaque membre gagne dans le classement des joueurs. Les places suivantes suivent le classement à mesure qu’il se remplit."
+  },
+  "standing": "Classement",
+  "places": "Places",
+  "value": {
+    "players": "Obligations",
+    "clans": "Multiplicateur"
+  },
+  "bonds": "{bonds} obligations",
+  "top": "Les {share} meilleurs",
+  "rest": "Le reste",
+  "range": "De {from} à {to}",
+  "legend-rule": "une place parmi les {share} meilleurs, dans un clan parmi les {share} meilleurs, avec au moins {battles} batailles de l’événement combattues pour ce clan",
+  "hero-rule": "un clan parmi les {share} meilleurs, avec {count} batailles combattues pour ce clan depuis l’arrivée du joueur",
+  "medal-place": "place {place}",
+  "medal-top": "les {place} meilleurs",
+  "medal-rule": "chaque membre du clan correspondant à {rule}, avec {count} batailles combattues pour ce clan depuis son arrivée"
+}

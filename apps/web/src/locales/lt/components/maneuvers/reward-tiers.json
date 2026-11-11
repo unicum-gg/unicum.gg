@@ -1,0 +1,21 @@
+{
+  "intro": {
+    "players": "Kiekvienas žaidėjas, esantis viršutinėje lentelės dalyje, taip pat uždirba bonų pagal lygį, į kurį patenka jo vieta, padauginus iš jo klano vietos klanų lentelėje. Žemiau esančios vietos seka lentelę jai pildantis.",
+    "clans": "Klano vieta padaugina bonus, kuriuos kiekvienas narys uždirba žaidėjų lentelėje. Žemiau esančios vietos seka lentelę jai pildantis."
+  },
+  "standing": "Pozicija",
+  "places": "Vietos",
+  "value": {
+    "players": "Bonai",
+    "clans": "Daugiklis"
+  },
+  "bonds": "{bonds} bonų",
+  "top": "Geriausi {share}",
+  "rest": "Likę",
+  "range": "Nuo {from} iki {to}",
+  "legend-rule": "vieta tarp geriausių {share}, klanas tarp geriausių {share}, kuriam sužaista bent {battles} įvykio mūšių",
+  "hero-rule": "klanas tarp geriausių {share}, kuriam nuo prisijungimo sužaista {count} mūšių",
+  "medal-place": "{place} vieta",
+  "medal-top": "tarp geriausių {place}",
+  "medal-rule": "kiekvienas klano, esančio pagal {rule}, narys, nuo prisijungimo sužaidęs {count} mūšių"
+}

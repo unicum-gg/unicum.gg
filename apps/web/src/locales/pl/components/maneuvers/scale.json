@@ -3,9 +3,9 @@
     "players": "Kolumna Punktów sławy jest kolorowana w zależności od tego, jak wysokie miejsce zajmuje wśród wszystkich graczy w rankingu, według tych samych percentyli co pozostałe skale ocen witryny. Poniższe miejsca są zgodne z tabelą w miarę jej zapełnienia.",
     "clans": "Kolumna Punktów sławy jest kolorowana w zależności od tego, jak wysokie miejsce zajmuje wśród wszystkich klanów w rankingu, według tych samych percentyli co pozostałe skale ocen witryny. Poniższe miejsca są zgodne z tabelą w miarę jej zapełnienia."
   },
-  "share": "Udostępnij",
+  "share": "Pozycja",
   "places": "Miejsca",
   "top": "Najlepsze {share}",
-  "rest": "Reszta",
+  "rest": "Pozostali",
   "range": "{from} do {to}"
 }

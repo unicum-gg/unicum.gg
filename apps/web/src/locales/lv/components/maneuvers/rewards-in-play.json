@@ -1,0 +1,30 @@
+{
+  "title": "Spēlē esošās apmaksāšanas",
+  "vehicle": "Tanks",
+  "places-to-go": "Vēl {places} vietas",
+  "bonds": "{bonds} bonām",
+  "bonds-multiplied": "{bonds} bonām × {multiplier} klana reizinātājs = {total} bonām",
+  "no-bonds": "Nav bonām",
+  "next-tier": "{bonds} bonām {places} vietas augstāk",
+  "badge": "{badge} nozīmīte",
+  "members-badge": "{badge} nozīmīte tā biedriem",
+  "members-medal": "{medal} medaļa tā biedriem",
+  "legend": "{maneuvers} Leģenda",
+  "hero": "{maneuvers} Varonis",
+  "legend-battles": "ja vismaz {share} viņu notikuma kauju tika izspēlētas šim klanam",
+  "legend-needs": "nepieciešams labāko {share} vieta un klans starp labākajiem {share}",
+  "legend-members": "biedriem starp labākajiem {share} spēlētājiem",
+  "hero-needs": "nepieciešams klans starp labākajiem {share}",
+  "clan-needs": "nepieciešama vieta starp labākajiem {share} klaniem",
+  "clan-battles": "ja viņi kopš pievienošanās tam izspēlēja {count} kaujas šim klanam",
+  "gold": "Zelts klana kasē",
+  "multiplier": "×{multiplier} uz tā biedru bonām",
+  "medals": {
+    "winner": "{maneuvers} Uzvarētājs",
+    "top-2": "{maneuvers} Labāko 2 vidū",
+    "top-3": "{maneuvers} Labāko 3 vidū",
+    "top-10": "{maneuvers} Labāko 10 vidū",
+    "top-100": "{maneuvers} Labāko 100 vidū"
+  },
+  "footnote": "Saskaņā ar notikuma noteikumiem, pamatojoties uz pašreizējo tabulu. Katrai nozīmītei un medaļai nepieciešamas arī šim klanam izspēlētas kaujas, ko spēle nepublicē, tāpēc tās ir vietas, nevis apbalvojumi."
+}

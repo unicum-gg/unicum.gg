@@ -8,5 +8,7 @@
   "members-winning": "{count} voittaa parhaillaan ajoneuvon",
   "place": "Sijoitus",
   "player": "Pelaaja",
-  "fame-points": "Mainepisteet"
+  "fame-points": "Mainepisteet",
+  "bonds": "Arvopaperit",
+  "bonds-hint": "Sijoituksen määräysten mukaan ansaitsemat arvopaperit klaanin kerroin huomioiden, jos pelaaja on taistellut sen edellyttämät taistelut"
 }

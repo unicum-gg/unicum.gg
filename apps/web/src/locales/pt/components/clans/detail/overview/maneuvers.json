@@ -8,5 +8,7 @@
   "members-winning": "{count} atualmente conquistam o veículo",
   "place": "posição",
   "player": "Jogador",
-  "fame-points": "Pontos de fama"
+  "fame-points": "Pontos de fama",
+  "bonds": "Títulos",
+  "bonds-hint": "Títulos que o lugar conquista conforme o regulamento, com o multiplicador do clã aplicado, caso o jogador tenha jogado as batalhas que o regulamento pergunta"
 }

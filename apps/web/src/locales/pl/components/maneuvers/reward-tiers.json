@@ -1,0 +1,21 @@
+{
+  "intro": {
+    "players": "Każdy gracz z czołowej części tabeli zdobywa także obligacje, zależnie od poziomu, do którego należy jego miejsce, pomnożone przez miejsce jego klanu w tabeli klanów. Kolejne miejsca wynikają z tego, jak zapełnia się tabela.",
+    "clans": "Miejsce klanu mnoży liczbę obligacji zdobywanych przez każdego członka w tabeli graczy. Kolejne miejsca wynikają z tego, jak zapełnia się tabela."
+  },
+  "standing": "Pozycja",
+  "places": "Miejsca",
+  "value": {
+    "players": "Obligacje",
+    "clans": "Mnożnik"
+  },
+  "bonds": "{bonds} obligacji",
+  "top": "Najlepsze {share}",
+  "rest": "Pozostali",
+  "range": "Od {from} do {to}",
+  "legend-rule": "miejsce w najlepszych {share}, klan w najlepszych {share}, z co najmniej {battles} bitwami wydarzenia rozegranymi dla tego klanu",
+  "hero-rule": "klan w najlepszych {share}, z {count} bitwami rozegranymi dla niego od dołączenia",
+  "medal-place": "miejsce {place}",
+  "medal-top": "najlepsze {place}",
+  "medal-rule": "każdy członek klanu w ramach {rule}, z {count} bitwami rozegranymi dla niego od dołączenia"
+}

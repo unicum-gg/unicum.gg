@@ -8,5 +8,7 @@
   "members-winning": "În prezent, {count} câștigă vehiculul",
   "place": "Loc",
   "player": "Jucător",
-  "fame-points": "Puncte de faimă"
+  "fame-points": "Puncte de faimă",
+  "bonds": "Bonduri",
+  "bonds-hint": "Bonduri pe care le câștigă locul conform regulamentului, cu multiplicatorul clanului aplicat, dacă jucătorul a jucat bătăliile solicitate"
 }

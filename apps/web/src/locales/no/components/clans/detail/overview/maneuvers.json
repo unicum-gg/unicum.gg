@@ -8,5 +8,7 @@
   "members-winning": "{count} vinner for øyeblikket kjøretøyet",
   "place": "Plass",
   "player": "Spiller",
-  "fame-points": "Berømmelsespoeng"
+  "fame-points": "Berømmelsespoeng",
+  "bonds": "Sedler",
+  "bonds-hint": "Sedler plasseringen tjener i henhold til regelverket, med klanens multiplikator brukt, hvis spilleren kjempet kampene den spør etter"
 }

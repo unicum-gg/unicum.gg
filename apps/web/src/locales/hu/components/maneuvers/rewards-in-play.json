@@ -1,0 +1,30 @@
+{
+  "title": "Játékban lévő jutalmak",
+  "vehicle": "Jármű",
+  "places-to-go": "Még {places} helyezés",
+  "bonds": "{bonds} kötvények",
+  "bonds-multiplied": "{bonds} kötvények × {multiplier} klánszorzó = {total} kötvények",
+  "no-bonds": "Nincsenek kötvények",
+  "next-tier": "{bonds} kötvények, {places} helyezéssel magasabban",
+  "badge": "{badge} jelvény",
+  "members-badge": "{badge} jelvény a tagoknak",
+  "members-medal": "{medal} érem a tagoknak",
+  "legend": "{maneuvers} Legenda",
+  "hero": "{maneuvers} Hős",
+  "legend-battles": "ha az esemény csatáinak legalább {share} részét ezért a klánért játszották",
+  "legend-needs": "a legjobb {share} helyezés szükséges, valamint egy klán a legjobb {share} között",
+  "legend-members": "a játékosok legjobb {share} részében lévő tagoknak",
+  "hero-needs": "a legjobb {share} klán egyikére van szükség",
+  "clan-needs": "a klánok legjobb {share} részében elfoglalt helyezés szükséges",
+  "clan-battles": "ha a csatlakozás óta {count} csatát játszottak ezért a klánért",
+  "gold": "Arany a klán kincstárába",
+  "multiplier": "×{multiplier} a tagok kötvényeire",
+  "medals": {
+    "winner": "{maneuvers} Győztes",
+    "top-2": "{maneuvers} Top 2",
+    "top-3": "{maneuvers} Top 3",
+    "top-10": "{maneuvers} Top 10",
+    "top-100": "{maneuvers} Top 100"
+  },
+  "footnote": "Az esemény szabályzata szerint, az aktuális ranglista alapján. Minden jelvényhez és éremhez a klánért lejátszott csaták is szükségesek, ezeket a játék nem teszi közzé, ezért ezek helyezések, nem jutalmak."
+}

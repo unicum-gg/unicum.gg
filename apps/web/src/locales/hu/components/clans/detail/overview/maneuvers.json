@@ -8,5 +8,7 @@
   "members-winning": "{count} tag jelenleg megszerzi a járművet",
   "place": "Helyezés",
   "player": "Játékos",
-  "fame-points": "Dicsőségpontok"
+  "fame-points": "Dicsőségpontok",
+  "bonds": "Kötvények",
+  "bonds-hint": "A helyezés által a szabályzat szerint megszerzett kötvények, a klán szorzójával alkalmazva, ha a játékos lejátszotta a szükséges csatákat"
 }

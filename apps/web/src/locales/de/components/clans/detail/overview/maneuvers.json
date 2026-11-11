@@ -8,5 +8,7 @@
   "members-winning": "{count} verdienen aktuell das Fahrzeug",
   "place": "Platz",
   "player": "Spieler",
-  "fame-points": "Ruhmpunkte"
+  "fame-points": "Ruhmpunkte",
+  "bonds": "Anleihen",
+  "bonds-hint": "Anleihen, die für den Platz gemäß den Regeln verdient werden, mit angewendetem Multiplikator des Clans, sofern der Spieler die dafür erforderlichen Gefechte gespielt hat"
 }

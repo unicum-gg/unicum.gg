@@ -8,5 +8,7 @@
   "members-winning": "{count} winnen momenteel het voertuig",
   "place": "Plaats",
   "player": "Speler",
-  "fame-points": "Roempunten"
+  "fame-points": "Roempunten",
+  "bonds": "Obligaties",
+  "bonds-hint": "Obligaties die de plaats volgens de reglementen verdient, met de vermenigvuldigingsfactor van de clan toegepast, als de speler de gevraagde gevechten heeft gevochten"
 }

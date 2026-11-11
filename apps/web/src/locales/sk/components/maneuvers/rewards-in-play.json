@@ -1,0 +1,30 @@
+{
+  "title": "Odmeny v hre",
+  "vehicle": "Vozidlo",
+  "places-to-go": "Zostáva {places} miest",
+  "bonds": "{bonds} obvezníc",
+  "bonds-multiplied": "{bonds} obvezníc × {multiplier} násobiteľ klanu = {total} obvezníc",
+  "no-bonds": "Žiadne obveznice",
+  "next-tier": "{bonds} obvezníc, o {places} miest vyššie",
+  "badge": "Značka {badge}",
+  "members-badge": "Značka {badge} pre členov",
+  "members-medal": "Medaila {medal} pre členov",
+  "legend": "Legenda: {maneuvers}",
+  "hero": "Hrdina: {maneuvers}",
+  "legend-battles": "ak za tento klan odigrali aspoň {share} svojich bitiek udalosti",
+  "legend-needs": "potrebuje miesto medzi najlepšími {share} a klan medzi najlepšími {share}",
+  "legend-members": "pre členov medzi najlepšími {share} hráčov",
+  "hero-needs": "potrebuje klan medzi najlepšími {share}",
+  "clan-needs": "potrebuje miesto medzi najlepšími {share} klanov",
+  "clan-battles": "ak za tento klan odohrali {count} bitiek od pridruženia",
+  "gold": "Zlato do pokladnice klanu",
+  "multiplier": "×{multiplier} k obvezniciam jeho členov",
+  "medals": {
+    "winner": "Víťaz: {maneuvers}",
+    "top-2": "Medzi 2 najlepšími: {maneuvers}",
+    "top-3": "Medzi 3 najlepšími: {maneuvers}",
+    "top-10": "Medzi 10 najlepšími: {maneuvers}",
+    "top-100": "Medzi 100 najlepšími: {maneuvers}"
+  },
+  "footnote": "Podľa pravidiel udalosti a aktuálneho stavu lestvice. Každá značka a medaila tiež vyžaduje bitky odhrané za klan, ktoré hra nezverejňuje, preto ide o umiestnenia, nie o odmeny."
+}

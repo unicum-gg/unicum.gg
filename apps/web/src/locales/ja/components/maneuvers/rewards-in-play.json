@@ -1,0 +1,30 @@
+{
+  "title": "獲得可能な報酬",
+  "vehicle": "車両",
+  "places-to-go": "あと{places}位",
+  "bonds": "{bonds} ボンズ",
+  "bonds-multiplied": "{bonds} ボンズ × クラン倍率 {multiplier} = {total} ボンズ",
+  "no-bonds": "ボンズなし",
+  "next-tier": "{places}位上がると{bonds} ボンズ",
+  "badge": "{badge}バッジ",
+  "members-badge": "メンバー用の{badge}バッジ",
+  "members-medal": "メンバー用の{medal}メダル",
+  "legend": "{maneuvers} レジェンド",
+  "hero": "{maneuvers} ヒーロー",
+  "legend-battles": "イベントでの戦闘の少なくとも{share}がこのクランのためのものである場合",
+  "legend-needs": "上位 {share}の順位と、上位 {share}のクランが必要",
+  "legend-members": "プレイヤーランキング上位 {share}のメンバー向け",
+  "hero-needs": "上位 {share}のクランが必要",
+  "clan-needs": "クランランキング上位 {share}の順位が必要",
+  "clan-battles": "クランに参加してから、このクランのために{count}回の戦闘をプレイ済みである場合",
+  "gold": "クラン金庫用ゴールド",
+  "multiplier": "メンバーのボンズに×{multiplier}",
+  "medals": {
+    "winner": "{maneuvers} 勝者",
+    "top-2": "{maneuvers} 上位2位",
+    "top-3": "{maneuvers} 上位3位",
+    "top-10": "{maneuvers} 上位10位",
+    "top-100": "{maneuvers} 上位100位"
+  },
+  "footnote": "イベントの規則に基づく、現在のランキング上の順位です。すべてのバッジとメダルにはクランのためにプレイした戦闘も必要ですが、ゲームではその情報が公開されていないため、これは報酬ではなく順位を示しています。"
+}

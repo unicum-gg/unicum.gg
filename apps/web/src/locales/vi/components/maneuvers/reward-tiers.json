@@ -1,0 +1,21 @@
+{
+  "intro": {
+    "players": "Mỗi người chơi trong nhóm đầu của bảng xếp hạng cũng kiếm được trái phiếu, tùy theo cấp mà vị trí của họ thuộc về, được nhân với vị trí của Clan trên bảng xếp hạng Clan. Các vị trí bên dưới sẽ theo dõi bảng xếp hạng khi bảng được lấp đầy.",
+    "clans": "Vị trí của một Clan nhân với số trái phiếu mà mỗi thành viên kiếm được trên bảng xếp hạng người chơi. Các vị trí bên dưới sẽ theo dõi bảng xếp hạng khi bảng được lấp đầy."
+  },
+  "standing": "Thứ hạng",
+  "places": "Vị trí",
+  "value": {
+    "players": "Trái phiếu",
+    "clans": "Hệ số"
+  },
+  "bonds": "{bonds} trái phiếu",
+  "top": "Top {share}",
+  "rest": "Phần còn lại",
+  "range": "Từ {from} đến {to}",
+  "legend-rule": "vị trí thuộc top {share}, trong một Clan thuộc top {share}, với ít nhất {battles} trận đấu của sự kiện đã tham chiến cho Clan đó",
+  "hero-rule": "một Clan thuộc top {share}, với {count} trận đấu đã tham chiến cho Clan đó kể từ khi tham gia",
+  "medal-place": "vị trí {place}",
+  "medal-top": "top {place}",
+  "medal-rule": "mỗi thành viên của Clan trong {rule}, với {count} trận đấu đã tham chiến cho Clan đó kể từ khi tham gia"
+}

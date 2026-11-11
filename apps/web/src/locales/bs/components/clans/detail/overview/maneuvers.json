@@ -8,5 +8,7 @@
   "members-winning": "{count} trenutno osvajaju vozilo",
   "place": "Mjesto",
   "player": "Igrač",
-  "fame-points": "Bodovi slave"
+  "fame-points": "Bodovi slave",
+  "bonds": "Obveznice",
+  "bonds-hint": "Obveznice koje se zarađuju za mjesto prema pravilima, uz primijenjeni množitelj klana, ako je igrač odigrao bitke koje se traže"
 }

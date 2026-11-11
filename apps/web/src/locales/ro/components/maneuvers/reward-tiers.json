@@ -1,0 +1,21 @@
+{
+  "intro": {
+    "players": "Fiecare jucător din zona de top a clasamentului câștigă și bonduri, în funcție de nivelul în care se încadrează locul său, înmulțite cu locul clanului său în clasamentul clanurilor. Locurile de mai jos urmăresc completările clasamentului.",
+    "clans": "Locul unui clan multiplică bondurile pe care le câștigă fiecare membru în clasamentul jucătorilor. Locurile de mai jos urmăresc completările clasamentului."
+  },
+  "standing": "Clasare",
+  "places": "Locuri",
+  "value": {
+    "players": "Bonduri",
+    "clans": "Multiplicator"
+  },
+  "bonds": "{bonds} bonduri",
+  "top": "Top {share}",
+  "rest": "Restul",
+  "range": "{from} până la {to}",
+  "legend-rule": "un loc din top {share}, într-un clan din top {share}, cu cel puțin {battles} dintre bătăliile evenimentului jucate pentru acesta",
+  "hero-rule": "un clan din top {share}, cu {count} bătălii jucate pentru acesta de la alăturare",
+  "medal-place": "locul {place}",
+  "medal-top": "top {place}",
+  "medal-rule": "fiecare membru al clanului din {rule}, cu {count} bătălii jucate pentru acesta de la alăturare"
+}

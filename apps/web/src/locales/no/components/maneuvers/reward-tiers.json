@@ -1,0 +1,21 @@
+{
+  "intro": {
+    "players": "Alle spillere i den øverste delen av tavlen tjener også sedler, etter nivået plasseringen deres faller i, multiplisert med klanens plass på klanetavlen. Plassene nedenfor følger tavlen etter hvert som den fyller seg.",
+    "clans": "En klans plass multipliserer sedlene hvert medlem tjener på spillertavlen. Plassene nedenfor følger tavlen etter hvert som den fyller seg."
+  },
+  "standing": "Plassering",
+  "places": "Plasser",
+  "value": {
+    "players": "Sedler",
+    "clans": "Multiplikator"
+  },
+  "bonds": "{bonds} sedler",
+  "top": "De beste {share}",
+  "rest": "Resten",
+  "range": "{from} til {to}",
+  "legend-rule": "en plass blant de beste {share}, i en klan blant de beste {share}, med minst {battles} av hendelsens kamper kjempet for den",
+  "hero-rule": "en klan blant de beste {share}, med {count} kamper kjempet for den siden spilleren ble med",
+  "medal-place": "plass {place}",
+  "medal-top": "de {place} beste",
+  "medal-rule": "alle medlemmer av klanen i {rule}, med {count} kamper kjempet for den siden de ble med"
+}

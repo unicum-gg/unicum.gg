@@ -854,7 +854,11 @@
     "Place": "المركز",
     "currently": "حاليًا",
     "holds": "يحمل",
-    "inside": "داخل"
+    "inside": "داخل",
+    "Bonds": "السندات",
+    "Standing": "الترتيب",
+    "The rest": "الباقي",
+    "follow": "متابعة"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1712,7 +1716,11 @@
     "Place": "Месца",
     "currently": "цяпер",
     "holds": "утрымлівае",
-    "inside": "унутры"
+    "inside": "унутры",
+    "Bonds": "Боны",
+    "Standing": "Пазіцыя",
+    "The rest": "Астатняе",
+    "follow": "сачыць"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -2786,7 +2794,10 @@
     "Place": "Място",
     "currently": "в момента",
     "holds": "притежава",
-    "inside": "вътре"
+    "inside": "вътре",
+    "Standing": "Класиране",
+    "The rest": "Останалите",
+    "follow": "следвай"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -3652,7 +3663,11 @@
     "Place": "Mjesto",
     "currently": "trenutno",
     "holds": "drži",
-    "inside": "unutar"
+    "inside": "unutar",
+    "Bonds": "Obveznice",
+    "Standing": "Plasman",
+    "The rest": "Ostalo",
+    "follow": "pratiti"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -4737,7 +4752,10 @@
     "Place": "Místo",
     "currently": "aktuálně",
     "holds": "drží",
-    "inside": "uvnitř"
+    "inside": "uvnitř",
+    "Standing": "Umístění",
+    "The rest": "Ostatní",
+    "follow": "sledovat"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -5828,7 +5846,10 @@
     "Place": "Plads",
     "currently": "aktuelt",
     "holds": "hold",
-    "inside": "inde i"
+    "inside": "inde i",
+    "Standing": "Placering",
+    "The rest": "Resten",
+    "follow": "følg"
   },
   "de": {
     "(optional)": "(optional)",
@@ -6912,7 +6933,10 @@
     "Place": "Platz",
     "currently": "aktuell",
     "holds": "hält",
-    "inside": "in"
+    "inside": "in",
+    "Standing": "Platzierung",
+    "The rest": "Der Rest",
+    "follow": "folgen"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -8002,7 +8026,10 @@
     "Place": "Θέση",
     "currently": "τρέχοντα",
     "holds": "κατέχει",
-    "inside": "εντός"
+    "inside": "εντός",
+    "Standing": "Κατάταξη",
+    "The rest": "Οι υπόλοιποι",
+    "follow": "ακολούθηση"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -9072,7 +9099,10 @@
     "Place": "Puesto",
     "currently": "actualmente",
     "holds": "tiene",
-    "inside": "dentro"
+    "inside": "dentro",
+    "Standing": "Clasificación",
+    "The rest": "El resto",
+    "follow": "seguir"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -10167,7 +10197,10 @@
     "Place": "Sijoitus",
     "currently": "parhaillaan",
     "holds": "hallussaan",
-    "inside": "sisällä"
+    "inside": "sisällä",
+    "Standing": "Sijoitus",
+    "The rest": "Muut",
+    "follow": "seuraa"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -11241,7 +11274,10 @@
     "Place": "Place",
     "currently": "actuellement",
     "holds": "possède",
-    "inside": "dans"
+    "inside": "dans",
+    "Standing": "Classement",
+    "The rest": "Le reste",
+    "follow": "suivre"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -12100,7 +12136,11 @@
     "Place": "स्थान",
     "currently": "वर्तमान में",
     "holds": "रखता है",
-    "inside": "अंदर"
+    "inside": "अंदर",
+    "Bonds": "बॉन्ड्स",
+    "Standing": "स्थिति",
+    "The rest": "बाकी",
+    "follow": "फ़ॉलो"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -13188,7 +13228,10 @@
     "Place": "Mjesto",
     "currently": "trenutno",
     "holds": "drži",
-    "inside": "unutar"
+    "inside": "unutar",
+    "Standing": "Poredak",
+    "The rest": "Ostalo",
+    "follow": "pratiti"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -14278,7 +14321,10 @@
     "Place": "Helyezés",
     "currently": "jelenleg",
     "holds": "rendelkezik",
-    "inside": "belül"
+    "inside": "belül",
+    "Standing": "Helyezés",
+    "The rest": "A többi",
+    "follow": "követés"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -15364,7 +15410,10 @@
     "Place": "Posizione",
     "currently": "attualmente",
     "holds": "detiene",
-    "inside": "all'interno"
+    "inside": "all'interno",
+    "Standing": "Posizione",
+    "The rest": "Il resto",
+    "follow": "segui"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -16457,7 +16506,10 @@
     "Place": "場所",
     "currently": "現在",
     "holds": "保有",
-    "inside": "内部"
+    "inside": "内部",
+    "Standing": "順位",
+    "The rest": "その他",
+    "follow": "フォロー"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -17316,7 +17368,11 @@
     "Place": "Орын",
     "currently": "қазір",
     "holds": "иеленеді",
-    "inside": "ішінде"
+    "inside": "ішінде",
+    "Bonds": "Облигациялар",
+    "Standing": "Орын",
+    "The rest": "Қалғаны",
+    "follow": "бақылау"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -18414,7 +18470,10 @@
     "Place": "장소",
     "currently": "현재",
     "holds": "보유",
-    "inside": "내부"
+    "inside": "내부",
+    "Standing": "순위",
+    "The rest": "나머지",
+    "follow": "팔로우"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -19507,7 +19566,10 @@
     "Place": "Vieta",
     "currently": "šiuo metu",
     "holds": "turi",
-    "inside": "viduje"
+    "inside": "viduje",
+    "Standing": "Pozicija",
+    "The rest": "Likę",
+    "follow": "sekti"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -20586,7 +20648,10 @@
     "Place": "vieta",
     "currently": "pašlaik",
     "holds": "ieņem",
-    "inside": "iekšpusē"
+    "inside": "iekšpusē",
+    "Standing": "Vieta",
+    "The rest": "Pārējie",
+    "follow": "sekot"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -21681,7 +21746,10 @@
     "Place": "Plaats",
     "currently": "momenteel",
     "holds": "heeft",
-    "inside": "binnen"
+    "inside": "binnen",
+    "Standing": "Positie",
+    "The rest": "De rest",
+    "follow": "volgen"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -22767,7 +22835,10 @@
     "Place": "Plass",
     "currently": "for øyeblikket",
     "holds": "har",
-    "inside": "i"
+    "inside": "i",
+    "Standing": "Plassering",
+    "The rest": "Resten",
+    "follow": "følg"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -23850,7 +23921,10 @@
     "Place": "Miejsce",
     "currently": "obecnie",
     "holds": "posiada",
-    "inside": "wewnątrz"
+    "inside": "wewnątrz",
+    "Standing": "Pozycja",
+    "The rest": "Pozostali",
+    "follow": "obserwuj"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -24926,7 +25000,10 @@
     "Place": "posição",
     "currently": "atualmente",
     "holds": "detém",
-    "inside": "dentro"
+    "inside": "dentro",
+    "Standing": "Colocação",
+    "The rest": "O restante",
+    "follow": "seguir"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -26002,7 +26079,10 @@
     "Place": "Loc",
     "currently": "în prezent",
     "holds": "deține",
-    "inside": "în"
+    "inside": "în",
+    "Standing": "Clasare",
+    "The rest": "Restul",
+    "follow": "urmărește"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -27066,7 +27146,10 @@
     "Place": "Место",
     "currently": "сейчас",
     "holds": "имеет",
-    "inside": "внутри"
+    "inside": "внутри",
+    "Standing": "Позиция",
+    "The rest": "Остальные",
+    "follow": "подписаться"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -27928,7 +28011,11 @@
     "Place": "Mesto",
     "currently": "trenutno",
     "holds": "ima",
-    "inside": "znotraj"
+    "inside": "znotraj",
+    "Bonds": "obveznice",
+    "Standing": "uvrstitev",
+    "The rest": "Preostalo",
+    "follow": "sledi"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -29018,7 +29105,10 @@
     "Place": "Mesto",
     "currently": "trenutno",
     "holds": "drži",
-    "inside": "unutra"
+    "inside": "unutra",
+    "Standing": "Пласман",
+    "The rest": "Остали",
+    "follow": "прати"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -30113,7 +30203,10 @@
     "Place": "Plats",
     "currently": "för närvarande",
     "holds": "har",
-    "inside": "i"
+    "inside": "i",
+    "Standing": "Ställning",
+    "The rest": "Resten",
+    "follow": "följ"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -31204,7 +31297,10 @@
     "Place": "ตำแหน่ง",
     "currently": "ขณะนี้",
     "holds": "มี",
-    "inside": "ภายใน"
+    "inside": "ภายใน",
+    "Standing": "อันดับ",
+    "The rest": "ที่เหลือ",
+    "follow": "ติดตาม"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -32065,7 +32161,11 @@
     "Place": "Lugar",
     "currently": "kasalukuyan",
     "holds": "may hawak",
-    "inside": "sa loob"
+    "inside": "sa loob",
+    "Bonds": "Bonds",
+    "Standing": "Ranggo",
+    "The rest": "Ang iba pa",
+    "follow": "sundan"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -33152,7 +33252,10 @@
     "Place": "Yer",
     "currently": "şu anda",
     "holds": "sahiptir",
-    "inside": "içinde"
+    "inside": "içinde",
+    "Standing": "Derece",
+    "The rest": "Diğerleri",
+    "follow": "takip et"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -34232,7 +34335,10 @@
     "Place": "Місце",
     "currently": "зараз",
     "holds": "має",
-    "inside": "у"
+    "inside": "у",
+    "Standing": "Місце",
+    "The rest": "Решта",
+    "follow": "стежити"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -35301,7 +35407,10 @@
     "Place": "Vị trí",
     "currently": "hiện tại",
     "holds": "sở hữu",
-    "inside": "bên trong"
+    "inside": "bên trong",
+    "Standing": "Thứ hạng",
+    "The rest": "Phần còn lại",
+    "follow": "theo dõi"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -36392,6 +36501,9 @@
     "Place": "名次",
     "currently": "当前",
     "holds": "拥有",
-    "inside": "内部"
+    "inside": "内部",
+    "Standing": "排名",
+    "The rest": "其余",
+    "follow": "跟随"
   }
 }

@@ -1,0 +1,21 @@
+{
+  "intro": {
+    "players": "Každý hráč v hornej časti lestvice tiež získa obveznice podľa úrovne, do ktorej spadá jeho miesto, vynásobené umiestnením jeho klanu na klanovej lestvici. Nižšie uvedené miesta sledujú naplnenie lestvice.",
+    "clans": "Umiestnenie klanu násobí obveznice, ktoré každý člen získa na hráčskej lestvici. Nižšie uvedené miesta sledujú naplnenie lestvice."
+  },
+  "standing": "uvrstitev",
+  "places": "Mesta",
+  "value": {
+    "players": "Obveznice",
+    "clans": "Násobiteľ"
+  },
+  "bonds": "{bonds} obvezníc",
+  "top": "Najlepší {share}",
+  "rest": "Preostalo",
+  "range": "{from} až {to}",
+  "legend-rule": "miesto medzi najlepšími {share}, v klane medzi najlepšími {share}, s najmenej {battles} odigranými bitkami udalosti za tento klan",
+  "hero-rule": "klan medzi najlepšími {share}, s {count} bitkami odigranými zaň od pridruženia",
+  "medal-place": "miesto {place}",
+  "medal-top": "medzi najlepšími {place}",
+  "medal-rule": "každý člen klanu podľa pravidla {rule}, s {count} bitkami odigranými zaň od pridruženia"
+}

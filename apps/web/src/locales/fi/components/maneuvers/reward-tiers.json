@@ -1,0 +1,21 @@
+{
+  "intro": {
+    "players": "Jokainen tulostaulukon kärkiosassa oleva pelaaja ansaitsee myös arvopapereita sijoituksensa mukaisen tason perusteella, kerrottuna klaanin sijoituksella klaanien tulostaulukossa. Alemmat sijat seuraavat tulostaulukon täyttymistä.",
+    "clans": "Klaanin sijoitus kertoo, kuinka monella kertoimella jokainen pelaaja ansaitsee arvopapereita pelaajien tulostaulukossa. Alemmat sijat seuraavat tulostaulukon täyttymistä."
+  },
+  "standing": "Sijoitus",
+  "places": "Sijat",
+  "value": {
+    "players": "Arvopaperit",
+    "clans": "Kerroin"
+  },
+  "bonds": "{bonds} arvopaperia",
+  "top": "Parhaat {share}",
+  "rest": "Muut",
+  "range": "{from}–{to}",
+  "legend-rule": "sijoitus parhaiden {share} joukossa, klaani parhaiden {share} joukossa ja vähintään {battles} tapahtuman taistelut taisteltuna sen puolesta",
+  "hero-rule": "klaani parhaiden {share} joukossa ja {count} taistelut taisteltuna sen puolesta liittymisen jälkeen",
+  "medal-place": "sijoitus {place}",
+  "medal-top": "parhaat {place}",
+  "medal-rule": "jokainen klaanin jäsen, joka täyttää ehdon {rule}, ja jonka puolesta on taisteltu {count} taistelut liittymisen jälkeen"
+}

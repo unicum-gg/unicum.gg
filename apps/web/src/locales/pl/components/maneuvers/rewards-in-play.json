@@ -1,0 +1,30 @@
+{
+  "title": "Nagrody w grze",
+  "vehicle": "Pojazd",
+  "places-to-go": "Pozostało {places} miejsc",
+  "bonds": "{bonds} obligacji",
+  "bonds-multiplied": "{bonds} obligacji × mnożnik klanu {multiplier} = łącznie {total} obligacji",
+  "no-bonds": "Nie ma obligacji",
+  "next-tier": "{bonds} obligacji, {places} miejsc wyżej",
+  "badge": "Odznaka {badge}",
+  "members-badge": "Odznaka {badge} dla członków",
+  "members-medal": "Medal {medal} dla członków",
+  "legend": "Legenda {maneuvers}",
+  "hero": "Bohater {maneuvers}",
+  "legend-battles": "jeśli co najmniej {share} ich bitew wydarzenia rozegrano dla tego klanu",
+  "legend-needs": "potrzebuje miejsca w najlepszych {share} i klanu w najlepszych {share}",
+  "legend-members": "dla członków wśród najlepszych {share} graczy",
+  "hero-needs": "potrzebuje klanu w najlepszych {share}",
+  "clan-needs": "potrzebuje miejsca wśród najlepszych {share} klanów",
+  "clan-battles": "jeśli rozegrali {count} bitwy dla tego klanu od dołączenia do niego",
+  "gold": "Złoto dla skarbca klanu",
+  "multiplier": "×{multiplier} do obligacji jego członków",
+  "medals": {
+    "winner": "Zwycięzca {maneuvers}",
+    "top-2": "Najlepsza 2, {maneuvers}",
+    "top-3": "Najlepsza 3, {maneuvers}",
+    "top-10": "Najlepsza 10, {maneuvers}",
+    "top-100": "Najlepsza 100, {maneuvers}"
+  },
+  "footnote": "Zgodnie z regulaminem wydarzenia, na podstawie aktualnego stanu tabeli. Każda odznaka i medal wymagają także rozegrania bitew dla klanu, czego gra nie publikuje, dlatego są to pozycje, a nie nagrody."
+}

@@ -1,0 +1,30 @@
+{
+  "title": "Ricompense in gioco",
+  "vehicle": "Carro armato",
+  "places-to-go": "{places} piazzamenti più in alto",
+  "bonds": "{bonds} titoli",
+  "bonds-multiplied": "{bonds} titoli × {multiplier} moltiplicatore del clan = {total} titoli",
+  "no-bonds": "Nessun titolo",
+  "next-tier": "{bonds} titoli, {places} piazzamenti più in alto",
+  "badge": "Distintivo {badge}",
+  "members-badge": "Distintivo {badge} per i suoi membri",
+  "members-medal": "Medaglia {medal} per i suoi membri",
+  "legend": "Leggenda di {maneuvers}",
+  "hero": "Eroe di {maneuvers}",
+  "legend-battles": "se almeno {share} delle loro battaglie dell’evento sono state combattute per questo clan",
+  "legend-needs": "richiede un posto tra i migliori {share} e un clan tra i migliori {share}",
+  "legend-members": "per i membri tra i migliori {share} dei giocatori",
+  "hero-needs": "richiede un clan tra i migliori {share}",
+  "clan-needs": "richiede un posto tra i migliori {share} dei clan",
+  "clan-battles": "se hanno giocato {count} battaglie per questo clan da quando si sono uniti",
+  "gold": "Oro per la tesoreria del clan",
+  "multiplier": "×{multiplier} sui titoli dei suoi membri",
+  "medals": {
+    "winner": "Vincitore di {maneuvers}",
+    "top-2": "I migliori 2 di {maneuvers}",
+    "top-3": "I migliori 3 di {maneuvers}",
+    "top-10": "I migliori 10 di {maneuvers}",
+    "top-100": "I migliori 100 di {maneuvers}"
+  },
+  "footnote": "Secondo il regolamento dell’evento, in base alla classifica attuale. Ogni distintivo e medaglia richiede anche battaglie giocate per il clan, dato che il gioco non pubblica questo dato, quindi si tratta di piazzamenti e non di ricompense."
+}

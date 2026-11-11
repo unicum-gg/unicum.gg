@@ -1,0 +1,30 @@
+{
+  "title": "Нагороди в події",
+  "vehicle": "Техніка",
+  "places-to-go": "Залишилося {places} місць",
+  "bonds": "{bonds} бонів",
+  "bonds-multiplied": "{bonds} бонів × множник клану {multiplier} = {total} бонів",
+  "no-bonds": "Немає бонів",
+  "next-tier": "{bonds} бонів на {places} місць вище",
+  "badge": "{badge}",
+  "members-badge": "{badge} для учасників",
+  "members-medal": "{medal} для учасників",
+  "legend": "Легенда {maneuvers}",
+  "hero": "Герой {maneuvers}",
+  "legend-battles": "якщо щонайменше {share} їхніх боїв події були за цей клан",
+  "legend-needs": "потребує місця в топі {share} та клану в топі {share}",
+  "legend-members": "для учасників у топі {share} гравців",
+  "hero-needs": "потребує клану в топі {share}",
+  "clan-needs": "потребує місця в топі {share} кланів",
+  "clan-battles": "якщо вони зіграли {count} боїв за цей клан після приєднання до нього",
+  "gold": "Золото до казни клану",
+  "multiplier": "×{multiplier} до бонів його учасників",
+  "medals": {
+    "winner": "Переможець {maneuvers}",
+    "top-2": "Топ-2 {maneuvers}",
+    "top-3": "Топ-3 {maneuvers}",
+    "top-10": "Топ-10 {maneuvers}",
+    "top-100": "Топ-100 {maneuvers}"
+  },
+  "footnote": "За правилами події, згідно з поточним станом таблиці. Для кожного значка й медалі також потрібні бої, зіграні за клан, але гра їх не публікує, тому це місця, а не нагороди."
+}

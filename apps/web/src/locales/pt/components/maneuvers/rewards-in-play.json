@@ -1,0 +1,30 @@
+{
+  "title": "Recompensas em disputa",
+  "vehicle": "Veículo",
+  "places-to-go": "Faltam {places} lugares",
+  "bonds": "{bonds} títulos",
+  "bonds-multiplied": "{bonds} títulos × {multiplier} de multiplicador do clã = {total} títulos",
+  "no-bonds": "Sem títulos",
+  "next-tier": "{bonds} títulos, {places} lugares acima",
+  "badge": "Distintivo {badge}",
+  "members-badge": "Distintivo {badge} para seus membros",
+  "members-medal": "Medalha {medal} para seus membros",
+  "legend": "Lenda de {maneuvers}",
+  "hero": "Herói de {maneuvers}",
+  "legend-battles": "se pelo menos {share} das batalhas do evento tiverem sido jogadas por esse jogador para este clã",
+  "legend-needs": "precisa de um lugar entre os melhores {share} e de um clã entre os melhores {share}",
+  "legend-members": "para membros entre os melhores {share} dos jogadores",
+  "hero-needs": "precisa de um clã entre os melhores {share}",
+  "clan-needs": "precisa de um lugar entre os melhores {share} dos clãs",
+  "clan-battles": "se tiver jogado {count} batalhas para este clã desde que entrou nele",
+  "gold": "Ouro para o tesouro do clã",
+  "multiplier": "×{multiplier} nos títulos de seus membros",
+  "medals": {
+    "winner": "Vencedor de {maneuvers}",
+    "top-2": "Melhores 2 de {maneuvers}",
+    "top-3": "Melhores 3 de {maneuvers}",
+    "top-10": "Melhores 10 de {maneuvers}",
+    "top-100": "Melhores 100 de {maneuvers}"
+  },
+  "footnote": "Conforme o regulamento do evento, com base na classificação atual. Cada distintivo e medalha também exige batalhas jogadas para o clã, informação que o jogo não publica, portanto estas são posições em vez de recompensas."
+}

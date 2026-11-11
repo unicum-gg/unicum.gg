@@ -8,5 +8,7 @@
   "members-winning": "Şu anda {count} üye aracı kazanıyor",
   "place": "Yer",
   "player": "Oyuncu",
-  "fame-points": "Şöhret Puanları"
+  "fame-points": "Şöhret Puanları",
+  "bonds": "Tahviller",
+  "bonds-hint": "Oyuncu istenen savaşları savaştıysa, klanın çarpanı uygulanarak, düzenlemelere göre yerin kazandığı tahviller"
 }

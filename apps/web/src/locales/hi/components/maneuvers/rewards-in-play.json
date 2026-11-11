@@ -1,0 +1,30 @@
+{
+  "title": "चल रहे इनाम",
+  "vehicle": "टैंक",
+  "places-to-go": "{places} स्थान बाकी",
+  "bonds": "{bonds} बॉन्ड्स",
+  "bonds-multiplied": "{bonds} बॉन्ड्स × {multiplier} क्लान गुणक = {total} बॉन्ड्स",
+  "no-bonds": "कोई बॉन्ड्स नहीं",
+  "next-tier": "{bonds} बॉन्ड्स, {places} स्थान ऊपर",
+  "badge": "{badge} बैज",
+  "members-badge": "इसके सदस्यों के लिए {badge} बैज",
+  "members-medal": "इसके सदस्यों के लिए {medal} मेडल",
+  "legend": "{maneuvers} लीजेंड",
+  "hero": "{maneuvers} हीरो",
+  "legend-battles": "यदि उनके इवेंट के कम से कम {share} युद्ध इस क्लान के लिए लड़ी गईं हों",
+  "legend-needs": "शीर्ष {share} स्थान और शीर्ष {share} में आने वाला क्लान ज़रूरी है",
+  "legend-members": "खिलाड़ियों के शीर्ष {share} में आने वाले सदस्यों के लिए",
+  "hero-needs": "शीर्ष {share} में आने वाला क्लान ज़रूरी है",
+  "clan-needs": "क्लानों के शीर्ष {share} में स्थान ज़रूरी है",
+  "clan-battles": "यदि वे इस क्लान से जुड़ने के बाद इसके लिए {count} युद्ध खेले गए हों",
+  "gold": "क्लान के खजाने के लिए गोल्ड",
+  "multiplier": "इसके सदस्यों के बॉन्ड्स पर ×{multiplier}",
+  "medals": {
+    "winner": "{maneuvers} विजेता",
+    "top-2": "{maneuvers} शीर्ष 2",
+    "top-3": "{maneuvers} शीर्ष 3",
+    "top-10": "{maneuvers} शीर्ष 10",
+    "top-100": "{maneuvers} शीर्ष 100"
+  },
+  "footnote": "इवेंट के नियमों के अनुसार, वर्तमान लीडरबोर्ड पर। हर बैज और मेडल के लिए क्लान के लिए खेले गए युद्ध भी ज़रूरी हैं, जिन्हें गेम प्रकाशित नहीं करता, इसलिए ये इनाम के बजाय स्थान हैं।"
+}

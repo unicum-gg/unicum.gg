@@ -3,9 +3,9 @@
     "players": "Ang kolum ng Mga puntos ng katanyagan ay may kulay batay sa taas ng lugar sa lahat ng ranked na manlalaro, gamit ang parehong percentile ng iba pang iskala ng rating ng website. Ang mga lugar sa ibaba ay sumusunod sa talahanayan ng ranggo habang napupunan ito.",
     "clans": "Ang kolum ng Mga puntos ng katanyagan ay may kulay batay sa taas ng lugar sa lahat ng ranked na klano, gamit ang parehong percentile ng iba pang iskala ng rating ng website. Ang mga lugar sa ibaba ay sumusunod sa talahanayan ng ranggo habang napupunan ito."
   },
-  "share": "Puwesto",
+  "share": "Ranggo",
   "places": "Mga puwesto",
   "top": "Nangungunang {share}",
-  "rest": "Iba pa",
+  "rest": "Ang iba pa",
   "range": "{from} hanggang {to}"
 }

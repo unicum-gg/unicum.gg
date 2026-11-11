@@ -8,5 +8,7 @@
   "members-winning": "{count} attualmente ottengono il veicolo",
   "place": "Posizione",
   "player": "Giocatore",
-  "fame-points": "Punti fama"
+  "fame-points": "Punti fama",
+  "bonds": "Titoli",
+  "bonds-hint": "Titoli che il posto guadagna secondo il regolamento, con il moltiplicatore del clan applicato, se il giocatore ha combattuto le battaglie richieste"
 }

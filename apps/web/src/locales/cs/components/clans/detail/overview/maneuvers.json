@@ -8,5 +8,7 @@
   "members-winning": "Vozidlo aktuálně získává {count} členů",
   "place": "Místo",
   "player": "Hráč",
-  "fame-points": "Body slávy"
+  "fame-points": "Body slávy",
+  "bonds": "Bony",
+  "bonds-hint": "Bony, které umístění získá podle pravidel, s použitím násobitele klanu, pokud hráč odehrál bitvy, na které se pravidla ptají"
 }

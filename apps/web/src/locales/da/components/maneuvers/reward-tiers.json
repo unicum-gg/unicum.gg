@@ -1,0 +1,21 @@
+{
+  "intro": {
+    "players": "Alle spillere i den øverste del af ranglisten optjener også obligationer efter det niveau, deres placering falder i, ganget med deres klans placering på klanranglisten. De følgende pladser følger ranglisten, efterhånden som den fylder op.",
+    "clans": "En klans placering ganger de obligationer, hvert medlem optjener på spillerranglisten. De følgende pladser følger ranglisten, efterhånden som den fylder op."
+  },
+  "standing": "Placering",
+  "places": "Pladser",
+  "value": {
+    "players": "Obligationer",
+    "clans": "Multiplikator"
+  },
+  "bonds": "{bonds} obligationer",
+  "top": "Top {share}",
+  "rest": "Resten",
+  "range": "{from} til {to}",
+  "legend-rule": "en placering blandt de øverste {share}, i en klan blandt de øverste {share}, med mindst {battles} af begivenhedens kampe spillet for den",
+  "hero-rule": "en klan blandt de øverste {share}, med {count} kampe spillet for den siden deltagelse",
+  "medal-place": "placering {place}",
+  "medal-top": "de øverste {place}",
+  "medal-rule": "alle medlemmer af klanen i {rule}, med {count} kampe spillet for den siden deltagelse"
+}

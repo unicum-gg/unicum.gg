@@ -1,0 +1,21 @@
+{
+  "intro": {
+    "players": "Jeder Spieler im oberen Teil der Rangliste verdient ebenfalls Anleihen, abhängig von der Stufe seines Platzes und multipliziert mit dem Platz seines Clans in der Clan-Rangliste. Die darunterliegenden Plätze folgen der Rangliste, wie sie sich füllt.",
+    "clans": "Der Platz eines Clans multipliziert die Anleihen, die jedes Mitglied in der Spieler-Rangliste verdient. Die darunterliegenden Plätze folgen der Rangliste, wie sie sich füllt."
+  },
+  "standing": "Platzierung",
+  "places": "Plätze",
+  "value": {
+    "players": "Anleihen",
+    "clans": "Multiplikator"
+  },
+  "bonds": "{bonds} Anleihen",
+  "top": "Top {share}",
+  "rest": "Der Rest",
+  "range": "{from} bis {to}",
+  "legend-rule": "ein Platz im oberen {share}-Anteil, in einem Clan im oberen {share}-Anteil, mit mindestens {battles} für ihn gespielten Gefechten des Ereignisses",
+  "hero-rule": "ein Clan im oberen {share}-Anteil, mit {count} Gefechten, die seit dem Beitritt für ihn gespielt wurden",
+  "medal-place": "Platz {place}",
+  "medal-top": "die besten {place}",
+  "medal-rule": "jedes Mitglied des Clans in {rule}, mit {count} Gefechten, die seit dem Beitritt für ihn gespielt wurden"
+}

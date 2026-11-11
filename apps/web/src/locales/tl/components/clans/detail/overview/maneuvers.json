@@ -8,5 +8,7 @@
   "members-winning": "Kasalukuyang nananalo sa sasakyan ang {count}",
   "place": "Lugar",
   "player": "Manlalaro",
-  "fame-points": "Mga puntos ng katanyagan"
+  "fame-points": "Mga puntos ng katanyagan",
+  "bonds": "Bonds",
+  "bonds-hint": "Mga Bonds na kinikita ng lugar ayon sa mga regulasyon, kasama ang multiplier ng klano, kung nakipaglaban ang manlalaro sa mga labanan na hinihingi nito"
 }

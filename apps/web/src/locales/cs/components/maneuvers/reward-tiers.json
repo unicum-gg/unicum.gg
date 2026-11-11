@@ -1,0 +1,21 @@
+{
+  "intro": {
+    "players": "Každý hráč v horní části žebříčku také získá bony podle úrovně, do které jeho umístění spadá, vynásobené umístěním jeho klanu v klanovém žebříčku. Nižší umístění se řídí žebříčkem podle toho, jak se plní.",
+    "clans": "Umístění klanu násobí bony, které každý člen získá v žebříčku hráčů. Nižší umístění se řídí žebříčkem podle toho, jak se plní."
+  },
+  "standing": "Umístění",
+  "places": "Umístění",
+  "value": {
+    "players": "Bony",
+    "clans": "Násobitel"
+  },
+  "bonds": "{bonds} bonů",
+  "top": "Nejlepších {share}",
+  "rest": "Ostatní",
+  "range": "{from} až {to}",
+  "legend-rule": "umístění mezi nejlepšími {share}, v klanu mezi nejlepšími {share}, s nejméně {battles} odehranými bitvami události za tento klan",
+  "hero-rule": "klan mezi nejlepšími {share}, s {count} bitvami odehranými za tento klan od připojení",
+  "medal-place": "umístění {place}",
+  "medal-top": "mezi nejlepšími {place}",
+  "medal-rule": "každý člen klanu v {rule}, s {count} bitvami odehranými za tento klan od připojení"
+}

@@ -3,9 +3,9 @@
     "players": "Stupac Bodovi slave obojen je prema tome koliko je visoko mjesto među svim rangiranim igračima, s istim percentilima kao i druge skale ocjena na web-mjestu. Mjesta u nastavku prate ljestvicu kako se popunjava.",
     "clans": "Stupac Bodovi slave obojen je prema tome koliko je visoko mjesto među svim rangiranim klanovima, s istim percentilima kao i druge skale ocjena na web-mjestu. Mjesta u nastavku prate ljestvicu kako se popunjava."
   },
-  "share": "Podijeli",
+  "share": "Poredak",
   "places": "Mjesta",
   "top": "Najboljih {share}",
-  "rest": "Ostatak",
+  "rest": "Ostalo",
   "range": "{from} do {to}"
 }

@@ -8,5 +8,7 @@
   "members-winning": "{count} pašlaik nopelna transportlīdzekli",
   "place": "vieta",
   "player": "Spēlētājs",
-  "fame-points": "Slavas punkti"
+  "fame-points": "Slavas punkti",
+  "bonds": "Bonas",
+  "bonds-hint": "Bonas, ko vieta nopelna saskaņā ar noteikumiem, piemērojot klana reizinātāju, ja spēlētājs izspēlēja nepieciešamās kaujas"
 }

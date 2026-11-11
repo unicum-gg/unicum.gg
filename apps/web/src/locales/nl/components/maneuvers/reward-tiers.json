@@ -1,0 +1,21 @@
+{
+  "intro": {
+    "players": "Elke speler in het bovenste deel van het klassement verdient ook Obligaties, afhankelijk van het niveau waarin zijn plaats valt, vermenigvuldigd met de plaats van zijn clan in het clan-klassement. De plaatsen hieronder volgen het klassement naarmate het zich vult.",
+    "clans": "De plaats van een clan vermenigvuldigt de Obligaties die elk lid verdient in het spelersklassement. De plaatsen hieronder volgen het klassement naarmate het zich vult."
+  },
+  "standing": "Positie",
+  "places": "Plaatsen",
+  "value": {
+    "players": "Obligaties",
+    "clans": "Vermenigvuldigingsfactor"
+  },
+  "bonds": "{bonds} Obligaties",
+  "top": "Beste {share}",
+  "rest": "De rest",
+  "range": "{from} tot {to}",
+  "legend-rule": "een plaats bij de beste {share}, in een clan bij de beste {share}, met ten minste {battles} gevechten van het evenement die ervoor zijn gevochten",
+  "hero-rule": "een clan bij de beste {share}, met {count} gevechten ervoor gevochten sinds deelname",
+  "medal-place": "plaats {place}",
+  "medal-top": "de beste {place}",
+  "medal-rule": "elk lid van de clan in {rule}, met {count} gevechten ervoor gevochten sinds deelname"
+}

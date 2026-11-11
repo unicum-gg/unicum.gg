@@ -1,0 +1,30 @@
+{
+  "title": "Belöningar i spel",
+  "vehicle": "Fordon",
+  "places-to-go": "{places} placeringar kvar",
+  "bonds": "{bonds} obligationer",
+  "bonds-multiplied": "{bonds} obligationer × {multiplier} klanmultiplikator = {total} obligationer",
+  "no-bonds": "Obligationer: nej",
+  "next-tier": "{bonds} obligationer, {places} placeringar upp",
+  "badge": "{badge}-märke",
+  "members-badge": "{badge}-märke för dess medlemmar",
+  "members-medal": "{medal}-medalj för dess medlemmar",
+  "legend": "Legend för {maneuvers}",
+  "hero": "Hjälte för {maneuvers}",
+  "legend-battles": "om minst {share} av deras strider i evenemanget spelades för denna klan",
+  "legend-needs": "behöver en plats bland de bästa {share} och en klan bland de bästa {share}",
+  "legend-members": "för medlemmar bland de bästa {share} spelarna",
+  "hero-needs": "behöver en klan bland de bästa {share}",
+  "clan-needs": "behöver en plats bland de bästa {share} klanerna",
+  "clan-battles": "om de spelade {count} strider för denna klan sedan de gick med i den",
+  "gold": "Guld till klanens skattkammare",
+  "multiplier": "×{multiplier} på obligationerna för dess medlemmar",
+  "medals": {
+    "winner": "Vinnare i {maneuvers}",
+    "top-2": "Topp 2 i {maneuvers}",
+    "top-3": "Topp 3 i {maneuvers}",
+    "top-10": "Topp 10 i {maneuvers}",
+    "top-100": "Topp 100 i {maneuvers}"
+  },
+  "footnote": "Enligt evenemangets regler, på topplistan som den ser ut. Varje märke och medalj kräver också strider som spelats för klanen, vilket spelet inte publicerar, så detta är placeringar hellre än belöningar."
+}

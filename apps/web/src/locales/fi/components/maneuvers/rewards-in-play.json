@@ -1,0 +1,30 @@
+{
+  "title": "Meneillään olevat palkkiot",
+  "vehicle": "Ajoneuvo",
+  "places-to-go": "{places} sijaa jäljellä",
+  "bonds": "{bonds} arvopaperia",
+  "bonds-multiplied": "{bonds} arvopaperia × klaanin kerroin {multiplier} = yhteensä {total} arvopaperia",
+  "no-bonds": "Ei arvopapereita",
+  "next-tier": "{bonds} arvopaperia {places} sijaa ylempänä",
+  "badge": "{badge}",
+  "members-badge": "{badge} klaanin jäsenille",
+  "members-medal": "{medal} klaanin jäsenille",
+  "legend": "Legenda {maneuvers}",
+  "hero": "Sankari {maneuvers}",
+  "legend-battles": "jos vähintään {share} heidän tapahtuman taisteluistaan taisteltiin tämän klaanin puolesta",
+  "legend-needs": "tarvitsee sijoituksen parhaiden {share} joukossa ja klaanin parhaiden {share} joukossa",
+  "legend-members": "pelaajien parhaiden {share} joukossa oleville jäsenille",
+  "hero-needs": "tarvitsee klaanin parhaiden {share} joukossa",
+  "clan-needs": "tarvitsee sijoituksen klaanien parhaiden {share} joukossa",
+  "clan-battles": "jos he pelasivat {count} taistelut tämän klaanin puolesta siihen liittymisen jälkeen",
+  "gold": "Kultaa klaanin kassaan",
+  "multiplier": "×{multiplier} sen jäsenten arvopapereihin",
+  "medals": {
+    "winner": "Voittaja {maneuvers}",
+    "top-2": "Parhaat 2, {maneuvers}",
+    "top-3": "Parhaat 3, {maneuvers}",
+    "top-10": "Parhaat 10, {maneuvers}",
+    "top-100": "Parhaat 100, {maneuvers}"
+  },
+  "footnote": "Tapahtuman määräysten mukaan nykyisen tulostaulukon perusteella. Jokainen merkki ja mitali edellyttää myös klaanin puolesta pelattuja taistelut, joita peli ei julkaise, joten nämä ovat sijoituksia eivätkä palkkioita."
+}

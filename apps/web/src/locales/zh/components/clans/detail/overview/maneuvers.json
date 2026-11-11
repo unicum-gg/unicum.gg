@@ -8,5 +8,7 @@
   "members-winning": "当前有{count}名成员可胜利获得车辆",
   "place": "名次",
   "player": "玩家",
-  "fame-points": "名望点数"
+  "fame-points": "名望点数",
+  "bonds": "战争债券",
+  "bonds-hint": "根据规则赚取的战争债券，已应用军团的倍率，前提是玩家进行过要求的战斗场次"
 }

@@ -3,9 +3,9 @@
     "players": "Šlovės taškų stulpelis nuspalvintas pagal vietą tarp visų reitinguojamų žaidėjų, naudojant tuos pačius procentilius kaip ir kitose svetainės reitingo skalėse. Toliau pateiktos vietos seka lentelę jai pildantis.",
     "clans": "Šlovės taškų stulpelis nuspalvintas pagal vietą tarp visų reitinguojamų klanų, naudojant tuos pačius procentilius kaip ir kitose svetainės reitingo skalėse. Toliau pateiktos vietos seka lentelę jai pildantis."
   },
-  "share": "Dalis",
+  "share": "Pozicija",
   "places": "Vietos",
   "top": "Geriausi {share}",
-  "rest": "Likusi dalis",
+  "rest": "Likę",
   "range": "Nuo {from} iki {to}"
 }

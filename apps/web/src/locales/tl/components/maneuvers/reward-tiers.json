@@ -1,0 +1,21 @@
+{
+  "intro": {
+    "players": "Ang bawat manlalaro sa nangungunang bahagi ng talahanayan ng ranggo ay kumikita rin ng Bonds, ayon sa tier na kinabibilangan ng kanilang lugar, na pinaparami batay sa lugar ng kanilang klano sa talahanayan ng ranggo ng mga clan. Ang mga puwestong nasa ibaba ay sumusunod sa talahanayan ng ranggo habang napupunan ito.",
+    "clans": "Ang lugar ng isang klano ang nagpaparami sa Bonds na kinikita ng bawat miyembro sa talahanayan ng ranggo ng mga manlalaro. Ang mga puwestong nasa ibaba ay sumusunod sa talahanayan ng ranggo habang napupunan ito."
+  },
+  "standing": "Ranggo",
+  "places": "Mga puwesto",
+  "value": {
+    "players": "Bonds",
+    "clans": "Multiplier"
+  },
+  "bonds": "{bonds} Bonds",
+  "top": "Nangungunang {share}",
+  "rest": "Ang iba pa",
+  "range": "{from} hanggang {to}",
+  "legend-rule": "isang lugar sa nangungunang {share}, sa isang klano sa nangungunang {share}, na may hindi bababa sa {battles} ng mga laban ng kaganagan na ipinaglaban para rito",
+  "hero-rule": "isang klano sa nangungunang {share}, na may {count} mga laban na ipinaglaban para rito mula nang sumali",
+  "medal-place": "lugar {place}",
+  "medal-top": "nangungunang {place}",
+  "medal-rule": "bawat miyembro ng klano sa {rule}, na may {count} mga laban na ipinaglaban para rito mula nang sumali"
+}

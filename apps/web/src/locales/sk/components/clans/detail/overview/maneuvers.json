@@ -8,5 +8,7 @@
   "members-winning": "{count} aktuálne získava vozidlo",
   "place": "Mesto",
   "player": "Hráč",
-  "fame-points": "Body slávy"
+  "fame-points": "Body slávy",
+  "bonds": "Obveznice",
+  "bonds-hint": "Obveznice, ktoré miesto získa podľa pravidiel, s použitím násobiteľa klanu, ak hráč odohral požadované bitky"
 }

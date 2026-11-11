@@ -1,0 +1,30 @@
+{
+  "title": "进行中的奖励",
+  "vehicle": "坦克",
+  "places-to-go": "还差{places}名次",
+  "bonds": "{bonds}战争债券",
+  "bonds-multiplied": "{bonds}战争债券 × {multiplier}军团倍率 = {total}战争债券",
+  "no-bonds": "无战争债券",
+  "next-tier": "高出{places}名次可获得{bonds}战争债券",
+  "badge": "{badge}徽章",
+  "members-badge": "成员可获得的{badge}徽章",
+  "members-medal": "成员可获得的{medal}奖章",
+  "legend": "{maneuvers}传说",
+  "hero": "{maneuvers}英雄",
+  "legend-battles": "如果其活动战斗场次中至少有{share}是为该军团进行过的",
+  "legend-needs": "需要名次位于前{share}，且军团位于前{share}",
+  "legend-members": "适用于玩家排名前{share}的成员",
+  "hero-needs": "需要军团位于前{share}",
+  "clan-needs": "需要军团名次位于军团前{share}",
+  "clan-battles": "如果其自加入该军团以来为该军团进行过{count}战斗场次",
+  "gold": "军团仓库中的黄金",
+  "multiplier": "其成员战争债券的×{multiplier}",
+  "medals": {
+    "winner": "{maneuvers}胜者",
+    "top-2": "{maneuvers}前2名",
+    "top-3": "{maneuvers}前3名",
+    "top-10": "{maneuvers}前10名",
+    "top-100": "{maneuvers}前100名"
+  },
+  "footnote": "根据活动规则，以当前榜单为准。每个徽章和奖章还需要为该军团进行过战斗，但游戏不会公布此数据，因此这里显示的是名次，而不是奖励。"
+}

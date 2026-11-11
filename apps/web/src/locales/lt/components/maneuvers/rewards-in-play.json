@@ -1,0 +1,30 @@
+{
+  "title": "Dabartiniai atlygiai",
+  "vehicle": "Transporto priemonė",
+  "places-to-go": "Liko {places} vietos",
+  "bonds": "{bonds} bonų",
+  "bonds-multiplied": "{bonds} bonų × {multiplier} klano daugiklis = iš viso {total} bonų",
+  "no-bonds": "Bonų nėra",
+  "next-tier": "{bonds} bonų, {places} vietomis aukščiau",
+  "badge": "{badge} ženklelis",
+  "members-badge": "Nariams skirtas {badge} ženklelis",
+  "members-medal": "Nariams skirtas {medal} medalis",
+  "legend": "{maneuvers}: Legenda",
+  "hero": "{maneuvers}: Didvyris",
+  "legend-battles": "jei šiam klanui teko bent {share} jų įvykio mūšių",
+  "legend-needs": "reikia vietos tarp geriausių {share} ir klano tarp geriausių {share}",
+  "legend-members": "nariams, esantiems tarp geriausių {share} žaidėjų",
+  "hero-needs": "reikia klano tarp geriausių {share}",
+  "clan-needs": "reikia vietos tarp geriausių {share} klanų",
+  "clan-battles": "jei nuo prisijungimo prie šio klano už jį sužaista {count} mūšių",
+  "gold": "Auksas klano iždui",
+  "multiplier": "×{multiplier} jos narių bonams",
+  "medals": {
+    "winner": "{maneuvers}: Nugalėtojai",
+    "top-2": "{maneuvers}: 2 geriausi",
+    "top-3": "{maneuvers}: 3 geriausi",
+    "top-10": "{maneuvers}: 10 geriausių",
+    "top-100": "{maneuvers}: 100 geriausių"
+  },
+  "footnote": "Pagal įvykio taisykles ir dabartinę vietą lentelėje. Kiekvienam ženkleliui ir medaliui taip pat reikia už klaną sužaistų mūšių, kurių žaidimas neskelbia, todėl tai yra vietos, o ne atlygiai."
+}

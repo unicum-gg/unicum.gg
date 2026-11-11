@@ -1,0 +1,21 @@
+{
+  "intro": {
+    "players": "Katrs spēlētājs tabulas augšdaļā papildus nopelna bonām atbilstoši līmenim, kurā atrodas viņa vieta, reizinot tās ar viņa klana vietu klanu tabulā. Zemāk esošās vietas seko tabulai, kad tā aizpilda.",
+    "clans": "Klana vieta reizina bonām, ko katrs biedrs nopelna spēlētāju tabulā. Zemāk esošās vietas seko tabulai, kad tā aizpilda."
+  },
+  "standing": "Vieta",
+  "places": "Vietas",
+  "value": {
+    "players": "Bonas",
+    "clans": "Reizinātājs"
+  },
+  "bonds": "{bonds} bonām",
+  "top": "Labākie {share}",
+  "rest": "Pārējie",
+  "range": "No {from} līdz {to}",
+  "legend-rule": "vieta starp labākajiem {share}, klans starp labākajiem {share}, un par to izspēlētas vismaz {battles} notikuma kaujas",
+  "hero-rule": "klans starp labākajiem {share}, un par to kopš pievienošanās izspēlētas {count} kaujas",
+  "medal-place": "{place}. vieta",
+  "medal-top": "starp labākajiem {place}",
+  "medal-rule": "katrs klana biedrs, kas atrodas {rule}, un par to kopš pievienošanās izspēlētas {count} kaujas"
+}

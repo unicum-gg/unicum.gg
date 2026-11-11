@@ -1,0 +1,30 @@
+{
+  "title": "Belønninger i spil",
+  "vehicle": "Køretøj",
+  "places-to-go": "{places} pladser tilbage",
+  "bonds": "{bonds} obligationer",
+  "bonds-multiplied": "{bonds} obligationer × {multiplier} klanmultiplikator = {total} obligationer",
+  "no-bonds": "Ingen obligationer",
+  "next-tier": "{bonds} obligationer {places} pladser højere",
+  "badge": "{badge}-mærke",
+  "members-badge": "{badge}-mærke til medlemmerne",
+  "members-medal": "{medal}-medalje til medlemmerne",
+  "legend": "{maneuvers} Legende",
+  "hero": "{maneuvers} Helt",
+  "legend-battles": "hvis mindst {share} af deres kampe i begivenheden blev spillet for denne klan",
+  "legend-needs": "kræver en placering blandt de øverste {share} og en klan blandt de øverste {share}",
+  "legend-members": "for medlemmer blandt de øverste {share} spillere",
+  "hero-needs": "kræver en klan blandt de øverste {share}",
+  "clan-needs": "kræver en placering blandt de øverste {share} klaner",
+  "clan-battles": "hvis de spillede {count} kampe for denne klan siden deltagelse i den",
+  "gold": "Guld til klanens skatkammer",
+  "multiplier": "×{multiplier} på medlemmernes obligationer",
+  "medals": {
+    "winner": "{maneuvers} Vinder",
+    "top-2": "{maneuvers} Top 2",
+    "top-3": "{maneuvers} Top 3",
+    "top-10": "{maneuvers} Top 10",
+    "top-100": "{maneuvers} Top 100"
+  },
+  "footnote": "Ifølge begivenhedens regler, på ranglisten som den ser ud. Alle mærker og medaljer kræver også kampe spillet for klanen, hvilket spillet ikke offentliggør, så dette er placeringer snarere end belønninger."
+}

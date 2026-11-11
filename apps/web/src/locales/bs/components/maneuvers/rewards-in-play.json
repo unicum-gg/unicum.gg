@@ -1,0 +1,30 @@
+{
+  "title": "Nagrade u igri",
+  "vehicle": "Vozilo",
+  "places-to-go": "Još {places} mjesta",
+  "bonds": "{bonds} obveznica",
+  "bonds-multiplied": "{bonds} obveznica × množitelj klana {multiplier} = ukupno {total} obveznica",
+  "no-bonds": "Nema obveznica",
+  "next-tier": "{bonds} obveznica, {places} mjesta više",
+  "badge": "{badge} značka",
+  "members-badge": "{badge} značka za članove",
+  "members-medal": "{medal} medalja za članove",
+  "legend": "Legenda događaja {maneuvers}",
+  "hero": "Heroj događaja {maneuvers}",
+  "legend-battles": "ako je najmanje {share} njihovih bitaka u događaju odigrano za ovaj klan",
+  "legend-needs": "treba mjesto među najboljih {share} i klan među najboljih {share}",
+  "legend-members": "za članove među najboljih {share} igrača",
+  "hero-needs": "treba klan među najboljih {share}",
+  "clan-needs": "treba mjesto među najboljih {share} klanova",
+  "clan-battles": "ako su odigrali {count} bitke za ovaj klan od pridruživanja",
+  "gold": "Zlato za trezor klana",
+  "multiplier": "×{multiplier} na obveznice njegovih članova",
+  "medals": {
+    "winner": "Pobjednik događaja {maneuvers}",
+    "top-2": "Među 2 najbolja u događaju {maneuvers}",
+    "top-3": "Među 3 najbolja u događaju {maneuvers}",
+    "top-10": "Među 10 najboljih u događaju {maneuvers}",
+    "top-100": "Među 100 najboljih u događaju {maneuvers}"
+  },
+  "footnote": "Prema pravilima događaja, prema trenutnom stanju rang-liste. Svaka značka i medalja također pita za odigrane bitke za klan, koje igra ne objavljuje, pa su ovo mjesta, a ne nagrade."
+}

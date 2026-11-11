@@ -1,0 +1,21 @@
+{
+  "intro": {
+    "players": "Cada jogador na parte superior da classificação também conquista títulos, de acordo com o nível correspondente ao seu lugar, multiplicados pelo lugar do clã na classificação de clãs. Os lugares abaixo seguem a classificação à medida que ela tem preenchimentos.",
+    "clans": "O lugar de um clã multiplica os títulos que cada membro conquista na classificação de jogadores. Os lugares abaixo seguem a classificação à medida que ela tem preenchimentos."
+  },
+  "standing": "Colocação",
+  "places": "Lugares",
+  "value": {
+    "players": "Títulos",
+    "clans": "Multiplicador"
+  },
+  "bonds": "{bonds} títulos",
+  "top": "Melhores {share}",
+  "rest": "O restante",
+  "range": "{from} a {to}",
+  "legend-rule": "um lugar entre os melhores {share}, em um clã entre os melhores {share}, com pelo menos {battles} batalhas do evento jogadas por ele",
+  "hero-rule": "um clã entre os melhores {share}, com {count} batalhas jogadas por ele desde que entrou",
+  "medal-place": "lugar {place}",
+  "medal-top": "os melhores {place}",
+  "medal-rule": "cada membro do clã em {rule}, com {count} batalhas jogadas por ele desde que entrou"
+}

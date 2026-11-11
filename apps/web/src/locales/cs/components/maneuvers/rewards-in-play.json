@@ -1,0 +1,30 @@
+{
+  "title": "Odměny ve hře",
+  "vehicle": "Vozidlo",
+  "places-to-go": "Zbývá {places} umístění",
+  "bonds": "{bonds} bonů",
+  "bonds-multiplied": "{bonds} bonů × násobitel klanu {multiplier} = celkem {total} bonů",
+  "no-bonds": "Žádné bony",
+  "next-tier": "{bonds} bonů o {places} umístění výše",
+  "badge": "Odznak {badge}",
+  "members-badge": "Odznak {badge} pro jeho členy",
+  "members-medal": "Medaile {medal} pro jeho členy",
+  "legend": "Legenda události {maneuvers}",
+  "hero": "Hrdina události {maneuvers}",
+  "legend-battles": "pokud za tento klan odehráli nejméně {share} svých bitev události",
+  "legend-needs": "potřebuje umístění mezi nejlepšími {share} a klan mezi nejlepšími {share}",
+  "legend-members": "pro členy mezi nejlepšími {share} hráči",
+  "hero-needs": "potřebuje klan mezi nejlepšími {share}",
+  "clan-needs": "potřebuje umístění mezi nejlepšími {share} klany",
+  "clan-battles": "pokud za tento klan od připojení k němu odehráli {count} bitev",
+  "gold": "Zlaťáky do pokladnice klanu",
+  "multiplier": "×{multiplier} k bonům členů",
+  "medals": {
+    "winner": "Vítěz události {maneuvers}",
+    "top-2": "Nejlepší 2 v události {maneuvers}",
+    "top-3": "Nejlepší 3 v události {maneuvers}",
+    "top-10": "Nejlepších 10 v události {maneuvers}",
+    "top-100": "Nejlepších 100 v události {maneuvers}"
+  },
+  "footnote": "Podle pravidel události a aktuálního žebříčku. Každý odznak a medaile také vyžadují bitvy odehrané za klan, které hra nezveřejňuje, takže jde spíše o umístění než o odměny."
+}

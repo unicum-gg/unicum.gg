@@ -1,0 +1,21 @@
+{
+  "intro": {
+    "players": "Varje spelare i den övre delen av topplistan tjänar också obligationer enligt den nivå som deras plats hamnar i, multiplicerat med klanens plats på klanernas topplista. Placeringarna nedanför följer topplistan allteftersom den fylls på.",
+    "clans": "En klans plats multiplicerar de obligationer som varje medlem tjänar på spelarens topplista. Placeringarna nedanför följer topplistan allteftersom den fylls på."
+  },
+  "standing": "Ställning",
+  "places": "Placeringar",
+  "value": {
+    "players": "Obligationer",
+    "clans": "Multiplikator"
+  },
+  "bonds": "{bonds} obligationer",
+  "top": "Topp {share}",
+  "rest": "Resten",
+  "range": "{from} till {to}",
+  "legend-rule": "en plats bland de bästa {share}, i en klan bland de bästa {share}, med minst {battles} av evenemangets strider spelade för den",
+  "hero-rule": "en klan bland de bästa {share}, med {count} strider spelade för den sedan spelaren gick med",
+  "medal-place": "plats {place}",
+  "medal-top": "de bästa {place}",
+  "medal-rule": "varje medlem i klanen i {rule}, med {count} strider spelade för den sedan medlemmen gick med"
+}

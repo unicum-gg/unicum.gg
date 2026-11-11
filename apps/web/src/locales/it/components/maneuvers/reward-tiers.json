@@ -1,0 +1,21 @@
+{
+  "intro": {
+    "players": "Ogni giocatore nella parte alta della classifica guadagna anche titoli, in base al livello del proprio piazzamento, moltiplicati per il posto del clan nella classifica dei clan. I piazzamenti successivi seguono la classifica man mano che si riempie.",
+    "clans": "Il posto del clan moltiplica i titoli che ogni membro guadagna nella classifica dei giocatori. I piazzamenti successivi seguono la classifica man mano che si riempie."
+  },
+  "standing": "Posizione",
+  "places": "Piazzamenti",
+  "value": {
+    "players": "Titoli",
+    "clans": "Moltiplicatore"
+  },
+  "bonds": "{bonds} titoli",
+  "top": "I migliori {share}",
+  "rest": "Il resto",
+  "range": "Da {from} a {to}",
+  "legend-rule": "un posto tra i migliori {share}, in un clan tra i migliori {share}, con almeno {battles} delle battaglie dell’evento combattute per il clan",
+  "hero-rule": "un clan tra i migliori {share}, con {count} battaglie combattute per il clan da quando il giocatore si è unito",
+  "medal-place": "posto {place}",
+  "medal-top": "i primi {place}",
+  "medal-rule": "ogni membro del clan in {rule}, con {count} battaglie combattute per il clan da quando si è unito"
+}

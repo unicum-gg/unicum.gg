@@ -1,0 +1,30 @@
+{
+  "title": "진행 중인 보상",
+  "vehicle": "차량",
+  "places-to-go": "앞으로 {places}등수",
+  "bonds": "전쟁 채권 {bonds}개",
+  "bonds-multiplied": "전쟁 채권 {bonds}개 × 클랜 배율 {multiplier} = 전쟁 채권 {total}개",
+  "no-bonds": "전쟁 채권 없음",
+  "next-tier": "{places}등수 높아지면 전쟁 채권 {bonds}개",
+  "badge": "{badge}",
+  "members-badge": "구성원용 {badge}",
+  "members-medal": "구성원용 {medal}",
+  "legend": "{maneuvers} 레전드",
+  "hero": "{maneuvers} 영웅",
+  "legend-battles": "이벤트 전투 중 최소 {share}를 해당 클랜을 위해 플레이한 경우",
+  "legend-needs": "상위 {share} 순위 및 상위 {share} 클랜 필요",
+  "legend-members": "플레이어 상위 {share}에 속한 구성원용",
+  "hero-needs": "상위 {share} 클랜 필요",
+  "clan-needs": "클랜 상위 {share} 순위 필요",
+  "clan-battles": "가입 후 해당 클랜을 위해 {count}회 전투를 플레이한 경우",
+  "gold": "클랜 금고용 골드",
+  "multiplier": "구성원의 전쟁 채권에 ×{multiplier}",
+  "medals": {
+    "winner": "{maneuvers} 승자",
+    "top-2": "{maneuvers} 상위 2",
+    "top-3": "{maneuvers} 상위 3",
+    "top-10": "{maneuvers} 상위 10",
+    "top-100": "{maneuvers} 상위 100"
+  },
+  "footnote": "이벤트 규정에 따라 현재 리더보드 기준입니다. 모든 배지와 메달에는 클랜을 위해 플레이한 전투도 필요하지만, 게임에서 이를 공개하지 않으므로 이는 보상이 아니라 순위입니다."
+}

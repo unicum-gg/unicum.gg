@@ -1,0 +1,21 @@
+{
+  "intro": {
+    "players": "Svaki igrač u najboljim dijelovima ljestvice također zarađuje obveznice, prema razini u kojoj se nalazi njegovo mjesto, pomnoženo s mjestom njegova klana na klanskoj ljestvici. Mjesta ispod toga prate ljestvicu kako se popunjava.",
+    "clans": "Mjesto klana množi obveznice koje svaki član zarađuje na ljestvici igrača. Mjesta ispod toga prate ljestvicu kako se popunjava."
+  },
+  "standing": "Poredak",
+  "places": "Mjesta",
+  "value": {
+    "players": "Obveznice",
+    "clans": "Množitelj"
+  },
+  "bonds": "{bonds} obveznice",
+  "top": "Najboljih {share}",
+  "rest": "Ostalo",
+  "range": "{from} do {to}",
+  "legend-rule": "mjesto među najboljih {share}, u klanu među najboljih {share}, s najmanje {battles} odigranih bitaka događaja za taj klan",
+  "hero-rule": "klan među najboljih {share}, s {count} bitaka odigranih za taj klan od pridruživanja",
+  "medal-place": "mjesto {place}",
+  "medal-top": "među najboljih {place}",
+  "medal-rule": "svaki član klana u kategoriji {rule}, s {count} bitaka odigranih za taj klan od pridruživanja"
+}

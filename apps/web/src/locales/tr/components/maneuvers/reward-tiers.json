@@ -1,0 +1,21 @@
+{
+  "intro": {
+    "players": "Tablonun en üst kısmındaki her oyuncu, yerinin düştüğü seviyeye göre tahvil kazanır. Bu tahviller, klan tablosundaki klanının yeriyle çarpılır. Aşağıdaki dereceler, tablo doldukça tabloyu takip eder.",
+    "clans": "Bir klanın yeri, oyuncu tablosunda her üyenin kazandığı tahvilleri çarpar. Aşağıdaki dereceler, tablo doldukça tabloyu takip eder."
+  },
+  "standing": "Derece",
+  "places": "Dereceler",
+  "value": {
+    "players": "Tahviller",
+    "clans": "Çarpan"
+  },
+  "bonds": "{bonds} tahvil",
+  "top": "İlk {share}",
+  "rest": "Diğerleri",
+  "range": "{from} ile {to} arası",
+  "legend-rule": "ilk {share} içindeki bir yer, ilk {share} içindeki bir klan ve etkinlik savaşlarının en az {battles} tanesinde onun için savaşılmış olması",
+  "hero-rule": "ilk {share} içindeki bir klan ve katıldıktan sonra onun için {count} savaşta savaşılmış olması",
+  "medal-place": "{place}. yer",
+  "medal-top": "ilk {place}",
+  "medal-rule": "{rule} içindeki klanın, katıldıktan sonra onun için {count} savaşta savaşmış her üyesi"
+}

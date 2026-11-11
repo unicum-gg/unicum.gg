@@ -3,7 +3,7 @@
     "players": "A coluna de Pontos de fama é colorida de acordo com a posição ocupada entre todos os jogadores classificados, usando os mesmos percentis das outras escalas de classificação do site. As posições abaixo acompanham a classificação conforme ela recebe preenchimentos.",
     "clans": "A coluna de Pontos de fama é colorida de acordo com a posição ocupada entre todos os clãs classificados, usando os mesmos percentis das outras escalas de classificação do site. As posições abaixo acompanham a classificação conforme ela recebe preenchimentos."
   },
-  "share": "Classificação",
+  "share": "Colocação",
   "places": "Lugares",
   "top": "Melhores {share}",
   "rest": "O restante",

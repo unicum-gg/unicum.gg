@@ -1,0 +1,30 @@
+{
+  "title": "Phần thưởng đang diễn ra",
+  "vehicle": "Xe tăng",
+  "places-to-go": "Còn {places} vị trí",
+  "bonds": "{bonds} trái phiếu",
+  "bonds-multiplied": "{bonds} trái phiếu × hệ số Clan {multiplier} = {total} trái phiếu",
+  "no-bonds": "Không có trái phiếu",
+  "next-tier": "{bonds} trái phiếu, cao hơn {places} vị trí",
+  "badge": "{badge}",
+  "members-badge": "{badge} dành cho các thành viên",
+  "members-medal": "{medal} dành cho các thành viên",
+  "legend": "{maneuvers} Legend",
+  "hero": "{maneuvers} Hero",
+  "legend-battles": "nếu ít nhất {share} số trận đấu của sự kiện mà họ đã tham chiến là cho Clan này",
+  "legend-needs": "cần một vị trí thuộc top {share} và một Clan thuộc top {share}",
+  "legend-members": "dành cho các thành viên thuộc top {share} người chơi",
+  "hero-needs": "cần một Clan thuộc top {share}",
+  "clan-needs": "cần một vị trí thuộc top {share} Clan",
+  "clan-battles": "nếu họ đã chơi {count} trận đấu cho Clan này kể từ khi tham gia Clan",
+  "gold": "Gold cho kho bạc của Clan",
+  "multiplier": "×{multiplier} trái phiếu của các thành viên",
+  "medals": {
+    "winner": "{maneuvers} Winner",
+    "top-2": "{maneuvers} Top 2",
+    "top-3": "{maneuvers} Top 3",
+    "top-10": "{maneuvers} Top 10",
+    "top-100": "{maneuvers} Top 100"
+  },
+  "footnote": "Theo quy định của sự kiện và bảng xếp hạng hiện tại. Mỗi huy hiệu và huy chương cũng yêu cầu các trận đấu đã chơi cho Clan, nhưng trò chơi không công bố thông tin này, vì vậy đây là các vị trí thay vì phần thưởng."
+}

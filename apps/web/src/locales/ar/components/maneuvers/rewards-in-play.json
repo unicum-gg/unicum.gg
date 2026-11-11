@@ -1,0 +1,30 @@
+{
+  "title": "المكافآت المتاحة",
+  "vehicle": "المركبة",
+  "places-to-go": "يتبقى {places} من المراكز",
+  "bonds": "{bonds} من السندات",
+  "bonds-multiplied": "{bonds} من السندات × مضاعف القبيلة {multiplier} = {total} من السندات",
+  "no-bonds": "لا توجد سندات",
+  "next-tier": "{bonds} من السندات أعلى بـ {places} من المراكز",
+  "badge": "شارة {badge}",
+  "members-badge": "{badge} لأعضاء القبيلة",
+  "members-medal": "{medal} لأعضاء القبيلة",
+  "legend": "أسطورة {maneuvers}",
+  "hero": "بطل {maneuvers}",
+  "legend-battles": "إذا خاضوا ما لا يقل عن {share} من معارك الحدث لصالح هذه القبيلة",
+  "legend-needs": "يحتاج إلى مركز ضمن أفضل {share} وعشيرة ضمن أفضل {share}",
+  "legend-members": "للأعضاء ضمن أفضل {share} من اللاعبين",
+  "hero-needs": "يحتاج إلى عشيرة ضمن أفضل {share}",
+  "clan-needs": "يحتاج إلى مركز ضمن أفضل {share} من العشائر",
+  "clan-battles": "إذا لعبوا {count} من المعارك لهذه القبيلة منذ انضمامهم إليها",
+  "gold": "الذهب لخزينة القبيلة",
+  "multiplier": "×{multiplier} على سندات أعضائها",
+  "medals": {
+    "winner": "الفائز في {maneuvers}",
+    "top-2": "أفضل 2 في {maneuvers}",
+    "top-3": "أفضل 3 في {maneuvers}",
+    "top-10": "أفضل 10 في {maneuvers}",
+    "top-100": "أفضل 100 في {maneuvers}"
+  },
+  "footnote": "وفقًا للوائح الحدث، وبحسب لوحة المتصدرين كما هي. تتطلب كل شارة وميدالية أيضًا لعب المعارك لصالح القبيلة، وهو ما لا تنشره اللعبة، لذا فهذه مراكز بالأحرى وليست مكافآت."
+}

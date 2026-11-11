@@ -1,0 +1,30 @@
+{
+  "title": "Devam eden ödüller",
+  "vehicle": "Tank",
+  "places-to-go": "{places} derece kaldı",
+  "bonds": "{bonds} tahvil",
+  "bonds-multiplied": "{bonds} tahvil × {multiplier} klan çarpanı = {total} tahvil",
+  "no-bonds": "Tahvil yok",
+  "next-tier": "{places} derece daha yukarıda {bonds} tahvil",
+  "badge": "{badge} rozeti",
+  "members-badge": "Üyeleri için {badge} rozeti",
+  "members-medal": "Üyeleri için {medal} madalyası",
+  "legend": "{maneuvers} Efsanesi",
+  "hero": "{maneuvers} Kahramanı",
+  "legend-battles": "etkinlik savaşlarının en az {share} kadarı bu klan için oynandıysa",
+  "legend-needs": "ilk {share} içinde bir yer ve ilk {share} içinde bir klan gerekiyor",
+  "legend-members": "oyuncuların ilk {share} içindeki üyeler için",
+  "hero-needs": "ilk {share} içinde bir klan gerekiyor",
+  "clan-needs": "klanlar arasında ilk {share} içinde bir yer gerekiyor",
+  "clan-battles": "klana katıldıktan sonra bu klan için {count} savaş oynandıysa",
+  "gold": "Klan hazinesi için altın",
+  "multiplier": "Üyelerinin tahvillerine ×{multiplier}",
+  "medals": {
+    "winner": "{maneuvers} Kazananı",
+    "top-2": "{maneuvers} İlk 2",
+    "top-3": "{maneuvers} İlk 3",
+    "top-10": "{maneuvers} İlk 10",
+    "top-100": "{maneuvers} İlk 100"
+  },
+  "footnote": "Etkinlik kurallarına göre, tablonun mevcut durumunda. Her rozet ve madalya ayrıca klan için oynanan savaşları gerektirir. Oyun bunları yayımlamadığından bunlar ödül değil, derecelerdir."
+}

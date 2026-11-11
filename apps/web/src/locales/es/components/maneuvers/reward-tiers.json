@@ -1,0 +1,21 @@
+{
+  "intro": {
+    "players": "Cada jugador de la parte superior de la clasificación también obtiene bonos, según el nivel en el que quede su posición, multiplicados por la posición de su clan en la clasificación de clanes. Los puestos inferiores siguen la clasificación a medida que se rellena.",
+    "clans": "La posición de un clan multiplica los bonos que obtiene cada miembro en la clasificación de jugadores. Los puestos inferiores siguen la clasificación a medida que se rellena."
+  },
+  "standing": "Clasificación",
+  "places": "Puestos",
+  "value": {
+    "players": "Bonos",
+    "clans": "Multiplicador"
+  },
+  "bonds": "{bonds} bonos",
+  "top": "Mejores {share}",
+  "rest": "El resto",
+  "range": "De {from} a {to}",
+  "legend-rule": "una posición entre las mejores {share}, en un clan entre los mejores {share}, con al menos {battles} batallas del evento libradas para él",
+  "hero-rule": "un clan entre los mejores {share}, con {count} batallas libradas para él desde que se unió",
+  "medal-place": "puesto {place}",
+  "medal-top": "los primeros {place}",
+  "medal-rule": "cada miembro del clan en {rule}, con {count} batallas libradas para él desde que se unió"
+}

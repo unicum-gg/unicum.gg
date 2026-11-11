@@ -8,5 +8,7 @@
   "members-winning": "{count} gagnent actuellement le véhicule",
   "place": "Place",
   "player": "Joueur",
-  "fame-points": "Points de renommée"
+  "fame-points": "Points de renommée",
+  "bonds": "Obligations",
+  "bonds-hint": "Obligations gagnées par la place selon le règlement, avec le multiplicateur du clan appliqué, si le joueur a combattu les batailles demandées"
 }

@@ -8,5 +8,7 @@
   "members-winning": "{count} hiện tại đã giành được xe tăng",
   "place": "Vị trí",
   "player": "Người chơi",
-  "fame-points": "Điểm Danh tiếng"
+  "fame-points": "Điểm Danh tiếng",
+  "bonds": "Trái phiếu",
+  "bonds-hint": "Trái phiếu mà vị trí kiếm được theo quy định, sau khi áp dụng hệ số của Clan, nếu người chơi đã tham chiến số trận đấu được yêu cầu"
 }

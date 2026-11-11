@@ -1,0 +1,21 @@
+{
+  "intro": {
+    "players": "A ranglista felső részén lévő minden játékos kötvényeket is szerez a helyezése szerinti szint alapján, megszorozva a klán ranglistáján elfoglalt helyezéssel. Az alacsonyabb helyezések a ranglista kitöltésekor követik annak alakulását.",
+    "clans": "A klán helyezése megszorozza a játékosok ranglistáján minden tag által megszerzett kötvényeket. Az alacsonyabb helyezések a ranglista kitöltésekor követik annak alakulását."
+  },
+  "standing": "Helyezés",
+  "places": "Helyezések",
+  "value": {
+    "players": "Kötvények",
+    "clans": "Szorzó"
+  },
+  "bonds": "{bonds} kötvények",
+  "top": "A legjobb {share}",
+  "rest": "A többi",
+  "range": "{from}–{to}",
+  "legend-rule": "a legjobb {share} helyezés, a legjobb {share} klán egyikében, amelyért legalább {battles} csatát lejátszottak az esemény csatái közül",
+  "hero-rule": "a legjobb {share} klán egyike, amelyért a csatlakozás óta {count} csatát lejátszottak",
+  "medal-place": "{place}. helyezés",
+  "medal-top": "a legjobb {place}",
+  "medal-rule": "a {rule} klán minden tagja, aki a csatlakozás óta {count} csatát játszott érte"
+}

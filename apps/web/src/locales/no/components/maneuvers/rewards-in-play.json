@@ -1,0 +1,30 @@
+{
+  "title": "Belønninger i spill",
+  "vehicle": "Kjøretøy",
+  "places-to-go": "{places} plasser igjen",
+  "bonds": "{bonds} sedler",
+  "bonds-multiplied": "{bonds} sedler × {multiplier} klanmultiplikator = {total} sedler",
+  "no-bonds": "Ingen sedler",
+  "next-tier": "{bonds} sedler {places} plasser høyere",
+  "badge": "{badge}-merke",
+  "members-badge": "{badge}-merke for medlemmene",
+  "members-medal": "En medalje som heter {medal} for medlemmene",
+  "legend": "{maneuvers} Legend",
+  "hero": "{maneuvers} Helt",
+  "legend-battles": "hvis minst {share} av kampene deres i hendelsen ble kjempet for denne klanen",
+  "legend-needs": "trenger en plass blant de beste {share} og en klan blant de beste {share}",
+  "legend-members": "for medlemmer blant de beste {share} spillerne",
+  "hero-needs": "trenger en klan blant de beste {share}",
+  "clan-needs": "trenger en plass blant de beste {share} klanene",
+  "clan-battles": "hvis de har spilt {count} kamper for denne klanen siden de ble med i den",
+  "gold": "Gold til klanens skattkammer",
+  "multiplier": "×{multiplier} på medlemmenes sedler",
+  "medals": {
+    "winner": "{maneuvers} Vinner",
+    "top-2": "{maneuvers} blant de 2 beste",
+    "top-3": "{maneuvers} blant de 3 beste",
+    "top-10": "{maneuvers} blant de 10 beste",
+    "top-100": "{maneuvers} blant de 100 beste"
+  },
+  "footnote": "I henhold til hendelsens regler, på tavlen slik den ser ut nå. Alle merker og medaljer krever også kamper spilt for klanen, noe spillet ikke publiserer, så dette er plasser heller enn belønninger."
+}

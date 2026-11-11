@@ -1,0 +1,30 @@
+{
+  "title": "Recompense în joc",
+  "vehicle": "Vehicul",
+  "places-to-go": "{places} locuri până acolo",
+  "bonds": "{bonds} bonduri",
+  "bonds-multiplied": "{bonds} bonduri × multiplicatorul clanului de {multiplier} = {total} bonduri",
+  "no-bonds": "Nu există bonduri",
+  "next-tier": "{bonds} bonduri cu {places} locuri mai sus",
+  "badge": "{badge}, insignă",
+  "members-badge": "{badge}, insignă pentru membri",
+  "members-medal": "{medal}, medalie pentru membri",
+  "legend": "Legendă pentru {maneuvers}",
+  "hero": "Erou pentru {maneuvers}",
+  "legend-battles": "dacă cel puțin {share} dintre bătăliile lor din eveniment au fost jucate pentru acest clan",
+  "legend-needs": "necesită un loc din top {share} și un clan din top {share}",
+  "legend-members": "pentru membri din top {share} al jucătorilor",
+  "hero-needs": "necesită un clan din top {share}",
+  "clan-needs": "necesită un loc din top {share} al clanurilor",
+  "clan-battles": "dacă au jucat {count} bătălii pentru acest clan de la alăturare",
+  "gold": "Aur pentru vistieria clanului",
+  "multiplier": "×{multiplier} la bondurile membrilor săi",
+  "medals": {
+    "winner": "Câștigător {maneuvers}",
+    "top-2": "Top 2 la {maneuvers}",
+    "top-3": "Top 3 la {maneuvers}",
+    "top-10": "Top 10 la {maneuvers}",
+    "top-100": "Top 100 la {maneuvers}"
+  },
+  "footnote": "Conform regulamentului evenimentului, în clasamentul actual. Fiecare insignă și medalie necesită și bătălii jucate pentru clan, pe care jocul nu le publică, așa că acestea sunt locuri, nu recompense."
+}

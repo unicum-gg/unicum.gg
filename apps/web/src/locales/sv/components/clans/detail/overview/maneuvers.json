@@ -8,5 +8,7 @@
   "members-winning": "{count} vinner för närvarande fordonet",
   "place": "Plats",
   "player": "Spelare",
-  "fame-points": "Ärepoäng"
+  "fame-points": "Ärepoäng",
+  "bonds": "Obligationer",
+  "bonds-hint": "Obligationer som platsen tjänar enligt reglerna, med klanens multiplikator tillämpad, om spelaren spelade de strider som krävs"
 }

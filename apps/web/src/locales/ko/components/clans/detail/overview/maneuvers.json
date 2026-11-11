@@ -6,7 +6,9 @@
   "gold-line": "골드 획득 컷오프",
   "members": "플레이어 리더보드의 구성원 {count}명",
   "members-winning": "현재 {count}명이 차량을 획득합니다",
-  "place": "순위",
+  "place": "장소",
   "player": "플레이어",
-  "fame-points": "명예 점수"
+  "fame-points": "명예 점수",
+  "bonds": "전쟁 채권",
+  "bonds-hint": "규정에 따라 해당 순위에서 획득하는 전쟁 채권입니다. 클랜의 배율이 적용되며, 플레이어가 요구되는 전투 횟수를 수행한 경우에 지급됩니다."
 }
