@@ -10,5 +10,12 @@
     "clans": "Rangirani klanovi"
   },
   "fame-points": "Bodovi slave",
-  "no-curve": "Krivulja počinje nakon što je ljestvica zabilježena dvaput."
+  "no-curve": "Krivulja počinje nakon što je ljestvica zabilježena dvaput.",
+  "last-evening": "+{points} tijekom posljednje večeri",
+  "projected": {
+    "players": "Predviđeni prag na kraju",
+    "clans": "Predviđeni prag zlata na kraju"
+  },
+  "projected-range": "Vjerojatno između {low} i {high}",
+  "projected-pending": "Predviđeno nakon praćenja {count} večeri"
 }

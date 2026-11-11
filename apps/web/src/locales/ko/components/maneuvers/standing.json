@@ -26,5 +26,13 @@
   "won": {
     "players": "차량 획득함",
     "clans": "골드 획득함"
+  },
+  "projected-above": {
+    "players": "차량 행은 {projected} 명예 점수 근처에서 종료될 것으로 예상되며, 오늘의 합계보다 {points}점 낮습니다.",
+    "clans": "골드 행은 {projected} 명예 점수 근처에서 종료될 것으로 예상되며, 오늘의 합계보다 {points}점 낮습니다."
+  },
+  "projected-short": {
+    "players": "차량 행은 {projected} 명예 점수 근처에서 종료될 것으로 예상됩니다. 그때까지 {points}점을 더 획득해야 합니다.",
+    "clans": "골드 행은 {projected} 명예 점수 근처에서 종료될 것으로 예상됩니다. 그때까지 {points}점을 더 획득해야 합니다."
   }
 }

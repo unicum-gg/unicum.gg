@@ -10,5 +10,12 @@
     "clans": "Gewertete Clans"
   },
   "fame-points": "Ruhmpunkte",
-  "no-curve": "Die Kurve beginnt, sobald die Rangliste zweimal aufgezeichnet wurde."
+  "no-curve": "Die Kurve beginnt, sobald die Rangliste zweimal aufgezeichnet wurde.",
+  "last-evening": "+{points} im letzten Abend",
+  "projected": {
+    "players": "Prognostizierter Schwellenwert am Ende",
+    "clans": "Prognostizierter Gold-Schwellenwert am Ende"
+  },
+  "projected-range": "Voraussichtlich zwischen {low} und {high}",
+  "projected-pending": "Prognose, sobald {count} Abende beobachtet wurden"
 }

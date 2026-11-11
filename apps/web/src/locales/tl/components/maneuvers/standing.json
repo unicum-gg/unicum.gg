@@ -26,5 +26,13 @@
   "won": {
     "players": "Nakuha ang sasakyan",
     "clans": "Nakuha ang gold"
+  },
+  "projected-above": {
+    "players": "Tinatayang magtatapos ang linya ng sasakyan sa bandang {projected} Mga puntos ng katanyagan, {points} mas mababa kaysa sa kabuuan ngayon.",
+    "clans": "Tinatayang magtatapos ang linya ng gold sa bandang {projected} Mga puntos ng katanyagan, {points} mas mababa kaysa sa kabuuan ngayon."
+  },
+  "projected-short": {
+    "players": "Tinatayang magtatapos ang linya ng sasakyan sa bandang {projected} Mga puntos ng katanyagan: {points} pa ang kailangang kitain bago iyon.",
+    "clans": "Tinatayang magtatapos ang linya ng gold sa bandang {projected} Mga puntos ng katanyagan: {points} pa ang kailangang kitain bago iyon."
   }
 }

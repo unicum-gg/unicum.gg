@@ -10,5 +10,12 @@
     "clans": "Reitinguojami klanai"
   },
   "fame-points": "Šlovės taškai",
-  "no-curve": "Kreivė pradedama, kai lentelė užfiksuojama du kartus."
+  "no-curve": "Kreivė pradedama, kai lentelė užfiksuojama du kartus.",
+  "last-evening": "+{points} taškų per pastarąjį vakarą",
+  "projected": {
+    "players": "Numatoma riba pabaigoje",
+    "clans": "Numatoma aukso riba pabaigoje"
+  },
+  "projected-range": "Tikėtina, kad bus nuo {low} iki {high}",
+  "projected-pending": "Prognozė bus pateikta stebėjus {count} vakarų"
 }

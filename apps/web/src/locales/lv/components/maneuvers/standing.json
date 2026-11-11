@@ -26,5 +26,13 @@
   "won": {
     "players": "Transportlīdzeklis nopelnīts",
     "clans": "Zelts nopelnīts"
+  },
+  "projected-above": {
+    "players": "Transportlīdzekļu rinda, visticamāk, beigsies pie aptuveni {projected} Slavas punktiem, kas ir par {points} punktiem mazāk nekā šodien kopā.",
+    "clans": "Zelta rinda, visticamāk, beigsies pie aptuveni {projected} Slavas punktiem, kas ir par {points} punktiem mazāk nekā šodien kopā."
+  },
+  "projected-short": {
+    "players": "Transportlīdzekļu rinda, visticamāk, beigsies pie aptuveni {projected} Slavas punktiem, līdz tam vēl jānopelna {points} punkti.",
+    "clans": "Zelta rinda, visticamāk, beigsies pie aptuveni {projected} Slavas punktiem, līdz tam vēl jānopelna {points} punkti."
   }
 }

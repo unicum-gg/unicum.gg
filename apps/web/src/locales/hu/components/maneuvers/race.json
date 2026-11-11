@@ -10,5 +10,12 @@
     "clans": "Rangsorolt klánok"
   },
   "fame-points": "Dicsőségpontok",
-  "no-curve": "A görbe akkor kezdődik, amikor a ranglistát kétszer rögzítették."
+  "no-curve": "A görbe akkor kezdődik, amikor a ranglistát kétszer rögzítették.",
+  "last-evening": "+{points} az elmúlt estén",
+  "projected": {
+    "players": "A várható küszöbérték a végén",
+    "clans": "A várható arany küszöbérték a végén"
+  },
+  "projected-range": "Valószínűleg {low} és {high} között",
+  "projected-pending": "Várható érték, miután {count} estét megfigyeltünk"
 }

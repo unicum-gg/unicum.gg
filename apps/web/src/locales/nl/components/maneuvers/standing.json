@@ -26,5 +26,13 @@
   "won": {
     "players": "Voertuig verdiend",
     "clans": "Goud verdiend"
+  },
+  "projected-above": {
+    "players": "De voertuigregel zal naar verwachting eindigen rond {projected} Roempunten, {points} onder het huidige totaal.",
+    "clans": "De Goudregel zal naar verwachting eindigen rond {projected} Roempunten, {points} onder het huidige totaal."
+  },
+  "projected-short": {
+    "players": "De voertuigregel zal naar verwachting eindigen rond {projected} Roempunten: tegen die tijd moeten er nog {points} worden verdiend.",
+    "clans": "De Goudregel zal naar verwachting eindigen rond {projected} Roempunten: tegen die tijd moeten er nog {points} worden verdiend."
   }
 }

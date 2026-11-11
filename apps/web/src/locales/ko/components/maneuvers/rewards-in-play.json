@@ -1,6 +1,6 @@
 {
   "title": "진행 중인 보상",
-  "vehicle": "차량",
+  "vehicle": "전차",
   "places-to-go": "앞으로 {places}등수",
   "bonds": "전쟁 채권 {bonds}개",
   "bonds-multiplied": "전쟁 채권 {bonds}개 × 클랜 배율 {multiplier} = 전쟁 채권 {total}개",

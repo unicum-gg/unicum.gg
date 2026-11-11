@@ -10,5 +10,12 @@
     "clans": "Klany v žebříčku"
   },
   "fame-points": "Body slávy",
-  "no-curve": "Křivka začíná, jakmile byl žebříček dvakrát zaznamenán."
+  "no-curve": "Křivka začíná, jakmile byl žebříček dvakrát zaznamenán.",
+  "last-evening": "+{points} za poslední večer",
+  "projected": {
+    "players": "Předpokládaná hranice na konci",
+    "clans": "Předpokládaná hranice zlaťáků na konci"
+  },
+  "projected-range": "Pravděpodobně mezi {low} a {high}",
+  "projected-pending": "Předpoklad po sledování {count} večerů"
 }

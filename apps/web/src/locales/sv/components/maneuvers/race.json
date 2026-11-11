@@ -10,5 +10,12 @@
     "clans": "Rankade klaner"
   },
   "fame-points": "Ärepoäng",
-  "no-curve": "Kurvan startar när topplistan har registrerats två gånger."
+  "no-curve": "Kurvan startar när topplistan har registrerats två gånger.",
+  "last-evening": "+{points} under den senaste kvällen",
+  "projected": {
+    "players": "Förväntad gräns vid slutet",
+    "clans": "Förväntad guldgräns vid slutet"
+  },
+  "projected-range": "Troligen mellan {low} och {high}",
+  "projected-pending": "Prognos efter att {count} kvällar har följts"
 }

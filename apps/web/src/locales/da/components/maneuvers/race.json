@@ -10,5 +10,12 @@
     "clans": "Rangerede klaner"
   },
   "fame-points": "Berømmelsespoint",
-  "no-curve": "Kurven starter, når ranglisten er blevet registreret to gange."
+  "no-curve": "Kurven starter, når ranglisten er blevet registreret to gange.",
+  "last-evening": "+{points} i løbet af den seneste aften",
+  "projected": {
+    "players": "Forventet grænse ved afslutningen",
+    "clans": "Forventet guldgrænse ved afslutningen"
+  },
+  "projected-range": "Sandsynligvis mellem {low} og {high}",
+  "projected-pending": "Forventet, når {count} aftener er blevet fulgt"
 }

@@ -10,5 +10,12 @@
     "clans": "Ranga klani"
   },
   "fame-points": "Slavas punkti",
-  "no-curve": "Līkne sākas, kad tabula ir reģistrēta divreiz."
+  "no-curve": "Līkne sākas, kad tabula ir reģistrēta divreiz.",
+  "last-evening": "+{points} punkti pēdējā vakarā",
+  "projected": {
+    "players": "Paredzamais slieksnis beigās",
+    "clans": "Paredzamais zelta slieksnis beigās"
+  },
+  "projected-range": "Visticamāk, starp {low} un {high}",
+  "projected-pending": "Prognoze būs pieejama pēc {count} vakaru novērošanas"
 }

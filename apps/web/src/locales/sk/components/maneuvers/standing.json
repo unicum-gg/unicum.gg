@@ -26,5 +26,13 @@
   "won": {
     "players": "Vozidlo získané",
     "clans": "Zlato získané"
+  },
+  "projected-above": {
+    "players": "Predvideni konec vrstice vozil je pri približno {projected} Body slávy, {points} body pod današnjim celkom.",
+    "clans": "Predvideni konec vrstice zlata je pri približno {projected} Body slávy, {points} body pod današnjim celkom."
+  },
+  "projected-short": {
+    "players": "Predvideni konec vrstice vozil je pri približno {projected} Body slávy, do takrat pa je treba zbrati še {points} body.",
+    "clans": "Predvideni konec vrstice zlata je pri približno {projected} Body slávy, do takrat pa je treba zbrati še {points} body."
   }
 }

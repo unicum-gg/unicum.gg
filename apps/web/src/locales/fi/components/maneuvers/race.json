@@ -10,5 +10,12 @@
     "clans": "Sijoittuneet klaanit"
   },
   "fame-points": "Mainepisteet",
-  "no-curve": "Käyrä alkaa, kun tulostaulukko on tallennettu kahdesti."
+  "no-curve": "Käyrä alkaa, kun tulostaulukko on tallennettu kahdesti.",
+  "last-evening": "+{points} viime illan aikana",
+  "projected": {
+    "players": "Ennustettu raja lopussa",
+    "clans": "Ennustettu kultaa koskeva raja lopussa"
+  },
+  "projected-range": "Todennäköisesti vähintään {low} ja enintään {high}",
+  "projected-pending": "Ennuste näkyy, kun {count} iltaa on seurattu"
 }

@@ -10,5 +10,12 @@
     "clans": "Clãs classificados"
   },
   "fame-points": "Pontos de fama",
-  "no-curve": "A curva começa quando a classificação é registrada duas vezes."
+  "no-curve": "A curva começa quando a classificação é registrada duas vezes.",
+  "last-evening": "+{points} na última noite",
+  "projected": {
+    "players": "Limite projetado ao final",
+    "clans": "Limite de ouro projetado ao final"
+  },
+  "projected-range": "Provavelmente entre {low} e {high}",
+  "projected-pending": "Projetado depois de observar {count} noites"
 }

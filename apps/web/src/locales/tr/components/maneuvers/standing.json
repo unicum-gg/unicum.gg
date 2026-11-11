@@ -26,5 +26,13 @@
   "won": {
     "players": "Kazanılan araç",
     "clans": "Kazanılan altın"
+  },
+  "projected-above": {
+    "players": "Araç satırının, bugün toplamından {points} puan daha düşük olarak yaklaşık {projected} Şöhret Puanları ile sona ermesi bekleniyor.",
+    "clans": "Altın satırının, bugün toplamından {points} puan daha düşük olarak yaklaşık {projected} Şöhret Puanları ile sona ermesi bekleniyor."
+  },
+  "projected-short": {
+    "players": "Araç satırının yaklaşık {projected} Şöhret Puanları ile sona ermesi bekleniyor: o zamana kadar {points} puan daha kazanmak gerekiyor.",
+    "clans": "Altın satırının yaklaşık {projected} Şöhret Puanları ile sona ermesi bekleniyor: o zamana kadar {points} puan daha kazanmak gerekiyor."
   }
 }

@@ -10,5 +10,12 @@
     "clans": "ランククラン"
   },
   "fame-points": "名声ポイント",
-  "no-curve": "ランキングが2回記録されると曲線が開始します。"
+  "no-curve": "ランキングが2回記録されると曲線が開始します。",
+  "last-evening": "直近の夕方から+{points}ポイント",
+  "projected": {
+    "players": "終了時点の予測ボーダー",
+    "clans": "終了時点のゴールド予測ボーダー"
+  },
+  "projected-range": "{low}～{high}の間になる可能性があります",
+  "projected-pending": "夕方を{count}回観測した後に予測されます"
 }

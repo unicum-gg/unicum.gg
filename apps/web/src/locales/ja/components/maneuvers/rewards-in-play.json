@@ -1,6 +1,6 @@
 {
   "title": "獲得可能な報酬",
-  "vehicle": "車両",
+  "vehicle": "車輌",
   "places-to-go": "あと{places}位",
   "bonds": "{bonds} ボンズ",
   "bonds-multiplied": "{bonds} ボンズ × クラン倍率 {multiplier} = {total} ボンズ",

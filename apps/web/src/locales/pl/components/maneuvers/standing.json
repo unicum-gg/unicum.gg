@@ -26,5 +26,13 @@
   "won": {
     "players": "Pojazd zdobyty",
     "clans": "Złoto zdobyte"
+  },
+  "projected-above": {
+    "players": "Przewiduje się, że linia pojazdu zakończy się w okolicach {projected} Punktów sławy, {points} poniżej dzisiejszej wartości łącznie.",
+    "clans": "Przewiduje się, że linia złota zakończy się w okolicach {projected} Punktów sławy, {points} poniżej dzisiejszej wartości łącznie."
+  },
+  "projected-short": {
+    "players": "Przewiduje się, że linia pojazdu zakończy się w okolicach {projected} Punktów sławy: zdobądź jeszcze {points} do tego czasu.",
+    "clans": "Przewiduje się, że linia złota zakończy się w okolicach {projected} Punktów sławy: zdobądź jeszcze {points} do tego czasu."
   }
 }

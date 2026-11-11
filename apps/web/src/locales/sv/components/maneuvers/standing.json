@@ -26,5 +26,13 @@
   "won": {
     "players": "Fordon intjänat",
     "clans": "Guld intjänat"
+  },
+  "projected-above": {
+    "players": "Raden för fordon förväntas sluta på omkring {projected} Ärepoäng, {points} under dagens resultat totalt.",
+    "clans": "Raden för guld förväntas sluta på omkring {projected} Ärepoäng, {points} under dagens resultat totalt."
+  },
+  "projected-short": {
+    "players": "Raden för fordon förväntas sluta på omkring {projected} Ärepoäng: ytterligare {points} att tjäna fram till dess.",
+    "clans": "Raden för guld förväntas sluta på omkring {projected} Ärepoäng: ytterligare {points} att tjäna fram till dess."
   }
 }

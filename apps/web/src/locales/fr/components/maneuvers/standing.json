@@ -26,5 +26,13 @@
   "won": {
     "players": "Véhicule gagné",
     "clans": "Or gagné"
+  },
+  "projected-above": {
+    "players": "La ligne des véhicules devrait se terminer autour de {projected} Points de renommée, à {points} du total d’aujourd’hui.",
+    "clans": "La ligne de l’or devrait se terminer autour de {projected} Points de renommée, à {points} du total d’aujourd’hui."
+  },
+  "projected-short": {
+    "players": "La ligne des véhicules devrait se terminer autour de {projected} Points de renommée : {points} de plus à gagner d’ici là.",
+    "clans": "La ligne de l’or devrait se terminer autour de {projected} Points de renommée : {points} de plus à gagner d’ici là."
   }
 }

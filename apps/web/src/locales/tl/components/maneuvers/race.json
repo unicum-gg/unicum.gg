@@ -10,5 +10,12 @@
     "clans": "Mga klano ayon sa ranggo"
   },
   "fame-points": "Mga puntos ng katanyagan",
-  "no-curve": "Magsisimula ang kurba kapag dalawang beses nang naitala ang talahanayan ng ranggo."
+  "no-curve": "Magsisimula ang kurba kapag dalawang beses nang naitala ang talahanayan ng ranggo.",
+  "last-evening": "+{points} sa nakaraang gabi",
+  "projected": {
+    "players": "Tinatayang hangganan sa pagtatapos",
+    "clans": "Tinatayang hangganan ng gold sa pagtatapos"
+  },
+  "projected-range": "Malamang na nasa pagitan ng {low} at {high}",
+  "projected-pending": "Tinatayang resulta kapag nasubaybayan na ang {count} gabi"
 }

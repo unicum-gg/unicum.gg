@@ -11,7 +11,7 @@
   },
   "bonds": "{bonds} obveznica",
   "top": "Najboljih {share}",
-  "rest": "Ostatak",
+  "rest": "Ostalo",
   "range": "{from} do {to}",
   "legend-rule": "mjesto među najboljih {share}, u klanu među najboljih {share}, s najmanje {battles} odigranih bitaka događaja za njega",
   "hero-rule": "klan među najboljih {share}, s {count} bitaka odigranih za njega od pridruživanja",

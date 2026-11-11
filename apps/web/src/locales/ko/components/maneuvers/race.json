@@ -10,5 +10,12 @@
     "clans": "순위권 클랜"
   },
   "fame-points": "명예 점수",
-  "no-curve": "리더보드가 두 번 기록된 후 곡선이 시작됩니다."
+  "no-curve": "리더보드가 두 번 기록된 후 곡선이 시작됩니다.",
+  "last-evening": "지난 저녁 동안 +{points}점",
+  "projected": {
+    "players": "종료 시 예상 컷오프",
+    "clans": "종료 시 예상 골드 컷오프"
+  },
+  "projected-range": "{low}에서 {high} 사이일 가능성이 높습니다",
+  "projected-pending": "저녁 {count}회를 확인한 후 예상됩니다"
 }

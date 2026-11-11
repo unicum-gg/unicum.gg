@@ -1,6 +1,6 @@
 {
   "title": "Odmeny v hre",
-  "vehicle": "Vozidlo",
+  "vehicle": "Vozilo",
   "places-to-go": "Zostáva {places} miest",
   "bonds": "{bonds} obvezníc",
   "bonds-multiplied": "{bonds} obvezníc × {multiplier} násobiteľ klanu = {total} obvezníc",

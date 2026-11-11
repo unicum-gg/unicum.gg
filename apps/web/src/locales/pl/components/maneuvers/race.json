@@ -10,5 +10,12 @@
     "clans": "Klany w rankingu"
   },
   "fame-points": "Punkty sławy",
-  "no-curve": "Krzywa rozpoczyna się po dwukrotnym zarejestrowaniu tabeli."
+  "no-curve": "Krzywa rozpoczyna się po dwukrotnym zarejestrowaniu tabeli.",
+  "last-evening": "+{points} w ciągu ostatniego wieczoru",
+  "projected": {
+    "players": "Przewidywany próg na koniec",
+    "clans": "Przewidywany próg złota na koniec"
+  },
+  "projected-range": "Prawdopodobnie między {low} a {high}",
+  "projected-pending": "Przewidywany po obserwacji wieczorów w liczbie {count}"
 }

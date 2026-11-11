@@ -10,5 +10,12 @@
     "clans": "Rangirani klanovi"
   },
   "fame-points": "Poeni slave",
-  "no-curve": "Крива почиње када се табела два пута забележи."
+  "no-curve": "Крива почиње када се табела два пута забележи.",
+  "last-evening": "+{points} током последње вечери",
+  "projected": {
+    "players": "Предвиђени праг на крају",
+    "clans": "Предвиђени праг zlata на крају"
+  },
+  "projected-range": "Вероватно између {low} и {high}",
+  "projected-pending": "Предвиђено након што се испрати {count} вечери"
 }

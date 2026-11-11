@@ -26,5 +26,13 @@
   "won": {
     "players": "Vehicul câștigat",
     "clans": "Aur câștigat"
+  },
+  "projected-above": {
+    "players": "Linia vehiculului este estimată să se încheie în jurul valorii de {projected} Puncte de faimă, cu {points} sub totalul de astăzi.",
+    "clans": "Linia aurului este estimată să se încheie în jurul valorii de {projected} Puncte de faimă, cu {points} sub totalul de astăzi."
+  },
+  "projected-short": {
+    "players": "Linia vehiculului este estimată să se încheie în jurul valorii de {projected} Puncte de faimă, cu încă {points} de câștigat până atunci.",
+    "clans": "Linia aurului este estimată să se încheie în jurul valorii de {projected} Puncte de faimă, cu încă {points} de câștigat până atunci."
   }
 }

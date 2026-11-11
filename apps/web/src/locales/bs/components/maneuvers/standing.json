@@ -26,5 +26,13 @@
   "won": {
     "players": "Vozilo zarađeno",
     "clans": "Zlato zarađeno"
+  },
+  "projected-above": {
+    "players": "Predviđa se da će linija vozila završiti blizu {projected} Bodova slave, {points} ispod današnjeg ukupnog iznosa.",
+    "clans": "Predviđa se da će linija zlata završiti blizu {projected} Bodova slave, {points} ispod današnjeg ukupnog iznosa."
+  },
+  "projected-short": {
+    "players": "Predviđa se da će linija vozila završiti blizu {projected} Bodova slave: do tada treba zaraditi još {points}.",
+    "clans": "Predviđa se da će linija zlata završiti blizu {projected} Bodova slave: do tada treba zaraditi još {points}."
   }
 }

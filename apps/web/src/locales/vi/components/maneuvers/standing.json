@@ -26,5 +26,13 @@
   "won": {
     "players": "Đã kiếm được xe tăng",
     "clans": "Đã kiếm được vàng"
+  },
+  "projected-above": {
+    "players": "Dòng xe tăng được dự kiến sẽ kết thúc gần {projected} Điểm Danh tiếng, thấp hơn tổng hôm nay {points} điểm.",
+    "clans": "Dòng vàng được dự kiến sẽ kết thúc gần {projected} Điểm Danh tiếng, thấp hơn tổng hôm nay {points} điểm."
+  },
+  "projected-short": {
+    "players": "Dòng xe tăng được dự kiến sẽ kết thúc gần {projected} Điểm Danh tiếng: cần kiếm được thêm {points} điểm trước thời điểm đó.",
+    "clans": "Dòng vàng được dự kiến sẽ kết thúc gần {projected} Điểm Danh tiếng: cần kiếm được thêm {points} điểm trước thời điểm đó."
   }
 }

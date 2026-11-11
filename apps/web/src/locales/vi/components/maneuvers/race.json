@@ -10,5 +10,12 @@
     "clans": "Các Clan xếp hạng"
   },
   "fame-points": "Điểm Danh tiếng",
-  "no-curve": "Đường cong bắt đầu sau khi bảng xếp hạng được ghi nhận hai lần."
+  "no-curve": "Đường cong bắt đầu sau khi bảng xếp hạng được ghi nhận hai lần.",
+  "last-evening": "+{points} trong buổi tối vừa qua",
+  "projected": {
+    "players": "Ngưỡng dự kiến vào cuối",
+    "clans": "Ngưỡng vàng dự kiến vào cuối"
+  },
+  "projected-range": "Có khả năng nằm trong khoảng từ {low} đến {high}",
+  "projected-pending": "Dự kiến sau khi đã theo dõi {count} buổi tối"
 }

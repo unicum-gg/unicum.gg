@@ -26,5 +26,13 @@
   "won": {
     "players": "车辆已获得",
     "clans": "金币已获得"
+  },
+  "projected-above": {
+    "players": "车辆行预计将在接近 {projected} 名望点数时结束，比今天的总计少 {points} 点数。",
+    "clans": "金币行预计将在接近 {projected} 名望点数时结束，比今天的总计少 {points} 点数。"
+  },
+  "projected-short": {
+    "players": "车辆行预计将在接近 {projected} 名望点数时结束，届时还需赚取 {points} 点数。",
+    "clans": "金币行预计将在接近 {projected} 名望点数时结束，届时还需赚取 {points} 点数。"
   }
 }

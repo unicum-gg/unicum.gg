@@ -10,5 +10,12 @@
     "clans": "Sıralamalı klanlar"
   },
   "fame-points": "Şöhret Puanları",
-  "no-curve": "Eğri, tablo iki kez kaydedildiğinde başlar."
+  "no-curve": "Eğri, tablo iki kez kaydedildiğinde başlar.",
+  "last-evening": "Son akşamda +{points} puan",
+  "projected": {
+    "players": "Dönem sonundaki tahmini eşik",
+    "clans": "Dönem sonundaki tahmini altın eşik"
+  },
+  "projected-range": "Muhtemelen {low} ile {high} arasında",
+  "projected-pending": "{count} akşam izlendiğinde tahmin edilecek"
 }

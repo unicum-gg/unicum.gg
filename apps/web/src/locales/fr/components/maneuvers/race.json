@@ -10,5 +10,12 @@
     "clans": "Clans classés"
   },
   "fame-points": "Points de renommée",
-  "no-curve": "La courbe commence une fois que le classement a été enregistré deux fois."
+  "no-curve": "La courbe commence une fois que le classement a été enregistré deux fois.",
+  "last-evening": "+{points} durant la dernière soirée",
+  "projected": {
+    "players": "Seuil projeté à la fin",
+    "clans": "Seuil d’or projeté à la fin"
+  },
+  "projected-range": "Probablement entre {low} et {high}",
+  "projected-pending": "Projection une fois que {count} soirées auront été suivies"
 }

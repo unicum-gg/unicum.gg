@@ -10,5 +10,12 @@
     "clans": "排名军团"
   },
   "fame-points": "名望点数",
-  "no-curve": "榜单被记录两次后，曲线才会开始。"
+  "no-curve": "榜单被记录两次后，曲线才会开始。",
+  "last-evening": "过去一个晚间增加 +{points} 点数",
+  "projected": {
+    "players": "预计结束时的门槛",
+    "clans": "预计结束时的金币门槛"
+  },
+  "projected-range": "可能在 {low} 或 {high} 之间",
+  "projected-pending": "预计在观察 {count} 个晚间后确定"
 }

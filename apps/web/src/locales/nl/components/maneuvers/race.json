@@ -10,5 +10,12 @@
     "clans": "Gerangschikte clans"
   },
   "fame-points": "Roempunten",
-  "no-curve": "De curve begint zodra het klassement twee keer is geregistreerd."
+  "no-curve": "De curve begint zodra het klassement twee keer is geregistreerd.",
+  "last-evening": "+{points} in de afgelopen avond",
+  "projected": {
+    "players": "Verwachte grens aan het einde",
+    "clans": "Verwachte Goudgrens aan het einde"
+  },
+  "projected-range": "Waarschijnlijk tussen {low} en {high}",
+  "projected-pending": "Verwacht nadat {count} avonden zijn bekeken"
 }

@@ -26,5 +26,13 @@
   "won": {
     "players": "Megszerezhető jármű",
     "clans": "Megszerezhető arany"
+  },
+  "projected-above": {
+    "players": "A járműsor várhatóan körülbelül {projected} Dicsőségpontoknál ér véget, a mai összesnél {points} ponttal kevesebbel.",
+    "clans": "Az aranysor várhatóan körülbelül {projected} Dicsőségpontoknál ér véget, a mai összesnél {points} ponttal kevesebbel."
+  },
+  "projected-short": {
+    "players": "A járműsor várhatóan körülbelül {projected} Dicsőségpontoknál ér véget: addig még {points} pont megszerzése szükséges.",
+    "clans": "Az aranysor várhatóan körülbelül {projected} Dicsőségpontoknál ér véget: addig még {points} pont megszerzése szükséges."
   }
 }

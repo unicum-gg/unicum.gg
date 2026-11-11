@@ -10,5 +10,12 @@
     "clans": "Hodnotené klany"
   },
   "fame-points": "Body slávy",
-  "no-curve": "Krivulja začína po druhom zaznamenaní lestvice."
+  "no-curve": "Krivulja začína po druhom zaznamenaní lestvice.",
+  "last-evening": "+{points} body v zadnjem večeru",
+  "projected": {
+    "players": "Predvideni prag ob koncu",
+    "clans": "Predvideni prag zlata ob koncu"
+  },
+  "projected-range": "Verjetno med {low} in {high}",
+  "projected-pending": "Predvideno, ko bo spremljanih {count, plural, one {# večer} two {# večera} few {# večeri} other {# večerov}}"
 }

@@ -26,5 +26,13 @@
   "won": {
     "players": "Uždirbta transporto priemonė",
     "clans": "Uždirbta aukso"
+  },
+  "projected-above": {
+    "players": "Numatoma, kad transporto priemonės eilutė baigsis ties maždaug {projected} Šlovės taškais, {points} taškais žemiau šiandienos bendro skaičiaus.",
+    "clans": "Numatoma, kad aukso eilutė baigsis ties maždaug {projected} Šlovės taškais, {points} taškais žemiau šiandienos bendro skaičiaus."
+  },
+  "projected-short": {
+    "players": "Numatoma, kad transporto priemonės eilutė baigsis ties maždaug {projected} Šlovės taškais. Iki tol reikia uždirbti dar {points} taškų.",
+    "clans": "Numatoma, kad aukso eilutė baigsis ties maždaug {projected} Šlovės taškais. Iki tol reikia uždirbti dar {points} taškų."
   }
 }

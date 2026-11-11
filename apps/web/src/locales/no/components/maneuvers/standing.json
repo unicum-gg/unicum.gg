@@ -26,5 +26,13 @@
   "won": {
     "players": "Kjøretøy opptjent",
     "clans": "Gull opptjent"
+  },
+  "projected-above": {
+    "players": "Kjøretøylinjen forventes å ende nær {projected} Berømmelsespoeng, {points} under totalt i dag.",
+    "clans": "Gullinjen forventes å ende nær {projected} Berømmelsespoeng, {points} under totalt i dag."
+  },
+  "projected-short": {
+    "players": "Kjøretøylinjen forventes å ende nær {projected} Berømmelsespoeng: Tjen {points} mer innen da.",
+    "clans": "Gullinjen forventes å ende nær {projected} Berømmelsespoeng: Tjen {points} mer innen da."
   }
 }

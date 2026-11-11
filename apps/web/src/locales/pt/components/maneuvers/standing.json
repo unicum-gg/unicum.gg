@@ -26,5 +26,13 @@
   "won": {
     "players": "Veículo conquistado",
     "clans": "Ouro conquistado"
+  },
+  "projected-above": {
+    "players": "A linha de veículo está projetada para terminar perto de {projected} Pontos de fama, {points} abaixo do total de hoje.",
+    "clans": "A linha de ouro está projetada para terminar perto de {projected} Pontos de fama, {points} abaixo do total de hoje."
+  },
+  "projected-short": {
+    "players": "A linha de veículo está projetada para terminar perto de {projected} Pontos de fama: mais {points} a conquistar até lá.",
+    "clans": "A linha de ouro está projetada para terminar perto de {projected} Pontos de fama: mais {points} a conquistar até lá."
   }
 }

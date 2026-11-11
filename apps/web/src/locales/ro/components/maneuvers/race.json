@@ -10,5 +10,12 @@
     "clans": "Clanuri clasate"
   },
   "fame-points": "Puncte de faimă",
-  "no-curve": "Curba începe după ce clasamentul a fost înregistrat de două ori."
+  "no-curve": "Curba începe după ce clasamentul a fost înregistrat de două ori.",
+  "last-evening": "+{points} în ultima seară",
+  "projected": {
+    "players": "Prag estimat la final",
+    "clans": "Prag estimat pentru aur la final"
+  },
+  "projected-range": "Probabil între {low} și {high}",
+  "projected-pending": "Estimare după ce au fost urmărite {count} seri"
 }

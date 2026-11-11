@@ -26,5 +26,13 @@
   "won": {
     "players": "Ajoneuvo ansaittu",
     "clans": "Kultaa ansaittu"
+  },
+  "projected-above": {
+    "players": "Ajoneuvorivin ennustetaan päättyvän noin {projected} Mainepisteen kohdalla, {points} alle tänään yhteensä saavutetun määrän.",
+    "clans": "Kultaa koskevan rivin ennustetaan päättyvän noin {projected} Mainepisteen kohdalla, {points} alle tänään yhteensä saavutetun määrän."
+  },
+  "projected-short": {
+    "players": "Ajoneuvorivin ennustetaan päättyvän noin {projected} Mainepisteen kohdalla: siihen mennessä on ansaittava vielä {points}.",
+    "clans": "Kultaa koskevan rivin ennustetaan päättyvän noin {projected} Mainepisteen kohdalla: siihen mennessä on ansaittava vielä {points}."
   }
 }

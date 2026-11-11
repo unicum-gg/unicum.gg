@@ -26,5 +26,13 @@
   "won": {
     "players": "Získané vozidlo",
     "clans": "Získané zlaťáky"
+  },
+  "projected-above": {
+    "players": "Řádek vozidla by měl skončit kolem {projected} Bodů slávy, o {points} body pod dnešním celkem.",
+    "clans": "Řádek zlaťáků by měl skončit kolem {projected} Bodů slávy, o {points} body pod dnešním celkem."
+  },
+  "projected-short": {
+    "players": "Řádek vozidla by měl skončit kolem {projected} Bodů slávy, do té doby je třeba získat ještě {points} body.",
+    "clans": "Řádek zlaťáků by měl skončit kolem {projected} Bodů slávy, do té doby je třeba získat ještě {points} body."
   }
 }

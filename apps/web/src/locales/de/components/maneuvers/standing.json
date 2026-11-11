@@ -26,5 +26,13 @@
   "won": {
     "players": "Fahrzeug verdient",
     "clans": "Gold verdient"
+  },
+  "projected-above": {
+    "players": "Die Fahrzeugzeile wird voraussichtlich bei etwa {projected} Ruhmpunkten enden, {points} unter der heutigen Gesamtpunktzahl.",
+    "clans": "Die Goldzeile wird voraussichtlich bei etwa {projected} Ruhmpunkten enden, {points} unter der heutigen Gesamtpunktzahl."
+  },
+  "projected-short": {
+    "players": "Die Fahrzeugzeile wird voraussichtlich bei etwa {projected} Ruhmpunkten enden: Bis dahin sind noch {points} zu verdienen.",
+    "clans": "Die Goldzeile wird voraussichtlich bei etwa {projected} Ruhmpunkten enden: Bis dahin sind noch {points} zu verdienen."
   }
 }
