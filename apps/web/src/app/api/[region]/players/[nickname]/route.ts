@@ -14,6 +14,7 @@ import { traced, tracedSync } from "@unicum.gg/core/lib/perf-trace";
 import { withDeadline } from "@unicum.gg/core/lib/deadline";
 import { isRegion } from "@unicum.gg/wargaming";
 import { PlayerDetailResponse } from "./schema.api";
+import { STILL_LOADING_RETRY_SECONDS } from "@/lib/still-loading";
 
 const JSON_HEADERS = { "content-type": "application/json" } as const;
 
@@ -96,7 +97,10 @@ export async function GET(
       if (shared === ASSEMBLY_REFUSED) {
         return Response.json(
           { error: "still_loading" },
-          { status: 503, headers: { "retry-after": "5" } },
+          {
+          status: 503,
+          headers: { "retry-after": String(STILL_LOADING_RETRY_SECONDS) },
+        },
         );
       }
       const assembled = await traced("loadPlayerDetailLive", () =>
@@ -108,7 +112,10 @@ export async function GET(
       if (assembled === null) {
         return Response.json(
           { error: "still_loading" },
-          { status: 503, headers: { "retry-after": "5" } },
+          {
+          status: 503,
+          headers: { "retry-after": String(STILL_LOADING_RETRY_SECONDS) },
+        },
         );
       }
       const { result, json } = assembled;

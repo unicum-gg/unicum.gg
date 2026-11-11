@@ -33,6 +33,7 @@ import type { ClanFullInfo } from "@unicum.gg/core/wargaming/wot/clans/info";
 import type { ClanNameHistoryEntry } from "@unicum.gg/core/clans/name-history";
 import { isRegion, type Region } from "@unicum.gg/wargaming";
 import { withDictionaries } from "@/components/dictionaries";
+import { isStillLoading, throwStillLoading } from "@/lib/still-loading";
 
 const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 
@@ -83,6 +84,11 @@ async function loadOverview(region: Region, tag: string) {
     ) {
       return null;
     }
+    // Not a failure: the endpoint is assembling this entity and asked us to
+    // come back (see `lib/still-loading`). Marked rather than rendered, since
+    // this page is `force-static` and a placeholder would be the ISR entry
+    // everyone reads for the rest of the window.
+    if (isStillLoading(error)) throwStillLoading(error);
     throw error;
   }
 }

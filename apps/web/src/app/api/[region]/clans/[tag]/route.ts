@@ -12,6 +12,7 @@ import { measured } from "@/services/perf";
 import { traced } from "@unicum.gg/core/lib/perf-trace";
 import { isRegion } from "@unicum.gg/wargaming";
 import { ClanOverviewResponse } from "./schema.api";
+import { STILL_LOADING_RETRY_SECONDS } from "@/lib/still-loading";
 
 export const dynamic = "force-dynamic";
 
@@ -54,7 +55,10 @@ export async function GET(
     if (resolved === null) {
       return Response.json(
         { error: "still_loading" },
-        { status: 503, headers: { "retry-after": "5" } },
+        {
+        status: 503,
+        headers: { "retry-after": String(STILL_LOADING_RETRY_SECONDS) },
+      },
       );
     }
     const clanCached = resolved.clan;

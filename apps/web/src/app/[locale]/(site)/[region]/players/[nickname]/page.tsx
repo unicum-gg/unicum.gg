@@ -45,6 +45,7 @@ import {
 } from "@unicum.gg/shared";
 import { type Region, isRegion } from "@unicum.gg/wargaming";
 import { withDictionaries } from "@/components/dictionaries";
+import { isStillLoading, throwStillLoading } from "@/lib/still-loading";
 
 const PCT_FORMAT = {
   minimumFractionDigits: 1,
@@ -105,6 +106,11 @@ async function loadDetail(
         return { locked: true, nickname: body.nickname ?? nickname };
       }
     }
+    // Not a failure: the endpoint is assembling this entity and asked us to
+    // come back (see `lib/still-loading`). Marked rather than rendered, since
+    // this page is `force-static` and a placeholder would be the ISR entry
+    // everyone reads for the rest of the window.
+    if (isStillLoading(error)) throwStillLoading(error);
     throw error;
   }
 }
