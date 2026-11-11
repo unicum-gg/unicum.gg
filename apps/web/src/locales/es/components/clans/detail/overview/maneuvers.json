@@ -1,0 +1,12 @@
+{
+  "title": "Clasificación de {maneuvers}",
+  "loading": "Cargando el récord del clan…",
+  "no-place": "El clan no tiene posición en la clasificación de {edition}.",
+  "no-edition": "Todavía no se ha registrado ninguna edición en este servidor.",
+  "gold-line": "Corte para obtener oro",
+  "members": "{count} miembros en la clasificación de jugadores",
+  "members-winning": "Actualmente, {count} obtienen el vehículo",
+  "place": "Puesto",
+  "player": "Jugador",
+  "fame-points": "Puntos de fama"
+}

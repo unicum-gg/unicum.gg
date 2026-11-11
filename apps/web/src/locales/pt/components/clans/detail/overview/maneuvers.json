@@ -1,0 +1,12 @@
+{
+  "title": "Classificação de {maneuvers}",
+  "loading": "Carregando o recorde do clã…",
+  "no-place": "O clã não detém lugar na classificação da edição {edition}.",
+  "no-edition": "Nenhuma edição foi registrada neste servidor ainda.",
+  "gold-line": "Limite para conquistar ouro",
+  "members": "{count} membros na classificação de jogadores",
+  "members-winning": "{count} atualmente conquistam o veículo",
+  "place": "posição",
+  "player": "Jogador",
+  "fame-points": "Pontos de fama"
+}

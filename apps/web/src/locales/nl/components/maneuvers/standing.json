@@ -1,0 +1,30 @@
+{
+  "see-board": "Bekijk het klassement van deze editie",
+  "of-ranked": {
+    "players": "van de {count} gerangschikte spelers",
+    "clans": "van de {count} gerangschikte clans"
+  },
+  "gain": "+{points} in 24 u",
+  "climbed": "▲ {count} plaatsen in 24 u",
+  "fell": "▼ {count} plaatsen in 24 u",
+  "inside-points": {
+    "players": "Voertuig verdiend, {points} Roempunten boven de regel.",
+    "clans": "Goud verdiend, {points} Roempunten boven de regel."
+  },
+  "inside-places": {
+    "players": "Voertuig verdiend, {places} plaatsen binnen de regel.",
+    "clans": "Goud verdiend, {places} plaatsen binnen de regel."
+  },
+  "outside-points": {
+    "players": "{points} Roempunten te weinig voor de voertuigregel.",
+    "clans": "{points} Roempunten te weinig voor de goudregel."
+  },
+  "outside-places": {
+    "players": "{places} plaatsen te weinig voor de voertuigregel.",
+    "clans": "{places} plaatsen te weinig voor de goudregel."
+  },
+  "won": {
+    "players": "Voertuig verdiend",
+    "clans": "Goud verdiend"
+  }
+}

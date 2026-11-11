@@ -1,7 +1,7 @@
 {
   "description": {
-    "players": "Ärepoängskolumnen färgas efter hur hög en placering är bland alla rankade spelare, med samma percentiler som webbplatsens övriga betygsskalor. Placeringarna nedan följer topplistan när den fylls.",
-    "clans": "Ärepoängskolumnen färgas efter hur hög en placering är bland alla rankade klaner, med samma percentiler som webbplatsens övriga betygsskalor. Placeringarna nedan följer topplistan när den fylls."
+    "players": "Kolumnen med Ärepoäng är färgad efter hur högt en plats ligger bland alla rankade spelare, på samma percentiler som webbplatsens övriga betygsskalor. Platserna nedan följer topplistan när den fylls.",
+    "clans": "Kolumnen med Ärepoäng är färgad efter hur högt en plats ligger bland alla rankade klaner, på samma percentiler som webbplatsens övriga betygsskalor. Platserna nedan följer topplistan när den fylls."
   },
   "share": "Ställning",
   "places": "Placeringar",

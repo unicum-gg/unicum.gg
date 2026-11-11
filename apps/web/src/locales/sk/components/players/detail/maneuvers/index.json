@@ -1,0 +1,8 @@
+{
+  "title": "Záznam {maneuvers} hráča {nickname}",
+  "loading": "Nalaganje záznamu {maneuvers} hráča {nickname}…",
+  "no-place": "{nickname} nemá miesto na lestvici vydania {edition}.",
+  "no-edition": "Na tomto serveri zatiaľ nebola zaznamenaná žiadna izdaja.",
+  "how-to-enter": "Hráč sa dostane na lestvicu po získaní prvých bodov slávy v bitkách tejto udalosti.",
+  "vehicle-line": "Prag na získanie vozidla"
+}

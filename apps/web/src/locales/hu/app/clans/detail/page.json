@@ -11,6 +11,10 @@
     "title": "[{tag}] {name} klánháborús statisztikái ({region})",
     "description": "{name} [{tag}] klánháborús teljesítménye a(z) {region} régióban: tagonkénti értékelések, csaták és győzelmi arány a globális térkép kampányaiban."
   },
+  "maneuvers": {
+    "title": "{name} [{tag}] klán helyezései, {maneuvers} ranglista ({region})",
+    "description": "{name} [{tag}] klán, {maneuvers}, {region}: a klán helyezése és Dicsőségpontjai, feljutása a kiadás során, valamint tagjai a játékosok ranglistáján."
+  },
   "tanks": {
     "title": "[{tag}] {name} tankjai ({region}), a klán járművei",
     "description": "Minden jármű, amellyel {name} [{tag}] játszott a(z) {region} régióban, a csaták, a győzelmi arány és az átlagos sebzés összesítésével a klán tagjai között."

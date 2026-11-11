@@ -1,7 +1,7 @@
 {
   "description": {
-    "players": "Cột Điểm Danh tiếng có màu dựa trên vị trí cao đến đâu trong số tất cả người chơi được xếp hạng, theo cùng các phân vị như những thang đo chỉ số đánh giá khác của trang web. Các vị trí bên dưới thay đổi theo bảng xếp hạng khi bảng được lấp đầy.",
-    "clans": "Cột Điểm Danh tiếng có màu dựa trên vị trí cao đến đâu trong số tất cả Clan được xếp hạng, theo cùng các phân vị như những thang đo chỉ số đánh giá khác của trang web. Các vị trí bên dưới thay đổi theo bảng xếp hạng khi bảng được lấp đầy."
+    "players": "Cột Điểm Danh tiếng có màu dựa trên vị trí cao đến đâu trong số tất cả người chơi được xếp hạng, theo cùng các phân vị như những thang đo chỉ số đánh giá khác của trang web. Các vị trí bên dưới tuân theo bảng xếp hạng khi bảng xếp hạng lấp đầy.",
+    "clans": "Cột Điểm Danh tiếng có màu dựa trên vị trí cao đến đâu trong số tất cả Clan được xếp hạng, theo cùng các phân vị như những thang đo chỉ số đánh giá khác của trang web. Các vị trí bên dưới tuân theo bảng xếp hạng khi bảng xếp hạng lấp đầy."
   },
   "share": "Thứ hạng",
   "places": "Vị trí",

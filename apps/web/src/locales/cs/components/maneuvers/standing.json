@@ -1,0 +1,30 @@
+{
+  "see-board": "Zobrazit žebříček této edice",
+  "of-ranked": {
+    "players": "z celkového počtu {count} hráčů v žebříčku",
+    "clans": "z celkového počtu {count} klanů v žebříčku"
+  },
+  "gain": "+{points} za 24 h",
+  "climbed": "▲ o {count} umístění za 24 h",
+  "fell": "▼ o {count} umístění za 24 h",
+  "inside-points": {
+    "players": "Vyhrává vozidlo, je {points} bodů slávy nad řádkem.",
+    "clans": "Vyhrávají zlaťáky, je {points} bodů slávy nad řádkem."
+  },
+  "inside-places": {
+    "players": "Vyhrává vozidlo, {places} umístění uvnitř řádku.",
+    "clans": "Vyhrávají zlaťáky, {places} umístění uvnitř řádku."
+  },
+  "outside-points": {
+    "players": "Do řádku pro vozidlo chybí {points} bodů slávy.",
+    "clans": "Do řádku pro zlaťáky chybí {points} bodů slávy."
+  },
+  "outside-places": {
+    "players": "Do řádku pro vozidlo chybí {places} umístění.",
+    "clans": "Do řádku pro zlaťáky chybí {places} umístění."
+  },
+  "won": {
+    "players": "Získané vozidlo",
+    "clans": "Získané zlaťáky"
+  }
+}

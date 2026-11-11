@@ -1,0 +1,30 @@
+{
+  "see-board": "Tingnan ang talahanayan ng ranggo ng edisyong ito",
+  "of-ranked": {
+    "players": "sa kabuuang {count} na mga manlalaro ayon sa ranggo",
+    "clans": "sa kabuuang {count} na mga klano ayon sa ranggo"
+  },
+  "gain": "+{points} sa loob ng 24 na oras",
+  "climbed": "▲ {count} na pag-akyat sa loob ng 24 na oras",
+  "fell": "▼ {count} na pagbaba sa loob ng 24 na oras",
+  "inside-points": {
+    "players": "Panalo sa sasakyan, {points} mga puntos ng katanyagan sa itaas ng linya.",
+    "clans": "Panalo sa gold, {points} mga puntos ng katanyagan sa itaas ng linya."
+  },
+  "inside-places": {
+    "players": "Panalo sa sasakyan, {places} mga puwesto sa loob ng linya.",
+    "clans": "Panalo sa gold, {places} mga puwesto sa loob ng linya."
+  },
+  "outside-points": {
+    "players": "Kulang ng {points} mga puntos ng katanyagan para maabot ang linya ng sasakyan.",
+    "clans": "Kulang ng {points} mga puntos ng katanyagan para maabot ang linya ng gold."
+  },
+  "outside-places": {
+    "players": "Kulang ng {places} mga puwesto para maabot ang linya ng sasakyan.",
+    "clans": "Kulang ng {places} mga puwesto para maabot ang linya ng gold."
+  },
+  "won": {
+    "players": "Nakuha ang sasakyan",
+    "clans": "Nakuha ang gold"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "title": "{maneuvers} klasifikācija",
+  "loading": "Ielādē klana rekordu…",
+  "no-place": "Klans neieņem vietu {edition} tabulā.",
+  "no-edition": "Šajā serverī vēl nav reģistrēts neviens izdevums.",
+  "gold-line": "Slieksnis, lai nopelnītu zeltu",
+  "members": "{count} biedri spēlētāju tabulā",
+  "members-winning": "{count} pašlaik nopelna transportlīdzekli",
+  "place": "vieta",
+  "player": "Spēlētājs",
+  "fame-points": "Slavas punkti"
+}

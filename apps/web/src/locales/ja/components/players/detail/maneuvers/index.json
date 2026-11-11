@@ -1,0 +1,8 @@
+{
+  "title": "{nickname}の{maneuvers}記録",
+  "loading": "{nickname}の{maneuvers}記録を読み込み中…",
+  "no-place": "{nickname}は{edition}のランキングで順位を保有していません。",
+  "no-edition": "このサーバーではまだ開催回が記録されていません。",
+  "how-to-enter": "プレイヤーは、イベントの戦闘で獲得した最初の名声ポイントによりランキングに入ります。",
+  "vehicle-line": "車両獲得のボーダー"
+}

@@ -1,0 +1,30 @@
+{
+  "see-board": "Погледај табелу овог издања",
+  "of-ranked": {
+    "players": "од {count} рангираних играча",
+    "clans": "од {count} рангираних кланова"
+  },
+  "gain": "+{points} за 24 h",
+  "climbed": "▲ {count} за 24 h",
+  "fell": "▼ {count} за 24 h",
+  "inside-points": {
+    "players": "Осваја возило, {points} Poeni slave изнад линије.",
+    "clans": "Осваја zlata, {points} Poeni slave изнад линије."
+  },
+  "inside-places": {
+    "players": "Осваја возило, {places} места унутар линије.",
+    "clans": "Осваја zlata, {places} места унутар линије."
+  },
+  "outside-points": {
+    "players": "Недостаје му {points} Poeni slave до линије за возило.",
+    "clans": "Недостаје му {points} Poeni slave до линије за zlata."
+  },
+  "outside-places": {
+    "players": "Недостаје му {places} места до линије за возило.",
+    "clans": "Недостаје му {places} места до линије за zlata."
+  },
+  "won": {
+    "players": "Возило је зарађено",
+    "clans": "Zlata су зарађена"
+  }
+}

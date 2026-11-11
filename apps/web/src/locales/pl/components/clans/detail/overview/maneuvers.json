@@ -1,0 +1,12 @@
+{
+  "title": "Klasyfikacja {maneuvers}",
+  "loading": "Ładowanie rekordu klanu…",
+  "no-place": "Klan nie posiada miejsca w tabeli {edition}.",
+  "no-edition": "Na tym serwerze nie zarejestrowano jeszcze żadnej edycji.",
+  "gold-line": "Próg zdobycia złota",
+  "members": "{count} członków w tabeli graczy",
+  "members-winning": "{count} obecnie zdobywa pojazd",
+  "place": "Miejsce",
+  "player": "Gracz",
+  "fame-points": "Punkty sławy"
+}

@@ -1,0 +1,8 @@
+{
+  "title": "{nickname} adlı oyuncunun {maneuvers} rekoru",
+  "loading": "{nickname} adlı oyuncunun {maneuvers} rekoru yükleniyor…",
+  "no-place": "{nickname} adlı oyuncunun {edition} tablosunda yeri yok.",
+  "no-edition": "Bu sunucuda henüz kaydedilen sezon yok.",
+  "how-to-enter": "Oyuncu, etkinlik savaşlarında kazandığı ilk Şöhret Puanlarıyla tabloya girer.",
+  "vehicle-line": "Aracı kazanma eşiği"
+}

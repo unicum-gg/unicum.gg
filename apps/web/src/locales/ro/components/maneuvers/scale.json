@@ -1,7 +1,7 @@
 {
   "description": {
-    "players": "Coloana Puncte de faimă este colorată în funcție de poziția ocupată printre toți jucătorii clasați, folosind aceleași percentile ca celelalte scări de rating ale site-ului. Locurile de mai jos urmează clasamentul pe măsură ce acesta se completează.",
-    "clans": "Coloana Puncte de faimă este colorată în funcție de poziția ocupată printre toate clanurile clasate, folosind aceleași percentile ca celelalte scări de rating ale site-ului. Locurile de mai jos urmează clasamentul pe măsură ce acesta se completează."
+    "players": "Coloana Puncte de faimă este colorată în funcție de cât de sus se află un loc printre toți jucătorii clasați, pe aceleași percentile ca celelalte scări de rating ale site-ului. Locurile de mai jos urmează clasamentul pe măsură ce acesta se completează.",
+    "clans": "Coloana Puncte de faimă este colorată în funcție de cât de sus se află un loc printre toate clanurile clasate, pe aceleași percentile ca celelalte scări de rating ale site-ului. Locurile de mai jos urmează clasamentul pe măsură ce acesta se completează."
   },
   "share": "Poziție",
   "places": "Locuri",

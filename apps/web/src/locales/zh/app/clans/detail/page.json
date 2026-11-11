@@ -11,6 +11,10 @@
     "title": "[{tag}] {name}军团战争数据（{region}）",
     "description": "{name} [{tag}]在{region}的军团战争表现：全球地图战役中的成员评分、战斗场次和胜率。"
   },
+  "maneuvers": {
+    "title": "[{tag}] {name} 的{maneuvers}排名（{region}）",
+    "description": "{name} [{tag}] 在{region}的{maneuvers}中：军团名次和名望点数、赛季中的攀升情况，以及玩家榜单上的成员。"
+  },
   "tanks": {
     "title": "[{tag}] {name}的坦克（{region}），军团的车辆",
     "description": "{name} [{tag}]在{region}进行过的每辆车辆，汇总军团成员的战斗场次、胜率和平均伤害。"

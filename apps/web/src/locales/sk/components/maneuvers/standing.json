@@ -1,0 +1,30 @@
+{
+  "see-board": "Zobraziť lestvicu tejto izdaje",
+  "of-ranked": {
+    "players": "z {count} hodnotených hráčov",
+    "clans": "z {count} hodnotených klanov"
+  },
+  "gain": "+{points} za 24 h",
+  "climbed": "▲ {count} za 24 h",
+  "fell": "▼ {count} za 24 h",
+  "inside-points": {
+    "players": "Získava vozidlo, {points} bodov slávy nad riadkom.",
+    "clans": "Získava zlato, {points} bodov slávy nad riadkom."
+  },
+  "inside-places": {
+    "players": "Získava vozidlo, {places} miest nad riadkom.",
+    "clans": "Získava zlato, {places} miest nad riadkom."
+  },
+  "outside-points": {
+    "players": "Chýba {points} bodov slávy do riadku vozidla.",
+    "clans": "Chýba {points} bodov slávy do riadku zlata."
+  },
+  "outside-places": {
+    "players": "Chýba {places} miest do riadku vozidla.",
+    "clans": "Chýba {places} miest do riadku zlata."
+  },
+  "won": {
+    "players": "Vozidlo získané",
+    "clans": "Zlato získané"
+  }
+}

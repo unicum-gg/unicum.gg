@@ -1,0 +1,30 @@
+{
+  "see-board": "이 시즌 리더보드 보기",
+  "of-ranked": {
+    "players": "순위권 플레이어 {count}명 중",
+    "clans": "랭크 클랜 {count}개 중"
+  },
+  "gain": "24시간 동안 +{points}",
+  "climbed": "24시간 동안 ▲ {count}순위 상승",
+  "fell": "24시간 동안 ▼ {count}순위 하락",
+  "inside-points": {
+    "players": "행보다 명예 점수 {points}점 높아 차량을 획득합니다.",
+    "clans": "행보다 명예 점수 {points}점 높아 골드를 획득합니다."
+  },
+  "inside-places": {
+    "players": "획득 행보다 {places}등수 안쪽에 있어 차량을 획득합니다.",
+    "clans": "획득 행보다 {places}등수 안쪽에 있어 골드를 획득합니다."
+  },
+  "outside-points": {
+    "players": "차량 획득 행까지 명예 점수가 {points}점 부족합니다.",
+    "clans": "골드 획득 행까지 명예 점수가 {points}점 부족합니다."
+  },
+  "outside-places": {
+    "players": "차량 획득 행까지 {places}등수가 부족합니다.",
+    "clans": "골드 획득 행까지 {places}등수가 부족합니다."
+  },
+  "won": {
+    "players": "차량 획득함",
+    "clans": "골드 획득함"
+  }
+}

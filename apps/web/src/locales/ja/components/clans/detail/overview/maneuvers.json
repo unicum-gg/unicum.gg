@@ -1,0 +1,12 @@
+{
+  "title": "{maneuvers}の順位",
+  "loading": "クランの記録を読み込み中…",
+  "no-place": "クランは{edition}のランキングで順位を保有していません。",
+  "no-edition": "このサーバーではまだ開催回が記録されていません。",
+  "gold-line": "ゴールド獲得のボーダー",
+  "members": "ランキング上のメンバー数：{count}人",
+  "members-winning": "現在、{count}人が車両を獲得できます",
+  "place": "順位",
+  "player": "プレイヤー",
+  "fame-points": "名声ポイント"
+}

@@ -1,0 +1,8 @@
+{
+  "title": "Spēlētāja {nickname} {maneuvers} rekords",
+  "loading": "Ielādē spēlētāja {nickname} {maneuvers} rekordu…",
+  "no-place": "{nickname} neieņem vietu {edition} tabulā.",
+  "no-edition": "Šajā serverī vēl nav reģistrēts neviens izdevums.",
+  "how-to-enter": "Spēlētājs iekļūst tabulā ar pirmajiem Slavas punktiem, kas nopelnīti notikuma kaujās.",
+  "vehicle-line": "Slieksnis, lai nopelnītu transportlīdzekli"
+}

@@ -1,7 +1,7 @@
 {
   "description": {
-    "players": "A Dicsőségpontok oszlopa annak alapján színezett, hogy egy helyezés milyen magas minden rangsorolt játékos között, ugyanazon százalékos határok szerint, mint a webhely többi értékelési skálája. Az alábbi helyezések a ranglista kitöltésével párhuzamosan követik annak állását.",
-    "clans": "A Dicsőségpontok oszlopa annak alapján színezett, hogy egy helyezés milyen magas minden rangsorolt klán között, ugyanazon százalékos határok szerint, mint a webhely többi értékelési skálája. Az alábbi helyezések a ranglista kitöltésével párhuzamosan követik annak állását."
+    "players": "A Dicsőségpontok oszlopának színezése azt mutatja, milyen magas helyezést ér el valaki az összes rangsorolt játékos között, ugyanazon percentilisek alapján, mint a webhely többi értékelési skálája. Az alábbi helyezések a ranglista kitöltését követik.",
+    "clans": "A Dicsőségpontok oszlopának színezése azt mutatja, milyen magas helyezést ér el egy klán az összes rangsorolt klán között, ugyanazon percentilisek alapján, mint a webhely többi értékelési skálája. Az alábbi helyezések a ranglista kitöltését követik."
   },
   "share": "Helyezés",
   "places": "Helyezések",

@@ -1,0 +1,30 @@
+{
+  "see-board": "この開催回のランキングを見る",
+  "of-ranked": {
+    "players": "{count}人のランク戦プレイヤー中",
+    "clans": "{count}クラン中"
+  },
+  "gain": "24時間で+{points}",
+  "climbed": "24時間で▲ {count}順位上昇",
+  "fell": "24時間で▼ {count}順位下降",
+  "inside-points": {
+    "players": "車両を獲得できます。行より名声ポイントが{points}ポイント上です。",
+    "clans": "ゴールドを獲得できます。行より名声ポイントが{points}ポイント上です。"
+  },
+  "inside-places": {
+    "players": "車両を獲得できます。行の内部に{places}位あります。",
+    "clans": "ゴールドを獲得できます。行の内部に{places}位あります。"
+  },
+  "outside-points": {
+    "players": "車両獲得の行まで名声ポイントが{points}ポイント不足しています。",
+    "clans": "ゴールド獲得の行まで名声ポイントが{points}ポイント不足しています。"
+  },
+  "outside-places": {
+    "players": "車両獲得の行まで{places}位不足しています。",
+    "clans": "ゴールド獲得の行まで{places}位不足しています。"
+  },
+  "won": {
+    "players": "車両獲得済み",
+    "clans": "ゴールド獲得済み"
+  }
+}

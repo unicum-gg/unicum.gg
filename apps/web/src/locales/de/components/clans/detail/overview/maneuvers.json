@@ -1,0 +1,12 @@
+{
+  "title": "{maneuvers}-Rangliste",
+  "loading": "Rekord des Clans wird geladen…",
+  "no-place": "Der Clan hält keinen Platz in der Rangliste der Ausgabe {edition}.",
+  "no-edition": "Auf diesem Server wurde noch keine Ausgabe aufgezeichnet.",
+  "gold-line": "Schwellenwert zum Verdienen von Gold",
+  "members": "{count} Mitglieder in der Spielerrangliste",
+  "members-winning": "{count} verdienen aktuell das Fahrzeug",
+  "place": "Platz",
+  "player": "Spieler",
+  "fame-points": "Ruhmpunkte"
+}

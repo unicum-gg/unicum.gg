@@ -1,0 +1,30 @@
+{
+  "see-board": "Se tavlen for denne utgaven",
+  "of-ranked": {
+    "players": "av {count} rangerte spillere",
+    "clans": "av {count} rangerte klaner"
+  },
+  "gain": "+{points} på 24 t",
+  "climbed": "▲ {count} på 24 t",
+  "fell": "▼ {count} på 24 t",
+  "inside-points": {
+    "players": "Vinner kjøretøyet, {points} Berømmelsespoeng over linjen.",
+    "clans": "Vinner gull, {points} Berømmelsespoeng over linjen."
+  },
+  "inside-places": {
+    "players": "Vinner kjøretøyet, {places} plasser innenfor linjen.",
+    "clans": "Vinner gull, {places} plasser innenfor linjen."
+  },
+  "outside-points": {
+    "players": "{points} Berømmelsespoeng under kjøretøylinjen.",
+    "clans": "{points} Berømmelsespoeng under gullinjen."
+  },
+  "outside-places": {
+    "players": "{places} plasser fra kjøretøylinjen.",
+    "clans": "{places} plasser fra gullinjen."
+  },
+  "won": {
+    "players": "Kjøretøy opptjent",
+    "clans": "Gull opptjent"
+  }
+}

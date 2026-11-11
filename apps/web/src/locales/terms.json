@@ -850,7 +850,11 @@
     "edition": "النسخة",
     "ends": "ينتهي",
     "places": "المراكز",
-    "home": "الرئيسية"
+    "home": "الرئيسية",
+    "Place": "المركز",
+    "currently": "حاليًا",
+    "holds": "يحمل",
+    "inside": "داخل"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1704,7 +1708,11 @@
     "edition": "выданне",
     "ends": "завяршаецца",
     "places": "месцы",
-    "home": "галоўная"
+    "home": "галоўная",
+    "Place": "Месца",
+    "currently": "цяпер",
+    "holds": "утрымлівае",
+    "inside": "унутры"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -2774,7 +2782,11 @@
     "edition": "издание",
     "ends": "край",
     "places": "места",
-    "home": "начало"
+    "home": "начало",
+    "Place": "Място",
+    "currently": "в момента",
+    "holds": "притежава",
+    "inside": "вътре"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -3636,7 +3648,11 @@
     "edition": "izdanje",
     "ends": "završava",
     "places": "mjesta",
-    "home": "početna"
+    "home": "početna",
+    "Place": "Mjesto",
+    "currently": "trenutno",
+    "holds": "drži",
+    "inside": "unutar"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -4717,7 +4733,11 @@
     "edition": "edice",
     "ends": "končí",
     "places": "umístění",
-    "home": "domů"
+    "home": "domů",
+    "Place": "Místo",
+    "currently": "aktuálně",
+    "holds": "drží",
+    "inside": "uvnitř"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -5804,7 +5824,11 @@
     "edition": "udgave",
     "ends": "slutter",
     "places": "pladser",
-    "home": "hjem"
+    "home": "hjem",
+    "Place": "Plads",
+    "currently": "aktuelt",
+    "holds": "hold",
+    "inside": "inde i"
   },
   "de": {
     "(optional)": "(optional)",
@@ -6884,7 +6908,11 @@
     "edition": "Ausgabe",
     "ends": "endet",
     "places": "Plätze",
-    "home": "Startseite"
+    "home": "Startseite",
+    "Place": "Platz",
+    "currently": "aktuell",
+    "holds": "hält",
+    "inside": "in"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -7970,7 +7998,11 @@
     "edition": "έκδοση",
     "ends": "λήξη",
     "places": "θέσεις",
-    "home": "αρχική"
+    "home": "αρχική",
+    "Place": "Θέση",
+    "currently": "τρέχοντα",
+    "holds": "κατέχει",
+    "inside": "εντός"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -9036,7 +9068,11 @@
     "edition": "edición",
     "ends": "finaliza",
     "places": "puestos",
-    "home": "inicio"
+    "home": "inicio",
+    "Place": "Puesto",
+    "currently": "actualmente",
+    "holds": "tiene",
+    "inside": "dentro"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -10127,7 +10163,11 @@
     "edition": "kausi",
     "ends": "päättyy",
     "places": "sijat",
-    "home": "etusivu"
+    "home": "etusivu",
+    "Place": "Sijoitus",
+    "currently": "parhaillaan",
+    "holds": "hallussaan",
+    "inside": "sisällä"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -11197,7 +11237,11 @@
     "edition": "édition",
     "ends": "fin",
     "places": "places",
-    "home": "accueil"
+    "home": "accueil",
+    "Place": "Place",
+    "currently": "actuellement",
+    "holds": "possède",
+    "inside": "dans"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -12052,7 +12096,11 @@
     "edition": "संस्करण",
     "ends": "समाप्ति",
     "places": "स्थान",
-    "home": "होम"
+    "home": "होम",
+    "Place": "स्थान",
+    "currently": "वर्तमान में",
+    "holds": "रखता है",
+    "inside": "अंदर"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -13136,7 +13184,11 @@
     "edition": "izdanje",
     "ends": "završava",
     "places": "mjesta",
-    "home": "početna"
+    "home": "početna",
+    "Place": "Mjesto",
+    "currently": "trenutno",
+    "holds": "drži",
+    "inside": "unutar"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -14222,7 +14274,11 @@
     "edition": "kiadás",
     "ends": "véget ér",
     "places": "helyezések",
-    "home": "kezdőlap"
+    "home": "kezdőlap",
+    "Place": "Helyezés",
+    "currently": "jelenleg",
+    "holds": "rendelkezik",
+    "inside": "belül"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -15304,7 +15360,11 @@
     "edition": "edizione",
     "ends": "termina",
     "places": "piazzamenti",
-    "home": "home"
+    "home": "home",
+    "Place": "Posizione",
+    "currently": "attualmente",
+    "holds": "detiene",
+    "inside": "all'interno"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -16393,7 +16453,11 @@
     "edition": "開催回",
     "ends": "終了日",
     "places": "位",
-    "home": "ホーム"
+    "home": "ホーム",
+    "Place": "場所",
+    "currently": "現在",
+    "holds": "保有",
+    "inside": "内部"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -17248,7 +17312,11 @@
     "coloured": "түсті",
     "edition": "шығарылым",
     "ends": "аяқталуы",
-    "places": "орындар"
+    "places": "орындар",
+    "Place": "Орын",
+    "currently": "қазір",
+    "holds": "иеленеді",
+    "inside": "ішінде"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -18342,7 +18410,11 @@
     "edition": "시즌",
     "ends": "종료",
     "places": "등수",
-    "home": "홈"
+    "home": "홈",
+    "Place": "장소",
+    "currently": "현재",
+    "holds": "보유",
+    "inside": "내부"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -19431,7 +19503,11 @@
     "edition": "etapas",
     "ends": "baigiasi",
     "places": "vietos",
-    "home": "pradžia"
+    "home": "pradžia",
+    "Place": "Vieta",
+    "currently": "šiuo metu",
+    "holds": "turi",
+    "inside": "viduje"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -20506,7 +20582,11 @@
     "edition": "izdevums",
     "ends": "beidzas",
     "places": "vietas",
-    "home": "sākums"
+    "home": "sākums",
+    "Place": "vieta",
+    "currently": "pašlaik",
+    "holds": "ieņem",
+    "inside": "iekšpusē"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -21597,7 +21677,11 @@
     "edition": "editie",
     "ends": "eindigt",
     "places": "plaatsen",
-    "home": "startpagina"
+    "home": "startpagina",
+    "Place": "Plaats",
+    "currently": "momenteel",
+    "holds": "heeft",
+    "inside": "binnen"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -22679,7 +22763,11 @@
     "edition": "utgave",
     "ends": "slutter",
     "places": "plasser",
-    "home": "hjem"
+    "home": "hjem",
+    "Place": "Plass",
+    "currently": "for øyeblikket",
+    "holds": "har",
+    "inside": "i"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -23758,7 +23846,11 @@
     "edition": "edycja",
     "ends": "kończy się",
     "places": "miejsca",
-    "home": "strona główna"
+    "home": "strona główna",
+    "Place": "Miejsce",
+    "currently": "obecnie",
+    "holds": "posiada",
+    "inside": "wewnątrz"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -24830,7 +24922,11 @@
     "edition": "edição",
     "ends": "termina",
     "places": "lugares",
-    "home": "início"
+    "home": "início",
+    "Place": "posição",
+    "currently": "atualmente",
+    "holds": "detém",
+    "inside": "dentro"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -25902,7 +25998,11 @@
     "edition": "ediție",
     "ends": "se încheie",
     "places": "locuri",
-    "home": "acasă"
+    "home": "acasă",
+    "Place": "Loc",
+    "currently": "în prezent",
+    "holds": "deține",
+    "inside": "în"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -26962,7 +27062,11 @@
     "edition": "сезон",
     "ends": "окончание",
     "places": "места",
-    "home": "главная"
+    "home": "главная",
+    "Place": "Место",
+    "currently": "сейчас",
+    "holds": "имеет",
+    "inside": "внутри"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -27820,7 +27924,11 @@
     "edition": "izdaja",
     "ends": "konča se",
     "places": "mesta",
-    "home": "domov"
+    "home": "domov",
+    "Place": "Mesto",
+    "currently": "trenutno",
+    "holds": "ima",
+    "inside": "znotraj"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -28906,7 +29014,11 @@
     "edition": "izdanje",
     "ends": "ističe",
     "places": "mesta",
-    "home": "početna"
+    "home": "početna",
+    "Place": "Mesto",
+    "currently": "trenutno",
+    "holds": "drži",
+    "inside": "unutra"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -29997,7 +30109,11 @@
     "edition": "upplaga",
     "ends": "slutar",
     "places": "placeringar",
-    "home": "hem"
+    "home": "hem",
+    "Place": "Plats",
+    "currently": "för närvarande",
+    "holds": "har",
+    "inside": "i"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -31084,7 +31200,11 @@
     "edition": "รอบ",
     "ends": "สิ้นสุด",
     "places": "อันดับ",
-    "home": "หน้าหลัก"
+    "home": "หน้าหลัก",
+    "Place": "ตำแหน่ง",
+    "currently": "ขณะนี้",
+    "holds": "มี",
+    "inside": "ภายใน"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -31941,7 +32061,11 @@
     "coloured": "may kulay",
     "edition": "edisyon",
     "ends": "nagtatapos",
-    "places": "mga puwesto"
+    "places": "mga puwesto",
+    "Place": "Lugar",
+    "currently": "kasalukuyan",
+    "holds": "may hawak",
+    "inside": "sa loob"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -33024,7 +33148,11 @@
     "edition": "sezon",
     "ends": "bitiş",
     "places": "dereceler",
-    "home": "ana sayfa"
+    "home": "ana sayfa",
+    "Place": "Yer",
+    "currently": "şu anda",
+    "holds": "sahiptir",
+    "inside": "içinde"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -34100,7 +34228,11 @@
     "edition": "видання",
     "ends": "завершення",
     "places": "місця",
-    "home": "головна"
+    "home": "головна",
+    "Place": "Місце",
+    "currently": "зараз",
+    "holds": "має",
+    "inside": "у"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -35165,7 +35297,11 @@
     "edition": "đợt",
     "ends": "kết thúc",
     "places": "vị trí",
-    "home": "trang chủ"
+    "home": "trang chủ",
+    "Place": "Vị trí",
+    "currently": "hiện tại",
+    "holds": "sở hữu",
+    "inside": "bên trong"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -36252,6 +36388,10 @@
     "edition": "赛季",
     "ends": "结束",
     "places": "名次",
-    "home": "首页"
+    "home": "首页",
+    "Place": "名次",
+    "currently": "当前",
+    "holds": "拥有",
+    "inside": "内部"
   }
 }

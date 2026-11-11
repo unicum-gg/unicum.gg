@@ -1,0 +1,8 @@
+{
+  "title": "Recorde de {nickname} em {maneuvers}",
+  "loading": "Carregando o recorde de {nickname} em {maneuvers}…",
+  "no-place": "Não há lugar ocupado por {nickname} na classificação da edição {edition}.",
+  "no-edition": "Nenhuma edição foi registrada neste servidor ainda.",
+  "how-to-enter": "Um jogador entra na classificação com seus primeiros Pontos de fama, conquistados nas batalhas do evento.",
+  "vehicle-line": "Limite para conquistar o veículo"
+}

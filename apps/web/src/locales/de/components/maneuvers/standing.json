@@ -1,0 +1,30 @@
+{
+  "see-board": "Rangliste dieser Ausgabe ansehen",
+  "of-ranked": {
+    "players": "von {count} gewerteten Spielern",
+    "clans": "von {count} gewerteten Clans"
+  },
+  "gain": "+{points} in 24 Std.",
+  "climbed": "▲ {count} Plätze in 24 Std.",
+  "fell": "▼ {count} Plätze in 24 Std.",
+  "inside-points": {
+    "players": "Verdient das Fahrzeug, {points} Ruhmpunkte über der Zeile.",
+    "clans": "Verdient Gold, {points} Ruhmpunkte über der Zeile."
+  },
+  "inside-places": {
+    "players": "Verdient das Fahrzeug, {places} Plätze innerhalb der Zeile.",
+    "clans": "Verdient Gold, {places} Plätze innerhalb der Zeile."
+  },
+  "outside-points": {
+    "players": "{points} Ruhmpunkte fehlen bis zur Fahrzeugzeile.",
+    "clans": "{points} Ruhmpunkte fehlen bis zur Goldzeile."
+  },
+  "outside-places": {
+    "players": "{places} Plätze fehlen bis zur Fahrzeugzeile.",
+    "clans": "{places} Plätze fehlen bis zur Goldzeile."
+  },
+  "won": {
+    "players": "Fahrzeug verdient",
+    "clans": "Gold verdient"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "title": "Classement de {maneuvers}",
+  "loading": "Chargement du record du clan…",
+  "no-place": "Le clan ne possède aucune place dans le classement de l’édition {edition}.",
+  "no-edition": "Aucune édition n’a encore été enregistrée sur ce serveur.",
+  "gold-line": "Seuil pour gagner de l’or",
+  "members": "{count} membres dans le classement des joueurs",
+  "members-winning": "{count} gagnent actuellement le véhicule",
+  "place": "Place",
+  "player": "Joueur",
+  "fame-points": "Points de renommée"
+}

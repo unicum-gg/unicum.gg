@@ -1,0 +1,12 @@
+{
+  "title": "Pořadí {maneuvers}",
+  "loading": "Načítání záznamu klanu…",
+  "no-place": "Klan nemá umístění v žebříčku edice {edition}.",
+  "no-edition": "Na tomto serveru zatím nebyla zaznamenána žádná edice.",
+  "gold-line": "Hranice pro získání zlaťáků",
+  "members": "{count} členů v žebříčku hráčů",
+  "members-winning": "Vozidlo aktuálně získává {count} členů",
+  "place": "Místo",
+  "player": "Hráč",
+  "fame-points": "Body slávy"
+}

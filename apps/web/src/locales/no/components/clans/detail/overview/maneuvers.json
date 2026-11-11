@@ -1,0 +1,12 @@
+{
+  "title": "Rangering for {maneuvers}",
+  "loading": "Laster inn klanens rekord…",
+  "no-place": "Klanen har ingen plass på tavlen for {edition}.",
+  "no-edition": "Ingen utgave er registrert på denne serveren ennå.",
+  "gold-line": "Grense for å tjene gull",
+  "members": "{count} medlemmer på spillertavlen",
+  "members-winning": "{count} vinner for øyeblikket kjøretøyet",
+  "place": "Plass",
+  "player": "Spiller",
+  "fame-points": "Berømmelsespoeng"
+}

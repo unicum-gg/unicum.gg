@@ -1,0 +1,12 @@
+{
+  "title": "{maneuvers} įskaita",
+  "loading": "Kraunama klano rekordo informacija…",
+  "no-place": "Klanas neturi vietos {edition} lentelėje.",
+  "no-edition": "Šiame serveryje dar neužfiksuotas nė vienas etapas.",
+  "gold-line": "Aukso uždirbimo riba",
+  "members": "Žaidėjų lentelėje yra {count} klano narių",
+  "members-winning": "{count} šiuo metu laimi transporto priemonę",
+  "place": "Vieta",
+  "player": "Žaidėjas",
+  "fame-points": "Šlovės taškai"
+}

@@ -1,7 +1,7 @@
 {
   "closes": "Fechar {when}",
   "map-pool": "Conjunto de Mapas",
-  "place": "Classificação",
+  "place": "posição",
   "prize": "Prêmio",
   "prizes": "Prêmios",
   "qualified": "Qualificados ({count})",

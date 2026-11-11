@@ -1,0 +1,8 @@
+{
+  "title": "Kỷ lục {maneuvers} của {nickname}",
+  "loading": "Đang tải kỷ lục {maneuvers} của {nickname}…",
+  "no-place": "{nickname} không sở hữu vị trí trên bảng xếp hạng đợt {edition}.",
+  "no-edition": "Chưa có đợt nào được ghi nhận trên máy chủ này.",
+  "how-to-enter": "Một người chơi lọt vào bảng xếp hạng với Điểm Danh tiếng đầu tiên, kiếm được trong các trận đấu của sự kiện.",
+  "vehicle-line": "Ngưỡng để kiếm được xe tăng"
+}

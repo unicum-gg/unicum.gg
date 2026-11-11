@@ -1,7 +1,7 @@
 {
   "description": {
-    "players": "May kulay ang kolum ng Mga puntos ng katanyagan batay sa taas ng puwesto sa hanay ng lahat ng niranggong manlalaro, gamit ang parehong mga percentile tulad ng iba pang iskala ng rating ng website. Sumusunod ang mga puwesto sa ibaba habang napupunan ang talahanayan ng ranggo.",
-    "clans": "May kulay ang kolum ng Mga puntos ng katanyagan batay sa taas ng puwesto sa hanay ng lahat ng niranggong klano, gamit ang parehong mga percentile tulad ng iba pang iskala ng rating ng website. Sumusunod ang mga puwesto sa ibaba habang napupunan ang talahanayan ng ranggo."
+    "players": "Ang kolum ng Mga puntos ng katanyagan ay may kulay batay sa taas ng lugar sa lahat ng ranked na manlalaro, gamit ang parehong percentile ng iba pang iskala ng rating ng website. Ang mga lugar sa ibaba ay sumusunod sa talahanayan ng ranggo habang napupunan ito.",
+    "clans": "Ang kolum ng Mga puntos ng katanyagan ay may kulay batay sa taas ng lugar sa lahat ng ranked na klano, gamit ang parehong percentile ng iba pang iskala ng rating ng website. Ang mga lugar sa ibaba ay sumusunod sa talahanayan ng ranggo habang napupunan ito."
   },
   "share": "Puwesto",
   "places": "Mga puwesto",

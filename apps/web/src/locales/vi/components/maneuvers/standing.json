@@ -1,0 +1,30 @@
+{
+  "see-board": "Xem bảng xếp hạng của đợt này",
+  "of-ranked": {
+    "players": "trong số {count} người chơi được xếp hạng",
+    "clans": "trong số {count} Clan được xếp hạng"
+  },
+  "gain": "+{points} trong 24 giờ",
+  "climbed": "▲ leo hạng {count} trong 24 giờ",
+  "fell": "▼ tụt {count} vị trí trong 24 giờ",
+  "inside-points": {
+    "players": "Chiến thắng xe tăng, cao hơn dòng {points} Điểm Danh tiếng.",
+    "clans": "Chiến thắng vàng, cao hơn dòng {points} Điểm Danh tiếng."
+  },
+  "inside-places": {
+    "players": "Chiến thắng xe tăng, bên trong dòng {places} vị trí.",
+    "clans": "Chiến thắng vàng, bên trong dòng {places} vị trí."
+  },
+  "outside-points": {
+    "players": "Thiếu {points} Điểm Danh tiếng để đạt dòng xe tăng.",
+    "clans": "Thiếu {points} Điểm Danh tiếng để đạt dòng vàng."
+  },
+  "outside-places": {
+    "players": "Thiếu {places} vị trí để đạt dòng xe tăng.",
+    "clans": "Thiếu {places} vị trí để đạt dòng vàng."
+  },
+  "won": {
+    "players": "Đã kiếm được xe tăng",
+    "clans": "Đã kiếm được vàng"
+  }
+}

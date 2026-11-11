@@ -1,0 +1,30 @@
+{
+  "see-board": "Katso tämän kauden tulostaulukko",
+  "of-ranked": {
+    "players": "{count} rankatun pelaajan joukossa",
+    "clans": "{count} rankatun klaanin joukossa"
+  },
+  "gain": "+{points} 24 tunnissa",
+  "climbed": "▲ {count} sijaa 24 tunnissa",
+  "fell": "▼ {count} sijaa 24 tunnissa",
+  "inside-points": {
+    "players": "Ajoneuvo ansaittu, {points} Mainepistettä rivin yläpuolella.",
+    "clans": "Kultaa ansaittu, {points} Mainepistettä rivin yläpuolella."
+  },
+  "inside-places": {
+    "players": "Ajoneuvo ansaittu, {places} sijaa rivin sisäpuolella.",
+    "clans": "Kultaa ansaittu, {places} sijaa rivin sisäpuolella."
+  },
+  "outside-points": {
+    "players": "Ajoneuvon ansaitsemiseen vaadittavasta rivistä puuttuu {points} Mainepistettä.",
+    "clans": "Kultaa ansaitsemiseen vaadittavasta rivistä puuttuu {points} Mainepistettä."
+  },
+  "outside-places": {
+    "players": "Ajoneuvon ansaitsemiseen vaadittavasta rivistä puuttuu {places} sijaa.",
+    "clans": "Kultaa ansaitsemiseen vaadittavasta rivistä puuttuu {places} sijaa."
+  },
+  "won": {
+    "players": "Ajoneuvo ansaittu",
+    "clans": "Kultaa ansaittu"
+  }
+}

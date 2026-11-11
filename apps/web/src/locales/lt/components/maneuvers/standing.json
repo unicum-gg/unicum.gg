@@ -1,0 +1,30 @@
+{
+  "see-board": "Peržiūrėti šio etapo lentelę",
+  "of-ranked": {
+    "players": "iš {count} reitinguojamų žaidėjų",
+    "clans": "iš {count} reitinguojamų klanų"
+  },
+  "gain": "+{points} per 24 val.",
+  "climbed": "▲ Pakilo {count} vietomis per 24 val.",
+  "fell": "▼ Nukrito {count} vietomis per 24 val.",
+  "inside-points": {
+    "players": "Uždirbama transporto priemonė, {points} Šlovės taškų virš eilutės.",
+    "clans": "Uždirbama aukso, {points} Šlovės taškų virš eilutės."
+  },
+  "inside-places": {
+    "players": "Uždirbama transporto priemonė, iki eilutės trūksta {places} vietų.",
+    "clans": "Uždirbama aukso, iki eilutės trūksta {places} vietų."
+  },
+  "outside-points": {
+    "players": "Iki transporto priemonės eilutės trūksta {points} Šlovės taškų.",
+    "clans": "Iki aukso eilutės trūksta {points} Šlovės taškų."
+  },
+  "outside-places": {
+    "players": "Iki transporto priemonės eilutės trūksta {places} vietų.",
+    "clans": "Iki aukso eilutės trūksta {places} vietų."
+  },
+  "won": {
+    "players": "Uždirbta transporto priemonė",
+    "clans": "Uždirbta aukso"
+  }
+}

@@ -11,6 +11,10 @@
     "title": "[{tag}] {name}, thống kê Clan Wars ({region})",
     "description": "Thành tích Clan Wars của {name} [{tag}] tại {region}: các chỉ số đánh giá, trận đấu và tỷ lệ thắng của từng thành viên trên các chiến dịch bản đồ toàn cầu."
   },
+  "maneuvers": {
+    "title": "Bảng xếp hạng {maneuvers} của {name} [{tag}] ({region})",
+    "description": "Clan {name} [{tag}] trong {maneuvers} tại {region}: vị trí và Điểm Danh tiếng của Clan, quá trình leo hạng trong đợt, cùng các thành viên trên bảng xếp hạng người chơi."
+  },
   "tanks": {
     "title": "[{tag}] {name}, xe tăng ({region}), các xe tăng của Clan",
     "description": "Mọi xe tăng đã được chơi bởi {name} [{tag}] tại {region}, với trận đấu, tỷ lệ thắng và sát thương trung bình được tổng hợp trên các thành viên của Clan."

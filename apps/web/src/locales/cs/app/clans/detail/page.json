@@ -11,6 +11,10 @@
     "title": "Statistiky klanových válek: [{tag}] {name} ({region})",
     "description": "Klan {name} [{tag}] na serveru {region}: výkony v klanových válkách, hodnocení jednotlivých členů, bitvy a procento vítězství v kampaních na globální mapě."
   },
+  "maneuvers": {
+    "title": "Pořadí {maneuvers} klanu [{tag}] {name} ({region})",
+    "description": "Klan {name} [{tag}] v režimu {maneuvers} na serveru {region}: jeho umístění a Body slávy, stoupání během edice a jeho členové v žebříčku hráčů."
+  },
   "tanks": {
     "title": "Tanky: [{tag}] {name} ({region}), vozidla tohoto klanu",
     "description": "Klan {name} [{tag}] na serveru {region}: všechna hraná vozidla s počtem bitev, procentem vítězství a průměrným poškozením v souhrnu za všechny členy klanu."

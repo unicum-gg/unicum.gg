@@ -11,6 +11,10 @@
     "title": "[{tag}] {name} Klanu karu statistika ({region})",
     "description": "{name} [{tag}] sniegums Klanu karos reģionā {region}: katra biedra vērtējumi, kaujas un uzvaru procents globālās kartes kampaņās."
   },
+  "maneuvers": {
+    "title": "[{tag}] {name} {maneuvers} klasifikācija ({region})",
+    "description": "Klans [{tag}] {name} {maneuvers} režīmā reģionā {region}: klana vieta un Slavas punkti, tā kāpums izdevumā un tā biedri spēlētāju tabulā."
+  },
   "tanks": {
     "title": "[{tag}] {name} tanki ({region}), klana transportlīdzekļi",
     "description": "Katrs transportlīdzeklis, ko {name} [{tag}] spēlējis reģionā {region}, ar kaujām, uzvaru procentu un vidējiem bojājumiem, kas apkopoti par visiem klana biedriem."

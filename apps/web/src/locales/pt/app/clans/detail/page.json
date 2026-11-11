@@ -11,6 +11,10 @@
     "title": "Estatísticas das guerras de clãs: [{tag}] {name} ({region})",
     "description": "Desempenho do clã {name} [{tag}] nas guerras de clãs da região {region}: classificações por membro, batalhas e taxa de vitórias nas campanhas do mapa global."
   },
+  "maneuvers": {
+    "title": "Classificação de {maneuvers} de [{tag}] {name} ({region})",
+    "description": "{name} [{tag}] em {maneuvers}, na região {region}: o lugar e os Pontos de fama do clã, sua subida ao longo da edição e seus membros na classificação de jogadores."
+  },
   "tanks": {
     "title": "Tanques do clã [{tag}] {name} ({region}), os veículos do clã",
     "description": "Todos os veículos utilizados pelo clã {name} [{tag}] na região {region}, com dados agregados de todos os membros do clã sobre batalhas, taxa de vitórias e dano médio."

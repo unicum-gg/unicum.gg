@@ -1,0 +1,30 @@
+{
+  "see-board": "Bu sezonun tablosunu gör",
+  "of-ranked": {
+    "players": "{count} sıralamadaki oyuncu arasından",
+    "clans": "{count} sıralamadaki klan arasından"
+  },
+  "gain": "24 sa. içinde +{points}",
+  "climbed": "24 sa. içinde ▲ {count} sıra yükseldi",
+  "fell": "24 sa. içinde ▼ {count} sıra düştü",
+  "inside-points": {
+    "players": "Aracı kazanır, satırın {points} Şöhret Puanı üzerinde.",
+    "clans": "Altın kazanır, satırın {points} Şöhret Puanı üzerinde."
+  },
+  "inside-places": {
+    "players": "Aracı kazanır, satırın {places} derecesi içinde.",
+    "clans": "Altın kazanır, satırın {places} derecesi içinde."
+  },
+  "outside-points": {
+    "players": "Araç satırının {points} Şöhret Puanı gerisinde.",
+    "clans": "Altın satırının {points} Şöhret Puanı gerisinde."
+  },
+  "outside-places": {
+    "players": "Araç satırının {places} derece gerisinde.",
+    "clans": "Altın satırının {places} derece gerisinde."
+  },
+  "won": {
+    "players": "Kazanılan araç",
+    "clans": "Kazanılan altın"
+  }
+}

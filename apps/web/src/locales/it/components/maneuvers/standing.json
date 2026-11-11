@@ -1,0 +1,30 @@
+{
+  "see-board": "Vedi la classifica di questa edizione",
+  "of-ranked": {
+    "players": "su {count} giocatori classificati",
+    "clans": "su {count} clan classificati"
+  },
+  "gain": "+{points} nelle ultime 24 ore",
+  "climbed": "▲ {count} nelle ultime 24 ore",
+  "fell": "▼ {count} nelle ultime 24 ore",
+  "inside-points": {
+    "players": "Guadagna il veicolo, con {points} Punti fama sopra la linea.",
+    "clans": "Guadagna oro, con {points} Punti fama sopra la linea."
+  },
+  "inside-places": {
+    "players": "Guadagna il veicolo, con {places} piazzamenti sopra la linea.",
+    "clans": "Guadagna oro, con {places} piazzamenti sopra la linea."
+  },
+  "outside-points": {
+    "players": "Mancano {points} Punti fama per raggiungere la linea del veicolo.",
+    "clans": "Mancano {points} Punti fama per raggiungere la linea dell’oro."
+  },
+  "outside-places": {
+    "players": "Mancano {places} piazzamenti per raggiungere la linea del veicolo.",
+    "clans": "Mancano {places} piazzamenti per raggiungere la linea dell’oro."
+  },
+  "won": {
+    "players": "Veicolo guadagnato",
+    "clans": "Oro guadagnato"
+  }
+}

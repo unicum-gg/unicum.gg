@@ -1,0 +1,8 @@
+{
+  "title": "Record van {nickname} voor {maneuvers}",
+  "loading": "Het record van {nickname} voor {maneuvers} wordt geladen…",
+  "no-place": "{nickname} heeft geen plaats in het klassement van {edition}.",
+  "no-edition": "Er is nog geen editie geregistreerd op deze server.",
+  "how-to-enter": "Een speler komt in het klassement met zijn eerste Roempunten, verdiend in de gevechten van het evenement.",
+  "vehicle-line": "Grens om het voertuig te verdienen"
+}

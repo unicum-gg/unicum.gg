@@ -1,0 +1,12 @@
+{
+  "title": "{maneuvers} sıralamaları",
+  "loading": "Klanın rekoru yükleniyor…",
+  "no-place": "Klanın {edition} tablosunda yeri yok.",
+  "no-edition": "Bu sunucuda henüz kaydedilen sezon yok.",
+  "gold-line": "Altın kazanma eşiği",
+  "members": "Oyuncu tablosunda {count} üye",
+  "members-winning": "Şu anda {count} üye aracı kazanıyor",
+  "place": "Yer",
+  "player": "Oyuncu",
+  "fame-points": "Şöhret Puanları"
+}

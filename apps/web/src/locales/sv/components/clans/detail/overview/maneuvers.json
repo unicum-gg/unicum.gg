@@ -1,0 +1,12 @@
+{
+  "title": "Ställningar för {maneuvers}",
+  "loading": "Laddar klanens rekord…",
+  "no-place": "Klanen har ingen plats på topplistan för {edition}.",
+  "no-edition": "Ingen upplaga har ännu registrerats på den här servern.",
+  "gold-line": "Gräns för att tjäna guld",
+  "members": "{count} medlemmar på spelarens topplista",
+  "members-winning": "{count} vinner för närvarande fordonet",
+  "place": "Plats",
+  "player": "Spelare",
+  "fame-points": "Ärepoäng"
+}

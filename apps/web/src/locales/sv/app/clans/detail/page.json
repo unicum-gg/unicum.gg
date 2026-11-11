@@ -11,6 +11,10 @@
     "title": "Klanen [{tag}] {name}: klan krig statistik ({region})",
     "description": "Klanen [{tag}] {name} på {region}: prestationer i klankrig, betyg, strider och vinstprocent per medlem i kampanjerna på den globala kartan."
   },
+  "maneuvers": {
+    "title": "[{tag}] {name}, ställningar för {maneuvers} ({region})",
+    "description": "{name} [{tag}] i {maneuvers} i {region}: klanens plats och Ärepoäng, dess klättring genom upplagan och dess medlemmar på spelarens topplista."
+  },
   "tanks": {
     "title": "Klanen [{tag}] {name}: Tanken ({region}), klanens fordon",
     "description": "Klanen [{tag}] {name} på {region}: alla spelade fordon, med antal strider, vinstprocent och genomsnittlig skada sammanställda för alla klanmedlemmar."

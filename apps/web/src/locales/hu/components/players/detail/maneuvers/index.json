@@ -1,0 +1,8 @@
+{
+  "title": "{nickname} {maneuvers} rekordja",
+  "loading": "{nickname} {maneuvers} rekordjának betöltése…",
+  "no-place": "A ranglista {edition} kiadásában {nickname} nem rendelkezik helyezéssel.",
+  "no-edition": "Ezen a szerveren még nincs rögzített kiadás.",
+  "how-to-enter": "A játékos az esemény csatáiban megszerzett első Dicsőségpontjaival kerül fel a ranglistára.",
+  "vehicle-line": "A jármű megszerzésének küszöbértéke"
+}

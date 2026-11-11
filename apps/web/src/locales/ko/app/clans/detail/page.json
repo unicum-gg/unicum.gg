@@ -11,6 +11,10 @@
     "title": "[{tag}] {name} 클랜 전쟁 통계 ({region})",
     "description": "{region}에서의 {name} [{tag}] 클랜 전쟁 성과입니다. 글로벌 지도 캠페인 전체에서 구성원별 평점, 전투와 승률을 제공합니다."
   },
+  "maneuvers": {
+    "title": "[{tag}] {name} {maneuvers} 순위 ({region})",
+    "description": "{name} [{tag}]의 {region} {maneuvers} 기록: 클랜의 순위와 명예 점수, 시즌 진행에 따른 상승, 플레이어 리더보드의 구성원입니다."
+  },
   "tanks": {
     "title": "[{tag}] {name} 전차 ({region}), 클랜의 차량",
     "description": "{region}에서 {name} [{tag}]의 구성원들이 플레이한 모든 차량을 보여주며, 클랜 구성원 전체의 전투, 승률과 평균 피해를 집계합니다."

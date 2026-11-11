@@ -1,0 +1,12 @@
+{
+  "title": "{maneuvers} 순위",
+  "loading": "클랜 기록을 불러오는 중…",
+  "no-place": "클랜은 {edition} 리더보드에 순위가 없습니다.",
+  "no-edition": "이 서버에는 아직 기록된 시즌이 없습니다.",
+  "gold-line": "골드 획득 컷오프",
+  "members": "플레이어 리더보드의 구성원 {count}명",
+  "members-winning": "현재 {count}명이 차량을 획득합니다",
+  "place": "순위",
+  "player": "플레이어",
+  "fame-points": "명예 점수"
+}

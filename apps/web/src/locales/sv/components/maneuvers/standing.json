@@ -1,0 +1,30 @@
+{
+  "see-board": "Se den här upplagans topplista",
+  "of-ranked": {
+    "players": "av totalt {count} rankade spelare",
+    "clans": "av totalt {count} rankade klaner"
+  },
+  "gain": "+{points} på 24 timmar",
+  "climbed": "▲ {count} upp på 24 timmar",
+  "fell": "▼ {count} ned på 24 timmar",
+  "inside-points": {
+    "players": "Fordonet vinns, {points} Ärepoäng över raden.",
+    "clans": "Guld vinns, {points} Ärepoäng över raden."
+  },
+  "inside-places": {
+    "players": "Fordonet vinns, {places} placeringar innanför raden.",
+    "clans": "Guld vinns, {places} placeringar innanför raden."
+  },
+  "outside-points": {
+    "players": "{points} Ärepoäng från raden för fordonet.",
+    "clans": "{points} Ärepoäng från raden för guld."
+  },
+  "outside-places": {
+    "players": "{places} placeringar från raden för fordonet.",
+    "clans": "{places} placeringar från raden för guld."
+  },
+  "won": {
+    "players": "Fordon intjänat",
+    "clans": "Guld intjänat"
+  }
+}

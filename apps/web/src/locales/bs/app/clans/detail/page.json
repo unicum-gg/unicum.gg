@@ -11,6 +11,10 @@
     "title": "[{tag}] {name}, statistike Clan Wars ({region})",
     "description": "Učinak klana {name} [{tag}] u Clan Wars na regiji {region}: rejtingzi po članu, bitke i procenat pobjeda širom kampanja na globalnoj mapi."
   },
+  "maneuvers": {
+    "title": "Poredak za {maneuvers}, [{tag}] {name} ({region})",
+    "description": "{name} [{tag}] u {maneuvers} u regiji {region}: mjesto klana i Bodovi slave, njegov uspon kroz izdanje i članovi na rang-listi igrača."
+  },
   "tanks": {
     "title": "[{tag}] {name}, tenkovi ({region}), vozila klana",
     "description": "Svako vozilo kojim je igrao klan {name} [{tag}] na regiji {region}, s bitkama, procentom pobjeda i prosječnom štetom objedinjenim za članove klana."

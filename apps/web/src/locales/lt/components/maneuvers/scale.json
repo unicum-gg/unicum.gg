@@ -1,7 +1,7 @@
 {
   "description": {
-    "players": "Šlovės taškų stulpelis nuspalvintas pagal tai, kokią vietą jis užima tarp visų reitinguojamų žaidėjų, pagal tas pačias procentiles kaip ir kitos svetainės reitingo skalės. Toliau pateiktos vietos seka lentelės užpildymus.",
-    "clans": "Šlovės taškų stulpelis nuspalvintas pagal tai, kokią vietą jis užima tarp visų reitinguojamų klanų, pagal tas pačias procentiles kaip ir kitos svetainės reitingo skalės. Toliau pateiktos vietos seka lentelės užpildymus."
+    "players": "Šlovės taškų stulpelis nuspalvintas pagal vietą tarp visų reitinguojamų žaidėjų, naudojant tuos pačius procentilius kaip ir kitose svetainės reitingo skalėse. Toliau pateiktos vietos seka lentelę jai pildantis.",
+    "clans": "Šlovės taškų stulpelis nuspalvintas pagal vietą tarp visų reitinguojamų klanų, naudojant tuos pačius procentilius kaip ir kitose svetainės reitingo skalėse. Toliau pateiktos vietos seka lentelę jai pildantis."
   },
   "share": "Dalis",
   "places": "Vietos",

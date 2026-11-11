@@ -1,0 +1,12 @@
+{
+  "title": "Ranggo ng {maneuvers}",
+  "loading": "Naglo-load ng rekord ng klano…",
+  "no-place": "Walang hawak na lugar ang klano sa talahanayan ng ranggo ng {edition}.",
+  "no-edition": "Wala pang edisyong naitala sa server na ito.",
+  "gold-line": "Hangganan para kumita ng gold",
+  "members": "{count} mga miyembro sa talahanayan ng ranggo ng mga manlalaro",
+  "members-winning": "Kasalukuyang nananalo sa sasakyan ang {count}",
+  "place": "Lugar",
+  "player": "Manlalaro",
+  "fame-points": "Mga puntos ng katanyagan"
+}

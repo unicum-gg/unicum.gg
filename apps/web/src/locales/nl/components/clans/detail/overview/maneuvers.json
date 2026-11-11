@@ -1,0 +1,12 @@
+{
+  "title": "{maneuvers}-klassementen",
+  "loading": "Het record van de clan wordt geladen…",
+  "no-place": "De clan heeft geen plaats in het klassement van {edition}.",
+  "no-edition": "Er is nog geen editie geregistreerd op deze server.",
+  "gold-line": "Grens om Goud te verdienen",
+  "members": "{count} leden in het spelersklassement",
+  "members-winning": "{count} winnen momenteel het voertuig",
+  "place": "Plaats",
+  "player": "Speler",
+  "fame-points": "Roempunten"
+}

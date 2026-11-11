@@ -11,6 +11,10 @@
     "title": "Statystyki wojen klanowych: [{tag}] {name} ({region})",
     "description": "Klan {name} [{tag}], region {region}, wyniki wojen klanowych: rankingi poszczególnych członków, liczba bitew i współczynnik zwycięstw w kampaniach na mapie globalnej."
   },
+  "maneuvers": {
+    "title": "Klasyfikacja dla {maneuvers}, klan [{tag}] {name} ({region})",
+    "description": "{name} [{tag}] w {maneuvers} w regionie {region}: miejsce klanu i Punkty sławy, jego awans w edycji oraz członkowie w tabeli graczy."
+  },
   "tanks": {
     "title": "Czołgi: [{tag}] {name} ({region}), pojazdy klanu",
     "description": "Klan {name} [{tag}], region {region}: wszystkie używane pojazdy wraz z liczbą bitew, współczynnikiem zwycięstw i średnimi uszkodzeniami obliczonymi łącznie dla członków klanu."

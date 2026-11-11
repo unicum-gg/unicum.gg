@@ -11,6 +11,10 @@
     "title": "[{tag}] {name} Clan Wars-statistik ({region})",
     "description": "{name} [{tag}]: Clan Wars-resultater på {region} med vurderinger, kampe og sejrsrate pr. medlem på tværs af kampagnerne på det globale kort."
   },
+  "maneuvers": {
+    "title": "[{tag}] {name}’s placeringer i {maneuvers} ({region})",
+    "description": "{name} [{tag}] i {maneuvers} på {region}: klanens placering og Berømmelsespoint, dens stigning gennem udgaven og dens medlemmer på spillerranglisten."
+  },
   "tanks": {
     "title": "[{tag}] {name}-kampvogne ({region}), klanens køretøjer",
     "description": "Alle køretøjer, {name} [{tag}] har spillet på {region}, med kampe, sejrsrate og gennemsnitlig skade samlet på tværs af klanens medlemmer."

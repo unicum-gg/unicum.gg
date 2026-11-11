@@ -1,0 +1,30 @@
+{
+  "see-board": "Se ranglisten for denne udgave",
+  "of-ranked": {
+    "players": "ud af {count} rangerede spillere",
+    "clans": "ud af {count} rangerede klaner"
+  },
+  "gain": "+{points} på 24 t",
+  "climbed": "▲ {count} placeringer på 24 t",
+  "fell": "▼ {count} placeringer på 24 t",
+  "inside-points": {
+    "players": "Vinder køretøjet, {points} Berømmelsespoint over linjen.",
+    "clans": "Vinder guld, {points} Berømmelsespoint over linjen."
+  },
+  "inside-places": {
+    "players": "Vinder køretøjet, {places} pladser inden for linjen.",
+    "clans": "Vinder guld, {places} pladser inden for linjen."
+  },
+  "outside-points": {
+    "players": "Mangler {points} Berømmelsespoint for at nå køretøjslinjen.",
+    "clans": "Mangler {points} Berømmelsespoint for at nå guldlinjen."
+  },
+  "outside-places": {
+    "players": "Mangler {places} pladser for at nå køretøjslinjen.",
+    "clans": "Mangler {places} pladser for at nå guldlinjen."
+  },
+  "won": {
+    "players": "Køretøj optjent",
+    "clans": "Guld optjent"
+  }
+}

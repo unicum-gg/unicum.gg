@@ -1,6 +1,7 @@
 {
   "seasons": {
     "spring": "Kevät {year}",
+    "summer": "Kesä {year}",
     "autumn": "Syksy {year}"
   },
   "window": "Kaudella {edition} ajanjakso alkaa hetkestä {from} ja päättyy hetkeen {to}."

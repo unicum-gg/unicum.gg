@@ -11,6 +11,10 @@
     "title": "[{tag}] {name}, статистика klanskih ratova ({region})",
     "description": "Učinak klanskih ratova клана {name} [{tag}] na regionu {region}: рејтинзи po članu, bitke i проценат победа širom kampanja na globalnoj mapi."
   },
+  "maneuvers": {
+    "title": "Пласман клана [{tag}] {name} у режиму {maneuvers} ({region})",
+    "description": "{name} [{tag}] у режиму {maneuvers} на региону {region}: место клана и Poeni slave, његов успон кроз izdanje и његови чланови на табели igrača."
+  },
   "tanks": {
     "title": "[{tag}] {name}, Tenkovi ({region}), vozila клана",
     "description": "Svako возило koje je igrao клан {name} [{tag}] na regionu {region}, sa bitkama, procentom pobeda i prosečnom štetom sabranim širom članova клана."

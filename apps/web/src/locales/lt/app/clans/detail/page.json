@@ -11,6 +11,10 @@
     "title": "Klanas [{tag}] {name}, Klano karų statistika ({region})",
     "description": "{name} [{tag}] Klano karų rezultatai regione {region}: kiekvieno nario reitingai, mūšiai ir pergalių procentas pasaulio žemėlapio kampanijose."
   },
+  "maneuvers": {
+    "title": "[{tag}] {name}: {maneuvers} įskaita ({region})",
+    "description": "{name} [{tag}] dalyvauja {maneuvers} regione {region}: klano vieta ir Šlovės taškai, jo kopimas per etapą bei jo nariai žaidėjų lentelėje."
+  },
   "tanks": {
     "title": "Klanas [{tag}] {name}, tankai ({region}), klano transporto priemonės",
     "description": "Kiekviena transporto priemonė, kurią regione {region} žaidė {name} [{tag}], su visų klano narių mūšių, pergalių procento ir vidutinės žalos suvestine."

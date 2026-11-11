@@ -1,0 +1,12 @@
+{
+  "title": "Poradie v režime {maneuvers}",
+  "loading": "Nalaganje záznamu klanu…",
+  "no-place": "Klan nemá miesto na lestvici vydania {edition}.",
+  "no-edition": "Na tomto serveri zatiaľ nebola zaznamenaná žiadna izdaja.",
+  "gold-line": "Prag na získanie zlata",
+  "members": "{count} členov na hráčskej lestvici",
+  "members-winning": "{count} aktuálne získava vozidlo",
+  "place": "Mesto",
+  "player": "Hráč",
+  "fame-points": "Body slávy"
+}

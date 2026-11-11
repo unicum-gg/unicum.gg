@@ -11,6 +11,10 @@
     "title": "[{tag}] {name}, statistici Clan Wars ({region})",
     "description": "Performanța clanului {name} [{tag}] în Clan Wars în {region}: ratinguri, bătălii și rată de victorii pentru fiecare membru în campaniile de pe harta globală."
   },
+  "maneuvers": {
+    "title": "Clasamentul {maneuvers} al [{tag}] {name} ({region})",
+    "description": "{name} [{tag}] în {maneuvers} în regiunea {region}: locul clanului și Punctele de faimă, urcarea acestuia pe parcursul ediției și membrii săi în clasamentul jucătorilor."
+  },
   "tanks": {
     "title": "[{tag}] {name}, tancuri ({region}), vehiculele clanului",
     "description": "Fiecare vehicul jucat de {name} [{tag}] în {region}, cu bătălii, rată de victorii și daune medii agregate pentru membrii clanului."

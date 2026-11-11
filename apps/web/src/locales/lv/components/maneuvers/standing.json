@@ -1,0 +1,30 @@
+{
+  "see-board": "Skatīt šī izdevuma tabulu",
+  "of-ranked": {
+    "players": "no {count} ranžētiem spēlētājiem",
+    "clans": "no {count} ranžētiem klaniem"
+  },
+  "gain": "+{points} punkti 24 stundu laikā",
+  "climbed": "▲ {count} vietas 24 stundu laikā",
+  "fell": "▼ {count} vietas 24 stundu laikā",
+  "inside-points": {
+    "players": "Transportlīdzeklis nopelnīts, par {points} Slavas punktiem virs rindas.",
+    "clans": "Zelts nopelnīts, par {points} Slavas punktiem virs rindas."
+  },
+  "inside-places": {
+    "players": "Transportlīdzeklis nopelnīts, {places} vietas rindas iekšpusē.",
+    "clans": "Zelts nopelnīts, {places} vietas rindas iekšpusē."
+  },
+  "outside-points": {
+    "players": "Līdz transportlīdzekļa rindai trūkst {points} Slavas punktu.",
+    "clans": "Līdz zelta rindai trūkst {points} Slavas punktu."
+  },
+  "outside-places": {
+    "players": "Līdz transportlīdzekļa rindai trūkst {places} vietu.",
+    "clans": "Līdz zelta rindai trūkst {places} vietu."
+  },
+  "won": {
+    "players": "Transportlīdzeklis nopelnīts",
+    "clans": "Zelts nopelnīts"
+  }
+}

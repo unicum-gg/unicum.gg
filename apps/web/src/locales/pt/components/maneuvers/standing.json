@@ -1,0 +1,30 @@
+{
+  "see-board": "Ver a classificação desta edição",
+  "of-ranked": {
+    "players": "de um total de {count} jogadores classificados",
+    "clans": "de um total de {count} clãs classificados"
+  },
+  "gain": "+{points} em 24 h",
+  "climbed": "▲ subiu {count} em 24 h",
+  "fell": "▼ caiu {count} em 24 h",
+  "inside-points": {
+    "players": "Conquista o veículo, {points} Pontos de fama acima da linha.",
+    "clans": "Conquista ouro, {points} Pontos de fama acima da linha."
+  },
+  "inside-places": {
+    "players": "Conquista o veículo, {places} lugares dentro da linha.",
+    "clans": "Conquista ouro, {places} lugares dentro da linha."
+  },
+  "outside-points": {
+    "players": "Faltam {points} Pontos de fama para a linha do veículo.",
+    "clans": "Faltam {points} Pontos de fama para a linha do ouro."
+  },
+  "outside-places": {
+    "players": "Faltam {places} lugares para a linha do veículo.",
+    "clans": "Faltam {places} lugares para a linha do ouro."
+  },
+  "won": {
+    "players": "Veículo conquistado",
+    "clans": "Ouro conquistado"
+  }
+}

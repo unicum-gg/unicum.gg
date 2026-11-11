@@ -1,0 +1,30 @@
+{
+  "see-board": "查看本赛季榜单",
+  "of-ranked": {
+    "players": "在{count}名排名玩家中",
+    "clans": "在{count}个排名军团中"
+  },
+  "gain": "24小时内 +{points}点数",
+  "climbed": "▲ 24小时内上升{count}名次",
+  "fell": "▼ 24小时内下降{count}名次",
+  "inside-points": {
+    "players": "胜利获得车辆，比车辆门槛行高{points}名望点数。",
+    "clans": "胜利获得金币，比金币门槛行高{points}名望点数。"
+  },
+  "inside-places": {
+    "players": "胜利获得车辆，位于车辆门槛行内{places}个名次。",
+    "clans": "胜利获得金币，位于金币门槛行内{places}个名次。"
+  },
+  "outside-points": {
+    "players": "距离车辆门槛行还差{points}名望点数。",
+    "clans": "距离金币门槛行还差{points}名望点数。"
+  },
+  "outside-places": {
+    "players": "距离车辆门槛行还差{places}个名次。",
+    "clans": "距离金币门槛行还差{places}个名次。"
+  },
+  "won": {
+    "players": "车辆已获得",
+    "clans": "金币已获得"
+  }
+}

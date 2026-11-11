@@ -1,0 +1,8 @@
+{
+  "title": "Рекорд за {maneuvers}, играч {nickname}",
+  "loading": "Učitavanje рекорда за {maneuvers}, играч {nickname}…",
+  "no-place": "{nickname} не drži место на табли издања {edition}.",
+  "no-edition": "На овом серверу још нема забележеног издања.",
+  "how-to-enter": "Играч улази на табелу са својим првим Poeni slave, зарађеним у биткама овог догађаја.",
+  "vehicle-line": "Праг за зараду возила"
+}

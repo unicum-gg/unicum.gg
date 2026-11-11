@@ -11,6 +11,10 @@
     "title": "Clan [{tag}] {name}: clan wars statistieken ({region})",
     "description": "Prestaties van {name} [{tag}] in clan wars op {region}: scores, gevechten en winstpercentage per lid in alle campagnes op de wereldkaart."
   },
+  "maneuvers": {
+    "title": "[{tag}] {name} {maneuvers}-klassementen ({region})",
+    "description": "{name} [{tag}] in {maneuvers} op {region}: de plaats en Roempunten van de clan, de stijging tijdens de editie en de leden in het spelersklassement."
+  },
   "tanks": {
     "title": "Tanks van [{tag}] {name} ({region}), de voertuigen van de clan",
     "description": "Alle voertuigen waarmee {name} [{tag}] op {region} heeft gespeeld, met het aantal gevechten, winstpercentage en gemiddelde schade, samengevoegd over alle clanleden."

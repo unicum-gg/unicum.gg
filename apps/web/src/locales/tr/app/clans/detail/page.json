@@ -11,6 +11,10 @@
     "title": "[{tag}] {name} Klan Savaşları istatistikleri ({region})",
     "description": "{name} [{tag}] klanının {region} bölgesindeki Klan Savaşları performansı: küresel harita kampanyalarındaki üye başına puanlar, savaşlar ve galibiyet oranı."
   },
+  "maneuvers": {
+    "title": "[{tag}] {name} {maneuvers} sıralamaları ({region})",
+    "description": "{region} bölgesindeki {maneuvers} kapsamında {name} [{tag}] klanının yeri ve Şöhret Puanları, sezondaki tırmanışı ve oyuncu tablosundaki üyeleri."
+  },
   "tanks": {
     "title": "[{tag}] {name} tankları ({region}), klanın araçları",
     "description": "{name} [{tag}] tarafından {region} bölgesinde oynanan her araç, klan üyelerinin genelinde hesaplanan savaşlar, galibiyet oranı ve ortalama hasarla birlikte."

@@ -11,6 +11,10 @@
     "title": "Statistiques des guerres de clans : [{tag}] {name} ({region})",
     "description": "Performances du clan {name} [{tag}] dans les guerres de clans sur {region} : cotes, batailles et taux de victoires de chaque membre pour toutes les campagnes de la carte globale."
   },
+  "maneuvers": {
+    "title": "Classement de {maneuvers} de [{tag}] {name} ({region})",
+    "description": "Le clan [{tag}] {name} dans {maneuvers} sur {region} : sa place et ses Points de renommée, son ascension pendant l’édition et ses membres dans le classement des joueurs."
+  },
   "tanks": {
     "title": "Chars du clan : [{tag}] {name} ({region}), les véhicules du clan",
     "description": "Tous les véhicules joués sur {region} par les membres du clan {name} [{tag}], avec les batailles, le taux de victoires et les dégâts moyens agrégés pour l’ensemble du clan."

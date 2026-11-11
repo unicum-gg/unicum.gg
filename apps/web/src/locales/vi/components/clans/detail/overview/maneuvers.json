@@ -1,0 +1,12 @@
+{
+  "title": "Bảng xếp hạng {maneuvers}",
+  "loading": "Đang tải kỷ lục của Clan…",
+  "no-place": "Clan không sở hữu vị trí trên bảng xếp hạng đợt {edition}.",
+  "no-edition": "Chưa có đợt nào được ghi nhận trên máy chủ này.",
+  "gold-line": "Ngưỡng để kiếm được vàng",
+  "members": "{count} thành viên trên bảng xếp hạng người chơi",
+  "members-winning": "{count} hiện tại đã giành được xe tăng",
+  "place": "Vị trí",
+  "player": "Người chơi",
+  "fame-points": "Điểm Danh tiếng"
+}

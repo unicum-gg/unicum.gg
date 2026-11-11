@@ -1,7 +1,7 @@
 {
   "description": {
-    "players": "Kolonnen for Berømmelsespoeng er farget etter hvor høy plassering man har blant alle rangerte spillere, med samme prosentiler som nettstedets andre vurderingsskalaer. Plasseringene nedenfor følger tavlen etter hvert som den fyller seg.",
-    "clans": "Kolonnen for Berømmelsespoeng er farget etter hvor høy plassering man har blant alle rangerte klaner, med samme prosentiler som nettstedets andre vurderingsskalaer. Plasseringene nedenfor følger tavlen etter hvert som den fyller seg."
+    "players": "Kolonnen for Berømmelsespoeng er farget etter hvor høyt en plass står blant alle rangerte spillere, med de samme prosentilene som nettstedets andre vurderingsskalaer. Plassene nedenfor følger tavlen etter hvert som den fylles.",
+    "clans": "Kolonnen for Berømmelsespoeng er farget etter hvor høyt en plass står blant alle rangerte klaner, med de samme prosentilene som nettstedets andre vurderingsskalaer. Plassene nedenfor følger tavlen etter hvert som den fylles."
   },
   "share": "Plassering",
   "places": "Plasser",

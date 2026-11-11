@@ -1,0 +1,8 @@
+{
+  "title": "Rekord ng {maneuvers} ni {nickname}",
+  "loading": "Naglo-load ng rekord ng {maneuvers} ni {nickname}…",
+  "no-place": "Walang hawak na lugar si {nickname} sa talahanayan ng ranggo ng {edition}.",
+  "no-edition": "Wala pang edisyong naitala sa server na ito.",
+  "how-to-enter": "Pumapasok ang isang manlalaro sa talahanayan ng ranggo kapag nakakuha ito ng mga unang puntos ng katanyagan mula sa mga laban sa kaganapan.",
+  "vehicle-line": "Hangganan para kumita ng sasakyan"
+}

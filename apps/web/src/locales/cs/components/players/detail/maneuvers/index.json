@@ -1,0 +1,8 @@
+{
+  "title": "Záznam hráče {nickname} v režimu {maneuvers}",
+  "loading": "Načítání záznamu hráče {nickname} v režimu {maneuvers}…",
+  "no-place": "Hráč {nickname} nemá umístění v žebříčku edice {edition}.",
+  "no-edition": "Na tomto serveru zatím nebyla zaznamenána žádná edice.",
+  "how-to-enter": "Hráč se dostane do žebříčku získáním prvních Bodů slávy v bitvách této události.",
+  "vehicle-line": "Hranice pro získání vozidla"
+}

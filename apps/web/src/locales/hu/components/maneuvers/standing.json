@@ -1,0 +1,30 @@
+{
+  "see-board": "A kiadás ranglistájának megtekintése",
+  "of-ranked": {
+    "players": "{count} rangsorolt játékos közül",
+    "clans": "{count} rangsorolt klán közül"
+  },
+  "gain": "+{points} 24 ó alatt",
+  "climbed": "▲ {count} helyezés 24 ó alatt",
+  "fell": "▼ {count} helyezés 24 ó alatt",
+  "inside-points": {
+    "players": "A jármű megszerzése, {points} Dicsőségponttal a sor felett.",
+    "clans": "Arany megszerzése, {points} Dicsőségponttal a sor felett."
+  },
+  "inside-places": {
+    "players": "A jármű megszerzése, {places} helyezéssel a soron belül.",
+    "clans": "Arany megszerzése, {places} helyezéssel a soron belül."
+  },
+  "outside-points": {
+    "players": "{points} Dicsőségponttal marad el a jármű sorától.",
+    "clans": "{points} Dicsőségponttal marad el az arany sorától."
+  },
+  "outside-places": {
+    "players": "{places} helyezéssel marad el a jármű sorától.",
+    "clans": "{places} helyezéssel marad el az arany sorától."
+  },
+  "won": {
+    "players": "Megszerezhető jármű",
+    "clans": "Megszerezhető arany"
+  }
+}

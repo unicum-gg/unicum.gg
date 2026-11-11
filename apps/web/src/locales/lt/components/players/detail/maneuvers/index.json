@@ -1,0 +1,8 @@
+{
+  "title": "Žaidėjo {nickname} {maneuvers} rekordas",
+  "loading": "Kraunama žaidėjo {nickname} {maneuvers} rekordo informacija…",
+  "no-place": "{nickname} neturi vietos {edition} lentelėje.",
+  "no-edition": "Šiame serveryje dar neužfiksuotas nė vienas etapas.",
+  "how-to-enter": "Žaidėjas patenka į lentelę pelnęs pirmuosius Šlovės taškus per įvykio mūšius.",
+  "vehicle-line": "Transporto priemonės uždirbimo riba"
+}

@@ -1,0 +1,8 @@
+{
+  "title": "{nickname}的{maneuvers}纪录",
+  "loading": "{nickname}的{maneuvers}纪录加载中…",
+  "no-place": "{nickname}在{edition}榜单上没有名次。",
+  "no-edition": "该服务器尚未记录任何赛季。",
+  "how-to-enter": "玩家通过在活动战斗场次中赚取的首批名望点数进入榜单。",
+  "vehicle-line": "赚取车辆的门槛"
+}

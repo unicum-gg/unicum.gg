@@ -1,0 +1,8 @@
+{
+  "title": "Rekord {maneuvers} gracza {nickname}",
+  "loading": "Ładowanie rekordu {maneuvers} gracza {nickname}…",
+  "no-place": "{nickname} nie posiada miejsca w tabeli {edition}.",
+  "no-edition": "Na tym serwerze nie zarejestrowano jeszcze żadnej edycji.",
+  "how-to-enter": "Gracz trafia do tabeli wraz z pierwszymi Punktami sławy zdobytymi w bitwach wydarzenia.",
+  "vehicle-line": "Próg zdobycia pojazdu"
+}

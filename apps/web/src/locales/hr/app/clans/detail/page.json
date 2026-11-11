@@ -11,6 +11,10 @@
     "title": "[{tag}] {name}, statistika Ratova klanova ({region})",
     "description": "Izvedba klana {name} [{tag}] u Ratovima klanova na regiji {region}: ocjene, bitke i postotak pobjeda po članu u kampanjama na globalnoj karti."
   },
+  "maneuvers": {
+    "title": "[{tag}] {name}, poredak za {maneuvers} ({region})",
+    "description": "{name} [{tag}] u načinu {maneuvers} na regiji {region}: mjesto klana i Bodovi slave, njegov uspon kroz izdanje te njegovi članovi na ljestvici igrača."
+  },
   "tanks": {
     "title": "[{tag}] {name}, tenkovi ({region}), vozila klana",
     "description": "Svako vozilo koje je klan {name} [{tag}] igrao na regiji {region}, s bitkama, postotkom pobjeda i prosječnom štetom objedinjenima za članove klana."

@@ -1,0 +1,30 @@
+{
+  "see-board": "Zobacz tabelę tej edycji",
+  "of-ranked": {
+    "players": "wśród {count} graczy w rankingu",
+    "clans": "wśród {count} klanów w rankingu"
+  },
+  "gain": "+{points} w ciągu 24 godz.",
+  "climbed": "▲ awans o {count} w ciągu 24 godz.",
+  "fell": "▼ spadek o {count} w ciągu 24 godz.",
+  "inside-points": {
+    "players": "Zdobywa pojazd, {points} Punktów sławy powyżej linii.",
+    "clans": "Zdobywa złoto, {points} Punktów sławy powyżej linii."
+  },
+  "inside-places": {
+    "players": "Zdobywa pojazd, {places} miejsc wewnątrz linii.",
+    "clans": "Zdobywa złoto, {places} miejsc wewnątrz linii."
+  },
+  "outside-points": {
+    "players": "Do linii pojazdu brakuje {points} Punktów sławy.",
+    "clans": "Do linii złota brakuje {points} Punktów sławy."
+  },
+  "outside-places": {
+    "players": "Do linii pojazdu brakuje {places} miejsc.",
+    "clans": "Do linii złota brakuje {places} miejsc."
+  },
+  "won": {
+    "players": "Pojazd zdobyty",
+    "clans": "Złoto zdobyte"
+  }
+}

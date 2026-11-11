@@ -1,0 +1,30 @@
+{
+  "see-board": "Vezi clasamentul acestei ediții",
+  "of-ranked": {
+    "players": "din {count} jucători clasați",
+    "clans": "din {count} clanuri clasate"
+  },
+  "gain": "+{points} în 24 de ore",
+  "climbed": "▲ {count} în 24 de ore",
+  "fell": "▼ {count} în 24 de ore",
+  "inside-points": {
+    "players": "Victorie pentru vehicul, cu {points} Puncte de faimă peste linie.",
+    "clans": "Victorie pentru aur, cu {points} Puncte de faimă peste linie."
+  },
+  "inside-places": {
+    "players": "Victorie pentru vehicul, cu {places} locuri în interiorul liniei.",
+    "clans": "Victorie pentru aur, cu {places} locuri în interiorul liniei."
+  },
+  "outside-points": {
+    "players": "Mai lipsesc {points} Puncte de faimă până la linia vehiculului.",
+    "clans": "Mai lipsesc {points} Puncte de faimă până la linia aurului."
+  },
+  "outside-places": {
+    "players": "Mai lipsesc {places} locuri până la linia vehiculului.",
+    "clans": "Mai lipsesc {places} locuri până la linia aurului."
+  },
+  "won": {
+    "players": "Vehicul câștigat",
+    "clans": "Aur câștigat"
+  }
+}

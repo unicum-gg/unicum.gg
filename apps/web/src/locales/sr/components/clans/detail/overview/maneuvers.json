@@ -1,0 +1,12 @@
+{
+  "title": "Пласман у режиму {maneuvers}",
+  "loading": "Učitavanje рекорда клана…",
+  "no-place": "Клан не drži место на табли издања {edition}.",
+  "no-edition": "На овом серверу још нема забележеног издања.",
+  "gold-line": "Праг за зараду zlata",
+  "members": "{count} чланова на табли igrača",
+  "members-winning": "{count} тренутно осваја возило",
+  "place": "Mesto",
+  "player": "Igrač",
+  "fame-points": "Poeni slave"
+}

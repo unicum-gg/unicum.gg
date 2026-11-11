@@ -1,0 +1,12 @@
+{
+  "title": "Clasamentul {maneuvers}",
+  "loading": "Se încarcă recordul clanului…",
+  "no-place": "Clanul nu deține niciun loc în clasamentul ediției {edition}.",
+  "no-edition": "Nicio ediție nu a fost încă înregistrată pe acest server.",
+  "gold-line": "Linia pentru câștigarea aurului",
+  "members": "{count} membri în clasamentul jucătorilor",
+  "members-winning": "În prezent, {count} câștigă vehiculul",
+  "place": "Loc",
+  "player": "Jucător",
+  "fame-points": "Puncte de faimă"
+}

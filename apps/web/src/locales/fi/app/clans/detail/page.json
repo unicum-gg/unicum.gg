@@ -11,6 +11,10 @@
     "title": "[{tag}] {name}, klaanisotien tilastot alueella {region}",
     "description": "{name} [{tag}] -klaanisotien suorituskyky alueella {region}: jäsenten arvosanat, taistelut ja voittoprosentti maailmanlaajuisen kartan kampanjoissa."
   },
+  "maneuvers": {
+    "title": "[{tag}] {name}, {maneuvers}-sijoitukset alueella {region}",
+    "description": "{name} [{tag}] alueella {region}, {maneuvers}: klaanin sijoitus ja Mainepisteet, nousu kauden aikana sekä jäsenet pelaajien tulostaulukossa."
+  },
   "tanks": {
     "title": "[{tag}] {name}, panssarivaunut alueella {region}, klaanin ajoneuvot",
     "description": "Jokainen {name} [{tag}] -klaanin pelaama ajoneuvo alueella {region}, ja taistelut, voittoprosentti sekä keskimääräinen vahinko koottuna klaanin jäsenten yli."

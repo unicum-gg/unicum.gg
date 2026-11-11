@@ -1,0 +1,12 @@
+{
+  "title": "{maneuvers}-sijoitukset",
+  "loading": "Ladataan klaanin ennätystä…",
+  "no-place": "Klaanilla ei ole sijoitusta kauden {edition} tulostaulukossa.",
+  "no-edition": "Tälle palvelimelle ei ole vielä tallennettu kautta.",
+  "gold-line": "Kultaa ansaitsevien raja",
+  "members": "{count} jäsentä pelaajien tulostaulukossa",
+  "members-winning": "{count} voittaa parhaillaan ajoneuvon",
+  "place": "Sijoitus",
+  "player": "Pelaaja",
+  "fame-points": "Mainepisteet"
+}

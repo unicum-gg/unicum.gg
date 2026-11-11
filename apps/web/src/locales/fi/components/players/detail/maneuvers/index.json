@@ -1,0 +1,8 @@
+{
+  "title": "Nimimerkin {nickname} {maneuvers}-ennätys",
+  "loading": "Ladataan nimimerkin {nickname} {maneuvers}-ennätystä…",
+  "no-place": "Nimimerkillä {nickname} ei ole sijoitusta kauden {edition} tulostaulukossa.",
+  "no-edition": "Tälle palvelimelle ei ole vielä tallennettu kautta.",
+  "how-to-enter": "Pelaaja pääsee tulostaulukkoon ensimmäisillä Mainepisteillään, jotka hän ansaitsee tapahtuman taisteluissa.",
+  "vehicle-line": "Ajoneuvon ansaitsemisen raja"
+}

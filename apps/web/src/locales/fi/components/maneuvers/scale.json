@@ -1,7 +1,7 @@
 {
   "description": {
-    "players": "Mainepisteet-sarake on värillinen sen mukaan, kuinka korkealla sijoitus on kaikkien rankattujen pelaajien joukossa, samoilla prosenttipisteillä kuin sivuston muissa arvosana-asteikoissa. Alla olevat sijat seuraavat tulostaulukon täyttymistä.",
-    "clans": "Mainepisteet-sarake on värillinen sen mukaan, kuinka korkealla sijoitus on kaikkien rankattujen klaanien joukossa, samoilla prosenttipisteillä kuin sivuston muissa arvosana-asteikoissa. Alla olevat sijat seuraavat tulostaulukon täyttymistä."
+    "players": "Mainepisteet-sarake on värillinen sen mukaan, kuinka korkealla sijoitus on kaikkien rankattujen pelaajien joukossa, samoilla prosenttipisteillä kuin sivuston muissa arvosana-asteikoissa. Alla olevat sijoitukset seuraavat tulostaulukon täyttymistä.",
+    "clans": "Mainepisteet-sarake on värillinen sen mukaan, kuinka korkealla sijoitus on kaikkien rankattujen klaanien joukossa, samoilla prosenttipisteillä kuin sivuston muissa arvosana-asteikoissa. Alla olevat sijoitukset seuraavat tulostaulukon täyttymistä."
   },
   "share": "Sijoitus",
   "places": "Sijat",

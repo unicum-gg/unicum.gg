@@ -1,0 +1,8 @@
+{
+  "title": "Rekord i {maneuvers} for {nickname}",
+  "loading": "Indlæser rekorden for {nickname} i {maneuvers}…",
+  "no-place": "{nickname} har ingen placering på ranglisten for {edition}.",
+  "no-edition": "Der er endnu ikke registreret nogen udgave på denne server.",
+  "how-to-enter": "En spiller kommer på ranglisten med sine første Berømmelsespoint, optjent i begivenhedens kampe.",
+  "vehicle-line": "Grænse for at optjene køretøjet"
+}

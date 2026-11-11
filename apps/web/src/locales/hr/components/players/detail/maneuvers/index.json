@@ -1,0 +1,8 @@
+{
+  "title": "Rekord za {nickname} u načinu {maneuvers}",
+  "loading": "Učitavanje rekorda za {nickname} u načinu {maneuvers}…",
+  "no-place": "{nickname} ne drži mjesto na ljestvici izdanja {edition}.",
+  "no-edition": "Na ovom poslužitelju još nije zabilježeno nijedno izdanje.",
+  "how-to-enter": "Igrač ulazi na ljestvicu s prvim Bodovima slave, zarađenima u bitkama događaja.",
+  "vehicle-line": "Prag za zaradu vozila"
+}

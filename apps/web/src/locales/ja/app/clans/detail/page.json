@@ -11,6 +11,10 @@
     "title": "[{tag}] {name}のクランウォーズ戦績（{region}地域）",
     "description": "{region}地域における{name} [{tag}]のクランウォーズ戦績。グローバルマップのキャンペーン全体について、メンバーごとのレーティング、戦闘数、勝率を表示します。"
   },
+  "maneuvers": {
+    "title": "[{tag}] {name} {maneuvers}の順位（{region}）",
+    "description": "{name} [{tag}] の{region}における{maneuvers}：クランの順位と名声ポイント、開催回中の上昇、ランキング上のメンバー。"
+  },
   "tanks": {
     "title": "[{tag}] {name}の戦車（{region}地域）、クランの車両",
     "description": "{region}地域で{name} [{tag}]のメンバーがプレイしたすべての車両。クランメンバー全体の戦闘数、勝率、平均ダメージを集計しています。"

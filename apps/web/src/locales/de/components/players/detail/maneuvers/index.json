@@ -1,0 +1,8 @@
+{
+  "title": "{maneuvers}-Rekord von {nickname}",
+  "loading": "Rekord von {nickname} in {maneuvers} wird geladen…",
+  "no-place": "{nickname} hält keinen Platz in der Rangliste der Ausgabe {edition}.",
+  "no-edition": "Auf diesem Server wurde noch keine Ausgabe aufgezeichnet.",
+  "how-to-enter": "Ein Spieler gelangt mit seinen ersten Ruhmpunkten in die Rangliste. Diese werden in den Gefechten des Ereignisses verdient.",
+  "vehicle-line": "Schwellenwert zum Verdienen des Fahrzeugs"
+}

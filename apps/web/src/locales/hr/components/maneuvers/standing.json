@@ -1,0 +1,30 @@
+{
+  "see-board": "Pogledajte ljestvicu ovog izdanja",
+  "of-ranked": {
+    "players": "od {count} rangiranih igrača",
+    "clans": "od {count} rangiranih klanova"
+  },
+  "gain": "+{points} u 24 h",
+  "climbed": "▲ {count} mjesta u 24 h",
+  "fell": "▼ {count} mjesta u 24 h",
+  "inside-points": {
+    "players": "Vozilo je osvojeno, {points} Bodova slave iznad retka.",
+    "clans": "Zlato je osvojeno, {points} Bodova slave iznad retka."
+  },
+  "inside-places": {
+    "players": "Vozilo je osvojeno, {places} mjesta unutar retka.",
+    "clans": "Zlato je osvojeno, {places} mjesta unutar retka."
+  },
+  "outside-points": {
+    "players": "Nedostaje {points} Bodova slave do retka za vozilo.",
+    "clans": "Nedostaje {points} Bodova slave do retka za zlato."
+  },
+  "outside-places": {
+    "players": "Nedostaje {places} mjesta do retka za vozilo.",
+    "clans": "Nedostaje {places} mjesta do retka za zlato."
+  },
+  "won": {
+    "players": "Vozilo zarađeno",
+    "clans": "Zlato zarađeno"
+  }
+}

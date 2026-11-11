@@ -1,0 +1,8 @@
+{
+  "title": "{nickname}의 {maneuvers} 기록",
+  "loading": "{nickname}의 {maneuvers} 기록을 불러오는 중…",
+  "no-place": "{nickname}은(는) {edition} 리더보드에 순위가 없습니다.",
+  "no-edition": "이 서버에는 아직 기록된 시즌이 없습니다.",
+  "how-to-enter": "플레이어는 이벤트 전투에서 획득한 첫 명예 점수로 리더보드에 진입합니다.",
+  "vehicle-line": "차량 획득 컷오프"
+}

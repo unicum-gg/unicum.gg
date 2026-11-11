@@ -11,6 +11,10 @@
     "title": "Clan [{tag}] {name}: clan wars stats ({region})",
     "description": "Clankriegsstatistiken des Clans {name} [{tag}] auf {region}: Wertungen, Gefechte und Siegrate jedes Mitglieds in allen Kampagnen auf der Weltkarte."
   },
+  "maneuvers": {
+    "title": "[{tag}] {name} {maneuvers}-Rangliste ({region})",
+    "description": "{name} [{tag}] in {maneuvers} auf {region}: Platz und Ruhmpunkte des Clans, sein Aufstieg während der Ausgabe und seine Mitglieder in der Spielerrangliste."
+  },
   "tanks": {
     "title": "Clan [{tag}] {name}: Panzer ({region}), die Fahrzeuge des Clans",
     "description": "Jeder Panzer, den der Clan {name} [{tag}] auf {region} gespielt hat, mit Gefechtszahl, Siegrate und durchschnittlichem Schaden, jeweils über alle Clanmitglieder aggregiert."

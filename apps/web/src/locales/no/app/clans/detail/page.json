@@ -11,6 +11,10 @@
     "title": "[{tag}] {name} klankrigsstatistikk ({region})",
     "description": "{name} [{tag}] klankrigsprestasjoner på {region}: vurderinger, kamper og seiersprosent per medlem på tvers av kampanjene på det globale kartet."
   },
+  "maneuvers": {
+    "title": "Rangering for {maneuvers}: [{tag}] {name} ({region})",
+    "description": "{name} [{tag}] i {maneuvers} i {region}: klanens plass og Berømmelsespoeng, klatringen gjennom utgaven og medlemmene på spillertavlen."
+  },
   "tanks": {
     "title": "[{tag}] {name} kjøretøy ({region}), klanens stridsvogner",
     "description": "Alle kjøretøy {name} [{tag}] har spilt på {region}, med kamper, seiersprosent og gjennomsnittlig skade samlet på tvers av klanens medlemmer."

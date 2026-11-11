@@ -1,0 +1,12 @@
+{
+  "title": "{maneuvers}排名",
+  "loading": "军团纪录加载中…",
+  "no-place": "该军团在{edition}榜单上没有名次。",
+  "no-edition": "该服务器尚未记录任何赛季。",
+  "gold-line": "赚取金币的门槛",
+  "members": "玩家榜单上的{count}名成员",
+  "members-winning": "当前有{count}名成员可胜利获得车辆",
+  "place": "名次",
+  "player": "玩家",
+  "fame-points": "名望点数"
+}

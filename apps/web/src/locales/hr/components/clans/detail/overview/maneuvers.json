@@ -1,0 +1,12 @@
+{
+  "title": "Poredak za {maneuvers}",
+  "loading": "Učitavanje rekorda klana…",
+  "no-place": "Klan ne drži mjesto na ljestvici izdanja {edition}.",
+  "no-edition": "Na ovom poslužitelju još nije zabilježeno nijedno izdanje.",
+  "gold-line": "Prag za zaradu zlata",
+  "members": "{count} članova na ljestvici igrača",
+  "members-winning": "{count} članova trenutno osvajaju vozilo",
+  "place": "Mjesto",
+  "player": "Igrač",
+  "fame-points": "Bodovi slave"
+}

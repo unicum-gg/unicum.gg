@@ -1,0 +1,12 @@
+{
+  "title": "Placeringer i {maneuvers}",
+  "loading": "Indlæser klanens rekord…",
+  "no-place": "Klanen har ingen placering på ranglisten for {edition}.",
+  "no-edition": "Der er endnu ikke registreret nogen udgave på denne server.",
+  "gold-line": "Grænse for at optjene guld",
+  "members": "{count} medlemmer på spillerranglisten",
+  "members-winning": "{count} vinder aktuelt køretøjet",
+  "place": "Plads",
+  "player": "Spiller",
+  "fame-points": "Berømmelsespoint"
+}
