@@ -114,6 +114,7 @@ function viewCopy(
   regionLabel: string,
   members: string,
   t: TranslateFunction,
+  maneuvers: string,
 ): { title: string; description: string } {
   const key = view.mode === ClanMode.RandomBattles ? view.section : view.mode;
   const block =
@@ -121,12 +122,14 @@ function viewCopy(
       ? "stronghold"
       : key === ClanMode.ClanWars
         ? "clan-wars"
+        : key === ClanMode.Maneuvers
+          ? "maneuvers"
         : key === ClanSection.Tanks
           ? "tanks"
           : key === ClanSection.Manage
             ? "manage"
             : "overview";
-  const values = { name, tag, region: regionLabel, members };
+  const values = { name, tag, region: regionLabel, members, maneuvers };
   return {
     title: t(`${block}.title`, values),
     description: t(`${block}.description`, values),
@@ -145,10 +148,15 @@ export async function clanMetadata(
   // The Manage tab is a tool, not clan content: keep it out of the index.
   let noIndex = view.section === ClanSection.Manage;
 
-  const { t } = await getTranslation("app/clans/detail/page", locale);
+  const [{ t }, { t: tGame }] = await Promise.all([
+    getTranslation("app/clans/detail/page", locale),
+    getTranslation("game/vocabulary", locale),
+  ]);
+  // The event's own name, as the reader's client writes it.
+  const maneuvers = tGame("battle-formats.maneuvers");
   const overview = await loadOverview(region, decoded).catch(() => null);
   if (!overview) {
-    const copy = viewCopy(view, "", decoded, regionLabel, "", t);
+    const copy = viewCopy(view, "", decoded, regionLabel, "", t, maneuvers);
     return constructMetadata({
       locale,
       title: copy.title.replace("[" + decoded + "]  ", "[" + decoded + "] "),
@@ -183,7 +191,7 @@ export async function clanMetadata(
     noIndex = videos.length === 0;
   }
   const members = numberFormat(locale, INT_FORMAT).format(clan.membersCount);
-  const copy = viewCopy(view, clan.name, clan.tag, regionLabel, members, t);
+  const copy = viewCopy(view, clan.name, clan.tag, regionLabel, members, t, maneuvers);
   return constructMetadata({
     locale,
     title: copy.title,

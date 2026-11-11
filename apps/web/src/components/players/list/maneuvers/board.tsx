@@ -31,6 +31,7 @@ import {
 import { useFormat } from "@/hooks/use-format";
 import { useTranslation } from "@/hooks/use-translation";
 import { cn } from "@/lib/utils";
+import ROUTES from "@/constants/routes";
 import { FilterSubject } from "@/components/filter-subject";
 import { ManeuversBoardKind, ManeuversSort } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
@@ -211,6 +212,11 @@ function PlayerRowView({
       <TableCell>
         <PlayerName
           region={region}
+          // Straight to their Maneuvers record rather than the overview, as the
+          // Rampage and Onslaught boards do for theirs.
+          href={
+            row.nickname ? ROUTES.PLAYER_MANEUVERS(region, row.nickname) : undefined
+          }
           player={{
             nickname: row.nickname ?? String(row.accountId),
             accountId: row.accountId,

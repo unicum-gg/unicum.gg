@@ -199,6 +199,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/clans/{tag}/maneuvers": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Clan Maneuvers record
+         * @description This clan's record in Maneuvers, the recurring Stronghold clan event: its place and Fame Points on the edition being played with the day's move, its climb through it, every edition it held a place on, and which of its players sit on the player board. The game keeps no history of its boards, so all of it comes from our own captures. 404 when the tag is unknown in this region.
+         */
+        get: operations["get-{region}-clans-{tag}-maneuvers"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/{region}/clans/{tag}/members": {
         parameters: {
             query?: never;
@@ -1293,6 +1313,26 @@ export interface paths {
          * @description Signals that a real browser is viewing this player's page. Schedules a background refresh of the player's stats from the Wargaming API. Idempotent: calling it multiple times only raises the existing queue entry's priority, never duplicates work.
          */
         post: operations["post-{region}-players-{nickname}-enqueue"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/players/{nickname}/maneuvers": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Player Maneuvers record
+         * @description This player's record in Maneuvers, the recurring Stronghold clan event: their place and Fame Points on the edition being played with the day's move, their climb through it, and every edition they held a place on. The game keeps no history of its boards, so all of it comes from our own captures. 404 when the nickname is unknown in this region.
+         */
+        get: operations["get-{region}-players-{nickname}-maneuvers"];
+        put?: never;
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -3068,6 +3108,66 @@ export interface components {
             code: string;
             total: number;
             strict: number;
+        };
+        /** @description The clan's row on the newest edition (fields as on `ClanManeuversEdition`), with the day's move. */
+        ClanManeuversCurrent: {
+            eventName: string;
+            startDate: string | null;
+            endDate: string | null;
+            place: number;
+            famePoints: number;
+            ranked: number | null;
+            rewardPositions: number | null;
+            /** @description Fame Points gained over the last 24 hours. Null until the edition's captures reach back a day. */
+            gain24h: number | null;
+            /** @description Places climbed over the last 24 hours, negative when the clan fell. Null when it held no place a day ago. */
+            placeChange24h: number | null;
+        };
+        /** @description Where the clan stood on one edition's board. */
+        ClanManeuversEdition: {
+            /** @description The edition's identifier, e.g. `stronghold_event_2026_autumn`. */
+            eventName: string;
+            startDate: string | null;
+            endDate: string | null;
+            /** @description The clan's place: the live one on the edition being played, the last recorded on one that ended. */
+            place: number;
+            famePoints: number;
+            /** @description How many clans held a place on the board at its last capture. */
+            ranked: number | null;
+            /** @description How many places win gold on this edition and server, so `place <= rewardPositions` is gold. */
+            rewardPositions: number | null;
+        };
+        /** @description The newest edition recorded on the server. */
+        ClanManeuversLatest: {
+            eventName: string;
+            startDate: string | null;
+            endDate: string | null;
+        };
+        /** @description One recorded move of the clan through the edition. */
+        ClanManeuversPoint: {
+            /** @description Capture instant, epoch seconds. */
+            t: number;
+            place: number;
+            famePoints: number;
+        };
+        /** @description A clan's Maneuvers record, from our own capture of the event's boards. */
+        ClanManeuversResponse: {
+            clanId: number;
+            tag: string | null;
+            /** @description The newest edition on the server, whether or not the clan is on it. Null when none was ever recorded. */
+            latest: components["schemas"]["ClanManeuversLatest"] | null;
+            /** @description Null when the clan holds no place on the newest edition. */
+            current: components["schemas"]["ClanManeuversCurrent"] | null;
+            /** @description The clan's climb through the newest edition, oldest first: one point per capture that moved it. */
+            history: components["schemas"]["ClanManeuversPoint"][];
+            /** @description Every edition the clan held a place on, newest first. */
+            editions: components["schemas"]["ClanManeuversEdition"][];
+            /** @description The clan's players on the newest edition's player board, best place first, as the board shows them. */
+            members: components["schemas"]["ManeuversPlayerEntry"][];
+            /** @description How many players hold a place on the newest edition's player board. */
+            playersRanked: number | null;
+            /** @description How many places on that player board win the vehicle. */
+            vehiclePositions: number | null;
         };
         /** @description A clan member with cached WN7/WN8/WNX ratings and Wargaming's Personal Rating (`pr`) and WTR. */
         ClanMember: {
@@ -5601,6 +5701,64 @@ export interface components {
         playerLangField: string;
         PlayerLanguagesResponse: {
             results: components["schemas"]["LanguageStat"][];
+        };
+        /** @description The player's row on the newest edition (fields as on `PlayerManeuversEdition`), with the day's move. */
+        PlayerManeuversCurrent: {
+            eventName: string;
+            startDate: string | null;
+            endDate: string | null;
+            place: number;
+            famePoints: number;
+            ranked: number | null;
+            rewardPositions: number | null;
+            clanId: number | null;
+            clanTag: string | null;
+            /** @description Fame Points gained over the last 24 hours. Null until the edition's captures reach back a day. */
+            gain24h: number | null;
+            /** @description Places climbed over the last 24 hours, negative when the player fell. Null when they held no place a day ago. */
+            placeChange24h: number | null;
+        };
+        /** @description Where the player stood on one edition's board. */
+        PlayerManeuversEdition: {
+            /** @description The edition's identifier, e.g. `stronghold_event_2026_autumn`. */
+            eventName: string;
+            startDate: string | null;
+            endDate: string | null;
+            /** @description The player's place: the live one on the edition being played, the last recorded on one that ended. */
+            place: number;
+            famePoints: number;
+            /** @description How many players held a place on the board at its last capture. */
+            ranked: number | null;
+            /** @description How many places win the vehicle on this edition and server, so `place <= rewardPositions` is a vehicle. */
+            rewardPositions: number | null;
+            clanId: number | null;
+            clanTag: string | null;
+        };
+        /** @description The newest edition recorded on the server. */
+        PlayerManeuversLatest: {
+            eventName: string;
+            startDate: string | null;
+            endDate: string | null;
+        };
+        /** @description One recorded move of the player through the edition. */
+        PlayerManeuversPoint: {
+            /** @description Capture instant, epoch seconds. */
+            t: number;
+            place: number;
+            famePoints: number;
+        };
+        /** @description A player's Maneuvers record, from our own capture of the event's boards. */
+        PlayerManeuversResponse: {
+            accountId: number;
+            nickname: string;
+            /** @description The newest edition on the server, whether or not the player is on it. Null when none was ever recorded. */
+            latest: components["schemas"]["PlayerManeuversLatest"] | null;
+            /** @description Null when the player holds no place on the newest edition. */
+            current: components["schemas"]["PlayerManeuversCurrent"] | null;
+            /** @description The player's climb through the newest edition, oldest first: one point per capture that moved them, so a gap means they did not move. */
+            history: components["schemas"]["PlayerManeuversPoint"][];
+            /** @description Every edition the player held a place on, newest first. */
+            editions: components["schemas"]["PlayerManeuversEdition"][];
         };
         /** @description Marks of Excellence and Marks of Mastery across the garage, by tier, plus the vehicles closest to their next mark. */
         PlayerMarkProgress: {
@@ -8612,6 +8770,34 @@ export interface operations {
             };
         };
     };
+    "get-{region}-clans-{tag}-maneuvers": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example example */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Clan tag.
+                 * @example example
+                 */
+                tag: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ClanManeuversResponse"];
+                };
+            };
+        };
+    };
     "get-{region}-clans-{tag}-members": {
         parameters: {
             query?: never;
@@ -10107,6 +10293,34 @@ export interface operations {
                         estimatedSeconds: null;
                         queued: boolean;
                     };
+                };
+            };
+        };
+    };
+    "get-{region}-players-{nickname}-maneuvers": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example example */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Player nickname.
+                 * @example example
+                 */
+                nickname: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PlayerManeuversResponse"];
                 };
             };
         };

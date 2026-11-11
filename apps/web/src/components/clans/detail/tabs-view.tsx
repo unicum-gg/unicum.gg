@@ -22,6 +22,10 @@ import { ClanVideosTab } from "@/components/clans/detail/videos";
 import type { TankVideoCardData } from "@/components/tanks/detail/videos/card";
 import { RandomBattlesTab } from "@/components/clans/detail/overview";
 import { StrongholdTab } from "@/components/clans/detail/overview/stronghold";
+import {
+  ClanManeuversTab,
+  type ClanManeuversData,
+} from "@/components/clans/detail/overview/maneuvers";
 import { ClanWarsTab } from "@/components/clans/detail/overview/clan-wars";
 import {
   Panel,
@@ -214,6 +218,13 @@ export function ClanTabsView({
     () => clanApi.clanWars().then((r) => r as unknown as ClanGlobalMapView),
     { fallbackData: clanWarsSeed, revalidateOnMount: false },
   );
+  // Fetched when the mode is opened: most clans hold no place on the event's
+  // board, so the rest of the page never pays for it.
+  const { data: maneuvers } = useSWR(
+    mode === ClanMode.Maneuvers ? clanApi.maneuvers().url() : null,
+    () => clanApi.maneuvers().then((r) => r as unknown as ClanManeuversData),
+    { revalidateOnFocus: false, shouldRetryOnError: false },
+  );
   const stronghold = strongholdData ?? strongholdSeed;
   const clanWars = clanWarsData ?? clanWarsSeed;
 
@@ -322,6 +333,13 @@ export function ClanTabsView({
           tag={tag}
           color={color}
           stronghold={stronghold}
+        />
+      ) : mode === ClanMode.Maneuvers ? (
+        <ClanManeuversTab
+          region={region}
+          tag={tag}
+          color={color}
+          data={maneuvers ?? null}
         />
       ) : (
         <ClanWarsTab tag={tag} color={color} clanWars={clanWars} />

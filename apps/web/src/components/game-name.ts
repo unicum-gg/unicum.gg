@@ -9,6 +9,8 @@ import {
   type TankBattleMode,
 } from "@unicum.gg/shared";
 import { LOADOUT_MODE_NAME_KEY } from "@/components/tanks/detail/loadouts/mode-names";
+import { PlayerMode } from "@/components/players/detail/modes";
+import { ClanMode } from "@/components/clans/detail/tabs";
 
 /**
  * A battle type's name in the reader's language.
@@ -241,4 +243,26 @@ export function tankModeName(
   tGame: TranslateFunction,
 ): string {
   return tGame(TANK_MODE_VOCABULARY_KEY[mode]);
+}
+
+/**
+ * A profile mode tab's name in the reader's language.
+ *
+ * Maneuvers is read where the event is already catalogued (`battle-formats`)
+ * rather than given a second entry under `player-modes`: a name rendered from
+ * two cells holds nothing to either, and the event's boards already wear the
+ * other one.
+ */
+export function playerModeName(mode: string, tGame: TranslateFunction): string {
+  return mode === PlayerMode.Maneuvers
+    ? tGame("battle-formats.maneuvers")
+    : tGame(`player-modes.${mode}`);
+}
+
+/** A clan profile mode tab's name, Maneuvers read from `battle-formats` for
+ * the reason `playerModeName` gives. */
+export function clanModeName(mode: string, tGame: TranslateFunction): string {
+  return mode === ClanMode.Maneuvers
+    ? tGame("battle-formats.maneuvers")
+    : tGame(`clan-modes.${mode}`);
 }

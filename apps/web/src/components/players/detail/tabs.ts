@@ -18,6 +18,7 @@ export { PlayerMode, PLAYER_MODE_LABEL };
 //   /eu/players/Animal/achievements   Achievements
 //   /eu/players/Animal/rampage        Overview + Rampage
 //   /eu/players/Animal/onslaught      Overview + Onslaught
+//   /eu/players/Animal/maneuvers      Overview + Maneuvers
 //   /eu/players/Animal/tournaments    Tournaments
 //   /eu/players/Animal/value          Value
 //
@@ -56,6 +57,7 @@ const MODE_SEGMENT: Record<PlayerMode, string | null> = {
   [PlayerMode.ClanWarsVI]: "cw-vi",
   [PlayerMode.Rampage]: "rampage",
   [PlayerMode.Onslaught]: "onslaught",
+  [PlayerMode.Maneuvers]: "maneuvers",
   [PlayerMode.ClanBattles]: "clan",
   [PlayerMode.TankCompany]: "company",
   [PlayerMode.TeamBattles]: "team",

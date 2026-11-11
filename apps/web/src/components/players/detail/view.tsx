@@ -12,6 +12,7 @@ import { PlayerMode, PlayerSection } from "@/components/players/detail/tabs";
 import { PlayerTabsView } from "@/components/players/detail/tabs-view";
 import type { PlayerTournamentRecord } from "@/components/players/detail/tournaments/row";
 import type { PlayerOnslaughtData } from "@/components/players/detail/onslaught";
+import type { PlayerManeuversData } from "@/components/players/detail/maneuvers";
 import type { PlayerBattlesPayload } from "@/components/players/detail/overview/battles";
 import type { PlayerBattleEncounters } from "@unicum.gg/core/battles/met";
 import type { PlayerModeEconomy } from "@unicum.gg/shared";
@@ -53,6 +54,7 @@ export function PlayerProfile({
   initialAchievements,
   initialTournaments,
   initialOnslaught,
+  initialManeuvers,
   initialBattles,
   initialEncounters,
   initialEconomy,
@@ -86,6 +88,8 @@ export function PlayerProfile({
   initialTournaments: PlayerTournamentRecord | null;
   /** Onslaught record, server-rendered on a direct `/onslaught` landing. */
   initialOnslaught: PlayerOnslaughtData | null;
+  /** Maneuvers record, server-rendered on a direct `/maneuvers` landing. */
+  initialManeuvers: PlayerManeuversData | null;
   /** Battles shared through the mod, server-rendered under Overview. */
   initialBattles: PlayerBattlesPayload | null;
   /** Who the player meets in those battles, server-rendered on the Battles tab. */
@@ -213,6 +217,7 @@ export function PlayerProfile({
         initialAchievements={initialAchievements}
         initialTournaments={initialTournaments}
         initialOnslaught={initialOnslaught}
+        initialManeuvers={initialManeuvers}
         initialBattles={initialBattles}
         initialEncounters={initialEncounters}
         isOwnProfile={isOwnProfile}

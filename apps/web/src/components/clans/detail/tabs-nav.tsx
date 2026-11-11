@@ -1,5 +1,6 @@
 "use client";
 
+import { clanModeName } from "@/components/game-name";
 import { useLocale } from "@onruntime/translations/react";
 import { numberFormat } from "@/lib/format";
 
@@ -154,7 +155,7 @@ export function ClanModeNav({
           active={mode === m.id}
           onActivate={() => onSelect(m.id)}
         >
-          {tGame(`clan-modes.${m.id}`)}
+          {clanModeName(m.id, tGame)}
         </NavAnchor>
       ))}
     </TabBar>

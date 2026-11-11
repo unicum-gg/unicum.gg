@@ -11,6 +11,10 @@
     "title": "[{tag}] {name} clan wars stats ({region})",
     "description": "{name} [{tag}] clan wars performance on {region}: per-member ratings, battles and win rate across the global map campaigns."
   },
+  "maneuvers": {
+    "title": "[{tag}] {name} {maneuvers} standings ({region})",
+    "description": "{name} [{tag}] in {maneuvers} on {region}: the clan’s place and Fame Points, its climb through the edition, and its members on the player board."
+  },
   "tanks": {
     "title": "[{tag}] {name} tanks ({region}), the clan’s vehicles",
     "description": "Every vehicle played by {name} [{tag}] on {region}, with battles, win rate and average damage aggregated across the clan’s members."

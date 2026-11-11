@@ -187,7 +187,11 @@ function englishVocabulary(): Json {
       ...BATTLE_TYPE_LABEL,
       [BattleType.OnslaughtNight]: "{onslaught} Night",
     },
-    "player-modes": { ...PLAYER_MODE_LABEL },
+    // Maneuvers is named under `battle-formats` already, which the profile tab
+    // reads through `playerModeName`: one name, one cell.
+    "player-modes": Object.fromEntries(
+      Object.entries(PLAYER_MODE_LABEL).filter(([mode]) => mode !== "maneuvers"),
+    ),
     // The modes a VEHICLE's record is reported in, which is not the profile's
     // list: Wargaming answers a different set per vehicle than per account (one
     // Global Map block where the account splits into three Clan Wars tiers,

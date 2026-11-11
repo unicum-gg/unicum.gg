@@ -1,0 +1,8 @@
+{
+  "title": "{nickname}’s {maneuvers} record",
+  "loading": "Loading {nickname}’s {maneuvers} record…",
+  "no-place": "{nickname} holds no place on the {edition} board.",
+  "no-edition": "No edition has been recorded on this server yet.",
+  "how-to-enter": "A player enters the board with their first Fame Points, earned in the event’s battles.",
+  "vehicle-line": "Cutoff to earn the vehicle"
+}

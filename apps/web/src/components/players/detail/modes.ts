@@ -14,6 +14,9 @@ export enum PlayerMode {
   ClanWarsVIII = "cw-viii",
   ClanWarsVI = "cw-vi",
   Onslaught = "onslaught",
+  /** The recurring Stronghold clan event. Like Onslaught, a standing on a
+   * board we capture rather than statistics Wargaming publishes per account. */
+  Maneuvers = "maneuvers",
   /**
    * The 2015 Rampage event, which WG's API carries as `statistics.fallout` and
    * which this tab was published as "Steel Hunter" until October 2026. They are
@@ -60,6 +63,7 @@ export const PLAYER_MODE_LABEL: Record<PlayerMode, string> = {
   [PlayerMode.ClanWarsVIII]: "Clan Wars VIII",
   [PlayerMode.ClanWarsVI]: "Clan Wars VI",
   [PlayerMode.Onslaught]: "Onslaught",
+  [PlayerMode.Maneuvers]: "Maneuvers",
   [PlayerMode.Rampage]: "Rampage",
   // The same strings `TANK_BATTLE_MODE_LABEL` gives the per-vehicle blocks:
   // one mode seen from two sides must not meet a reader under two words.

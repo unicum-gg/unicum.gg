@@ -1,0 +1,12 @@
+{
+  "title": "{maneuvers} standings",
+  "loading": "Loading the clan’s record…",
+  "no-place": "The clan holds no place on the {edition} board.",
+  "no-edition": "No edition has been recorded on this server yet.",
+  "gold-line": "Cutoff to earn gold",
+  "members": "{count} members on the player board",
+  "members-winning": "{count} currently win the vehicle",
+  "place": "Place",
+  "player": "Player",
+  "fame-points": "Fame Points"
+}

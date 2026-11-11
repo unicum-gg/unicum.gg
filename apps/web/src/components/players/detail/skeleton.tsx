@@ -1,5 +1,6 @@
 "use client";
 
+import { playerModeName } from "@/components/game-name";
 import {
   Panel,
   PanelContent,
@@ -179,7 +180,7 @@ export function PlayerProfileSkeleton({
               <StaticNav
               items={ALWAYS_SHOWN_PLAYER_MODES}
               activeId={mode}
-              label={(id) => tGame(`player-modes.${id}`)}
+              label={(id) => playerModeName(id, tGame)}
             />
             </PanelHeader>
           </Panel>

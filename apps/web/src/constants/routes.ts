@@ -119,6 +119,9 @@ const ROUTES = {
   // the matching mode instead of the overview, like Rampage above.
   PLAYER_ONSLAUGHT: (region: Region, nickname: string) =>
     pathcat("/:region/players/:nickname/onslaught", { region, nickname }),
+  // A player's Maneuvers mode, which the Maneuvers board links to the same way.
+  PLAYER_MANEUVERS: (region: Region, nickname: string) =>
+    pathcat("/:region/players/:nickname/maneuvers", { region, nickname }),
   // A player's account-value tab, which is where a sign-in started from this
   // page has to land: the whole point of signing in there is to watch the
   // figure change, so sending the reader back to the home page would hide the

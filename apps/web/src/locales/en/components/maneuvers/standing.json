@@ -1,0 +1,30 @@
+{
+  "see-board": "See this edition’s board",
+  "of-ranked": {
+    "players": "out of {count} ranked players",
+    "clans": "out of {count} ranked clans"
+  },
+  "gain": "+{points} in 24h",
+  "climbed": "▲ {count} in 24h",
+  "fell": "▼ {count} in 24h",
+  "inside-points": {
+    "players": "Wins the vehicle, {points} Fame Points above the line.",
+    "clans": "Wins gold, {points} Fame Points above the line."
+  },
+  "inside-places": {
+    "players": "Wins the vehicle, {places} places inside the line.",
+    "clans": "Wins gold, {places} places inside the line."
+  },
+  "outside-points": {
+    "players": "{points} Fame Points short of the vehicle line.",
+    "clans": "{points} Fame Points short of the gold line."
+  },
+  "outside-places": {
+    "players": "{places} places short of the vehicle line.",
+    "clans": "{places} places short of the gold line."
+  },
+  "won": {
+    "players": "Vehicle earned",
+    "clans": "Gold earned"
+  }
+}

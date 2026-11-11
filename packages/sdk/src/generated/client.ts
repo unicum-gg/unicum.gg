@@ -82,6 +82,15 @@ class PlayerClient {
     );
   }
 
+  /** Player Maneuvers record */
+  maneuvers() {
+    const path = { region: this.region, nickname: this.nickname };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/players/{nickname}/maneuvers", path),
+      () => this.api.GET("/{region}/players/{nickname}/maneuvers", { params: { path } }),
+    );
+  }
+
   /** Player Onslaught record */
   onslaught() {
     const path = { region: this.region, nickname: this.nickname };
@@ -202,6 +211,15 @@ class ClanClient {
     return handle(
       buildUrl(this.baseUrl, "/{region}/clans/{tag}/enqueue", path),
       () => this.api.POST("/{region}/clans/{tag}/enqueue", { params: { path } }),
+    );
+  }
+
+  /** Clan Maneuvers record */
+  maneuvers() {
+    const path = { region: this.region, tag: this.tag };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/clans/{tag}/maneuvers", path),
+      () => this.api.GET("/{region}/clans/{tag}/maneuvers", { params: { path } }),
     );
   }
 

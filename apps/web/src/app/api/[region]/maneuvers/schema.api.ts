@@ -133,7 +133,7 @@ const maneuversStanding = z
       "Both boards as a whole at one instant: how many hold a place, and what a rewarded place costs.",
   });
 
-const maneuversPlayerEntry = z
+export const maneuversPlayerEntry = z
   .object({
     place: z.number(),
     accountId: z.number(),

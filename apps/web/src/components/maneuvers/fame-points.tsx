@@ -70,3 +70,27 @@ export function FamePointsCell({
     </TableCell>
   );
 }
+
+/** A Fame Points figure outside a table, painted like the board's cell so a
+ * profile reads in the same colours as the row it mirrors. */
+export function FamePointsBadge({
+  value,
+  place,
+  ranked,
+}: {
+  value: number;
+  place: number;
+  ranked: number;
+}) {
+  const color = famePointsColor(place, ranked);
+  return (
+    <span
+      className={cn(
+        "inline-flex rounded px-1.5 py-0.5 text-sm font-semibold",
+        color != null && RATING_COLOR_CLASS[color],
+      )}
+    >
+      <FamePoints value={value} />
+    </span>
+  );
+}

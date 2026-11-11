@@ -43,6 +43,10 @@ import {
   OnslaughtTab,
   type PlayerOnslaughtData,
 } from "@/components/players/detail/onslaught";
+import {
+  ManeuversTab,
+  type PlayerManeuversData,
+} from "@/components/players/detail/maneuvers";
 import { TournamentsTab } from "@/components/players/detail/tournaments";
 import { BattlesTab } from "@/components/players/detail/battles";
 import type { PlayerTournamentRecord } from "@/components/players/detail/tournaments/row";
@@ -70,7 +74,7 @@ import type { Region } from "@unicum.gg/wargaming";
 // (`No {label} data yet`).
 type StrongholdModeId = Exclude<
   PlayerMode,
-  PlayerMode.Overall | PlayerMode.Onslaught
+  PlayerMode.Overall | PlayerMode.Onslaught | PlayerMode.Maneuvers
 >;
 const STRONGHOLD_MODES: {
   id: StrongholdModeId;
@@ -131,6 +135,9 @@ export type PlayerTabsViewProps = {
   /** Onslaught record, server-rendered on a direct `/onslaught` landing; null
    * on every other view, where the client fetches it when the mode is opened. */
   initialOnslaught: PlayerOnslaughtData | null;
+  /** Maneuvers record, server-rendered on a direct `/maneuvers` landing; null
+   * on every other view, where the client fetches it when the mode is opened. */
+  initialManeuvers: PlayerManeuversData | null;
   /** Battles shared through the mod, server-rendered under Overview (its last
    * ten) and on the Battles tab (its first page). */
   initialBattles: PlayerBattlesPayload | null;
@@ -159,6 +166,7 @@ export function PlayerTabsView({
   initialAchievements,
   initialTournaments,
   initialOnslaught,
+  initialManeuvers,
   initialBattles,
   initialEncounters,
   isOwnProfile,
@@ -284,7 +292,23 @@ export function PlayerTabsView({
     },
   );
 
-  // Same on-demand shape as the two above, plus a bucket size the reader picks.
+  // Same on-demand shape for the Maneuvers record.
+  const maneuversReq = () =>
+    unicum.region(region).players(nickname).maneuvers();
+  const onManeuvers =
+    section === PlayerSection.Overview && mode === PlayerMode.Maneuvers;
+  const { data: maneuvers } = useSWR(
+    onManeuvers ? maneuversReq().url() : null,
+    () => maneuversReq().then((r) => r as unknown as PlayerManeuversData),
+    {
+      fallbackData: initialManeuvers ?? undefined,
+      revalidateOnMount: initialManeuvers == null,
+      revalidateOnFocus: false,
+      shouldRetryOnError: false,
+    },
+  );
+
+  // Same on-demand shape as those above, plus a bucket size the reader picks.
   // Only the default one is ever server-rendered, so switching to Weekly is a
   // fetch and switching back is a cache hit.
   const [granularity, setGranularity] = useState(SessionGranularity.Daily);
@@ -470,6 +494,13 @@ export function PlayerTabsView({
         />
       ) : mode === PlayerMode.Overall ? (
         <OverallTab region={region} nickname={nickname} {...overall} />
+      ) : mode === PlayerMode.Maneuvers ? (
+        <ManeuversTab
+          region={region}
+          nickname={nickname}
+          data={maneuvers ?? null}
+          loading={!maneuvers}
+        />
       ) : mode === PlayerMode.Onslaught ? (
         <OnslaughtTab
           region={region}

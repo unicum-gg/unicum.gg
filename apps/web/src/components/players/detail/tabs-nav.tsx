@@ -1,5 +1,6 @@
 "use client";
 
+import { playerModeName } from "@/components/game-name";
 import { useLocale } from "@onruntime/translations/react";
 import { LockSimpleIcon } from "@phosphor-icons/react";
 import { numberFormat } from "@/lib/format";
@@ -191,7 +192,7 @@ export function PlayerModeNav({
           active={mode === m.id}
           onActivate={() => onSelect(m.id)}
         >
-          {t(`player-modes.${m.id}`)}
+          {playerModeName(m.id, t)}
         </NavAnchor>
       ))}
     </TabBar>

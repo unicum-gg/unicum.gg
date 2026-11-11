@@ -1,5 +1,6 @@
 "use client";
 
+import { clanModeName } from "@/components/game-name";
 import {
   Panel,
   PanelContent,
@@ -149,7 +150,7 @@ export function ClanProfileSkeleton({
               <StaticNav
               items={CLAN_MODES}
               activeId={mode}
-              label={(id) => tGame(`clan-modes.${id}`)}
+              label={(id) => clanModeName(id, tGame)}
             />
             </PanelHeader>
           </Panel>
@@ -181,6 +182,18 @@ export function ClanProfileSkeleton({
             <PanelContent className="p-0">
               <ClanStrongholdStatsTable loading />
             </PanelContent>
+          </Panel>
+        </>
+      ) : mode === ClanMode.Maneuvers ? (
+        <>
+          <PanelSeparator />
+          <Panel>
+            <PanelHeader>
+              <TaggedTitle tag={tag} color={color}>
+                {clanModeName(ClanMode.Maneuvers, tGame)}
+              </TaggedTitle>
+            </PanelHeader>
+            <PanelContent className="h-40" />
           </Panel>
         </>
       ) : mode === ClanMode.ClanWars ? (

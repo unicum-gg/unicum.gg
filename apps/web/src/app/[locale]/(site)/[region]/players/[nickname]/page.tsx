@@ -1,4 +1,5 @@
 import { numberFormat } from "@/lib/format";
+import { playerModeName } from "@/components/game-name";
 import type { Metadata } from "next";
 import type { TranslateFunction } from "@onruntime/translations";
 import { localizePath } from "@/lib/translations";
@@ -16,6 +17,7 @@ import { archivedModeRecord } from "@/components/players/detail/overview/mode-ta
 import { AccountLockedView } from "@/components/players/detail/account-locked";
 import type { PlayerTournamentRecord } from "@/components/players/detail/tournaments/row";
 import type { PlayerOnslaughtData } from "@/components/players/detail/onslaught";
+import type { PlayerManeuversData } from "@/components/players/detail/maneuvers";
 import type { PlayerBattlesPayload } from "@/components/players/detail/overview/battles";
 import type { PlayerBattleEncounters } from "@unicum.gg/core/battles/met";
 import type { PlayerModeEconomy } from "@unicum.gg/shared";
@@ -247,7 +249,7 @@ export async function playerMetadata(
     numberFormat(locale, INT_FORMAT).format(current.wtr ?? current.globalRating),
     numberFormat(locale, INT_FORMAT).format(detail.achievementCount),
     t,
-    tGame(`player-modes.${view.mode}`),
+    playerModeName(view.mode, tGame),
   );
   return constructMetadata({
     locale,
@@ -489,6 +491,16 @@ async function PlayerProfileServer({
           .then((r) => r as unknown as PlayerOnslaughtData)
           .catch(() => null)
       : null;
+  // Same again for the Maneuvers record, and caught for the same reason.
+  const initialManeuvers: PlayerManeuversData | null =
+    mode === PlayerMode.Maneuvers
+      ? await unicum
+          .region(region)
+          .players(decoded)
+          .maneuvers()
+          .then((r) => r as unknown as PlayerManeuversData)
+          .catch(() => null)
+      : null;
   const initialSessions: PlayerSession[] | null =
     section === PlayerSection.Sessions
       ? ((
@@ -590,6 +602,7 @@ async function PlayerProfileServer({
         initialAchievements={initialAchievements}
         initialTournaments={initialTournaments}
         initialOnslaught={initialOnslaught}
+        initialManeuvers={initialManeuvers}
         initialBattles={initialBattles}
         initialEncounters={initialEncounters}
         initialEconomy={initialEconomy}

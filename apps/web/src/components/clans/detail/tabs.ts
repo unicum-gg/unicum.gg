@@ -8,6 +8,7 @@
 //   /eu/clans/FAME               Overview + Random Battles (the default)
 //   /eu/clans/FAME/stronghold    Overview + Stronghold
 //   /eu/clans/FAME/clan-wars     Overview + Clan Wars
+//   /eu/clans/FAME/maneuvers     Overview + Maneuvers
 //   /eu/clans/FAME/tanks         Tanks
 //   /eu/clans/FAME/tournaments   Tournaments
 //   /eu/clans/FAME/manage        Manage (a tool, kept out of the index)
@@ -31,6 +32,8 @@ export enum ClanMode {
   RandomBattles = "random",
   Stronghold = "stronghold",
   ClanWars = "clan-wars",
+  /** The recurring Stronghold clan event, read off our capture of its boards. */
+  Maneuvers = "maneuvers",
 }
 
 /** A reachable (section, mode) pair, and the segment that addresses it. The
@@ -60,6 +63,12 @@ export const CLAN_VIEWS: ClanView[] = [
     mode: ClanMode.ClanWars,
     segment: "clan-wars",
     label: "Clan Wars",
+  },
+  {
+    section: ClanSection.Overview,
+    mode: ClanMode.Maneuvers,
+    segment: "maneuvers",
+    label: "Maneuvers",
   },
   {
     section: ClanSection.Tanks,
