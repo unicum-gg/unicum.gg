@@ -10,6 +10,7 @@ import { ClanSection, ClanMode } from "@/components/clans/detail/tabs";
 import type { ClanNameHistoryEntry } from "@unicum.gg/core/clans/name-history";
 import type { TankVideoCardData } from "@/components/tanks/detail/videos/card";
 import type { ClanTournamentRecord } from "@/components/clans/detail/tournaments/row";
+import type { ClanManeuversData } from "@/components/clans/detail/overview/maneuvers";
 import {
   ClanTabsView,
   type ClanTabsInitialData,
@@ -52,6 +53,7 @@ export function ClanProfile({
   initialTournamentCount,
   initialVehicles,
   initialTournaments,
+  initialManeuvers,
   initialVehiclesCount,
   initialVideos,
   initialNameHistory,
@@ -73,6 +75,8 @@ export function ClanProfile({
   initialData: ClanTabsInitialData;
   initialVehicles: ClanVehicleRow[] | null;
   initialTournaments: ClanTournamentRecord | null;
+  /** Maneuvers record, server-rendered on a direct `/maneuvers` landing. */
+  initialManeuvers: ClanManeuversData | null;
   initialVehiclesCount: number | null;
   /** Rendered by the server, so the tactics are in the HTML rather than fetched
    * once the browser has caught up. */
@@ -181,6 +185,7 @@ export function ClanProfile({
         initialData={initialData}
         initialVehicles={initialVehicles}
         initialTournaments={initialTournaments}
+        initialManeuvers={initialManeuvers}
         initialVideos={initialVideos}
         liveVersion={liveVersion}
       />

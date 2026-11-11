@@ -85,6 +85,9 @@ export type ClanTabsViewProps = {
   /** The tournaments read, when the server rendered this section. Null when it
    * rendered another one, which is when the browser fetches on demand. */
   initialTournaments: ClanTournamentRecord | null;
+  /** The Maneuvers record, when the server rendered that mode. Null on every
+   * other view, where the browser fetches it when the mode is opened. */
+  initialManeuvers: ClanManeuversData | null;
   initialVideos: TankVideoCardData[];
   // Bumped by the parent (ClanProfile) on each LiveSync tick; watched below to
   // refetch every section. The single LiveSync subscription lives in the parent
@@ -107,6 +110,7 @@ export function ClanTabsView({
   initialData,
   initialVehicles,
   initialTournaments,
+  initialManeuvers,
   initialVideos,
   liveVersion,
 }: ClanTabsViewProps) {
@@ -223,7 +227,15 @@ export function ClanTabsView({
   const { data: maneuvers } = useSWR(
     mode === ClanMode.Maneuvers ? clanApi.maneuvers().url() : null,
     () => clanApi.maneuvers().then((r) => r as unknown as ClanManeuversData),
-    { revalidateOnFocus: false, shouldRetryOnError: false },
+    {
+      fallbackData: initialManeuvers ?? undefined,
+      // Always: the clan page is held by ISR for half an hour, while the board
+      // moves every five minutes during an evening. The seed is in the HTML
+      // for a crawler, and the reader gets the current figures right after.
+      revalidateOnMount: true,
+      revalidateOnFocus: false,
+      shouldRetryOnError: false,
+    },
   );
   const stronghold = strongholdData ?? strongholdSeed;
   const clanWars = clanWarsData ?? clanWarsSeed;

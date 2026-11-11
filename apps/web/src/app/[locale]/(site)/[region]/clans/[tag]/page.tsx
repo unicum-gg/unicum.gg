@@ -17,6 +17,7 @@ import type { ClanTabsInitialData } from "@/components/clans/detail/tabs-view";
 import { JsonLd } from "@/components/json-ld";
 import APP from "@/constants/app";
 import type { TankVideoCardData } from "@/components/tanks/detail/videos/card";
+import type { ClanManeuversData } from "@/components/clans/detail/overview/maneuvers";
 import type { ClanTournamentRecord } from "@/components/clans/detail/tournaments/row";
 import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
@@ -304,6 +305,7 @@ async function ClanProfileServer({
     vehicles,
     tournaments,
     videos,
+    maneuvers,
   ] = await Promise.all([
     clanApi.members(),
     clanApi.previousClans(),
@@ -323,6 +325,12 @@ async function ClanProfileServer({
     // fetched by the browser so the tactics are in the HTML, which is what the
     // `.md` twin converts and what a crawler reads.
     clanApi.videos(),
+    // Like Tournaments: in the HTML when it is the mode being served, so a
+    // crawler reads the standings rather than a loading line. Caught, since a
+    // clan the event never ranked is an answer and must not take the page down.
+    mode === ClanMode.Maneuvers
+      ? clanApi.maneuvers().catch(() => null)
+      : Promise.resolve(null),
   ]);
 
   const initialData = {
@@ -338,6 +346,9 @@ async function ClanProfileServer({
   const initialVideos = videos.videos as unknown as TankVideoCardData[];
   const initialTournaments = tournaments
     ? (tournaments as unknown as ClanTournamentRecord)
+    : null;
+  const initialManeuvers = maneuvers
+    ? (maneuvers as unknown as ClanManeuversData)
     : null;
 
   // The tabs, and everything else that builds a URL under this page, hang off
@@ -396,6 +407,7 @@ async function ClanProfileServer({
         initialData={initialData}
         initialVehicles={initialVehicles}
         initialTournaments={initialTournaments}
+        initialManeuvers={initialManeuvers}
         initialVehiclesCount={overview.vehiclesCount ?? null}
         initialVideos={initialVideos}
         initialBadges={overview.badges}
