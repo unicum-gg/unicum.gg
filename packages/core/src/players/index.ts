@@ -22,8 +22,11 @@ import { bulkInsertTankSnapshots } from "./tanks";
 import { bulkUpsertTankModes } from "./tank-modes";
 import { upsertPlayerArchivedModes } from "./archived-modes";
 import { computeDueAt } from "./refresh-policy";
-import { computeWindowRatings, writeTierWindowRatings } from "./window-ratings";
-import { TopPlayersPeriod } from "@unicum.gg/core/wargaming/wot/players/top/period";
+import {
+  computeWindowRatings,
+  playerWindowColumns,
+  writeTierWindowRatings,
+} from "./window-ratings";
 
 const SNAPSHOT_THROTTLE_MS = 60 * 60 * 1000; // 1 hour
 
@@ -829,9 +832,6 @@ async function updatePlayerRatings(
     wnxExpected,
     wn8Fallback,
   });
-  const p24h = windows[TopPlayersPeriod.Day].all;
-  const p7d = windows[TopPlayersPeriod.Week].all;
-  const p30d = windows[TopPlayersPeriod.Month].all;
 
   await db
     .update(players)
@@ -839,21 +839,7 @@ async function updatePlayerRatings(
       wn7,
       wn8,
       wnx,
-      wn730d: p30d.wn7,
-      wn830d: p30d.wn8,
-      wnx30d: p30d.wnx,
-      battles30d: p30d.battles,
-      wins30d: p30d.wins,
-      wn724h: p24h.wn7,
-      wn824h: p24h.wn8,
-      wnx24h: p24h.wnx,
-      battles24h: p24h.battles,
-      wins24h: p24h.wins,
-      wn77d: p7d.wn7,
-      wn87d: p7d.wn8,
-      wnx7d: p7d.wnx,
-      battles7d: p7d.battles,
-      wins7d: p7d.wins,
+      ...playerWindowColumns(windows),
       battles: overall.battles,
       winrate: overall.battles > 0 ? overall.wins / overall.battles : null,
       hr,

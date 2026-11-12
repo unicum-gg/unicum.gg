@@ -212,6 +212,34 @@ export async function computeWindowRatings(
 }
 
 /**
+ * The all-tier window figures as the player row stores them, read by the
+ * profile's rating columns and the clan pages. One place for the mapping so the
+ * snapshot path and the backfill cannot write them differently.
+ */
+export function playerWindowColumns(windows: Record<RecentWindow, WindowRatings>) {
+  const d1 = windows[TopPlayersPeriod.Day].all;
+  const d7 = windows[TopPlayersPeriod.Week].all;
+  const d30 = windows[TopPlayersPeriod.Month].all;
+  return {
+    wn730d: d30.wn7,
+    wn830d: d30.wn8,
+    wnx30d: d30.wnx,
+    battles30d: d30.battles,
+    wins30d: d30.wins,
+    wn724h: d1.wn7,
+    wn824h: d1.wn8,
+    wnx24h: d1.wnx,
+    battles24h: d1.battles,
+    wins24h: d1.wins,
+    wn77d: d7.wn7,
+    wn87d: d7.wn8,
+    wnx7d: d7.wnx,
+    battles7d: d7.battles,
+    wins7d: d7.wins,
+  };
+}
+
+/**
  * Store the per-floor window ratings the recent boards rank by.
  *
  * Only what clears the window's battle floor is kept, since nothing else reads

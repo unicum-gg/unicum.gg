@@ -1,4 +1,4 @@
-import { and, asc, gt, gte, isNull, or, sql } from "drizzle-orm";
+import { and, asc, eq, gt, gte, isNull, lt, or, sql } from "drizzle-orm";
 import { TOP_PLAYERS_MIN_BATTLES, buildWN8Fallback, playersByRegion } from "@unicum.gg/shared";
 import { db } from "@unicum.gg/core/db";
 import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/tanks/encyclopedia";
@@ -12,6 +12,7 @@ import { getLatestTankSnapshotsByAccounts, tankSnapshotsToTankStats } from "./ta
 import {
   type RatingContext,
   computeWindowRatings,
+  playerWindowColumns,
   writeTierWindowRatings,
 } from "./window-ratings";
 
@@ -26,7 +27,8 @@ export type TierWindowBackfillResult = {
 
 /**
  * Seed `*_player_tier_window_ratings` for every account a recent board could
- * rank today, from the snapshots we already hold.
+ * rank today, and the window columns on its player row, from the snapshots we
+ * already hold.
  *
  * The snapshot path writes the table on each account's next battle, which is
  * soon for most of them, but the 30-day board also ranks players who last
@@ -35,18 +37,23 @@ export type TierWindowBackfillResult = {
  * snapshot standing in for the live figures it would have fetched.
  *
  * Candidates are the accounts whose ALL-tier window already clears a floor,
- * since a tier floor can only remove battles from it. Resumable on the players
- * id, like the other backfills.
+ * since a tier floor can only remove battles from it. With `staleBefore`, they
+ * are instead every account that played in the last 30 days but not since that
+ * instant: the ones still carrying figures a change to the window computation
+ * has made wrong, which the snapshot path will not rewrite until they play
+ * again. Resumable on the players id, like the other backfills.
  */
 export async function backfillTierWindowRatings(
   region: Region,
   {
     from = 0,
     limit,
+    staleBefore,
     onProgress,
   }: {
     from?: number;
     limit?: number;
+    staleBefore?: Date;
     onProgress?: (r: TierWindowBackfillResult) => void;
   } = {},
 ): Promise<TierWindowBackfillResult> {
@@ -68,18 +75,24 @@ export async function backfillTierWindowRatings(
     const remaining = limit === undefined ? BATCH : Math.min(BATCH, limit - result.examined);
     if (remaining <= 0) break;
     const batch = await db
-      .select({ id: players.id, accountId: players.accountId })
+      .select({
+        id: players.id,
+        accountId: players.accountId,
+        lastBattleAt: players.lastBattleAt,
+      })
       .from(players)
       .where(
         and(
           gt(players.id, result.cursor),
           isNull(players.softDeletedAt),
           gte(players.lastBattleAt, sql`now() - interval '30 days'`),
-          or(
-            gte(players.battles30d, TOP_PLAYERS_MIN_BATTLES[TopPlayersPeriod.Month]),
-            gte(players.battles7d, TOP_PLAYERS_MIN_BATTLES[TopPlayersPeriod.Week]),
-            gte(players.battles24h, TOP_PLAYERS_MIN_BATTLES[TopPlayersPeriod.Day]),
-          ),
+          staleBefore
+            ? lt(players.lastBattleAt, staleBefore)
+            : or(
+                gte(players.battles30d, TOP_PLAYERS_MIN_BATTLES[TopPlayersPeriod.Month]),
+                gte(players.battles7d, TOP_PLAYERS_MIN_BATTLES[TopPlayersPeriod.Week]),
+                gte(players.battles24h, TOP_PLAYERS_MIN_BATTLES[TopPlayersPeriod.Day]),
+              ),
         ),
       )
       .orderBy(asc(players.id))
@@ -102,6 +115,14 @@ export async function backfillTierWindowRatings(
           ctx,
         );
         await writeTierWindowRatings(region, Number(p.accountId), windows);
+        // Only while the row is still the one read: an account that played
+        // since has been rewritten by the snapshot path from fresher figures.
+        if (p.lastBattleAt) {
+          await db
+            .update(players)
+            .set(playerWindowColumns(windows))
+            .where(and(eq(players.id, p.id), eq(players.lastBattleAt, p.lastBattleAt)));
+        }
         result.written += 1;
       }
     };
