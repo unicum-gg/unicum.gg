@@ -4,6 +4,7 @@
   "seen-by": "viđeno od strane {count}",
   "died": "Uništeno u ovoj bitki",
   "unknown-vehicle": "Nepoznato vozilo",
+  "unknown-item": "Nepoznata stavka",
   "empty-heading": "Podijeli svoje bitke",
   "example": "Primjer",
   "see-all": "Pogledaj sve bitke ({count})",

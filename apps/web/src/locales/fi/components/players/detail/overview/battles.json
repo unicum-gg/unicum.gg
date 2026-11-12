@@ -4,6 +4,7 @@
   "seen-by": "nähty {count} kertaa",
   "died": "Tuhottu tässä taistelussa",
   "unknown-vehicle": "Tuntematon ajoneuvo",
+  "unknown-item": "Tuntematon kohde",
   "empty-heading": "Jaa taistelut",
   "example": "Esimerkki",
   "see-all": "Näytä kaikki taistelut ({count})",

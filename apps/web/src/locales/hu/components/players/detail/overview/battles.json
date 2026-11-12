@@ -4,6 +4,7 @@
   "seen-by": "Megtekintések száma: {count}",
   "died": "Megsemmisítve ebben a csatában",
   "unknown-vehicle": "Ismeretlen jármű",
+  "unknown-item": "Ismeretlen elem",
   "empty-heading": "Csatáid megosztása",
   "example": "Példa",
   "see-all": "Mind a {count} csata megtekintése",

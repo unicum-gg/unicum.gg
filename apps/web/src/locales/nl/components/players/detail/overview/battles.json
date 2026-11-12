@@ -4,6 +4,7 @@
   "seen-by": "gezien door {count}",
   "died": "Vernietigd in dit gevecht",
   "unknown-vehicle": "Onbekend voertuig",
+  "unknown-item": "Onbekend item",
   "empty-heading": "Deel je gevechten",
   "example": "Voorbeeld",
   "see-all": "Bekijk alle {count} gevechten",

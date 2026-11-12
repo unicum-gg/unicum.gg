@@ -4,6 +4,7 @@
   "seen-by": "شوهدت من قِبل {count}",
   "died": "مُدمّرة في هذه المعركة",
   "unknown-vehicle": "مركبة غير معروفة",
+  "unknown-item": "عنصر غير معروف",
   "empty-heading": "مشاركة معاركك",
   "example": "مثال",
   "see-all": "عرض جميع المعارك ({count})",

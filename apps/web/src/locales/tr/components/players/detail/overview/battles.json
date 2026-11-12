@@ -4,6 +4,7 @@
   "seen-by": "{count} kişi tarafından görüldü",
   "died": "Bu savaşta imha edildi",
   "unknown-vehicle": "Bilinmeyen araç",
+  "unknown-item": "Bilinmeyen öğe",
   "empty-heading": "Savaşlarını paylaş",
   "example": "Örnek",
   "see-all": "Tüm {count} savaşı gör",

@@ -4,6 +4,7 @@
   "seen-by": "matė: {count}",
   "died": "Sunaikinta šiame mūšyje",
   "unknown-vehicle": "Nežinoma transporto priemonė",
+  "unknown-item": "Nežinomas elementas",
   "empty-heading": "Dalintis savo mūšiais",
   "example": "Pavyzdys",
   "see-all": "Peržiūrėti visus mūšius ({count})",

@@ -4,6 +4,7 @@
   "seen-by": "set af {count}",
   "died": "Ødelagt i denne kamp",
   "unknown-vehicle": "Ukendt køretøj",
+  "unknown-item": "Ukendt element",
   "empty-heading": "Del dine kampe",
   "example": "Eksempel",
   "see-all": "Se alle {count} kampe",

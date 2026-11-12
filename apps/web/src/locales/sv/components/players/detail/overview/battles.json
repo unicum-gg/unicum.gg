@@ -4,6 +4,7 @@
   "seen-by": "sedda av {count}",
   "died": "Förstörda i denna strid",
   "unknown-vehicle": "Okänt fordon",
+  "unknown-item": "Okänd post",
   "empty-heading": "Dela dina strider",
   "example": "Exempel",
   "see-all": "Visa alla {count} strider",

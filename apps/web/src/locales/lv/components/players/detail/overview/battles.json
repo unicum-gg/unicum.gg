@@ -4,6 +4,7 @@
   "seen-by": "redzējuši {count}",
   "died": "Iznīcināts šajā kaujā",
   "unknown-vehicle": "Nezināms transportlīdzeklis",
+  "unknown-item": "Nezināms vienums",
   "empty-heading": "Kopīgot savas kaujas",
   "example": "Piemērs",
   "see-all": "Skatīt visas {count} kaujas",

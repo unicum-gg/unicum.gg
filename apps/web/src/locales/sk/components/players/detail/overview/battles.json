@@ -4,6 +4,7 @@
   "seen-by": "videlo {count}",
   "died": "Zničené v tejto bitke",
   "unknown-vehicle": "Neznáme vozidlo",
+  "unknown-item": "Neznan predmet",
   "empty-heading": "Zdieľať svoje bitky",
   "example": "Príklad",
   "see-all": "Zobraziť všetkých {count} bitiek",

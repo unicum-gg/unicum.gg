@@ -4,6 +4,7 @@
   "seen-by": "von {count} gesehen",
   "died": "In diesem Gefecht zerstört",
   "unknown-vehicle": "Unbekanntes Fahrzeug",
+  "unknown-item": "Unbekanntes Element",
   "empty-heading": "Gefechte teilen",
   "example": "Beispiel",
   "see-all": "Alle {count} Gefechte ansehen",

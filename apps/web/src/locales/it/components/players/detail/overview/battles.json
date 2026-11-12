@@ -4,6 +4,7 @@
   "seen-by": "Visto da {count}",
   "died": "Distrutto in questa battaglia",
   "unknown-vehicle": "Veicolo sconosciuto",
+  "unknown-item": "Elemento sconosciuto",
   "empty-heading": "Condividi le tue battaglie",
   "example": "Esempio",
   "see-all": "Vedi tutte le {count} battaglie",
