@@ -56,6 +56,15 @@ const refreshPolicyBucket = z.object({
 export const CoverageResponse = z
   .object({
     region: z.enum(["eu", "na", "asia"]),
+    /** When these figures were measured. Every number below is of this instant
+     * rather than of the request: the figures come from full scans of the
+     * players and clans tables, which are run on a schedule and read from a
+     * materialized row. A caller that needs to say how current the answer is
+     * reads this rather than the time it asked. */
+    computedAt: z.date().meta({
+      description: "When these figures were measured.",
+      example: "2026-11-12T13:57:13.851Z",
+    }),
     players: z.number(),
     clans: z.number(),
     playerSnapshots: z.number(),

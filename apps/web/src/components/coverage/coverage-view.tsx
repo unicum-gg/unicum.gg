@@ -1,5 +1,6 @@
 import { numberFormat } from "@/lib/format";
 import { dateLocale } from "@/lib/date-locale";
+import { BoardUpdated } from "@/components/board-updated";
 import { Interpolate } from "@/components/interpolate";
 import { getTranslation } from "@/lib/translations.server";
 import { format } from "date-fns";
@@ -96,7 +97,7 @@ export async function CoverageView({ region, locale }: { region: Region; locale:
   return (
     <div className="mx-auto w-full max-w-7xl">
       <Panel>
-        <PanelContent className="px-4 py-12 text-center">
+        <PanelContent className="relative px-4 py-12 text-center">
           <div className="mb-2 text-sm uppercase tracking-wide text-fd-muted-foreground">
             {REGION_EMOJI[region]} {REGION_LABEL[region]}
           </div>
@@ -126,6 +127,13 @@ export async function CoverageView({ region, locale }: { region: Region; locale:
               {tr("code-on-github")}</a>
             .
           </p>
+          {/* Said rather than implied. Every count on this page comes from full
+              scans of the players and clans tables, which are run on a schedule
+              and read back from a materialized row, so the page is never live
+              and used to claim otherwise by saying nothing. Worn in the hero's
+              corner like every board's, which is also where a reader already
+              looks for it. */}
+          <BoardUpdated at={stats.computedAt} />
         </PanelContent>
       </Panel>
 

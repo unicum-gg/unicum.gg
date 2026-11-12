@@ -3464,6 +3464,12 @@ export interface components {
         Coverage: {
             /** @enum {string} */
             region: "eu" | "na" | "asia";
+            /**
+             * Format: date-time
+             * @description When these figures were measured.
+             * @example 2026-11-12T13:57:13.851Z
+             */
+            computedAt: Date;
             players: number;
             clans: number;
             playerSnapshots: number;
