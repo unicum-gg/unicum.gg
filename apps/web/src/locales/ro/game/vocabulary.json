@@ -36,6 +36,7 @@
   },
   "stronghold-tiers": {
     "advances": "Ofensive",
+    "t11": "Raid T11",
     "t10": "Escarmușă T10",
     "t8": "Escarmușă T8",
     "t6": "Escarmușă T6"
@@ -55,6 +56,7 @@
   },
   "clan-boards": {
     "advances": "Ofensive",
+    "t11": "Raid XI",
     "t10": "Escarmușă X",
     "t8": "Escarmușă VIII",
     "t6": "Escarmușă VI"

@@ -2,6 +2,7 @@
   "aria-rank": "Poradie {rank} v tabuľke {board}",
   "board": {
     "advances": "Hodnotenie postupov v Pevnosti",
+    "t11": "Hodnotenie šarvátky na Stopni XI",
     "t10": "Hodnotenie šarvátok na úrovni X",
     "t6": "Hodnotenie šarvátok na úrovni VI",
     "t8": "Hodnotenie šarvátok na úrovni VIII"

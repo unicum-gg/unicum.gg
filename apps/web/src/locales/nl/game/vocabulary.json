@@ -36,6 +36,7 @@
   },
   "stronghold-tiers": {
     "advances": "Offensieven",
+    "t11": "Schermutseling T11",
     "t10": "Schermutseling T10",
     "t8": "Schermutseling T8",
     "t6": "Schermutseling T6"
@@ -55,6 +56,7 @@
   },
   "clan-boards": {
     "advances": "Offensieven",
+    "t11": "Schermutseling XI",
     "t10": "Schermutseling X",
     "t8": "Schermutseling VIII",
     "t6": "Schermutseling VI"

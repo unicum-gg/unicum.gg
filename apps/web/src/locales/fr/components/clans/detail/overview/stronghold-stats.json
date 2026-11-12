@@ -9,6 +9,7 @@
   "sections": {
     "elo": "ELO de rang X ({advances} + {skirmish})",
     "advances": "{advances} (15v15)",
+    "t11": "{skirmish} Rang XI (7v7)",
     "t10": "Rang X : {skirmish} (7 contre 7)",
     "t8": "Rang VIII : {skirmish} (7 contre 7)",
     "t6": "Rang VI : {skirmish} (7 contre 7)"

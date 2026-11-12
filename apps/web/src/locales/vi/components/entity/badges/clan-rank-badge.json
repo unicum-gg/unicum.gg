@@ -2,6 +2,7 @@
   "aria-rank": "Bậc {rank} trên bảng {board}",
   "board": {
     "advances": "Chỉ số đánh giá Tiến công Pháo đài",
+    "t11": "Chỉ số đánh giá Tranh chấp Cấp XI",
     "t10": "Chỉ số đánh giá Tranh chấp Cấp X",
     "t6": "Chỉ số đánh giá Tranh chấp Cấp VI",
     "t8": "Chỉ số đánh giá Tranh chấp Cấp VIII"

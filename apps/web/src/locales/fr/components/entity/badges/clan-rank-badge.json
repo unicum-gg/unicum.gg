@@ -2,6 +2,7 @@
   "aria-rank": "Rang {rank} du classement {board}",
   "board": {
     "advances": "Notation des Incursions en Bastion",
+    "t11": "Notation de l’Escarmouche de rang XI",
     "t10": "Notation des Escarmouches de Rang X",
     "t6": "Notation des Escarmouches de Rang VI",
     "t8": "Notation des Escarmouches de Rang VIII"

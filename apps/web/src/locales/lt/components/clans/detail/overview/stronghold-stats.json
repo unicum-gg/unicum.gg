@@ -9,6 +9,7 @@
   "sections": {
     "elo": "Lygio X ELO ({advances} + {skirmish})",
     "advances": "{advances} (15 prieš 15)",
+    "t11": "{skirmish} XI lygis (7 prieš 7)",
     "t10": "{skirmish} lygio X (7v7)",
     "t8": "{skirmish} lygio VIII (7v7)",
     "t6": "{skirmish} lygio VI (7v7)"

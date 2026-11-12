@@ -36,6 +36,7 @@
   },
   "stronghold-tiers": {
     "advances": "Napadi",
+    "t11": "Čarke T11",
     "t10": "Окршај T10",
     "t8": "Окршај T8",
     "t6": "Окршај T6"
@@ -55,6 +56,7 @@
   },
   "clan-boards": {
     "advances": "Napadi",
+    "t11": "Окршај XI",
     "t10": "Окршај X",
     "t8": "Окршај VIII",
     "t6": "Окршај VI"

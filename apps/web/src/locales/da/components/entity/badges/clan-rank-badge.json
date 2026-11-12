@@ -2,6 +2,7 @@
   "aria-rank": "Rang {rank} på ranglisten for {board}",
   "board": {
     "advances": "Fremrykninger i Højborg-vurdering",
+    "t11": "Vurdering for Træfning på Niveau XI",
     "t10": "Vurdering for Træfning på Niveau X",
     "t6": "Vurdering for Træfning på Niveau VI",
     "t8": "Vurdering for Træfning på Niveau VIII"

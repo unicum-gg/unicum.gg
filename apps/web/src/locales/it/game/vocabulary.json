@@ -36,6 +36,7 @@
   },
   "stronghold-tiers": {
     "advances": "Offensive",
+    "t11": "Schermaglia T11",
     "t10": "Schermaglia T10",
     "t8": "Schermaglia T8",
     "t6": "Schermaglia T6"
@@ -55,6 +56,7 @@
   },
   "clan-boards": {
     "advances": "Offensive",
+    "t11": "Schermaglia XI",
     "t10": "Schermaglia X",
     "t8": "Schermaglia VIII",
     "t6": "Schermaglia VI"

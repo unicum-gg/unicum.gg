@@ -2,6 +2,7 @@
   "aria-rank": "Rango {rank} en {board}",
   "board": {
     "advances": "Valoración de Avances de Fortaleza",
+    "t11": "Valoración de la Escaramuza de Nivel XI",
     "t10": "Valoración de Escaramuza de Nivel X",
     "t6": "Valoración de Escaramuza de Nivel VI",
     "t8": "Valoración de Escaramuza de Nivel VIII"

@@ -9,6 +9,7 @@
   "sections": {
     "elo": "ELO للمرتبة X ({advances} + {skirmish})",
     "advances": "{advances} (15 ضد 15)",
+    "t11": "المستوى XI من {skirmish} (7 ضد 7)",
     "t10": "{skirmish} المرتبة X (7 ضد 7)",
     "t8": "{skirmish} المرتبة VIII (7 ضد 7)",
     "t6": "{skirmish} المرتبة VI (7 ضد 7)"

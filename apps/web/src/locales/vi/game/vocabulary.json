@@ -36,6 +36,7 @@
   },
   "stronghold-tiers": {
     "advances": "Tiến công",
+    "t11": "Tranh chấp T11",
     "t10": "Giao tranh T10",
     "t8": "Giao tranh T8",
     "t6": "Giao tranh T6"
@@ -55,6 +56,7 @@
   },
   "clan-boards": {
     "advances": "Tiến công",
+    "t11": "Tranh chấp XI",
     "t10": "Giao tranh X",
     "t8": "Giao tranh VIII",
     "t6": "Giao tranh VI"

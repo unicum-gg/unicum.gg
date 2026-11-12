@@ -2,6 +2,7 @@
   "aria-rank": "Sijoitusluokka {rank} taululla {board}",
   "board": {
     "advances": "Hyökkäysoperaatioiden Linnoituksen arvosana",
+    "t11": "Taso XI -kahakan arvosana",
     "t10": "Tason X Kahakan arvosana",
     "t6": "Tason VI Kahakan arvosana",
     "t8": "Tason VIII Kahakan arvosana"

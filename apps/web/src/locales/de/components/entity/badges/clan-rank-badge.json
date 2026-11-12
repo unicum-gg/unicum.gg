@@ -2,6 +2,7 @@
   "aria-rank": "Rang {rank} auf der Rangliste für {board}",
   "board": {
     "advances": "Wertung der Festungs-Vorstöße",
+    "t11": "Wertung im Scharmützel der Stufe XI",
     "t10": "Wertung für Scharmützel der Stufe X",
     "t6": "Wertung für Scharmützel der Stufe VI",
     "t8": "Wertung für Scharmützel der Stufe VIII"

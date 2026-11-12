@@ -2,6 +2,7 @@
   "aria-rank": "Rang {rank} in klassement {board}",
   "board": {
     "advances": "Beoordeling voor Bolwerk-offensieven",
+    "t11": "Beoordeling voor Schermutseling op Niveau XI",
     "t10": "Beoordeling voor Schermutseling op niveau X",
     "t6": "Beoordeling voor Schermutseling op niveau VI",
     "t8": "Beoordeling voor Schermutseling op niveau VIII"

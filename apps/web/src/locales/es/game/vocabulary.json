@@ -36,6 +36,7 @@
   },
   "stronghold-tiers": {
     "advances": "Avances",
+    "t11": "Escaramuza T11",
     "t10": "Escaramuza T10",
     "t8": "Escaramuza T8",
     "t6": "Escaramuza T6"
@@ -55,6 +56,7 @@
   },
   "clan-boards": {
     "advances": "Avances",
+    "t11": "Escaramuza XI",
     "t10": "Escaramuza X",
     "t8": "Escaramuza VIII",
     "t6": "Escaramuza VI"

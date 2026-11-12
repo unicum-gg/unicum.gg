@@ -9,6 +9,7 @@
   "sections": {
     "elo": "Poziom X: ELO ({advances} + {skirmish})",
     "advances": "{advances} (15 na 15)",
+    "t11": "{skirmish} Poziom XI (7 na 7)",
     "t10": "Poziom X: {skirmish} (7 na 7)",
     "t8": "Poziom VIII: {skirmish} (7 na 7)",
     "t6": "Poziom VI: {skirmish} (7 na 7)"

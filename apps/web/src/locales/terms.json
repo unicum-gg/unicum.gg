@@ -2797,7 +2797,9 @@
     "inside": "вътре",
     "Standing": "Класиране",
     "The rest": "Останалите",
-    "follow": "следвай"
+    "follow": "следвай",
+    "Tier XI": "Ниво XI",
+    "XI": "XI"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -4755,7 +4757,9 @@
     "inside": "uvnitř",
     "Standing": "Umístění",
     "The rest": "Ostatní",
-    "follow": "sledovat"
+    "follow": "sledovat",
+    "Tier XI": "XI. úroveň",
+    "XI": "XI"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -5849,7 +5853,9 @@
     "inside": "inde i",
     "Standing": "Placering",
     "The rest": "Resten",
-    "follow": "følg"
+    "follow": "følg",
+    "Tier XI": "Niveau XI",
+    "XI": "XI"
   },
   "de": {
     "(optional)": "(optional)",
@@ -6936,7 +6942,9 @@
     "inside": "in",
     "Standing": "Platzierung",
     "The rest": "Der Rest",
-    "follow": "folgen"
+    "follow": "folgen",
+    "Tier XI": "Stufe XI",
+    "XI": "XI"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -8029,7 +8037,9 @@
     "inside": "εντός",
     "Standing": "Κατάταξη",
     "The rest": "Οι υπόλοιποι",
-    "follow": "ακολούθηση"
+    "follow": "ακολούθηση",
+    "Tier XI": "Βαθμίδα XI",
+    "XI": "XI"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -9102,7 +9112,9 @@
     "inside": "dentro",
     "Standing": "Clasificación",
     "The rest": "El resto",
-    "follow": "seguir"
+    "follow": "seguir",
+    "Tier XI": "Nivel XI",
+    "XI": "XI"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -10200,7 +10212,9 @@
     "inside": "sisällä",
     "Standing": "Sijoitus",
     "The rest": "Muut",
-    "follow": "seuraa"
+    "follow": "seuraa",
+    "Tier XI": "Taso XI",
+    "XI": "XI"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -11277,7 +11291,9 @@
     "inside": "dans",
     "Standing": "Classement",
     "The rest": "Le reste",
-    "follow": "suivre"
+    "follow": "suivre",
+    "Tier XI": "Rang XI",
+    "XI": "XI"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -13231,7 +13247,9 @@
     "inside": "unutar",
     "Standing": "Poredak",
     "The rest": "Ostalo",
-    "follow": "pratiti"
+    "follow": "pratiti",
+    "Tier XI": "Razina XI",
+    "XI": "XI"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -14324,7 +14342,9 @@
     "inside": "belül",
     "Standing": "Helyezés",
     "The rest": "A többi",
-    "follow": "követés"
+    "follow": "követés",
+    "Tier XI": "XI-es szint",
+    "XI": "XI"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -15413,7 +15433,9 @@
     "inside": "all'interno",
     "Standing": "Posizione",
     "The rest": "Il resto",
-    "follow": "segui"
+    "follow": "segui",
+    "Tier XI": "Livello XI",
+    "XI": "XI"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -16509,7 +16531,9 @@
     "inside": "内部",
     "Standing": "順位",
     "The rest": "その他",
-    "follow": "フォロー"
+    "follow": "フォロー",
+    "Tier XI": "Tier XI",
+    "XI": "XI"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -18473,7 +18497,9 @@
     "inside": "내부",
     "Standing": "순위",
     "The rest": "나머지",
-    "follow": "팔로우"
+    "follow": "팔로우",
+    "Tier XI": "11단계",
+    "XI": "11"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -19569,7 +19595,9 @@
     "inside": "viduje",
     "Standing": "Pozicija",
     "The rest": "Likę",
-    "follow": "sekti"
+    "follow": "sekti",
+    "Tier XI": "XI lygis",
+    "XI": "XI"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -20651,7 +20679,9 @@
     "inside": "iekšpusē",
     "Standing": "Vieta",
     "The rest": "Pārējie",
-    "follow": "sekot"
+    "follow": "sekot",
+    "Tier XI": "XI līmenis",
+    "XI": "XI"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -21749,7 +21779,9 @@
     "inside": "binnen",
     "Standing": "Positie",
     "The rest": "De rest",
-    "follow": "volgen"
+    "follow": "volgen",
+    "Tier XI": "Niveau XI",
+    "XI": "XI"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -22838,7 +22870,9 @@
     "inside": "i",
     "Standing": "Plassering",
     "The rest": "Resten",
-    "follow": "følg"
+    "follow": "følg",
+    "Tier XI": "Nivå 11",
+    "XI": "11"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -23924,7 +23958,9 @@
     "inside": "wewnątrz",
     "Standing": "Pozycja",
     "The rest": "Pozostali",
-    "follow": "obserwuj"
+    "follow": "obserwuj",
+    "Tier XI": "Poziom XI",
+    "XI": "XI"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -25003,7 +25039,9 @@
     "inside": "dentro",
     "Standing": "Colocação",
     "The rest": "O restante",
-    "follow": "seguir"
+    "follow": "seguir",
+    "Tier XI": "Nível XI",
+    "XI": "XI"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -26082,7 +26120,9 @@
     "inside": "în",
     "Standing": "Clasare",
     "The rest": "Restul",
-    "follow": "urmărește"
+    "follow": "urmărește",
+    "Tier XI": "Generația XI",
+    "XI": "XI"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -27149,7 +27189,9 @@
     "inside": "внутри",
     "Standing": "Позиция",
     "The rest": "Остальные",
-    "follow": "подписаться"
+    "follow": "подписаться",
+    "Tier XI": "XI уровень",
+    "XI": "XI"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -29108,7 +29150,9 @@
     "inside": "unutra",
     "Standing": "Пласман",
     "The rest": "Остали",
-    "follow": "прати"
+    "follow": "прати",
+    "Tier XI": "Nivo XI",
+    "XI": "XI"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -30206,7 +30250,9 @@
     "inside": "i",
     "Standing": "Ställning",
     "The rest": "Resten",
-    "follow": "följ"
+    "follow": "följ",
+    "Tier XI": "Klass XI",
+    "XI": "XI"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -31300,7 +31346,9 @@
     "inside": "ภายใน",
     "Standing": "อันดับ",
     "The rest": "ที่เหลือ",
-    "follow": "ติดตาม"
+    "follow": "ติดตาม",
+    "Tier XI": "ระดับ XI",
+    "XI": "XI"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -33255,7 +33303,9 @@
     "inside": "içinde",
     "Standing": "Derece",
     "The rest": "Diğerleri",
-    "follow": "takip et"
+    "follow": "takip et",
+    "Tier XI": "Seviye XI",
+    "XI": "XI"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -34338,7 +34388,9 @@
     "inside": "у",
     "Standing": "Місце",
     "The rest": "Решта",
-    "follow": "стежити"
+    "follow": "стежити",
+    "Tier XI": "XI рівень",
+    "XI": "XI"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -35410,7 +35462,9 @@
     "inside": "bên trong",
     "Standing": "Thứ hạng",
     "The rest": "Phần còn lại",
-    "follow": "theo dõi"
+    "follow": "theo dõi",
+    "Tier XI": "Cấp XI",
+    "XI": "XI"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -36504,6 +36558,8 @@
     "inside": "内部",
     "Standing": "排名",
     "The rest": "其余",
-    "follow": "跟随"
+    "follow": "跟随",
+    "Tier XI": "XI级",
+    "XI": "XI"
   }
 }

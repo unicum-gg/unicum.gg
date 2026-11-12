@@ -36,6 +36,7 @@
   },
   "stronghold-tiers": {
     "advances": "Avanços",
+    "t11": "Escaramuça T11",
     "t10": "Escaramuça T10",
     "t8": "Escaramuça T8",
     "t6": "Escaramuça T6"
@@ -55,6 +56,7 @@
   },
   "clan-boards": {
     "advances": "Avanços",
+    "t11": "Escaramuça XI",
     "t10": "Escaramuça X",
     "t8": "Escaramuça VIII",
     "t6": "Escaramuça VI"

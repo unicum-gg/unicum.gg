@@ -2,6 +2,7 @@
   "aria-rank": "Rango {rank} nella classifica di {board}",
   "board": {
     "advances": "Valutazione delle Offensive della Roccaforte",
+    "t11": "Valutazione della Schermaglia di Livello XI",
     "t10": "Valutazione della Schermaglia di Livello X",
     "t6": "Valutazione della Schermaglia di Livello VI",
     "t8": "Valutazione della Schermaglia di Livello VIII"

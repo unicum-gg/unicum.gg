@@ -36,6 +36,7 @@
   },
   "stronghold-tiers": {
     "advances": "Puolimai",
+    "t11": "Išpuolis T11",
     "t10": "Susirėmimas T10",
     "t8": "Susirėmimas T8",
     "t6": "Susirėmimas T6"
@@ -55,6 +56,7 @@
   },
   "clan-boards": {
     "advances": "Puolimai",
+    "t11": "Susirėmimas XI",
     "t10": "Susirėmimas X",
     "t8": "Susirėmimas VIII",
     "t6": "Susirėmimas VI"

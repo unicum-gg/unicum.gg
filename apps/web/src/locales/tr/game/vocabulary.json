@@ -36,6 +36,7 @@
   },
   "stronghold-tiers": {
     "advances": "İlerlemeler",
+    "t11": "Çatışma T11",
     "t10": "Çatışma T10",
     "t8": "Çatışma T8",
     "t6": "Çatışma T6"
@@ -55,6 +56,7 @@
   },
   "clan-boards": {
     "advances": "İlerlemeler",
+    "t11": "Çatışma XI",
     "t10": "Çatışma X",
     "t8": "Çatışma VIII",
     "t6": "Çatışma VI"

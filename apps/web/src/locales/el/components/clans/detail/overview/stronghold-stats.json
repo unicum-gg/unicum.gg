@@ -9,6 +9,7 @@
   "sections": {
     "elo": "ELO βαθμίδας X ({advances} + {skirmish})",
     "advances": "{advances} (15v15)",
+    "t11": "{skirmish}, Βαθμίδα XI (7v7)",
     "t10": "{skirmish} βαθμίδας X (7v7)",
     "t8": "{skirmish} βαθμίδας VIII (7v7)",
     "t6": "{skirmish} βαθμίδας VI (7v7)"

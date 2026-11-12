@@ -9,6 +9,7 @@
   "sections": {
     "elo": "ELO Razine X ({advances} + {skirmish})",
     "advances": "{advances} (15v15)",
+    "t11": "{skirmish} Razina XI (7v7)",
     "t10": "{skirmish} Razina X (7v7)",
     "t8": "{skirmish} Razina VIII (7v7)",
     "t6": "{skirmish} Razina VI (7v7)"

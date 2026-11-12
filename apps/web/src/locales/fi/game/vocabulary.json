@@ -36,6 +36,7 @@
   },
   "stronghold-tiers": {
     "advances": "Hyökkäysoperaatiot",
+    "t11": "Kahakka T11",
     "t10": "Kahakka T10",
     "t8": "Kahakka T8",
     "t6": "Kahakka T6"
@@ -55,6 +56,7 @@
   },
   "clan-boards": {
     "advances": "Hyökkäysoperaatiot",
+    "t11": "Kahakka XI",
     "t10": "Kahakka X",
     "t8": "Kahakka VIII",
     "t6": "Kahakka VI"

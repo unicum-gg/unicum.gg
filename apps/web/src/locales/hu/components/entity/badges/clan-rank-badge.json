@@ -2,6 +2,7 @@
   "aria-rank": "Rang: {rank}, {board} ranglistáján",
   "board": {
     "advances": "Előrenyomulások értékelése az Erődítményben",
+    "t11": "A Csatározás XI-es szintjének értékelése",
     "t10": "Csatározás értékelése X-es szinten",
     "t6": "Csatározás értékelése VI-os szinten",
     "t8": "Csatározás értékelése VIII-as szinten"

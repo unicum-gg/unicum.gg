@@ -9,6 +9,7 @@
   "sections": {
     "elo": "Nivo X ELO ({advances} + {skirmish})",
     "advances": "{advances} (15v15)",
+    "t11": "{skirmish} Nivo XI (7v7)",
     "t10": "{skirmish} Nivo X (7v7)",
     "t8": "{skirmish} Nivo VIII (7v7)",
     "t6": "{skirmish} Nivo VI (7v7)"

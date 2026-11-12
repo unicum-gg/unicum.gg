@@ -2,6 +2,7 @@
   "aria-rank": "{board} sıralamasında {rank}. Kademe",
   "board": {
     "advances": "Tahkimat İlerlemeleri puanı",
+    "t11": "Seviye XI Çatışma puanı",
     "t10": "Seviye X Çatışma puanı",
     "t6": "Seviye VI Çatışma puanı",
     "t8": "Seviye VIII Çatışma puanı"

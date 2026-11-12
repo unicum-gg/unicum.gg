@@ -36,6 +36,7 @@
   },
   "stronghold-tiers": {
     "advances": "Uzbrukumi",
+    "t11": "Sadursme T11",
     "t10": "Sadursme T10",
     "t8": "Sadursme T8",
     "t6": "Sadursme T6"
@@ -55,6 +56,7 @@
   },
   "clan-boards": {
     "advances": "Uzbrukumi",
+    "t11": "Sadursme XI",
     "t10": "Sadursme X",
     "t8": "Sadursme VIII",
     "t6": "Sadursme VI"

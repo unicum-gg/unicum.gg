@@ -36,6 +36,7 @@
   },
   "stronghold-tiers": {
     "advances": "Vorstöße",
+    "t11": "Scharmützel T11",
     "t10": "Scharmützel T10",
     "t8": "Scharmützel T8",
     "t6": "Scharmützel T6"
@@ -55,6 +56,7 @@
   },
   "clan-boards": {
     "advances": "Vorstöße",
+    "t11": "Scharmützel XI",
     "t10": "Scharmützel X",
     "t8": "Scharmützel VIII",
     "t6": "Scharmützel VI"

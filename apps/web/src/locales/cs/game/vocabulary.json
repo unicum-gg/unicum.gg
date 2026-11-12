@@ -36,6 +36,7 @@
   },
   "stronghold-tiers": {
     "advances": "Ofenzívy",
+    "t11": "Šarvátka T11",
     "t10": "Šarvátka T10",
     "t8": "Šarvátka T8",
     "t6": "Šarvátka T6"
@@ -55,6 +56,7 @@
   },
   "clan-boards": {
     "advances": "Ofenzívy",
+    "t11": "Šarvátka XI",
     "t10": "Šarvátka X",
     "t8": "Šarvátka VIII",
     "t6": "Šarvátka VI"

@@ -2,6 +2,7 @@
   "aria-rank": "Grad {rank} på {board}",
   "board": {
     "advances": "Betyg för Offensiver i Befästning",
+    "t11": "Betyg för Skärmytsling på Klass XI",
     "t10": "Betyg för Skärmytsling på Klass X",
     "t6": "Betyg för Skärmytsling på Klass VI",
     "t8": "Betyg för Skärmytsling på Klass VIII"

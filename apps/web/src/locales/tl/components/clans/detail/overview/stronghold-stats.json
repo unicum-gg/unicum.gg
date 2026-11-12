@@ -9,6 +9,7 @@
   "sections": {
     "elo": "Antas X ELO ({advances} + {skirmish})",
     "advances": "{advances} (15v15)",
+    "t11": "Antas XI ng {skirmish} (7v7)",
     "t10": "{skirmish} Antas X (7v7)",
     "t8": "{skirmish} Antas VIII (7v7)",
     "t6": "{skirmish} Antas VI (7v7)"

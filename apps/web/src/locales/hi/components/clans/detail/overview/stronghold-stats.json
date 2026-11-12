@@ -9,6 +9,7 @@
   "sections": {
     "elo": "टियर X ELO ({advances} + {skirmish})",
     "advances": "{advances} (15v15)",
+    "t11": "{skirmish} स्तर XI (7v7)",
     "t10": "{skirmish} टियर X (7v7)",
     "t8": "{skirmish} टियर VIII (7v7)",
     "t6": "{skirmish} टियर VI (7v7)"

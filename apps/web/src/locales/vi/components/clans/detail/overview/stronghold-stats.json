@@ -9,6 +9,7 @@
   "sections": {
     "elo": "ELO Cấp X ({advances} + {skirmish})",
     "advances": "{advances} (15v15)",
+    "t11": "{skirmish} Cấp XI (7v7)",
     "t10": "{skirmish} Cấp X (7v7)",
     "t8": "{skirmish} Cấp VIII (7v7)",
     "t6": "{skirmish} Cấp VI (7v7)"

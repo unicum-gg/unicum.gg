@@ -36,6 +36,7 @@
   },
   "stronghold-tiers": {
     "advances": "Napretci",
+    "t11": "Okršaji T11",
     "t10": "Okršaj T10",
     "t8": "Okršaj T8",
     "t6": "Okršaj T6"
@@ -55,6 +56,7 @@
   },
   "clan-boards": {
     "advances": "Napretci",
+    "t11": "Okršaj XI",
     "t10": "Okršaj X",
     "t8": "Okršaj VIII",
     "t6": "Okršaj VI"

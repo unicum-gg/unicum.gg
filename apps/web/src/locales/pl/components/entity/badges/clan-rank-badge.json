@@ -2,6 +2,7 @@
   "aria-rank": "Stopień {rank} w klasyfikacji {board}",
   "board": {
     "advances": "ocena: Natarcia, Twierdza",
+    "t11": "Ocena Potyczki na Poziomie XI",
     "t10": "ocena: Potyczka, Poziom X",
     "t6": "ocena: Potyczka, Poziom VI",
     "t8": "ocena: Potyczka, Poziom VIII"

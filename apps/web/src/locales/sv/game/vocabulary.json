@@ -36,6 +36,7 @@
   },
   "stronghold-tiers": {
     "advances": "Offensiver",
+    "t11": "Skärmytsling T11",
     "t10": "Skärmytsling T10",
     "t8": "Skärmytsling T8",
     "t6": "Skärmytsling T6"
@@ -55,6 +56,7 @@
   },
   "clan-boards": {
     "advances": "Offensiver",
+    "t11": "Skärmytsling XI",
     "t10": "Skärmytsling X",
     "t8": "Skärmytsling VIII",
     "t6": "Skärmytsling VI"

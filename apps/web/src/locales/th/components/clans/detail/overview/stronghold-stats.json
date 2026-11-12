@@ -9,6 +9,7 @@
   "sections": {
     "elo": "ELO ระดับ X ({advances} + {skirmish})",
     "advances": "{advances} (15v15)",
+    "t11": "{skirmish} ระดับ XI (7v7)",
     "t10": "{skirmish} ระดับ X (7v7)",
     "t8": "{skirmish} ระดับ VIII (7v7)",
     "t6": "{skirmish} ระดับ VI (7v7)"

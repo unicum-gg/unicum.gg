@@ -36,6 +36,7 @@
   },
   "stronghold-tiers": {
     "advances": "Fremrykninger",
+    "t11": "Træfning T11",
     "t10": "Træfning T10",
     "t8": "Træfning T8",
     "t6": "Træfning T6"
@@ -55,6 +56,7 @@
   },
   "clan-boards": {
     "advances": "Fremrykninger",
+    "t11": "Træfning XI",
     "t10": "Træfning X",
     "t8": "Træfning VIII",
     "t6": "Træfning VI"

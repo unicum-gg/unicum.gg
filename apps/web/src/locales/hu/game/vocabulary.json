@@ -36,6 +36,7 @@
   },
   "stronghold-tiers": {
     "advances": "Előrenyomulások",
+    "t11": "Csatározás T11",
     "t10": "Csatározás T10",
     "t8": "Csatározás T8",
     "t6": "Csatározás T6"
@@ -55,6 +56,7 @@
   },
   "clan-boards": {
     "advances": "Előrenyomulások",
+    "t11": "Csatározás XI",
     "t10": "Csatározás X",
     "t8": "Csatározás VIII",
     "t6": "Csatározás VI"
