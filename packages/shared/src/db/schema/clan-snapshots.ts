@@ -33,6 +33,10 @@ export function makeClanSnapshotsTable(region: string, clans: ClansTable) {
       skirmishBattlesT10: integer("skirmish_battles_t10"),
       skirmishWinsT10: integer("skirmish_wins_t10"),
 
+      // Tier XI carries no ELO column because Wargaming publishes none for it.
+      skirmishBattlesT11: integer("skirmish_battles_t11"),
+      skirmishWinsT11: integer("skirmish_wins_t11"),
+
       advancesBattlesT10: integer("advances_battles_t10"),
       advancesWinsT10: integer("advances_wins_t10"),
 
