@@ -1,6 +1,10 @@
 import { useTranslation } from "@/hooks/use-translation";
 import Link from "@/components/link";
-import { Crest } from "@/components/entity/badges/crest";
+import {
+  Crest,
+  CrestKind,
+  crestTincture,
+} from "@/components/entity/badges/crest";
 import {
   CLAN_BOARD_TINCTURE,
   CLAN_BOARD_BY_STRONGHOLD_TIER,
@@ -131,10 +135,16 @@ export function ClanRankBadge({
           </Link>
         </TooltipTrigger>
         <TooltipContent>
-          <span className="font-semibold">
-            #{badge.rank} {tGame(`clan-boards.${badge.board}`)}
-          </span>{" "}
-          · {t(`board.${badge.board}`)}
+          {/* One text run: the tooltip is a flex box, so loose children each
+              become a column and wrap on their own, which broke "#2 Skirmish
+              VI" across two lines beside the description. The name itself
+              never wraps, since it is what the crest is being read as. */}
+          <span>
+            <span className="font-semibold whitespace-nowrap">
+              #{badge.rank} {tGame(`clan-boards.${badge.board}`)}
+            </span>{" "}
+            · {t(`board.${badge.board}`)}
+          </span>
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
@@ -143,13 +153,14 @@ export function ClanRankBadge({
 
 /**
  * The whole cluster, already ordered by the resolver (best placing first).
- * Renders nothing when the clan holds no placing, so it is always safe to mount.
+ * Renders nothing when the clan holds no placing and no tournament win, so it is
+ * always safe to mount.
  *
- * A clan can hold up to four placings, one per stronghold board, so past `max`
- * the rest fold into a single "+N" crest whose tooltip still lists them. The
- * fold was sized when there were seven, the three rating boards included; it
- * fires rarely now and is kept because nothing stops a fifth board being added. Because the list is pre-sorted, the ones
- * that stay visible are always the clan's best.
+ * A clan can hold up to four placings, one per stronghold board, plus the
+ * tournament crest, so past `max` the rest fold into a single "+N" crest whose
+ * tooltip still lists them. Because the placings arrive pre-sorted and the
+ * tournament crest is appended last, the ones that stay visible are always the
+ * clan's best.
  *
  * Every crest is a link to its board, so this must not be mounted inside another
  * anchor: callers that put it in a row link have to lift it out of the link
@@ -182,27 +193,17 @@ export function ClanBadges({
   const { t: tBadge } = useTranslation(
     "components/entity/badges/clan-rank-badge",
   );
-  // The tournament crest is not a placing, so it sits outside the fold: the
-  // "+N" counts board ranks, which are a set that can grow to seven, while this
-  // is one mark a clan either has or does not.
-  const trophy = (
-    <TournamentBadge
-      wins={tournamentWins}
-      featuredWins={tournamentFeaturedWins}
-      bestTitle={tournamentBestTitle}
-      href={tag ? ROUTES.CLAN_TOURNAMENTS(region, tag) : undefined}
-      size={size}
-    />
+  const { t: tPlayer } = useTranslation(
+    "components/entity/badges/player-badges",
   );
-  if (!badges?.length) return trophy;
   // Folded by the same component the player crests use, so a clan and a player
   // standing on the same row cannot cap their clusters differently.
-  const cluster: ClusterBadge[] = badges.map((b) => ({
+  const cluster: ClusterBadge[] = (badges ?? []).map((b) => ({
     key: `${b.board}-${b.rank}`,
     href: boardHref(region, b.board),
     label: (
       <>
-        <span className="font-semibold">
+        <span className="font-semibold whitespace-nowrap">
           #{b.rank} {tGame(`clan-boards.${b.board}`)}
         </span>{" "}
         · {tBadge(`board.${b.board}`)}
@@ -219,10 +220,32 @@ export function ClanBadges({
     tint: CLAN_BOARD_TINCTURE[b.board],
     node: <ClanRankBadge badge={b} region={region} size={size} />,
   }));
-  return (
-    <>
-      <BadgeCluster badges={cluster} size={size} max={max} />
-      {trophy}
-    </>
-  );
+  // The tournament crest joins the fold rather than trailing it, or the cap
+  // would hold for everything but this and a clan could wear four crests where
+  // a player wears three. Last, because order is priority: a standing on a
+  // stronghold board is what a clan is now, a tournament win is what it once
+  // did, so it is the first thing to fold when there is no room.
+  if (tournamentWins > 0) {
+    const tournamentKind =
+      tournamentFeaturedWins > 0
+        ? CrestKind.TournamentFeatured
+        : CrestKind.Tournament;
+    cluster.push({
+      key: "tournament",
+      href: tag ? ROUTES.CLAN_TOURNAMENTS(region, tag) : undefined,
+      label: tPlayer("tournament-wins", { count: tournamentWins }),
+      crest: <Crest kind={tournamentKind} />,
+      tint: crestTincture(tournamentKind),
+      node: (
+        <TournamentBadge
+          wins={tournamentWins}
+          featuredWins={tournamentFeaturedWins}
+          bestTitle={tournamentBestTitle}
+          href={tag ? ROUTES.CLAN_TOURNAMENTS(region, tag) : undefined}
+          size={size}
+        />
+      ),
+    });
+  }
+  return <BadgeCluster badges={cluster} size={size} max={max} />;
 }
