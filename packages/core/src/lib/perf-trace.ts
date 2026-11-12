@@ -2,7 +2,20 @@ import { AsyncLocalStorage } from "node:async_hooks";
 import { appendFileSync } from "node:fs";
 import { join } from "node:path";
 
-const LOG_FILE = join(process.cwd(), ".perf-trace.log");
+// Inside `.next/`, which the dev server excludes from its own watcher, and not
+// at the working directory's root where this used to sit.
+//
+// A trace is written on every instrumented request, and the root of `apps/web`
+// is watched: each write looked like a source change, so Turbopack recompiled,
+// Fast Refresh reloaded the open page, the reload issued the request again, and
+// that wrote the next trace. Measured with one page open on `/coverage`: nine
+// recompilations in twenty-five seconds, against zero with the page closed. The
+// page never stopped loading, and nothing in the log said why, because every
+// line in it was correct.
+//
+// Being gitignored was not enough: that hides a file from git, not from a file
+// watcher. The directory has to be one the watcher already ignores.
+const LOG_FILE = join(process.cwd(), ".next", "perf-trace.log");
 
 type Span = { name: string; startMs: number; durationMs: number };
 
