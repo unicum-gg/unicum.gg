@@ -191,6 +191,16 @@ export async function clanMetadata(
       .catch(() => ({ videos: [] as unknown[] }));
     noIndex = videos.length === 0;
   }
+  // The Maneuvers tab of a clan the event never ranked is one empty line, the
+  // same across every such clan: out of the index until it holds a standing.
+  if (view.mode === ClanMode.Maneuvers && !noIndex) {
+    noIndex = !(await unicum
+      .region(region)
+      .clans(clan.tag)
+      .maneuvers()
+      .then((r) => r.current != null || r.editions.length > 0)
+      .catch(() => false));
+  }
   const members = numberFormat(locale, INT_FORMAT).format(clan.membersCount);
   const copy = viewCopy(view, clan.name, clan.tag, regionLabel, members, t, maneuvers);
   return constructMetadata({

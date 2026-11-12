@@ -235,9 +235,20 @@ export async function playerMetadata(
   // The Battles tab likewise when it holds none: most accounts have never had
   // a battle shared, and their tab is an offer to install the mod, the same
   // across two million profiles.
+  //
+  // The Maneuvers tab likewise when the event never ranked them: most accounts
+  // play no Stronghold event, and their tab is the same empty line across two
+  // million profiles. Same call the page makes, so it is deduped in the render.
   const noIndex =
     view.section === PlayerSection.Achievements ||
-    (view.section === PlayerSection.Battles && !detail.battleCount);
+    (view.section === PlayerSection.Battles && !detail.battleCount) ||
+    (view.mode === PlayerMode.Maneuvers &&
+      !(await unicum
+        .region(region)
+        .players(decoded)
+        .maneuvers()
+        .then((r) => r.current != null || r.editions.length > 0)
+        .catch(() => false)));
 
   const { current } = detail;
   const copy = viewCopy(
