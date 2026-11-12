@@ -8,6 +8,7 @@ import {
   PanelTitle,
 } from "@/components/panel";
 import { RankMedal } from "@/components/rank-medal";
+import ROUTES from "@/constants/routes";
 import {
   type ManeuversData,
   useManeuversEdition,
@@ -215,6 +216,9 @@ function ClanRowView({
           region={region}
           showEmblem
           showName
+          // Straight to its Maneuvers record rather than the overview, as the
+          // player board does for players.
+          href={row.tag ? ROUTES.CLAN_MANEUVERS(region, row.tag) : undefined}
           clan={{
             // The board keyed the clan on its id; a tag it never read falls back
             // to that so the row still links.

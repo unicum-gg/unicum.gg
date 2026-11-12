@@ -132,6 +132,9 @@ const ROUTES = {
   // crest says they have won, this is the record of what.
   PLAYER_TOURNAMENTS: (region: Region, nickname: string) =>
     pathcat("/:region/players/:nickname/tournaments", { region, nickname }),
+  // A clan's Maneuvers tab, which the Maneuvers clan board links to.
+  CLAN_MANEUVERS: (region: Region, tag: string) =>
+    pathcat("/:region/clans/:tag/maneuvers", { region, tag }),
   // A clan's Tournaments tab, the target of its own winner's crest.
   CLAN_TOURNAMENTS: (region: Region, tag: string) =>
     pathcat("/:region/clans/:tag/tournaments", { region, tag }),
