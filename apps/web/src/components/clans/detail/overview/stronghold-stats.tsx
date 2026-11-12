@@ -161,6 +161,31 @@ const SECTIONS: {
       },
     ],
   },
+  // Young columns, so a payload from before they existed may not carry them.
+  {
+    id: "t11",
+    tier: StrongholdTier.T11,
+    rows: [
+      { id: "sr", sr: "t11" },
+      {
+        id: "battles",
+        current: (s, num) => battlesCell(num, s.skirmishBattlesT11 ?? null),
+        delta: (s, num) =>
+          battlesCell(
+            num,
+            s.skirmishBattlesT11 ?? null,
+            s.skirmishBattlesT11 ?? null,
+          ),
+      },
+      {
+        id: "winrate",
+        current: (s, num) =>
+          wrCell(num, s.skirmishWinsT11 ?? null, s.skirmishBattlesT11 ?? null),
+        delta: (s, num) =>
+          wrCell(num, s.skirmishWinsT11 ?? null, s.skirmishBattlesT11 ?? null),
+      },
+    ],
+  },
   {
     id: "t10",
     tier: StrongholdTier.T10,

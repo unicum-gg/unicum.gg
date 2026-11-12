@@ -1,4 +1,4 @@
-import type { ClanStrongholdData } from "@unicum.gg/wargaming";
+import type { ClanStrongholdData, StrongholdModeStats } from "@unicum.gg/wargaming";
 
 /**
  * How often a clan's Stronghold record is re-sampled, keyed on whether it is
@@ -69,9 +69,13 @@ export const STRONGHOLD_BUCKET_LABEL: Record<StrongholdActivityBucket, string> =
  * diffed against our previous snapshot: it is already in the response we just
  * paid for, and it stays correct across a gap in our own sampling, which a diff
  * against a stale row would not.
+ *
+ * `skirmishT11` arrives separately because the Stronghold host does not carry
+ * tier XI (see `fetchClanSkirmishT11`).
  */
 export function strongholdBucketFor(
   data: ClanStrongholdData | null,
+  skirmishT11?: StrongholdModeStats,
 ): StrongholdActivityBucket {
   if (!data) return StrongholdActivityBucket.None;
   const modes = [
@@ -79,6 +83,7 @@ export function strongholdBucketFor(
     data.t8?.skirmish,
     data.t10?.skirmish,
     data.t10?.advances,
+    skirmishT11,
   ];
   if (modes.some((m) => (m?.battles28d ?? 0) > 0)) {
     return StrongholdActivityBucket.Active;
@@ -96,6 +101,9 @@ export function strongholdDueAt(bucket: StrongholdActivityBucket): Date {
 
 /** The due date for a clan we just fetched. Convenience over the two above, for
  * the write path that holds the response and nothing else. */
-export function strongholdDueAtFor(data: ClanStrongholdData | null): Date {
-  return strongholdDueAt(strongholdBucketFor(data));
+export function strongholdDueAtFor(
+  data: ClanStrongholdData | null,
+  skirmishT11?: StrongholdModeStats,
+): Date {
+  return strongholdDueAt(strongholdBucketFor(data, skirmishT11));
 }

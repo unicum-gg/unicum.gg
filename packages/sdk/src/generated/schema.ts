@@ -368,7 +368,7 @@ export interface paths {
         };
         /**
          * Stronghold clan leaderboard
-         * @description The region's best stronghold clans for one mode/tier (Advances, tier X/VIII/VI skirmishes), ranked by SR (skirmish rating), Elo, battles, or win rate, over the last 24 hours, 7 days, 30 days, or all-time. Top 100; cached ~10 min server-side.
+         * @description The region's best stronghold clans for one mode/tier (Advances, tier XI/X/VIII/VI skirmishes), ranked by SR (skirmish rating), Elo, battles, or win rate, over the last 24 hours, 7 days, 30 days, or all-time. Top 100; cached ~10 min server-side.
          */
         get: operations["get-{region}-clans-stronghold-top"];
         put?: never;
@@ -3252,7 +3252,7 @@ export interface components {
              * @description The leaderboard this placing is on.
              * @enum {string}
              */
-            board: "advances" | "t10" | "t8" | "t6";
+            board: "advances" | "t11" | "t10" | "t8" | "t6";
             rank: number;
         };
         /** @description The clan's battle-weighted aggregate ratings: lifetime WN7/WN8/WNX/PR/WTR weighted by lifetime battles, the 30-day WN7/WN8/WNX weighted by recent battles (PR and WTR have no window), plus the lifetime average win rate. */
@@ -3331,7 +3331,7 @@ export interface components {
                 overall: components["schemas"]["strongholdSr"];
             };
         };
-        /** @description A clan's Stronghold Elo and skirmish/advances battles and wins per tier (6/8/10). */
+        /** @description A clan's Stronghold Elo and skirmish/advances battles and wins per tier (6/8/10/11). Wargaming publishes no Elo for tier 11. */
         ClanStrongholdStats: {
             eloT6: number | null;
             skirmishBattlesT6: number | null;
@@ -3342,6 +3342,8 @@ export interface components {
             eloT10: number | null;
             skirmishBattlesT10: number | null;
             skirmishWinsT10: number | null;
+            skirmishBattlesT11: number | null;
+            skirmishWinsT11: number | null;
             advancesBattlesT10: number | null;
             advancesWinsT10: number | null;
         };
@@ -6881,7 +6883,7 @@ export interface components {
             emblem: string;
             languages: string[];
             membersCount: number;
-            /** @description Tier Elo (null for Advances, which has no Elo). */
+            /** @description Tier Elo (null where Wargaming publishes none, such as tier XI). */
             elo: number | null;
             /** @description Battles over the selected period. */
             battles: number;
@@ -6909,6 +6911,7 @@ export interface components {
         };
         strongholdSr: {
             advances: number | null;
+            t11: number | null;
             t10: number | null;
             t8: number | null;
             t6: number | null;
@@ -9002,7 +9005,7 @@ export interface operations {
         parameters: {
             query?: {
                 /** @description Stronghold mode/tier (default t10). */
-                tier?: "advances" | "t10" | "t8" | "t6";
+                tier?: "advances" | "t11" | "t10" | "t8" | "t6";
                 /** @description Ranking column (default sr). */
                 sort?: "sr" | "srb" | "elo" | "battles" | "winrate";
                 /** @description Window the stats are computed over: the last 24 hours, 7 days, 30 days, or all-time (default overall). */

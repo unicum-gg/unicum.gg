@@ -23,24 +23,30 @@ export type StrongholdBattleSeriesStats = {
   win_10_in_28d: number;
 };
 
-/** The clan's own skirmish tallies, split across Tiers VI / VIII / X. */
+/** The clan's own skirmish tallies, split across Tiers VI / VIII / X / XI. */
 export type StrongholdSkirmishStats = {
   last_time_6: number;
   last_time_8: number;
   last_time_10: number;
+  last_time_11: number;
   lose_6: number;
   lose_8: number;
   lose_10: number;
+  lose_11: number;
   total_6: number;
   total_6_in_28d: number;
   total_8: number;
   total_8_in_28d: number;
   total_10: number;
   total_10_in_28d: number;
+  total_11: number;
+  total_11_in_28d: number;
   win_6: number;
   win_6_in_28d: number;
   win_8: number;
   win_8_in_28d: number;
+  win_11: number;
+  win_11_in_28d: number;
 };
 
 /** One construction site of the Stronghold. */

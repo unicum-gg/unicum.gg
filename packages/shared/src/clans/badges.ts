@@ -23,6 +23,7 @@ import { StrongholdTier } from "../constants/stronghold";
  */
 export enum ClanBoard {
   Advances = "advances",
+  SkirmishT11 = "t11",
   SkirmishT10 = "t10",
   SkirmishT8 = "t8",
   SkirmishT6 = "t6",
@@ -53,6 +54,7 @@ export type ClanBadgeFlags = {
 
 export const CLAN_BOARD_LABEL: Record<ClanBoard, string> = {
   [ClanBoard.Advances]: "Advances",
+  [ClanBoard.SkirmishT11]: "Skirmish XI",
   [ClanBoard.SkirmishT10]: "Skirmish X",
   [ClanBoard.SkirmishT8]: "Skirmish VIII",
   [ClanBoard.SkirmishT6]: "Skirmish VI",
@@ -72,6 +74,7 @@ export type ClanBoardTincture = { fill: string; edge: string };
 
 export const CLAN_BOARD_TINCTURE: Record<ClanBoard, ClanBoardTincture> = {
   [ClanBoard.Advances]: { fill: "#EF4444", edge: "#B91C1C" },
+  [ClanBoard.SkirmishT11]: { fill: "#A855F7", edge: "#7E22CE" },
   [ClanBoard.SkirmishT10]: { fill: "#F59E0B", edge: "#B45309" },
   [ClanBoard.SkirmishT8]: { fill: "#10B981", edge: "#047857" },
   [ClanBoard.SkirmishT6]: { fill: "#EC4899", edge: "#BE185D" },
@@ -84,6 +87,7 @@ export const CLAN_BOARD_TINCTURE: Record<ClanBoard, ClanBoardTincture> = {
  */
 export const CLAN_BOARD_BY_STRONGHOLD_TIER: Record<StrongholdTier, ClanBoard> = {
   [StrongholdTier.Advances]: ClanBoard.Advances,
+  [StrongholdTier.T11]: ClanBoard.SkirmishT11,
   [StrongholdTier.T10]: ClanBoard.SkirmishT10,
   [StrongholdTier.T8]: ClanBoard.SkirmishT8,
   [StrongholdTier.T6]: ClanBoard.SkirmishT6,
@@ -92,6 +96,7 @@ export const CLAN_BOARD_BY_STRONGHOLD_TIER: Record<StrongholdTier, ClanBoard> = 
 /** Longer wording for the tooltip, where there is room to say which board. */
 export const CLAN_BOARD_DESCRIPTION: Record<ClanBoard, string> = {
   [ClanBoard.Advances]: "Advances stronghold rating",
+  [ClanBoard.SkirmishT11]: "Tier XI skirmish rating",
   [ClanBoard.SkirmishT10]: "Tier X skirmish rating",
   [ClanBoard.SkirmishT8]: "Tier VIII skirmish rating",
   [ClanBoard.SkirmishT6]: "Tier VI skirmish rating",
@@ -102,6 +107,7 @@ export const CLAN_BOARD_DESCRIPTION: Record<ClanBoard, string> = {
  * tier VI skirmishes, and the order says so. */
 const BOARD_ORDER: ClanBoard[] = [
   ClanBoard.Advances,
+  ClanBoard.SkirmishT11,
   ClanBoard.SkirmishT10,
   ClanBoard.SkirmishT8,
   ClanBoard.SkirmishT6,

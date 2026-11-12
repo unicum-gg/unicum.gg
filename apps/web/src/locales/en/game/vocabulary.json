@@ -36,6 +36,7 @@
   },
   "stronghold-tiers": {
     "advances": "Advances",
+    "t11": "Skirmish T11",
     "t10": "Skirmish T10",
     "t8": "Skirmish T8",
     "t6": "Skirmish T6"
@@ -55,6 +56,7 @@
   },
   "clan-boards": {
     "advances": "Advances",
+    "t11": "Skirmish XI",
     "t10": "Skirmish X",
     "t8": "Skirmish VIII",
     "t6": "Skirmish VI"

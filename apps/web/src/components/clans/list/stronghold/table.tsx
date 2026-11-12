@@ -22,6 +22,7 @@ import {
   CLAN_BOARD_BY_STRONGHOLD_TIER,
   RATING_COLOR_CLASS,
   StrongholdSort,
+  TIER_SORT_OPTIONS,
   type StrongholdTier,
   strongholdRatingBattlesColor,
   strongholdRatingColor,
@@ -68,6 +69,7 @@ export function StrongholdTable({
   const { num } = useFormat();
   const { t } = useTranslation("components/clans/list/stronghold/table");
   const { t: tCol } = useTranslation("components/columns");
+  const hasElo = TIER_SORT_OPTIONS[tier].includes(StrongholdSort.Elo);
   return (
     <TooltipProvider delayDuration={150}>
       <Table
@@ -83,13 +85,15 @@ export function StrongholdTable({
             <TableHead className="w-12 text-center!">#</TableHead>
             <TableHead>{tCol("clan")}</TableHead>
             <TableHead className="w-24 text-center!">{tCol("members")}</TableHead>
-            <RankingColumnHead
-              sortKey={StrongholdSort.Elo}
-              active={sort === StrongholdSort.Elo}
-              onSort={onSort}
-              className="w-24"
-            >
-              {t("elo")}</RankingColumnHead>
+            {hasElo && (
+              <RankingColumnHead
+                sortKey={StrongholdSort.Elo}
+                active={sort === StrongholdSort.Elo}
+                onSort={onSort}
+                className="w-24"
+              >
+                {t("elo")}</RankingColumnHead>
+            )}
             <RankingColumnHead
               sortKey={StrongholdSort.Battles}
               active={sort === StrongholdSort.Battles}
@@ -124,7 +128,7 @@ export function StrongholdTable({
           {rows.length === 0 && (
             <TableRow>
               <TableCell
-                colSpan={8}
+                colSpan={hasElo ? 8 : 7}
                 className="px-4 py-12 text-center text-sm text-muted-foreground"
               >
                 {t("no-clan-matches-the-current")}</TableCell>
@@ -177,9 +181,11 @@ export function StrongholdTable({
                 <TableCell className="text-center text-muted-foreground tabular-nums">
                   {num(INT_FORMAT).format(entry.membersCount)}
                 </TableCell>
-                <TableCell className="text-right font-semibold tabular-nums">
-                  {entry.elo !== null ? num(INT_FORMAT).format(entry.elo) : "—"}
-                </TableCell>
+                {hasElo && (
+                  <TableCell className="text-right font-semibold tabular-nums">
+                    {entry.elo !== null ? num(INT_FORMAT).format(entry.elo) : "—"}
+                  </TableCell>
+                )}
                 <TableCell className="text-right font-semibold tabular-nums">
                   {num(INT_FORMAT).format(entry.battles)}
                 </TableCell>

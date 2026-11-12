@@ -16,6 +16,8 @@ export type ClanStrongholdStats = {
   eloT10: number | null;
   skirmishBattlesT10: number | null;
   skirmishWinsT10: number | null;
+  skirmishBattlesT11: number | null;
+  skirmishWinsT11: number | null;
   advancesBattlesT10: number | null;
   advancesWinsT10: number | null;
 };
@@ -68,6 +70,8 @@ export function strongholdStatsFromClanSnapshot(
     eloT10: s.eloT10,
     skirmishBattlesT10: s.skirmishBattlesT10,
     skirmishWinsT10: s.skirmishWinsT10,
+    skirmishBattlesT11: s.skirmishBattlesT11,
+    skirmishWinsT11: s.skirmishWinsT11,
     advancesBattlesT10: s.advancesBattlesT10,
     advancesWinsT10: s.advancesWinsT10,
   };
@@ -181,6 +185,8 @@ export function diffClanStrongholdStats(
     eloT10: rating(curr.eloT10, prev.eloT10, battlesT10),
     skirmishBattlesT10: skirmishT10,
     skirmishWinsT10: diff(curr.skirmishWinsT10, prev.skirmishWinsT10),
+    skirmishBattlesT11: diff(curr.skirmishBattlesT11, prev.skirmishBattlesT11),
+    skirmishWinsT11: diff(curr.skirmishWinsT11, prev.skirmishWinsT11),
     advancesBattlesT10: advancesT10,
     advancesWinsT10: diff(curr.advancesWinsT10, prev.advancesWinsT10),
   };
@@ -197,6 +203,7 @@ export function diffClanStrongholdStats(
 // per-period diff, so it only fills the "Total" column of the stronghold table.
 export type ClanStrongholdSr = {
   advances: number | null;
+  t11: number | null;
   t10: number | null;
   t8: number | null;
   t6: number | null;

@@ -10,6 +10,7 @@ import {
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import type { ClanGlobalMapData } from "@unicum.gg/core/wargaming/wot/clans/globalmap";
+import type { StrongholdModeStats } from "@unicum.gg/wargaming";
 import type { ClanStrongholdData } from "@unicum.gg/core/wargaming/wot/clans/stronghold";
 
 // Floor between two stored snapshots for one clan. This is NOT the sampling
@@ -69,6 +70,8 @@ function carriedStronghold(row: ClanSnapshot | undefined) {
     eloT10: row?.eloT10 ?? null,
     skirmishBattlesT10: row?.skirmishBattlesT10 ?? null,
     skirmishWinsT10: row?.skirmishWinsT10 ?? null,
+    skirmishBattlesT11: row?.skirmishBattlesT11 ?? null,
+    skirmishWinsT11: row?.skirmishWinsT11 ?? null,
     advancesBattlesT10: row?.advancesBattlesT10 ?? null,
     advancesWinsT10: row?.advancesWinsT10 ?? null,
   };
@@ -116,11 +119,16 @@ function latestSnapshot(
  * different cron on a different budget, so it is carried forward from the
  * previous row rather than written as null, otherwise every Stronghold sample
  * would blank the clan-wars view until the next full clan refresh.
+ *
+ * `skirmishT11` comes from a different API than `data`. Absent means that read
+ * failed or the clan was not in its answer, so the last figures are carried
+ * rather than nulled: a null would drop the clan off the tier XI board.
  */
 export async function recordClanSnapshot(
   region: Region,
   clanId: number,
   data: ClanStrongholdData | null,
+  skirmishT11?: StrongholdModeStats,
 ): Promise<void> {
   const snapshots = clanSnapshotsByRegion[region];
   const clans = clansByRegion[region];
@@ -130,7 +138,7 @@ export async function recordClanSnapshot(
   // one is due a full cadence out.
   await db
     .update(clans)
-    .set({ strongholdDueAt: strongholdDueAtFor(data) })
+    .set({ strongholdDueAt: strongholdDueAtFor(data, skirmishT11) })
     .where(eq(clans.id, clanId));
 
   if (!data) return;
@@ -146,6 +154,9 @@ export async function recordClanSnapshot(
   await db.insert(snapshots).values({
     clanId,
     ...strongholdColumns(data),
+    skirmishBattlesT11:
+      skirmishT11?.battles ?? latest?.skirmishBattlesT11 ?? null,
+    skirmishWinsT11: skirmishT11?.wins ?? latest?.skirmishWinsT11 ?? null,
     ...carriedGlobalMap(latest),
   });
 }

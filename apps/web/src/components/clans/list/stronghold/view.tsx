@@ -94,7 +94,9 @@ export function StrongholdLeaderboardView({
     () => [
       { key: "sr", label: tCol("sr"), value: (r) => r.sr },
       { key: "srb", label: tCol("srb"), value: (r) => r.srb },
-      { key: "elo", label: tCol("elo"), value: (r) => r.elo },
+      ...(TIER_SORT_OPTIONS[tier].includes(StrongholdSort.Elo)
+        ? [{ key: "elo", label: tCol("elo"), value: (r: RankedStrongholdEntry) => r.elo }]
+        : []),
       { key: "battles", label: tCol("battles"), value: (r) => r.battles },
       {
         key: "winrate",
@@ -103,7 +105,7 @@ export function StrongholdLeaderboardView({
       },
       { key: "members", label: tCol("members"), value: (r) => r.membersCount },
     ],
-    [tCol],
+    [tCol, tier],
   );
   // The board is a single table (unlike the three metric boards on /clans), so
   // the filter can own `?q=&rc=&min=&max=` without fighting a sibling over them.

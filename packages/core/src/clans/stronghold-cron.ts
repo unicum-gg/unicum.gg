@@ -9,7 +9,10 @@ import {
 } from "@unicum.gg/shared";
 import { REGIONS, type Region } from "@unicum.gg/wargaming";
 import { recordClanSnapshot } from "./snapshots";
-import { fetchClanStronghold } from "@unicum.gg/core/wargaming/wot/clans/stronghold";
+import {
+  fetchClanSkirmishT11,
+  fetchClanStronghold,
+} from "@unicum.gg/core/wargaming/wot/clans/stronghold";
 
 // Ticks back to back (node-cron's 6-field form is seconds), each one guarded
 // against overlap by the scheduler. A tick that finds nothing due returns in
@@ -194,15 +197,19 @@ export async function sampleDueStrongholdsForRegion(
   // which is the only way to see the sampling policy working (or not) from the
   // outside.
   const tally = tallyFor(region);
+  // One request per ten clans on the public API, the only budget this cron
+  // touches beside its own: about 3,000 requests a day on EU.
+  const skirmishT11 = await fetchClanSkirmishT11(region, clanIds);
 
   const queue = [...clanIds];
   const worker = async (): Promise<void> => {
     for (let clanId = queue.pop(); clanId !== undefined; clanId = queue.pop()) {
       try {
         const data = await fetchClanStronghold(region, clanId);
-        const bucket = strongholdBucketFor(data);
+        const t11 = skirmishT11.get(clanId);
+        const bucket = strongholdBucketFor(data, t11);
         tally.buckets.set(bucket, (tally.buckets.get(bucket) ?? 0) + 1);
-        await recordClanSnapshot(region, clanId, data);
+        await recordClanSnapshot(region, clanId, data, t11);
         if (data) result.stored += 1;
         else result.absent += 1;
       } catch (err) {

@@ -33,6 +33,11 @@ function strongholdRows(s: ClanStrongholdStats): TableRow[] {
       label: "Advances T10 WR",
       primary: wr(s.advancesWinsT10, s.advancesBattlesT10),
     },
+    { label: "Skirmish T11", primary: int(s.skirmishBattlesT11) },
+    {
+      label: "Skirmish T11 WR",
+      primary: wr(s.skirmishWinsT11, s.skirmishBattlesT11),
+    },
     { label: "Skirmish T10", primary: int(s.skirmishBattlesT10) },
     {
       label: "Skirmish T10 WR",

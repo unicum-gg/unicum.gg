@@ -17,7 +17,7 @@ const strongholdLeaderboardEntry = z
     languages: z.array(z.string()),
     membersCount: z.number(),
     elo: z.number().nullable().meta({
-      description: "Tier Elo (null for Advances, which has no Elo).",
+      description: "Tier Elo (null where Wargaming publishes none, such as tier XI).",
     }),
     battles: z.number().meta({
       description: "Battles over the selected period.",

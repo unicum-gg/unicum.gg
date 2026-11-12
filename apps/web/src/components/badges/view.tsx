@@ -80,12 +80,13 @@ const PLAYER_BADGE_COUNT = 7;
 
 const CLAN_BOARDS = [
   { board: ClanBoard.Advances, tier: StrongholdTier.Advances },
+  { board: ClanBoard.SkirmishT11, tier: StrongholdTier.T11 },
   { board: ClanBoard.SkirmishT10, tier: StrongholdTier.T10 },
   { board: ClanBoard.SkirmishT8, tier: StrongholdTier.T8 },
   { board: ClanBoard.SkirmishT6, tier: StrongholdTier.T6 },
 ] as const;
 
-/** The four board crests plus the tournament trophy in its two tinctures. */
+/** The board crests plus the tournament trophy in its two tinctures. */
 const CLAN_BADGE_COUNT = CLAN_BOARDS.length + 2;
 
 export function BadgesView() {

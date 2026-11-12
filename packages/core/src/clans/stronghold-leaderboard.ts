@@ -30,6 +30,12 @@ function tierColumns(tier: StrongholdTier): {
   wins: string;
 } {
   switch (tier) {
+    case StrongholdTier.T11:
+      return {
+        elo: null,
+        battles: "skirmish_battles_t11",
+        wins: "skirmish_wins_t11",
+      };
     case StrongholdTier.T10:
       return {
         elo: "elo_t10",
@@ -106,6 +112,7 @@ function srExpr(p: { battles: string; wins: string }): string {
 
 const TIERS: StrongholdTier[] = [
   StrongholdTier.Advances,
+  StrongholdTier.T11,
   StrongholdTier.T10,
   StrongholdTier.T8,
   StrongholdTier.T6,

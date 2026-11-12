@@ -175,6 +175,7 @@ export async function getClanStrongholdSr(
     );
     return {
       advances: byTier.get(StrongholdTier.Advances) ?? null,
+      t11: byTier.get(StrongholdTier.T11) ?? null,
       t10: byTier.get(StrongholdTier.T10) ?? null,
       t8: byTier.get(StrongholdTier.T8) ?? null,
       t6: byTier.get(StrongholdTier.T6) ?? null,

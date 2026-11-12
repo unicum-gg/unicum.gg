@@ -24,7 +24,7 @@ export function makeStrongholdRatingsTable(region: string) {
   return pgTable(
     `${region}_stronghold_ratings`,
     {
-      // 'advances' | 't10' | 't8' | 't6' (StrongholdTier).
+      // 'advances' | 't11' | 't10' | 't8' | 't6' (StrongholdTier).
       tier: text("tier").notNull(),
       // StrongholdPeriod: '24h' | '7d' | '30d' | 'overall'. Battles/wins/sr are already the
       // period's values (all-time totals, or the 30-day diff).

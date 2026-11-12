@@ -1,5 +1,6 @@
 export enum StrongholdTier {
   Advances = "advances",
+  T11 = "t11",
   T10 = "t10",
   T8 = "t8",
   T6 = "t6",
@@ -57,6 +58,7 @@ export const STRONGHOLD_PERIOD_DAYS: Record<StrongholdPeriod, number | null> = {
 
 export const STRONGHOLD_TIER_LABEL: Record<StrongholdTier, string> = {
   [StrongholdTier.Advances]: "Advances",
+  [StrongholdTier.T11]: "Skirmish T11",
   [StrongholdTier.T10]: "Skirmish T10",
   [StrongholdTier.T8]: "Skirmish T8",
   [StrongholdTier.T6]: "Skirmish T6",
@@ -104,6 +106,12 @@ export const STRONGHOLD_MIN_BATTLES: Record<
     [StrongholdPeriod.Month]: 10,
     [StrongholdPeriod.Overall]: 30,
   },
+  [StrongholdTier.T11]: {
+    [StrongholdPeriod.Day]: 5,
+    [StrongholdPeriod.Week]: 12,
+    [StrongholdPeriod.Month]: 33,
+    [StrongholdPeriod.Overall]: 100,
+  },
   [StrongholdTier.T10]: {
     [StrongholdPeriod.Day]: 5,
     [StrongholdPeriod.Week]: 12,
@@ -132,7 +140,12 @@ const DEFAULT_SORT_OPTIONS: StrongholdSort[] = [
   StrongholdSort.Winrate,
 ];
 
+// Tier XI has no ELO: Wargaming publishes battles and wins for it and no rating,
+// so offering the sort would rank every clan on the same null.
 export const TIER_SORT_OPTIONS: Record<StrongholdTier, StrongholdSort[]> = {
+  [StrongholdTier.T11]: DEFAULT_SORT_OPTIONS.filter(
+    (sort) => sort !== StrongholdSort.Elo,
+  ),
   [StrongholdTier.T10]: DEFAULT_SORT_OPTIONS,
   [StrongholdTier.T8]: DEFAULT_SORT_OPTIONS,
   [StrongholdTier.T6]: DEFAULT_SORT_OPTIONS,

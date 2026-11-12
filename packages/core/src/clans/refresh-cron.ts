@@ -13,7 +13,10 @@ import { getClanMembersBatch } from "@unicum.gg/core/clans/members";
 import { refreshClansByIdsBatch } from "./repository";
 import { refreshClanEvents } from "./repository/events";
 import { refreshClanMembers } from "./repository/members";
-import { fetchClanStronghold } from "@unicum.gg/core/wargaming/wot/clans/stronghold";
+import {
+  fetchClanSkirmishT11,
+  fetchClanStronghold,
+} from "@unicum.gg/core/wargaming/wot/clans/stronghold";
 import { fetchClanGlobalMap } from "@unicum.gg/core/wargaming/wot/clans/globalmap";
 
 // 10s tick, fast enough for user-initiated page visits to feel live, loose
@@ -115,9 +118,10 @@ export async function drainClanRefreshQueueForRegion(
         Promise.all([
           fetchClanStronghold(region, clanId),
           fetchClanGlobalMap(region, clanId),
+          fetchClanSkirmishT11(region, [clanId]),
         ])
-          .then(async ([sh, gm]) => {
-            await recordClanSnapshot(region, clanId, sh);
+          .then(async ([sh, gm, t11]) => {
+            await recordClanSnapshot(region, clanId, sh, t11.get(clanId));
             if (gm) await recordClanGlobalMapSnapshot(region, clanId, gm);
           })
           .catch((err) =>

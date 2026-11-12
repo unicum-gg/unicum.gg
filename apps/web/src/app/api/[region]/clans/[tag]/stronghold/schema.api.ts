@@ -14,17 +14,19 @@ const clanStrongholdStats = z
     eloT10: n(),
     skirmishBattlesT10: n(),
     skirmishWinsT10: n(),
+    skirmishBattlesT11: n(),
+    skirmishWinsT11: n(),
     advancesBattlesT10: n(),
     advancesWinsT10: n(),
   })
   .meta({
     id: "ClanStrongholdStats",
     description:
-      "A clan's Stronghold Elo and skirmish/advances battles and wins per tier (6/8/10).",
+      "A clan's Stronghold Elo and skirmish/advances battles and wins per tier (6/8/10/11). Wargaming publishes no Elo for tier 11.",
   });
 
 const strongholdSr = z
-  .object({ advances: n(), t10: n(), t8: n(), t6: n() })
+  .object({ advances: n(), t11: n(), t10: n(), t8: n(), t6: n() })
   .nullable();
 
 /** Response of `GET /{region}/clans/{tag}/stronghold` (latest + period diffs). */

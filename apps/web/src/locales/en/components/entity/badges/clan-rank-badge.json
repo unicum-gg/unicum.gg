@@ -2,6 +2,7 @@
   "aria-rank": "Rank {rank} on the {board}",
   "board": {
     "advances": "Advances Stronghold rating",
+    "t11": "Tier XI Skirmish rating",
     "t10": "Tier X Skirmish rating",
     "t6": "Tier VI Skirmish rating",
     "t8": "Tier VIII Skirmish rating"
