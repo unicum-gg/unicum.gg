@@ -13,6 +13,7 @@ import {
   MANEUVERS_HERO_SHARE,
   MANEUVERS_LEGEND_BATTLE_SHARE,
   MANEUVERS_LEGEND_SHARE,
+  topShareLastPlace,
 } from "@unicum.gg/shared";
 import { useFormat } from "@/hooks/use-format";
 import { useTranslation } from "@/hooks/use-translation";
@@ -106,6 +107,30 @@ export function ManeuversPlayerRewards({
   const fmt = num(INT_FORMAT);
   const pct = num(PCT_FORMAT);
   if (!current.ranked) return null;
+  const ranked = current.ranked;
+  // What stands between the player and a badge, said in places: their own
+  // place against the last one inside the share, then their clan's, each only
+  // when it is the condition missing.
+  const playerGap = (share: number) =>
+    inTopShare(current.place, ranked, share)
+      ? null
+      : t("players-short", {
+          share: pct.format(share),
+          last: fmt.format(topShareLastPlace(ranked, share)),
+          place: fmt.format(current.place),
+        });
+  const clanGap = (share: number) =>
+    current.clanPlace == null || !current.clansRanked
+      ? t("no-clan", { share: pct.format(share) })
+      : inTopShare(current.clanPlace, current.clansRanked, share)
+        ? null
+        : t("clan-short", {
+            share: pct.format(share),
+            last: fmt.format(topShareLastPlace(current.clansRanked, share)),
+            place: fmt.format(current.clanPlace),
+          });
+  const gaps = (...parts: (string | null)[]) =>
+    parts.filter((x): x is string => x != null).join(" · ");
   const r = maneuversPlayerRewards({
     place: current.place,
     ranked: current.ranked,
@@ -162,7 +187,7 @@ export function ManeuversPlayerRewards({
           detail={
             r.legend
               ? t("legend-battles", { share: pct.format(MANEUVERS_LEGEND_BATTLE_SHARE) })
-              : t("legend-needs", { share: pct.format(MANEUVERS_LEGEND_SHARE) })
+              : gaps(playerGap(MANEUVERS_LEGEND_SHARE), clanGap(MANEUVERS_LEGEND_SHARE))
           }
         />
         <Line
@@ -172,7 +197,7 @@ export function ManeuversPlayerRewards({
           detail={
             r.hero
               ? t("clan-battles", { count: MANEUVERS_CLAN_BATTLES })
-              : t("hero-needs", { share: pct.format(MANEUVERS_HERO_SHARE) })
+              : gaps(clanGap(MANEUVERS_HERO_SHARE))
           }
         />
         {r.medal ? <Line ok label={medal(r.medal)} /> : null}
@@ -196,8 +221,16 @@ export function ManeuversClanRewards({
 }) {
   const { t, maneuvers, medal } = useNames();
   const { num } = useFormat();
+  const fmt = num(INT_FORMAT);
   const pct = num(PCT_FORMAT);
   if (!current.ranked) return null;
+  const ranked = current.ranked;
+  const gap = (share: number) =>
+    t("clans-short", {
+      share: pct.format(share),
+      last: fmt.format(topShareLastPlace(ranked, share)),
+      place: fmt.format(current.place),
+    });
   const multiplier = maneuversMultiplier(current.place, current.ranked, clanBondsPercent);
   const won = maneuversMedal(current.place);
   const hero = inTopShare(current.place, current.ranked, MANEUVERS_HERO_SHARE);
@@ -222,7 +255,7 @@ export function ManeuversClanRewards({
           ok={hero}
           badge={ManeuversBadge.Hero}
           label={t("members-badge", { badge: t("hero", { maneuvers }) })}
-          detail={hero ? undefined : t("clan-needs", { share: pct.format(MANEUVERS_HERO_SHARE) })}
+          detail={hero ? undefined : gap(MANEUVERS_HERO_SHARE)}
         />
         <Line
           ok={legend}
@@ -231,7 +264,7 @@ export function ManeuversClanRewards({
           detail={
             legend
               ? t("legend-members", { share: pct.format(MANEUVERS_LEGEND_SHARE) })
-              : t("clan-needs", { share: pct.format(MANEUVERS_LEGEND_SHARE) })
+              : gap(MANEUVERS_LEGEND_SHARE)
           }
         />
         {won ? <Line ok label={t("members-medal", { medal: medal(won) })} /> : null}
