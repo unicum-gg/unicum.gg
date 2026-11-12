@@ -69,5 +69,22 @@
   "paint-locked": {
     "factory": "Har sin egen fabriksmålning: spelet målar inget ovanpå den",
     "locked": "Spelet tillåter ingen anpassning av detta fordon"
+  },
+  "deploy-tooltips": {
+    "engaged": "{mode}: {meaning}. Bakåt till {travel}",
+    "travel": "{mode}: fordonet före bytet. Visa det {meaning}"
+  },
+  "deploy-meaning": {
+    "siege": "förankrat, där både dess kanon och dess skrov siktar",
+    "wheeled": "låst med hjulen, för vägen hellre än striden",
+    "dualGun": "båda kanonerna avfyrades som en",
+    "shellParamsSwitcher": "kanonens extra kamrar öppna, där skada byts mot penetreringseffekt",
+    "lowChargeShot": "en delvis laddning, avfyrad utan att vänta",
+    "turboshaftEngine": "turbinen uppvarvad",
+    "twinGun": "båda piporna avfyrades som en"
+  },
+  "mechanism": {
+    "says": "Använd {mode}-mekanismen",
+    "tooltip": "Låt kanonen gå igenom sin {mode}-cykel, så som spelet spelar den vid ett skott"
   }
 }

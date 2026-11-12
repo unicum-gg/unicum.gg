@@ -69,5 +69,22 @@
   "paint-locked": {
     "factory": "Har sin egen fabriksmaling på: spillet maler ingenting oven på det",
     "locked": "Spillet tillader ingen tilpasning på dette køretøj"
+  },
+  "deploy-tooltips": {
+    "engaged": "{mode}: {meaning}. Tilbage til {travel}",
+    "travel": "{mode}: køretøjet før skiftet. Vis det {meaning}"
+  },
+  "deploy-meaning": {
+    "siege": "plantet, hvor både kanonen og skroget sigter",
+    "wheeled": "hjulene låst fast, til vejen snarere end kampen",
+    "dualGun": "begge kanoner affyret som én",
+    "shellParamsSwitcher": "kanonens ekstra kamre åbne, hvor der byttes skade for gennemslagskraft",
+    "lowChargeShot": "en delvis ladning, affyret uden at vente",
+    "turboshaftEngine": "turbinen kørt op",
+    "twinGun": "begge løb affyret som én"
+  },
+  "mechanism": {
+    "says": "Betjen mekanismen for {mode}",
+    "tooltip": "Kør kanonen gennem cyklussen for {mode}, sådan som spillet spiller den ved et skud"
   }
 }

@@ -69,5 +69,22 @@
   "paint-locked": {
     "factory": "Trägt die werkseigene Lackierung, das Spiel malt Nichts darüber",
     "locked": "Das Spiel sagt nein zu jeder Anpassung an diesem Fahrzeug"
+  },
+  "deploy-tooltips": {
+    "engaged": "{mode}: {meaning}. Zurück zu {travel}",
+    "travel": "{mode}: das Fahrzeug vor dem Wechsel. Anzeigen: {meaning}"
+  },
+  "deploy-meaning": {
+    "siege": "aufgestellt, wobei Geschütz und Wanne beide zielen",
+    "wheeled": "Räder gesperrt, eher für die Straße als für den Kampf",
+    "dualGun": "beide Geschütze als eines abgefeuert",
+    "shellParamsSwitcher": "die zusätzlichen Kammern des Geschützes sind Offen, wobei Schaden gegen Durchschlagsleistung eingetauscht wird",
+    "lowChargeShot": "eine teilweise Ladung, ohne zu warten abgefeuert",
+    "turboshaftEngine": "die Turbine hochgefahren",
+    "twinGun": "beide Läufe als eines abgefeuert"
+  },
+  "mechanism": {
+    "says": "Den Mechanismus für {mode} bedienen",
+    "tooltip": "Das Geschütz durch seinen {mode}-Zyklus führen, wie das Spiel ihn bei einem Schuss spielt"
   }
 }

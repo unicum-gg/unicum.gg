@@ -13,6 +13,18 @@
     "story_mode": "Storymodus",
     "training": "Ausbildung"
   },
+  "vehicle-modes": {
+    "travel": "Reise",
+    "siege": "Belagerung",
+    "rapid": "Schnell",
+    "single": "einzeln",
+    "salvo": "Salve",
+    "standard": "Standard",
+    "calibrated": "Kalibriert",
+    "full": "Vollständig",
+    "single-charge": "Einzelaufladung",
+    "turbine": "Turbine"
+  },
   "player-modes": {
     "overall": "Zufallsgefechte",
     "skirmish": "Scharmützel",

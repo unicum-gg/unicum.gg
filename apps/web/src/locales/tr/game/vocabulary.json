@@ -13,6 +13,18 @@
     "story_mode": "Hikâye Kipi",
     "training": "Eğitim"
   },
+  "vehicle-modes": {
+    "travel": "Seyahat",
+    "siege": "Kuşatma",
+    "rapid": "Hızlı",
+    "single": "Tek",
+    "salvo": "Salvo",
+    "standard": "Standart",
+    "calibrated": "Kalibre edilmiş",
+    "full": "Tam",
+    "single-charge": "Tek Şarjlı",
+    "turbine": "Türbin"
+  },
   "player-modes": {
     "overall": "Rastgele Savaşlar",
     "skirmish": "Çatışma",

@@ -13,6 +13,18 @@
     "story_mode": "剧情模式",
     "training": "训练中"
   },
+  "vehicle-modes": {
+    "travel": "行进",
+    "siege": "攻城",
+    "rapid": "快速",
+    "single": "单场",
+    "salvo": "齐射",
+    "standard": "标准",
+    "calibrated": "已校准",
+    "full": "完整",
+    "single-charge": "单场装填",
+    "turbine": "涡轮"
+  },
   "player-modes": {
     "overall": "随机战斗",
     "skirmish": "冲突战",

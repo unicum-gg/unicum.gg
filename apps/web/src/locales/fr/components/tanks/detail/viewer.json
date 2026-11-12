@@ -69,5 +69,22 @@
   "paint-locked": {
     "factory": "Porte sa propre livrée d’usine : le jeu ne peint rien par-dessus",
     "locked": "Le jeu n’autorise aucune personnalisation sur ce véhicule"
+  },
+  "deploy-tooltips": {
+    "engaged": "{mode} : {meaning}. Retour à {travel}",
+    "travel": "{mode} : le véhicule avant le changement. Affichez-le {meaning}"
+  },
+  "deploy-meaning": {
+    "siege": "posé, avec le canon et la caisse orientés dans la même direction",
+    "wheeled": "roues verrouillées, pour la route plutôt que le combat",
+    "dualGun": "les deux canons tirant simultanément",
+    "shellParamsSwitcher": "chambres supplémentaires du canon ouvertes, au prix des dégâts pour gagner en puissance de pénétration",
+    "lowChargeShot": "charge partielle, tirée sans attendre",
+    "turboshaftEngine": "turbine lancée",
+    "twinGun": "les deux tubes tirant simultanément"
+  },
+  "mechanism": {
+    "says": "Utilisez le mécanisme {mode}",
+    "tooltip": "Faites fonctionner le canon selon son cycle {mode}, comme le jeu l’exécute à chaque tir"
   }
 }

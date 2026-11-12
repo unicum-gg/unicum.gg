@@ -13,6 +13,18 @@
     "story_mode": "طور القصة",
     "training": "تدريب"
   },
+  "vehicle-modes": {
+    "travel": "تنقّل",
+    "siege": "حصار",
+    "rapid": "سريع",
+    "single": "فردي",
+    "salvo": "وابل",
+    "standard": "قياسي",
+    "calibrated": "مُعاير",
+    "full": "كامل",
+    "single-charge": "شحنة فردية",
+    "turbine": "توربين"
+  },
   "player-modes": {
     "overall": "المعارك العشوائية",
     "skirmish": "مناوشة",

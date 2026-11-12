@@ -69,5 +69,22 @@
   "paint-locked": {
     "factory": "Má vlastní tovární zbarvení: hra přes něj nic nepřekresluje",
     "locked": "Hra u tohoto vozidla nepovoluje žádné úpravy"
+  },
+  "deploy-tooltips": {
+    "engaged": "{mode}: {meaning}. Zpět k {travel}",
+    "travel": "{mode}: vozidlo před přepnutím. Zobrazit ho jako {meaning}"
+  },
+  "deploy-meaning": {
+    "siege": "rozložené, kdy jeho dělo i korba míří stejným směrem",
+    "wheeled": "kola zamčeno, spíše pro silnici než pro boj",
+    "dualGun": "obě děla vypálila jako jedno",
+    "shellParamsSwitcher": "další komory otevřít, výměnou poškození za průbojnost",
+    "lowChargeShot": "částečně nabité, vystřelené bez čekání",
+    "turboshaftEngine": "turbína roztočená",
+    "twinGun": "obě hlavně vypálily jako jedna"
+  },
+  "mechanism": {
+    "says": "Pracujte s mechanismem režimu {mode}",
+    "tooltip": "Proveďte dělo cyklem režimu {mode}, jak jej hra hraje při výstřelu"
   }
 }

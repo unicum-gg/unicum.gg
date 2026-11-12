@@ -13,6 +13,18 @@
     "story_mode": "Historietilstand",
     "training": "Træning"
   },
+  "vehicle-modes": {
+    "travel": "Kørsel",
+    "siege": "Belejring",
+    "rapid": "Hurtig",
+    "single": "Enkelt",
+    "salvo": "Salve",
+    "standard": "Standard",
+    "calibrated": "Kalibreret",
+    "full": "Fuld",
+    "single-charge": "Enkeltladning",
+    "turbine": "Turbine"
+  },
   "player-modes": {
     "overall": "Tilfældige Kampe",
     "skirmish": "Træfning",

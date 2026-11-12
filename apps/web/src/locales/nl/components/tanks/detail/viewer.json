@@ -69,5 +69,22 @@
   "paint-locked": {
     "factory": "Dit voertuig heeft zijn eigen fabrieksbeschildering: het spel schildert er niets overheen",
     "locked": "Het spel staat geen aanpassingen aan dit voertuig toe"
+  },
+  "deploy-tooltips": {
+    "engaged": "{mode}: {meaning}. Terug naar {travel}",
+    "travel": "{mode}: het voertuig vóór de omschakeling. Tonen als {meaning}"
+  },
+  "deploy-meaning": {
+    "siege": "vastgezet, waarbij het kanon en de romp allebei richten",
+    "wheeled": "wielen vergrendeld, voor de weg in plaats van het gevecht",
+    "dualGun": "beide kanonnen schieten als één",
+    "shellParamsSwitcher": "de extra kamers van het kanon open, waarbij schade wordt ingeruild voor penetratievermogen",
+    "lowChargeShot": "gedeeltelijk opgeladen, afgevuurd zonder wachten",
+    "turboshaftEngine": "de turbine op toeren",
+    "twinGun": "beide lopen schieten als één"
+  },
+  "mechanism": {
+    "says": "Bedien het mechanisme van {mode}",
+    "tooltip": "Laat het kanon de cyclus van {mode} doorlopen, zoals het spel die bij een schot speelt"
   }
 }

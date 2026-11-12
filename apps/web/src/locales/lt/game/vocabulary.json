@@ -13,6 +13,18 @@
     "story_mode": "Istorijos režimas",
     "training": "Treniruotės"
   },
+  "vehicle-modes": {
+    "travel": "Važiavimas",
+    "siege": "Apgultis",
+    "rapid": "Spartusis",
+    "single": "Vienas",
+    "salvo": "Salvė",
+    "standard": "Standartinis",
+    "calibrated": "Kalibruotas",
+    "full": "Pilnas",
+    "single-charge": "Vieno įkrovimo",
+    "turbine": "Turbina"
+  },
   "player-modes": {
     "overall": "Atsitiktinės kovos",
     "skirmish": "Išpuolis",

@@ -69,5 +69,22 @@
   "paint-locked": {
     "factory": "Suot nito ang sarili nitong factory livery: walang ipinipinta ang laro sa ibabaw nito",
     "locked": "Hindi pinapayagan ng laro ang anumang customization sa sasakyang ito"
+  },
+  "deploy-tooltips": {
+    "engaged": "{mode}: {meaning}. Bumalik sa {travel}",
+    "travel": "{mode}: ang sasakyan bago ang paglipat. Ipakita ito {meaning}"
+  },
+  "deploy-meaning": {
+    "siege": "nakapuwesto, kung saan parehong tumututok ang mga baril at kasko nito",
+    "wheeled": "naka-lock ang mga gulong, para sa kalsada sa halip na pakikipaglaban",
+    "dualGun": "sabay na pagpapaputok ng parehong baril bilang isa",
+    "shellParamsSwitcher": "bukas ang mga karagdagang kamara ng baril, ipinagpapalit ang pinsala para sa lakas ng pagtagos",
+    "lowChargeShot": "bahagyang karga, ipinapaputok nang walang paghihintay",
+    "turboshaftEngine": "umandar na ang turbine",
+    "twinGun": "sabay na pagpapaputok ng parehong baril bilang isa"
+  },
+  "mechanism": {
+    "says": "Gamitin ang mekanismo ng {mode}",
+    "tooltip": "Patakbuhin ang baril sa cycle nitong {mode}, ayon sa pagpapatupad ng laro sa bawat pagpapaputok"
   }
 }

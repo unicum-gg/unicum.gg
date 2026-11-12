@@ -69,5 +69,22 @@
   "paint-locked": {
     "factory": "Xe tăng giữ nguyên lớp sơn xuất xưởng: trò chơi không sơn gì đè lên nó",
     "locked": "Trò chơi không cho phép tùy chỉnh xe tăng này"
+  },
+  "deploy-tooltips": {
+    "engaged": "{mode}: {meaning}. Quay lại {travel}",
+    "travel": "{mode}: xe tăng trước khi chuyển đổi. Hiển thị ở trạng thái {meaning}"
+  },
+  "deploy-meaning": {
+    "siege": "đã cố định, nơi pháo và thân xe cùng ngắm",
+    "wheeled": "bánh xe bị khóa, dành cho đường đi thay vì chiến đấu",
+    "dualGun": "cả hai pháo cùng khai hỏa như một",
+    "shellParamsSwitcher": "các buồng bổ sung của pháo mở, đánh đổi sát thương lấy công suất xuyên giáp",
+    "lowChargeShot": "nạp một phần, bắn mà không cần chờ",
+    "turboshaftEngine": "tuabin đã tăng tốc",
+    "twinGun": "cả hai nòng pháo cùng khai hỏa như một"
+  },
+  "mechanism": {
+    "says": "Vận hành cơ chế {mode}",
+    "tooltip": "Cho pháo trải qua chu kỳ {mode}, như cách trò chơi thực hiện trong một lượt bắn"
   }
 }

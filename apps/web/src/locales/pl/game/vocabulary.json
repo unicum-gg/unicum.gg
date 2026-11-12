@@ -13,6 +13,18 @@
     "story_mode": "Tryb fabularny",
     "training": "Szkolenie"
   },
+  "vehicle-modes": {
+    "travel": "Podróżny",
+    "siege": "Oblężniczy",
+    "rapid": "Szybkostrzelny",
+    "single": "Pojedynczy",
+    "salvo": "Salwa",
+    "standard": "Standardowy",
+    "calibrated": "Skalibrowany",
+    "full": "Pełne",
+    "single-charge": "Pojedynczy ładunek",
+    "turbine": "Turbina"
+  },
   "player-modes": {
     "overall": "Bitwy losowe",
     "skirmish": "Potyczka",

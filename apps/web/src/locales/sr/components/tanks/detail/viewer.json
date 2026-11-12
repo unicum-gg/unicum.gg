@@ -69,5 +69,22 @@
   "paint-locked": {
     "factory": "Има сопствену фабричку боју: игра преко ње не наноси ништа",
     "locked": "Игра не дозвољава никакво прилагођавање на овом возилу"
+  },
+  "deploy-tooltips": {
+    "engaged": "{mode}: {meaning}. Nazad na {travel}",
+    "travel": "{mode}: возило pre prebacivanja. Prikaži ga {meaning}"
+  },
+  "deploy-meaning": {
+    "siege": "postavljeno, gde i njegov top i njegov труп ciljaju",
+    "wheeled": "točkovi закључано, za put radije nego za borbu",
+    "dualGun": "oba topovi ispaljeni kao jedan",
+    "shellParamsSwitcher": "dodatne komore topa отвори, menjajući штета za prodornu снага",
+    "lowChargeShot": "delimično punjenje, ispaljeno без чекање",
+    "turboshaftEngine": "turbina je zavrtela",
+    "twinGun": "obe cevi ispaljene kao jedna"
+  },
+  "mechanism": {
+    "says": "Pokreni mehanizam za {mode}",
+    "tooltip": "Pokreni top kroz njegov ciklus {mode}, kao tokom играња pri jednom pucnju"
   }
 }

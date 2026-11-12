@@ -13,6 +13,18 @@
     "story_mode": "Történet mód",
     "training": "Képzés"
   },
+  "vehicle-modes": {
+    "travel": "Utazás",
+    "siege": "Ostrom",
+    "rapid": "Gyors",
+    "single": "Egyszeri",
+    "salvo": "Sortűz",
+    "standard": "Standard",
+    "calibrated": "Kalibrált",
+    "full": "Teljes",
+    "single-charge": "Egyszeri töltés",
+    "turbine": "Turbina"
+  },
   "player-modes": {
     "overall": "Véletlenszerű Csata",
     "skirmish": "Csatározás",

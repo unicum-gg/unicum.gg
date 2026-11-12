@@ -13,6 +13,18 @@
     "story_mode": "Modo historia",
     "training": "Entrenamiento"
   },
+  "vehicle-modes": {
+    "travel": "Viaje",
+    "siege": "Asedio",
+    "rapid": "Rápido",
+    "single": "individual",
+    "salvo": "Salva",
+    "standard": "Estándar",
+    "calibrated": "Calibrado",
+    "full": "Completo",
+    "single-charge": "Carga individual",
+    "turbine": "Turbina"
+  },
   "player-modes": {
     "overall": "Batallas Aleatorias",
     "skirmish": "Escaramuza",

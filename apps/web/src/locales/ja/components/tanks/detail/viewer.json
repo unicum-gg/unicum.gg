@@ -69,5 +69,22 @@
   "paint-locked": {
     "factory": "工場出荷時の塗装のままです。ゲームではその上への塗装はなしです",
     "locked": "ゲームではこの車両をカスタマイズできません"
+  },
+  "deploy-tooltips": {
+    "engaged": "{mode}：{meaning}。{travel}に戻る",
+    "travel": "{mode}：切り替え前の車両。{meaning}として表示"
+  },
+  "deploy-meaning": {
+    "siege": "設置状態で、砲と車体がともに照準を合わせる方向",
+    "wheeled": "車輪がロック済みで、戦闘ではなく道路向け",
+    "dualGun": "両方の砲を一斉に発射",
+    "shellParamsSwitcher": "砲の追加チャンバーが開き、ダメージを貫通力と引き換えにする",
+    "lowChargeShot": "部分的なチャージで、待機なしで発射",
+    "turboshaftEngine": "タービンの回転数が上がった状態",
+    "twinGun": "両方の砲身を一斉に発射"
+  },
+  "mechanism": {
+    "says": "{mode}機構を操作",
+    "tooltip": "ゲームで1発撃つときのように、砲で{mode}サイクルを実行"
   }
 }

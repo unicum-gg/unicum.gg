@@ -13,6 +13,18 @@
     "story_mode": "Сюжетний режим",
     "training": "Навчання"
   },
+  "vehicle-modes": {
+    "travel": "Рух",
+    "siege": "Облоговий",
+    "rapid": "Швидкий",
+    "single": "Одиночний",
+    "salvo": "Залп",
+    "standard": "Стандартний",
+    "calibrated": "Калібрований",
+    "full": "Повний",
+    "single-charge": "Однозарядний",
+    "turbine": "Турбіна"
+  },
   "player-modes": {
     "overall": "Випадкові бої",
     "skirmish": "Вилазка",

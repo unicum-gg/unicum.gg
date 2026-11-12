@@ -13,6 +13,18 @@
     "story_mode": "Tarinatila",
     "training": "Koulutus"
   },
+  "vehicle-modes": {
+    "travel": "Matka",
+    "siege": "Piiritys",
+    "rapid": "Nopea",
+    "single": "Yksittäinen",
+    "salvo": "Sarjatuli",
+    "standard": "Standardi",
+    "calibrated": "Kalibroitu",
+    "full": "Täysi",
+    "single-charge": "Yksittäinen lataus",
+    "turbine": "Turbiini"
+  },
   "player-modes": {
     "overall": "Satunnaista taistelua",
     "skirmish": "Kahakka",

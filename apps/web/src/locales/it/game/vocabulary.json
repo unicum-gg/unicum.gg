@@ -13,6 +13,18 @@
     "story_mode": "Modalità Storia",
     "training": "Addestramento"
   },
+  "vehicle-modes": {
+    "travel": "Viaggio",
+    "siege": "Assedio",
+    "rapid": "Rapido",
+    "single": "Singolo",
+    "salvo": "Salva",
+    "standard": "Standard",
+    "calibrated": "Calibrato",
+    "full": "Completo",
+    "single-charge": "Carica singola",
+    "turbine": "Turbina"
+  },
   "player-modes": {
     "overall": "Battaglie casuali",
     "skirmish": "Schermaglia",

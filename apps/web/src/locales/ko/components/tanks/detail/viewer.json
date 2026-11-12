@@ -69,5 +69,22 @@
   "paint-locked": {
     "factory": "자체 공장 도색을 사용하며, 게임에서 그 위에 도색되는 것은 없음",
     "locked": "게임에서 이 차량은 어떤 커스터마이즈도 허용하지 않습니다"
+  },
+  "deploy-tooltips": {
+    "engaged": "{mode}: {meaning}. 뒤로 이동할 대상: {travel}",
+    "travel": "{mode}: 전환 전 차량. {meaning} 상태로 표시"
+  },
+  "deploy-meaning": {
+    "siege": "주포와 차체가 모두 조준하는 고정 상태",
+    "wheeled": "바퀴 잠김 상태로, 전투보다는 도로 주행용",
+    "dualGun": "두 주포가 하나처럼 발사됨",
+    "shellParamsSwitcher": "주포의 추가 약실을 열기, 피해를 관통 출력과 맞바꿈",
+    "lowChargeShot": "부분 충전, 대기 중 없음으로 발사됨",
+    "turboshaftEngine": "터빈이 회전 속도를 올림",
+    "twinGun": "두 포신이 하나처럼 발사됨"
+  },
+  "mechanism": {
+    "says": "{mode} 메커니즘을 작동하세요",
+    "tooltip": "게임에서 한 발 발사 시 플레이되는 방식대로 주포를 {mode} 주기로 작동하세요"
   }
 }

@@ -69,5 +69,22 @@
   "paint-locked": {
     "factory": "Poartă schema de vopsire din fabrică: jocul nu pictează nimic peste ea",
     "locked": "Jocul nu permite nicio personalizare pentru acest vehicul"
+  },
+  "deploy-tooltips": {
+    "engaged": "{mode}: {meaning}. Înapoi la {travel}",
+    "travel": "{mode}: vehiculul dinaintea schimbării. Afișează-l {meaning}"
+  },
+  "deploy-meaning": {
+    "siege": "fixat, cu tunul și carena orientate ambele în direcția țintirii",
+    "wheeled": "roțile blocate, pentru drum mai degrabă decât pentru luptă",
+    "dualGun": "ambele tunuri au tras ca unul singur",
+    "shellParamsSwitcher": "camerele suplimentare ale tunului deschise, schimbând daune pentru putere de penetrare",
+    "lowChargeShot": "o încărcare parțială, trasă fără așteptare",
+    "turboshaftEngine": "turbina pornită",
+    "twinGun": "ambele țevi au tras ca una singură"
+  },
+  "mechanism": {
+    "says": "Acționează mecanismul {mode}",
+    "tooltip": "Rulează tunul prin ciclul său {mode}, așa cum îl joacă jocul la o lovitură"
   }
 }

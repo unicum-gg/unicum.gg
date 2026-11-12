@@ -69,5 +69,22 @@
   "paint-locked": {
     "factory": "Ha la propria livrea di fabbrica: il gioco non dipinge nulla sopra di essa",
     "locked": "Il gioco non consente personalizzazioni su questo veicolo"
+  },
+  "deploy-tooltips": {
+    "engaged": "{mode}: {meaning}. Indietro a {travel}",
+    "travel": "{mode}: il veicolo prima del cambio. Mostralo {meaning}"
+  },
+  "deploy-meaning": {
+    "siege": "ancorato, con cannone e scafo entrambi puntati",
+    "wheeled": "ruote bloccate, per la strada piuttosto che per il combattimento",
+    "dualGun": "entrambi i cannoni sparano come uno solo",
+    "shellParamsSwitcher": "le camere aggiuntive del cannone aperte, sacrificando danno per la potenza di penetrazione",
+    "lowChargeShot": "una carica parziale, sparata senza attendere",
+    "turboshaftEngine": "la turbina portata a regime",
+    "twinGun": "entrambe le canne sparano come una sola"
+  },
+  "mechanism": {
+    "says": "Aziona il meccanismo di {mode}",
+    "tooltip": "Esegui il ciclo di {mode} del cannone, come lo riproduce il gioco allo sparo"
   }
 }

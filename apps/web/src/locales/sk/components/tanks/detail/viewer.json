@@ -69,5 +69,22 @@
   "paint-locked": {
     "factory": "Ima lastno tovarniško poslikavo: hra čeznjo ne nariše nič",
     "locked": "Hra za vozilo ne dovoljuje nobenega prilagajanja"
+  },
+  "deploy-tooltips": {
+    "engaged": "{mode}: {meaning}. Nazaj na {travel}",
+    "travel": "{mode}: vozilo pred preklopom. Prikaži ga {meaning}"
+  },
+  "deploy-meaning": {
+    "siege": "zasidrano, kjer topovi in trup merijo v isto smer",
+    "wheeled": "kolesa so uzamknuté, za cesto skôr kot za boj",
+    "dualGun": "oba topova sta streljala kot eden",
+    "shellParamsSwitcher": "dodatne komore topa so otvorené, pri čemer se poškodzenie zamenja za prodorno moč",
+    "lowChargeShot": "delno napolnjen strel, izstreljen brez čakanja",
+    "turboshaftEngine": "turbína se je zavrtela",
+    "twinGun": "obe cevi sta streljali kot ena"
+  },
+  "mechanism": {
+    "says": "Upravljaj mehanizem režima {mode}",
+    "tooltip": "Izvedi cikel režima {mode} v topu, kot ga igra izvaja ob strelu"
   }
 }

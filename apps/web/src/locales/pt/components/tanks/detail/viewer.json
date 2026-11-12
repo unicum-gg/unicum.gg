@@ -69,5 +69,22 @@
   "paint-locked": {
     "factory": "Usa sua própria pintura de fábrica: o jogo não pinta nada sobre ela",
     "locked": "O jogo não permite personalização neste veículo"
+  },
+  "deploy-tooltips": {
+    "engaged": "{mode}: {meaning}. Voltar para {travel}",
+    "travel": "{mode}: o veículo antes da troca. Mostrar o veículo {meaning}"
+  },
+  "deploy-meaning": {
+    "siege": "plantado, com o canhão e o casco apontados na mesma direção",
+    "wheeled": "com as rodas em estado bloqueado, para a estrada em vez da luta",
+    "dualGun": "ambos os canhões a fazer fogo em conjunto",
+    "shellParamsSwitcher": "as câmaras extra do canhão em estado aberto, trocando dano por potência de penetração",
+    "lowChargeShot": "uma carga parcial, disparada sem ficar a aguardar",
+    "turboshaftEngine": "a turbina acelerada",
+    "twinGun": "ambos os canos a fazer fogo em conjunto"
+  },
+  "mechanism": {
+    "says": "Opere o mecanismo de {mode}",
+    "tooltip": "Faça o canhão passar pelo seu ciclo de {mode}, tal como o jogo o joga num disparo"
   }
 }

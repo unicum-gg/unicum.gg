@@ -13,6 +13,18 @@
     "story_mode": "Režim priče",
     "training": "Trening"
   },
+  "vehicle-modes": {
+    "travel": "Putovanje",
+    "siege": "Opsadni",
+    "rapid": "Brzi",
+    "single": "Pojedinačno",
+    "salvo": "Salva",
+    "standard": "Standard",
+    "calibrated": "Kalibrisano",
+    "full": "Potpuno",
+    "single-charge": "Pojedinačno punjenje",
+    "turbine": "Turbina"
+  },
   "player-modes": {
     "overall": "Nasumične bitke",
     "skirmish": "Okršaj",

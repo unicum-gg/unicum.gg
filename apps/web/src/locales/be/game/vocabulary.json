@@ -13,6 +13,18 @@
     "story_mode": "Сюжэтны рэжым",
     "training": "Трэніроўка"
   },
+  "vehicle-modes": {
+    "travel": "Падарожжа",
+    "siege": "Аблога",
+    "rapid": "Хуткі",
+    "single": "Адзінкавы",
+    "salvo": "Залп",
+    "standard": "Стандарт",
+    "calibrated": "Адкалібраваны",
+    "full": "Поўны",
+    "single-charge": "Адзінкавы зарад",
+    "turbine": "Турбіна"
+  },
   "player-modes": {
     "overall": "Слухмяшаныя баі",
     "skirmish": "Вылазка",

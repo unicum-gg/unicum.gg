@@ -13,6 +13,18 @@
     "story_mode": "Mode ng Kuwento",
     "training": "Pagsasanay"
   },
+  "vehicle-modes": {
+    "travel": "Paglalakbay",
+    "siege": "Pagkubkob",
+    "rapid": "Mabilis",
+    "single": "iisa",
+    "salvo": "Salbo",
+    "standard": "Pamantayan",
+    "calibrated": "Na-calibrate",
+    "full": "Buo",
+    "single-charge": "Isang-karga",
+    "turbine": "Turbina"
+  },
   "player-modes": {
     "overall": "Randong Labanan",
     "skirmish": "Skirmish",

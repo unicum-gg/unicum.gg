@@ -13,6 +13,18 @@
     "story_mode": "कहानी मोड",
     "training": "प्रशिक्षण"
   },
+  "vehicle-modes": {
+    "travel": "यात्रा",
+    "siege": "घेराबंदी",
+    "rapid": "तीव्र",
+    "single": "एकल",
+    "salvo": "सल्वो",
+    "standard": "मानक",
+    "calibrated": "कैलिब्रेटेड",
+    "full": "पूर्ण",
+    "single-charge": "एकल-चार्ज",
+    "turbine": "टर्बाइन"
+  },
   "player-modes": {
     "overall": "यादृच्छिक लड़ाई",
     "skirmish": "झड़प",

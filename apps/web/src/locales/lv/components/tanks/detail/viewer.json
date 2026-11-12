@@ -69,5 +69,22 @@
   "paint-locked": {
     "factory": "Šis transportlīdzeklis saglabā savu rūpnīcas krāsojumu: spēle virs tā neko neuzkrāso",
     "locked": "Spēlē šis transportlīdzeklis nav pielāgojams"
+  },
+  "deploy-tooltips": {
+    "engaged": "{mode}: {meaning}. Atpakaļ uz {travel}",
+    "travel": "{mode}: transportlīdzeklis pirms pārslēgšanas. Rādīt to kā {meaning}"
+  },
+  "deploy-meaning": {
+    "siege": "nostabilizēts, kad gan tā lielgabals, gan korpuss tēmē",
+    "wheeled": "riteņi bloķēti, paredzēti ceļam, nevis cīņai",
+    "dualGun": "abi lielgabali izšauj kā viens",
+    "shellParamsSwitcher": "lielgabala papildu kameras atvērt, apmainot bojājumus pret cauršaušanas jaudu",
+    "lowChargeShot": "daļējs lādiņš, izšauts bez gaidīšanas",
+    "turboshaftEngine": "turbīna uzgriezta",
+    "twinGun": "abi stobri izšauj kā viens"
+  },
+  "mechanism": {
+    "says": "Darbināt {mode} mehānismu",
+    "tooltip": "Izpildīt lielgabala {mode} ciklu, kā to spēle spēlē katrā šāvienā"
   }
 }

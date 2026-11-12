@@ -13,6 +13,18 @@
     "story_mode": "Příběhový režim",
     "training": "Výcvik"
   },
+  "vehicle-modes": {
+    "travel": "Cestovní",
+    "siege": "Obléhací",
+    "rapid": "Rychlý",
+    "single": "jednotlivý",
+    "salvo": "Salva",
+    "standard": "Standardní",
+    "calibrated": "Kalibrovaný",
+    "full": "Celý",
+    "single-charge": "Jednotlivé nabití",
+    "turbine": "Turbína"
+  },
   "player-modes": {
     "overall": "Náhodné bitvy",
     "skirmish": "Šarvátka",

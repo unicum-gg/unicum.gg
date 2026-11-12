@@ -69,5 +69,22 @@
   "paint-locked": {
     "factory": "Kendi fabrika kaplamasını kullanır: oyun üzerine hiçbir şey boyamaz",
     "locked": "Oyun bu araçta özelleştirmeye izin vermiyor"
+  },
+  "deploy-tooltips": {
+    "engaged": "{mode}: {meaning}. Geri dön: {travel}",
+    "travel": "{mode}: geçişten önceki araç. Aracı {meaning} olarak göster"
+  },
+  "deploy-meaning": {
+    "siege": "sabitlenmiş, topunun ve gövdesinin aynı yöne nişan aldığı",
+    "wheeled": "tekerlekler kilitli, çatışmadan daha ziyade yol için",
+    "dualGun": "iki top birlikte ateşlendi",
+    "shellParamsSwitcher": "topun ek hazneleri açık, hasar karşılığında delme gücü sağlıyor",
+    "lowChargeShot": "kısmi dolum, beklemeden ateşlendi",
+    "turboshaftEngine": "türbinin devri yükseltildi",
+    "twinGun": "iki namlu birlikte ateşlendi"
+  },
+  "mechanism": {
+    "says": "{mode} mekanizmasını kullan",
+    "tooltip": "Topu, oyunun bir atışta oynattığı şekilde {mode} döngüsünde çalıştır"
   }
 }

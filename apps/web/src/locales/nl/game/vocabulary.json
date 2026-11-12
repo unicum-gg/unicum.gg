@@ -13,6 +13,18 @@
     "story_mode": "Verhaalmodus",
     "training": "Training"
   },
+  "vehicle-modes": {
+    "travel": "Reizen",
+    "siege": "Belegering",
+    "rapid": "Snel",
+    "single": "enkel",
+    "salvo": "Salvo",
+    "standard": "Standaard",
+    "calibrated": "Gekalibreerd",
+    "full": "Volledig",
+    "single-charge": "Enkele lading",
+    "turbine": "Turbine"
+  },
   "player-modes": {
     "overall": "Willekeurige Gevechten",
     "skirmish": "Schermutseling",

@@ -13,6 +13,18 @@
     "story_mode": "스토리 모드",
     "training": "훈련"
   },
+  "vehicle-modes": {
+    "travel": "이동",
+    "siege": "공성",
+    "rapid": "신속",
+    "single": "단일",
+    "salvo": "일제 사격",
+    "standard": "기준",
+    "calibrated": "보정됨",
+    "full": "전체",
+    "single-charge": "단일 충전",
+    "turbine": "터빈"
+  },
   "player-modes": {
     "overall": "무작위 전투",
     "skirmish": "쟁탈전",

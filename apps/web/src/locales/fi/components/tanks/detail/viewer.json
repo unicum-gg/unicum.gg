@@ -69,5 +69,22 @@
   "paint-locked": {
     "factory": "Käyttää omaa tehdasväritystään: peli ei maalaa sen päälle mitään",
     "locked": "Peli ei salli tämän ajoneuvon muokkaamista"
+  },
+  "deploy-tooltips": {
+    "engaged": "{mode}: {meaning}. Takaisin kohtaan {travel}",
+    "travel": "{mode}: ajoneuvo ennen vaihtoa. Näytä se muodossa {meaning}"
+  },
+  "deploy-meaning": {
+    "siege": "paikalleen ankkuroituna, jolloin sekä tykki että runko tähtäävät",
+    "wheeled": "pyörät lukittuina, tietä pikemminkin kuin taistelua varten",
+    "dualGun": "molemmat tykit ampuivat yhtenä",
+    "shellParamsSwitcher": "tykin lisäkammioiden ollessa avoimina, vahinkoa vaihdetaan läpäisytehoon",
+    "lowChargeShot": "osittainen lataus, joka ammutaan ilman että tarvitsee odottaa",
+    "turboshaftEngine": "turbiini on käynnistetty",
+    "twinGun": "molemmat piiput ampuivat yhtenä"
+  },
+  "mechanism": {
+    "says": "Käytä pelimuodon {mode} mekanismia",
+    "tooltip": "Suorita tykillä pelimuodon {mode} kierto samalla tavalla kuin peli pelaa sen yhdellä laukauksella"
   }
 }

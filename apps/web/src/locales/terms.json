@@ -858,7 +858,10 @@
     "Bonds": "السندات",
     "Standing": "الترتيب",
     "The rest": "الباقي",
-    "follow": "متابعة"
+    "follow": "متابعة",
+    "hull": "هيكل",
+    "power": "القوة",
+    "without": "بدون"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1720,7 +1723,10 @@
     "Bonds": "Боны",
     "Standing": "Пазіцыя",
     "The rest": "Астатняе",
-    "follow": "сачыць"
+    "follow": "сачыць",
+    "hull": "корпус",
+    "power": "магутнасць",
+    "without": "без"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -2799,7 +2805,10 @@
     "The rest": "Останалите",
     "follow": "следвай",
     "Tier XI": "Ниво XI",
-    "XI": "XI"
+    "XI": "XI",
+    "hull": "корпус",
+    "power": "мощност",
+    "without": "без"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -3669,7 +3678,10 @@
     "Bonds": "Obveznice",
     "Standing": "Plasman",
     "The rest": "Ostalo",
-    "follow": "pratiti"
+    "follow": "pratiti",
+    "hull": "trup",
+    "power": "snaga",
+    "without": "bez"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -4759,7 +4771,10 @@
     "The rest": "Ostatní",
     "follow": "sledovat",
     "Tier XI": "XI. úroveň",
-    "XI": "XI"
+    "XI": "XI",
+    "hull": "korba",
+    "power": "výkon",
+    "without": "bez"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -5855,7 +5870,10 @@
     "The rest": "Resten",
     "follow": "følg",
     "Tier XI": "Niveau XI",
-    "XI": "XI"
+    "XI": "XI",
+    "hull": "skrog",
+    "power": "effekt",
+    "without": "uden"
   },
   "de": {
     "(optional)": "(optional)",
@@ -6944,7 +6962,10 @@
     "The rest": "Der Rest",
     "follow": "folgen",
     "Tier XI": "Stufe XI",
-    "XI": "XI"
+    "XI": "XI",
+    "hull": "Wanne",
+    "power": "Leistung",
+    "without": "ohne"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -8039,7 +8060,10 @@
     "The rest": "Οι υπόλοιποι",
     "follow": "ακολούθηση",
     "Tier XI": "Βαθμίδα XI",
-    "XI": "XI"
+    "XI": "XI",
+    "hull": "σκάφος",
+    "power": "ισχύς",
+    "without": "χωρίς"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -9114,7 +9138,10 @@
     "The rest": "El resto",
     "follow": "seguir",
     "Tier XI": "Nivel XI",
-    "XI": "XI"
+    "XI": "XI",
+    "hull": "chasis",
+    "power": "potencia",
+    "without": "sin"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -10214,7 +10241,10 @@
     "The rest": "Muut",
     "follow": "seuraa",
     "Tier XI": "Taso XI",
-    "XI": "XI"
+    "XI": "XI",
+    "hull": "runko",
+    "power": "teho",
+    "without": "ilman"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -11293,7 +11323,10 @@
     "The rest": "Le reste",
     "follow": "suivre",
     "Tier XI": "Rang XI",
-    "XI": "XI"
+    "XI": "XI",
+    "hull": "caisse",
+    "power": "puissance",
+    "without": "sans"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -12156,7 +12189,10 @@
     "Bonds": "बॉन्ड्स",
     "Standing": "स्थिति",
     "The rest": "बाकी",
-    "follow": "फ़ॉलो"
+    "follow": "फ़ॉलो",
+    "hull": "हुल",
+    "power": "शक्ति",
+    "without": "बिना"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -13249,7 +13285,10 @@
     "The rest": "Ostalo",
     "follow": "pratiti",
     "Tier XI": "Razina XI",
-    "XI": "XI"
+    "XI": "XI",
+    "hull": "trup",
+    "power": "snaga",
+    "without": "bez"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -14344,7 +14383,10 @@
     "The rest": "A többi",
     "follow": "követés",
     "Tier XI": "XI-es szint",
-    "XI": "XI"
+    "XI": "XI",
+    "hull": "páncéltest",
+    "power": "teljesítmény",
+    "without": "nélkül"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -15435,7 +15477,10 @@
     "The rest": "Il resto",
     "follow": "segui",
     "Tier XI": "Livello XI",
-    "XI": "XI"
+    "XI": "XI",
+    "hull": "scafo",
+    "power": "potenza",
+    "without": "senza"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -16533,7 +16578,10 @@
     "The rest": "その他",
     "follow": "フォロー",
     "Tier XI": "Tier XI",
-    "XI": "XI"
+    "XI": "XI",
+    "hull": "車体",
+    "power": "出力",
+    "without": "なし"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -17396,7 +17444,10 @@
     "Bonds": "Облигациялар",
     "Standing": "Орын",
     "The rest": "Қалғаны",
-    "follow": "бақылау"
+    "follow": "бақылау",
+    "hull": "корпус",
+    "power": "қуат",
+    "without": "онсыз"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -18499,7 +18550,10 @@
     "The rest": "나머지",
     "follow": "팔로우",
     "Tier XI": "11단계",
-    "XI": "11"
+    "XI": "11",
+    "hull": "차체",
+    "power": "출력",
+    "without": "없음"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -19597,7 +19651,10 @@
     "The rest": "Likę",
     "follow": "sekti",
     "Tier XI": "XI lygis",
-    "XI": "XI"
+    "XI": "XI",
+    "hull": "korpusas",
+    "power": "galia",
+    "without": "be"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -20681,7 +20738,10 @@
     "The rest": "Pārējie",
     "follow": "sekot",
     "Tier XI": "XI līmenis",
-    "XI": "XI"
+    "XI": "XI",
+    "hull": "korpuss",
+    "power": "jauda",
+    "without": "bez"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -21781,7 +21841,10 @@
     "The rest": "De rest",
     "follow": "volgen",
     "Tier XI": "Niveau XI",
-    "XI": "XI"
+    "XI": "XI",
+    "hull": "romp",
+    "power": "vermogen",
+    "without": "zonder"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -22872,7 +22935,10 @@
     "The rest": "Resten",
     "follow": "følg",
     "Tier XI": "Nivå 11",
-    "XI": "11"
+    "XI": "11",
+    "hull": "skrog",
+    "power": "effekt",
+    "without": "uten"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -23960,7 +24026,10 @@
     "The rest": "Pozostali",
     "follow": "obserwuj",
     "Tier XI": "Poziom XI",
-    "XI": "XI"
+    "XI": "XI",
+    "hull": "kadłub",
+    "power": "moc",
+    "without": "bez"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -25041,7 +25110,10 @@
     "The rest": "O restante",
     "follow": "seguir",
     "Tier XI": "Nível XI",
-    "XI": "XI"
+    "XI": "XI",
+    "hull": "casco",
+    "power": "potência",
+    "without": "sem"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -26122,7 +26194,10 @@
     "The rest": "Restul",
     "follow": "urmărește",
     "Tier XI": "Generația XI",
-    "XI": "XI"
+    "XI": "XI",
+    "hull": "carenă",
+    "power": "putere",
+    "without": "fără"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -27191,7 +27266,10 @@
     "The rest": "Остальные",
     "follow": "подписаться",
     "Tier XI": "XI уровень",
-    "XI": "XI"
+    "XI": "XI",
+    "hull": "корпус",
+    "power": "мощность",
+    "without": "без"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -28057,7 +28135,10 @@
     "Bonds": "obveznice",
     "Standing": "uvrstitev",
     "The rest": "Preostalo",
-    "follow": "sledi"
+    "follow": "sledi",
+    "hull": "trup",
+    "power": "moč",
+    "without": "brez"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -29152,7 +29233,10 @@
     "The rest": "Остали",
     "follow": "прати",
     "Tier XI": "Nivo XI",
-    "XI": "XI"
+    "XI": "XI",
+    "hull": "труп",
+    "power": "снага",
+    "without": "без"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -30252,7 +30336,10 @@
     "The rest": "Resten",
     "follow": "följ",
     "Tier XI": "Klass XI",
-    "XI": "XI"
+    "XI": "XI",
+    "hull": "skrov",
+    "power": "effekt",
+    "without": "utan"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -31348,7 +31435,10 @@
     "The rest": "ที่เหลือ",
     "follow": "ติดตาม",
     "Tier XI": "ระดับ XI",
-    "XI": "XI"
+    "XI": "XI",
+    "hull": "ตัวถัง",
+    "power": "กำลัง",
+    "without": "ไม่มี"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -32213,7 +32303,10 @@
     "Bonds": "Bonds",
     "Standing": "Ranggo",
     "The rest": "Ang iba pa",
-    "follow": "sundan"
+    "follow": "sundan",
+    "hull": "kasko",
+    "power": "lakas",
+    "without": "walang"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -33305,7 +33398,10 @@
     "The rest": "Diğerleri",
     "follow": "takip et",
     "Tier XI": "Seviye XI",
-    "XI": "XI"
+    "XI": "XI",
+    "hull": "gövde",
+    "power": "güç",
+    "without": "olmadan"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -34390,7 +34486,10 @@
     "The rest": "Решта",
     "follow": "стежити",
     "Tier XI": "XI рівень",
-    "XI": "XI"
+    "XI": "XI",
+    "hull": "корпус",
+    "power": "потужність",
+    "without": "без"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -35464,7 +35563,10 @@
     "The rest": "Phần còn lại",
     "follow": "theo dõi",
     "Tier XI": "Cấp XI",
-    "XI": "XI"
+    "XI": "XI",
+    "hull": "thân xe",
+    "power": "công suất",
+    "without": "không có"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -36560,6 +36662,9 @@
     "The rest": "其余",
     "follow": "跟随",
     "Tier XI": "XI级",
-    "XI": "XI"
+    "XI": "XI",
+    "hull": "车体",
+    "power": "功率",
+    "without": "无"
   }
 }

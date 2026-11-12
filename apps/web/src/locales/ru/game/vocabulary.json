@@ -13,6 +13,18 @@
     "story_mode": "Сюжетный режим",
     "training": "Обучение"
   },
+  "vehicle-modes": {
+    "travel": "Походный",
+    "siege": "Осадный",
+    "rapid": "Скорострельный",
+    "single": "Одиночный",
+    "salvo": "Залп",
+    "standard": "Стандарт",
+    "calibrated": "Калиброванный",
+    "full": "Полный",
+    "single-charge": "Одиночный заряд",
+    "turbine": "Турбинный"
+  },
   "player-modes": {
     "overall": "Случайные бои",
     "skirmish": "Вылазка",

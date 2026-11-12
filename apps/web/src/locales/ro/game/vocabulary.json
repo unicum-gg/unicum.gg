@@ -13,6 +13,18 @@
     "story_mode": "Mod poveste",
     "training": "Pregătire"
   },
+  "vehicle-modes": {
+    "travel": "Deplasare",
+    "siege": "Asediu",
+    "rapid": "Rapid",
+    "single": "singură",
+    "salvo": "Salvă",
+    "standard": "Standard",
+    "calibrated": "Calibrat",
+    "full": "Complet",
+    "single-charge": "Încărcare unică",
+    "turbine": "Turbină"
+  },
   "player-modes": {
     "overall": "Bătălii aleatorii",
     "skirmish": "Raid",

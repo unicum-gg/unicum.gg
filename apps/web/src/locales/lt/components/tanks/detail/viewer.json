@@ -69,5 +69,22 @@
   "paint-locked": {
     "factory": "Turi gamyklinį dažymą: žaidimas ant transporto priemonės nieko nenudažo",
     "locked": "Žaidimas neleidžia keisti šios transporto priemonės išvaizdos"
+  },
+  "deploy-tooltips": {
+    "engaged": "{mode}: {meaning}. Atgal į {travel}",
+    "travel": "{mode}: transporto priemonė prieš perjungimą. Rodyti ją {meaning}"
+  },
+  "deploy-meaning": {
+    "siege": "įtvirtintas, kur jo pabūklai ir korpusas abu nukreipti",
+    "wheeled": "ratai užrakinta, veikiau skirta keliui nei kovai",
+    "dualGun": "abu pabūklai iššauti kaip vienas",
+    "shellParamsSwitcher": "papildomos pabūklo kameros atidaryti, žala keičiama į prasiskverbimo galią",
+    "lowChargeShot": "dalinis įkrovimas, iššautas nelaukiant",
+    "turboshaftEngine": "turbina įsisuko",
+    "twinGun": "abu vamzdžiai iššauna kaip vienas gaisras"
+  },
+  "mechanism": {
+    "says": "Valdykite mechanizmą {mode}",
+    "tooltip": "Paleiskite pabūklą per ciklą, susijusį su {mode}, taip, kaip tai atlieka žaidimas per šūvį"
   }
 }

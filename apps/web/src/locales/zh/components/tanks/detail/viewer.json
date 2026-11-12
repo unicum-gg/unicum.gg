@@ -69,5 +69,22 @@
   "paint-locked": {
     "factory": "自带出厂涂装：游戏不会在其上绘制任何内容",
     "locked": "游戏不允许对该车辆进行任何自定义"
+  },
+  "deploy-tooltips": {
+    "engaged": "{mode}：{meaning}。返回{travel}",
+    "travel": "{mode}：切换前的车辆。显示其{meaning}"
+  },
+  "deploy-meaning": {
+    "siege": "已固定，炮管和车体都朝向同一方向",
+    "wheeled": "车轮已锁定，宁愿用于道路而非战斗",
+    "dualGun": "两门炮管同时开火",
+    "shellParamsSwitcher": "火炮的额外弹膛已打开，以伤害换取穿透功率",
+    "lowChargeShot": "部分充能，无需等待即可开火",
+    "turboshaftEngine": "涡轮已启动",
+    "twinGun": "两根炮管同时开火"
+  },
+  "mechanism": {
+    "says": "操作{mode}机制",
+    "tooltip": "让火炮按照游戏每次射击时游玩的{mode}循环运行"
   }
 }

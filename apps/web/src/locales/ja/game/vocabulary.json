@@ -13,6 +13,18 @@
     "story_mode": "ストーリーモード",
     "training": "訓練"
   },
+  "vehicle-modes": {
+    "travel": "移動",
+    "siege": "攻城",
+    "rapid": "高速",
+    "single": "1戦",
+    "salvo": "一斉射撃",
+    "standard": "標準",
+    "calibrated": "調整済み",
+    "full": "完全",
+    "single-charge": "1戦チャージ",
+    "turbine": "タービン"
+  },
   "player-modes": {
     "overall": "ランダムバトル",
     "skirmish": "前衛戦",

@@ -13,6 +13,18 @@
     "story_mode": "Сюжетен режим",
     "training": "Обучение"
   },
+  "vehicle-modes": {
+    "travel": "Пътуване",
+    "siege": "Обсада",
+    "rapid": "Бърз",
+    "single": "единичен",
+    "salvo": "Залп",
+    "standard": "Стандарт",
+    "calibrated": "Калибриран",
+    "full": "Пълен",
+    "single-charge": "Единичен заряд",
+    "turbine": "Турбина"
+  },
   "player-modes": {
     "overall": "Случайни битки",
     "skirmish": "Схватка",

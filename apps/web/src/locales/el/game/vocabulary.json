@@ -13,6 +13,18 @@
     "story_mode": "Λειτουργία Ιστορίας",
     "training": "Εκπαίδευση"
   },
+  "vehicle-modes": {
+    "travel": "Πορεία",
+    "siege": "Πολιορκία",
+    "rapid": "Ταχεία",
+    "single": "μεμονωμένο",
+    "salvo": "Ομοβροντία",
+    "standard": "Τυπικό",
+    "calibrated": "Βαθμονομημένο",
+    "full": "Πλήρης",
+    "single-charge": "Μονής φόρτισης",
+    "turbine": "Τουρμπίνα"
+  },
   "player-modes": {
     "overall": "Τυχαίες Μάχες",
     "skirmish": "Αψιμαχία",

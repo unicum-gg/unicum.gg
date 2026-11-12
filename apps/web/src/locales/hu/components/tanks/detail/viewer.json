@@ -69,5 +69,22 @@
   "paint-locked": {
     "factory": "Saját gyári festését viseli: a játék semmi mást nem fest rá",
     "locked": "A játék nem engedélyez semmilyen testreszabást a jármű esetében"
+  },
+  "deploy-tooltips": {
+    "engaged": "{mode}: {meaning}. Vissza ide: {travel}",
+    "travel": "{mode}: a váltás előtti jármű. Megjelenítés: {meaning}"
+  },
+  "deploy-meaning": {
+    "siege": "rögzítve, az ágyú és a páncéltest egyaránt célra tart",
+    "wheeled": "a kerekek zárolva, inkább az útra, mint a harcra",
+    "dualGun": "mindkét ágyú egyszerre tüzel",
+    "shellParamsSwitcher": "az ágyú extra kamrái nyitottak, a sebzést páncélátütő teljesítményre cserélve",
+    "lowChargeShot": "részleges töltés, várakozás nélkül leadott tűz",
+    "turboshaftEngine": "a turbina felpörögve",
+    "twinGun": "mindkét cső egyszerre ad le tüzet"
+  },
+  "mechanism": {
+    "says": "Működtesd ezt a mechanizmust: {mode}",
+    "tooltip": "Futtasd végig az ágyút {mode} szerinti cikluson, ahogy a játék egy lövésnél végrehajtja"
   }
 }

@@ -13,6 +13,18 @@
     "story_mode": "Berättelseläge",
     "training": "Träning"
   },
+  "vehicle-modes": {
+    "travel": "Färd",
+    "siege": "Belägring",
+    "rapid": "Snabb",
+    "single": "enskild",
+    "salvo": "Salva",
+    "standard": "Standard",
+    "calibrated": "Kalibrerad",
+    "full": "Full",
+    "single-charge": "Enskild laddning",
+    "turbine": "Turbin"
+  },
   "player-modes": {
     "overall": "Slumptävlingar",
     "skirmish": "Skärmytsling",

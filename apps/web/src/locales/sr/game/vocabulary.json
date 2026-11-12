@@ -13,6 +13,18 @@
     "story_mode": "Режим приче",
     "training": "Trening"
   },
+  "vehicle-modes": {
+    "travel": "Путовање",
+    "siege": "Опсада",
+    "rapid": "Брзи",
+    "single": "Један",
+    "salvo": "Салва",
+    "standard": "Standard",
+    "calibrated": "Калибрисано",
+    "full": "Pun",
+    "single-charge": "Једно пуњење",
+    "turbine": "Турбина"
+  },
   "player-modes": {
     "overall": "Nasumične bitke",
     "skirmish": "Čarke",

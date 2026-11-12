@@ -13,6 +13,18 @@
     "story_mode": "Stāsta režīms",
     "training": "Apmācība"
   },
+  "vehicle-modes": {
+    "travel": "Ceļošana",
+    "siege": "Aplenkums",
+    "rapid": "Ātrs",
+    "single": "atsevišķs",
+    "salvo": "Zalve",
+    "standard": "Standarts",
+    "calibrated": "Kalibrēts",
+    "full": "Pilns",
+    "single-charge": "atsevišķs lādiņš",
+    "turbine": "Turbīna"
+  },
   "player-modes": {
     "overall": "Nejaušas kaujas",
     "skirmish": "Sadursme",

@@ -13,6 +13,18 @@
     "story_mode": "Оқиға режимі",
     "training": "Жаттығу"
   },
+  "vehicle-modes": {
+    "travel": "Жүріс",
+    "siege": "Қоршау",
+    "rapid": "Жылдам",
+    "single": "бір",
+    "salvo": "Залп",
+    "standard": "Стандарт",
+    "calibrated": "Калибрленген",
+    "full": "Толық",
+    "single-charge": "Бір зарядты",
+    "turbine": "Турбиналық"
+  },
   "player-modes": {
     "overall": "кездейсоқ шайқастар",
     "skirmish": "Айқас",

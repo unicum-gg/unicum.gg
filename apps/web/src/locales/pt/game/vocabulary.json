@@ -13,6 +13,18 @@
     "story_mode": "Modo História",
     "training": "Treinando"
   },
+  "vehicle-modes": {
+    "travel": "Viagem",
+    "siege": "Cerco",
+    "rapid": "Rápido",
+    "single": "Único",
+    "salvo": "Salva",
+    "standard": "Padrão",
+    "calibrated": "Calibrado",
+    "full": "Completo",
+    "single-charge": "Carga única",
+    "turbine": "Turbina"
+  },
   "player-modes": {
     "overall": "Batalhas aleatórias",
     "skirmish": "Escaramuça",

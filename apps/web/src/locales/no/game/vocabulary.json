@@ -13,6 +13,18 @@
     "story_mode": "Historiemodus",
     "training": "Trening"
   },
+  "vehicle-modes": {
+    "travel": "Reise",
+    "siege": "Beleiring",
+    "rapid": "Rask",
+    "single": "enkelt",
+    "salvo": "Salve",
+    "standard": "Standard",
+    "calibrated": "Kalibrert",
+    "full": "Full",
+    "single-charge": "Enkeltlading",
+    "turbine": "Turbin"
+  },
   "player-modes": {
     "overall": "Tilfeldige kamper",
     "skirmish": "Trefning",

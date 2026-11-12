@@ -13,6 +13,18 @@
     "story_mode": "Story Mode",
     "training": "Đào tạo"
   },
+  "vehicle-modes": {
+    "travel": "Di chuyển",
+    "siege": "Công thành",
+    "rapid": "Nhanh",
+    "single": "đơn lẻ",
+    "salvo": "Loạt bắn",
+    "standard": "Tiêu chuẩn",
+    "calibrated": "Đã hiệu chỉnh",
+    "full": "Đầy đủ",
+    "single-charge": "Nạp một lần",
+    "turbine": "Tuabin"
+  },
   "player-modes": {
     "overall": "Trận đấu ngẫu nhiên",
     "skirmish": "Tranh chấp",

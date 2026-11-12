@@ -69,5 +69,22 @@
   "paint-locked": {
     "factory": "Ma własne fabryczne malowanie: gra nie maluje na nim nic",
     "locked": "Gra nie pozwala na żadną personalizację tego pojazdu"
+  },
+  "deploy-tooltips": {
+    "engaged": "{mode}: {meaning}. Wstecz do {travel}",
+    "travel": "{mode}: pojazd przed przełączeniem. Pokaż go jako {meaning}"
+  },
+  "deploy-meaning": {
+    "siege": "ustawiony, gdzie zarówno jego działo, jak i kadłub celują",
+    "wheeled": "koła zablokowane, do jazdy po drodze, a nie do walki",
+    "dualGun": "oba działa wystrzeliły jednocześnie",
+    "shellParamsSwitcher": "otwórz dodatkowe komory działa, wymieniając uszkodzenia na moc przebicia",
+    "lowChargeShot": "częściowo naładowany, wystrzelony, gdy działo nie oczekuje",
+    "turboshaftEngine": "turbina rozkręcona",
+    "twinGun": "obie lufy wystrzeliły jednocześnie"
+  },
+  "mechanism": {
+    "says": "Obsługuj mechanizm trybu {mode}",
+    "tooltip": "Przeprowadź działo przez cykl trybu {mode}, tak jak gra odtwarza go przy oddaniu strzału"
   }
 }

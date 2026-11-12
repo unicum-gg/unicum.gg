@@ -13,6 +13,18 @@
     "story_mode": "โหมดเนื้อเรื่อง",
     "training": "การฝึก"
   },
+  "vehicle-modes": {
+    "travel": "การเดินทาง",
+    "siege": "ปิดล้อม",
+    "rapid": "เร่งด่วน",
+    "single": "หนึ่งครั้ง",
+    "salvo": "ชุดยิง",
+    "standard": "มาตรฐาน",
+    "calibrated": "ปรับเทียบแล้ว",
+    "full": "เต็ม",
+    "single-charge": "ชาร์จหนึ่งครั้ง",
+    "turbine": "กังหัน"
+  },
   "player-modes": {
     "overall": "การต่อสู้แบบสุ่ม",
     "skirmish": "การปะทะ",
