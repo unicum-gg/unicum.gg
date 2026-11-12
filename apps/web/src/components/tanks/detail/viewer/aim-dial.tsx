@@ -67,6 +67,7 @@ export function AimDial({
   hullPitch,
   aimRef,
   watchRef,
+  pointing,
   onAim,
 }: {
   /** What the mirror publishes for the gun that is mounted. */
@@ -79,6 +80,8 @@ export function AimDial({
   aimRef: React.RefObject<Aim | null>;
   /** Filled with the updater the draw loop calls as the camera moves. */
   watchRef: React.RefObject<Watch | null>;
+  /** Where the gun has already been asked to point, read when the dial opens. */
+  pointing: React.RefObject<{ bearing: number; pitch: number } | null>;
   /** Where a reader's ask goes: the vehicle turns, then tells the dial. */
   onAim: Aim;
 }) {
@@ -191,10 +194,19 @@ export function AimDial({
         side.current.textContent = `${mark} ${Math.abs(round).toFixed(1)}°`;
       }
     };
+    // **An aim can arrive before there is a dial to draw it.** A shared link
+    // carrying one points the gun as soon as the vehicle is built, which is
+    // before the band above has been walked, so the ask reached the picture
+    // through the ref the draw loop reads and reached nothing here: the turret
+    // sat where the link asked above a dial reading zero, until the reader
+    // happened to touch it. The ask is kept rather than consumed, so catching
+    // up with it is all this takes.
+    const standing = pointing.current;
+    if (standing) aimRef.current(standing.bearing, standing.pitch);
     return () => {
       aimRef.current = null;
     };
-  }, [aimRef, arc, shape]);
+  }, [aimRef, arc, pointing, shape]);
 
   useEffect(() => {
     watchRef.current = (bearing) => {
