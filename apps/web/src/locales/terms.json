@@ -861,7 +861,8 @@
     "follow": "متابعة",
     "hull": "هيكل",
     "power": "القوة",
-    "without": "بدون"
+    "without": "بدون",
+    "better": "أفضل"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1726,7 +1727,8 @@
     "follow": "сачыць",
     "hull": "корпус",
     "power": "магутнасць",
-    "without": "без"
+    "without": "без",
+    "better": "лепш"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -2808,7 +2810,8 @@
     "XI": "XI",
     "hull": "корпус",
     "power": "мощност",
-    "without": "без"
+    "without": "без",
+    "better": "по-добър"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -3681,7 +3684,8 @@
     "follow": "pratiti",
     "hull": "trup",
     "power": "snaga",
-    "without": "bez"
+    "without": "bez",
+    "better": "bolje"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -4774,7 +4778,8 @@
     "XI": "XI",
     "hull": "korba",
     "power": "výkon",
-    "without": "bez"
+    "without": "bez",
+    "better": "lepší"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -5873,7 +5878,8 @@
     "XI": "XI",
     "hull": "skrog",
     "power": "effekt",
-    "without": "uden"
+    "without": "uden",
+    "better": "bedre"
   },
   "de": {
     "(optional)": "(optional)",
@@ -6965,7 +6971,8 @@
     "XI": "XI",
     "hull": "Wanne",
     "power": "Leistung",
-    "without": "ohne"
+    "without": "ohne",
+    "better": "besser"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -8063,7 +8070,8 @@
     "XI": "XI",
     "hull": "σκάφος",
     "power": "ισχύς",
-    "without": "χωρίς"
+    "without": "χωρίς",
+    "better": "καλύτερο"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -9141,7 +9149,8 @@
     "XI": "XI",
     "hull": "chasis",
     "power": "potencia",
-    "without": "sin"
+    "without": "sin",
+    "better": "mejor"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -10244,7 +10253,8 @@
     "XI": "XI",
     "hull": "runko",
     "power": "teho",
-    "without": "ilman"
+    "without": "ilman",
+    "better": "parempi"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -11326,7 +11336,8 @@
     "XI": "XI",
     "hull": "caisse",
     "power": "puissance",
-    "without": "sans"
+    "without": "sans",
+    "better": "meilleur"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -12192,7 +12203,8 @@
     "follow": "फ़ॉलो",
     "hull": "हुल",
     "power": "शक्ति",
-    "without": "बिना"
+    "without": "बिना",
+    "better": "बेहतर"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -13288,7 +13300,8 @@
     "XI": "XI",
     "hull": "trup",
     "power": "snaga",
-    "without": "bez"
+    "without": "bez",
+    "better": "bolje"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -14386,7 +14399,8 @@
     "XI": "XI",
     "hull": "páncéltest",
     "power": "teljesítmény",
-    "without": "nélkül"
+    "without": "nélkül",
+    "better": "jobb"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -15480,7 +15494,8 @@
     "XI": "XI",
     "hull": "scafo",
     "power": "potenza",
-    "without": "senza"
+    "without": "senza",
+    "better": "migliore"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -16581,7 +16596,8 @@
     "XI": "XI",
     "hull": "車体",
     "power": "出力",
-    "without": "なし"
+    "without": "なし",
+    "better": "より良い"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -17447,7 +17463,8 @@
     "follow": "бақылау",
     "hull": "корпус",
     "power": "қуат",
-    "without": "онсыз"
+    "without": "онсыз",
+    "better": "жақсырақ"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -18553,7 +18570,8 @@
     "XI": "11",
     "hull": "차체",
     "power": "출력",
-    "without": "없음"
+    "without": "없음",
+    "better": "우수"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -19654,7 +19672,8 @@
     "XI": "XI",
     "hull": "korpusas",
     "power": "galia",
-    "without": "be"
+    "without": "be",
+    "better": "geriau"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -20741,7 +20760,8 @@
     "XI": "XI",
     "hull": "korpuss",
     "power": "jauda",
-    "without": "bez"
+    "without": "bez",
+    "better": "labāks"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -21844,7 +21864,8 @@
     "XI": "XI",
     "hull": "romp",
     "power": "vermogen",
-    "without": "zonder"
+    "without": "zonder",
+    "better": "beter"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -22938,7 +22959,8 @@
     "XI": "11",
     "hull": "skrog",
     "power": "effekt",
-    "without": "uten"
+    "without": "uten",
+    "better": "bedre"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -24029,7 +24051,8 @@
     "XI": "XI",
     "hull": "kadłub",
     "power": "moc",
-    "without": "bez"
+    "without": "bez",
+    "better": "lepszy"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -25113,7 +25136,8 @@
     "XI": "XI",
     "hull": "casco",
     "power": "potência",
-    "without": "sem"
+    "without": "sem",
+    "better": "melhor"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -26197,7 +26221,8 @@
     "XI": "XI",
     "hull": "carenă",
     "power": "putere",
-    "without": "fără"
+    "without": "fără",
+    "better": "mai bun"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -27269,7 +27294,8 @@
     "XI": "XI",
     "hull": "корпус",
     "power": "мощность",
-    "without": "без"
+    "without": "без",
+    "better": "лучше"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -28138,7 +28164,8 @@
     "follow": "sledi",
     "hull": "trup",
     "power": "moč",
-    "without": "brez"
+    "without": "brez",
+    "better": "boljši"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -29236,7 +29263,8 @@
     "XI": "XI",
     "hull": "труп",
     "power": "снага",
-    "without": "без"
+    "without": "без",
+    "better": "боље"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -30339,7 +30367,8 @@
     "XI": "XI",
     "hull": "skrov",
     "power": "effekt",
-    "without": "utan"
+    "without": "utan",
+    "better": "bättre"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -31438,7 +31467,8 @@
     "XI": "XI",
     "hull": "ตัวถัง",
     "power": "กำลัง",
-    "without": "ไม่มี"
+    "without": "ไม่มี",
+    "better": "ดีกว่า"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -32306,7 +32336,8 @@
     "follow": "sundan",
     "hull": "kasko",
     "power": "lakas",
-    "without": "walang"
+    "without": "walang",
+    "better": "mas mahusay"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -33401,7 +33432,8 @@
     "XI": "XI",
     "hull": "gövde",
     "power": "güç",
-    "without": "olmadan"
+    "without": "olmadan",
+    "better": "daha iyi"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -34489,7 +34521,8 @@
     "XI": "XI",
     "hull": "корпус",
     "power": "потужність",
-    "without": "без"
+    "without": "без",
+    "better": "кращий"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -35566,7 +35599,8 @@
     "XI": "XI",
     "hull": "thân xe",
     "power": "công suất",
-    "without": "không có"
+    "without": "không có",
+    "better": "tốt hơn"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -36665,6 +36699,7 @@
     "XI": "XI",
     "hull": "车体",
     "power": "功率",
-    "without": "无"
+    "without": "无",
+    "better": "更好"
   }
 }
