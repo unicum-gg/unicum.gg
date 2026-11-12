@@ -1,6 +1,6 @@
 import { getTotalReceivedCents } from "@unicum.gg/core/subscription";
 import { fundingProgress } from "@unicum.gg/shared";
-import { getExpenseLedger } from "@/services/coverage";
+import { getExpenseLedger } from "@/services/coverage/expenses";
 import { jsonResponse } from "@/services/openapi/json-response";
 import { FundingSummaryResponse } from "./schema.api";
 import { measured } from "@/services/perf";

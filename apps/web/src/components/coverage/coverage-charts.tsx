@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/chart";
 import { ChartMode } from "@/components/coverage/chart-mode";
 import { SegmentedControl } from "@/components/segmented-control";
-import type { DailyPoint } from "@/services/coverage";
+import type { DailyPoint } from "@/services/coverage/trends";
 
 const DAY_TICK = "d MMM";
 const TOOLTIP_DAY = "EEE d MMM";
