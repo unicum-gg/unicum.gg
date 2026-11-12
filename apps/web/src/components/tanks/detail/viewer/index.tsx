@@ -370,6 +370,7 @@ export function TankViewer({
               hullPitch={aiming.reach?.hullPitch}
               aimRef={aim}
               watchRef={watch}
+              pointing={aiming.pointing}
               onAim={takeAim}
             />
           </div>
