@@ -242,7 +242,7 @@ function ClanManeuversMembers({
               <TableRow>
                 <TableHead className="w-20 text-center!">{t("place")}</TableHead>
                 <TableHead>{t("player")}</TableHead>
-                <TableHead className="w-40 text-right!">{t("fame-points")}</TableHead>
+                <TableHead className="w-40 whitespace-nowrap text-right!">{t("fame-points")}</TableHead>
                 {measured ? (
                   <TableHead className="w-24 text-right!" title={tCols("gain-hint")}>
                     {tCols("gain")}

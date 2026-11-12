@@ -5,6 +5,7 @@ import { dateLocale } from "@/lib/date-locale";
 import type { NumberFormatter } from "@/lib/format";
 
 import { useFormat } from "@/hooks/use-format";
+import { Hint } from "@/components/hint";
 import { statLabel } from "@/components/stat-label";
 
 import { useTranslation } from "@/hooks/use-translation";
@@ -59,6 +60,8 @@ const PCT_FORMAT = {
 
 type MetricCell = {
   label: string;
+  /** The full name, when the column shows a shorter one. */
+  hint?: string;
   value: string;
   color: RatingColor | null;
 };
@@ -108,7 +111,10 @@ function computeMetrics(
       wtr: metricCell(num, "Avg WTR", r.lifetime.wtr ?? null, wtrColor),
     },
     avgWinrate: {
-      label: "Avg winrate",
+      // The short form fits the column's width in every language, the long
+      // one is on hover.
+      label: "Avg WR",
+      hint: "Avg winrate",
       value:
         r.avgWinrate === null
           ? "—"
@@ -283,9 +289,13 @@ function MetricColumn({
       data-rating-wn-col={wnCol}
       className="flex flex-1 flex-col border-l border-fd-border max-sm:first:border-l-0 sm:w-32 sm:flex-none sm:shrink-0"
     >
-      <div className="px-4 py-2 text-center text-xs text-muted-foreground">
-        {statLabel(metric.label, tStats)}
-      </div>
+      {/* One line, like every table head on the site: a label too long for
+          the column is cut and named in full on hover rather than wrapping. */}
+      <Hint content={statLabel(metric.hint ?? metric.label, tStats)}>
+        <div className="truncate px-4 py-2 text-center text-xs text-muted-foreground">
+          {statLabel(metric.label, tStats)}
+        </div>
+      </Hint>
       <div
         className={cn(
           "flex flex-1 items-center justify-center border-t border-fd-border text-xl font-semibold tabular-nums",
