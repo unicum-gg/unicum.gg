@@ -28,7 +28,7 @@
   "one-command-in-claude-code-or-the-usual-mcps": "Yksi komento Claude Codessa tai tavallinen mcpServers-merkintä muualla.",
   "parameters": "Parametrit",
   "prefer-raw-http": "Suositko raakaa HTTP:tä? Samat tiedot ovat saatavilla {docs}-sivulla. Agentit voivat löytää tämän palvelimen myös {card}-kortin avulla.",
-  "public-api": "Jul公開 API",
+  "public-api": "Julkinen API",
   "remote-mcp-server-url": "Etäkäytössä olevan MCP-palvelimen URL-osoite",
   "server-url": "Palvelin URL",
   "stats-for-your-ai-assistant": "Tilastot tekoälyavustajallesi",

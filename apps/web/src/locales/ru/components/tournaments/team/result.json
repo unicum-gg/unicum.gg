@@ -4,7 +4,7 @@
   "avg-metric": "Среднее значение {metric}",
   "avg-metric-rank": "Среднее значение {metric} · {rank} место из {size}",
   "avg-metric-recent": "Среднее значение {metric} · 30 дн.",
-  "avg-winrate": "Средняя побед率",
+  "avg-winrate": "Средний процент побед",
   "finished": "Завершён",
   "of-teams": "{size, plural, one {из # команды} few {из # команд} many {из # команд} other {из # команд}}",
   "record": "Рекорд",
