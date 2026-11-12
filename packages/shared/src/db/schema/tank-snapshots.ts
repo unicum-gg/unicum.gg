@@ -7,6 +7,7 @@ import {
   real,
   timestamp,
 } from "drizzle-orm/pg-core";
+import { sql } from "drizzle-orm";
 import { Region } from "@unicum.gg/wargaming";
 import { type PlayersTable, playersByRegion } from "./players";
 
@@ -102,6 +103,19 @@ export function makeTankSnapshotsTable(
         t.playerId,
         t.takenAt,
       ),
+      // The access path for `carryForwardMarks`, which was 20.3% of the whole
+      // database before it existed (migration 0146 carries the measurement and
+      // the reason the build needs a quiet window). Its column order IS the
+      // query's own, so `DISTINCT ON (tank_id)` walks the index and takes the
+      // first entry per tank with no sort, and `battles` is a key column rather
+      // than a payload because it breaks ties between rows sharing a `taken_at`.
+      //
+      // The deployed index also carries `INCLUDE ("marks_on_gun")`, which makes
+      // the scan read no heap at all and which drizzle-orm 0.45 cannot express,
+      // so the migration is authoritative for this one and not this file.
+      index(`${region}_tank_snapshots_marks_idx`)
+        .on(t.playerId, t.tankId, t.takenAt.desc(), t.battles.desc())
+        .where(sql`${t.marksOnGun} IS NOT NULL`),
       // (player, tank, battles) IS the identity of a row: the same counter state
       // for the same tank is the same observation. A surrogate `serial` id used
       // to carry the primary key, but it bought nothing (nothing referenced it,
