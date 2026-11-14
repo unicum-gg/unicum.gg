@@ -103,16 +103,26 @@ export function makeTankSnapshotsTable(
         t.playerId,
         t.takenAt,
       ),
-      // The access path for `carryForwardMarks`, which was 20.3% of the whole
-      // database before it existed (migration 0146 carries the measurement and
-      // the reason the build needs a quiet window). Its column order IS the
+      // The access path for `carryForwardMarks`. Its column order IS the
       // query's own, so `DISTINCT ON (tank_id)` walks the index and takes the
       // first entry per tank with no sort, and `battles` is a key column rather
       // than a payload because it breaks ties between rows sharing a `taken_at`.
       //
-      // The deployed index also carries `INCLUDE ("marks_on_gun")`, which makes
+      // ON EU THIS INDEX DOES NOT EXIST, and putting it back needs a reason
+      // better than the one that built it. Migration 0147 carries the numbers:
+      // at 5,145 MB against a 2,816 MB `shared_buffers` it evicted the heap
+      // pages the other readers of this table need, and cost 33.0ms per
+      // insertion into this table: 24.7ms saved on the marks query against
+      // 45.9ms lost on the per-tank stats read, which runs 4.3x as often, and
+      // 11.8ms lost on the write, which never stops. The planner's choice never
+      // changed, so it was the buffer pool and not the plan.
+      //
+      // NA and Asia keep theirs provisionally, at 918 MB and 473 MB, and are
+      // not yet proven positive either.
+      //
+      // The deployed indexes also carry `INCLUDE ("marks_on_gun")`, which makes
       // the scan read no heap at all and which drizzle-orm 0.45 cannot express,
-      // so the migration is authoritative for this one and not this file.
+      // so the migrations are authoritative for this one and not this file.
       index(`${region}_tank_snapshots_marks_idx`)
         .on(t.playerId, t.tankId, t.takenAt.desc(), t.battles.desc())
         .where(sql`${t.marksOnGun} IS NOT NULL`),

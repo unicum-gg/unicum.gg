@@ -1,0 +1,72 @@
+-- Revoke the EU half of migration 0146. Measured net negative, by a wide margin.
+--
+-- 0146 built a partial index so `carryForwardMarks` would stop fetching every
+-- one of a player's snapshot rows from the heap to test `marks_on_gun`. It did
+-- exactly that, and it cost more than it saved. The index is 5,145 MB against a
+-- `shared_buffers` of 2,816 MB, so on its own it is 1.8x the entire buffer pool:
+-- every read of it evicts the heap pages the other readers of that table need.
+--
+-- THE MEASUREMENT, normalised per insertion into `eu_tank_snapshots`, which is
+-- the pipeline's own unit of work and therefore independent of how much traffic
+-- the site is taking. Same host, same hour, same mix (0.66 against 0.71 marks
+-- calls per insertion), 2026-11-12 21:23 and 21:38 UTC.
+--
+-- Read the last pair of columns: a query's weight per insertion is its own mean
+-- times how often it runs per insertion, so the total is a weighted sum and not
+-- a column sum.
+--
+--                      ms per call      calls per ins     ms per insertion
+--                     with   without    with  without     with  without
+--   marks             15.6     49.4     0.66    0.71      10.2     35.0
+--   stats B           18.3      2.1     2.84    2.88      52.0      6.1
+--   insert            23.8     12.0     1.00    1.00      23.8     12.0
+--                                                       ------   ------
+--   total                                                 86.1     53.1
+--
+-- So it cost 33.0ms per insertion, 62% more: it saved 24.7ms on the marks query
+-- and lost 45.9ms on the per-tank stats read plus 11.8ms on the write. `stats B`
+-- alone (that read, `DISTINCT ON (tank_id)` over the same table) more than
+-- cancels the whole gain on the marks query, because it runs 4.3x as often.
+-- The write cost is pure loss on top of that and is permanent: the pipeline
+-- writes continuously.
+--
+-- Two readings confirm it was buffer pressure and not a bad plan. The plan on
+-- `stats B` never changed (`Index Scan using eu_tank_snapshots_pkey` throughout,
+-- checked both ways), and dropping the index returned both collateral queries
+-- to their own lifetime means to the tenth: insertions to 12.0ms against a
+-- 56-day mean of 12.2ms, `stats B` to 2.1ms against 4.9ms, below it because the
+-- window was taken at a third of peak traffic.
+--
+-- `stats B` had also stopped recovering, which is what ruled out a cold cache:
+-- 47.4ms right after the build, then 35.1, 32.6, 30.6, 32.1, 37.9, 29.4, 24.7,
+-- 19.1, 17.3 over fifty minutes, and still 18.3 ninety minutes later. It warmed
+-- and settled at 3.7x its normal cost rather than returning to it.
+--
+-- NA and Asia keep theirs for now (918 MB and 473 MB once rebuilt on
+-- 2026-11-13, a different order of magnitude against the same buffer pool,
+-- which is the whole reason they are not simply dropped too) and are to be
+-- judged at their own
+-- peak by this same method. They are NOT yet proven positive: the first attempt
+-- to measure them normalised by insertion count during a window in which Asia
+-- made one insertion and NA fifty-five, which is noise rather than a reading.
+--
+-- WHAT NOT TO REACH FOR NEXT, because it is the obvious idea and it was
+-- measured after this index was dropped. A current-state table keyed on
+-- (player_id, tank_id), the shape `*_tank_modes` uses, buys almost nothing
+-- here: over 300 random active EU accounts the table already holds 1.9 rows per
+-- pair (449 rows across 235 vehicles), so it is NOT mostly history. Folding it
+-- leaves ~253M pairs, which at `eu_tank_modes`' own 227 bytes a row is tens of
+-- gigabytes against a 2,816 MB `shared_buffers`: the same trap as this index,
+-- one size down.
+--
+-- What actually costs is PHYSICAL DISPERSION, not row count. A player's rows
+-- are written on the days they played, so they land anywhere across the 91 GB
+-- heap: the profile read touches ~340 pages and misses cache on ~44 of them,
+-- and the mean time tracks the pages read from disk rather than the pages
+-- touched (43.5 reads at 23.8ms, 75.8 at 37.3ms, about 0.5ms each). Folding the
+-- rows would still leave 235 of them scattered. Locality is the lever, and
+-- every way to get it (CLUSTER, repack, hash partitioning on player_id) is a
+-- 91 GB rewrite, so none of it is free and none of it should be started without
+-- a measurement of what it would actually save.
+
+DROP INDEX CONCURRENTLY IF EXISTS "eu_tank_snapshots_marks_idx";
