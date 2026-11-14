@@ -83,8 +83,15 @@ export function PlayersOnline() {
   // the strip fit a phone once a signed-in reader's nickname and clan tag sit
   // at the other end of it.
   const label = (
+    // On intent: the comment above already says this is the chrome of every
+    // page, which is exactly what makes its prefetch expensive. /servers is one
+    // of the heaviest pages we render (the distributions, the activity series
+    // and the win-rate grid) and only its English copy is prerendered, so a
+    // reader in any other language paid a full render of it on every view
+    // without ever going there.
     <Link
       href={ROUTES.SERVERS(region)}
+      prefetch="intent"
       className="shrink-0 font-medium tabular-nums text-fd-muted-foreground transition-colors hover:text-fd-foreground"
     >
       <span className="hidden sm:inline">{t("count", { count })}</span>

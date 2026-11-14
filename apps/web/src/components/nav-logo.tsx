@@ -22,7 +22,10 @@ export function NavLogo(props: ComponentProps<"a">) {
   const { t } = useTranslation("components/nav-logo");
   const { region } = useRegion();
   return (
-    <Link {...props} href={ROUTES.HOME(region)}>
+    // On intent. The logo is on every page and is reached for deliberately
+    // or not at all, so Next's viewport prefetch bought the home page of the
+    // reader's language on every single view, and only English is prerendered.
+    <Link {...props} href={ROUTES.HOME(region)} prefetch="intent">
       <svg
         width="24"
         height="24"

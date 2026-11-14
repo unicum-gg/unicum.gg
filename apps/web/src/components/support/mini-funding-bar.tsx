@@ -33,8 +33,16 @@ export function MiniFundingBar() {
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
+          {/* On intent, like the top bar's own /support link two elements
+              over, and for a reason that only shows up in the server's logs:
+              this bar is in the chrome of every page, so its prefetch fires on
+              every view, and /support exists in 36 languages of which only
+              English is prerendered. Measured 2026-11-13 on one client, this
+              link alone was 170 of its 798 requests, each one a full render of
+              a page nobody had asked for. */}
           <Link
             href={ROUTES.SUPPORT}
+            prefetch="intent"
             className="flex items-center gap-2 whitespace-nowrap transition-opacity hover:opacity-80"
           >
             <span className="hidden shrink-0 text-fd-muted-foreground sm:inline">
