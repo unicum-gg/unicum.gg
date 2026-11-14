@@ -79,6 +79,9 @@ export type EntityResolution = {
    * itself lands in `clans`, so a tag costs one lookup rather than a lookup and
    * then a second request. */
   tags: Record<string, number>;
+  /** Nickname to account id, the same bargain as `tags` for the same reason:
+   * one roster prints a name and no id. The player lands in `players`. */
+  names: Record<string, number>;
   /**
    * What each player asked about does on the vehicle they were asked about.
    *
@@ -120,6 +123,9 @@ export async function resolveEntities(
     players: number[];
     clans: number[];
     tags: string[];
+    /** Nicknames, for a roster that prints no account id. Optional so every
+     * caller that resolved rosters before this existed is unchanged. */
+    names?: string[];
     /** (account, vehicle) pairs to describe, and the mode to describe them
      * over. Absent means the roster alone, as this answered before. */
     vehicles?: VehiclePair[];
@@ -129,7 +135,13 @@ export async function resolveEntities(
   // Tags first: a tag resolves to a clan id, and that clan is then resolved
   // alongside the ones asked for by id, so a caller mixing the two forms never
   // gets the same clan described twice.
-  const tags = await resolveTags(region, ids.tags);
+  // Tags and names first, and together: each resolves a printed string to an
+  // id, and the entity is then resolved alongside the ones asked for by id, so
+  // a caller mixing the two forms never gets the same one described twice.
+  const [tags, names] = await Promise.all([
+    resolveTags(region, ids.tags),
+    resolveNames(region, ids.names ?? []),
+  ]);
   // Capped AFTER the tags expand into ids: the route bounds each list on its
   // own, so 100 clan ids plus 100 tags naming other clans would otherwise walk
   // past the ceiling every reader below assumes, this module's own SQL builder
@@ -137,10 +149,14 @@ export async function resolveEntities(
   const clanIds = Array.from(
     new Set([...ids.clans, ...Object.values(tags)]),
   ).slice(0, MAX_IDS_PER_KIND);
+  // The same cap for the same reason, on the same ceiling.
+  const playerIds = Array.from(
+    new Set([...ids.players, ...Object.values(names)]),
+  ).slice(0, MAX_IDS_PER_KIND);
 
   const [languages, players, clans, vehicles] = await Promise.all([
-    resolveLanguages(region, { players: ids.players, clans: clanIds }),
-    loadPlayers(region, ids.players),
+    resolveLanguages(region, { players: playerIds, clans: clanIds }),
+    loadPlayers(region, playerIds),
     loadClans(region, clanIds),
     // Alongside the roster rather than after it: the per-vehicle read keys on
     // its own pairs and needs nothing the three beside it produce, and a
@@ -190,7 +206,7 @@ export async function resolveEntities(
       .slice(0, MAX_DISCOVERIES_PER_CALL),
   );
 
-  return { players: players.players, clans, tags, vehicles };
+  return { players: players.players, clans, tags, names, vehicles };
 }
 
 /** The language block is flattened onto the entity rather than nested, since a
@@ -237,6 +253,52 @@ async function resolveTags(
   for (const tag of tags) {
     const id = byLower.get(tag.toLowerCase());
     if (id !== undefined) out[tag] = id;
+  }
+  return out;
+}
+
+/** Nicknames, matched case-insensitively, and the key echoes back what the
+ * caller wrote, so a roster that printed `Animal` pairs the answer to its own
+ * row without re-casing anything. The same bargain `resolveTags` makes above,
+ * and it exists for the same roster: the Stronghold web app in the embedded
+ * browser, whose detachment list prints a clan tag on the left and a player's
+ * name on the right, and no id on either side.
+ *
+ * `LOWER(nickname)` is indexed per region (`<region>_players_lower_nickname_idx`,
+ * which the player page's own lookup uses), so this is one index scan however
+ * many names are asked about.
+ *
+ * The CURRENT nickname only, never a name an account used to wear. A name
+ * history exists, and resolving through it would answer confidently with an
+ * account that no longer answers to what the roster printed, which is worse
+ * than not answering: the roster is showing who is in the room right now.
+ *
+ * Soft-deleted accounts resolve to nothing, as they answer nothing below.
+ */
+async function resolveNames(
+  region: Region,
+  names: string[],
+): Promise<Record<string, number>> {
+  if (names.length === 0) return {};
+  const players = playersByRegion[region];
+  const lowered = names.map((n) => n.toLowerCase());
+  const rows = await db
+    .select({ id: players.accountId, nickname: players.nickname })
+    .from(players)
+    .where(
+      and(
+        inArray(sql`LOWER(${players.nickname})`, lowered),
+        isNull(players.softDeletedAt),
+      ),
+    );
+
+  const byLower = new Map(
+    rows.map((r) => [r.nickname.toLowerCase(), Number(r.id)]),
+  );
+  const out: Record<string, number> = {};
+  for (const name of names) {
+    const id = byLower.get(name.toLowerCase());
+    if (id !== undefined) out[name] = id;
   }
   return out;
 }

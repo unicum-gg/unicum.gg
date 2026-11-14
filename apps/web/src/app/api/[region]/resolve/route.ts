@@ -15,7 +15,7 @@ export const dynamic = "force-dynamic";
 
 /**
  * Resolve a roster
- * @description Everything about a set of players and clans in one call: language flags, lifetime and 30-day ratings, win rates, and the clan a player wears. Addressed by the ids a game client hands over, plus clan tags for the one roster that carries no id. Each list is optional, comma separated and capped at 100; a longer list is refused rather than truncated. An id we hold nothing for is absent from the response, while an entity we hold but have no language for is present with an empty `languages`. `vehicles` adds what each account has done on one vehicle, over the `mode` asked for: that is the question a battle asks, since a career rating says nothing about the vehicle a player just brought. Reads cached data only, with no live Wargaming call.
+ * @description Everything about a set of players and clans in one call: language flags, lifetime and 30-day ratings, win rates, and the clan a player wears. Addressed by the ids a game client hands over, plus clan tags and nicknames for the rosters that carry no id. Each list is optional, comma separated and capped at 100; a longer list is refused rather than truncated. An id we hold nothing for is absent from the response, while an entity we hold but have no language for is present with an empty `languages`. `vehicles` adds what each account has done on one vehicle, over the `mode` asked for: that is the question a battle asks, since a career rating says nothing about the vehicle a player just brought. Reads cached data only, with no live Wargaming call.
  * @pathParams regionParams
  * @queryParams resolveQuery
  * @response ResolveResponse
@@ -38,6 +38,7 @@ async function GET__perf(
   const players = countedNumericIds(query, "players");
   const clans = countedNumericIds(query, "clans");
   const tags = idList(query, "tags");
+  const names = idList(query, "names");
   const vehicles = countedPairs(query, "vehicles");
   const asked = query.get("mode");
   const mode = tankBattleMode(asked);
@@ -49,7 +50,8 @@ async function GET__perf(
   if (
     players.sent > MAX_IDS_PER_KIND ||
     clans.sent > MAX_IDS_PER_KIND ||
-    tags.length > MAX_IDS_PER_KIND
+    tags.length > MAX_IDS_PER_KIND ||
+    names.length > MAX_IDS_PER_KIND
   ) {
     return Response.json(
       { error: "too_many_ids", max: MAX_IDS_PER_KIND },
@@ -78,6 +80,7 @@ async function GET__perf(
     players: players.ids,
     clans: clans.ids,
     tags,
+    names,
     vehicles: vehicles.pairs.map((pair) => ({
       accountId: pair.left,
       tankId: pair.right,

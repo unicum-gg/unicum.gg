@@ -13,9 +13,10 @@ import type { EnumMeta } from "@/services/openapi/schemas";
  * caller (a roster row carries `dbID` and `clanDBID`) and a Flash roster does
  * not always carry a displayable name at all.
  *
- * `tags` is the exception and takes the clan tag, because the one roster that
- * carries no clan id is the Stronghold detachment list, which is the WGSH web
- * app in the embedded browser and prints the tag alone.
+ * `tags` and `names` are the exceptions and take what was printed, because the
+ * roster that carries no id at all is the Stronghold detachment list: the WGSH
+ * web app in the embedded browser, whose table prints a clan tag on the left
+ * and a player's name on the right, and nothing else to address either by.
  *
  * The cap is written out here because it cannot be computed into a description:
  * next-openapi-gen reads `.meta` off the AST and drops the whole object when it
@@ -35,6 +36,13 @@ export const resolveQuery = z.object({
     .array(z.string())
     .optional()
     .meta({ description: "Clan tags, case-insensitive. Up to 100." }),
+  names: z
+    .array(z.string())
+    .optional()
+    .meta({
+      description:
+        "Player nicknames, case-insensitive. Up to 100. The nickname an account wears NOW, never one it used to: a roster shows who is in the room, and answering through a name history would confidently name an account that no longer answers to what the roster printed.",
+    }),
   vehicles: z
     .array(z.string())
     .optional()
@@ -195,6 +203,10 @@ export const ResolveResponse = z.object({
   tags: z.record(z.string(), z.number()).meta({
     description:
       "Tag to clan id, echoing back the tag as it was written. The clan itself is in `clans`, so a detachment list costs one request rather than one lookup per row and then a second request.",
+  }),
+  names: z.record(z.string(), z.number()).meta({
+    description:
+      "Nickname to account id, echoing back the nickname as it was written, so a caller pairs it to its own row without re-casing. The player itself is in `players`, the same bargain `tags` makes. A nickname we hold no live account for is absent.",
   }),
   vehicles: z.array(resolvedVehicle).meta({
     description:
