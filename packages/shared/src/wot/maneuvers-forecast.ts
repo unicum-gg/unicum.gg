@@ -8,14 +8,20 @@
  * 502 to 1,015 over one evening and did not move again for seventeen hours. A
  * curve fitted through every capture would spend most of its points on those
  * flat nights, so this reads one value per EVENING, the line as that evening
- * left it, and fits through those.
+ * left it, and works from those.
  *
- * The fit is Onslaught's (`fitCutoffCurve`): the line grows as the square root
- * of the days played, which there was measured to beat a straight line by a
- * factor of seven at a week's range. Whether it holds for Maneuvers is not
- * measured yet, which is why nothing is projected before
- * `MANEUVERS_FORECAST_MIN_EVENINGS` complete evenings, and why the projection
- * carries a range rather than one figure.
+ * What it does with them is carry the evenings' pace forward, not fit a curve.
+ * This was Onslaught's square root of the days played first, and the autumn
+ * 2026 edition measured it wrong: on EU the vehicle line gained 581, 572, 573,
+ * 589 and 665 over five evenings, and the gold line 3,000 to 3,500 each, with
+ * no slowing at all. The square root expects the gains to shrink, so every
+ * evening beat it and the projection was revised upward every day (6,100, then
+ * 6,459, then 6,864) with even its high bound below the straight line. Unlike
+ * Onslaught, whose line chases a few hundred places, this one sits deep in a
+ * board of tens of thousands who all play the same windows, and points only add
+ * up. Nothing is projected before `MANEUVERS_FORECAST_MIN_EVENINGS` watched
+ * evenings, and the range is the slowest and fastest evening seen, so a last
+ * weekend's rush can still beat it.
  */
 
 const HOUR_SECONDS = 3_600;
@@ -125,10 +131,10 @@ function close(open: Open): ManeuversEvening {
 /**
  * The line's evenings, the last one's gain, and where it ends up.
  *
- * Only watched evenings enter the fit, since an evening seen only after the
- * fact has a value but no time. The range widens with how little has been seen:
- * half the growth still to come either way at three evenings, narrowing as the
- * square root of the evenings past that.
+ * The pace is a gain per day between two watched evenings, so a night the
+ * feeder missed divides over the days it spans instead of reading as one huge
+ * evening. The evenings still to come are the whole days between the last one
+ * and the end, each window closing about a day after the one before.
  */
 export function maneuversCutoffForecast(
   samples: ManeuversCutoffSample[],
@@ -143,45 +149,38 @@ export function maneuversCutoffForecast(
     lastTwo.length === 2 ? lastTwo[1].points - lastTwo[0].points : null;
 
   const watched = evenings.filter((e) => e.watched);
+  const last = evenings.at(-1);
   if (
     watched.length < MANEUVERS_FORECAST_MIN_EVENINGS ||
     editionStart == null ||
     editionEnd == null ||
-    now == null
+    now == null ||
+    !last
   ) {
     return { evenings, lastEveningGain, now, projection: null };
   }
 
-  const xs = watched.map((e) => Math.sqrt(Math.max(0, (e.t - editionStart) / DAY_SECONDS)));
-  const ys = watched.map((e) => e.points);
-  const meanX = xs.reduce((a, b) => a + b, 0) / xs.length;
-  const meanY = ys.reduce((a, b) => a + b, 0) / ys.length;
-  let covariance = 0;
-  let variance = 0;
-  for (let i = 0; i < xs.length; i++) {
-    covariance += (xs[i] - meanX) * (ys[i] - meanY);
-    variance += (xs[i] - meanX) ** 2;
+  const paces: number[] = [];
+  for (let i = 1; i < watched.length; i++) {
+    const days = Math.max(1, Math.round((watched[i].t - watched[i - 1].t) / DAY_SECONDS));
+    paces.push(Math.max(0, watched[i].points - watched[i - 1].points) / days);
   }
-  const growth = variance > 0 ? Math.max(0, covariance / variance) : 0;
+  const pace = paces.reduce((a, b) => a + b, 0) / paces.length;
+  const remaining = Math.max(0, Math.floor((editionEnd - last.t) / DAY_SECONDS));
 
-  // Anchored on the line the board shows, like the Onslaught projection, so
-  // the forecast never argues with the figure beside it: what is projected is
-  // the distance still to travel.
-  const lastWatched = watched[watched.length - 1];
-  const fitted = (at: number) =>
-    growth * Math.sqrt(Math.max(0, (at - editionStart) / DAY_SECONDS));
-  const ahead = Math.max(0, fitted(editionEnd) - fitted(lastWatched.t));
-  const spread =
-    0.5 / Math.sqrt(watched.length - MANEUVERS_FORECAST_MIN_EVENINGS + 1);
-  const base = Math.max(now, lastWatched.points);
+  // Anchored on the line the board shows, so the forecast never argues with the
+  // figure beside it. An evening in progress is already part of `now`, which is
+  // why it is a floor rather than the base.
+  const at = (perEvening: number) =>
+    Math.round(Math.max(now, last.points + perEvening * remaining));
   return {
     evenings,
     lastEveningGain,
     now,
     projection: {
-      points: Math.round(base + ahead),
-      low: Math.round(base + ahead * (1 - spread)),
-      high: Math.round(base + ahead * (1 + spread)),
+      points: at(pace),
+      low: at(Math.min(...paces)),
+      high: at(Math.max(...paces)),
       at: editionEnd,
     },
   };
