@@ -31,6 +31,10 @@ const PAGINATION = {
     CATALOGUE: 50,
     /** A feed, where one entry is a block rather than a line. */
     FEED: 25,
+    /** A teaser on a page about something else, such as the home page's three
+     * leaderboard panels: enough rows to show who is at the top and a link to
+     * the board itself for the rest. */
+    PREVIEW: 9,
   },
 };
 

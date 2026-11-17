@@ -18,14 +18,15 @@ import { PlayerBoard, boardLanguageHref } from "@/components/players/list/boards
 import { PlayerLanguageSelect } from "@/components/players/list/language-select";
 import { TopPlayersBoard } from "@/components/players/list/top-players-board";
 import { isStrongholdPeriod, useStatsPeriod } from "@/hooks/use-period";
+import { usePaintedRatingMetric } from "@/hooks/use-rating-metric";
 import { useTierFloor } from "@/hooks/use-tier-floor";
 import { useTranslation } from "@/hooks/use-translation";
 import { numberFormat } from "@/lib/format";
 import { cn } from "@/lib/utils";
 import { unicum } from "@/services/sdk";
 import type { TopPlayerByLanguageResult } from "@/services/wargaming/wot/players/top/by-language";
+import PAGINATION from "@/constants/pagination";
 import {
-  RATING_METRICS,
   RatingMetric,
   StrongholdPeriod,
   TIER_FLOORS,
@@ -43,13 +44,18 @@ function tierParam(floor: TierFloor): "6" | "8" | "10" {
   return String(floor) as "6" | "8" | "10";
 }
 
-export type TopPlayersByMetric = Record<RatingMetric, TopPlayerByLanguageResult[]>;
-
 export type LanguageCount = { code: string; total: number; strict: number };
 
 /**
  * The player leaderboard's panel: the title, the window it ranks over, the
- * language filter, and the three metric boards CSS picks between.
+ * language filter, and the one metric board the reader is actually reading.
+ *
+ * It rendered one board per metric and let CSS show one, which is what a static
+ * page has to do when the pick lives in a cookie. Measured on the EU landing,
+ * the four a reader cannot see were 10,744 of its 14,162 DOM nodes: 76% of the
+ * page, hydrated by every visitor to be hidden. So the page serves the default
+ * metric and this fetches another one when the document says the reader picked
+ * it, which costs those readers one request and everybody else nothing.
  *
  * The period works exactly as the stronghold board's does, which is what a
  * reader asked for by pointing at it. The page is prerendered at Overall and
@@ -77,15 +83,29 @@ export type LanguageCount = { code: string; total: number; strict: number };
 export function TopPlayersPanel({
   region,
   initial,
+  initialMetric,
   page,
+  total,
   title,
   language,
   strict,
   languageStats,
 }: {
   region: Region;
-  initial: TopPlayersByMetric;
+  /** The rows the page was built with, which are `initialMetric`'s. */
+  initial: TopPlayerByLanguageResult[];
+  /**
+   * The metric those rows rank by, which is the default one: the page is static
+   * and no static render may read the reader's cookie.
+   */
+  initialMetric: RatingMetric;
   page?: number;
+  /**
+   * Rows the lifetime board holds in all, when `initial` is one server-cut page
+   * of it rather than the whole thing. It is what the heading counts and what
+   * the pager pages against; absent, `initial` is the whole board as before.
+   */
+  total?: number;
   /** The heading template's key in `components/players/list/view`, and what fills it. */
   title: { key: "board.all" | "board.language" | "board.strict"; language?: string };
   /** The language this landing is filtered to, null for the whole region. */
@@ -100,28 +120,49 @@ export function TopPlayersPanel({
   const [period, setPeriodCookie] = useStatsPeriod();
   const [tier, setTier] = useTierFloor();
   const overall = period === StrongholdPeriod.Overall;
+  // The pick as the document is painted with it, which is readable on the very
+  // first render where the cookie hook is not (see `usePaintedRatingMetric`).
+  const metric = usePaintedRatingMetric(initialMetric);
+  // The server's rows answer for its own metric over its own window and nothing
+  // else, so anything else is fetched.
+  const served = overall && metric === initialMetric;
 
   const { data, isLoading } = useSWR(
-    overall ? null : (["players-top", region, period, tier, language, strict] as const),
-    async ([, r, p, floor, lang, s]) => {
+    served
+      ? null
+      : ([
+          "players-top",
+          region,
+          period,
+          tier,
+          language,
+          strict,
+          metric,
+          page,
+        ] as const),
+    async ([, r, p, floor, lang, s, m, pg]) => {
       const api = unicum.region(r).players;
-      const lists = await Promise.all(
-        RATING_METRICS.map((metric) =>
-          api
-            .top({
-              metric,
-              period: p,
-              min_tier: tierParam(floor),
-              limit: LIMIT,
-              ...(lang ? { lang } : {}),
-              ...(s ? { strict: "true" as const } : {}),
-            })
-            .then((res) => res.results as unknown as TopPlayerByLanguageResult[]),
-        ),
-      );
-      return Object.fromEntries(
-        RATING_METRICS.map((m, i) => [m, lists[i]]),
-      ) as Partial<TopPlayersByMetric>;
+      // A lifetime board that the route can page is cut by the server, here as
+      // on the page, so switching metric on page four answers with page four.
+      const cut = p === StrongholdPeriod.Overall && pg !== undefined;
+      const size = PAGINATION.SIZE.LEADERBOARD;
+      const res = await api.top({
+        metric: m,
+        period: p,
+        min_tier: tierParam(floor),
+        limit: cut ? size : LIMIT,
+        ...(cut ? { offset: (pg - 1) * size } : {}),
+        // The language pair has to be the page's own, or this filters a
+        // different population: without `languages` the rows come back with no
+        // inferred languages at all and the board throws on the flags it draws
+        // from them.
+        ...(lang ? { lang } : { languages: "true" as const }),
+        ...(s ? { strict: "true" as const } : {}),
+      });
+      return {
+        rows: res.results as unknown as TopPlayerByLanguageResult[],
+        total: res.total ?? null,
+      };
     },
     { keepPreviousData: true },
   );
@@ -134,10 +175,22 @@ export function TopPlayersPanel({
         .then((res) => res.results as LanguageCount[]),
     { keepPreviousData: true },
   );
-  const boards: Partial<TopPlayersByMetric> = overall ? initial : (data ?? initial);
+  // The fetched rows once they exist, the page's own until then. A reader who
+  // picked PR therefore reads the default board faded for as long as theirs is
+  // in flight, which is the same compromise the period switch already makes and
+  // the honest one: the alternative is an empty table under a filled heading.
+  const rows = data?.rows ?? initial;
   const stats = overall ? languageStats : (periodStats ?? languageStats);
-  const loading = !overall && (isLoading || data === undefined);
+  const loading = !served && (isLoading || data === undefined);
   const filterCounts = language ? stats.find((s) => s.code === language) : null;
+  // The depth the pager pages against: the page's for the board it was built
+  // with, the endpoint's own count for a board fetched here. A recent window is
+  // paged in the browser over rows it holds whole, so it names none.
+  const serverTotal = overall
+    ? served
+      ? total
+      : (data?.total ?? undefined)
+    : undefined;
 
   // Reflect the window in the URL without a Next navigation, keeping the
   // Overall URL clean, and read the filter bar's own keys back rather than
@@ -168,7 +221,9 @@ export function TopPlayersPanel({
     if (raw && isStrongholdPeriod(raw)) setPeriodCookie(raw);
   }, [setPeriodCookie]);
 
-  const count = boards[RatingMetric.Wnx]?.length ?? 0;
+  // The heading names the board's depth, which a server-cut page cannot be
+  // asked for: it holds a hundred rows whatever the thousand behind it.
+  const count = serverTotal ?? rows.length;
 
   return (
     <Panel>
@@ -234,19 +289,18 @@ export function TopPlayersPanel({
         </div>
       </PanelHeader>
       <PanelContent className={cn("p-0 transition-opacity", loading && "opacity-60")}>
-        {RATING_METRICS.map((metric) => (
-          <div key={metric} data-rating-col={metric}>
-            <TopPlayersBoard
-              region={region}
-              metric={metric}
-              results={boards[metric] ?? []}
-              page={page}
-              // The lifetime board prints the recent figure beside the career
-              // one; a recent window already ranks by it.
-              recent={overall}
-            />
-          </div>
-        ))}
+        <TopPlayersBoard
+          serverTotal={serverTotal}
+          language={language}
+          strict={strict}
+          region={region}
+          metric={metric}
+          results={rows}
+          page={page}
+          // The lifetime board prints the recent figure beside the career one;
+          // a recent window already ranks by it.
+          recent={overall}
+        />
       </PanelContent>
     </Panel>
   );

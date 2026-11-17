@@ -11,9 +11,13 @@ import { RelativeTime } from "@/components/relative-time";
 import { RATING_METRIC_LABEL, RatingMetric, ratingColorClass } from "@unicum.gg/shared";
 import { RatingMetricInlineSelect } from "@/components/rating-metric-inline-select";
 import { rankedByKey } from "@/components/home/ranked-by";
+import PAGINATION from "@/constants/pagination";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
+import { usePaintedRatingMetric } from "@/hooks/use-rating-metric";
 import { useTranslation } from "@/hooks/use-translation";
+import useSWR from "swr";
+import { unicum } from "@/services/sdk";
 import {
   Table,
   TableBody,
@@ -40,14 +44,22 @@ export type TopClansInitial = Record<
   { results: TopClanResult[]; computedAt: Date | null }
 >;
 
+/**
+ * The home page's clan board: nine rows of whichever clans lead the window.
+ *
+ * Metric-aware for the reason `TopPlayers` is, and measured the same way: the
+ * home rendered one of these per metric with CSS showing one, which put two
+ * thirds of the page's DOM in boards nobody can see.
+ */
 export function TopClans({
   initial,
-  metric,
+  initialMetric,
   period = Period.Overall,
   regionOverride,
 }: {
   initial: TopClansInitial;
-  metric: RatingMetric;
+  /** The metric the page's rows rank by, which is the default one. */
+  initialMetric: RatingMetric;
   period?: Period;
   regionOverride?: Region;
 }) {
@@ -55,8 +67,26 @@ export function TopClans({
   const { t } = useTranslation("components/home/top-clans");
   const region: Region =
     regionOverride ?? (isRegion(storedRegion) ? storedRegion : Region.EU);
+  const metric = usePaintedRatingMetric(initialMetric);
   const metricLabel = RATING_METRIC_LABEL[metric];
-  const { results, computedAt } = initial[region];
+
+  const { data } = useSWR(
+    metric === initialMetric
+      ? null
+      : (["home-top-clans", region, metric, period] as const),
+    ([, r, m, p]) =>
+      unicum
+        .region(r)
+        .clans.top({ metric: m, period: p, limit: PAGINATION.SIZE.PREVIEW })
+        .then((res) => ({
+          results: res.results,
+          computedAt: res.computed_at ? new Date(res.computed_at) : null,
+        })),
+    { keepPreviousData: true },
+  );
+
+  const { results, computedAt } = (data ??
+    initial[region]) as TopClansInitial[Region];
 
   return (
     <div className="flex h-full flex-col">

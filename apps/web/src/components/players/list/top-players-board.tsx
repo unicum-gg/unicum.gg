@@ -15,7 +15,6 @@ import { RATING_METRIC_LABEL, type RatingMetric } from "@unicum.gg/shared";
 import type { TopPlayerByLanguageResult } from "@/services/wargaming/wot/players/top/by-language";
 import type { Region } from "@unicum.gg/wargaming";
 import { FilterSubject } from "@/components/filter-subject";
-import { useRatingMetric } from "@/hooks/use-rating-metric";
 import { useTranslation } from "@/hooks/use-translation";
 import { unicum } from "@/services/sdk";
 import { sharedParamStore } from "@/lib/url-param-store";
@@ -23,9 +22,9 @@ import { sharedParamStore } from "@/lib/url-param-store";
 /**
  * One metric's leaderboard, server-rendered at the page the route names and
  * paged through the site-wide TablePager, so it reads like every other
- * paginated table. One instance per metric, each CSS-gated by the parent's
- * `data-rating-col` wrapper. Carries its own filter section (search + a min/max
- * range over the ranking).
+ * paginated table. One instance, for the metric the reader is reading, which is
+ * the default one unless `TopPlayersPanel` fetched another. Carries its own
+ * filter section (search + a min/max range over the ranking).
  *
  * **Where the rows come from is the whole subject here.** With `serverTotal`
  * the server hands over ONE page and the pager navigates for the next, which is
@@ -95,12 +94,10 @@ export function TopPlayersBoard({
   );
   const wanted = parsePage(urlPage) ?? page ?? 1;
   const size = PAGINATION.SIZE.LEADERBOARD;
-  // All five metrics are mounted at once and CSS shows one, so without this
-  // every page click would be five requests for the four nobody is looking at:
-  // measured at 3.9 s against 0.8 for the one that is. The cookie is what the
-  // CSS gates on too, so the board that fetches is the board on screen.
-  const { metric: shown } = useRatingMetric();
-  const sliced = serverTotal !== undefined && metric === shown;
+  // One board is mounted now, the one the reader is reading, so a page click is
+  // one request. It used to mount all five and let CSS show one, where a click
+  // cost five, four of them for boards nobody was looking at.
+  const sliced = serverTotal !== undefined;
 
   // The filter narrows the BOARD, not the page, so using it is what buys the
   // rest of the ranking. Armed by the filter going active rather than by a
@@ -156,8 +153,9 @@ export function TopPlayersBoard({
   // a URL that moved under it exactly like this).
   if (filters.active && !wantFull) setWantFull(true);
 
-  // The three metric boards (wn7/wn8/wnx) are mounted at once and share the one
-  // `?page=`: they are three views of one ranking, so they mean the same page.
+  // `?page=` is read through the shared param store rather than held here, so
+  // the board and the filter bar above it cannot disagree about which page is
+  // on screen.
   const { paged, pager } = usePagination(filtered, PAGINATION.SIZE.LEADERBOARD, {
     initialPage: page,
     // Server-cut until the filter bar pulls the whole ranking in, after which

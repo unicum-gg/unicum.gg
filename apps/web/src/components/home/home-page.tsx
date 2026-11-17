@@ -21,7 +21,6 @@ import { LiveSection } from "@/components/home/live-section";
 import { TopPlayers } from "@/components/home/top-players";
 import { TopPlayersOverallPanel } from "@/components/home/top-players-overall-panel";
 import { Interpolate } from "@/components/interpolate";
-import { RatingMetricInlineSelect } from "@/components/rating-metric-inline-select";
 import { Kbd } from "@/components/ui/kbd";
 import {
   Panel,
@@ -31,12 +30,13 @@ import {
   PanelTitle,
 } from "@/components/panel";
 import APP from "@/constants/app";
+import PAGINATION from "@/constants/pagination";
 import {
-  RATING_METRICS,
+  DEFAULT_RATING_METRIC,
   RatingMetric,
   type LiveStreamer,
 } from "@unicum.gg/shared";
-import { rankedByKey } from "@/components/home/ranked-by";
+import { HomeWindow } from "@/components/home/ranked-by";
 import { getTranslation } from "@/lib/translations.server";
 import type {
   TopClansPeriod,
@@ -49,11 +49,15 @@ import type {
 import { buildSafe, optional, unicum } from "@/services/sdk";
 import { type Region, REGIONS } from "@unicum.gg/wargaming";
 
-const TOP_LIMIT = 9;
-
 // The home consumes its own public API through the SDK: one `/top` call per
-// (region, metric, period), all precomputed leaderboards server-side, plus
-// the live-streamers snapshot. Next memoizes identical fetches per render.
+// (region, period) in the DEFAULT metric, all precomputed leaderboards
+// server-side, plus the live-streamers snapshot. Next memoizes identical
+// fetches per render.
+//
+// It used to be one call per (region, metric, period), which is five times as
+// many for four boards CSS then hid: thirty leaderboard reads a render to
+// publish six, and two thirds of the page's DOM built for nobody. The boards
+// fetch another metric themselves when the reader picked one.
 async function playersTopByRegions(
   metric: RatingMetric,
   period: `${TopPlayersPeriod}`,
@@ -64,7 +68,7 @@ async function playersTopByRegions(
         () =>
           unicum
             .region(region)
-            .players.top({ metric, period, limit: TOP_LIMIT }),
+            .players.top({ metric, period, limit: PAGINATION.SIZE.PREVIEW }),
         { results: [], computed_at: null },
       );
       return [
@@ -89,7 +93,7 @@ async function clansTopByRegions(
         () =>
           unicum
             .region(region)
-            .clans.top({ metric, period, limit: TOP_LIMIT }),
+            .clans.top({ metric, period, limit: PAGINATION.SIZE.PREVIEW }),
         { results: [], computed_at: null },
       );
       return [
@@ -112,32 +116,30 @@ export async function HomePage({
   locale: string;
 }) {
   const { t } = await getTranslation("components/home/home-page", locale);
-  // The four "Ranked by ..." lines live in ONE namespace, read here and by the
-  // overall panel: siblings that must read alike have to be decided in the same
-  // request, or the model writes each on its own and French gets an article in
-  // one and not the next.
-  const { t: tRanked } = await getTranslation(
-    "components/home/ranked-by",
-    locale,
-  );
+  // The four "Ranked by ..." lines still live in ONE namespace, for the reason
+  // they always did: siblings that must read alike have to be written together,
+  // or the model gives French an article in one and not the next. It is read in
+  // the boards rather than here now, because the metric a line names is decided
+  // there (see `TopPlayers`).
+  const metric = DEFAULT_RATING_METRIC;
   const [
-    topClansOverallByMetric,
-    topClansMonthByMetric,
-    topPlayersDayByMetric,
-    topPlayersWeekByMetric,
-    topPlayersOverallByMetric,
-    topPlayersMonthByMetric,
+    topClansOverall,
+    topClansMonth,
+    topPlayersDay,
+    topPlayersWeek,
+    topPlayersOverall,
+    topPlayersMonth,
     liveStreamers,
   ] = await Promise.all([
-    // Every board ranks every metric. PR and WTR have no value over a window
-    // (see `RatingMetric`), so a recent board ranks the accounts active inside
-    // it by their current figure, and says so.
-    Promise.all(RATING_METRICS.map((m) => clansTopByRegions(m, "overall"))),
-    Promise.all(RATING_METRICS.map((m) => clansTopByRegions(m, "30d"))),
-    Promise.all(RATING_METRICS.map((m) => playersTopByRegions(m, "24h"))),
-    Promise.all(RATING_METRICS.map((m) => playersTopByRegions(m, "7d"))),
-    Promise.all(RATING_METRICS.map((m) => playersTopByRegions(m, "overall"))),
-    Promise.all(RATING_METRICS.map((m) => playersTopByRegions(m, "30d"))),
+    // The default metric only. PR and WTR have no value over a window (see
+    // `RatingMetric`), so a recent board ranks the accounts active inside it by
+    // their current figure, and says so.
+    clansTopByRegions(metric, "overall"),
+    clansTopByRegions(metric, "30d"),
+    playersTopByRegions(metric, "24h"),
+    playersTopByRegions(metric, "7d"),
+    playersTopByRegions(metric, "overall"),
+    playersTopByRegions(metric, "30d"),
     optional(() => unicum.streamers.list(), { results: [] }).then(
       (r) => r.results as unknown as LiveStreamer[],
     ),
@@ -158,21 +160,12 @@ export async function HomePage({
             <PanelTitle>{t("top-players.day.title")}</PanelTitle>
           </PanelHeader>
           <PanelContent className="flex-1 p-0">
-            {RATING_METRICS.map((m, i) => (
-              <div key={m} data-rating-col={m}>
-                <TopPlayers
-                  description={
-                    <Interpolate
-                      template={tRanked(rankedByKey("day", m))}
-                      values={{ metric: <RatingMetricInlineSelect /> }}
-                    />
-                  }
-                  initial={topPlayersDayByMetric[i]}
-                  metric={m}
-                  regionOverride={regionOverride}
-                />
-              </div>
-            ))}
+            <TopPlayers
+              initial={topPlayersDay}
+              initialMetric={metric}
+              period={HomeWindow.Day}
+              regionOverride={regionOverride}
+            />
           </PanelContent>
         </Panel>
 
@@ -184,27 +177,19 @@ export async function HomePage({
             <PanelTitle>{t("top-players.week.title")}</PanelTitle>
           </PanelHeader>
           <PanelContent className="flex-1 p-0">
-            {RATING_METRICS.map((m, i) => (
-              <div key={m} data-rating-col={m}>
-                <TopPlayers
-                  description={
-                    <Interpolate
-                      template={tRanked(rankedByKey("week", m))}
-                      values={{ metric: <RatingMetricInlineSelect /> }}
-                    />
-                  }
-                  initial={topPlayersWeekByMetric[i]}
-                  metric={m}
-                  regionOverride={regionOverride}
-                />
-              </div>
-            ))}
+            <TopPlayers
+              initial={topPlayersWeek}
+              initialMetric={metric}
+              period={HomeWindow.Week}
+              regionOverride={regionOverride}
+            />
           </PanelContent>
         </Panel>
 
         <TopPlayersOverallPanel
-          overallByMetric={topPlayersOverallByMetric}
-          monthByMetric={topPlayersMonthByMetric}
+          overall={topPlayersOverall}
+          month={topPlayersMonth}
+          initialMetric={metric}
           regionOverride={regionOverride}
         />
       </div>
@@ -213,8 +198,9 @@ export async function HomePage({
 
       <div className="grid lg:grid-cols-2 *:min-w-0">
         <TopClansOverallPanel
-          overallByMetric={topClansOverallByMetric}
-          monthByMetric={topClansMonthByMetric}
+          overall={topClansOverall}
+          month={topClansMonth}
+          initialMetric={metric}
           regionOverride={regionOverride}
         />
 

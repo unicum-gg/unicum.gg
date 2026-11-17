@@ -1,7 +1,5 @@
 "use client";
 
-import { Interpolate } from "@/components/interpolate";
-import { RatingMetricInlineSelect } from "@/components/rating-metric-inline-select";
 import { Period, usePeriod } from "@/hooks/use-period";
 import { useTranslation } from "@/hooks/use-translation";
 import { PeriodSelect } from "@/components/home/period-select";
@@ -11,8 +9,8 @@ import {
 } from "@/components/home/top-players";
 import { TopPlayersLeaderboardLink } from "@/components/home/top-players-leaderboard-link";
 import { Panel, PanelContent, PanelHeader, PanelTitle } from "@/components/panel";
-import { RATING_METRICS } from "@unicum.gg/shared";
-import { rankedByKey } from "@/components/home/ranked-by";
+import type { RatingMetric } from "@unicum.gg/shared";
+import { HomeWindow } from "@/components/home/ranked-by";
 import type { Region } from "@unicum.gg/wargaming";
 
 /**
@@ -22,24 +20,26 @@ import type { Region } from "@unicum.gg/wargaming";
  * a cookie) with the "Top clans" panel, so the two stay in sync. The "See all →"
  * link only applies to the all-time leaderboard.
  *
- * Both come in every metric, ordered as `RATING_METRICS`. PR and WTR have no
- * value over a window, so the 30-day board ranks on the current figure of who
- * was active in it (see `rankedByKey`).
+ * Both come in the default metric only, and the board fetches another one for
+ * a reader who picked it (see `TopPlayers`). PR and WTR have no value over a
+ * window, so the 30-day board ranks on the current figure of who was active in
+ * it (see `rankedByKey`).
  */
 export function TopPlayersOverallPanel({
-  overallByMetric,
-  monthByMetric,
+  overall,
+  month,
+  initialMetric,
   regionOverride,
 }: {
-  overallByMetric: TopPlayersInitial[];
-  monthByMetric: TopPlayersInitial[];
+  overall: TopPlayersInitial;
+  month: TopPlayersInitial;
+  /** The metric the page's rows rank by, which is the default one. */
+  initialMetric: RatingMetric;
   regionOverride?: Region;
 }) {
   const [period, setPeriod] = usePeriod();
   const { t } = useTranslation("components/home/top-players-overall-panel");
-  const { t: tRanked } = useTranslation("components/home/ranked-by");
   const isOverall = period === Period.Overall;
-  const data = isOverall ? overallByMetric : monthByMetric;
 
   return (
     <Panel className="flex flex-col" screenLines={false}>
@@ -56,21 +56,12 @@ export function TopPlayersOverallPanel({
         )}
       </PanelHeader>
       <PanelContent className="flex-1 p-0">
-        {RATING_METRICS.map((m, i) => (
-          <div key={m} data-rating-col={m}>
-            <TopPlayers
-              description={
-                <Interpolate
-                  template={tRanked(isOverall ? "overall" : rankedByKey("month", m))}
-                  values={{ metric: <RatingMetricInlineSelect /> }}
-                />
-              }
-              initial={data[i]}
-              metric={m}
-              regionOverride={regionOverride}
-            />
-          </div>
-        ))}
+        <TopPlayers
+          initial={isOverall ? overall : month}
+          initialMetric={initialMetric}
+          period={isOverall ? HomeWindow.Overall : HomeWindow.Month}
+          regionOverride={regionOverride}
+        />
       </PanelContent>
     </Panel>
   );

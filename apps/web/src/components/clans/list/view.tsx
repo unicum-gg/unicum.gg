@@ -4,7 +4,7 @@ import { BoardUpdated } from "@/components/board-updated";
 import { ClanLanguageSelect } from "@/components/clans/list/language-select";
 import { StrictModeToggle } from "@/components/clans/list/strict-mode-toggle";
 import { StrongholdTierTabs } from "@/components/clans/list/stronghold/tier-tabs";
-import { TopClansBoard } from "@/components/clans/list/top-clans-board";
+import { ClansBoardLive } from "@/components/clans/list/board-live";
 import { LeaderboardTabs } from "@/components/leaderboard-tabs";
 import { RatingMetricInlineSelect } from "@/components/rating-metric-inline-select";
 import {
@@ -14,7 +14,12 @@ import {
   PanelSeparator,
   PanelTitle,
 } from "@/components/panel";
-import { RATING_METRICS, RatingMetric, languageToCountryCode } from "@unicum.gg/shared";
+import {
+  DEFAULT_RATING_METRIC,
+  RATING_METRICS,
+  RatingMetric,
+  languageToCountryCode,
+} from "@unicum.gg/shared";
 import { buildSafe, unicum } from "@/services/sdk";
 import type { TopClanByLanguageResult } from "@/services/wargaming/wot/clans/top/by-language";
 import {
@@ -52,9 +57,9 @@ async function MetricInline({ locale }: { locale: string }) {
  * /clans/lang/<language>. `strict` narrows to clans that declared ONLY
  * the requested language.
  *
- * The view renders every metric variant in parallel and gates them
- * via `data-rating-col` so the same HTML serves every visitor. The
- * cookie picks which is visible via CSS (rule lives in `globals.css`).
+ * The view renders ONE metric board, the default one, since the page is static
+ * and the pick lives in a cookie no static render may read. A reader who picked
+ * another metric has it fetched in the browser by `ClansBoardLive`.
  */
 export async function ClansLandingView({
   region,
@@ -78,25 +83,21 @@ export async function ClansLandingView({
     ...(strict ? { strict: "true" as const } : {}),
   });
   const EMPTY_TOP = { results: [], computed_at: null };
-  const [tops, languageStats] = await Promise.all([
-    Promise.all(
-      RATING_METRICS.map((metric) =>
-        buildSafe(() => api.top(topQuery(metric)), EMPTY_TOP),
-      ),
-    ),
+  // One board, where this fetched and rendered all five and let CSS show one.
+  // Measured on the EU landing: 14,383 DOM nodes for a table of 100 rows,
+  // against 3,197 once only the board being read is built.
+  const [top, languageStats] = await Promise.all([
+    buildSafe(() => api.top(topQuery(DEFAULT_RATING_METRIC)), EMPTY_TOP),
     buildSafe(() => api.languages(), { results: [] }),
   ]);
-  const resultsOf = (metric: RatingMetric) =>
-    tops[RATING_METRICS.indexOf(metric)]
-      .results as unknown as TopClanByLanguageResult[];
+  const results = top.results as unknown as TopClanByLanguageResult[];
   const stats = languageStats.results;
   const filterCounts = language ? stats.find((s) => s.code === language) : null;
   const langName = language ? languageDisplayName(language, locale) : null;
   const langCountry = language ? languageToCountryCode(language, region) : null;
   // Every metric uses the same eligibility filter, so the row count is
-  // identical across them in practice. Pick one as the canonical count for
-  // the panel title.
-  const totalCount = resultsOf(RatingMetric.Wnx).length;
+  // identical across them in practice, and the one fetched speaks for all.
+  const totalCount = results.length;
 
   return (
     <div className="mx-auto w-full max-w-7xl">
@@ -160,8 +161,7 @@ export async function ClansLandingView({
               strict={strict}
             />
           </div>
-          <BoardUpdated at={tops[RATING_METRICS.indexOf(RatingMetric.Wnx)].computed_at ??
-              tops[RATING_METRICS.indexOf(RatingMetric.Wn8)].computed_at} />
+          <BoardUpdated at={top.computed_at} />
         </PanelContent>
       </Panel>
 
@@ -223,15 +223,13 @@ export async function ClansLandingView({
               placings, which this table is not one of. The rating board had its
               own crest and had to be hidden on its own page; it no longer
               exists. */}
-          {RATING_METRICS.map((metric) => (
-            <div key={metric} data-rating-col={metric}>
-              <TopClansBoard
-                region={region}
-                results={resultsOf(metric)}
-                metric={metric}
-              />
-            </div>
-          ))}
+          <ClansBoardLive
+            region={region}
+            initial={results}
+            initialMetric={DEFAULT_RATING_METRIC}
+            language={language}
+            strict={strict}
+          />
         </PanelContent>
       </Panel>
     </div>

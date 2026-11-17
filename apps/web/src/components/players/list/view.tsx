@@ -23,7 +23,7 @@ import {
   PanelTitle,
 } from "@/components/panel";
 import {
-  RATING_METRICS,
+  DEFAULT_RATING_METRIC,
   RatingMetric,
   languageToCountryCode,
 } from "@unicum.gg/shared";
@@ -36,17 +36,20 @@ import {
   REGION_LABEL,
 } from "@unicum.gg/wargaming";
 
-// The full ranking is fetched once and paginated client-side (TablePager).
-const LIMIT = 1000;
+/**
+ * How deep this board goes. It is what a reader can page through and what the
+ * filter bar searches, and it is the figure the API's own maximum is set to.
+ */
+const DEPTH = 1000;
 /**
  * Shared body for both /players (EU default) and /<region>/players pages.
  * Pass `language: null` for the unfiltered landing and the language code
  * for /players/lang/<language>. `strict` narrows to players whose
  * inferred language set is exactly the requested one (no co-dominance).
  *
- * The view renders every metric variant in parallel and gates them
- * via `data-rating-col` so the same HTML serves every visitor. The
- * cookie picks which is visible via CSS (rule lives in `globals.css`).
+ * The view renders ONE metric board, the default one, since the page is static
+ * and the pick lives in a cookie no static render may read. A reader who picked
+ * another metric has it fetched in the browser by `TopPlayersPanel`.
  */
 export async function PlayersLandingView({
   region,
@@ -76,31 +79,38 @@ export async function PlayersLandingView({
   // populations for the chips.
   const { t } = await getTranslation("components/players/list/view", locale);
   const api = unicum.region(region).players;
+  // A caller that names a page has a `/page/[n]` route serving every page this
+  // board offers, so the server cuts the page and ships a hundred rows instead
+  // of a thousand: measured on the EU landing, 286 kB of RSC payload against 63.
+  // A caller that names none (the per-language landings, which have no such
+  // route) still gets the whole depth and pages it in the browser, since there
+  // is nowhere for its pager to navigate to.
+  const sliced = page !== undefined;
+  const size = PAGINATION.SIZE.LEADERBOARD;
   const topQuery = (metric: RatingMetric) => ({
     metric,
-    limit: LIMIT,
+    limit: sliced ? size : DEPTH,
+    ...(sliced ? { offset: (page - 1) * size } : {}),
     ...(language ? { lang: language } : { languages: "true" as const }),
     ...(strict ? { strict: "true" as const } : {}),
   });
-  const EMPTY_TOP = { results: [], computed_at: null };
-  const [tops, languageStats] = await Promise.all([
-    Promise.all(
-      RATING_METRICS.map((metric) =>
-        buildSafe(() => api.top(topQuery(metric)), EMPTY_TOP),
-      ),
-    ),
+  const EMPTY_TOP = { results: [], computed_at: null, total: 0 };
+  // One board, where this used to fetch and render all five and let CSS show
+  // one of them. Measured on this page: the four boards a reader cannot see
+  // were 10,744 of its 14,162 DOM nodes, 76% of the page, downloaded, parsed
+  // and hydrated by everybody. The page is static, so the server cannot read
+  // the reader's pick and serves the default; `TopPlayersPanel` fetches another
+  // metric for the readers who chose one, which is the trade this buys.
+  const [top, languageStats] = await Promise.all([
+    buildSafe(() => api.top(topQuery(DEFAULT_RATING_METRIC)), EMPTY_TOP),
     buildSafe(() => api.languages(), { results: [] }),
   ]);
-  const results = Object.fromEntries(
-    RATING_METRICS.map((metric, i) => [
-      metric,
-      tops[i].results as TopPlayerByLanguageResult[],
-    ]),
-  ) as Record<RatingMetric, TopPlayerByLanguageResult[]>;
-  const top = (metric: RatingMetric) => tops[RATING_METRICS.indexOf(metric)];
-  // Every metric ranks the same eligible set, so their lengths agree; the
-  // longest is what bounds the pages either way.
-  const pagedRows = Math.max(...Object.values(results).map((r) => r.length));
+  const results = top.results as TopPlayerByLanguageResult[];
+  // Every metric ranks the same eligible set, so the depth of the one fetched
+  // is the depth of all of them, which is what the pager pages against.
+  // Server-cut, the rows in hand are one page and say nothing about that depth,
+  // so the count comes from the endpoint instead.
+  const pagedRows = sliced ? (top.total ?? 0) : results.length;
   assertPageInRange(page, pagedRows, PAGINATION.SIZE.LEADERBOARD);
   const stats = languageStats.results;
   const langName = language ? languageDisplayName(language, locale) : null;
@@ -171,9 +181,7 @@ export async function PlayersLandingView({
               strict={strict}
             />
           </div>
-          <BoardUpdated
-            at={top(RatingMetric.Wnx).computed_at ?? top(RatingMetric.Wn8).computed_at}
-          />
+          <BoardUpdated at={top.computed_at} />
         </PanelContent>
       </Panel>
 
@@ -189,6 +197,8 @@ export async function PlayersLandingView({
         region={region}
         page={page}
         initial={results}
+        initialMetric={DEFAULT_RATING_METRIC}
+        total={sliced ? pagedRows : undefined}
         title={{
           key: language ? (strict ? "board.strict" : "board.language") : "board.all",
           language: langName ?? undefined,
