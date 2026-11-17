@@ -4,6 +4,7 @@ import {
   battleLoadoutsByRegion,
   battlesByRegion,
   clansByRegion,
+  EVENT_VEHICLE_VARIANT,
   playersByRegion,
   RatingMetric,
   type BattleEconomy,
@@ -233,6 +234,12 @@ export type BattleTank = {
   tag: string;
   /** Our slug, so the row can link to the vehicle. Null when it has none. */
   slug: string | null;
+  /**
+   * Exists only inside an event mode. Wargaming publishes no record on such a
+   * vehicle for anybody, so a row links to the vehicle rather than to the
+   * player on it, a page that could only ever be a 404.
+   */
+  isEvent: boolean;
 };
 
 export enum BattleOutcome {
@@ -581,6 +588,7 @@ function namedTank(
     nation: meta.nation,
     tag: meta.tag,
     slug: slugs.get(id) ?? null,
+    isEvent: meta.variant === EVENT_VEHICLE_VARIANT,
   };
 }
 

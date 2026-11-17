@@ -67,6 +67,10 @@ const battleTank = z
     slug: z.string().nullable().meta({
       description: "Our slug for the vehicle page, null when it has none.",
     }),
+    isEvent: z.boolean().meta({
+      description:
+        "Exists only inside an event mode, so no player has a published record on it.",
+    }),
   })
   .meta({ id: "BattleTank", description: "A vehicle as a battle row names it." });
 

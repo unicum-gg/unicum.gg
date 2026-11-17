@@ -66,6 +66,8 @@ export type Participant = {
     nation: string;
     tag: string;
     slug: string | null;
+    /** An event mode's vehicle, on which nobody has a published record. */
+    isEvent: boolean;
   } | null;
   /** Every tank they fought in, when it was more than one (Frontline). */
   lineup?: LineupTank[];

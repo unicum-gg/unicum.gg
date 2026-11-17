@@ -207,9 +207,14 @@ export function BattlePlayerPanel({
               />
               {tank.slug && player ? (
                 // This player's own record on this vehicle, which is the
-                // question a roster raises and cannot answer.
+                // question a roster raises and cannot answer. An event
+                // vehicle has no such record, so it leads to the vehicle.
                 <Link
-                  href={ROUTES.PLAYER_TANK(region, player.nickname, tank.slug)}
+                  href={
+                    tank.isEvent
+                      ? ROUTES.TANK(region, tank.slug)
+                      : ROUTES.PLAYER_TANK(region, player.nickname, tank.slug)
+                  }
                   className="text-foreground truncate hover:underline"
                 >
                   {tank.name}

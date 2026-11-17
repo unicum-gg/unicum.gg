@@ -129,6 +129,10 @@ const battleParticipant = z
         nation: z.string(),
         tag: z.string(),
         slug: z.string().nullable(),
+        isEvent: z.boolean().meta({
+          description:
+            "Exists only inside an event mode, so no player has a published record on it.",
+        }),
       })
       .nullable()
       .meta({ id: "BattleParticipantTank" }),

@@ -79,6 +79,8 @@ export type PlayerBattleRow = {
     nation: string;
     tag: string;
     slug: string | null;
+    /** An event mode's vehicle, on which nobody has a published record. */
+    isEvent: boolean;
   } | null;
   /**
    * Every tank they fought in, when it was more than one (Frontline). `tank`
@@ -302,11 +304,15 @@ export function PlayerBattlesTable({
                         />
                         {battle.tank.slug ? (
                           <Link
-                            href={ROUTES.PLAYER_TANK(
-                              region,
-                              battle.player.identity.nickname,
-                              battle.tank.slug,
-                            )}
+                            href={
+                              battle.tank.isEvent
+                                ? ROUTES.TANK(region, battle.tank.slug)
+                                : ROUTES.PLAYER_TANK(
+                                    region,
+                                    battle.player.identity.nickname,
+                                    battle.tank.slug,
+                                  )
+                            }
                             className="truncate hover:underline"
                           >
                             {battle.tank.shortName || battle.tank.name}
@@ -342,11 +348,12 @@ export function PlayerBattlesTable({
                       <Link
                         // This player on this vehicle, like the profile's other
                         // vehicle lists: the row is one battle of their record.
-                        href={ROUTES.PLAYER_TANK(
-                          region,
-                          nickname,
-                          battle.tank.slug,
-                        )}
+                        // An event vehicle has no record, so the vehicle itself.
+                        href={
+                          battle.tank.isEvent
+                            ? ROUTES.TANK(region, battle.tank.slug)
+                            : ROUTES.PLAYER_TANK(region, nickname, battle.tank.slug)
+                        }
                         className="truncate font-medium hover:underline"
                       >
                         {battle.tank.shortName || battle.tank.name}
