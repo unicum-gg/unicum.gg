@@ -13,8 +13,9 @@ import type { Region } from "@unicum.gg/wargaming";
  * fields and three fields respectively, which is how a winner came to wear the
  * crest on one page and nothing on the next.
  *
- * A row whose account is not connected here keeps the falsy defaults rather
- * than being dropped.
+ * A row whose account is not connected here keeps the camelCase falsy defaults
+ * rather than being dropped; the snake_case half omits them, see
+ * `PlayerCrestsSnake`.
  */
 
 /** The camelCase shape, for payloads built against our own types. */
@@ -30,17 +31,29 @@ export type PlayerCrests = {
   onslaughtSeasons: number;
 };
 
-/** The snake_case shape, for rows that go out on the public API as they are. */
+/**
+ * The snake_case shape, for rows that go out on the public API as they are.
+ *
+ * Every field is optional and a crest nobody wears is OMITTED rather than
+ * written as `false`, `null` or `0`. On one row that is pedantry, on a
+ * leaderboard it is most of the payload: measured on the EU board, these nine
+ * fields were 1,014,661 of the 2,226,634 bytes a navigation carried, and nearly
+ * all of them empty (4,999 rows of 5,000 said `is_supporter: false`, 4,867 said
+ * `twitch_login: null`, and `tournament_best_title` spent 177 kB saying players
+ * hold no title, against 125 kB for every nickname on the board). The response
+ * schemas have always declared them optional, so an absent field reads exactly
+ * as the falsy one did for anything testing it.
+ */
 export type PlayerCrestsSnake = {
-  is_verified: boolean;
-  is_supporter: boolean;
-  twitch_login: string | null;
-  tournament_wins: number;
-  tournament_featured_wins: number;
-  tournament_best_title: string | null;
-  onslaught_best_tier: string | null;
-  onslaught_best_rank: number | null;
-  onslaught_seasons: number;
+  is_verified?: boolean;
+  is_supporter?: boolean;
+  twitch_login?: string;
+  tournament_wins?: number;
+  tournament_featured_wins?: number;
+  tournament_best_title?: string;
+  onslaught_best_tier?: string;
+  onslaught_best_rank?: number;
+  onslaught_seasons?: number;
 };
 
 async function crestsFor(
@@ -101,18 +114,19 @@ export async function attachPlayerBadges<T extends { account_id: number }>(
     rows.map((r) => r.account_id),
   );
   return rows.map((row) => {
-    const c = crests.get(row.account_id) ?? EMPTY;
-    return {
-      ...row,
-      is_verified: c.isVerified,
-      is_supporter: c.isSupporter,
-      twitch_login: c.twitchLogin,
-      tournament_wins: c.tournamentWins,
-      tournament_featured_wins: c.tournamentFeaturedWins,
-      tournament_best_title: c.tournamentBestTitle,
-      onslaught_best_tier: c.onslaughtBestTier,
-      onslaught_best_rank: c.onslaughtBestRank,
-      onslaught_seasons: c.onslaughtSeasons,
-    };
+    const c = crests.get(row.account_id);
+    if (!c) return row as T & PlayerCrestsSnake;
+    const out: T & PlayerCrestsSnake = { ...row };
+    if (c.isVerified) out.is_verified = true;
+    if (c.isSupporter) out.is_supporter = true;
+    if (c.twitchLogin) out.twitch_login = c.twitchLogin;
+    if (c.tournamentWins) out.tournament_wins = c.tournamentWins;
+    if (c.tournamentFeaturedWins)
+      out.tournament_featured_wins = c.tournamentFeaturedWins;
+    if (c.tournamentBestTitle) out.tournament_best_title = c.tournamentBestTitle;
+    if (c.onslaughtBestTier) out.onslaught_best_tier = c.onslaughtBestTier;
+    if (c.onslaughtBestRank) out.onslaught_best_rank = c.onslaughtBestRank;
+    if (c.onslaughtSeasons) out.onslaught_seasons = c.onslaughtSeasons;
+    return out;
   });
 }
