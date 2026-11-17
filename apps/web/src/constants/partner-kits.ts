@@ -73,6 +73,7 @@ export type PartnerKit = { name: string; locale: AssetLocale };
 
 export const PARTNER_KITS: Record<string, PartnerKit> = {
   remi: { name: "Remi_iD", locale: "fr" },
+  ophacker: { name: "O_P_Hacker", locale: "en" },
 };
 
 /**

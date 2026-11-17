@@ -21,6 +21,7 @@ import type { NextConfig } from "next";
  */
 const PARTNERS: { slug: string; region: string; nickname: string }[] = [
   { slug: "remi", region: "eu", nickname: "Remi_iD" },
+  { slug: "ophacker", region: "na", nickname: "O_P_Hacker" },
 ];
 
 // Language-neutral on purpose: the destination carries no locale prefix, so a
