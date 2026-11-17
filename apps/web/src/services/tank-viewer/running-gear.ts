@@ -13,6 +13,7 @@ import { switched } from "./switches";
 import type { MirrorModel } from "@unicum.gg/wargaming";
 import { bandAround, type layTrack } from "./track";
 import { holdDown, tipCeiling } from "./ceiling";
+import { ribbonScroller } from "./ribbon";
 
 /** `Object3D` carries no discriminant, so the renderer's own flag narrows a traversal. */
 const isBone = (o: THREE.Object3D): o is THREE.Bone =>
@@ -69,6 +70,9 @@ export function runningGear({
   // Read once per vehicle rather than per frame, and after the module is loaded
   // rather than while it is being imported.
   const turning = turnWheels();
+  // Where no belt could be laid, the ribbon the chassis carries is what is on
+  // screen, and it slides its texture instead.
+  const scrollRibbons = belts.length > 0 ? null : ribbonScroller(parts);
   // Turning the road wheels is what the skeleton in the .glb is there for.
   //
   // The bone a wheel is skinned to sits at the origin, so turning it on its own
@@ -349,7 +353,9 @@ export function runningGear({
 
   return {
     /** Whether this vehicle published axles for its wheels. */
-    turns: wheels.length > 0,
+    // A ribbon that scrolls is something to run too, on the vehicles that
+    // publish no axles at all.
+    turns: wheels.length > 0 || scrollRibbons !== null,
     /**
      * Whether the gear has anything to do when the body tips.
      *
@@ -375,6 +381,7 @@ export function runningGear({
     roll(distance: number) {
       travelled = distance;
       pose();
+      scrollRibbons?.(distance);
     },
   };
 }
