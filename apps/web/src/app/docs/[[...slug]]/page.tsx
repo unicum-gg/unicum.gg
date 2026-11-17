@@ -96,6 +96,7 @@ const DIRECTORIES: Directory[] = [
     name: "Track Awesome List",
     href: "https://www.trackawesomelist.com/public-apis/public-apis/",
   },
+  { name: "APIs.io", href: "https://apis.io/providers/unicum-gg/" },
 ];
 
 type Crumb = { name: string; href: string };

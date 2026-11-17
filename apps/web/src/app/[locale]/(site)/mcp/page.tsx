@@ -182,6 +182,10 @@ const DIRECTORIES: Directory[] = [
     name: "MCP Server Hub",
     href: "https://mcpserver.dev/s/unicum-gg-world-of-tanks-stats_ngfh9qn",
   },
+  {
+    name: "Agentalog",
+    href: "https://agentalog.com/l/mcp_gg_unicum_wot_stats_29155f57",
+  },
 ];
 
 function toolParams(def: (typeof TOOL_DEFS)[number]): string {
