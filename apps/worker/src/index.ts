@@ -114,6 +114,11 @@ async function startCrons(): Promise<void> {
   );
   startMarksRefreshCron();
 
+  const { startWindowRatingsRefreshCron } = await import(
+    "@unicum.gg/core/players/window-ratings-refresh"
+  );
+  startWindowRatingsRefreshCron();
+
   const { startChangelogCron } = await import("@unicum.gg/core/changelog/cron");
   startChangelogCron();
 

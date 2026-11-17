@@ -19,6 +19,73 @@ import {
 const BATCH = 200;
 const CONCURRENCY = 6;
 
+/** An account whose window figures are about to be recomputed, as read. */
+export type WindowRecomputeTarget = {
+  id: number;
+  accountId: number;
+  lastBattleAt: Date | null;
+};
+
+/** What `computeWindowRatings` needs besides the battles, loaded once a run. */
+export async function loadRatingContext(region: Region): Promise<RatingContext> {
+  const [encyclopedia, wn8Expected, wnxExpected] = await Promise.all([
+    getVehicleEncyclopedia(region),
+    getWN8ExpectedValues(),
+    getWNXExpectedValues(),
+  ]);
+  return {
+    encyclopedia,
+    wn8Expected,
+    wnxExpected,
+    wn8Fallback: buildWN8Fallback(wn8Expected, encyclopedia),
+  };
+}
+
+/**
+ * Recompute one batch of accounts' window figures from their stored snapshots,
+ * exactly as the snapshot path would, with each vehicle's newest stored
+ * snapshot standing in for the live figures it would have fetched. Writes the
+ * board rows and the player row's window columns; returns how many it wrote.
+ */
+export async function recomputeWindowFigures(
+  region: Region,
+  batch: WindowRecomputeTarget[],
+  ctx: RatingContext,
+  concurrency: number,
+): Promise<number> {
+  const players = playersByRegion[region];
+  const latest = await getLatestTankSnapshotsByAccounts(
+    region,
+    batch.map((p) => Number(p.accountId)),
+  );
+  const queue = [...batch];
+  let written = 0;
+  const work = async () => {
+    for (let p = queue.shift(); p; p = queue.shift()) {
+      const snapshots = latest.get(Number(p.accountId));
+      if (!snapshots || snapshots.length === 0) continue;
+      const windows = await computeWindowRatings(
+        region,
+        p.id,
+        tankSnapshotsToTankStats(snapshots),
+        ctx,
+      );
+      await writeTierWindowRatings(region, Number(p.accountId), windows);
+      // Only while the row is still the one read: an account that played
+      // since has been rewritten by the snapshot path from fresher figures.
+      if (p.lastBattleAt) {
+        await db
+          .update(players)
+          .set(playerWindowColumns(windows))
+          .where(and(eq(players.id, p.id), eq(players.lastBattleAt, p.lastBattleAt)));
+      }
+      written += 1;
+    }
+  };
+  await Promise.all(Array.from({ length: concurrency }, work));
+  return written;
+}
+
 export type TierWindowBackfillResult = {
   cursor: number;
   examined: number;
@@ -58,17 +125,7 @@ export async function backfillTierWindowRatings(
   } = {},
 ): Promise<TierWindowBackfillResult> {
   const players = playersByRegion[region];
-  const [encyclopedia, wn8Expected, wnxExpected] = await Promise.all([
-    getVehicleEncyclopedia(region),
-    getWN8ExpectedValues(),
-    getWNXExpectedValues(),
-  ]);
-  const ctx: RatingContext = {
-    encyclopedia,
-    wn8Expected,
-    wnxExpected,
-    wn8Fallback: buildWN8Fallback(wn8Expected, encyclopedia),
-  };
+  const ctx = await loadRatingContext(region);
 
   const result: TierWindowBackfillResult = { cursor: from, examined: 0, written: 0 };
   for (;;) {
@@ -99,34 +156,7 @@ export async function backfillTierWindowRatings(
       .limit(remaining);
     if (batch.length === 0) break;
 
-    const latest = await getLatestTankSnapshotsByAccounts(
-      region,
-      batch.map((p) => Number(p.accountId)),
-    );
-    const queue = [...batch];
-    const work = async () => {
-      for (let p = queue.shift(); p; p = queue.shift()) {
-        const snapshots = latest.get(Number(p.accountId));
-        if (!snapshots || snapshots.length === 0) continue;
-        const windows = await computeWindowRatings(
-          region,
-          p.id,
-          tankSnapshotsToTankStats(snapshots),
-          ctx,
-        );
-        await writeTierWindowRatings(region, Number(p.accountId), windows);
-        // Only while the row is still the one read: an account that played
-        // since has been rewritten by the snapshot path from fresher figures.
-        if (p.lastBattleAt) {
-          await db
-            .update(players)
-            .set(playerWindowColumns(windows))
-            .where(and(eq(players.id, p.id), eq(players.lastBattleAt, p.lastBattleAt)));
-        }
-        result.written += 1;
-      }
-    };
-    await Promise.all(Array.from({ length: CONCURRENCY }, work));
+    result.written += await recomputeWindowFigures(region, batch, ctx, CONCURRENCY);
 
     result.examined += batch.length;
     result.cursor = batch[batch.length - 1].id;
