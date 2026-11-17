@@ -17,6 +17,7 @@ import type {
 import { piecesOf } from "@unicum.gg/wargaming";
 
 import { partOf } from "./decals";
+import { glb, grab } from "./spare";
 import { studio } from "./lighting";
 import { wardrobe } from "./styling";
 
@@ -145,7 +146,7 @@ export async function loadVisual({
   ready?.();
 
   const model: MirrorModel = await (
-    await fetch(fresh(`${root}/vehicles/${vehicle}/model.json`))
+    await grab(fresh(`${root}/vehicles/${vehicle}/model.json`))
   ).json();
   const loader = new GLTFLoader();
 
@@ -204,7 +205,8 @@ export async function loadVisual({
   const fetched = await Promise.all(
     pieces.map(async (name) => ({
       name,
-      gltf: await loader.loadAsync(
+      gltf: await glb(
+        loader,
         fresh(`${root}/vehicles/${vehicle}/${model.pieces[name].glb}`),
       ),
     })),

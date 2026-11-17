@@ -3,6 +3,7 @@ import * as THREE from "three";
 import type { GLTF, GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import type { MirrorBeltRun, MirrorModel } from "@unicum.gg/wargaming";
 import { layTrack } from "./track";
+import { glb } from "./spare";
 import type { LaidBelt } from "./running-gear";
 import type { Brush, MaterialShop } from "./materials";
 
@@ -129,7 +130,8 @@ export async function layBelts({
       brush.piece = run.piece;
       let loading = read.get(run.piece);
       if (!loading) {
-        loading = loader.loadAsync(
+        loading = glb(
+          loader,
           fresh(`${root}/vehicles/${vehicle}/${segment.glb}`),
         );
         read.set(run.piece, loading);

@@ -7,6 +7,7 @@ import type { loadVisual, Mounted } from "@/services/tank-viewer";
 import type { Collision } from "@/services/tank-viewer/armour/plates";
 import { hangar } from "@/components/tanks/detail/viewer/hangar";
 import { SKIN_FOLDER } from "@/services/tank-viewer/styles";
+import { grab } from "@/services/tank-viewer/spare";
 
 // Putting the room and the vehicle together.
 //
@@ -128,7 +129,7 @@ export async function buildStage({
   // Left at the origin, as a first pass had them, every piece is drawn in
   // the same place and the tank comes out as a heap with its tracks laid
   // over its roof.
-  const collision: Collision | null = await fetch(
+  const collision: Collision | null = await grab(
     `${root}/vehicles/${at}/collision.json`,
   )
     .then((r) => (r.ok ? r.json() : null))

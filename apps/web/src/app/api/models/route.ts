@@ -1,5 +1,5 @@
 import { getModelsMirror } from "@unicum.gg/core/wargaming/wot/tanks/mirror";
-import { modelsCdn, modelsRoot } from "@unicum.gg/wargaming";
+import { modelsCdn } from "@unicum.gg/wargaming";
 import { measured } from "@/services/perf";
 
 // Where the viewer reads a vehicle's geometry from, and what there is to read.
@@ -26,9 +26,13 @@ async function GET__perf() {
       // fallback is the same files: what it loses is a patch changing the
       // address, so a reader holds the old geometry until their cache turns
       // over rather than until the next request.
+      //
+      // **The viewer falls back by rewriting this**, where the CDN answers a
+      // request with nothing at all, rather than by being handed a second
+      // address here: the commit is in the one above, so the raw host serving
+      // the same bytes is derivable from it (`modelsSpare`), and a field
+      // naming that host would be free to disagree with it.
       root: sha ? modelsCdn(sha) : modelsCdn(),
-      // What the CDN cannot serve, if it is ever the one that is down.
-      origin: modelsRoot(),
       sha,
       vehicles,
       // What each vehicle is issued wearing, which a viewer has to know before

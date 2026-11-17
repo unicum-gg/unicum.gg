@@ -84,3 +84,28 @@ export function modelUrl(path: string, ref: string = MODELS_BRANCH): string {
 export function styleCatalogueUrl(ref?: string): string {
   return modelUrl("styles2d.json", ref);
 }
+
+/**
+ * The same file at the other host, or null where there is no other.
+ *
+ * **Both addresses serve one repository, and only one of them is ours.** The
+ * viewer reads through jsDelivr for the week of caching a pinned commit earns,
+ * and the price is a dependency nobody here operates: a CDN-wide incident
+ * answers `503 No healthy backends` on every cache miss while the files sit
+ * intact on GitHub. The commit is in the address, so the raw host serves the
+ * same bytes by construction and a refused request can simply be asked again.
+ *
+ * Derived from the failed address rather than published beside it: a second
+ * field naming the spare host would be a second answer to where these files
+ * are, free to disagree with `modelsCdn` the day either moves. Null for
+ * anything that is not a CDN address, which is the local tree a developer
+ * points the viewer at and the raw host itself.
+ */
+export function modelsSpare(url: string): string | null {
+  const prefix = modelsCdn("");
+  if (!url.startsWith(prefix)) return null;
+  const rest = url.slice(prefix.length);
+  const cut = rest.indexOf("/");
+  if (cut < 1) return null;
+  return `${modelsRoot(rest.slice(0, cut))}/${rest.slice(cut + 1)}`;
+}

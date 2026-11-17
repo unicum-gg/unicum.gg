@@ -9,6 +9,7 @@ import type { loadArmour, Shot } from "@/services/tank-viewer/armour";
 import type { loadVisual } from "@/services/tank-viewer";
 import type { Collision } from "@/services/tank-viewer/armour/plates";
 import { skinNames, wardrobeFor } from "@/services/tank-viewer/styles";
+import { grab } from "@/services/tank-viewer/spare";
 import { DISTANCE } from "@/components/tanks/detail/viewer/framing";
 import type { Rig } from "@/components/tanks/detail/viewer/rig";
 import { View } from "@/components/tanks/detail/viewer/views";
@@ -288,7 +289,7 @@ export function fitVehicle(
     if (!page.skin) {
       page.setCuts(built.skins);
     } else {
-      void fetch(`${root}/vehicles/${at}/model.json`)
+      void grab(`${root}/vehicles/${at}/model.json`)
         .then((r) => (r.ok ? r.json() : null))
         .then((bare: { skins?: string[] } | null) => {
           if (live() && bare?.skins?.length) page.setCuts(bare.skins);

@@ -9,6 +9,7 @@
 // actually be dressed in, in the catalogue's own order, with its own tiling
 // already applied.
 import type { MirrorStyle, MirrorStylePatch } from "@unicum.gg/wargaming";
+import { grab } from "./spare";
 
 /** What a 3D style is called, and the swatch the client draws it with. */
 export type SkinFace = { name: string; icon?: string };
@@ -45,7 +46,7 @@ function all(
   // **A failure is not memoised.** Kept, one dropped connection would answer
   // every later request for the life of the page with the empty fallback, and
   // the wardrobe would stay empty until a reload with nothing saying why.
-  catalogue ??= fetch(fresh(`${root}/styles2d.json`))
+  catalogue ??= grab(fresh(`${root}/styles2d.json`))
     .then((r) => (r.ok ? r.json() : Promise.reject(new Error("no catalogue"))))
     .catch(() => {
       catalogue = null;
@@ -66,7 +67,7 @@ export function skinNames(
   root: string,
   fresh: (url: string) => string = (url) => url,
 ): Promise<Record<string, SkinFace>> {
-  named ??= fetch(fresh(`${root}/skins.json`))
+  named ??= grab(fresh(`${root}/skins.json`))
     .then((r) => (r.ok ? r.json() : Promise.reject(new Error("no names"))))
     .then((table: Record<string, string | SkinFace>) =>
       // **Both shapes read.** The table was a folder and a name, and now
@@ -106,7 +107,7 @@ export async function wardrobeFor(
 ): Promise<MirrorStyle[]> {
   const [styles, patch] = await Promise.all([
     all(root, fresh),
-    fetch(fresh(`${root}/vehicles/${vehicle}/${at}`))
+    grab(fresh(`${root}/vehicles/${vehicle}/${at}`))
       .then((r) => (r.ok ? (r.json() as Promise<MirrorStylePatch>) : BARE))
       .catch(() => BARE),
   ]);

@@ -4,6 +4,7 @@ import type { MirrorMaterial, MirrorModel, MirrorTexture } from "@unicum.gg/warg
 import { compile, withDetail, type CamoUniforms, type PaintedMaterial } from "./shader";
 import { BLANK, FLAT } from "./textures";
 import { switched } from "./switches";
+import { picture } from "./spare";
 
 // Turning the mirror's materials into the renderer's.
 //
@@ -111,7 +112,7 @@ export function materialShop(
         arriving.add(waiting);
         void waiting.then(() => arriving.delete(waiting));
       }
-      const map = textures.load(fresh(`${root}/${at}`), arrived, undefined, arrived);
+      const map = picture(textures, fresh(`${root}/${at}`), arrived);
       // The mirror stores UVs the way glTF reads them, top down.
       map.flipY = false;
       // A track's UVs run to 30 so its texture repeats along the run. three
