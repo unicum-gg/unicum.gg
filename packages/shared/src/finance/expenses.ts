@@ -206,6 +206,22 @@ const ONE_OFF_EXPENSES: readonly OneOffExpense[] = [
     incurredAt: "2026-09-18",
     note: "netcup set-up fee for the additional IPv4",
   },
+  // The two lines below are recorded as what the money bought rather than as
+  // who received it, like the one above them. A supporter is asked to cover a
+  // total, which these are part of, and the counterparty to a private
+  // arrangement never agreed to be named on a public page.
+  {
+    label: "Marketing",
+    eur: 35,
+    incurredAt: "2026-10-02",
+    note: "Getting the site in front of World of Tanks players",
+  },
+  {
+    label: "Marketing",
+    eur: 75,
+    incurredAt: "2026-11-03",
+    note: "Getting the site in front of World of Tanks players",
+  },
 ];
 
 /**
