@@ -19,6 +19,7 @@ import {
   useClearance,
   usePresentation,
 } from "@/components/tanks/detail/viewer/use-hero-window";
+import type { View } from "@/components/tanks/detail/viewer/views";
 
 // How this reader likes to be shown a tank, rather than what they are looking at.
 //
@@ -32,12 +33,16 @@ import {
 export function useHeroDesk({
   held,
   sharp,
+  showing,
   narrow,
 }: {
   /** The box the picture is drawn in, which the two sizes are measured from. */
   held: RefObject<HTMLElement | null>;
   /** The texture set, remembered with the rest though it is set elsewhere. */
   sharp: boolean;
+  /** Switch the picture to one of the three, which the stage owns and this
+   * wraps so that asking for one is also remembering it. */
+  showing: (next: View) => void;
   /** A phone, where the studio is a band of its own: the vehicle is centred in
    * it and the framing is not the reader's to choose. */
   narrow: boolean;
@@ -45,8 +50,8 @@ export function useHeroDesk({
   /**
    * How this reader likes to be shown a tank, read once at the top.
    *
-   * The four below are seeded from it rather than from a fixed default, and
-   * written back as they change. They are the reader's own answers, so they
+   * The settings below are seeded from it rather than from a fixed default,
+   * and written back as they change. They are the reader's own answers, so they
    * hold from one vehicle to the next.
    */
   const [liked] = useState(preferences);
@@ -74,6 +79,27 @@ export function useHeroDesk({
    */
   const framing = useRef(liked.centred);
   /**
+   * The same answer, in a form a render can see.
+   *
+   * **It is not `centred`.** That one follows the camera, and the camera is
+   * centred by the page itself whenever the picture is given the window or the
+   * screen, so remembering it remembered our own decision: a reader who opened
+   * one tank full-screen found every tank afterwards framed in the middle
+   * without ever having asked for it. Written only where the reader asks for
+   * it in the page, which is what `framing` already holds and what the effect
+   * below needs to be able to notice.
+   */
+  const [framed, setFramed] = useState(liked.centred);
+  /**
+   * Which of the three pictures this reader asked for themselves.
+   *
+   * **Not what the stage is drawing**, for the reason the framing above is not
+   * the camera's: a link naming a view is the sender showing this tank in it,
+   * and answering it is not the reader choosing anything. Written where they
+   * press one of the three, which is the only place it is their answer.
+   */
+  const [picked, setPicked] = useState(liked.view);
+  /**
    * How far up the dial has to sit to clear the cost panel, measured.
    *
    * **They share this corner and neither is told about the other.** The dial
@@ -97,16 +123,27 @@ export function useHeroDesk({
       // Only what they asked for in the page is theirs to keep: the larger
       // sizes centre on their own, so remembering that would be remembering
       // our own decision.
-      if (presentationRef.current === Presentation.Inline) framing.current = next;
+      if (presentationRef.current === Presentation.Inline) {
+        framing.current = next;
+        setFramed(next);
+      }
     },
     [presentationRef],
   );
+  /** Draw one of the three, and keep it for the next vehicle. */
+  const viewing = useCallback(
+    (next: View) => {
+      showing(next);
+      setPicked(next);
+    },
+    [showing],
+  );
   // Written back as a set rather than one key per setting: they are read as a
-  // set too, and four keys would be four chances for a browser to answer with
-  // three of them.
+  // set too, and a key apiece would be as many chances for a browser to answer
+  // with all but one of them.
   useEffect(() => {
-    remember({ sharp, cinematic, rolling, centred });
-  }, [sharp, cinematic, rolling, centred]);
+    remember({ sharp, cinematic, rolling, centred: framed, view: picked });
+  }, [sharp, cinematic, rolling, framed, picked]);
   /**
    * What the picture is handed, as one object that never changes.
    *
@@ -137,6 +174,7 @@ export function useHeroDesk({
     framing,
     recentre,
     recentring,
+    viewing,
     presentation,
     present,
     clearance,

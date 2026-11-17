@@ -59,7 +59,7 @@ export async function openStage(
     code: string;
     skin?: string | null;
     fitted?: Mounted;
-    liked: { centred: boolean };
+    liked: { centred: boolean; view: View };
     /**
      * The build of the mirror to read, and where this vehicle sits in it.
      *
@@ -338,8 +338,15 @@ export async function openStage(
     // shown so it arrives where they left the last one rather than sliding
     // into place a moment after it appears.
     if (from.liked.centred) handles.recentre.current?.(true);
-    const asked = offered.find((one) => one === from.opening.view);
-    if (asked) handles.show.current?.(asked);
+    // **The link outranks the habit.** A reader who reads armour gets the
+    // armour on the next vehicle too, which is what the stored view is for,
+    // but a link naming a view was written by somebody showing this tank in
+    // that one and must not be answered with the reader's own setting.
+    // Either way only where this vehicle can draw it: most offer Visual
+    // alone, and Visual is what the scene already came up on.
+    const wanted = from.opening.view ?? from.liked.view;
+    const asked = offered.find((one) => one === wanted);
+    if (asked && asked !== View.Visual) handles.show.current?.(asked);
     if (from.opening.hullDown) handles.ridge.current?.(true);
     if (from.opening.aim) from.takeAim(from.opening.aim.bearing, from.opening.aim.pitch);
   }

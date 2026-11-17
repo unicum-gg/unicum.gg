@@ -1,5 +1,6 @@
 import STORAGE from "@/constants/storage";
 import { Cinematic } from "@/components/tanks/detail/viewer/cinematic";
+import { View } from "@/components/tanks/detail/viewer/views";
 
 /**
  * How the reader likes to be shown a tank, kept between vehicles and visits.
@@ -12,6 +13,12 @@ import { Cinematic } from "@/components/tanks/detail/viewer/cinematic";
  * and where they want the vehicle framed. Those answers hold from one tank to
  * the next, and asking them again on every page is the site forgetting who it
  * is talking to.
+ *
+ * **The view is the one that is both.** Which of the three a reader is looking
+ * at is a question about the vehicle, so a link carries it and a link that
+ * names one wins. It is also a habit: somebody who reads armour reads armour on
+ * the next tank too, and sending them back to the visual model every time is
+ * the same forgetting. So it is kept here and the link outranks it.
  */
 export type Preferences = {
   /** The larger texture set, where the vehicle has one. */
@@ -22,6 +29,8 @@ export type Preferences = {
   rolling: boolean;
   /** Whether the vehicle is framed in the middle of the band. */
   centred: boolean;
+  /** Which of the three pictures they were last reading. */
+  view: View;
 };
 
 const DEFAULTS: Preferences = {
@@ -29,15 +38,17 @@ const DEFAULTS: Preferences = {
   cinematic: Cinematic.Auto,
   rolling: true,
   centred: false,
+  view: View.Visual,
 };
 
 const KINDS = new Set<string>([Cinematic.Off, Cinematic.Auto, Cinematic.On]);
+const VIEWS = new Set<string>([View.Visual, View.Collision, View.Live]);
 
 /**
  * What this reader last asked for, or the defaults where they never have.
  *
  * Read field by field, so a stored answer that no longer makes sense costs its
- * own setting rather than all four: the file is written by a version of this
+ * own setting rather than every other: the file is written by a version of this
  * page and read by whichever one the reader loads next.
  */
 export function preferences(): Preferences {
@@ -54,6 +65,10 @@ export function preferences(): Preferences {
           : DEFAULTS.cinematic,
       rolling: typeof kept.rolling === "boolean" ? kept.rolling : DEFAULTS.rolling,
       centred: typeof kept.centred === "boolean" ? kept.centred : DEFAULTS.centred,
+      view:
+        typeof kept.view === "string" && VIEWS.has(kept.view)
+          ? (kept.view as View)
+          : DEFAULTS.view,
     };
   } catch {
     // A quota-blocked or privacy-mode browser answers by throwing, and a page

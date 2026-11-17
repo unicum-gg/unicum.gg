@@ -187,7 +187,12 @@ export function TankViewer({
   // the picture owns: where the vehicle stands in the band, and whether the
   // reader is offered a say in it.
   const narrow = useMediaQuery("max-sm");
-  const desk = useHeroDesk({ held, sharp: dressing.sharp, narrow });
+  const desk = useHeroDesk({
+    held,
+    sharp: dressing.sharp,
+    showing: stage.showing,
+    narrow,
+  });
   const { liked, centred, presentation } = desk;
   usePublishedHero({ view, dressing, firing, hullDown, aimed });
   /** Take the 3D style off, for the one case the reader did not ask for. */
@@ -438,7 +443,7 @@ export function TankViewer({
               onSeason={dressing.setSeason}
               view={view}
               views={stage.views}
-              onView={stage.showing}
+              onView={desk.viewing}
             />
           </div>
         </div>
