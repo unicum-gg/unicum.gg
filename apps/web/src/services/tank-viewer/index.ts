@@ -230,7 +230,10 @@ export async function loadVisual({
     gltf.scene.traverse((o) => {
       if (!isMesh(o)) return;
       mended += mendPositions(o.geometry);
-      o.material = material(model.materials[order[index++] ?? -1]);
+      const spec = model.materials[order[index++] ?? -1];
+      o.material = material(spec);
+      // Geometry the client ships for the engine rather than the eye.
+      if (spec?.hidden) o.visible = false;
       o.castShadow = true;
       o.receiveShadow = true;
       // Occlusion samples the second UV set where the client ships one, and

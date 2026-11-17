@@ -19,6 +19,12 @@ export type MirrorMaterial = {
   values?: Record<string, unknown>;
   doubleSided?: boolean;
   alphaTest?: number | null;
+  /**
+   * Shipped by the client with no shader and nothing to draw: geometry the
+   * engine needs and the game never shows, such as the chassis the Halloween
+   * spider rolls on under its legs. A viewer draws nothing with it.
+   */
+  hidden?: boolean;
 };
 
 /** Where a decal is stuck, in the vehicle's own space. */
