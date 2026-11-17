@@ -14,10 +14,25 @@ export {
 
 import { iconUrl } from "@unicum.gg/wargaming";
 
-/** The largest in-client vehicle render on the mirror (420x307), keyed by the
- * lowercased vehicle tag (e.g. `F139_Terrifiant` -> `f139_terrifiant`). Used as
- * the tank-hero fallback when WG's portal CDN has no hi-res render: not every
- * tank has one, so callers fall through to a placeholder on a 404. */
-export function vehicleRenderUrl(tag: string, ref?: string): string {
-  return iconUrl(`vehicle/420x307/${tag.toLowerCase()}.png`, ref);
+/** Where the mirror may hold a vehicle's in-client render, best first.
+ *
+ * The largest is 420x307, keyed by the lowercased tag (`F139_Terrifiant` ->
+ * `f139_terrifiant`). Used as the tank-hero fallback when WG's portal CDN has
+ * no hi-res render, so callers try each in turn and fall through to a
+ * placeholder when none answers.
+ *
+ * **An event vehicle's render is often only in the next size down, and named
+ * differently.** The modes ship theirs as `<name>.extend.png`, and several (the
+ * Halloween Havoc among them) have no 420x307 at all, only a 380x304 keyed by
+ * nation and the tag as written (`uk-GB123_GSOR_1006_v7_Halloween_event`). Same
+ * three-quarter angle on a canvas of nearly the same shape, so the hero's
+ * framing reads it unchanged. */
+export function vehicleRenderUrls(tag: string, nation: string, ref?: string): string[] {
+  const lower = tag.toLowerCase();
+  return [
+    iconUrl(`vehicle/420x307/${lower}.png`, ref),
+    iconUrl(`vehicle/420x307/${lower}.extend.png`, ref),
+    iconUrl(`vehicle/x380x304/${nation}-${tag}.extend.png`, ref),
+    iconUrl(`vehicle/x380x304/${nation}-${tag}.png`, ref),
+  ];
 }

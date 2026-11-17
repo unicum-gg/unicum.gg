@@ -1,5 +1,5 @@
 import sharp from "sharp";
-import { vehicleRenderUrl } from "@unicum.gg/shared";
+import { vehicleRenderUrls } from "@unicum.gg/shared";
 
 // WG's tankopedia frames every vehicle at a consistent spot in its 1920x900
 // render so the tracks land on the hangar-floor rail imprints. Our wot.assets
@@ -48,16 +48,11 @@ const ALPHA_FLOOR = 30;
  */
 export async function normalizeVehicleRender(
   tag: string,
+  nation: string,
   ref?: string,
 ): Promise<Buffer | null> {
-  let buf: Buffer;
-  try {
-    const res = await fetch(vehicleRenderUrl(tag, ref));
-    if (!res.ok) return null; // no mirror for this tag -> caller falls back
-    buf = Buffer.from(await res.arrayBuffer());
-  } catch {
-    return null;
-  }
+  const buf = await firstRender(vehicleRenderUrls(tag, nation, ref));
+  if (!buf) return null; // no mirror for this tag -> caller falls back
 
   try {
     // Bounding box of the (transparent-margined) vehicle within the mirror.
@@ -141,4 +136,17 @@ export async function normalizeVehicleRender(
   } catch {
     return null;
   }
+}
+
+/** The first of `urls` the mirror answers, in order, or null when none does. */
+async function firstRender(urls: string[]): Promise<Buffer | null> {
+  for (const url of urls) {
+    try {
+      const res = await fetch(url);
+      if (res.ok) return Buffer.from(await res.arrayBuffer());
+    } catch {
+      // A failed fetch is as good as a missing file here: try the next one.
+    }
+  }
+  return null;
 }

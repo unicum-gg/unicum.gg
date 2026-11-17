@@ -27,6 +27,7 @@ export async function GET(
   // mirror's CT branch; the live one will not carry it until it ships.
   const png = await normalizeVehicleRender(
     tank.meta.tag,
+    tank.meta.nation,
     tank.meta.isCommonTest ? ASSETS_BRANCH_CT : undefined,
   );
   if (!png) return new Response(null, { status: 404 }); // caller falls back
