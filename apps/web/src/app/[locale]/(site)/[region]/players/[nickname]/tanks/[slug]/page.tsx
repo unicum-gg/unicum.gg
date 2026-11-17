@@ -80,6 +80,7 @@ export async function generateMetadata({
       .url()
       .replace(/^https?:\/\/[^/]+/, ""),
     canonical: ROUTES.PLAYER_TANK(region, decoded, slug),
+    googleIndexDefaultLocaleOnly: true,
   });
 }
 

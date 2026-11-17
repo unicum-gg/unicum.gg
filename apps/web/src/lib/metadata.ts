@@ -57,6 +57,7 @@ export function constructMetadata({
   ogImage,
   ogType = "website",
   noIndex = false,
+  googleIndexDefaultLocaleOnly = false,
   canonical: explicitCanonical,
   locale,
 }: {
@@ -69,6 +70,18 @@ export function constructMetadata({
   ogImage?: string | false;
   ogType?: "website" | "article";
   noIndex?: boolean;
+  // Keep Google, and Google alone, to the untranslated version of the page:
+  // every other language gets `googlebot: noindex, follow` while the generic
+  // robots tag, the hreflang alternates and the sitemaps stay as they are.
+  //
+  // For the entity pages (players, clans), whose 35 translations multiply
+  // millions of profiles by 36. Google has refused to index almost all of them
+  // ("Crawled - currently not indexed" on 152K URLs, five pages indexed in
+  // November 2026) and its crawl of the site has shrunk to ~100 requests a day,
+  // so the surface it is shown is cut to the pages it can actually take. Bing
+  // reads none of this: it ranks those same translated profiles, and keeps
+  // every one of them.
+  googleIndexDefaultLocaleOnly?: boolean;
   // The page's own absolute path (e.g. "/eu/players/Straik", usually a
   // `ROUTES.X(...)`). Required and never auto-derived: a static (ISR) page is
   // rendered without a request, so there is no path to read — the old
@@ -135,7 +148,12 @@ export function constructMetadata({
       ...(resolvedOgImage && { images: [resolvedOgImage] }),
     },
     icons: { icon: "/icon.svg" },
-    ...(noIndex && { robots: { index: false, follow: false } }),
+    ...(noIndex
+      ? { robots: { index: false, follow: false } }
+      : googleIndexDefaultLocaleOnly &&
+        resolved !== DEFAULT_LOCALE && {
+          robots: { googleBot: { index: false, follow: true } },
+        }),
   };
 }
 

@@ -199,6 +199,7 @@ export async function playerMetadata(
       }),
       ogImage: `/api/og/${region}/players/${encodeURIComponent(decoded)}`,
       canonical: playerViewHref(ROUTES.PLAYER(region, decoded), view),
+      googleIndexDefaultLocaleOnly: true,
     });
   }
 
@@ -215,6 +216,7 @@ export async function playerMetadata(
       }),
       ogImage: `/api/og/${region}/players/${encodeURIComponent(decoded)}`,
       canonical: playerViewHref(ROUTES.PLAYER(region, decoded), view),
+      googleIndexDefaultLocaleOnly: true,
     });
   }
 
@@ -268,6 +270,7 @@ export async function playerMetadata(
     description: copy.description,
     ogImage: `/api/og/${region}/players/${encodeURIComponent(decoded)}`,
     canonical: playerViewHref(ROUTES.PLAYER(region, decoded), view),
+    googleIndexDefaultLocaleOnly: true,
     noIndex,
   });
 }

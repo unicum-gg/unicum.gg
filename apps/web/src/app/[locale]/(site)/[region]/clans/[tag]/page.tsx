@@ -170,6 +170,7 @@ export async function clanMetadata(
       // reads headers() which isn't available during static generation (it would
       // otherwise fall back to the site root). Points at this view's own segment.
       canonical: clanViewHref(ROUTES.CLAN(region, decoded), view),
+      googleIndexDefaultLocaleOnly: true,
       noIndex,
     });
   }
@@ -212,6 +213,7 @@ export async function clanMetadata(
     // The address rather than the tag, so an archive's canonical is the one URL
     // that keeps meaning it after its tag has been taken by another clan.
     canonical: clanViewHref(ROUTES.CLAN(region, clanAddress(clan)), view),
+    googleIndexDefaultLocaleOnly: true,
     noIndex,
   });
 }

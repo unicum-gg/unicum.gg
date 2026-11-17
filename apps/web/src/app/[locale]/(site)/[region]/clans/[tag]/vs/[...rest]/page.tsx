@@ -65,6 +65,7 @@ export async function generateMetadata({
     description: `Side-by-side World of Tanks clan stats for ${list}: members, WN8/WNX averages, tanks, role distribution. ${APP.NAME}.`,
     ogImage,
     canonical: ROUTES.COMPARE_CLANS(region, tags),
+    googleIndexDefaultLocaleOnly: true,
   });
 }
 
