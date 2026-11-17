@@ -302,10 +302,26 @@ export type MirrorWheel = {
   wrap: number;
 };
 
+/** A piece drawn once per copy, where no module names it. */
+export type MirrorPieceCopy = {
+  piece: string;
+  /** In the vehicle's space, set on the clone as it is. */
+  translation: number[];
+  /** A quaternion, x y z w. */
+  rotation: number[];
+};
+
 export type MirrorModel = {
   features?: string[];
   hullPosition?: number[] | null;
   pieces: Record<string, MirrorPiece>;
+  /**
+   * Pieces placed by the vehicle's prefab rather than by a module.
+   *
+   * Only a walking vehicle has any: the Halloween spider ships one leg and
+   * stands on seven copies of it. Absent everywhere else.
+   */
+  copies?: MirrorPieceCopy[];
   materials: MirrorMaterial[];
   wheels?: MirrorWheel[];
   /**

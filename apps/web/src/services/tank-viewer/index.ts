@@ -11,6 +11,7 @@
 // Its source of truth stays `unicum-gg/wot.build`, `preview/visual.js`.
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { clone as cloneSkinned } from "three/examples/jsm/utils/SkeletonUtils.js";
 import type {
   MirrorModel,
 } from "@unicum.gg/wargaming";
@@ -202,8 +203,13 @@ export async function loadVisual({
   // across the vehicle, so two pieces reading it at once would paint each
   // other's. It is a traversal over meshes already in memory, which costs
   // nothing next to the network it used to be serialised behind.
+  // The pieces the prefab draws once per copy (the spider's legs) are fetched
+  // with the rest, once each, and cloned where they stand below.
+  const copied = [
+    ...new Set((model.copies ?? []).map((c) => c.piece)),
+  ].filter((name) => model.pieces[name] && !pieces.includes(name));
   const fetched = await Promise.all(
-    pieces.map(async (name) => ({
+    [...pieces, ...copied].map(async (name) => ({
       name,
       gltf: await glb(
         loader,
@@ -211,6 +217,8 @@ export async function loadVisual({
       ),
     })),
   );
+  /** The dressed original of each copied piece, never drawn itself. */
+  const copies = new Map<string, THREE.Object3D>();
   for (const { name, gltf } of fetched) {
     const piece = model.pieces[name];
     brush.part = partOf(name);
@@ -231,6 +239,10 @@ export async function loadVisual({
         o.geometry.setAttribute("uv1", o.geometry.getAttribute("uv"));
       triangles += (o.geometry.index?.count ?? 0) / 3;
     });
+    if (copied.includes(name)) {
+      copies.set(name, gltf.scene);
+      continue;
+    }
     parentFor(name).add(gltf.scene);
     parts.push(gltf.scene);
     if (gltf.animations.length > 0) {
@@ -243,6 +255,19 @@ export async function loadVisual({
       if (isMesh(o)) meshes.push(o);
     });
     surfaces.set(name, meshes);
+  }
+
+  // **Placed off the vehicle itself**, like the chassis, since the copies are
+  // published in its space. A clone shares the original's geometry and
+  // materials, and a skinned leg needs its skeleton cloned with it.
+  for (const copy of model.copies ?? []) {
+    const original = copies.get(copy.piece);
+    if (!original) continue;
+    const scene = cloneSkinned(original);
+    scene.position.fromArray(copy.translation);
+    scene.quaternion.fromArray(copy.rotation);
+    mounts.scene.add(scene);
+    parts.push(scene);
   }
 
   const { belts, links, triangles: laid } = await layBelts({

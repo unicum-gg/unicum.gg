@@ -77,6 +77,13 @@ function linksOf(model: MirrorModel): string[] {
   );
 }
 
+/** The pieces the vehicle's prefab draws once per copy, the spider's legs. */
+function copiedOf(model: MirrorModel): string[] {
+  return [...new Set((model.copies ?? []).map((c) => c.piece))].filter(
+    (n) => Boolean(model.pieces[n]),
+  );
+}
+
 /**
  * Every file the vehicle's first picture reads, as mirror-relative paths.
  *
@@ -90,7 +97,7 @@ export function firstPaintFiles(
   { mounted }: { mounted?: MirrorMounted } = {},
 ): { geometry: string[]; textures: string[] } {
   if (!model?.pieces) return { geometry: [], textures: [] };
-  const pieces = [...piecesOf(model, mounted), ...linksOf(model)];
+  const pieces = [...piecesOf(model, mounted), ...linksOf(model), ...copiedOf(model)];
   const geometry: string[] = [];
   const slots = new Set<number>();
   for (const name of pieces) {
