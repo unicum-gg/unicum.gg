@@ -62,6 +62,14 @@ export type PaginationOptions = {
    * followable pages of tank rows on each is a crawl budget spent on a panel.
    */
   crawlable?: boolean;
+  /**
+   * Rows the table holds in all, when what it is handed is ONE PAGE of them.
+   * `items` is then the page: the hook stops slicing and the controls count
+   * against this total rather than against the handful in hand, while supplying
+   * the rows a control names stays the caller's business, since only it knows
+   * where they come from. Unset, every other table behaves as it always has.
+   */
+  serverTotal?: number;
 };
 
 /** The `?ps=` twin of a page param, so two tables do not share one row count. */
@@ -100,7 +108,11 @@ export function usePagination<T>(
     param = PAGINATION.PARAM,
     initialPage,
     crawlable = false,
+    serverTotal,
   } = options;
+  // One page was handed over: it is the rows, and what measures the list below
+  // measures the whole table instead.
+  const server = serverTotal !== undefined;
   const pageStore = sharedParamStore(param);
   const sizeStore = sharedParamStore(sizeParamFor(param));
 
@@ -128,7 +140,7 @@ export function usePagination<T>(
     if (seen.page !== urlPage) setPage(parsePage(urlPage) ?? 1);
   }
 
-  const total = items.length;
+  const total = server ? serverTotal : items.length;
   const size = pageSize === "all" ? Math.max(total, 1) : pageSize;
   const totalPages = Math.max(1, Math.ceil(total / size));
 
@@ -147,7 +159,7 @@ export function usePagination<T>(
       rows: slicePage(items, initialPage ?? 1, size, pageSize),
     }),
   );
-  if (sig.items !== items || sig.pageSize !== pageSize) {
+  if (!server && (sig.items !== items || sig.pageSize !== pageSize)) {
     const held = slicePage(items, Math.min(page, totalPages), size, pageSize);
     const settled = sameRows(held, sig.rows);
     setSig({
@@ -160,7 +172,9 @@ export function usePagination<T>(
 
   const current = Math.min(page, totalPages);
   const startIdx = (current - 1) * size;
-  const paged = slicePage(items, current, size, pageSize);
+  // Already the page when it was cut for us, so slicing again would take the
+  // first hundred of a hundred and call it page three.
+  const paged = server ? items : slicePage(items, current, size, pageSize);
 
   // Mirror back, merged with whatever else the URL carries. Defaults (page 1,
   // the table's own initial size) are written as an absent param rather than a

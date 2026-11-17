@@ -645,10 +645,18 @@ export const playerLanguagesQuery = z.object({
   min_tier: minTierField.optional(),
 });
 
+export const offsetField = z
+  .coerce
+  .number()
+  .int()
+  .min(0)
+  .meta({ description: "Rows to skip, for paging through a board." });
+
 export const playersTopQuery = z.object({
   period: periodField.optional(),
   min_tier: minTierField.optional(),
   limit: limitField(PLAYERS_TOP_MAX_LIMIT).optional(),
+  offset: offsetField.optional(),
   metric: metricField.optional(),
   lang: playerLangField.optional(),
   language: deprecatedLangField.optional(),

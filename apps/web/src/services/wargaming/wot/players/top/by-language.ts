@@ -36,6 +36,14 @@ export type TopPlayerByLanguageResult = {
 export type TopPlayersByLanguage = {
   results: TopPlayerByLanguageResult[];
   computedAt: Date | null;
+  /**
+   * How many rows this board holds, counted no deeper than the board's own
+   * published depth, which is what a pager needs and all it needs. Counting the
+   * whole qualifying population would be a scan of two million rows to print a
+   * page count, and no reader can reach past the depth anyway, so the count
+   * runs over a bounded subquery and stops there.
+   */
+  total: number;
 };
 
 // Lower than the global Overall leaderboard floor (20k) because the
@@ -56,6 +64,8 @@ async function getTopPlayersGlobal(
   region: Region,
   col: RatingMetric,
   limit: number,
+  offset: number,
+  depth: number,
 ): Promise<TopPlayersByLanguage> {
   // No language filter: just the top N by metric straight off the players
   // table (indexed, cheap) — no inference needed. Mirrors the "All" tab.
@@ -73,7 +83,7 @@ async function getTopPlayersGlobal(
       AND p.battles >= ${MIN_BATTLES}
       AND p.soft_deleted_at IS NULL
     ORDER BY ${metricCol} DESC
-    LIMIT ${limit}
+    LIMIT ${limit} OFFSET ${offset}
   `)) as unknown as Array<{
     account_id: number | string;
     nickname: string;
@@ -85,6 +95,15 @@ async function getTopPlayersGlobal(
     clan_tag: string | null;
     clan_color: string | null;
   }>;
+  const counted = (await db.execute(sql`
+    SELECT COUNT(*)::int AS n FROM (
+      SELECT 1 FROM ${players} p
+      WHERE ${metricCol} IS NOT NULL
+        AND p.battles >= ${MIN_BATTLES}
+        AND p.soft_deleted_at IS NULL
+      LIMIT ${depth}
+    ) t
+  `)) as unknown as Array<{ n: number }>;
   const results = rows.map((r) => ({
     account_id: Number(r.account_id),
     nickname: r.nickname,
@@ -97,7 +116,7 @@ async function getTopPlayersGlobal(
     battles_30d: r.recent_battles,
     languages: [],
   }));
-  return { results, computedAt: new Date() };
+  return { results, computedAt: new Date(), total: counted[0]?.n ?? results.length };
 }
 
 /**
@@ -115,12 +134,14 @@ export async function getTopPlayersByLanguage(
   language: string | null,
   limit: number,
   strict: boolean = false,
+  offset: number = 0,
+  depth: number = limit + offset,
 ): Promise<TopPlayersByLanguage> {
   const col = VALID_METRIC_COLUMNS[metric];
   if (!col) {
     throw new Error(`top-players by-language: unknown metric ${metric}`);
   }
-  if (!language) return getTopPlayersGlobal(region, col, limit);
+  if (!language) return getTopPlayersGlobal(region, col, limit, offset, depth);
 
   const table = playerRatingsByRegion[region];
   const players = playersByRegion[region];
@@ -142,7 +163,7 @@ export async function getTopPlayersByLanguage(
         AND r.battles >= ${MIN_BATTLES}
         ${langClause}
       ORDER BY ${metricCol} DESC
-      LIMIT ${limit}
+      LIMIT ${limit} OFFSET ${offset}
     ) r
     LEFT JOIN ${players} p ON p.account_id = r.account_id
     ORDER BY ${metricCol} DESC
@@ -171,11 +192,21 @@ export async function getTopPlayersByLanguage(
     battles_30d: r.recent_battles,
     languages: r.languages ?? [],
   }));
+  const counted = (await db.execute(sql`
+    SELECT COUNT(*)::int AS n FROM (
+      SELECT 1 FROM ${table} r
+      WHERE ${metricCol} IS NOT NULL
+        AND r.battles >= ${MIN_BATTLES}
+        ${langClause}
+      LIMIT ${depth}
+    ) t
+  `)) as unknown as Array<{ n: number }>;
   // One cron pass rewrites the whole table in one transaction, so every row
   // carries the same stamp.
   return {
     results,
     computedAt: rows[0] ? new Date(rows[0].computed_at) : null,
+    total: counted[0]?.n ?? results.length,
   };
 }
 

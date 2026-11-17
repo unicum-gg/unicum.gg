@@ -52,12 +52,21 @@ export function useLeaderboardFilter<T>(
      * back on "rating points". A prefix gives the second table its own four.
      */
     paramPrefix?: string;
+    /**
+     * What the bar should say it is searching, when `items` is one page of a
+     * larger list rather than the list. The search box names this figure, and
+     * on a server-paged board it would otherwise promise a hundred players
+     * while the filter really does reach the whole ranking, which it fetches
+     * the moment it is used.
+     */
+    total?: number;
   },
 ): { filtered: T[]; filters: LeaderboardFilters<T> } {
   const {
     searchFields,
     rangeCols,
     initialRangeCol,
+    total,
     syncUrl = false,
     paramPrefix = "",
   } = opts;
@@ -152,7 +161,7 @@ export function useLeaderboardFilter<T>(
       rangeCols,
       activeRangeCol,
       resultCount: filtered.length,
-      totalCount: items.length,
+      totalCount: total ?? items.length,
       active: query.trim() !== "" || minVal.trim() !== "" || maxVal.trim() !== "",
     },
   };

@@ -34,6 +34,16 @@ async function GET__perf(
     return Response.json({ error: "invalid_region" }, { status: 400 });
   }
 
+  // The ranking behind this is rewritten once an hour by the top-players cron,
+  // and the page that reads it was the only thing holding a cache: it is ISR,
+  // so a reader never reached the endpoint at all. Paging does reach it, and an
+  // uncached ordered scan of two million rows is 1.2 s a click, measured. The
+  // window is well under the hour the data moves in, and `stale-while-
+  // revalidate` means the one reader who lands on an expired entry is served
+  // the old board rather than made to wait for the new one.
+  const CACHE = {
+    "cache-control": "public, max-age=60, s-maxage=600, stale-while-revalidate=300",
+  };
   const url = new URL(req.url);
   // `periodField` enum values match `TopPlayersPeriod`; `.catch` mirrors the
   // old `parsePeriod` (unknown/missing -> overall).
@@ -46,6 +56,12 @@ async function GET__perf(
       S.PLAYERS_TOP_MAX_LIMIT,
       Number(url.searchParams.get("limit")) || S.TOP_DEFAULT_LIMIT,
     ),
+  );
+  // Rows to skip. Bounded with the limit by the API's own maximum depth, which
+  // is what the board publishes and as far as any reader can page.
+  const offset = Math.max(
+    0,
+    Math.min(S.PLAYERS_TOP_MAX_LIMIT, Number(url.searchParams.get("offset")) || 0),
   );
   const metric = ratingMetricFromCookie(url.searchParams.get("metric"));
 
@@ -72,25 +88,36 @@ async function GET__perf(
         strict,
         limit,
       });
-      return jsonResponse(TopPlayersResponse, {
-        results: await attachPlayerBadges(region, results),
-        computed_at: computedAt?.toISOString() ?? null,
-      });
+      return jsonResponse(
+        TopPlayersResponse,
+        {
+          results: await attachPlayerBadges(region, results),
+          computed_at: computedAt?.toISOString() ?? null,
+        },
+        { headers: CACHE },
+      );
     }
     if (lang || withLanguages) {
       // The lifetime language board, scoped to clans declaring the language
       // (`strict` = the clan declares only that one).
-      const { results, computedAt } = await getTopPlayersByLanguage(
+      const { results, computedAt, total } = await getTopPlayersByLanguage(
         region,
         metric,
         lang,
         limit,
         strict,
+        offset,
+        S.PLAYERS_TOP_MAX_LIMIT,
       );
-      return jsonResponse(TopPlayersResponse, {
-        results: await attachPlayerBadges(region, results),
-        computed_at: computedAt?.toISOString() ?? null,
-      });
+      return jsonResponse(
+        TopPlayersResponse,
+        {
+          results: await attachPlayerBadges(region, results),
+          computed_at: computedAt?.toISOString() ?? null,
+          total,
+        },
+        { headers: CACHE },
+      );
     }
     const { results, computedAt } = await getTopPlayersByMetric(
       region,
@@ -98,10 +125,14 @@ async function GET__perf(
       period,
       limit,
     );
-    return jsonResponse(TopPlayersResponse, {
-      results: await attachPlayerBadges(region, results),
-      computed_at: computedAt?.toISOString() ?? null,
-    });
+    return jsonResponse(
+      TopPlayersResponse,
+      {
+        results: await attachPlayerBadges(region, results),
+        computed_at: computedAt?.toISOString() ?? null,
+      },
+      { headers: CACHE },
+    );
   } catch (err) {
     console.error(`[api/${region}/players/top] failed:`, err);
     return Response.json({ error: "upstream_failure" }, { status: 502 });
