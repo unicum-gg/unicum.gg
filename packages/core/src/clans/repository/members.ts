@@ -7,6 +7,7 @@ import {
   playersByRegion,
 } from "@unicum.gg/shared";
 import { discoverPlayersBackground } from "@unicum.gg/core/discovery/players";
+import { recentColumn } from "@unicum.gg/core/players/recent-rating";
 import { clanChannel, publish } from "@unicum.gg/core/live/pubsub";
 import { clanRoleOrder, type Region } from "@unicum.gg/wargaming";
 import {
@@ -216,10 +217,10 @@ async function readStoredMembers(
       wnx: players.wnx,
       pr: players.pr,
       wtr: players.wtr,
-      wn730d: players.wn730d,
-      wn830d: players.wn830d,
-      wnx30d: players.wnx30d,
-      battles30d: players.battles30d,
+      wn730d: recentColumn(players.lastBattleAt, players.wn730d),
+      wn830d: recentColumn(players.lastBattleAt, players.wn830d),
+      wnx30d: recentColumn(players.lastBattleAt, players.wnx30d),
+      battles30d: recentColumn(players.lastBattleAt, players.battles30d),
     })
     .from(clanMembers)
     .leftJoin(players, eq(clanMembers.accountId, players.accountId))

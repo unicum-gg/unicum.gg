@@ -14,6 +14,7 @@ import {
   type VehicleRecord,
 } from "../players/vehicle-records";
 import { discoverClansBackground } from "../discovery/clans";
+import { recentColumn } from "../players/recent-rating";
 import { discoverPlayersBackground } from "../discovery/players";
 import {
   MAX_IDS_PER_KIND,
@@ -331,11 +332,11 @@ async function loadPlayers(
       wtr: players.wtr,
       battles: players.battles,
       winrate: players.winrate,
-      wn730d: players.wn730d,
-      wn830d: players.wn830d,
-      wnx30d: players.wnx30d,
-      battles30d: players.battles30d,
-      wins30d: players.wins30d,
+      wn730d: recentColumn(players.lastBattleAt, players.wn730d),
+      wn830d: recentColumn(players.lastBattleAt, players.wn830d),
+      wnx30d: recentColumn(players.lastBattleAt, players.wnx30d),
+      battles30d: recentColumn(players.lastBattleAt, players.battles30d),
+      wins30d: recentColumn(players.lastBattleAt, players.wins30d),
     })
     .from(players)
     .leftJoin(clans, eq(clans.id, players.clanId))

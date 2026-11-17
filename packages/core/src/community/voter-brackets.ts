@@ -7,6 +7,7 @@ import {
 } from "@unicum.gg/shared";
 import { REGIONS } from "@unicum.gg/wargaming";
 import { db } from "@unicum.gg/core/db";
+import { recentBattlesSql } from "@unicum.gg/core/players/recent-rating";
 
 /**
  * Keeping the stored bracket in step with how the voter plays now, across every
@@ -52,8 +53,8 @@ function bracketCase(): SQL<unknown> {
 function playerSource(): SQL<unknown> {
   const branches = REGIONS.map(
     (region) => sql`
-      SELECT account_id, wn8, battles, battles_30d, winrate, ${region} AS region
-      FROM ${playersByRegion[region]}
+      SELECT account_id, wn8, battles, ${recentBattlesSql("p")} AS battles_30d, winrate, ${region} AS region
+      FROM ${playersByRegion[region]} p
     `,
   );
   return sql.join(branches, sql` UNION ALL `);

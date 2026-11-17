@@ -7,6 +7,7 @@ import {
   type LiveStreamerAccount,
 } from "@unicum.gg/shared";
 import { getPlayersByAccounts } from "@unicum.gg/core/players";
+import { playedRecently } from "@unicum.gg/core/players/recent-rating";
 import type { PlayerClanInfo } from "@unicum.gg/core/wargaming/wot/clans/listings";
 import { isRegion, Region } from "@unicum.gg/wargaming";
 import { getWotStreamsByLogin } from "./index";
@@ -150,7 +151,7 @@ export async function getLiveStreamers(): Promise<LiveStreamer[]> {
   // 30-day battles, WNX as tiebreak) rather than duplicating the same stream.
   const bestByLogin = new Map<string, Resolved>();
   const activityOf = (r: Resolved): [number, number] => [
-    r.player.battles30d ?? -1,
+    playedRecently(r.player.lastBattleAt) ? (r.player.battles30d ?? -1) : -1,
     r.player.wnx ?? 0,
   ];
   for (const r of resolved) {
@@ -168,6 +169,7 @@ export async function getLiveStreamers(): Promise<LiveStreamer[]> {
 
   const out: LiveStreamer[] = [];
   for (const { row, region, player, stream, clan } of bestByLogin.values()) {
+    const recent = playedRecently(player.lastBattleAt);
     out.push({
       region,
       accountId: row.accountId,
@@ -179,9 +181,9 @@ export async function getLiveStreamers(): Promise<LiveStreamer[]> {
       wnx: player.wnx,
       pr: player.pr,
       wtr: player.wtr,
-      wn730d: player.wn730d,
-      wn830d: player.wn830d,
-      wnx30d: player.wnx30d,
+      wn730d: recent ? player.wn730d : null,
+      wn830d: recent ? player.wn830d : null,
+      wnx30d: recent ? player.wnx30d : null,
       twitchLogin: row.twitchLogin,
       twitchUserName: stream.userName,
       title: stream.title,

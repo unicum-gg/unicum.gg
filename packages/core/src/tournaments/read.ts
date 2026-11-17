@@ -322,6 +322,9 @@ export async function getTournament(
   const standingsTable = tournamentStandingsByRegion[region];
 
   const accounts = playersByRegion[region];
+  // The window columns are only rewritten when the account plays, so "has
+  // battles in its 30-day columns" is not "played in the last 30 days".
+  const playedInWindow = sql`${accounts.battles30d} > 0 AND ${accounts.lastBattleAt} >= now() - interval '30 days'`;
 
   const arenaIds = row.mapPool ?? [];
   const [
@@ -366,9 +369,9 @@ export async function getTournament(
           // account that did not play the window is either absent or a stale
           // reading of a player who is not in form, and either way it is not
           // evidence about tonight.
-          rated30dPlayers: sql<number>`count(${accounts.wn830d}) filter (where ${accounts.battles30d} > 0)::int`,
-          avgWn830d: sql<number | null>`avg(${accounts.wn830d}) filter (where ${accounts.battles30d} > 0)::float8`,
-          avgWnx30d: sql<number | null>`avg(${accounts.wnx30d}) filter (where ${accounts.battles30d} > 0)::float8`,
+          rated30dPlayers: sql<number>`count(${accounts.wn830d}) filter (where ${playedInWindow})::int`,
+          avgWn830d: sql<number | null>`avg(${accounts.wn830d}) filter (where ${playedInWindow})::float8`,
+          avgWnx30d: sql<number | null>`avg(${accounts.wnx30d}) filter (where ${playedInWindow})::float8`,
         })
         .from(playersTable)
         .innerJoin(accounts, eq(accounts.accountId, playersTable.accountId))

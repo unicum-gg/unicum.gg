@@ -9,6 +9,7 @@ import {
 import type { Region } from "@unicum.gg/wargaming";
 import { db } from "@unicum.gg/core/db";
 import { enqueuePlayerRefreshBackground } from "@unicum.gg/core/players/refresh-queue";
+import { recentBattlesSql } from "@unicum.gg/core/players/recent-rating";
 
 /**
  * Who may rate a map, and on what evidence.
@@ -84,8 +85,8 @@ export async function getMapRatingEligibility(
   const players = playersByRegion[region];
 
   const rows = (await db.execute(sql`
-    SELECT wn8, battles, battles_30d, winrate
-    FROM ${players}
+    SELECT wn8, battles, ${recentBattlesSql("p")} AS battles_30d, winrate
+    FROM ${players} p
     WHERE account_id = ${accountId}
     LIMIT 1
   `)) as unknown as EligibilityRow[];

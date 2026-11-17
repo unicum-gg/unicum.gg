@@ -1,4 +1,5 @@
 import { sql, type SQL } from "drizzle-orm";
+import type { AnyPgColumn } from "drizzle-orm/pg-core";
 import { type RatingMetric, wnRatingMetric } from "@unicum.gg/shared";
 
 /**
@@ -30,4 +31,25 @@ export function recentBattlesSql(alias = "p"): SQL {
   return sql.raw(
     `CASE WHEN ${alias}.last_battle_at >= now() - interval '30 days' THEN ${alias}.battles_30d END`,
   );
+}
+
+/**
+ * One 30-day column of a `*_players` row read through the query builder,
+ * withheld on the same condition as `recentRatingSql`: a clan roster or a
+ * tournament team otherwise prints, for a member idle since August, the
+ * battles and rating of the last window they played in.
+ */
+export function recentColumn<T extends AnyPgColumn>(
+  lastBattleAt: AnyPgColumn,
+  column: T,
+): SQL<T["_"]["data"] | null> {
+  return sql<T["_"]["data"] | null>`CASE WHEN ${lastBattleAt} >= now() - interval '30 days' THEN ${column} END`.mapWith(
+    column,
+  );
+}
+
+/** The same condition on a row already read, for a caller holding the whole
+ * player rather than building a query. */
+export function playedRecently(lastBattleAt: Date | null, now = Date.now()): boolean {
+  return lastBattleAt !== null && now - lastBattleAt.getTime() <= 30 * 86_400_000;
 }
