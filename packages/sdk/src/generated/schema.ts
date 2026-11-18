@@ -5123,6 +5123,49 @@ export interface components {
         offsetField: number;
         /** @description A 1200×630 PNG stats card. */
         ogImageResponse: string;
+        /** @description What the Onslaught board says about itself as a whole. */
+        OnslaughtAggregates: {
+            /** @description Players holding a place, which is the board's own length. */
+            ranked: number;
+            /** @description The rating at the last Legend position: what Legend costs. */
+            legendPoints: number | null;
+            /** @description The board's floor, which is Champion's threshold, since the board reaches exactly that far. */
+            championPoints: number | null;
+            /** @description Unix seconds of the newest capture on the board, which is the clock every activity figure is read against. Zero for a season we hold no captures of. */
+            reference: number;
+            /** @description Ranked players per activity bucket. */
+            activity: {
+                today: number;
+                week: number;
+                idle: number;
+            };
+            /** @description Ranked players per rank. */
+            tiers: {
+                legend: number;
+                champion: number;
+            };
+            profiles: components["schemas"]["OnslaughtTierProfile"][];
+            /** @description The rating a player enters the board at, which is Champion's threshold. */
+            entryBar: number;
+            /** @description Median battles the board's own players had played when they first appeared on it. */
+            entryBattles: number;
+            /** @description Quartiles of the season battles of everyone ranked, raw. Divided by the days the season has run to read as a pace, which is why they are published undivided: that divisor comes from the season curve, which is fetched apart from this board. */
+            battleQuantiles: number[];
+            /** @description Every ranked rating, descending, so a reader's own standing is counted rather than interpolated. */
+            ratings: number[];
+            /** @description The rating of every ranked row whose points per battle we measured, parallel to ratePerBattle. It is what lets a reader's own figure be read against the neighbourhood they are in rather than against the whole board, where the rate rises with the standings. */
+            rateRatings: number[];
+            /** @description The measured points per battle of those same rows, in the same order, to three decimals. */
+            ratePerBattle: number[];
+        };
+        /** @description Median overall rating of a cohort, per metric. */
+        OnslaughtCohortRatings: {
+            wn7: number | null;
+            wn8: number | null;
+            wnx: number | null;
+            pr: number | null;
+            wtr: number | null;
+        };
         /** @description A player who lost their place on the board this season. */
         OnslaughtDropout: {
             account_id: number;
@@ -5151,8 +5194,7 @@ export interface components {
         OnslaughtHistoryResponse: {
             /** @description The season these samples belong to. */
             eventId: string;
-            /** @description Samples in chronological order, oldest first. */
-            points: components["schemas"]["OnslaughtSeasonPoint"][];
+            series: components["schemas"]["OnslaughtSeasonSeries"];
         };
         /** @description How the previous Onslaught season ended. */
         OnslaughtPreviousSeason: {
@@ -5176,11 +5218,15 @@ export interface components {
         OnslaughtResponse: {
             season: components["schemas"]["OnslaughtSeason"] | null;
             seasons: components["schemas"]["OnslaughtSeasonRef"][];
+            /** @description One page of the standings, in rank order: `limit` rows from `offset`. The default is the whole board. */
             results: components["schemas"]["OnslaughtSummary"][];
+            aggregates: components["schemas"]["OnslaughtAggregates"];
             /** @description How the season before the one being served ended. Null when it is the first season we hold standings for. */
             previous: components["schemas"]["OnslaughtPreviousSeason"] | null;
-            /** @description Players who held a place this season and lost it, newest first. Recovered from our own daily fold, since the standings only carry who is ranked now. Empty for a season we hold no captures of. */
+            /** @description Players who held a place this season and lost it, newest first, one page of them on the same `limit` and `offset` as the standings. Recovered from our own daily fold, since the standings only carry who is ranked now. Empty for a season we hold no captures of. */
             dropouts: components["schemas"]["OnslaughtDropout"][];
+            /** @description How many lost their place in all, since `dropouts` is a page of them and the board names the count on its own tab. */
+            lost: number;
         };
         /** @description Onslaught season metadata. */
         OnslaughtSeason: {
@@ -5203,22 +5249,6 @@ export interface components {
             /** @description Unix seconds of the source's last leaderboard recompute. */
             lastRecalculationTs: number | null;
         };
-        /** @description One sample of an Onslaught season's board. */
-        OnslaughtSeasonPoint: {
-            /** @description Instant of the sample, unix seconds. */
-            t: number;
-            /** @description Players holding a place on the board at this instant. */
-            ranked: number;
-            /** @description Rating points needed for Legend, as published by the game. */
-            legendPoints: number | null;
-            /** @description Rating points sitting at the Champion position, read off the board. */
-            championPoints: number | null;
-            topRating: number | null;
-            /** @description The last ranked player's rating: the price of entry. */
-            minRating: number | null;
-            /** @description Battles summed over every ranked player. */
-            battles: number | null;
-        };
         /** @description A season selector entry. */
         OnslaughtSeasonRef: {
             /** @description Stable list key. */
@@ -5231,6 +5261,22 @@ export interface components {
             available: boolean;
             /** @description Season id to navigate to (available seasons only). */
             eventId: string | null;
+        };
+        /** @description An Onslaught season's board over time, as parallel columns. */
+        OnslaughtSeasonSeries: {
+            /** @description Instant of each sample, unix seconds, chronological and oldest first. Its length is the length of the curve. */
+            t: number[];
+            /** @description Players holding a place on the board at each instant. */
+            ranked: number[];
+            /** @description Rating points needed for Legend, as published by the game. */
+            legendPoints: (number | null)[];
+            /** @description Rating points sitting at the Champion position, read off the board. */
+            championPoints: (number | null)[];
+            topRating: (number | null)[];
+            /** @description The last ranked player's rating: the price of entry. */
+            minRating: (number | null)[];
+            /** @description Battles summed over every ranked player. */
+            battles: (number | null)[];
         };
         /** @description Onslaught leaderboard row (ranked by score). */
         OnslaughtSummary: {
@@ -5279,6 +5325,22 @@ export interface components {
             onslaught_seasons?: number;
             is_supporter?: boolean;
             twitch_login?: string | null;
+        };
+        /** @description Who the players of one Onslaught rank are. */
+        OnslaughtTierProfile: {
+            /**
+             * @description The rank this cohort holds.
+             * @enum {string}
+             */
+            tier: "legend" | "champion";
+            players: number;
+            ratings: components["schemas"]["OnslaughtCohortRatings"];
+            /** @description Median battles they had played when they first appeared on the board: the price of qualifying. */
+            entryBattles: number | null;
+            /** @description Median battles played over the whole season: the price of staying, which is the larger of the two. */
+            seasonBattles: number | null;
+            /** @description Median days they were actually seen playing. */
+            daysPlayed: number | null;
         };
         ownMapRating: {
             overall: number;
@@ -8728,6 +8790,8 @@ export interface operations {
             query?: {
                 /** @description Maximum number of rows to return. Out-of-range values are clamped. */
                 limit?: number;
+                /** @description Rows to skip before the page begins, applied to the standings AND to the lost places, so one pair of parameters pages both. The aggregates always describe the whole board, whatever the slice. */
+                offset?: number;
                 /** @description Season event id to load (default the current season). From the seasons list in the response. */
                 season?: string;
             };
