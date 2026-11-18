@@ -25,6 +25,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import ROUTES from "@/constants/routes";
+import { useAccount } from "@/hooks/use-account";
 import { useTranslation } from "@/hooks/use-translation";
 import { authClient, signOut } from "@/lib/auth-client";
 import { wgIdentityFromEmail } from "@/lib/wg-session";
@@ -51,6 +52,11 @@ export function AccountMenu({ active }: { active: ActiveSession }) {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [addOpen, setAddOpen] = useState(false);
   const accounts = useDeviceAccounts(active);
+  // The settings dialog below already preloads this at idle on every page, so
+  // reading it here costs no request of its own. The supporter entry waits for
+  // the answer rather than flashing at a supporter while it is on its way.
+  const { data: account } = useAccount();
+  const offerSupport = account?.loggedIn === true && !account.supporter;
   const wg = wgIdentityFromEmail(active.user.email);
   const current = accounts?.find((a) => a.userId === active.user.id);
   const others = accounts?.filter((a) => a.userId !== active.user.id) ?? [];
@@ -121,12 +127,14 @@ export function AccountMenu({ active }: { active: ActiveSession }) {
             <GearSixIcon weight="bold" />
             {t("settings")}
           </DropdownMenuItem>
-          <DropdownMenuItem asChild>
-            <Link href={ROUTES.SUPPORT}>
-              <HeartIcon weight="fill" className="text-brand" />
-              {t("support")}
-            </Link>
-          </DropdownMenuItem>
+          {offerSupport && (
+            <DropdownMenuItem asChild>
+              <Link href={ROUTES.SUPPORT}>
+                <HeartIcon weight="fill" className="text-brand" />
+                {t("support")}
+              </Link>
+            </DropdownMenuItem>
+          )}
           <DropdownMenuSeparator />
           {others.length > 0 && (
             <>
