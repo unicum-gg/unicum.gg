@@ -22,7 +22,11 @@ export const vehicleMeta = z
       .meta({ description: "Only on the Common Test client, not yet released." }),
     isHidden: z.boolean().meta({
       description:
-        "Not a vehicle at all (training bot, story-mode prop). Always false here: these are excluded from the catalogue.",
+        "Not a vehicle at all (training-room dummy, story-mode prop). Always false here: these are excluded from the catalogue.",
+    }),
+    eventRole: z.string().nullable().meta({
+      description:
+        "The part an event's bot plays in it, as the game tags it (\"boss\", \"sentry\", ...). Null for every vehicle a player drives.",
     }),
     variant: z.string().nullable().meta({
       description:

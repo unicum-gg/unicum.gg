@@ -33,7 +33,7 @@ export function makeVehiclesTable(region: string) {
     // vehicle players can already inspect here weeks before it ships. Its
     // details are read from the CT branch of the mirror, not the region's.
     isCommonTest: boolean("is_common_test").notNull().default(false),
-    // Not a vehicle: a training-room bot, a story-mode prop, or something the
+    // Not a vehicle: a training-room dummy, a story-mode prop, or something the
     // client never names. Zero battles on every region. Stored rather than
     // derived on read because the signal is the localization file the client
     // names it in, which is not something the row still holds.
@@ -41,6 +41,9 @@ export function makeVehiclesTable(region: string) {
     // The parallel catalogue the vehicle comes from, spelled as the suffix its
     // name ends with ("IGR"). Null for a normal vehicle.
     variant: text("variant"),
+    // The part an event's bot plays in it (`boss`, `sentry`, ...), from the
+    // client's `hwrole_*`/`lsrole_*` tag. Null for anything a player drives.
+    eventRole: text("event_role"),
     smallIcon: text("small_icon"),
     contourIcon: text("contour_icon"),
     bigIcon: text("big_icon"),

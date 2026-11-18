@@ -351,7 +351,8 @@ export async function refreshTankSpecs(): Promise<number> {
     // read the gun and the armour before the tank ships. Failing to read the
     // branch (no test running) simply leaves the live catalogue as it was.
     eu.source.specs.catalog(WotSrcBranch.CT).catch(() => []),
-    // The vehicles an event offers its players, which have a page like any other.
+    // Every vehicle an event fields, its bots and bosses included, each of
+    // which has a page like any other.
     eu.source.specs.eventCatalog().catch(() => []),
     eu.source.specs.branchVersion(BRANCH_BY_REGION[Region.EU]).catch(() => null),
     eu.source.specs.branchVersion(WotSrcBranch.CT).catch(() => null),

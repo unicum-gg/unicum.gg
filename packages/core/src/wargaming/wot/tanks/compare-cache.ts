@@ -37,8 +37,9 @@ export const TANK_COMPARE_TTL_SECONDS = 60 * 60;
  *     vehicle twice under two setups. A v4 entry has no such field, and the
  *     column that should have read as the second one would have come back
  *     unnumbered and indistinguishable from the first.
+ * v6: `eventRole` on each column's vehicle meta.
  */
-const SHAPE_VERSION = 5;
+const SHAPE_VERSION = 6;
 
 function key(region: Region, slugs: string[]): string {
   const columns = slugs.map((s) => s.toLowerCase()).join(",");

@@ -2799,6 +2799,8 @@ export interface components {
                 nation: string;
                 tag: string;
                 slug: string | null;
+                /** @description Exists only inside an event mode, so no player has a published record on it. */
+                isEvent: boolean;
             } | null;
             /** @description Every tank this vehicle fought in, when it was more than one (Frontline respawns). `tank` is then only the first, and `own` and `rating` cover all of them. */
             lineup?: components["schemas"]["BattleLineupTank"][];
@@ -2980,6 +2982,8 @@ export interface components {
             tag: string;
             /** @description Our slug for the vehicle page, null when it has none. */
             slug: string | null;
+            /** @description Exists only inside an event mode, so no player has a published record on it. */
+            isEvent: boolean;
         };
         /** @description One vehicle's whole battle. */
         BattleVehicle: {
@@ -7380,8 +7384,10 @@ export interface components {
             isReward: boolean;
             /** @description Only on the Common Test client, not yet released. */
             isCommonTest: boolean;
-            /** @description Not a vehicle at all (training bot, story-mode prop). Always false here: these are excluded from the catalogue. */
+            /** @description Not a vehicle at all (training-room dummy, story-mode prop). Always false here: these are excluded from the catalogue. */
             isHidden: boolean;
+            /** @description The part an event's bot plays in it, as the game tags it ("boss", "sentry", ...). Null for every vehicle a player drives. */
+            eventRole: string | null;
             /** @description The parallel catalogue this vehicle comes from, spelled as the suffix its name ends with ("IGR" for the retired cybercafe reissues), or "EVENT" for a vehicle that exists only inside an event mode, whose name carries no suffix. Null for a normal vehicle. */
             variant: string | null;
             /** @description How many characteristics the current Common Test build changes on this vehicle; 0 when none. */
@@ -8314,8 +8320,10 @@ export interface components {
             isReward: boolean;
             /** @description Only on the Common Test client, not yet released. */
             isCommonTest: boolean;
-            /** @description Not a vehicle at all (training bot, story-mode prop). Always false here: these are excluded from the catalogue. */
+            /** @description Not a vehicle at all (training-room dummy, story-mode prop). Always false here: these are excluded from the catalogue. */
             isHidden: boolean;
+            /** @description The part an event's bot plays in it, as the game tags it ("boss", "sentry", ...). Null for every vehicle a player drives. */
+            eventRole: string | null;
             /** @description The parallel catalogue this vehicle comes from, spelled as the suffix its name ends with ("IGR" for the retired cybercafe reissues). Null for a normal vehicle. */
             variant: string | null;
             role: string | null;

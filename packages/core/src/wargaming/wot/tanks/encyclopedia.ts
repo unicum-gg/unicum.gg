@@ -9,9 +9,11 @@ import { Region } from "@unicum.gg/wargaming";
 import {
   catalogueNaming,
   fetchCommonTestVehicles,
+  eventBaseName,
   eventNaming,
   fetchEventVehicles,
   fetchVehicleCatalog,
+  isOfferedEventVehicle,
 } from "@unicum.gg/core/wargaming/wot/tanks/wotsrc";
 
 // Module-level in-memory cache. Lives for the lifetime of the Node process
@@ -54,6 +56,7 @@ async function loadVehicles(
       isCommonTest: table.isCommonTest,
       isHidden: table.isHidden,
       variant: table.variant,
+      eventRole: table.eventRole,
       role: table.role,
       contourIcon: table.contourIcon,
       bigIcon: table.bigIcon,
@@ -81,6 +84,7 @@ async function loadVehicles(
       isCommonTest: r.isCommonTest,
       isHidden: r.isHidden,
       variant: r.variant,
+      eventRole: r.eventRole,
       role: r.role,
       contourIcon: httpsUrl(r.contourIcon),
       bigIcon: httpsUrl(r.bigIcon),
@@ -116,16 +120,17 @@ export async function getVehicleEncyclopedia(
   return promise;
 }
 
+/** The names that occur more than once in a list. */
+function repeated(names: string[]): string[] {
+  const seen = new Set<string>();
+  return names.filter((name) => seen.has(name) || !seen.add(name));
+}
+
 /**
- * Fetch the full vehicle catalogue from the IzeBerg/wot-src GitHub mirror
- * and upsert into `<region>_vehicles`. Called by the weekly cron (for all
- * regions) and as the cold-start bootstrap inside `loadVehicles`. The
- * mirror tracks the live WoT game client, so this returns ~1224 tanks
- * including the ~224 that WG's public API has stripped (removed/event-only
- * tanks that still show up in player stats).
+ * The rows `refreshVehicles` writes, built without writing them, so a change to
+ * how vehicles are named can be checked against the published slugs first.
  */
-export async function refreshVehicles(region: Region): Promise<number> {
-  const table = vehiclesByRegion[region];
+export async function buildVehicleRows(region: Region): Promise<NewVehicle[]> {
   const [catalog, commonTest, events] = await Promise.all([
     fetchVehicleCatalog(region),
     fetchCommonTestVehicles(region),
@@ -137,15 +142,30 @@ export async function refreshVehicles(region: Region): Promise<number> {
   // everything downstream (slugs, detail, search) then works on them for free,
   // and the flag is what the few places that must exclude them read.
   //
-  // An event's vehicles join it so a battle fought in one can name it. Those it
-  // offers its players are in the catalogue, behind a filter of their own; its
-  // bots and bosses stay hidden.
+  // An event's vehicles join it, bots and bosses included, so a battle fought
+  // in one can name each of them and every one has a page.
+  //
+  // Named in two passes, so a vehicle new to the catalogue can never move a
+  // published slug. The ones an event offers its players are named first,
+  // against the regular catalogue alone, exactly as they were before the rest
+  // joined. Every other one (its bots and bosses, Story Mode's vehicles) then
+  // takes its mode as a suffix whenever its name is already taken, by a regular
+  // vehicle, by a playable one, or by another event vehicle: Halloween and Last
+  // Stand field the same "Rattle", and two pages reading "Rattle" are no help.
+  const fresh = events.filter((v) => !known.has(v.tankId));
+  const offered = fresh.filter(isOfferedEventVehicle);
+  const others = fresh.filter((v) => !isOfferedEventVehicle(v));
   const regularNames = new Set(regular.map((v) => catalogueNaming(v).shortName));
-  const rows: NewVehicle[] = [
+  const offeredNamed = offered.map((v) => ({ v, naming: eventNaming(v, regularNames) }));
+  const taken = new Set([
+    ...regularNames,
+    ...offeredNamed.map(({ naming }) => naming.shortName),
+    ...repeated(others.map(eventBaseName)),
+  ]);
+  return [
     ...regular.map((v) => ({ v, naming: catalogueNaming(v) })),
-    ...events
-      .filter((v) => !known.has(v.tankId))
-      .map((v) => ({ v, naming: eventNaming(v, regularNames) })),
+    ...offeredNamed,
+    ...others.map((v) => ({ v, naming: eventNaming(v, taken) })),
   ].map(({ v, naming }) => ({
     tankId: v.tankId,
     tier: v.tier,
@@ -164,6 +184,19 @@ export async function refreshVehicles(region: Region): Promise<number> {
     bigIcon: null,
     updatedAt: new Date(),
   }));
+}
+
+/**
+ * Fetch the full vehicle catalogue from the IzeBerg/wot-src GitHub mirror
+ * and upsert into `<region>_vehicles`. Called by the weekly cron (for all
+ * regions) and as the cold-start bootstrap inside `loadVehicles`. The
+ * mirror tracks the live WoT game client, so this returns ~1224 tanks
+ * including the ~224 that WG's public API has stripped (removed/event-only
+ * tanks that still show up in player stats).
+ */
+export async function refreshVehicles(region: Region): Promise<number> {
+  const table = vehiclesByRegion[region];
+  const rows = await buildVehicleRows(region);
   if (rows.length === 0) return 0;
   await db
     .insert(table)
@@ -195,6 +228,7 @@ export async function refreshVehicles(region: Region): Promise<number> {
         // name into the nation catalogue and it becomes an ownable tank.
         isHidden: sql`excluded.is_hidden`,
         variant: sql`excluded.variant`,
+        eventRole: sql`excluded.event_role`,
         updatedAt: new Date(),
       },
     });

@@ -60,6 +60,12 @@ export type WotSrcVehicle = {
   isNamed: boolean;
   /** The vehicle's raw client tags, verbatim and in declaration order. */
   tags: string[];
+  /**
+   * The event pack whose `item_defs` declare it (`story_mode`), on the rows
+   * `eventCatalog` returns. Not the same as `nameSource`: Story Mode names its
+   * vehicles in the nations' own catalogues.
+   */
+  eventPack?: EventPack;
 };
 
 type RawTankEntry = {
@@ -108,6 +114,7 @@ function extractRole(tags: string | undefined): string | null {
  * `res/<pack>/` beside the main one. What they declare is in no other list.
  */
 export const EVENT_PACKS = ["halloween", "last_stand", "story_mode"] as const;
+export type EventPack = (typeof EVENT_PACKS)[number];
 
 /**
  * Vehicle catalogue from the IzeBerg/wot-src GitHub mirror (the actual game
@@ -170,12 +177,15 @@ export class SourceVehiclesResource {
             idx,
             parser,
             `sources/res/${pack}/scripts/item_defs/vehicles/${nation}/list.xml`,
-          ).catch((err) => {
-            if (!(err instanceof WargamingHttpError && err.status === 404)) {
-              console.error(`[wotsrc-${this.region}] ${pack}/${nation} failed:`, err);
-            }
-            return [] as WotSrcVehicle[];
-          }),
+          ).then(
+            (list) => list.map((v) => ({ ...v, eventPack: pack })),
+            (err) => {
+              if (!(err instanceof WargamingHttpError && err.status === 404)) {
+                console.error(`[wotsrc-${this.region}] ${pack}/${nation} failed:`, err);
+              }
+              return [] as WotSrcVehicle[];
+            },
+          ),
         ),
       ),
     );

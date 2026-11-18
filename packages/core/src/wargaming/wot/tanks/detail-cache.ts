@@ -76,8 +76,9 @@ export const TANK_DETAIL_TTL_SECONDS = 26 * 60 * 60;
  * v25: the lists again, for a third way of emitting them: an inline script,
  *     which a prefetch fetches without running. A new number because v24
  *     entries carry only the build.
+ * v26: `eventRole` on the vehicle meta, the day bots and bosses gained pages.
  */
-const SHAPE_VERSION = 25;
+const SHAPE_VERSION = 26;
 
 // The client is part of the key, not a second cache: the same tank on the test
 // build is a different payload under the same slug, and the two must never

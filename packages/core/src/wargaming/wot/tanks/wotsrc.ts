@@ -71,7 +71,13 @@ export function catalogueNaming(
     WotSrcVehicleRow,
     "name" | "shortName" | "nameSource" | "isNamed" | "nation"
   >,
-): { name: string; shortName: string; variant: string | null; isHidden: boolean } {
+): {
+  name: string;
+  shortName: string;
+  variant: string | null;
+  isHidden: boolean;
+  eventRole: null;
+} {
   // `poFilename` rather than a second copy of the rule: Britain's catalogue file
   // does not match its directory name, and that exception has one owner.
   const own = poFilename(v.nation);
@@ -80,7 +86,7 @@ export function catalogueNaming(
   // would store a truthy " IGR" and defeat the `shortName || name` fallback the
   // encyclopedia read relies on, slugging the vehicle as `igr`.
   const shortName = v.shortName || v.name;
-  const plain = { name: v.name, shortName, variant: null };
+  const plain = { name: v.name, shortName, variant: null, eventRole: null };
   if (!v.isNamed || v.nameSource === null || !v.nameSource.endsWith("_vehicles")) {
     return { ...plain, isHidden: true };
   }
@@ -91,35 +97,77 @@ export function catalogueNaming(
     shortName: `${shortName} ${variant}`,
     variant,
     isHidden: false,
+    eventRole: null,
   };
+}
+
+/**
+ * The part an event's bot plays in it, from the client's own tag for it
+ * (`hwrole_boss` in Halloween, `lsrole_sentry` in Last Stand), or null for a
+ * vehicle with none, which is every one a player drives.
+ */
+export function eventRoleOf(tags: string[]): string | null {
+  for (const tag of tags) {
+    const role = /^[a-z]+role_(.+)$/.exec(tag)?.[1];
+    if (role) return role;
+  }
+  return null;
 }
 
 /**
  * How an event mode's vehicle enters our catalogue.
  *
- * Only the ones the client offers a player are shown (`mode_hidden`, which no
- * bot or boss carries), so the catalogue is not half full of the event's
- * opponents. A slug collision renames BOTH vehicles, so an event vehicle named
- * like a real one (Last Stand's "T-44") takes its mode as a suffix, or `/tanks/t-44`
- * would move the day the event ships.
+ * All of them do, bots and bosses included: a boss is exactly what a player
+ * wants to look at after meeting one, and its page is the only place its model
+ * is shown. `eventRole` is what tells a bot apart where that matters.
+ *
+ * A name in `taken` would collide into a slug that renames BOTH vehicles, so
+ * the event vehicle takes its mode as a suffix instead ("T-44 Last Stand"), or
+ * `/tanks/t-44` would move the day the event ships. The suffix is the PACK the
+ * vehicle is declared in rather than the file it is named in: Story Mode names
+ * its vehicles in the nations' own catalogues, which once read "M26 Pershing
+ * Usa Vehicles".
+ *
+ * A vehicle no player is offered is named by its FULL name, short name
+ * included, since the short one is all a slug is built from and the client's is
+ * a family name there: twenty-five Halloween guards are each "Guard", seven
+ * alphas "Alpha".
  */
 export function eventNaming(
-  v: Pick<WotSrcVehicleRow, "name" | "shortName" | "nameSource" | "tags">,
-  regularNames: Set<string>,
-): { name: string; shortName: string; variant: string; isHidden: boolean } {
-  const shortName = v.shortName || v.name;
-  const named = regularNames.has(shortName) ? suffixOf(v.nameSource) : "";
+  v: Pick<WotSrcVehicleRow, "name" | "shortName" | "tags" | "eventPack">,
+  taken: Set<string>,
+): {
+  name: string;
+  shortName: string;
+  variant: string;
+  isHidden: boolean;
+  eventRole: string | null;
+} {
+  const shortName = eventBaseName(v);
+  const named = taken.has(shortName) ? suffixOf(v.eventPack) : "";
   return {
     name: `${v.name}${named}`,
     shortName: `${shortName}${named}`,
     variant: EVENT_VEHICLE_VARIANT,
-    isHidden: !v.tags.includes("mode_hidden"),
+    isHidden: false,
+    eventRole: eventRoleOf(v.tags),
   };
 }
 
-/** ` Last Stand`, from the catalogue a pack names its vehicles in. */
-function suffixOf(nameSource: string | null): string {
-  const pack = nameSource?.split(".")[0];
+/** Whether the event offers this vehicle to its players, from the client's tag. */
+export function isOfferedEventVehicle(v: Pick<WotSrcVehicleRow, "tags">): boolean {
+  return v.tags.includes("mode_hidden");
+}
+
+/** The name an event vehicle's slug is built from, before any suffix. */
+export function eventBaseName(
+  v: Pick<WotSrcVehicleRow, "name" | "shortName" | "tags">,
+): string {
+  return isOfferedEventVehicle(v) ? v.shortName || v.name : v.name;
+}
+
+/** ` Last Stand`, from the pack an event vehicle is declared in. */
+function suffixOf(pack: string | undefined): string {
   if (!pack) return "";
   return ` ${pack
     .split("_")

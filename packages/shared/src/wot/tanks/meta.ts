@@ -16,8 +16,9 @@ export type VehicleMeta = {
   /** Only on the Common Test client: unreleased, and not in any player's stats. */
   isCommonTest: boolean;
   /**
-   * Not a vehicle at all: a training-room bot, a story-mode prop, or something
-   * the client never names. None has a single battle on any region, so they are
+   * Not a vehicle at all: a training-room dummy, a story-mode prop, or
+   * something the client never names. An event's bots and bosses are not this:
+   * they have a page, and `eventRole` is what marks them. None has a single battle on any region, so they are
    * kept out of every catalogue surface, slugs included. Playable variants the
    * client files apart (the cybercafe IGR reissues) are not this: they are in
    * the catalogue, under a suffixed name.
@@ -31,6 +32,12 @@ export type VehicleMeta = {
    * `EVENT_VEHICLE_VARIANT` marks an event mode's vehicle.
    */
   variant: string | null;
+  /**
+   * The part an event's bot plays in it, as the client tags it (`boss`,
+   * `sentry`, `alpha`, ...), or null for anything a player drives. Its page
+   * shows what it is and leaves out everything only players produce.
+   */
+  eventRole: string | null;
   role: string | null;
   contourIcon: string | null;
   bigIcon: string | null;
@@ -60,6 +67,10 @@ export function computeAvgTier(
  *
  * Unlike "IGR" it is not spelled in the name: the event names its vehicles
  * itself. The catalogue offers these behind a filter of their own, and nothing
- * that compares vehicles by tier may count them.
+ * that compares vehicles by tier may count them. Its bots and bosses are among
+ * them, marked by `VehicleMeta.eventRole`.
  */
 export const EVENT_VEHICLE_VARIANT = "EVENT";
+
+/** `VehicleMeta.eventRole` of an event's boss, which the page names as one. */
+export const EVENT_BOSS_ROLE = "boss";

@@ -44,9 +44,6 @@ export type WotSrcCustomization = {
   customDefaultCamouflage: boolean;
 };
 
-/** The tag the client gives the vehicles an event mode offers its players. */
-const EVENT_PLAYABLE_TAG = "mode_hidden";
-
 const mainBase = (nation: string) => `sources/res/scripts/item_defs/vehicles/${nation}`;
 
 const packBase = (pack: string, nation: string) =>
@@ -93,9 +90,9 @@ export class SourceSpecsResource {
   }
 
   /**
-   * The specifications of the vehicles players field in an event mode, read
-   * from the mode's own definitions. Its bots and bosses are left out: only
-   * the vehicles the client offers a player carry `mode_hidden`.
+   * The specifications of every vehicle an event mode fields, read from the
+   * mode's own definitions: the ones it offers its players, and its bots and
+   * bosses, which have a page of their own.
    */
   async eventCatalog(): Promise<WotSrcSpec[]> {
     const branch = branchFor(this.region);
@@ -109,9 +106,7 @@ export class SourceSpecsResource {
     const results = await Promise.all(
       EVENT_PACKS.flatMap((pack) =>
         nations.map((nation, idx) =>
-          this.#nation(branch, nation, idx, parser, packBase(pack, nation), (tags) =>
-            tags.split(/\s+/).includes(EVENT_PLAYABLE_TAG),
-          ).catch((err) => {
+          this.#nation(branch, nation, idx, parser, packBase(pack, nation)).catch((err) => {
             if (!isMissing(err)) {
               console.error(`[wotsrc-specs-${this.region}] ${pack}/${nation} failed:`, err);
             }
@@ -175,7 +170,6 @@ export class SourceSpecsResource {
     nationIdx: number,
     parser: XMLParser,
     base: string,
-    keep?: (tags: string) => boolean,
   ): Promise<WotSrcSpec[]> {
     const comp = (c: string) => this.#text(rawUrl(branch, `${base}/components/${c}.xml`));
     const [listXml, gunsXml, shellsXml, turretsXml, enginesXml, chassisXml, radiosXml, fuelXml] =
@@ -209,7 +203,6 @@ export class SourceSpecsResource {
       if (!Number.isFinite(localId)) continue;
       const type = this.#extractType(entry.tags);
       if (!type) continue;
-      if (keep && !keep(String(entry.tags ?? ""))) continue;
       try {
         const vehXml = await this.#text(rawUrl(branch, `${base}/${tag}.xml`));
         const root = this.#root(parser, vehXml);
