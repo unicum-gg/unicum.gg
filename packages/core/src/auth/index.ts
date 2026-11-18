@@ -1,5 +1,6 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { multiSession } from "better-auth/plugins";
 import { and, eq } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
 import {
@@ -116,5 +117,12 @@ export const auth = betterAuth({
       },
     },
   },
-  plugins: [wargaming()],
+  // Several WG accounts signed in on one browser at once, switched from the
+  // top bar's account menu. The plugin records every session minted here (the
+  // WG callback included, through its `after` hook on `newSession`) in a signed
+  // cookie of its own, and switching only rewrites the regular session cookie,
+  // so every server-side `getSession` keeps reading the active account and
+  // needs no change. Signing in again with an account already in the list
+  // replaces its session rather than adding a second entry.
+  plugins: [wargaming(), multiSession()],
 });
