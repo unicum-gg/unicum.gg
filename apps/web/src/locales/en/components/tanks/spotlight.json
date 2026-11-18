@@ -1,5 +1,6 @@
 {
   "title": "New tanks",
   "common-test": "Common Test",
-  "update": "Update {version}"
+  "update": "Update {version}",
+  "see-all": "See all the new tanks"
 }

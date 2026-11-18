@@ -1,8 +1,10 @@
 "use client";
 
 import type { z } from "zod";
+import { ArrowRight } from "lucide-react";
 import type { Region } from "@unicum.gg/wargaming";
 import type { TankSpotlightResponse } from "@/app/api/[region]/tanks/spotlight/schema.api";
+import Link from "@/components/link";
 import { CommonTestBadge } from "@/components/entity/badges/common-test-badge";
 import {
   Panel,
@@ -28,9 +30,12 @@ const CARD_SIZES = "(min-width: 1024px) 25vw, 50vw";
 export function TankSpotlight({
   region,
   tanks,
+  moreHref,
 }: {
   region: Region;
   tanks: SpotlightTankRow[];
+  /** Where the rest of them are, for a page showing only the first few. */
+  moreHref?: string;
 }) {
   const { t } = useTranslation("components/tanks/spotlight");
   if (tanks.length === 0) return null;
@@ -59,6 +64,17 @@ export function TankSpotlight({
             </li>
           ))}
         </ul>
+        {moreHref ? (
+          <div className="mt-3 flex justify-end">
+            <Link
+              href={moreHref}
+              className="inline-flex items-center gap-1.5 text-xs text-fd-muted-foreground transition-colors hover:text-fd-foreground"
+            >
+              {t("see-all")}
+              <ArrowRight className="size-3.5" />
+            </Link>
+          </div>
+        ) : null}
       </PanelContent>
     </Panel>
   );

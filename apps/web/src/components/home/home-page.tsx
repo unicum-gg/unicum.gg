@@ -35,6 +35,7 @@ import {
 } from "@/components/panel";
 import APP from "@/constants/app";
 import PAGINATION from "@/constants/pagination";
+import ROUTES from "@/constants/routes";
 import {
   DEFAULT_RATING_METRIC,
   RatingMetric,
@@ -212,17 +213,6 @@ export async function HomePage({
 
       <PanelSeparator />
 
-      {/* Draws nothing when there is nothing new, so no separator of its own
-          is left hanging either: it carries the one below it. */}
-      {spotlight.length > 0 ? (
-        <>
-          {/* One row here, the catalogue's two rows on /tanks: the home page
-              only says something arrived. */}
-          <TankSpotlight region={spotlightRegion} tanks={spotlight.slice(0, 4)} />
-          <PanelSeparator />
-        </>
-      ) : null}
-
       <div className="grid lg:grid-cols-2 *:min-w-0">
         <TopClansOverallPanel
           overall={topClansOverall}
@@ -242,6 +232,21 @@ export async function HomePage({
           </PanelContent>
         </Panel>
       </div>
+
+      {/* Under the leaderboards, which are what the page is for. Draws nothing
+          when there is nothing new, separator included. */}
+      {spotlight.length > 0 ? (
+        <>
+          <PanelSeparator />
+          {/* One row here, the catalogue's two rows on /tanks: the home page
+              only says something arrived, and points the way there. */}
+          <TankSpotlight
+            region={spotlightRegion}
+            tanks={spotlight.slice(0, 4)}
+            moreHref={ROUTES.TANKS(spotlightRegion)}
+          />
+        </>
+      ) : null}
 
       <PanelSeparator />
 
