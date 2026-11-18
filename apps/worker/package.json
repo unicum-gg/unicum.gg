@@ -30,7 +30,8 @@
     "start:single": "NODE_ENV=production tsx src/index.ts",
     "refresh-tank-specs": "tsx --env-file-if-exists=../web/.env.local src/scripts/refresh-tank-specs.ts",
     "rebuild-onslaught-daily": "tsx --env-file-if-exists=../web/.env.local src/scripts/rebuild-onslaught-daily.ts",
-    "recompute-rampage-ratings": "tsx --env-file-if-exists=../web/.env.local src/scripts/recompute-rampage-ratings.ts"
+    "recompute-rampage-ratings": "tsx --env-file-if-exists=../web/.env.local src/scripts/recompute-rampage-ratings.ts",
+    "repair-untagged-baselines": "tsx --env-file-if-exists=../web/.env.local src/scripts/repair-untagged-baselines.ts"
   },
   "dependencies": {
     "@unicum.gg/core": "workspace:*",

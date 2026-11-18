@@ -263,7 +263,11 @@ export async function recordSpecChanges(
     // immutable). Checked before the tag test so a same-version re-run is inert
     // even if the stored tag was derived slightly differently.
     if (prev.gameVersion === version) continue;
-    if (prev.tag !== tag) {
+    // Both tags have to be KNOWN to differ. A baseline written before the
+    // column existed carries none, and reading that null as "another vehicle"
+    // is what released the IS-7, the MS-1 and 89 other old tanks in 2.4 and
+    // dropped that patch's rebalances on every one of them.
+    if (prev.tag !== null && tag !== null && prev.tag !== tag) {
       // The slot's tag changed at a version bump: WG reused this id for a
       // different vehicle. That is the new tank's release, not a change; seed a
       // fresh baseline and record the introduction (never diff across vehicles).
