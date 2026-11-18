@@ -1,5 +1,6 @@
 {
   "title": "Жаңа танктер",
   "common-test": "Жалпы Тест",
-  "update": "Жаңарту {version}"
+  "update": "Жаңарту {version}",
+  "see-all": "Барлық жаңа танктерді көру"
 }

@@ -1,5 +1,6 @@
 {
   "title": "Uudet panssarivaunut",
   "common-test": "Yhteinen testi",
-  "update": "Päivitä {version}"
+  "update": "Päivitä {version}",
+  "see-all": "Katso kaikki uudet panssarivaunut"
 }

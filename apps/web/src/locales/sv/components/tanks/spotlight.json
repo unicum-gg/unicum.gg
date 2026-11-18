@@ -1,5 +1,6 @@
 {
   "title": "Nya vagnar",
   "common-test": "Vanlig Test",
-  "update": "Uppdatera {version}"
+  "update": "Uppdatera {version}",
+  "see-all": "Se alla nya vagnar"
 }

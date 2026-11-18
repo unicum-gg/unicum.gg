@@ -1,5 +1,6 @@
 {
   "title": "Nye stridsvogner",
   "common-test": "Vanlig test",
-  "update": "Oppdatér {version}"
+  "update": "Oppdatér {version}",
+  "see-all": "Se alle de nye stridsvognene"
 }

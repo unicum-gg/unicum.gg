@@ -1,5 +1,6 @@
 {
   "title": "Nyt kampvogne",
   "common-test": "Offentlig Test",
-  "update": "Opdater {version}"
+  "update": "Opdater {version}",
+  "see-all": "Se alle de nye Tanks"
 }

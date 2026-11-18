@@ -1,5 +1,6 @@
 {
   "title": "नए टैंक",
   "common-test": "सामान्य परीक्षण",
-  "update": "अपडेट करें {version}"
+  "update": "अपडेट करें {version}",
+  "see-all": "सभी नए टैंक देखें"
 }

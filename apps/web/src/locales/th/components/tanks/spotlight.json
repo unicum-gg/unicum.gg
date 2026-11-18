@@ -1,5 +1,6 @@
 {
   "title": "รถถังใหม่",
   "common-test": "การทดสอบทั่วไป",
-  "update": "ปรับ {version}"
+  "update": "ปรับ {version}",
+  "see-all": "ดูรถถังใหม่ทั้งหมด"
 }

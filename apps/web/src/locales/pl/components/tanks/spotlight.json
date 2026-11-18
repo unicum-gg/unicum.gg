@@ -1,5 +1,6 @@
 {
   "title": "Nowe czołgi",
   "common-test": "Test ogólny",
-  "update": "Odśwież {version}"
+  "update": "Odśwież {version}",
+  "see-all": "Zobacz wszystkie nowe czołgi"
 }

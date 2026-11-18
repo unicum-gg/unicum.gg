@@ -1,5 +1,6 @@
 {
   "title": "دبابات جديدة",
   "common-test": "اختبار مشترك",
-  "update": "تحديث {version}"
+  "update": "تحديث {version}",
+  "see-all": "عرض جميع الدبابات الجديدة"
 }

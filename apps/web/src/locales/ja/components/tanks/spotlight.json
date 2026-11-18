@@ -1,5 +1,6 @@
 {
   "title": "追加戦車",
   "common-test": "共通テスト",
-  "update": "バージョン{version}を更新"
+  "update": "バージョン{version}を更新",
+  "see-all": "追加された戦車をすべて見る"
 }

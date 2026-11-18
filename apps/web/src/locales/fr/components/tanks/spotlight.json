@@ -1,5 +1,6 @@
 {
   "title": "Nouveaux chars",
   "common-test": "Test commun",
-  "update": "Mise à jour {version}"
+  "update": "Mise à jour {version}",
+  "see-all": "Voir tous les nouveaux chars"
 }

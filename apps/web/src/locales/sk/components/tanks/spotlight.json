@@ -1,5 +1,6 @@
 {
   "title": "Nové tanky",
   "common-test": "Všeobecný test",
-  "update": "Posodobitev {version}"
+  "update": "Posodobitev {version}",
+  "see-all": "Oglejte si vse nove tanky"
 }

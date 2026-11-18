@@ -1,5 +1,6 @@
 {
   "title": "Neue Panzer",
   "common-test": "Gemeinsamer Test",
-  "update": "Version {version} aktualisieren"
+  "update": "Version {version} aktualisieren",
+  "see-all": "Alle neuen Panzer ansehen"
 }

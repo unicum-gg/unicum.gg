@@ -1,5 +1,6 @@
 {
   "title": "Novi tenkovi",
   "common-test": "Zajedničko testiranje",
-  "update": "Obnovi {version}"
+  "update": "Obnovi {version}",
+  "see-all": "Pogledajte sve nove tenkove"
 }

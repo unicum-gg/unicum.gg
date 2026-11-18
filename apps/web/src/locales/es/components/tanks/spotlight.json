@@ -1,5 +1,6 @@
 {
   "title": "Nuevos tanques",
   "common-test": "Prueba común",
-  "update": "Actualizar {version}"
+  "update": "Actualizar {version}",
+  "see-all": "Ver todos los tanques nuevos"
 }

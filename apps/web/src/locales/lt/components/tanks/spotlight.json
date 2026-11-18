@@ -1,5 +1,6 @@
 {
   "title": "Nauja tankai",
   "common-test": "Bendras testas",
-  "update": "Atnaujinti {version}"
+  "update": "Atnaujinti {version}",
+  "see-all": "Peržiūrėti visus naujus tankus"
 }

@@ -1,5 +1,6 @@
 {
   "title": "신규 전차",
   "common-test": "공통 테스트",
-  "update": "{version} 업데이트"
+  "update": "{version} 업데이트",
+  "see-all": "신규 전차 모두 보기"
 }

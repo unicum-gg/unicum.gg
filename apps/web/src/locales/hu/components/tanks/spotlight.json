@@ -1,5 +1,6 @@
 {
   "title": "Új tankok",
   "common-test": "Közönséges Teszt",
-  "update": "Frissítés: {version}"
+  "update": "Frissítés: {version}",
+  "see-all": "Az összes új tank megtekintése"
 }
