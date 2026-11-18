@@ -13,13 +13,36 @@ import { Region, REGION_EMOJI, REGION_LABEL } from "@unicum.gg/wargaming";
 import { getTranslation } from "@/lib/translations.server";
 import { battleTypeName } from "@/components/game-name";
 import { Interpolate } from "@/components/interpolate";
-import { BattleType } from "@unicum.gg/shared";
+import { BattleType, onslaughtAggregates } from "@unicum.gg/shared";
 import { seasonName } from "@/components/game-name";
 
-// The full standings are fetched once and paginated client-side (TablePager).
-// Onslaught's board is the whole ranked population (a few thousand, down to the
-// Master cutoff), not a top-N, so we pull it all; the API caps at its own max.
-const LIMIT = 60000;
+// One page of the standings, and the page this route names.
+//
+// The whole ranked population used to be fetched and paginated client-side.
+// Onslaught's board is a few thousand rows down to the Master cutoff rather
+// than a top-N, so that was 1,679,926 octets of rows on EU behind a page
+// drawing a hundred, inlined twice over into a 3,996,734 octet document which
+// then sat in a 4 GiB LRU cache shared with every other prerendered page. The
+// aggregates the endpoint folds over the whole board are what let the panels
+// below keep describing the field from a page of it.
+const PAGE = PAGINATION.SIZE.LEADERBOARD;
+
+// What the page prerenders as when even the in-process handler cannot answer,
+// which only happens during a build with no database (see `buildSafe`). The
+// aggregates are folded from nothing rather than hand-written as zeroes, so the
+// shape can never drift from what the endpoint publishes.
+const EMPTY_BOARD = {
+  season: null,
+  seasons: [],
+  results: [],
+  aggregates: onslaughtAggregates([], {
+    elitePosition: null,
+    masterPosition: null,
+  }),
+  dropouts: [],
+  lost: 0,
+  previous: null,
+};
 
 type OnslaughtHistory = Awaited<
   ReturnType<ReturnType<typeof unicum.region>["players"]["onslaughtHistory"]>
@@ -59,21 +82,24 @@ export async function OnslaughtView({
   // would take the whole leaderboard down with it. The board is the page; the
   // curve is an extra, and it is allowed to be missing.
   const [initial, history] = await Promise.all([
-    buildSafe(() => unicum.region(region).players.onslaught({ limit: LIMIT }), {
-      season: null,
-      seasons: [],
-      results: [],
-      dropouts: [],
-      previous: null,
-    }),
+    buildSafe(
+      () =>
+        unicum
+          .region(region)
+          .players.onslaught({ limit: PAGE, offset: ((page ?? 1) - 1) * PAGE }),
+      EMPTY_BOARD,
+    ),
     buildSafe(
       () => unicum.region(region).players.onslaughtHistory(),
       null as OnslaughtHistory,
     ).catch(() => null as OnslaughtHistory),
   ]);
 
-  const pagedRows = initial.results.length;
-  assertPageInRange(page, pagedRows, PAGINATION.SIZE.LEADERBOARD);
+  // The board's own length, which the endpoint reports whatever slice it served:
+  // asked of `results` it would be the page, every page would be the last one,
+  // and the guard would answer 200 for every number a crawler tried.
+  const pagedRows = initial.aggregates.ranked;
+  assertPageInRange(page, pagedRows, PAGE);
 
   const [{ t }, { t: tGame }, { t: tSeasons }] = await Promise.all([
     getTranslation("components/players/list/onslaught/view", locale),
@@ -117,7 +143,7 @@ export async function OnslaughtView({
         path={ROUTES.PLAYERS_ONSLAUGHT(region)}
         page={page}
         total={pagedRows}
-        size={PAGINATION.SIZE.LEADERBOARD}
+        size={PAGE}
         locale={locale}
       />
       <Panel>

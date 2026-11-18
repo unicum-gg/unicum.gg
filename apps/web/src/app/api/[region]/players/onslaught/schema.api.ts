@@ -214,17 +214,141 @@ export const onslaughtPreviousSeason = z
     description: "How the previous Onslaught season ended.",
   });
 
+/** The median rating a cohort carries in ordinary battles, per metric. All five
+ * rather than the one the reader picked, since that pick lives in a cookie only
+ * their browser can read. */
+export const onslaughtCohortRatings = z
+  .object({
+    wn7: z.number().nullable(),
+    wn8: z.number().nullable(),
+    wnx: z.number().nullable(),
+    pr: z.number().nullable(),
+    wtr: z.number().nullable(),
+  })
+  .meta({
+    id: "OnslaughtCohortRatings",
+    description: "Median overall rating of a cohort, per metric.",
+  });
+
+/** Who the players holding one rank are: the figures the standings cannot show,
+ * since a row says where someone placed and nothing about what it took. */
+export const onslaughtTierProfile = z
+  .object({
+    tier: z.enum(["legend", "champion"]).meta({
+      description: "The rank this cohort holds.",
+    }),
+    players: z.number(),
+    ratings: onslaughtCohortRatings,
+    entryBattles: z.number().nullable().meta({
+      description:
+        "Median battles they had played when they first appeared on the board: the price of qualifying.",
+    }),
+    seasonBattles: z.number().nullable().meta({
+      description:
+        "Median battles played over the whole season: the price of staying, which is the larger of the two.",
+    }),
+    daysPlayed: z.number().nullable().meta({
+      description: "Median days they were actually seen playing.",
+    }),
+  })
+  .meta({
+    id: "OnslaughtTierProfile",
+    description: "Who the players of one Onslaught rank are.",
+  });
+
+/**
+ * What the board says about itself as a whole, computed over every ranked row.
+ *
+ * Here rather than left to the caller because `results` is a PAGE of the
+ * standings: three of the page's panels describe the board instead of a row of
+ * it, and shipping thousands of rows so a browser could average them is what
+ * made this the heaviest page on the site.
+ */
+export const onslaughtAggregatesSchema = z
+  .object({
+    ranked: z.number().meta({
+      description: "Players holding a place, which is the board's own length.",
+    }),
+    legendPoints: z.number().nullable().meta({
+      description: "The rating at the last Legend position: what Legend costs.",
+    }),
+    championPoints: z.number().nullable().meta({
+      description:
+        "The board's floor, which is Champion's threshold, since the board reaches exactly that far.",
+    }),
+    reference: z.number().meta({
+      description:
+        "Unix seconds of the newest capture on the board, which is the clock every activity figure is read against. Zero for a season we hold no captures of.",
+    }),
+    activity: z
+      .object({
+        today: z.number(),
+        week: z.number(),
+        idle: z.number(),
+      })
+      .meta({
+        id: "OnslaughtActivityCounts",
+        description: "Ranked players per activity bucket.",
+      }),
+    tiers: z
+      .object({
+        legend: z.number(),
+        champion: z.number(),
+      })
+      .meta({
+        id: "OnslaughtTierCounts",
+        description: "Ranked players per rank.",
+      }),
+    profiles: z.array(onslaughtTierProfile),
+    entryBar: z.number().meta({
+      description:
+        "The rating a player enters the board at, which is Champion's threshold.",
+    }),
+    entryBattles: z.number().meta({
+      description:
+        "Median battles the board's own players had played when they first appeared on it.",
+    }),
+    battleQuantiles: z.array(z.number()).meta({
+      description:
+        "Quartiles of the season battles of everyone ranked, raw. Divided by the days the season has run to read as a pace, which is why they are published undivided: that divisor comes from the season curve, which is fetched apart from this board.",
+    }),
+    ratings: z.array(z.number()).meta({
+      description:
+        "Every ranked rating, descending, so a reader's own standing is counted rather than interpolated.",
+    }),
+    rateRatings: z.array(z.number()).meta({
+      description:
+        "The rating of every ranked row whose points per battle we measured, parallel to ratePerBattle. It is what lets a reader's own figure be read against the neighbourhood they are in rather than against the whole board, where the rate rises with the standings.",
+    }),
+    ratePerBattle: z.array(z.number()).meta({
+      description:
+        "The measured points per battle of those same rows, in the same order, to three decimals.",
+    }),
+  })
+  .meta({
+    id: "OnslaughtAggregates",
+    description: "What the Onslaught board says about itself as a whole.",
+  });
+
 /** Response of `GET /{region}/players/onslaught` (the Onslaught board). */
 export const OnslaughtResponse = z.object({
   season: onslaughtSeason.nullable(),
   seasons: z.array(onslaughtSeasonRef),
-  results: z.array(onslaughtSummary),
+  results: z.array(onslaughtSummary).meta({
+    description:
+      "One page of the standings, in rank order: `limit` rows from `offset`. The default is the whole board.",
+  }),
+  aggregates: onslaughtAggregatesSchema,
   previous: onslaughtPreviousSeason.nullable().meta({
     description:
       "How the season before the one being served ended. Null when it is the first season we hold standings for.",
   }),
   dropouts: z.array(onslaughtDropout).meta({
     description:
-      "Players who held a place this season and lost it, newest first. Recovered from our own daily fold, since the standings only carry who is ranked now. Empty for a season we hold no captures of.",
+      "Players who held a place this season and lost it, newest first, one page of them on the same `limit` and `offset` as the standings. Recovered from our own daily fold, since the standings only carry who is ranked now. Empty for a season we hold no captures of.",
+  }),
+  lost: z.number().meta({
+    description:
+      "How many lost their place in all, since `dropouts` is a page of them and the board names the count on its own tab.",
   }),
 });

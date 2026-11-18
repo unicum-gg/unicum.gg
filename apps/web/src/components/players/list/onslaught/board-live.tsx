@@ -1,12 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import {
   OnslaughtBoard,
   type OnslaughtRow,
 } from "@/components/players/list/onslaught/board";
-import { boardStandings } from "@/components/players/list/onslaught/row";
 import type { OnslaughtDropoutRow } from "@/components/players/list/onslaught/dropouts";
 import { OnslaughtRankScale } from "@/components/players/list/onslaught/rank-scale";
 import { OnslaughtRankPredictor } from "@/components/players/list/onslaught/predict";
@@ -19,13 +18,18 @@ import {
   PanelSeparator,
   PanelTitle,
 } from "@/components/panel";
+import PAGINATION from "@/constants/pagination";
 import { unicum } from "@/services/sdk";
+import { onslaughtSamples, type OnslaughtAggregates } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import { useTranslation } from "@/hooks/use-translation";
 
-// The full standings are pulled once and paginated client-side (matches the
-// server default). The API caps at its own max.
-const LIMIT = 60000;
+// One page of the standings, which is what the server renders too. The whole
+// board used to be pulled here and paginated client-side, and on EU that was
+// 1,679,926 octets of rows behind a page that draws a hundred of them. The
+// aggregates ride every response whatever the slice, so the panels below are
+// never reading a page as though it were the field.
+const PAGE = PAGINATION.SIZE.LEADERBOARD;
 
 // The SDK's Onslaught payload (dates already revived), reused as the shape the
 // page hands in and the client refetch returns.
@@ -80,7 +84,7 @@ export function OnslaughtBoardLive({
     let cancelled = false;
     unicum
       .region(region)
-      .players.onslaught({ limit: LIMIT, season: seasonParam })
+      .players.onslaught({ limit: PAGE, season: seasonParam })
       .then((res) => {
         if (!cancelled) setSettled({ id: seasonParam, data: res });
       })
@@ -123,6 +127,9 @@ export function OnslaughtBoardLive({
   const data = resolved?.data ?? initial;
   const showPending = isPast && settled?.id !== seasonParam;
   const season = data.season;
+  // The wire spells a rank as its own string value and the enum it feeds is
+  // nominal, so this crosses the boundary like the rows beside it do.
+  const aggregates = data.aggregates as OnslaughtAggregates;
   // Same rule for the curve, but gated on BOTH fetches, not just its own. The
   // curve is a few hundred rows and the standings up to sixty thousand, so its
   // request always settles first: gated on itself alone, picking a past season
@@ -134,6 +141,14 @@ export function OnslaughtBoardLive({
         ? history.data
         : null
       : initialHistory;
+  // The curve crosses the wire as a column per field, since on a thirty-eight
+  // day season its seven field names came to 668,498 of the 1,055,355 octets it
+  // took. Expanded once, here, where it lands: every consumer below reads a
+  // sample at a time and none of them has to know.
+  const curvePoints = useMemo(
+    () => (curve ? onslaughtSamples(curve.series) : []),
+    [curve],
+  );
 
   return (
     <div
@@ -145,6 +160,9 @@ export function OnslaughtBoardLive({
         region={region}
         results={data.results as OnslaughtRow[]}
         dropouts={data.dropouts as OnslaughtDropoutRow[]}
+        aggregates={aggregates}
+        lost={data.lost}
+        seasonId={season?.eventId ?? null}
         elitePosition={season?.elitePosition ?? null}
         masterPosition={season?.masterPosition ?? null}
         seasonOrdinal={season?.seasonOrdinal ?? null}
@@ -162,9 +180,7 @@ export function OnslaughtBoardLive({
         <>
           <PanelSeparator />
           <OnslaughtTierProfile
-            results={data.results as OnslaughtRow[]}
-            elitePosition={season?.elitePosition ?? null}
-            masterPosition={season?.masterPosition ?? null}
+            aggregates={aggregates}
             seasonOrdinal={season?.seasonOrdinal ?? null}
             assetsRef={season?.assetsRef ?? null}
             seasonStart={season?.startDate ?? null}
@@ -178,12 +194,12 @@ export function OnslaughtBoardLive({
           with. It needs the season's own curve to project the bar Legend is,
           and it needs a season still running: a settled one has no rank left to
           climb to, only the standing it ended on. */}
-      {!season?.ended && curve && curve.points.length > 1 && season?.endDate ? (
+      {!season?.ended && curvePoints.length > 1 && season?.endDate ? (
         <>
           <PanelSeparator />
           <OnslaughtRankPredictor
-            results={data.results as OnslaughtRow[]}
-            curve={curve.points}
+            aggregates={aggregates}
+            curve={curvePoints}
             previous={data.previous}
             seasonStart={season.startDate ?? null}
             seasonEnd={season.endDate}
@@ -197,15 +213,16 @@ export function OnslaughtBoardLive({
           curve. What a rank cost is readable off the standings, so a season
           that ended before we were capturing still has its thresholds to show,
           and it used to show nothing at all. */}
-      {data.results.length > 0 ? (
+      {aggregates.ranked > 0 ? (
         <>
           <PanelSeparator />
           <OnslaughtSeasonRace
-            points={curve?.points ?? []}
-            standings={boardStandings(
-              data.results as OnslaughtRow[],
-              season?.elitePosition ?? null,
-            )}
+            points={curvePoints}
+            standings={{
+              ranked: aggregates.ranked,
+              legendPoints: aggregates.legendPoints,
+              championPoints: aggregates.championPoints,
+            }}
             ended={season?.ended ?? false}
             previous={data.previous}
           />

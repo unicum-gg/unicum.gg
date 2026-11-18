@@ -4,11 +4,14 @@ import { useMemo, useSyncExternalStore } from "react";
 import {
   boardRateOf,
   climbTo,
+  onslaughtNeighbourhoodRate,
+  onslaughtRankedAbove,
   onslaughtRankIcon,
   onslaughtRankOf,
   pointsAfter,
   RATING_COLOR_CLASS,
   ONSLAUGHT_RANK_COLOR,
+  type OnslaughtAggregates,
 } from "@unicum.gg/shared";
 import {
   Panel,
@@ -21,7 +24,6 @@ import { useFormat } from "@/hooks/use-format";
 import { useTranslation } from "@/hooks/use-translation";
 import {
   buildPredictModel,
-  neighbourhoodRate,
   stepsAbove,
 } from "@/components/players/list/onslaught/predict/model";
 import {
@@ -36,7 +38,6 @@ import {
 } from "@/components/players/list/onslaught/predict/figures";
 import { PredictLadder } from "@/components/players/list/onslaught/predict/ladder";
 import { standingName } from "@/components/players/list/onslaught/predict/rank-name";
-import type { OnslaughtRow } from "@/components/players/list/onslaught/row";
 import type {
   OnslaughtPreviousSeason,
   OnslaughtSeasonPoint,
@@ -109,7 +110,7 @@ const nullSnapshot = () => null;
  * rate and this is where you land.
  */
 export function OnslaughtRankPredictor({
-  results,
+  aggregates,
   curve,
   previous,
   seasonStart,
@@ -117,7 +118,9 @@ export function OnslaughtRankPredictor({
   seasonOrdinal,
   assetsRef,
 }: {
-  results: OnslaughtRow[];
+  /** The whole board's own figures. The page holds one page of the standings,
+   * and every question here is about the field rather than about a row. */
+  aggregates: OnslaughtAggregates;
   curve: OnslaughtSeasonPoint[];
   /** How the last season ended, which is the only precedent the projected
    * Legend bar can be judged against. */
@@ -159,8 +162,8 @@ export function OnslaughtRankPredictor({
   const points = parseCount(pointsRaw);
 
   const model = useMemo(
-    () => buildPredictModel({ results, curve, seasonStart, seasonEnd }),
-    [results, curve, seasonStart, seasonEnd],
+    () => buildPredictModel({ aggregates, curve, seasonStart, seasonEnd }),
+    [aggregates, curve, seasonStart, seasonEnd],
   );
 
   // What a battle is worth to them: their own record where it can carry the
@@ -178,7 +181,10 @@ export function OnslaughtRankPredictor({
     [battles, points, model],
   );
   const measured =
-    own ?? (points == null ? null : neighbourhoodRate(results, points));
+    own ??
+    (points == null
+      ? null
+      : onslaughtNeighbourhoodRate(aggregates, points));
   const rate = parseRate(rateRaw) ?? measured;
 
   // Under the bar, every battle they have played was spent getting to it, so
@@ -202,14 +208,13 @@ export function OnslaughtRankPredictor({
 
   const standing = useMemo(() => {
     if (points == null) return null;
-    const ahead = results.filter((r) => r.rating > points).length;
     return {
-      rank: ahead + 1,
-      total: results.length,
+      rank: onslaughtRankedAbove(aggregates.ratings, points) + 1,
+      total: aggregates.ranked,
       ranked: points >= model.entryBar,
       now: onslaughtRankOf(points, model.legendNow),
     };
-  }, [points, results, model]);
+  }, [points, aggregates, model]);
 
   // Where the season ends for them, at this rate and this pace. The projection
   // is what names the finishing rank, and the same arithmetic is what the

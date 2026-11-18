@@ -713,6 +713,10 @@ export const ONSLAUGHT_MAX_LIMIT = 60000;
 // order. `limit` caps the rows; `season` picks a past season (default current).
 export const onslaughtQuery = z.object({
   limit: limitField(ONSLAUGHT_MAX_LIMIT).optional(),
+  offset: z.coerce.number().int().min(0).optional().meta({
+    description:
+      "Rows to skip before the page begins, applied to the standings AND to the lost places, so one pair of parameters pages both. The aggregates always describe the whole board, whatever the slice.",
+  }),
   season: z.string().optional().meta({
     description:
       "Season event id to load (default the current season). From the seasons list in the response.",

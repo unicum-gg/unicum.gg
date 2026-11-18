@@ -42,4 +42,5 @@ export * from "./tournament-placements";
 export * from "./language-flags";
 export * from "./rating-scales";
 export * from "./onslaught-forecast";
+export * from "./onslaught-aggregates";
 export * from "./maneuvers-editions";

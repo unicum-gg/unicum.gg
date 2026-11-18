@@ -1,15 +1,14 @@
 import {
-  boardPaces,
   fitCutoffCurve,
-  median,
   ONSLAUGHT_DIVISIONS,
   onslaughtLadder,
+  onslaughtPaces,
   OnslaughtRank,
+  type OnslaughtAggregates,
   type OnslaughtCutoffCurve,
   type OnslaughtStanding,
   projectCutoff,
 } from "@unicum.gg/shared";
-import type { OnslaughtRow } from "@/components/players/list/onslaught/row";
 import type { OnslaughtSeasonPoint } from "@/components/players/list/onslaught/season-race";
 
 const DAY_SECONDS = 86_400;
@@ -52,12 +51,14 @@ export type PredictModel = {
 };
 
 export function buildPredictModel({
-  results,
+  aggregates,
   curve,
   seasonStart,
   seasonEnd,
 }: {
-  results: OnslaughtRow[];
+  /** The whole board's own figures, computed server-side: the model describes
+   * the field, and the page only ever holds a page of it. */
+  aggregates: OnslaughtAggregates;
   curve: OnslaughtSeasonPoint[] | null;
   seasonStart: string | null;
   seasonEnd: string | null;
@@ -65,31 +66,23 @@ export function buildPredictModel({
   const fitted = curve ? fitCutoffCurve(curve) : null;
   const at = fitted?.at ?? null;
 
-  const ratings = results.map((r) => r.rating).filter((v) => v > 0);
-  const entryBar = ratings.length > 0 ? Math.min(...ratings) : 2000;
-  const entryBattles =
-    median(
-      results.map((r) => r.entryBattles).filter((v): v is number => v != null && v > 0),
-    ) ?? 0;
-
   const startedAt = seasonStart ? Date.parse(seasonStart) / 1000 : fitted?.start;
   const seasonDays =
     at != null && startedAt != null ? Math.max(1, (at - startedAt) / DAY_SECONDS) : null;
   const endsAt = seasonEnd ? Date.parse(seasonEnd) / 1000 : null;
 
   return {
-    entryBar,
-    entryBattles,
+    entryBar: aggregates.entryBar,
+    entryBattles: aggregates.entryBattles,
     // A player under the bar is climbing the qualifying ladder, where a battle
     // is worth what it took the board's own players to arrive: 2000 points over
     // a median 139 battles on EU, around fourteen each, against the 2.4 the
     // same players average once they are ranked.
-    qualifyingRate: entryBattles > 0 ? entryBar / entryBattles : 0,
-    paces: boardPaces(
-      seasonDays == null
-        ? []
-        : results.map((r) => r.battles / seasonDays).filter((v) => v > 0),
-    ),
+    qualifyingRate:
+      aggregates.entryBattles > 0 ? aggregates.entryBar / aggregates.entryBattles : 0,
+    // The quartiles arrive raw because the divisor is the season's own length,
+    // which is read off a curve this model may not have been given.
+    paces: onslaughtPaces(aggregates.battleQuantiles, seasonDays),
     curve: fitted,
     seasonDays,
     daysLeft:
@@ -98,37 +91,6 @@ export function buildPredictModel({
       fitted && endsAt != null ? projectCutoff(fitted, endsAt) : (fitted?.points ?? null),
     legendNow: fitted?.points ?? null,
   };
-}
-
-/**
- * What a battle is worth to the players sitting where this one is.
- *
- * The fallback for a reader whose own two numbers cannot answer it, which is
- * everyone still under the leaderboard and anyone who has just arrived on it.
- * Read from the neighbourhood they are in rather than from the whole board,
- * because the rate rises with the standings (1.4 points a battle at the bottom
- * of the EU board against 6.1 at the top): the board's overall median would
- * tell someone at the entry bar they are gaining twice what they are.
- *
- * It is a weak estimator and is only ever the second choice. Checked against
- * the players whose real rate we can difference out of the captures, matching
- * on rating alone lands within a factor of two for 57% of them against 77% for
- * reading a player's own record, because two players holding the same rating
- * got there at very different speeds.
- */
-export function neighbourhoodRate(
-  results: OnslaughtRow[],
-  points: number,
-): number | null {
-  const rated = results.filter(
-    (r): r is OnslaughtRow & { pointsPerBattle: number } =>
-      r.pointsPerBattle != null && r.pointsPerBattle > 0,
-  );
-  for (const width of [250, 500, 1000, Number.POSITIVE_INFINITY]) {
-    const near = rated.filter((r) => Math.abs(r.rating - points) <= width);
-    if (near.length >= 20) return median(near.map((r) => r.pointsPerBattle));
-  }
-  return median(rated.map((r) => r.pointsPerBattle));
 }
 
 /**

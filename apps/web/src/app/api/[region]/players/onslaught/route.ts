@@ -38,6 +38,7 @@ async function GET__perf(
       Number(url.searchParams.get("limit")) || S.ONSLAUGHT_MAX_LIMIT,
     ),
   );
+  const offset = Math.max(0, Number(url.searchParams.get("offset")) || 0);
   const season = url.searchParams.get("season") ?? undefined;
 
   try {
@@ -45,10 +46,15 @@ async function GET__perf(
       season: current,
       seasons,
       results,
+      aggregates,
       dropouts,
+      lost,
       previous,
-    } = await getOnslaughtLeaderboard(region, limit, season);
+    } = await getOnslaughtLeaderboard(region, limit, season, offset);
     // Both lists wear the same crests, and both resolve them in one batch each.
+    // Over the PAGE rather than over the board: a crest is drawn on the rows a
+    // reader sees, and resolving a few thousand of them to publish a hundred is
+    // a batch query per request for nothing.
     const [decorated, fallen] = await Promise.all([
       attachPlayerBadges(region, results),
       attachPlayerBadges(region, dropouts),
@@ -58,7 +64,9 @@ async function GET__perf(
       seasons,
       previous,
       results: decorated,
+      aggregates,
       dropouts: fallen,
+      lost,
     });
   } catch (err) {
     console.error(`[api/${region}/players/onslaught] failed:`, err);

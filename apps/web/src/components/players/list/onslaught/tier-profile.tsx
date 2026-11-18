@@ -4,10 +4,6 @@ import Image from "next/image";
 import { type ReactNode, useMemo } from "react";
 import { Interpolate } from "@/components/interpolate";
 import {
-  activityReference,
-  type OnslaughtRow,
-} from "@/components/players/list/onslaught/row";
-import {
   Panel,
   PanelContent,
   PanelHeader,
@@ -21,36 +17,35 @@ import { useTranslation } from "@/hooks/use-translation";
 import { cn } from "@/lib/utils";
 import {
   DEFAULT_RATING_METRIC,
-  median,
   isRatingMetric,
   onslaughtRankIcon,
-  onslaughtBoardRank,
-  OnslaughtRank,
-  type OnslaughtBoardRank,
   RATING_COLOR_CLASS,
   RATING_COLOR_OF,
   RatingMetric,
+  type OnslaughtAggregates,
+  type OnslaughtBoardRank,
+  type OnslaughtRatingKey,
+  type OnslaughtTierAggregate,
 } from "@unicum.gg/shared";
 
 const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 
-const TIERS = [OnslaughtRank.Legend, OnslaughtRank.Champion] as const;
-
-function ratingOf(row: OnslaughtRow, metric: RatingMetric): number | null {
+/** The metric's own key on a cohort's published medians. The server computes
+ * all five, since the pick lives in a cookie only the browser can read. */
+function ratingKey(metric: RatingMetric): OnslaughtRatingKey {
   switch (metric) {
     case RatingMetric.Wn7:
-      return row.wn7;
+      return "wn7";
     case RatingMetric.Wn8:
-      return row.wn8;
+      return "wn8";
     case RatingMetric.Wnx:
-      return row.wnx;
-    // Optional on the row: absent from a response cached before they were served.
+      return "wnx";
     case RatingMetric.Pr:
-      return row.pr ?? null;
+      return "pr";
     case RatingMetric.Wtr:
-      return row.wtr ?? null;
+      return "wtr";
   }
 }
 
@@ -92,18 +87,17 @@ type TierProfile = {
  * which is the larger of the two and the one nobody expects.
  */
 export function OnslaughtTierProfile({
-  results,
-  elitePosition,
-  masterPosition,
+  aggregates,
   seasonOrdinal,
   assetsRef,
   seasonStart,
   seasonEnd,
   ended,
 }: {
-  results: OnslaughtRow[];
-  elitePosition: number | null;
-  masterPosition: number | null;
+  /** The cohorts as the server folded them, over every ranked row. The page
+   * holds one page of the standings, and a median read from a page would say
+   * that Legend is whoever happens to be on screen. */
+  aggregates: OnslaughtAggregates;
   seasonOrdinal: string | null;
   assetsRef: string | null;
   seasonStart: string | null;
@@ -126,7 +120,7 @@ export function OnslaughtTierProfile({
   // that boundary. A finished season we hold no captures of falls back to its
   // own end date, and one still running does not, or the pace would be divided
   // by days that have not happened.
-  const reference = useMemo(() => activityReference(results), [results]);
+  const reference = aggregates.reference;
   const seasonDays = useMemo(() => {
     if (!seasonStart) return null;
     const start = Date.parse(seasonStart);
@@ -140,40 +134,26 @@ export function OnslaughtTierProfile({
     return Math.max(1, (until - start) / DAY_MS);
   }, [reference, seasonStart, seasonEnd, ended]);
 
-  const profiles = useMemo<TierProfile[]>(() => {
-    const rows: Record<OnslaughtBoardRank, OnslaughtRow[]> = {
-      [OnslaughtRank.Legend]: [],
-      [OnslaughtRank.Champion]: [],
-    };
-    for (const row of results) {
-      const tier = onslaughtBoardRank(row.rank, { elitePosition, masterPosition });
-      if (tier) rows[tier].push(row);
-    }
-    return TIERS.map((tier) => {
-      const ratings = rows[tier]
-        .map((r) => ratingOf(r, metric))
-        .filter((v): v is number => v != null);
-      const entries = rows[tier]
-        .map((r) => r.entryBattles)
-        .filter((v): v is number => v != null);
-      const seasonBattles = median(rows[tier].map((r) => r.battles));
-      const active = rows[tier]
-        .map((r) => r.activeDays)
-        .filter((v): v is number => v != null);
-      return {
-        tier,
-        players: rows[tier].length,
-        rating: median(ratings),
-        entryBattles: median(entries),
-        seasonBattles,
+  // The medians arrive computed; only the pace is finished here, since it is
+  // the season's own length that divides it and that length is read against the
+  // board's newest capture above.
+  const key = ratingKey(metric);
+  const profiles = useMemo<TierProfile[]>(
+    () =>
+      aggregates.profiles.map((cohort: OnslaughtTierAggregate) => ({
+        tier: cohort.tier,
+        players: cohort.players,
+        rating: cohort.ratings[key],
+        entryBattles: cohort.entryBattles,
+        seasonBattles: cohort.seasonBattles,
         dailyPace:
-          seasonBattles != null && seasonDays != null
-            ? seasonBattles / seasonDays
+          cohort.seasonBattles != null && seasonDays != null
+            ? cohort.seasonBattles / seasonDays
             : null,
-        daysPlayed: median(active),
-      };
-    });
-  }, [results, metric, elitePosition, masterPosition, seasonDays]);
+        daysPlayed: cohort.daysPlayed,
+      })),
+    [aggregates, key, seasonDays],
+  );
 
   if (profiles.every((p) => p.players === 0)) return null;
 

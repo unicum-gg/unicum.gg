@@ -2,8 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import {
-  ACTIVITY_BUCKETS,
-  type ActivityBucket,
   BoardView,
   DropoutSortCol,
   type DropoutSortState,
@@ -14,7 +12,11 @@ import {
   type OnslaughtSortState,
   SortDirection,
 } from "@/components/players/list/onslaught/row";
-import { OnslaughtRank } from "@unicum.gg/shared";
+import {
+  ONSLAUGHT_ACTIVITY_BUCKETS,
+  OnslaughtRank,
+  type OnslaughtActivityBucket,
+} from "@unicum.gg/shared";
 
 /**
  * The board's sort and its two chip filters, mirrored to the URL.
@@ -31,7 +33,7 @@ export function useOnslaughtBoardControls() {
     dir: SortDirection.Desc,
   });
   const [tiers, setTiers] = useState<Set<OnslaughtRank>>(() => new Set());
-  const [activity, setActivity] = useState<Set<ActivityBucket>>(
+  const [activity, setActivity] = useState<Set<OnslaughtActivityBucket>>(
     () => new Set(),
   );
   const [view, setView] = useState<BoardView>(BoardView.Ranked);
@@ -61,8 +63,8 @@ export function useOnslaughtBoardControls() {
     if (ranks.length) setTiers(new Set(ranks));
     const buckets = (p.get("activity") ?? "")
       .split(",")
-      .filter((a): a is ActivityBucket =>
-        (ACTIVITY_BUCKETS as readonly string[]).includes(a),
+      .filter((a): a is OnslaughtActivityBucket =>
+        (ONSLAUGHT_ACTIVITY_BUCKETS as readonly string[]).includes(a),
       );
     if (buckets.length) setActivity(new Set(buckets));
     const requested = p.get("view");
@@ -122,7 +124,7 @@ export function useOnslaughtBoardControls() {
     toggleTier: (tier: OnslaughtRank) =>
       setTiers((prev) => toggled(prev, tier)),
     activity,
-    toggleActivity: (bucket: ActivityBucket) =>
+    toggleActivity: (bucket: OnslaughtActivityBucket) =>
       setActivity((prev) => toggled(prev, bucket)),
   };
 }

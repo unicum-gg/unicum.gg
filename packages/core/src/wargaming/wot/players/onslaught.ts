@@ -2,10 +2,12 @@ import { asc, desc, eq, inArray, sql } from "drizzle-orm";
 import {
   ASSETS_BRANCH,
   ASSETS_REPO,
+  onslaughtAggregates,
   onslaughtRatingsByRegion,
   onslaughtSeasonsByRegion,
   playerNameHistoryByRegion,
   playersByRegion,
+  type OnslaughtAggregates,
 } from "@unicum.gg/shared";
 import { db } from "@unicum.gg/core/db";
 import { getPlayerClansBatch } from "@unicum.gg/core/wargaming/wot/clans/listings";
@@ -176,18 +178,40 @@ async function fetchMirrorCommit(untilIso: string): Promise<string | null> {
  * so it is a couple of cheap indexed queries. Finished seasons stay in the table
  * under their own `event_id` with a frozen codename/rank-art ordinal.
  */
+/**
+ * The Onslaught board, a page of it at a time.
+ *
+ * `limit` and `offset` govern BOTH lists, which is what makes them one rule
+ * rather than two: a caller asking for a hundred rows gets the first hundred
+ * standings and the first hundred lost places, and the default (the whole
+ * board, nothing skipped) is what every existing caller already asked for, so
+ * nothing published before this changes its answer.
+ *
+ * The standings are READ whole whatever the slice, because `aggregates` is the
+ * whole board's answer and cannot be computed from a page of it. That costs
+ * nothing new: the query was already unbounded in practice, and what the slice
+ * saves is the serializing and the crest resolution of thousands of rows the
+ * page never draws.
+ */
 export async function getOnslaughtLeaderboard(
   region: Region,
   limit: number,
   eventId?: string,
+  offset = 0,
 ): Promise<{
   season: OnslaughtSeason | null;
   seasons: OnslaughtSeasonRef[];
   results: OnslaughtRow[];
+  /** Everything the page's three aggregate panels read, computed over every
+   * ranked row rather than shipped as those rows. */
+  aggregates: OnslaughtAggregates;
   /** Players who held a place this season and lost it, newest first. The feeder
    * prunes them from the standings, so they are recovered from the daily fold.
    * Empty for a season we hold no captures of. */
   dropouts: OnslaughtDropout[];
+  /** How many of those there are in all, since `dropouts` is a page of them and
+   * the board names the count on its own tab. */
+  lost: number;
   /** How the season before this one ended, or null when it is the first we
    * hold. The only end state on the page: everything else is mid-flight. */
   previous: OnslaughtPreviousSeason | null;
@@ -207,7 +231,18 @@ export async function getOnslaughtLeaderboard(
     .from(seasons)
     .orderBy(sql`${seasons.startDate} DESC NULLS LAST`);
   if (allSeasons.length === 0)
-    return { season: null, seasons: [], results: [], dropouts: [], previous: null };
+    return {
+      season: null,
+      seasons: [],
+      results: [],
+      aggregates: onslaughtAggregates([], {
+        elitePosition: null,
+        masterPosition: null,
+      }),
+      dropouts: [],
+      lost: 0,
+      previous: null,
+    };
 
   const season =
     (eventId ? allSeasons.find((s) => s.eventId === eventId) : undefined) ??
@@ -239,8 +274,7 @@ export async function getOnslaughtLeaderboard(
     .from(ratings)
     .leftJoin(players, eq(players.accountId, ratings.accountId))
     .where(eq(ratings.eventId, season.eventId))
-    .orderBy(asc(ratings.rank))
-    .limit(limit);
+    .orderBy(asc(ratings.rank));
 
 
 
@@ -364,8 +398,59 @@ export async function getOnslaughtLeaderboard(
       ? null
       : await mirrorCommitAt(season.endDate.toISOString());
 
+  // Every ranked row, which is what the aggregates are read over. Mapped before
+  // the slice rather than after it: the figures below describe the board, and a
+  // board described from the page a reader happens to be on would say that
+  // Legend costs whatever the hundredth-placed player has.
+  const allRows: OnslaughtRow[] = rows.map((r) => {
+    // A reconciled row uses its materialized current identity (a null current
+    // clan means the player genuinely left their clan). An unreconciled row
+    // falls back to the recorded snapshot.
+    const reconciled = r.currentName != null;
+    const accountId = Number(r.accountId);
+    const rate = rates.get(accountId);
+    // What they had played when they first appeared, which the fold read off
+    // their first day. Withheld for the few who were already ranked when the
+    // capture began, whose first day is a state rather than an arrival, and
+    // for every player of a season whose first capture did not see the whole
+    // board, where that distinction cannot be made at all.
+    const entryBattles =
+      entryCohort.complete && !entryCohort.rankedAtFirstCapture.has(accountId)
+        ? rate?.entryBattles
+        : undefined;
+    return {
+      rank: r.rank,
+      account_id: accountId,
+      nickname: reconciled ? r.currentName! : r.recordedName,
+      clan_tag: reconciled ? r.currentClanTag : r.recordedClanTag,
+      clan_color: reconciled ? r.currentClanColor : r.recordedClanColor,
+      recordedNickname: r.recordedName,
+      recordedClanTag: r.recordedClanTag,
+      recordedClanColor: r.recordedClanColor,
+      rating: r.rating,
+      battles: r.battles,
+      activeDays: rate?.activeDays,
+      battlesPerDay: rate?.battlesPerDay,
+      pointsPerDay: rate?.pointsPerDay,
+      pointsPerBattle: rate?.pointsPerBattle,
+      lastActiveAt: rate?.lastActiveAt,
+      entryBattles,
+      wn7: r.wn7,
+      wn8: r.wn8,
+      wnx: r.wnx,
+      pr: r.pr,
+      wtr: r.wtr,
+    };
+  });
+
   return {
-    dropouts,
+    results: allRows.slice(offset, offset + limit),
+    aggregates: onslaughtAggregates(allRows, {
+      elitePosition: season.elitePosition,
+      masterPosition: season.masterPosition,
+    }),
+    dropouts: dropouts.slice(offset, offset + limit),
+    lost: dropouts.length,
     previous,
     season: {
       eventId: season.eventId,
@@ -381,46 +466,6 @@ export async function getOnslaughtLeaderboard(
       lastRecalculationTs: season.lastRecalculationTs,
     },
     seasons: seasonsList,
-    results: rows.map((r) => {
-      // A reconciled row uses its materialized current identity (a null current
-      // clan means the player genuinely left their clan). An unreconciled row
-      // falls back to the recorded snapshot.
-      const reconciled = r.currentName != null;
-      const accountId = Number(r.accountId);
-      const rate = rates.get(accountId);
-      // What they had played when they first appeared, which the fold read off
-      // their first day. Withheld for the few who were already ranked when the
-      // capture began, whose first day is a state rather than an arrival, and
-      // for every player of a season whose first capture did not see the whole
-      // board, where that distinction cannot be made at all.
-      const entryBattles =
-        entryCohort.complete && !entryCohort.rankedAtFirstCapture.has(accountId)
-          ? rate?.entryBattles
-          : undefined;
-      return {
-        rank: r.rank,
-        account_id: Number(r.accountId),
-        nickname: reconciled ? r.currentName! : r.recordedName,
-        clan_tag: reconciled ? r.currentClanTag : r.recordedClanTag,
-        clan_color: reconciled ? r.currentClanColor : r.recordedClanColor,
-        recordedNickname: r.recordedName,
-        recordedClanTag: r.recordedClanTag,
-        recordedClanColor: r.recordedClanColor,
-        rating: r.rating,
-        battles: r.battles,
-        activeDays: rate?.activeDays,
-        battlesPerDay: rate?.battlesPerDay,
-        pointsPerDay: rate?.pointsPerDay,
-        pointsPerBattle: rate?.pointsPerBattle,
-        lastActiveAt: rate?.lastActiveAt,
-        entryBattles,
-        wn7: r.wn7,
-        wn8: r.wn8,
-        wnx: r.wnx,
-        pr: r.pr,
-        wtr: r.wtr,
-      };
-    }),
   };
 }
 

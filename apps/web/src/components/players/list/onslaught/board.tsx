@@ -3,7 +3,6 @@
 import { useFormat } from "@/hooks/use-format";
 import { useCallback, useMemo } from "react";
 import Image from "next/image";
-import { GlossaryLabel } from "@/components/glossary/label";
 import { LeaderboardFilterBar } from "@/components/players/list/filter-bar";
 import { OnslaughtBoardRow } from "@/components/players/list/onslaught/board-row";
 import {
@@ -11,22 +10,20 @@ import {
   OnslaughtDropoutsTable,
 } from "@/components/players/list/onslaught/dropouts";
 import {
-  ACTIVITY_BUCKETS,
-  ActivityBucket,
-  activityBucket,
-  activityReference,
   BoardView,
   compareBy,
   type OnslaughtRow,
   OnslaughtSortCol,
+  SortDirection,
 } from "@/components/players/list/onslaught/row";
 import {
   OnslaughtSeasonSelect,
   type OnslaughtSeasonRef,
 } from "@/components/players/list/onslaught/season-select";
-import { OnslaughtSortHead } from "@/components/players/list/onslaught/sort-head";
+import { OnslaughtBoardHead } from "@/components/players/list/onslaught/board-head";
 import { SegmentedControl } from "@/components/segmented-control";
 import { useOnslaughtBoardControls } from "@/components/players/list/onslaught/use-board-controls";
+import { useOnslaughtBoardRows } from "@/components/players/list/onslaught/use-board-rows";
 import { Chip, ChipRow } from "@/components/ui/chip";
 import { TablePager, usePagination } from "@/components/table-pager";
 import PAGINATION from "@/constants/pagination";
@@ -40,19 +37,15 @@ import {
   PanelHeader,
   PanelTitle,
 } from "@/components/panel";
-import {
-  Table,
-  TableBody,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { Table, TableBody } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
 import {
-  onslaughtRankIcon,
+  ONSLAUGHT_ACTIVITY_BUCKETS,
+  onslaughtActivityBucket,
   onslaughtBoardRank,
+  onslaughtRankIcon,
   OnslaughtRank,
-  type OnslaughtBoardRank,
+  type OnslaughtAggregates,
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import { FilterSubject } from "@/components/filter-subject";
@@ -67,10 +60,27 @@ const TIERS = [OnslaughtRank.Legend, OnslaughtRank.Champion] as const;
 
 export type { OnslaughtRow };
 
+/**
+ * **Where the rows come from is the whole subject here.** The server hands over
+ * ONE page of the standings and the pager navigates for the next, which is what
+ * took this page from 3,996,734 octets to a fraction of it: three thousand rows
+ * were shipped so that a browser could draw a hundred, average them for the
+ * panels below, and hold the rest against a search box.
+ *
+ * The panels read `aggregates` now, so every count and median on screen is
+ * still the whole board's. What genuinely wants the rows is the reader's own
+ * narrowing (a search, a sort, a chip, the lost-place tab), since narrowing a
+ * hundred rows would answer about the page rather than about the board, so the
+ * rest is fetched the moment one of those is used and not before. A reader who
+ * only reads the board never pays for it, and one who searches pays once.
+ */
 export function OnslaughtBoard({
   region,
   results,
   dropouts,
+  aggregates,
+  lost,
+  seasonId,
   elitePosition,
   masterPosition,
   seasonOrdinal,
@@ -80,8 +90,18 @@ export function OnslaughtBoard({
   page,
 }: {
   region: Region;
+  /** One page of the standings, in rank order. */
   results: OnslaughtRow[];
+  /** One page of the lost places, newest first. */
   dropouts: OnslaughtDropoutRow[];
+  /** What the whole board says about itself: every count, median and threshold
+   * on this page, computed server-side over every ranked row. */
+  aggregates: OnslaughtAggregates;
+  /** How many lost their place in all, for the tab beside the standings. */
+  lost: number;
+  /** The season these rows are of, so a page fetch cannot land on another one
+   * if the current season rolls over after this page was prerendered. */
+  seasonId: string | null;
   elitePosition: number | null;
   masterPosition: number | null;
   seasonOrdinal: string | null;
@@ -115,13 +135,6 @@ export function OnslaughtBoard({
     ],
     [t],
   );
-  const { filtered, filters } = useLeaderboardFilter(results, {
-    searchFields,
-    rangeCols,
-    initialRangeCol: "rating",
-    syncUrl: true,
-  });
-
   const {
     view,
     setView,
@@ -137,12 +150,49 @@ export function OnslaughtBoard({
   // A season we hold no captures of has nobody to have lost a place, so the
   // second tab is absent rather than empty, and a `?view=lost` link to such a
   // season falls back to the standings instead of an empty table.
-  const hasLost = dropouts.length > 0;
+  const hasLost = lost > 0;
   const showLost = hasLost && view === BoardView.Lost;
 
+  // Every control that narrows or reorders the BOARD rather than the page, which
+  // is what buys the rest of the rows. The default sort is the rank order the
+  // server already served, so arriving on the board asks for nothing. Opening
+  // the lost-place tab counts: that table carries its own search, sort and
+  // pager over a list the server also only sent a page of.
+  const narrowing =
+    sort.col !== OnslaughtSortCol.Rating ||
+    sort.dir !== SortDirection.Desc ||
+    tierSel.size > 0 ||
+    activitySel.size > 0 ||
+    showLost;
+  const { source, lostRows, serverTotal, wantFull, requestFull } =
+    useOnslaughtBoardRows({
+      region,
+      seasonId,
+      results,
+      dropouts,
+      ranked: aggregates.ranked,
+      page,
+      narrowing,
+    });
+
+  const { filtered, filters } = useLeaderboardFilter(source, {
+    searchFields,
+    rangeCols,
+    initialRangeCol: "rating",
+    syncUrl: true,
+    // What it searches is the board, not the page in hand.
+    total: aggregates.ranked,
+  });
+  // Derived during the render that first sees a filter, not in an effect: an
+  // effect would paint the page once with the narrowed rows before arming the
+  // fetch, and the pager beside it reads the same way.
+  if (filters.active && !wantFull) requestFull();
+
   // The board's own newest capture, which is the clock the activity buckets
-  // read rather than the reader's (see `activityReference`).
-  const reference = useMemo(() => activityReference(results), [results]);
+  // read rather than the reader's (see `onslaughtActivityReference`). Taken off
+  // the aggregates, since a page of rows would date the board by whoever on it
+  // played most recently.
+  const reference = aggregates.reference;
   // A season only carries rates if we recorded it. Nothing about activity is
   // shown for one we did not, since every player there would read as idle.
   const hasRates = reference > 0;
@@ -156,7 +206,9 @@ export function OnslaughtBoard({
         return t != null && tierSel.has(t);
       });
     if (hasRates && activitySel.size > 0)
-      rows = rows.filter((r) => activitySel.has(activityBucket(r, reference)));
+      rows = rows.filter((r) =>
+        activitySel.has(onslaughtActivityBucket(r, reference)),
+      );
     return [...rows].sort(compareBy(sort.col, sort.dir));
   }, [
     filtered,
@@ -171,35 +223,18 @@ export function OnslaughtBoard({
 
   const { paged, pager } = usePagination(processed, PAGINATION.SIZE.LEADERBOARD, {
     initialPage: page,
+    serverTotal,
     // Links rather than buttons, since a route serves every page they name. A
     // caller that hands no page has no `/page/[n]` of its own, and a link there
     // would be a crawl onto the first page under a second address.
     crawlable: page !== undefined,
   });
 
-  // How many ranked players fall in each rank, for the chip labels.
-  const tierCounts = useMemo(() => {
-    const counts: Record<OnslaughtBoardRank, number> = {
-      [OnslaughtRank.Legend]: 0,
-      [OnslaughtRank.Champion]: 0,
-    };
-    for (const r of results) {
-      const t = onslaughtBoardRank(r.rank, { elitePosition, masterPosition });
-      if (t) counts[t] += 1;
-    }
-    return counts;
-  }, [results, elitePosition, masterPosition]);
-
-  const activityCounts = useMemo(() => {
-    const counts: Record<ActivityBucket, number> = {
-      [ActivityBucket.Today]: 0,
-      [ActivityBucket.Week]: 0,
-      [ActivityBucket.Idle]: 0,
-    };
-    if (!hasRates) return counts;
-    for (const r of results) counts[activityBucket(r, reference)] += 1;
-    return counts;
-  }, [results, hasRates, reference]);
+  // How many ranked players fall in each rank and each activity bucket, for the
+  // chip labels. Folded server-side over the whole board: counted here, they
+  // would count the page and a chip would promise rows it cannot name.
+  const tierCounts = aggregates.tiers;
+  const activityCounts = aggregates.activity;
 
   const rankChips = (
     <ChipRow>
@@ -231,7 +266,7 @@ export function OnslaughtBoard({
   // Common Test chip on the tanks catalogue.
   const activityChips = hasRates ? (
     <ChipRow>
-      {ACTIVITY_BUCKETS.map((bucket) => (
+      {ONSLAUGHT_ACTIVITY_BUCKETS.map((bucket) => (
         <Chip
           key={bucket}
           active={activitySel.has(bucket)}
@@ -251,7 +286,9 @@ export function OnslaughtBoard({
   return (
     <Panel>
       <PanelHeader className="flex flex-wrap items-center justify-between gap-3">
-        <PanelTitle>{t("board", { count: results.length, mode })}</PanelTitle>
+        <PanelTitle>
+            {t("board", { count: aggregates.ranked, mode })}
+          </PanelTitle>
         <div className="flex flex-wrap items-center gap-2">
           <OnslaughtSeasonSelect
             seasons={seasons}
@@ -271,12 +308,12 @@ export function OnslaughtBoard({
                 {
                   id: BoardView.Ranked,
                   label: tOwn("views.ranked"),
-                  count: results.length,
+                  count: aggregates.ranked,
                 },
                 {
                   id: BoardView.Lost,
                   label: tOwn("views.lost"),
-                  count: dropouts.length,
+                  count: lost,
                 },
               ]}
             />
@@ -287,13 +324,13 @@ export function OnslaughtBoard({
         {showLost ? (
           <OnslaughtDropoutsTable
             region={region}
-            dropouts={dropouts}
+            dropouts={lostRows}
             sort={lostSort}
             setSort={setLostSort}
           />
         ) : (
           <>
-            {results.length > 0 && (
+            {aggregates.ranked > 0 && (
               <div className="border-b border-fd-border px-4 py-2.5">
                 <LeaderboardFilterBar
                   filters={filters}
@@ -307,7 +344,7 @@ export function OnslaughtBoard({
                 />
               </div>
             )}
-            {results.length === 0 ? (
+            {aggregates.ranked === 0 ? (
               <div className="px-4 py-12 text-center text-sm text-muted-foreground">
                 {tOwn("no-onslaught-standings-yet")}
               </div>
@@ -324,63 +361,7 @@ export function OnslaughtBoard({
                   "[&_thead_th:first-child]:pl-4! [&_thead_th:last-child]:pr-4!",
                 )}
               >
-                <TableHeader>
-                  <TableRow>
-                    <TableHead className="w-16 text-center!">#</TableHead>
-                    <TableHead>{t("columns.player")}</TableHead>
-                    <TableHead className="hidden w-28 text-right! sm:table-cell">
-                      {/* The mode's own ladder, not a leaderboard position: the
-                      row's number is in the first column. */}
-                      <GlossaryLabel label={tOwn("onslaught")}>
-                        {t("columns.rank")}
-                      </GlossaryLabel>
-                    </TableHead>
-                    {/* The rates, folded from our own captures. Ahead of the two
-                    figures the source itself publishes, which keep the last
-                    columns they have always held, and hidden on a narrow screen:
-                    they are what this board adds, not what it is. */}
-                    <OnslaughtSortHead
-                      col={OnslaughtSortCol.BattlesPerDay}
-                      sort={sort}
-                      setSort={setSort}
-                      className="hidden w-32 xl:table-cell"
-                    >
-                      {t("columns.battles-per-day")}
-                    </OnslaughtSortHead>
-                    <OnslaughtSortHead
-                      col={OnslaughtSortCol.PointsPerDay}
-                      sort={sort}
-                      setSort={setSort}
-                      className="hidden w-32 xl:table-cell"
-                    >
-                      {t("columns.points-per-day")}
-                    </OnslaughtSortHead>
-                    <OnslaughtSortHead
-                      col={OnslaughtSortCol.PointsPerBattle}
-                      sort={sort}
-                      setSort={setSort}
-                      className="hidden w-32 xl:table-cell"
-                    >
-                      {t("columns.points-per-battle")}
-                    </OnslaughtSortHead>
-                    <OnslaughtSortHead
-                      col={OnslaughtSortCol.Battles}
-                      sort={sort}
-                      setSort={setSort}
-                      className="w-24"
-                    >
-                      {t("columns.battles")}
-                    </OnslaughtSortHead>
-                    <OnslaughtSortHead
-                      col={OnslaughtSortCol.Rating}
-                      sort={sort}
-                      setSort={setSort}
-                      className="w-32"
-                    >
-                      {t("columns.rating")}
-                    </OnslaughtSortHead>
-                  </TableRow>
-                </TableHeader>
+                <OnslaughtBoardHead sort={sort} setSort={setSort} />
                 <TableBody>
                   {paged.map((r) => (
                     <OnslaughtBoardRow
