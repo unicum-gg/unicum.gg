@@ -14,6 +14,13 @@ export type State = {
   /** Alerts are sent on the edge, never repeated while the condition holds. */
   alerted: { loggedOut?: boolean; expiring?: boolean };
   /**
+   * The versions the hub was last seen dropping from the change log, as one
+   * string, so the same loss is reported once rather than every pass. Its own
+   * field rather than an `alerted` flag: that one is cleared wholesale when a
+   * session comes back, which has nothing to do with this.
+   */
+  notesLost?: string;
+  /**
    * The WG ID security token's expiry as last seen. It did not move on a silent
    * re-login when measured (2026-11-06), which is what caps a session at about
    * fourteen days; if it ever does move without a login, that is worth knowing.

@@ -94,6 +94,24 @@ function untouched(mod: any): string {
 }
 
 /**
+ * The releases the mod's change log does not list, by version.
+ *
+ * Read-only, and the whole point of asking it twice: the hub takes a change
+ * log, answers the save with the new list, and has been measured DROPPING it
+ * again a minute or two later while a version of the mod is in review (0.10.0
+ * on 2026-11-18, three saves, two of them undone with nothing said). So "it
+ * saved" is not "it kept it", and only asking again later tells the two apart.
+ */
+export async function missingNotes(
+  context: BrowserContext,
+  releases: ReleaseNotes[],
+): Promise<string[]> {
+  const mod = await json(context, OWNER());
+  const listed = new Set((mod.change_log ?? []).map((entry: { version: string }) => entry.version));
+  return releases.filter((release) => !listed.has(release.version)).map((release) => release.version);
+}
+
+/**
  * Add the releases missing from the mod's own change log, which is what its
  * page lists. A version's `change_log` does not reach that list: only saving
  * the whole mod does, so this sends what the edit page's Save sends, built from

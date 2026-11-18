@@ -10,7 +10,7 @@ import fs from "node:fs";
 import { config } from "./config.js";
 import { ensureLoggedIn, loggedIn, securityTokenExpiry, showLogin, withBrowser } from "./browser.js";
 import { readAllNotes, readRelease, verifySignature } from "./github.js";
-import { addVersion, hasVersion, reviewReport, syncChangeLog } from "./hub.js";
+import { addVersion, hasVersion, missingNotes, reviewReport, syncChangeLog } from "./hub.js";
 import { loginLink, notify } from "./notify.js";
 import { serveRemote, upgradeRemote } from "./remote.js";
 import { readState, updateState } from "./state.js";
@@ -23,6 +23,10 @@ const KEEPALIVE_MS = 6 * 60 * 60 * 1000;
 const EXPIRY_WARNING_S = 48 * 60 * 60;
 // How long a just-opened remote browser is watched for the login to land.
 const LOGIN_WATCH_MS = 20 * 60 * 1000;
+// How long after a save the hub is asked whether it kept it. Measured on
+// 0.10.0: the drop came back within a minute both times, so five is late
+// enough to catch it and early enough to be read the same evening.
+const KEPT_AFTER_MS = 5 * 60 * 1000;
 
 const log = (message: string) => console.log(`[wgmods] ${message}`);
 
@@ -54,17 +58,59 @@ async function publish(tag: string): Promise<void> {
   }
 }
 
-/** The mod's change log, brought up to the releases. A failure costs nothing else. */
+/** The mod's change log, brought up to the releases, and said out loud.
+ *
+ * It used to swallow everything: it logged only when it added something and
+ * wrote its failures to the console alone. So a release whose notes never
+ * reached the hub said nothing anywhere, and the only way to find out was to
+ * look at the page. That is what this is for; the publishing itself was never
+ * the part that failed quietly.
+ */
 async function updateChangeLog(): Promise<void> {
   try {
     const notes = await readAllNotes();
     const { added, moved } = await withBrowser((context) => syncChangeLog(context, notes));
-    if (added.length) log(`change log: added ${added.join(", ")}`);
     if (moved) await notify(`Saving the wgmods change log (${added.join(", ")}) also changed something else on the mod. The previous state is kept in the data volume.`);
+    if (!added.length) {
+      log(`change log: nothing to add, ${notes.length} release(s) read`);
+      return;
+    }
+    log(`change log: added ${added.join(", ")}`);
+    // Asked again later rather than trusted: see `missingNotes`.
+    setTimeout(() => void keptChangeLog(added), KEPT_AFTER_MS);
   } catch (error) {
     console.error("[wgmods] updating the change log failed", error);
+    await notify(`The wgmods change log could not be updated: ${reason(error)}`);
   }
 }
+
+/** Whether the hub kept what it said it saved, asked once, minutes later. */
+async function keptChangeLog(versions: string[]): Promise<void> {
+  try {
+    const lost = await withBrowser((context) =>
+      missingNotes(context, versions.map((version) => ({ version, body: "" }))),
+    );
+    const said = lost.join(", ");
+    const before = readState().notesLost ?? "";
+    if (said === before) return;
+    updateState((state) => {
+      if (said) state.notesLost = said;
+      else delete state.notesLost;
+    });
+    if (lost.length) {
+      await notify(
+        `wgmods accepted the change log for ${said} and dropped it again within ${Math.round(KEPT_AFTER_MS / 60000)} minutes. ` +
+          `The hub does that while a version is in review; every pass puts it back, and this says so once rather than every six hours.`,
+      );
+    } else if (before) {
+      await notify(`The wgmods change log kept ${versions.join(", ")} this time.`);
+    }
+  } catch (error) {
+    console.error("[wgmods] checking the change log failed", error);
+  }
+}
+
+const reason = (error: unknown) => (error instanceof Error ? error.message : String(error));
 
 async function alertLoggedOut(detail = ""): Promise<void> {
   if (readState().alerted.loggedOut) return;
