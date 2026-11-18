@@ -22,5 +22,10 @@
     "discord": "Discord"
   },
   "disclaimer": "Wargaming ile bağlantılı değildir",
-  "cookies": "Çerezleri yönet"
+  "cookies": "Çerezleri yönet",
+  "legal": {
+    "company": "Yasal bildirim",
+    "privacy": "Gizlilik",
+    "terms": "Terimler"
+  }
 }

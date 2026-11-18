@@ -22,5 +22,10 @@
     "discord": "Discord"
   },
   "disclaimer": "Nesusiję su Wargaming",
-  "cookies": "Tvarkyti slapukus"
+  "cookies": "Tvarkyti slapukus",
+  "legal": {
+    "company": "Teisinis pranešimas",
+    "privacy": "Privatumas",
+    "terms": "terminai"
+  }
 }

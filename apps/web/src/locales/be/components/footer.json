@@ -22,5 +22,10 @@
     "discord": "Discord"
   },
   "disclaimer": "Не звязана з Wargaming",
-  "cookies": "Кіраваць файламі cookie"
+  "cookies": "Кіраваць файламі cookie",
+  "legal": {
+    "company": "Прававая інфармацыя",
+    "privacy": "Прыватнасць",
+    "terms": "Тэрміны"
+  }
 }

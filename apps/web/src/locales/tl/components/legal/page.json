@@ -1,0 +1,11 @@
+{
+  "eyebrow": "Legal",
+  "last-updated": "Na-update noong {date}",
+  "nav": {
+    "label": "Iba pang legal na dokumento"
+  },
+  "question": {
+    "title": "May tanong tungkol sa mga dokumentong ito?",
+    "description": "Sumulat sa amin at sasagot kami sa lalong madaling panahon."
+  }
+}

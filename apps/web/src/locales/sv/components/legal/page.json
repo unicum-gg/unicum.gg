@@ -1,0 +1,11 @@
+{
+  "eyebrow": "Juridiskt",
+  "last-updated": "Senast Uppdaterad {date}",
+  "nav": {
+    "label": "Övriga juridiska dokument"
+  },
+  "question": {
+    "title": "En fråga om dessa dokument?",
+    "description": "Skriv till oss så svarar vi så snart vi kan."
+  }
+}

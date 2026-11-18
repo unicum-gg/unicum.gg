@@ -3,7 +3,7 @@
   "description": "Inställningarna som hör till ditt konto.",
   "section-account": "Konto",
   "section-account-description": "Vem du är här och vad du är ansluten till.",
-  "section-privacy": "Sekretess",
+  "section-privacy": "Integritet",
   "section-privacy-description": "Vad ditt konto publicerar om sig själv.",
   "log-out": "Logga ut",
   "log-out-description": "Avslutar den här sessionen på den här enheten. Inget raderas.",

@@ -22,5 +22,10 @@
     "discord": "Discord"
   },
   "disclaimer": "Δεν συνδέεται με τη Wargaming",
-  "cookies": "Διαχείριση cookies"
+  "cookies": "Διαχείριση cookies",
+  "legal": {
+    "company": "Νομική σημείωση",
+    "privacy": "Απόρρητο",
+    "terms": "Όροι"
+  }
 }

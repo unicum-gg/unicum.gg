@@ -22,5 +22,10 @@
     "discord": "Discord"
   },
   "disclaimer": "Није повезано са компанијом Wargaming",
-  "cookies": "Управљајте колачићима"
+  "cookies": "Управљајте колачићима",
+  "legal": {
+    "company": "Pravna napomena",
+    "privacy": "Privatnost",
+    "terms": "термини"
+  }
 }

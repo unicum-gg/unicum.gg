@@ -22,5 +22,10 @@
     "discord": "Discord"
   },
   "disclaimer": "Не связано с Общий",
-  "cookies": "Настроить cookies"
+  "cookies": "Настроить cookies",
+  "legal": {
+    "company": "Юридическая информация",
+    "privacy": "Конфиденциальность",
+    "terms": "Термины"
+  }
 }

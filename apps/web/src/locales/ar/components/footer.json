@@ -22,5 +22,10 @@
     "discord": "Discord"
   },
   "disclaimer": "غير تابع لـ Wargaming",
-  "cookies": "إدارة ملفات تعريف الارتباط"
+  "cookies": "إدارة ملفات تعريف الارتباط",
+  "legal": {
+    "company": "إشعار قانوني",
+    "privacy": "الخصوصية",
+    "terms": "المصطلحات"
+  }
 }

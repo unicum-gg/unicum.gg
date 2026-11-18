@@ -1,0 +1,11 @@
+{
+  "eyebrow": "Pravne informacije",
+  "last-updated": "Ažurirano {date}",
+  "nav": {
+    "label": "Drugo, pravni dokumenti"
+  },
+  "question": {
+    "title": "Pitanje u vezi sa ovim dokumentima?",
+    "description": "Pišite nam, odgovorićemo uskoro."
+  }
+}

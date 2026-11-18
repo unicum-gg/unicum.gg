@@ -22,5 +22,10 @@
     "discord": "Discord"
   },
   "disclaimer": "Не пов’язано із Загальний",
-  "cookies": "Керувати файлами cookie"
+  "cookies": "Керувати файлами cookie",
+  "legal": {
+    "company": "Юридична інформація",
+    "privacy": "Конфіденційність",
+    "terms": "Терміни"
+  }
 }

@@ -1,0 +1,11 @@
+{
+  "eyebrow": "Juridisch",
+  "last-updated": "Laatst bijgewerkt op {date}",
+  "nav": {
+    "label": "Overige juridische documenten"
+  },
+  "question": {
+    "title": "Een vraag over deze documenten?",
+    "description": "Schrijf ons en we antwoorden zo snel mogelijk."
+  }
+}

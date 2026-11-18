@@ -1,0 +1,11 @@
+{
+  "eyebrow": "Rechtliches",
+  "last-updated": "Zuletzt aktualisiert am {date}",
+  "nav": {
+    "label": "Sonstige rechtliche Dokumente"
+  },
+  "question": {
+    "title": "Eine Frage zu diesen Dokumenten?",
+    "description": "Schreiben Sie uns, und wir antworten so bald wie möglich."
+  }
+}

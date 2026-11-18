@@ -22,5 +22,10 @@
     "discord": "Discord"
   },
   "disclaimer": "Không liên kết với Wargaming",
-  "cookies": "Quản lý cookie"
+  "cookies": "Quản lý cookie",
+  "legal": {
+    "company": "Thông báo pháp lý",
+    "privacy": "Quyền riêng tư",
+    "terms": "Thuật ngữ"
+  }
 }

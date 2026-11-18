@@ -1,0 +1,11 @@
+{
+  "eyebrow": "Teisinė informacija",
+  "last-updated": "Paskutinį kartą atnaujinta {date}",
+  "nav": {
+    "label": "Kiti teisiniai dokumentai"
+  },
+  "question": {
+    "title": "Klausimas apie šiuos dokumentus?",
+    "description": "Parašykite mums ir netrukus atsakysime."
+  }
+}

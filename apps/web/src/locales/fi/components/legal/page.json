@@ -1,0 +1,11 @@
+{
+  "eyebrow": "Oikeudellinen",
+  "last-updated": "Päivitetty viimeksi {date}",
+  "nav": {
+    "label": "Muut oikeudelliset asiakirjat"
+  },
+  "question": {
+    "title": "Kysymys näistä asiakirjoista?",
+    "description": "Kirjoita meille, niin vastaamme niin pian kuin pystymme."
+  }
+}

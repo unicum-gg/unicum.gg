@@ -22,5 +22,10 @@
     "discord": "Discord"
   },
   "disclaimer": "Wargaming से संबद्ध नहीं",
-  "cookies": "कुकीज़ प्रबंधित करें"
+  "cookies": "कुकीज़ प्रबंधित करें",
+  "legal": {
+    "company": "कानूनी सूचना",
+    "privacy": "गोपनीयता",
+    "terms": "शब्द"
+  }
 }

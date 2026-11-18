@@ -22,5 +22,10 @@
     "discord": "Discord"
   },
   "disclaimer": "워게이밍과 제휴하지 않음",
-  "cookies": "쿠키 관리"
+  "cookies": "쿠키 관리",
+  "legal": {
+    "company": "법적 고지",
+    "privacy": "개인정보 보호",
+    "terms": "용어"
+  }
 }

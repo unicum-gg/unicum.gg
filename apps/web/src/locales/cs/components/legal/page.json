@@ -1,0 +1,11 @@
+{
+  "eyebrow": "Právní",
+  "last-updated": "Aktualizováno dne {date}",
+  "nav": {
+    "label": "Jiný právní dokument"
+  },
+  "question": {
+    "title": "Máte k těmto dokumentům otázku?",
+    "description": "Napište nám a odpovíme vám brzy."
+  }
+}

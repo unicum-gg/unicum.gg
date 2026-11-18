@@ -22,5 +22,10 @@
     "discord": "Discord"
   },
   "disclaimer": "Niet gelieerd aan Wargaming",
-  "cookies": "Cookies beheren"
+  "cookies": "Cookies beheren",
+  "legal": {
+    "company": "Juridische kennisgeving",
+    "privacy": "Privacy",
+    "terms": "Termen"
+  }
 }

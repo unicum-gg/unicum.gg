@@ -22,5 +22,10 @@
     "discord": "Discord"
   },
   "disclaimer": "与默认无关联",
-  "cookies": "管理 Cookie"
+  "cookies": "管理 Cookie",
+  "legal": {
+    "company": "法律声明",
+    "privacy": "隐私",
+    "terms": "术语"
+  }
 }

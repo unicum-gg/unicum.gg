@@ -1,0 +1,11 @@
+{
+  "eyebrow": "Juridisk",
+  "last-updated": "Sidst opdateret den {date}",
+  "nav": {
+    "label": "Andre juridiske dokumenter"
+  },
+  "question": {
+    "title": "Har du et spørgsmål om disse dokumenter?",
+    "description": "Skriv til os, så svarer vi så snart som muligt."
+  }
+}

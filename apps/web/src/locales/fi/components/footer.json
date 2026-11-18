@@ -22,5 +22,10 @@
     "discord": "Discord"
   },
   "disclaimer": "Ei sidoksissa Wargamingiin",
-  "cookies": "Hallitse evästeitä"
+  "cookies": "Hallitse evästeitä",
+  "legal": {
+    "company": "Oikeudellinen ilmoitus",
+    "privacy": "Yksityisyys",
+    "terms": "Termit"
+  }
 }

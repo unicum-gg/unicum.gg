@@ -22,5 +22,10 @@
     "discord": "Discord"
   },
   "disclaimer": "Wargaming-пен байланысы жоқ",
-  "cookies": "Cookie файлдарын басқару"
+  "cookies": "Cookie файлдарын басқару",
+  "legal": {
+    "company": "Құқықтық ескерту",
+    "privacy": "Құпиялылық",
+    "terms": "терминдер"
+  }
 }

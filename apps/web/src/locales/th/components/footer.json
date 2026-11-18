@@ -22,5 +22,10 @@
     "discord": "Discord"
   },
   "disclaimer": "ไม่มีส่วนเกี่ยวข้องกับ Wargaming",
-  "cookies": "จัดการคุกกี้"
+  "cookies": "จัดการคุกกี้",
+  "legal": {
+    "company": "ประกาศทางกฎหมาย",
+    "privacy": "ความเป็นส่วนตัว",
+    "terms": "คำศัพท์"
+  }
 }

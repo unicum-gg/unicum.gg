@@ -22,5 +22,10 @@
     "discord": "Discord"
   },
   "disclaimer": "Wargamingとは提携していません",
-  "cookies": "Cookieを管理"
+  "cookies": "Cookieを管理",
+  "legal": {
+    "company": "法的通知",
+    "privacy": "プライバシー",
+    "terms": "用語"
+  }
 }

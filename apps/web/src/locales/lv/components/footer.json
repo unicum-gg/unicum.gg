@@ -22,5 +22,10 @@
     "discord": "Discord"
   },
   "disclaimer": "Nav saistīts ar Wargaming",
-  "cookies": "Pārvaldīt sīkfailus"
+  "cookies": "Pārvaldīt sīkfailus",
+  "legal": {
+    "company": "Juridiskais paziņojums",
+    "privacy": "Privātums",
+    "terms": "Termini"
+  }
 }

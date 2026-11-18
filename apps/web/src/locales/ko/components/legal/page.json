@@ -1,0 +1,11 @@
+{
+  "eyebrow": "법률",
+  "last-updated": "{date}에 마지막으로 업데이트됨",
+  "nav": {
+    "label": "기타 법률 문서"
+  },
+  "question": {
+    "title": "이 문서에 대해 궁금한 점이 있으신가요?",
+    "description": "문의해 주시면 곧 답변해 드리겠습니다."
+  }
+}

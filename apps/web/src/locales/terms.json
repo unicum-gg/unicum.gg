@@ -863,7 +863,9 @@
     "power": "القوة",
     "without": "بدون",
     "better": "أفضل",
-    "Log out": "تسجيل الخروج"
+    "Log out": "تسجيل الخروج",
+    "Privacy": "الخصوصية",
+    "soon": "قريبًا"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1730,7 +1732,9 @@
     "power": "магутнасць",
     "without": "без",
     "better": "лепш",
-    "Log out": "Выйсці"
+    "Log out": "Выйсці",
+    "Privacy": "Прыватнасць",
+    "soon": "хутка"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -2816,7 +2820,9 @@
     "better": "по-добър",
     "Profile": "Профил",
     "Switch Account": "Смени акаунт",
-    "Log out": "Изход"
+    "Log out": "Изход",
+    "Privacy": "Поверителност",
+    "soon": "скоро"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -3691,7 +3697,9 @@
     "power": "snaga",
     "without": "bez",
     "better": "bolje",
-    "Log out": "Odjava"
+    "Log out": "Odjava",
+    "Privacy": "Privatnost",
+    "soon": "uskoro"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -4788,7 +4796,9 @@
     "better": "lepší",
     "Profile": "Profil",
     "Switch Account": "Přepnout účet",
-    "Log out": "Odhlásit se"
+    "Log out": "Odhlásit se",
+    "Privacy": "Soukromí",
+    "soon": "brzy"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -5891,7 +5901,9 @@
     "better": "bedre",
     "Profile": "Profil",
     "Switch Account": "Skift konto",
-    "Log out": "Log ud"
+    "Log out": "Log ud",
+    "Privacy": "Privatliv",
+    "soon": "snart"
   },
   "de": {
     "(optional)": "(optional)",
@@ -6987,7 +6999,9 @@
     "better": "besser",
     "Profile": "Profil",
     "Switch Account": "Konto wechseln",
-    "Log out": "Abmelden"
+    "Log out": "Abmelden",
+    "Privacy": "Datenschutz",
+    "soon": "bald"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -8089,7 +8103,9 @@
     "better": "καλύτερο",
     "Profile": "Προσωπικό Αρχείο",
     "Switch Account": "Αλλαγή Λογαριασμού",
-    "Log out": "Αποσύνδεση"
+    "Log out": "Αποσύνδεση",
+    "Privacy": "Απόρρητο",
+    "soon": "σύντομα"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -9171,7 +9187,9 @@
     "better": "mejor",
     "Profile": "Perfil",
     "Switch Account": "Cambiar cuenta",
-    "Log out": "Cerrar sesión"
+    "Log out": "Cerrar sesión",
+    "Privacy": "Privacidad",
+    "soon": "próximamente"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -10278,7 +10296,9 @@
     "better": "parempi",
     "Profile": "Profiili",
     "Switch Account": "Vaihda tiliä",
-    "Log out": "Kirjaudu ulos"
+    "Log out": "Kirjaudu ulos",
+    "Privacy": "Yksityisyys",
+    "soon": "pian"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -11364,7 +11384,9 @@
     "better": "meilleur",
     "Profile": "Profil",
     "Switch Account": "Changer de compte",
-    "Log out": "Se déconnecter"
+    "Log out": "Se déconnecter",
+    "Privacy": "Confidentialité",
+    "soon": "bientôt"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -12232,7 +12254,9 @@
     "power": "शक्ति",
     "without": "बिना",
     "better": "बेहतर",
-    "Log out": "लॉग आउट"
+    "Log out": "लॉग आउट",
+    "Privacy": "गोपनीयता",
+    "soon": "जल्द ही"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -13332,7 +13356,9 @@
     "better": "bolje",
     "Profile": "Profil",
     "Switch Account": "Promjeni korisnički račun",
-    "Log out": "Odjava"
+    "Log out": "Odjava",
+    "Privacy": "Privatnost",
+    "soon": "uskoro"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -14434,7 +14460,9 @@
     "better": "jobb",
     "Profile": "Profil",
     "Switch Account": "Felhasználói fiók váltás",
-    "Log out": "Kijelentkezés"
+    "Log out": "Kijelentkezés",
+    "Privacy": "Adatvédelem",
+    "soon": "hamarosan"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -15532,7 +15560,9 @@
     "better": "migliore",
     "Profile": "Profilo",
     "Switch Account": "Cambia Account",
-    "Log out": "Disconnetti"
+    "Log out": "Disconnetti",
+    "Privacy": "Privacy",
+    "soon": "a breve"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -16637,7 +16667,9 @@
     "better": "より良い",
     "Profile": "個人ファイル",
     "Switch Account": "アカウント切り替え",
-    "Log out": "ログアウト"
+    "Log out": "ログアウト",
+    "Privacy": "プライバシー",
+    "soon": "近日"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -17505,7 +17537,9 @@
     "power": "қуат",
     "without": "онсыз",
     "better": "жақсырақ",
-    "Log out": "Шығу"
+    "Log out": "Шығу",
+    "Privacy": "Құпиялылық",
+    "soon": "жақында"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -18614,7 +18648,9 @@
     "without": "없음",
     "better": "우수",
     "Switch Account": "계정 전환",
-    "Log out": "로그아웃"
+    "Log out": "로그아웃",
+    "Privacy": "개인정보 보호",
+    "soon": "곧"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -19719,7 +19755,9 @@
     "better": "geriau",
     "Profile": "Profilis",
     "Switch Account": "Pakeisti paskyrą",
-    "Log out": "Atsijungti"
+    "Log out": "Atsijungti",
+    "Privacy": "Privatumas",
+    "soon": "netrukus"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -20810,7 +20848,9 @@
     "better": "labāks",
     "Profile": "Profils",
     "Switch Account": "Nomainīt kontu",
-    "Log out": "Izrakstīties"
+    "Log out": "Izrakstīties",
+    "Privacy": "Privātums",
+    "soon": "drīzumā"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -21917,7 +21957,9 @@
     "better": "beter",
     "Profile": "Profiel",
     "Switch Account": "Wissel account",
-    "Log out": "Uitloggen"
+    "Log out": "Uitloggen",
+    "Privacy": "Privacy",
+    "soon": "binnenkort"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -23015,7 +23057,9 @@
     "better": "bedre",
     "Profile": "Profil",
     "Switch Account": "Bytt konto",
-    "Log out": "Logg ut"
+    "Log out": "Logg ut",
+    "Privacy": "Personvern",
+    "soon": "snart"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -24110,7 +24154,9 @@
     "better": "lepszy",
     "Profile": "Profil",
     "Switch Account": "Zmień konto",
-    "Log out": "Wyloguj się"
+    "Log out": "Wyloguj się",
+    "Privacy": "Prywatność",
+    "soon": "wkrótce"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -25198,7 +25244,9 @@
     "better": "melhor",
     "Profile": "Perfil",
     "Switch Account": "Mudar de Conta",
-    "Log out": "Sair"
+    "Log out": "Sair",
+    "Privacy": "Privacidade",
+    "soon": "em breve"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -26286,7 +26334,9 @@
     "better": "mai bun",
     "Profile": "Profil",
     "Switch Account": "Schimbă cont",
-    "Log out": "Deconectare"
+    "Log out": "Deconectare",
+    "Privacy": "Confidențialitate",
+    "soon": "în curând"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -27362,7 +27412,9 @@
     "better": "лучше",
     "Profile": "Профиль",
     "Switch Account": "Сменить аккаунт",
-    "Log out": "Выйти"
+    "Log out": "Выйти",
+    "Privacy": "Конфиденциальность",
+    "soon": "скоро"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -28233,7 +28285,9 @@
     "power": "moč",
     "without": "brez",
     "better": "boljši",
-    "Log out": "Odhlásiť sa"
+    "Log out": "Odhlásiť sa",
+    "Privacy": "Zasebnost",
+    "soon": "kmalu"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -29335,7 +29389,9 @@
     "better": "боље",
     "Profile": "Profil",
     "Switch Account": "Promeni nalog",
-    "Log out": "Одјави се"
+    "Log out": "Одјави се",
+    "Privacy": "Privatnost",
+    "soon": "uskoro"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -30442,7 +30498,9 @@
     "better": "bättre",
     "Profile": "Profil",
     "Switch Account": "Byt konto",
-    "Log out": "Logga ut"
+    "Log out": "Logga ut",
+    "Privacy": "Integritet",
+    "soon": "snart"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -31545,7 +31603,9 @@
     "better": "ดีกว่า",
     "Profile": "ประวัติย่อ",
     "Switch Account": "เปลี่ยนบัญชี",
-    "Log out": "ออกจากระบบ"
+    "Log out": "ออกจากระบบ",
+    "Privacy": "ความเป็นส่วนตัว",
+    "soon": "เร็ว ๆ นี้"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -32415,7 +32475,9 @@
     "power": "lakas",
     "without": "walang",
     "better": "mas mahusay",
-    "Log out": "Mag-log out"
+    "Log out": "Mag-log out",
+    "Privacy": "Pribasiya",
+    "soon": "malapit na"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -33514,7 +33576,9 @@
     "better": "daha iyi",
     "Profile": "Profil",
     "Switch Account": "Hesap Değiştir",
-    "Log out": "Çıkış yap"
+    "Log out": "Çıkış yap",
+    "Privacy": "Gizlilik",
+    "soon": "yakında"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -34605,7 +34669,9 @@
     "without": "без",
     "better": "кращий",
     "Switch Account": "Змінити акаунт",
-    "Log out": "Вийти"
+    "Log out": "Вийти",
+    "Privacy": "Конфіденційність",
+    "soon": "скоро"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -35686,7 +35752,9 @@
     "better": "tốt hơn",
     "Profile": "Hồ sơ",
     "Switch Account": "Chuyển Tài khoản",
-    "Log out": "Đăng xuất"
+    "Log out": "Đăng xuất",
+    "Privacy": "Quyền riêng tư",
+    "soon": "sắp có"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -36789,6 +36857,8 @@
     "better": "更好",
     "Profile": "档案",
     "Switch Account": "切换账号",
-    "Log out": "退出登录"
+    "Log out": "退出登录",
+    "Privacy": "隐私",
+    "soon": "即将推出"
   }
 }

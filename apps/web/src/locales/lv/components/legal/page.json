@@ -1,0 +1,11 @@
+{
+  "eyebrow": "Juridiskā informācija",
+  "last-updated": "Pēdējais atjauninājums: {date}",
+  "nav": {
+    "label": "Citi juridiskie dokumenti"
+  },
+  "question": {
+    "title": "Jautājums par šiem dokumentiem?",
+    "description": "Rakstiet mums, un mēs atbildēsim drīzumā."
+  }
+}

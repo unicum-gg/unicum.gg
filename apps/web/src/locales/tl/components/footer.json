@@ -22,5 +22,10 @@
     "discord": "Discord"
   },
   "disclaimer": "Hindi kaakibat ng Wargaming",
-  "cookies": "Pamahalaan ang cookies"
+  "cookies": "Pamahalaan ang cookies",
+  "legal": {
+    "company": "Legal na paunawa",
+    "privacy": "Pribasiya",
+    "terms": "Mga termino"
+  }
 }
