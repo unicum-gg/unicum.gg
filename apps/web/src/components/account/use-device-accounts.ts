@@ -16,68 +16,72 @@ export type DeviceAccount = {
   clan: AccountClan | null;
 };
 
+type ActiveSession = {
+  session: { token: string };
+  user: { id: string; email: string; name: string };
+};
+
+async function readAccounts(active: ActiveSession): Promise<DeviceAccount[]> {
+  const sessions: ActiveSession[] = await authClient.multiSession
+    .listDeviceSessions()
+    .then(({ data }) => data ?? [])
+    .catch(() => []);
+  // A session minted before multi-session existed has no entry of its own in
+  // the list, and a failed read has none at all: either way the active
+  // account is added from the session itself rather than going missing from
+  // its own menu.
+  if (!sessions.some((s) => s.user.id === active.user.id)) {
+    sessions.unshift(active);
+  }
+  return Promise.all(
+    sessions.map(async ({ session, user }) => {
+      const wg = wgIdentityFromEmail(user.email);
+      const clan = wg
+        ? await unicum
+            .region(wg.region)
+            .players(user.name)
+            .clan()
+            .then((res) => res.clan)
+            .catch(() => null)
+        : null;
+      return {
+        userId: user.id,
+        sessionToken: session.token,
+        nickname: user.name,
+        region: wg?.region ?? null,
+        clan,
+      };
+    }),
+  );
+}
+
 /**
  * Every account signed in on this browser, active one first, each with its
- * current clan.
+ * current clan, or null until a list holding the active account has landed.
+ *
+ * Null rather than a partial answer is what lets the top bar draw the
+ * nickname and the clan tag together: the name is in the session at once
+ * while the tag is two requests away, and drawing the name alone first made
+ * the tag pop in beside it a moment later.
  *
  * The list deduplicates by user, so an account appears once however many
- * times it signed in. Read once per active account rather than on every menu
- * open: the list only moves when someone signs in, switches or signs out, and
- * each of those ends in a reload. Keyed by the active user id so a list read under one account is
- * never shown under another. The clans are cheap DB-backed SDK calls (no live
- * Wargaming), one per account, and an account whose clan cannot be read is
- * still listed, just without its tag.
+ * times it signed in. It is read again whenever the active account changes,
+ * and while that read is on its way the previous list is kept, re-ordered: an
+ * account switched to from the menu is already in it, clan included, so the
+ * top bar changes name and tag in one step instead of blanking. The clans are
+ * cheap DB-backed SDK calls (no live Wargaming), one per account, and an
+ * account whose clan cannot be read is still listed, just without its tag.
  */
-export function useDeviceAccounts(
-  active: {
-    session: { token: string };
-    user: { id: string; email: string; name: string };
-  } | null,
-) {
+export function useDeviceAccounts(active: ActiveSession | null) {
   const activeUserId = active?.user.id;
-  const [state, setState] = useState<{
-    userId: string;
-    accounts: DeviceAccount[];
-  } | null>(null);
+  const [accounts, setAccounts] = useState<DeviceAccount[] | null>(null);
 
   useEffect(() => {
-    if (!activeUserId) return;
+    if (!active) return;
     let alive = true;
-    (async () => {
-      const { data } = await authClient.multiSession.listDeviceSessions();
-      const sessions = data ?? [];
-      // A session minted before multi-session existed has no entry of its own
-      // in the list, so the active account is added from the session itself
-      // rather than going missing from its own menu.
-      if (active && !sessions.some((s) => s.user.id === active.user.id)) {
-        sessions.unshift(active as (typeof sessions)[number]);
-      }
-      const accounts = await Promise.all(
-        sessions.map(async ({ session, user }) => {
-          const wg = wgIdentityFromEmail(user.email);
-          const clan = wg
-            ? await unicum
-                .region(wg.region)
-                .players(user.name)
-                .clan()
-                .then((res) => res.clan)
-                .catch(() => null)
-            : null;
-          return {
-            userId: user.id,
-            sessionToken: session.token,
-            nickname: user.name,
-            region: wg?.region ?? null,
-            clan,
-          };
-        }),
-      );
-      accounts.sort(
-        (a, b) =>
-          Number(b.userId === activeUserId) - Number(a.userId === activeUserId),
-      );
-      if (alive) setState({ userId: activeUserId, accounts });
-    })().catch(() => {});
+    void readAccounts(active).then((next) => {
+      if (alive) setAccounts(next);
+    });
     return () => {
       alive = false;
     };
@@ -86,5 +90,11 @@ export function useDeviceAccounts(
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeUserId]);
 
-  return state && state.userId === activeUserId ? state.accounts : null;
+  if (!accounts || !accounts.some((a) => a.userId === activeUserId)) {
+    return null;
+  }
+  return [...accounts].sort(
+    (a, b) =>
+      Number(b.userId === activeUserId) - Number(a.userId === activeUserId),
+  );
 }

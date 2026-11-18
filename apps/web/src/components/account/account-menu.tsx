@@ -10,6 +10,7 @@ import {
   UserIcon,
 } from "@phosphor-icons/react";
 import { useState } from "react";
+import { useSWRConfig } from "swr";
 import { REGION_LABEL } from "@unicum.gg/wargaming";
 import Link from "@/components/link";
 import { ClanTag } from "@/components/entity/clan-tag";
@@ -26,6 +27,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import ROUTES from "@/constants/routes";
 import { useAccount } from "@/hooks/use-account";
+import { useRouter } from "@/hooks/use-router";
 import { useTranslation } from "@/hooks/use-translation";
 import { authClient, signOut } from "@/lib/auth-client";
 import { wgIdentityFromEmail } from "@/lib/wg-session";
@@ -42,12 +44,21 @@ type ActiveSession = {
  * gear, which left no room for the account switcher and spent three targets of
  * a 36 pixel strip on things a reader opens rarely.
  *
- * Every switch and sign-out ends in a full reload, like the settings dialog's
- * sign-out always has: the session is read by server components, SWR keys and
- * cookie-painted CSS alike, and a client refresh would leave some of them on
- * the previous account.
+ * Switching account, or signing out of the active one onto the next, happens
+ * in place: the page keeps its scroll and its tab. Three things read the
+ * session, so three things are told: the session itself (`refetchSession`),
+ * every SWR entry (revalidated, keeping what they show until the new account's
+ * answer replaces it, so nothing blanks), and the server components
+ * (`router.refresh()`). Signing out of every account still reloads, where
+ * keeping the page has nothing to gain.
  */
-export function AccountMenu({ active }: { active: ActiveSession }) {
+export function AccountMenu({
+  active,
+  refetchSession,
+}: {
+  active: ActiveSession;
+  refetchSession: () => Promise<unknown>;
+}) {
   const { t } = useTranslation("components/account/account-menu");
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [addOpen, setAddOpen] = useState(false);
@@ -62,19 +73,31 @@ export function AccountMenu({ active }: { active: ActiveSession }) {
   const others = accounts?.filter((a) => a.userId !== active.user.id) ?? [];
   const clan = current?.clan ?? null;
 
-  const reload = () => window.location.reload();
+  const router = useRouter();
+  const { mutate } = useSWRConfig();
+
+  const settle = () =>
+    Promise.all([refetchSession(), mutate(() => true)]).then(() =>
+      router.refresh(),
+    );
   const switchTo = (account: DeviceAccount) =>
     authClient.multiSession
       .setActive({ sessionToken: account.sessionToken })
-      .then(reload);
+      .then(settle);
   // Signing out of the active account alone hands the session to the next one
   // still signed in (the plugin picks it), or signs out entirely if none is.
   const logOut = () =>
     authClient.multiSession
       .revoke({ sessionToken: active.session.token })
-      .then(reload);
+      .then(settle);
   const logOutAll = () =>
-    signOut({ fetchOptions: { onSuccess: reload } });
+    signOut({ fetchOptions: { onSuccess: () => window.location.reload() } });
+
+  // Nickname and clan tag arrive together: the name alone first, with the tag
+  // popping in beside it a moment later, read as the bar glitching.
+  if (!accounts) {
+    return <span className="shrink-0 text-fd-muted-foreground">—</span>;
+  }
 
   return (
     <>

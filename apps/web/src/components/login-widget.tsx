@@ -14,14 +14,14 @@ import { useSession } from "@/lib/auth-client";
  */
 export function LoginWidget() {
   const { t } = useTranslation("components/login-widget");
-  const { data: session, isPending } = useSession();
+  const { data: session, isPending, refetch } = useSession();
 
   if (isPending) {
     return <span className="shrink-0 text-fd-muted-foreground">—</span>;
   }
 
   if (session?.user) {
-    return <AccountMenu active={session} />;
+    return <AccountMenu active={session} refetchSession={refetch} />;
   }
 
   return (
