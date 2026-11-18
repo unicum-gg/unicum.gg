@@ -14,6 +14,7 @@ export * from "./maneuvers";
 export * from "./onslaught-ratings";
 export * from "./cron-leader";
 export * from "./changelog-state";
+export * from "./window-refresh-state";
 export * from "./players";
 export * from "./battle-positions";
 export * from "./battle-loadouts";

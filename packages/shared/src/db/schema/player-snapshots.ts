@@ -157,6 +157,9 @@ export function makePlayerSnapshotsTable(
         t.battles,
       ),
       index(`${region}_snapshots_clan_id_idx`).on(t.clanId),
+      // For the window refresh's hourly read of the snapshots taken in a band
+      // of time (migration 0149).
+      index(`${region}_snapshots_taken_at_idx`).on(t.takenAt),
     ],
   );
 }
