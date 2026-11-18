@@ -173,14 +173,20 @@ export async function SpecificationsTab({
       {/* The tab is the full list; this is what makes anyone discover it. Most
           of a tank page is read here, and a section nobody sees collects no
           suggestions, which is what the feature runs on, so it shows even with
-          nothing in it: the empty state is the invitation to add the first. */}
-      <PanelSeparator />
-      <TankVideosPreview
-        region={region}
-        slug={slug}
-        tankName={meta.name}
-        videos={videos}
-      />
+          nothing in it: the empty state is the invitation to add the first.
+          Except on an event's bot: nobody plays one, so nobody records one,
+          and the invitation would be to something that cannot exist. */}
+      {meta.eventRole === null && (
+        <>
+          <PanelSeparator />
+          <TankVideosPreview
+            region={region}
+            slug={slug}
+            tankName={meta.name}
+            videos={videos}
+          />
+        </>
+      )}
       {/* Last, deliberately: it is the section that sends the reader somewhere
           else, so it comes after everything this page had to say. */}
       {similar.length > 0 && (

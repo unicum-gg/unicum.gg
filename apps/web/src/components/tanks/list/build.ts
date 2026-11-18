@@ -57,6 +57,8 @@ export type TankListItem = {
   testChanges: number;
   /** Exists only inside an event mode. */
   isEvent: boolean;
+  /** An event's bot or boss, which nobody drives. */
+  isBot: boolean;
   stats: TankStatsRow | null;
   specs: TankSpecRow | null;
   mastery: MasteryRow | null;
@@ -106,6 +108,7 @@ type RawIdentity = {
   isCommonTest: boolean;
   testChanges?: number;
   variant?: string | null;
+  eventRole?: string | null;
 };
 
 function base(i: RawIdentity): TankListItem {
@@ -124,6 +127,7 @@ function base(i: RawIdentity): TankListItem {
     isCommonTest: i.isCommonTest,
     testChanges: i.testChanges ?? 0,
     isEvent: i.variant === EVENT_VEHICLE_VARIANT,
+    isBot: i.eventRole != null,
     stats: null,
     specs: null,
     mastery: null,

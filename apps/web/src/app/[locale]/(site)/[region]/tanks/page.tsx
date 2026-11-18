@@ -150,7 +150,11 @@ export async function renderTanksIndex(
       region={region}
       locale={locale}
       tab={activeTab}
-      count={numberFormat(locale, INT_FORMAT).format(items.length)}
+      // An event's bots and bosses are a page each but not part of what "every
+      // vehicle in World of Tanks" means to a reader, so they are not counted.
+      count={numberFormat(locale, INT_FORMAT).format(
+        items.filter((t) => !t.isBot).length,
+      )}
     >
       <TanksIndex
         tanks={items}

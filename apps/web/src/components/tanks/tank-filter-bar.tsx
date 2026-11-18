@@ -195,6 +195,14 @@ export function TankFilterBar<T>({
               {tOwn("event")}
             </Chip>
           )}
+          {filters.eventOnly && filters.hasBots && (
+            <Chip
+              active={filters.withBots}
+              onClick={() => filters.setWithBots(!filters.withBots)}
+            >
+              {tOwn("bots")}
+            </Chip>
+          )}
         </TooltipProvider>
       </ChipRow>
       {/* Marks and badges: only a player's own garage carries them, so on the

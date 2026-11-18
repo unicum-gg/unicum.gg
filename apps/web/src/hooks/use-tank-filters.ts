@@ -42,6 +42,8 @@ export type FilterableTank = {
   testChanges?: number;
   /** Exists only inside an event mode. */
   isEvent?: boolean;
+  /** An event's bot or boss, which nobody drives. */
+  isBot?: boolean;
   /** Marks of Excellence on the gun (0-3), and the Mark of Mastery badge
    * (0-4). Only a player's garage carries these, so like the Common Test fields
    * above they are optional and their controls hide themselves when nothing
@@ -99,6 +101,11 @@ export type TankFilters<T> = {
   setEventOnly: (v: boolean) => void;
   /** Whether the list holds any, so the control can hide itself. */
   hasEvents: boolean;
+  /** Within the event view, show the bots and bosses beside what players drive. */
+  withBots: boolean;
+  setWithBots: (v: boolean) => void;
+  /** Whether the list holds any, so the control can hide itself. */
+  hasBots: boolean;
   /** Marks on the gun to keep, 0 meaning "no mark yet". Empty means no filter. */
   moeSel: Set<number>;
   toggleMoe: (v: number) => void;
@@ -174,6 +181,9 @@ export function useTankFilters<T extends FilterableTank>(
   // Off by default and exclusive: these vehicles sit outside the game's tiers
   // and carry no statistics, so mixed in they would only pad every tier.
   const [eventOnly, setEventOnly] = useState(false);
+  // Off by default too: an event fields many times more opponents than it
+  // offers players, so mixed in they would bury the vehicles a reader can play.
+  const [withBots, setWithBots] = useState(false);
   const [moeSel, setMoeSel] = useState<Set<number>>(() => new Set());
   const [momSel, setMomSel] = useState<Set<number>>(() => new Set());
   const [garageSel, setGarageSel] = useState<Set<string>>(() => new Set());
@@ -183,6 +193,7 @@ export function useTankFilters<T extends FilterableTank>(
     [items],
   );
   const hasEvents = useMemo(() => items.some((t) => t.isEvent), [items]);
+  const hasBots = useMemo(() => items.some((t) => t.isBot), [items]);
   const hasMoe = useMemo(() => items.some((t) => t.gunMarks != null), [items]);
   const hasMom = useMemo(
     () => items.some((t) => t.masteryBadge != null),
@@ -218,6 +229,7 @@ export function useTankFilters<T extends FilterableTank>(
     if (cat.size) setCategorySel(cat);
     if (params.get("test") === "1") setTestOnly(true);
     if (params.get("event") === "1") setEventOnly(true);
+    if (params.get("bots") === "1") setWithBots(true);
     const moe = parseNumSet(params.get("moe"));
     if (moe.size) setMoeSel(moe);
     const mom = parseNumSet(params.get("mom"));
@@ -251,6 +263,7 @@ export function useTankFilters<T extends FilterableTank>(
     // link could not carry.
     setOrDel("test", testOnly ? "1" : "");
     setOrDel("event", eventOnly ? "1" : "");
+    setOrDel("bots", withBots ? "1" : "");
     setOrDel("moe", setStr(moeSel));
     setOrDel("mom", setStr(momSel));
     setOrDel("garage", setStr(garageSel));
@@ -277,6 +290,7 @@ export function useTankFilters<T extends FilterableTank>(
     categorySel,
     testOnly,
     eventOnly,
+    withBots,
     moeSel,
     momSel,
     garageSel,
@@ -346,6 +360,7 @@ export function useTankFilters<T extends FilterableTank>(
       // Either side of a Common Test: a vehicle it adds, or one it rebalances.
       if (testOnly && !t.isCommonTest && !(t.testChanges ?? 0)) return false;
       if (!!t.isEvent !== (hasEvents && eventOnly)) return false;
+      if (t.isBot && !withBots) return false;
       // Gated on the list actually carrying marks, so a `?moe=` left on the URL
       // (a shared link, a back-navigation from a profile) cannot empty the tank
       // catalogue through a chip row that is not on screen to clear it. A null
@@ -401,6 +416,7 @@ export function useTankFilters<T extends FilterableTank>(
     testOnly,
     eventOnly,
     hasEvents,
+    withBots,
     moeSel,
     momSel,
     garageSel,
@@ -430,6 +446,9 @@ export function useTankFilters<T extends FilterableTank>(
       hasTestChanges,
       setEventOnly,
       hasEvents,
+      withBots,
+      setWithBots,
+      hasBots,
       moeSel,
       toggleMoe: (v) => toggleSet(setMoeSel, v),
       momSel,

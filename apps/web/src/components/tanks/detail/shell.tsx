@@ -36,6 +36,7 @@ import { VehicleTypeIcon } from "@/components/tanks/vehicle-type-icon";
 import { Panel, PanelSeparator } from "@/components/panel";
 import ROUTES from "@/constants/routes";
 import {
+  EVENT_BOSS_ROLE,
   type PaintLock,
   type TankSpec,
   type VehicleMeta,
@@ -353,6 +354,11 @@ export function TankShell({
                         ) : meta.isPremium ? (
                           <span className="text-[#FAB81B]">{t("premium")}</span>
                         ) : null}
+                        {meta.eventRole !== null && (
+                          <span className="text-[#F2555A]">
+                            {t(meta.eventRole === EVENT_BOSS_ROLE ? "boss" : "bot")}
+                          </span>
+                        )}
                         {meta.isCommonTest && (
                           <span className="pointer-events-auto">
                             <CommonTestBadge size={15} />
@@ -388,18 +394,23 @@ export function TankShell({
                         </p>
                       ) : null}
                       {/* `w-fit` so it takes the pointer back over the stars alone and
-                not across a band the width of the column. */}
-                      <div className="pointer-events-auto w-fit">
-                        <CommunityHeroBadge
-                          region={region}
-                          slug={slug}
-                          overall={rating.overall}
-                          votes={rating.votes}
-                        />
-                      </div>
+                not across a band the width of the column. A bot has no vote to
+                show and can never get one, so it leaves the badge out. */}
+                      {meta.eventRole === null && (
+                        <div className="pointer-events-auto w-fit">
+                          <CommunityHeroBadge
+                            region={region}
+                            slug={slug}
+                            overall={rating.overall}
+                            votes={rating.votes}
+                          />
+                        </div>
+                      )}
                     </div>
                   </div>
-                  {specs && (
+                  {/* Nobody can buy an event's bot, and the client prices it at a
+                  placeholder single credit, so it has no cost to show. */}
+                  {specs && meta.eventRole === null && (
                     /* Marked so the viewer's dial can stand clear of it. The two
                 share this corner from different components, one of them
                 rendered on the server with no ref to hand over, and the dial

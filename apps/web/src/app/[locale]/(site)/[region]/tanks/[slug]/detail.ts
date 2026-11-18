@@ -187,6 +187,17 @@ export function availableTabs(detail: TankDetail): TankDetailTab[] {
     detail.modules.length > 0;
   const hasMarks = Boolean(detail.moe || detail.mom);
   const hasHistory = detail.hasHistory;
+  // An event's bot is never driven by a player, so every tab built from what
+  // players do (their records, their fittings, their videos, their votes) has
+  // nothing to show and never will, the forms included: nobody can submit a
+  // battle in a boss or reach the battles a vote asks for. Its characteristics
+  // are always offered, being the bare path the page lives at.
+  if (detail.meta.eventRole !== null) {
+    return [
+      TankDetailTab.Specifications,
+      ...(hasHistory ? [TankDetailTab.History] : []),
+    ];
+  }
   return [
     ...(hasSpecifications ? [TankDetailTab.Specifications] : []),
     TankDetailTab.Performances,
