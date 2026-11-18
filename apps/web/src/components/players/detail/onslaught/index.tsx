@@ -2,11 +2,12 @@
 
 import { useFormat } from "@/hooks/use-format";
 import { battleTypeName } from "@/components/game-name";
-import { BattleType } from "@unicum.gg/shared";
+import { BattleType, onslaughtSamples } from "@unicum.gg/shared";
 import { Interpolate } from "@/components/interpolate";
 import { useTranslation } from "@/hooks/use-translation";
 import dynamic from "next/dynamic";
 import Link from "@/components/link";
+import { useMemo } from "react";
 import useSWR from "swr";
 import {
   onslaughtRankIcon,
@@ -97,6 +98,13 @@ export function OnslaughtTab({
     () => unicum.region(region).players.onslaughtHistory(latest!.eventId),
     { revalidateOnFocus: false, shouldRetryOnError: false },
   );
+  // The curve crosses the wire as a column per field, since its seven field
+  // names were most of that payload on a full season. Expanded here, where it
+  // lands, so the chart keeps reading a sample at a time.
+  const cutoffs = useMemo(
+    () => (season ? onslaughtSamples(season.series) : []),
+    [season],
+  );
 
   if (loading && standings.length === 0) {
     return (
@@ -155,7 +163,7 @@ export function OnslaughtTab({
           {climb.length >= 2 ? (
             <PlayerOnslaughtChart
               climb={climb}
-              cutoffs={season?.points ?? []}
+              cutoffs={cutoffs}
               zone={zone}
             />
           ) : null}

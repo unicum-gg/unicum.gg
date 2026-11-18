@@ -4,7 +4,10 @@ import {
   onslaughtRatingsByRegion,
   onslaughtSeasonSnapshotsByRegion,
   onslaughtSeasonsByRegion,
+  onslaughtSeries,
   playersByRegion,
+  type OnslaughtSeasonSample,
+  type OnslaughtSeasonSeries,
 } from "@unicum.gg/shared";
 import { db } from "@unicum.gg/core/db";
 import { type Region } from "@unicum.gg/wargaming";
@@ -18,21 +21,10 @@ function epoch(date: Date): number {
   return Math.floor(date.getTime() / 1000);
 }
 
-/** The board as a whole at one instant. */
-export type OnslaughtSeasonPoint = {
-  t: number;
-  /** Players holding a place on the board. */
-  ranked: number;
-  /** Points needed for Legend, Wargaming's own published threshold. */
-  legendPoints: number | null;
-  /** Points sitting at the Champion position, read off the board. */
-  championPoints: number | null;
-  topRating: number | null;
-  /** The last ranked player's rating: the real price of entry. */
-  minRating: number | null;
-  /** Battles summed over every ranked player, the mode's activity. */
-  battles: number | null;
-};
+/** The board as a whole at one instant. Published as a column per field rather
+ * than an object per sample, since a season is 8,462 of them (see
+ * `OnslaughtSeasonSeries`). */
+export type OnslaughtSeasonPoint = OnslaughtSeasonSample;
 
 /**
  * How a season's board moved, from the first pass that recorded it to the last.
@@ -48,7 +40,7 @@ export type OnslaughtSeasonPoint = {
 export async function getOnslaughtSeasonHistory(
   region: Region,
   eventId?: string,
-): Promise<{ eventId: string; points: OnslaughtSeasonPoint[] } | null> {
+): Promise<{ eventId: string; series: OnslaughtSeasonSeries } | null> {
   const seasons = onslaughtSeasonsByRegion[region];
   const snapshots = onslaughtSeasonSnapshotsByRegion[region];
 
@@ -79,15 +71,17 @@ export async function getOnslaughtSeasonHistory(
 
   return {
     eventId: season.eventId,
-    points: rows.map((r) => ({
-      t: epoch(r.capturedAt),
-      ranked: r.ranked,
-      legendPoints: r.legendPoints,
-      championPoints: r.championPoints,
-      topRating: r.topRating,
-      minRating: r.minRating,
-      battles: r.battles,
-    })),
+    series: onslaughtSeries(
+      rows.map((r) => ({
+        t: epoch(r.capturedAt),
+        ranked: r.ranked,
+        legendPoints: r.legendPoints,
+        championPoints: r.championPoints,
+        topRating: r.topRating,
+        minRating: r.minRating,
+        battles: r.battles,
+      })),
+    ),
   };
 }
 

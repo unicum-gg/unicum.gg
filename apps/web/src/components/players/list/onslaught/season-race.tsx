@@ -12,15 +12,15 @@ import { formatMoment, formatPlayers } from "@/components/servers/format";
 import { RelativeTime } from "@/components/relative-time";
 import { useDisplayZone } from "@/components/servers/use-display-zone";
 import type { unicum } from "@/services/sdk";
+import type { OnslaughtSeasonSample } from "@unicum.gg/shared";
 import { CHAMPION, LEGEND_DARK, LEGEND_LIGHT } from "./season-race-colors";
 import { useTranslation } from "@/hooks/use-translation";
 import { seasonName } from "@/components/game-name";
 
-// The season-history payload, straight from the SDK.
-type HistoryData = Awaited<
-  ReturnType<ReturnType<typeof unicum.region>["players"]["onslaughtHistory"]>
->;
-export type OnslaughtSeasonPoint = HistoryData["points"][number];
+// One sample of the curve, as every consumer here reads it. The endpoint
+// publishes the season as parallel columns, since its field names were most of
+// that payload, and `onslaughtSamples` expands them once where it arrives.
+export type OnslaughtSeasonPoint = OnslaughtSeasonSample;
 
 /** How the season before this one ended, from the board payload. */
 export type OnslaughtPreviousSeason = NonNullable<

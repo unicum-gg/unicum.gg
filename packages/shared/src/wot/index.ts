@@ -43,4 +43,5 @@ export * from "./language-flags";
 export * from "./rating-scales";
 export * from "./onslaught-forecast";
 export * from "./onslaught-aggregates";
+export * from "./onslaught-series";
 export * from "./maneuvers-editions";
