@@ -1,3 +1,9 @@
 {
-  "settings": "Beállítások"
+  "profile": "Profilom",
+  "clan": "Klánom",
+  "settings": "Beállítások",
+  "switch-account": "Felhasználói fiók váltás",
+  "add-account": "Fiók hozzáadása",
+  "log-out": "Kijelentkezés",
+  "log-out-all": "Kijelentkezés az összes fiókból"
 }

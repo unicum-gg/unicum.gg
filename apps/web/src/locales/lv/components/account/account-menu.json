@@ -1,3 +1,9 @@
 {
-  "settings": "Iestatījumi"
+  "profile": "Mans profils",
+  "clan": "Mans klans",
+  "settings": "Iestatījumi",
+  "switch-account": "Nomainīt kontu",
+  "add-account": "Pievienot kontu",
+  "log-out": "Izrakstīties",
+  "log-out-all": "Izrakstīties no visiem kontiem"
 }

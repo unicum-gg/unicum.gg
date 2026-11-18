@@ -1,3 +1,9 @@
 {
-  "settings": "Ustawienia"
+  "profile": "Mój profil",
+  "clan": "Mój klan",
+  "settings": "Ustawienia",
+  "switch-account": "Zmień konto",
+  "add-account": "Dodaj konto",
+  "log-out": "Wyloguj się",
+  "log-out-all": "Wyloguj się ze wszystkich kont"
 }

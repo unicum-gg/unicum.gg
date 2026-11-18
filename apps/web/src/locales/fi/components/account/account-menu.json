@@ -1,3 +1,9 @@
 {
-  "settings": "Asetukset"
+  "profile": "Profiilini",
+  "clan": "Klaanini",
+  "settings": "Asetukset",
+  "switch-account": "Vaihda tiliä",
+  "add-account": "Lisää tili",
+  "log-out": "Kirjaudu ulos",
+  "log-out-all": "Kirjaudu ulos kaikilta tileiltä"
 }

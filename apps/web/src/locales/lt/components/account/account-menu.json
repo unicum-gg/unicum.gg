@@ -1,3 +1,9 @@
 {
-  "settings": "Nustatymai"
+  "profile": "Mano profilis",
+  "clan": "Mano klanas",
+  "settings": "Nustatymai",
+  "switch-account": "Pakeisti paskyrą",
+  "add-account": "Pridėti paskyrą",
+  "log-out": "Atsijungti",
+  "log-out-all": "Atsijungti nuo visų paskyrų"
 }

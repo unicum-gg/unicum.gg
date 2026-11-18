@@ -862,7 +862,8 @@
     "hull": "هيكل",
     "power": "القوة",
     "without": "بدون",
-    "better": "أفضل"
+    "better": "أفضل",
+    "Log out": "تسجيل الخروج"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1728,7 +1729,8 @@
     "hull": "корпус",
     "power": "магутнасць",
     "without": "без",
-    "better": "лепш"
+    "better": "лепш",
+    "Log out": "Выйсці"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -2811,7 +2813,10 @@
     "hull": "корпус",
     "power": "мощност",
     "without": "без",
-    "better": "по-добър"
+    "better": "по-добър",
+    "Profile": "Профил",
+    "Switch Account": "Смени акаунт",
+    "Log out": "Изход"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -3685,7 +3690,8 @@
     "hull": "trup",
     "power": "snaga",
     "without": "bez",
-    "better": "bolje"
+    "better": "bolje",
+    "Log out": "Odjava"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -4779,7 +4785,10 @@
     "hull": "korba",
     "power": "výkon",
     "without": "bez",
-    "better": "lepší"
+    "better": "lepší",
+    "Profile": "Profil",
+    "Switch Account": "Přepnout účet",
+    "Log out": "Odhlásit se"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -5879,7 +5888,10 @@
     "hull": "skrog",
     "power": "effekt",
     "without": "uden",
-    "better": "bedre"
+    "better": "bedre",
+    "Profile": "Profil",
+    "Switch Account": "Skift konto",
+    "Log out": "Log ud"
   },
   "de": {
     "(optional)": "(optional)",
@@ -6972,7 +6984,10 @@
     "hull": "Wanne",
     "power": "Leistung",
     "without": "ohne",
-    "better": "besser"
+    "better": "besser",
+    "Profile": "Profil",
+    "Switch Account": "Konto wechseln",
+    "Log out": "Abmelden"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -8071,7 +8086,10 @@
     "hull": "σκάφος",
     "power": "ισχύς",
     "without": "χωρίς",
-    "better": "καλύτερο"
+    "better": "καλύτερο",
+    "Profile": "Προσωπικό Αρχείο",
+    "Switch Account": "Αλλαγή Λογαριασμού",
+    "Log out": "Αποσύνδεση"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -9150,7 +9168,10 @@
     "hull": "chasis",
     "power": "potencia",
     "without": "sin",
-    "better": "mejor"
+    "better": "mejor",
+    "Profile": "Perfil",
+    "Switch Account": "Cambiar cuenta",
+    "Log out": "Cerrar sesión"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -10254,7 +10275,10 @@
     "hull": "runko",
     "power": "teho",
     "without": "ilman",
-    "better": "parempi"
+    "better": "parempi",
+    "Profile": "Profiili",
+    "Switch Account": "Vaihda tiliä",
+    "Log out": "Kirjaudu ulos"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -11337,7 +11361,10 @@
     "hull": "caisse",
     "power": "puissance",
     "without": "sans",
-    "better": "meilleur"
+    "better": "meilleur",
+    "Profile": "Profil",
+    "Switch Account": "Changer de compte",
+    "Log out": "Se déconnecter"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -12204,7 +12231,8 @@
     "hull": "हुल",
     "power": "शक्ति",
     "without": "बिना",
-    "better": "बेहतर"
+    "better": "बेहतर",
+    "Log out": "लॉग आउट"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -13301,7 +13329,10 @@
     "hull": "trup",
     "power": "snaga",
     "without": "bez",
-    "better": "bolje"
+    "better": "bolje",
+    "Profile": "Profil",
+    "Switch Account": "Promjeni korisnički račun",
+    "Log out": "Odjava"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -14400,7 +14431,10 @@
     "hull": "páncéltest",
     "power": "teljesítmény",
     "without": "nélkül",
-    "better": "jobb"
+    "better": "jobb",
+    "Profile": "Profil",
+    "Switch Account": "Felhasználói fiók váltás",
+    "Log out": "Kijelentkezés"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -15495,7 +15529,10 @@
     "hull": "scafo",
     "power": "potenza",
     "without": "senza",
-    "better": "migliore"
+    "better": "migliore",
+    "Profile": "Profilo",
+    "Switch Account": "Cambia Account",
+    "Log out": "Disconnetti"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -16597,7 +16634,10 @@
     "hull": "車体",
     "power": "出力",
     "without": "なし",
-    "better": "より良い"
+    "better": "より良い",
+    "Profile": "個人ファイル",
+    "Switch Account": "アカウント切り替え",
+    "Log out": "ログアウト"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -17464,7 +17504,8 @@
     "hull": "корпус",
     "power": "қуат",
     "without": "онсыз",
-    "better": "жақсырақ"
+    "better": "жақсырақ",
+    "Log out": "Шығу"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -18571,7 +18612,9 @@
     "hull": "차체",
     "power": "출력",
     "without": "없음",
-    "better": "우수"
+    "better": "우수",
+    "Switch Account": "계정 전환",
+    "Log out": "로그아웃"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -19673,7 +19716,10 @@
     "hull": "korpusas",
     "power": "galia",
     "without": "be",
-    "better": "geriau"
+    "better": "geriau",
+    "Profile": "Profilis",
+    "Switch Account": "Pakeisti paskyrą",
+    "Log out": "Atsijungti"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -20761,7 +20807,10 @@
     "hull": "korpuss",
     "power": "jauda",
     "without": "bez",
-    "better": "labāks"
+    "better": "labāks",
+    "Profile": "Profils",
+    "Switch Account": "Nomainīt kontu",
+    "Log out": "Izrakstīties"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -21865,7 +21914,10 @@
     "hull": "romp",
     "power": "vermogen",
     "without": "zonder",
-    "better": "beter"
+    "better": "beter",
+    "Profile": "Profiel",
+    "Switch Account": "Wissel account",
+    "Log out": "Uitloggen"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -22960,7 +23012,10 @@
     "hull": "skrog",
     "power": "effekt",
     "without": "uten",
-    "better": "bedre"
+    "better": "bedre",
+    "Profile": "Profil",
+    "Switch Account": "Bytt konto",
+    "Log out": "Logg ut"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -24052,7 +24107,10 @@
     "hull": "kadłub",
     "power": "moc",
     "without": "bez",
-    "better": "lepszy"
+    "better": "lepszy",
+    "Profile": "Profil",
+    "Switch Account": "Zmień konto",
+    "Log out": "Wyloguj się"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -25137,7 +25195,10 @@
     "hull": "casco",
     "power": "potência",
     "without": "sem",
-    "better": "melhor"
+    "better": "melhor",
+    "Profile": "Perfil",
+    "Switch Account": "Mudar de Conta",
+    "Log out": "Sair"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -26222,7 +26283,10 @@
     "hull": "carenă",
     "power": "putere",
     "without": "fără",
-    "better": "mai bun"
+    "better": "mai bun",
+    "Profile": "Profil",
+    "Switch Account": "Schimbă cont",
+    "Log out": "Deconectare"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -27295,7 +27359,10 @@
     "hull": "корпус",
     "power": "мощность",
     "without": "без",
-    "better": "лучше"
+    "better": "лучше",
+    "Profile": "Профиль",
+    "Switch Account": "Сменить аккаунт",
+    "Log out": "Выйти"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -28165,7 +28232,8 @@
     "hull": "trup",
     "power": "moč",
     "without": "brez",
-    "better": "boljši"
+    "better": "boljši",
+    "Log out": "Odhlásiť sa"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -29264,7 +29332,10 @@
     "hull": "труп",
     "power": "снага",
     "without": "без",
-    "better": "боље"
+    "better": "боље",
+    "Profile": "Profil",
+    "Switch Account": "Promeni nalog",
+    "Log out": "Одјави се"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -30368,7 +30439,10 @@
     "hull": "skrov",
     "power": "effekt",
     "without": "utan",
-    "better": "bättre"
+    "better": "bättre",
+    "Profile": "Profil",
+    "Switch Account": "Byt konto",
+    "Log out": "Logga ut"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -31468,7 +31542,10 @@
     "hull": "ตัวถัง",
     "power": "กำลัง",
     "without": "ไม่มี",
-    "better": "ดีกว่า"
+    "better": "ดีกว่า",
+    "Profile": "ประวัติย่อ",
+    "Switch Account": "เปลี่ยนบัญชี",
+    "Log out": "ออกจากระบบ"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -32337,7 +32414,8 @@
     "hull": "kasko",
     "power": "lakas",
     "without": "walang",
-    "better": "mas mahusay"
+    "better": "mas mahusay",
+    "Log out": "Mag-log out"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -33433,7 +33511,10 @@
     "hull": "gövde",
     "power": "güç",
     "without": "olmadan",
-    "better": "daha iyi"
+    "better": "daha iyi",
+    "Profile": "Profil",
+    "Switch Account": "Hesap Değiştir",
+    "Log out": "Çıkış yap"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -34522,7 +34603,9 @@
     "hull": "корпус",
     "power": "потужність",
     "without": "без",
-    "better": "кращий"
+    "better": "кращий",
+    "Switch Account": "Змінити акаунт",
+    "Log out": "Вийти"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -35600,7 +35683,10 @@
     "hull": "thân xe",
     "power": "công suất",
     "without": "không có",
-    "better": "tốt hơn"
+    "better": "tốt hơn",
+    "Profile": "Hồ sơ",
+    "Switch Account": "Chuyển Tài khoản",
+    "Log out": "Đăng xuất"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -36700,6 +36786,9 @@
     "hull": "车体",
     "power": "功率",
     "without": "无",
-    "better": "更好"
+    "better": "更好",
+    "Profile": "档案",
+    "Switch Account": "切换账号",
+    "Log out": "退出登录"
   }
 }

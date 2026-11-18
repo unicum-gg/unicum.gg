@@ -1,3 +1,9 @@
 {
-  "settings": "Setări"
+  "profile": "Profilul meu",
+  "clan": "Clanul meu",
+  "settings": "Setări",
+  "switch-account": "Schimbă cont",
+  "add-account": "Adaugă un cont",
+  "log-out": "Deconectare",
+  "log-out-all": "Deconectare de la toate conturile"
 }

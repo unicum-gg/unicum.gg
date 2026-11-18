@@ -1,3 +1,9 @@
 {
-  "settings": "Podešavanja"
+  "profile": "Мој профил",
+  "clan": "Мој клан",
+  "settings": "Podešavanja",
+  "switch-account": "Promeni nalog",
+  "add-account": "Dodaj nalog",
+  "log-out": "Одјави се",
+  "log-out-all": "Одјави се са свих налога"
 }

@@ -1,3 +1,9 @@
 {
-  "settings": "Nastavení"
+  "profile": "Můj profil",
+  "clan": "Můj klan",
+  "settings": "Nastavení",
+  "switch-account": "Přepnout účet",
+  "add-account": "Přidat účet",
+  "log-out": "Odhlásit se",
+  "log-out-all": "Odhlásit se ze všech účtů"
 }

@@ -1,3 +1,9 @@
 {
-  "settings": "游戏设置"
+  "profile": "我的个人资料",
+  "clan": "我的军团",
+  "settings": "游戏设置",
+  "switch-account": "切换账号",
+  "add-account": "添加账号",
+  "log-out": "退出登录",
+  "log-out-all": "退出所有账号"
 }

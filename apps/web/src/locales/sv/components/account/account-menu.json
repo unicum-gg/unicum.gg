@@ -1,3 +1,9 @@
 {
-  "settings": "Inställningar"
+  "profile": "Min profil",
+  "clan": "Min klan",
+  "settings": "Inställningar",
+  "switch-account": "Byt konto",
+  "add-account": "Lägg till ett konto",
+  "log-out": "Logga ut",
+  "log-out-all": "Logga ut från alla konton"
 }

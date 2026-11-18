@@ -1,3 +1,9 @@
 {
-  "settings": "Ayarlar"
+  "profile": "Profilim",
+  "clan": "Klanım",
+  "settings": "Ayarlar",
+  "switch-account": "Hesap Değiştir",
+  "add-account": "Bir hesap ekle",
+  "log-out": "Çıkış yap",
+  "log-out-all": "Tüm hesaplardan çıkış yap"
 }

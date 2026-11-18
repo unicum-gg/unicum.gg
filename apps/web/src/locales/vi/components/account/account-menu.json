@@ -1,3 +1,9 @@
 {
-  "settings": "Thiết lập"
+  "profile": "Hồ sơ của tôi",
+  "clan": "Clan của tôi",
+  "settings": "Thiết lập",
+  "switch-account": "Chuyển Tài khoản",
+  "add-account": "Thêm tài khoản",
+  "log-out": "Đăng xuất",
+  "log-out-all": "Đăng xuất khỏi tất cả tài khoản"
 }

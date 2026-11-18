@@ -1,3 +1,9 @@
 {
-  "settings": "Impostazioni"
+  "profile": "Il mio profilo",
+  "clan": "Il mio clan",
+  "settings": "Impostazioni",
+  "switch-account": "Cambia Account",
+  "add-account": "Aggiungi un account",
+  "log-out": "Disconnetti",
+  "log-out-all": "Disconnetti da tutti gli account"
 }

@@ -1,3 +1,9 @@
 {
-  "settings": "Mga setting"
+  "profile": "Aking profile",
+  "clan": "Aking klano",
+  "settings": "Mga setting",
+  "switch-account": "Lumipat ng account",
+  "add-account": "Magdagdag ng account",
+  "log-out": "Mag-log out",
+  "log-out-all": "Mag-log out sa lahat ng mga account"
 }

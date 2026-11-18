@@ -1,3 +1,9 @@
 {
-  "settings": "Instellingen"
+  "profile": "Mijn profiel",
+  "clan": "Mijn clan",
+  "settings": "Instellingen",
+  "switch-account": "Wissel account",
+  "add-account": "Account toevoegen",
+  "log-out": "Uitloggen",
+  "log-out-all": "Uitloggen bij alle accounts"
 }

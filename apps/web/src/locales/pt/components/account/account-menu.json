@@ -1,3 +1,9 @@
 {
-  "settings": "Configurações"
+  "profile": "Meu perfil",
+  "clan": "Meu clã",
+  "settings": "Configurações",
+  "switch-account": "Mudar de Conta",
+  "add-account": "Adicionar uma conta",
+  "log-out": "Sair",
+  "log-out-all": "Sair de todas as contas"
 }
