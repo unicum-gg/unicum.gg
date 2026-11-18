@@ -4,7 +4,9 @@ import { ThemeSwitch } from "fumadocs-ui/layouts/shared/slots/theme-switch";
 import { RatingSelector } from "@/components/rating-selector";
 import { LocaleSelector } from "@/components/locale-selector";
 import { RegionSelector } from "@/components/region-selector";
+import Link from "@/components/link";
 import APP from "@/constants/app";
+import ROUTES from "@/constants/routes";
 import { useTranslation } from "@/hooks/use-translation";
 import { openCookiePreferences } from "@/lib/cookie-preferences";
 import { styles } from "@/lib/styles";
@@ -44,6 +46,20 @@ export function FooterBottomBar() {
         >
           {t("cookies")}
         </button>
+        {[
+          { href: ROUTES.COMPANY, label: t("legal.company") },
+          { href: ROUTES.PRIVACY, label: t("legal.privacy") },
+          { href: ROUTES.TERMS, label: t("legal.terms") },
+        ].map(({ href, label }) => (
+          <span key={href} className="contents">
+            <span className={styles.mutedText} aria-hidden>
+              ·
+            </span>
+            <Link href={href} className={styles.linkHover}>
+              {label}
+            </Link>
+          </span>
+        ))}
       </div>
 
       {/* Wraps on a phone, where the four controls are 290px of a 288px line

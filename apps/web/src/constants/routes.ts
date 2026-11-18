@@ -47,6 +47,11 @@ const ROUTES = {
   // - Support (region-less)
   SUPPORT: "/support",
 
+  // - Legal (region-less: one publisher, one set of rules for every server)
+  COMPANY: "/company",
+  PRIVACY: "/privacy",
+  TERMS: "/terms",
+
   // - Glossary (region-less by design: a definition reads the same on every
   //   server, so one URL per term rather than three of the same page).
   BADGES: "/badges",

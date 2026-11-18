@@ -1,0 +1,11 @@
+{
+  "eyebrow": "Legal",
+  "last-updated": "Last updated on {date}",
+  "nav": {
+    "label": "Other legal documents"
+  },
+  "question": {
+    "title": "A question about these documents?",
+    "description": "Write to us and we will answer as soon as we can."
+  }
+}

@@ -59,6 +59,8 @@ apps/web/src/locales/generated/
 # postinstall/predev/prebuild. The single-file predecessor was already ignored;
 # the folder that replaced it was not, so 9.3 MB of machine output was staged.
 apps/web/src/services/glossary/generated/
+# legal documents compiled from content/legal/<locale>/*.md
+apps/web/src/services/legal/generated/
 apps/web/src/services/glossary/entries.generated.ts
 apps/web/.openapi-gen/
 
