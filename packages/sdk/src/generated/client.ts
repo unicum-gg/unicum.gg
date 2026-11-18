@@ -669,6 +669,8 @@ type TanksNamespace = ((slug: string) => TankClient) & {
   search(q: NonNullable<QueryOf<"/{region}/tanks/search">>["q"]): RequestHandle<Data<"/{region}/tanks/search">>;
   /** Tanks specifications */
   specifications(): RequestHandle<Data<"/{region}/tanks/specifications">>;
+  /** New and upcoming tanks */
+  spotlight(): RequestHandle<Data<"/{region}/tanks/spotlight">>;
   /** Streamed tank search: NDJSON chunks (local DB first, then Wargaming). */
   searchStream(
     q: string,
@@ -955,6 +957,14 @@ class RegionClient {
         buildUrl(this.baseUrl, "/{region}/tanks/specifications", { region: this.region }),
         () =>
           this.api.GET("/{region}/tanks/specifications", {
+            params: { path: { region: this.region } },
+          }),
+      );
+    ns.spotlight = () =>
+      handle(
+        buildUrl(this.baseUrl, "/{region}/tanks/spotlight", { region: this.region }),
+        () =>
+          this.api.GET("/{region}/tanks/spotlight", {
             params: { path: { region: this.region } },
           }),
       );

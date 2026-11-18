@@ -1079,6 +1079,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/tanks/spotlight": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * New and upcoming tanks
+         * @description The eight newest vehicles: the ones only the Common Test client carries first, then the releases of each update, newest update first and best tier first within one, topped up from the previous update when the latest added fewer than eight. Event vehicles, event bots and mode reissues (the Onslaught 7x7 editions, Frontline and cybercafe copies) are left out, since they are another tank handed out again rather than a new one.
+         */
+        get: operations["get-{region}-tanks-spotlight"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/{region}/videos": {
         parameters: {
             query?: never;
@@ -6944,6 +6964,12 @@ export interface components {
             low: number;
             high: number;
         };
+        /** @description A new or upcoming vehicle and the update it arrived in. */
+        SpotlightTank: {
+            identity: components["schemas"]["TankIdentity"];
+            /** @description The update that released the vehicle, or null for one only the Common Test client carries. */
+            releasedIn: string | null;
+        };
         /** @description One bar of a five-star histogram. */
         StarBar: {
             /** @description 1 to 5. */
@@ -7857,6 +7883,10 @@ export interface components {
         };
         TankSpecsResponse: {
             results: components["schemas"]["TankSpecRow"][];
+        };
+        TankSpotlightResponse: {
+            /** @description Up to eight vehicles: the Common Test's first, then each update's releases, newest update first and best tier first within one. */
+            tanks: components["schemas"]["SpotlightTank"][];
         };
         /** @description Vehicle row (additional fields may be present). */
         TankSummary: {
@@ -10120,6 +10150,29 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["TankRatingBoardResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-tanks-spotlight": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TankSpotlightResponse"];
                 };
             };
         };

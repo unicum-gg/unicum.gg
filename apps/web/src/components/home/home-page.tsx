@@ -20,6 +20,10 @@ import { TopClansOverallPanel } from "@/components/home/top-clans-overall-panel"
 import { LiveSection } from "@/components/home/live-section";
 import { TopPlayers } from "@/components/home/top-players";
 import { TopPlayersOverallPanel } from "@/components/home/top-players-overall-panel";
+import {
+  TankSpotlight,
+  type SpotlightTankRow,
+} from "@/components/tanks/spotlight";
 import { Interpolate } from "@/components/interpolate";
 import { Kbd } from "@/components/ui/kbd";
 import {
@@ -47,7 +51,7 @@ import type {
   TopPlayersSnapshot,
 } from "@unicum.gg/core/wargaming/wot/players/top";
 import { buildSafe, optional, unicum } from "@/services/sdk";
-import { type Region, REGIONS } from "@unicum.gg/wargaming";
+import { Region, REGIONS } from "@unicum.gg/wargaming";
 
 // The home consumes its own public API through the SDK: one `/top` call per
 // (region, period) in the DEFAULT metric, all precomputed leaderboards
@@ -122,6 +126,7 @@ export async function HomePage({
   // the boards rather than here now, because the metric a line names is decided
   // there (see `TopPlayers`).
   const metric = DEFAULT_RATING_METRIC;
+  const spotlightRegion = regionOverride ?? Region.EU;
   const [
     topClansOverall,
     topClansMonth,
@@ -130,6 +135,7 @@ export async function HomePage({
     topPlayersOverall,
     topPlayersMonth,
     liveStreamers,
+    spotlight,
   ] = await Promise.all([
     // The default metric only. PR and WTR have no value over a window (see
     // `RatingMetric`), so a recent board ranks the accounts active inside it by
@@ -142,6 +148,16 @@ export async function HomePage({
     playersTopByRegions(metric, "30d"),
     optional(() => unicum.streamers.list(), { results: [] }).then(
       (r) => r.results as unknown as LiveStreamer[],
+    ),
+    // Wargaming releases a vehicle on every server at once, so one region's
+    // answer is every region's; only the links it draws are regional.
+    optional(
+      () =>
+        unicum
+          .region(spotlightRegion)
+          .tanks.spotlight()
+          .then((r) => r.tanks as unknown as SpotlightTankRow[]),
+      [] as SpotlightTankRow[],
     ),
   ]);
 
@@ -195,6 +211,17 @@ export async function HomePage({
       </div>
 
       <PanelSeparator />
+
+      {/* Draws nothing when there is nothing new, so no separator of its own
+          is left hanging either: it carries the one below it. */}
+      {spotlight.length > 0 ? (
+        <>
+          {/* One row here, the catalogue's two rows on /tanks: the home page
+              only says something arrived. */}
+          <TankSpotlight region={spotlightRegion} tanks={spotlight.slice(0, 4)} />
+          <PanelSeparator />
+        </>
+      ) : null}
 
       <div className="grid lg:grid-cols-2 *:min-w-0">
         <TopClansOverallPanel

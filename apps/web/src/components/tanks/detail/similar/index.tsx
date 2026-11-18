@@ -2,7 +2,6 @@
 
 import Link from "@/components/link";
 import { ArrowRight } from "lucide-react";
-import { toRoman } from "roman-numerals";
 import type { Region } from "@unicum.gg/wargaming";
 import { TANK_AXIS_LABEL, type TankAxis } from "@unicum.gg/shared";
 import {
@@ -11,12 +10,9 @@ import {
   PanelHeader,
   PanelTitle,
 } from "@/components/panel";
-import { HangarBackdrop } from "@/components/tanks/hangar-backdrop";
-import { NationFlag } from "@/components/tanks/nation-flag";
-import { VehicleTypeIcon } from "@/components/tanks/vehicle-type-icon";
+import { TankCard } from "@/components/tanks/tank-card";
 import { MAX_COMPARE_TANKS } from "@/constants/compare";
 import ROUTES from "@/constants/routes";
-import { cn } from "@/lib/utils";
 import type { SimilarTankRow } from "@/app/api/[region]/tanks/[slug]/similar/schema.api";
 import { useTranslation } from "@/hooks/use-translation";
 import { tankParamName } from "@/components/game-name";
@@ -82,17 +78,7 @@ export function SimilarTanks({
  */
 const CARD_SIZES = "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw";
 
-/**
- * One match, shown the way the page above shows its own vehicle: the render lit
- * on the hangar floor.
- *
- * The same three layers as the hero, in miniature, and it costs little to
- * repeat them. The backdrop is a single image shared by every card and by the
- * hero the reader has already loaded, and the renders are the portal files
- * next/image resizes to card width. A row of contour icons would have been
- * cheaper still, but a page whose headline is a lit vehicle cannot end on grey
- * silhouettes and still read as the same page.
- */
+/** One match, shown the way the page above shows its own vehicle. */
 function SimilarTankCard({
   region,
   tank,
@@ -100,64 +86,14 @@ function SimilarTankCard({
   region: Region;
   tank: SimilarTankRow;
 }) {
-  const { identity } = tank;
-  const tier = identity.tier ? toRoman(identity.tier) : String(identity.tier);
   return (
-    <Link
-      href={ROUTES.TANK(region, identity.slug)}
-      // `dark` on the card, exactly as the hero does it: the vehicle is lit
-      // against a dark hangar in both themes, so the text over it is light in
-      // both, and the tokens have to be re-resolved inside to match.
-      className="dark block overflow-hidden rounded-lg border border-fd-border transition-colors hover:border-fd-muted-foreground/50"
-    >
-      {/* The hero's own aspect ratio, which is the render's: 1920x900 is 32/15,
-          so the picture lands in the frame whole, at the scale and the position
-          it was composed at. Any other ratio crops it, and a crop moves the
-          vehicle off the mark the portal layout puts it on. */}
-      <div className="relative isolate aspect-32/15 w-full overflow-hidden bg-fd-background">
-        <HangarBackdrop
-          region={region}
-          tag={identity.tag}
-          slug={identity.slug}
-          name={identity.name}
-          sizes={CARD_SIZES}
-        />
-        {/* Fade under the two lines of text at the foot, and no higher: the
-            vehicle sits above them and is the reason the card exists. */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/85 from-0% via-black/45 via-18% to-transparent to-46%"
-        />
-        <MatchScore score={tank.score} />
-        <div className="absolute inset-x-0 bottom-0 z-10 p-3">
-          <div className="flex items-center gap-1.5">
-            <NationFlag
-              nation={identity.nation}
-              region={region}
-              className="shrink-0"
-            />
-            <VehicleTypeIcon
-              type={identity.type}
-              premium={identity.isPremium}
-              size={14}
-              className="shrink-0"
-            />
-            <span
-              className={cn(
-                "truncate text-sm font-medium text-white",
-                identity.isPremium && "text-[#ffc363]",
-              )}
-            >
-              {identity.name}
-            </span>
-            <span className="shrink-0 text-xs text-white/70">{tier}</span>
-          </div>
-          <p className="mt-0.5 truncate text-xs text-white/70">
-            <Verdict closest={tank.closest} furthest={tank.furthest} />
-          </p>
-        </div>
-      </div>
-    </Link>
+    <TankCard
+      region={region}
+      identity={tank.identity}
+      sizes={CARD_SIZES}
+      overlay={<MatchScore score={tank.score} />}
+      caption={<Verdict closest={tank.closest} furthest={tank.furthest} />}
+    />
   );
 }
 

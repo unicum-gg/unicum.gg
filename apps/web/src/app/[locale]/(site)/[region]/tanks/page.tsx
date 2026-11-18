@@ -5,6 +5,10 @@ import { notFound } from "next/navigation";
 import { Panel, PanelContent, PanelSeparator } from "@/components/panel";
 import { TanksIndex } from "@/components/tanks/list";
 import { TanksVideosTab } from "@/components/tanks/list/videos";
+import {
+  TankSpotlight,
+  type SpotlightTankRow,
+} from "@/components/tanks/spotlight";
 import { toCommunityBattles } from "@/components/tanks/list/videos/row";
 import { tankTabCopy } from "@/components/tanks/list/copy";
 import {
@@ -166,7 +170,10 @@ export async function renderTanksIndex(
   );
 }
 
-/** The index's heading and region line, above whichever tab is showing. */
+/** The index's heading and region line, then the new vehicles, above whichever
+ * tab is showing. The vehicles sit above the tabs rather than in one of them:
+ * they are what a reader opening the catalogue has the least chance of finding
+ * by sorting it. */
 async function TanksIndexShell({
   region,
   locale,
@@ -180,7 +187,17 @@ async function TanksIndexShell({
   count: string;
   children: React.ReactNode;
 }) {
-  const { t } = await getTranslation("components/tanks/list/copy", locale);
+  const [{ t }, spotlight] = await Promise.all([
+    getTranslation("components/tanks/list/copy", locale),
+    buildSafe(
+      () =>
+        unicum
+          .region(region)
+          .tanks.spotlight()
+          .then((r) => r.tanks as unknown as SpotlightTankRow[]),
+      [] as SpotlightTankRow[],
+    ),
+  ]);
   const copy = tankTabCopy(tab, REGION_LABEL[region], t);
   return (
     <div className="mx-auto w-full max-w-7xl">
@@ -204,6 +221,13 @@ async function TanksIndexShell({
       </Panel>
 
       <PanelSeparator />
+
+      {spotlight.length > 0 ? (
+        <>
+          <TankSpotlight region={region} tanks={spotlight} />
+          <PanelSeparator />
+        </>
+      ) : null}
 
       {children}
     </div>
