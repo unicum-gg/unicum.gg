@@ -1,7 +1,7 @@
 import type * as Three from "three";
 import type { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
-import { AZIMUTH, DISTANCE, ELEVATION } from "@/components/tanks/detail/viewer/framing";
+import { AZIMUTH, ELEVATION, standOff } from "@/components/tanks/detail/viewer/framing";
 import { Cinematic, CINEMATIC_WAIT } from "@/components/tanks/detail/viewer/cinematic";
 import { drifting } from "@/services/tank-viewer/idle";
 
@@ -113,14 +113,16 @@ export function rigFor({
   // and off to one side so a face and a flank are in view at once. Copied
   // rather than re-chosen, because a hero framed by taste drifts from the
   // thing it is supposed to be showing.
-  // Fixed, not fitted: see `DISTANCE`. Nothing is measured off the vehicle
-  // here any more, which is the whole point.
-  const fit = DISTANCE;
+  // Fixed, not fitted: see `DISTANCE`. Measured off the vehicle only to back
+  // away from one too big for any frame at that distance, see `standOff`.
   const towards = new THREE.Vector3(
     Math.cos(ELEVATION) * Math.sin(AZIMUTH),
     Math.sin(ELEVATION),
     Math.cos(ELEVATION) * Math.cos(AZIMUTH),
   );
+  const standing = standOff(THREE, vehicle, centre, towards, camera.fov);
+  const fit = standing.distance;
+  centre.copy(standing.target);
   controls.target.copy(centre);
   camera.position.copy(centre).addScaledVector(towards, fit);
   controls.update();
