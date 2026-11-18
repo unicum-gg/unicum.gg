@@ -2,5 +2,7 @@
   "subtitle": "Статистика World of Tanks для региона {region}: {tier} уровень, {nation}, {class}, {tank}.",
   "based-on": "На основе",
   "reward": "Награда",
-  "premium": "Премиум"
+  "premium": "Премиум",
+  "boss": "Босс",
+  "bot": "Бот"
 }

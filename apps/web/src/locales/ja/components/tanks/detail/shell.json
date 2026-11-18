@@ -2,5 +2,7 @@
   "subtitle": "World of Tanks {region} の統計。Tier {tier} の {nation} {class} {tank}",
   "based-on": "基づいています",
   "reward": "報酬",
-  "premium": "プレミアム"
+  "premium": "プレミアム",
+  "boss": "ボス",
+  "bot": "ボット"
 }

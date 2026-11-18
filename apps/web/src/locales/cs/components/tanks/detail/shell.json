@@ -2,5 +2,7 @@
   "subtitle": "Tank {tank}: statistiky World of Tanks pro region {region}, {nation} {class} {tier}. úrovně.",
   "based-on": "Založeno na",
   "reward": "Odměna",
-  "premium": "Prémium"
+  "premium": "Prémium",
+  "boss": "Boss",
+  "bot": "Bot"
 }

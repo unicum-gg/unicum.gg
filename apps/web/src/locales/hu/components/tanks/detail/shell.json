@@ -2,5 +2,7 @@
   "subtitle": "World of Tanks {region} statisztikák a(z) {tier}. szintű {nation} {class} {tank} tankhoz.",
   "based-on": "Alapján",
   "reward": "Jutalom",
-  "premium": "Prémium"
+  "premium": "Prémium",
+  "boss": "Boss",
+  "bot": "Bot"
 }

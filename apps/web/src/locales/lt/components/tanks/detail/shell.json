@@ -2,5 +2,7 @@
   "subtitle": "World of Tanks {region} statistika apie {tier} lygio {nation} {class} {tank}.",
   "based-on": "Remiasi į",
   "reward": "Atlygis",
-  "premium": "Premium"
+  "premium": "Premium",
+  "boss": "Bosas",
+  "bot": "Botas"
 }

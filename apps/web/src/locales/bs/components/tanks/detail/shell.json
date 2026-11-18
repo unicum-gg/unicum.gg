@@ -2,5 +2,7 @@
   "subtitle": "World of Tanks statistika za regiju {region} za tenk {tank}, nivoa {tier}, nacije {nation} i klase {class}.",
   "based-on": "Na osnovu",
   "reward": "Nagrada",
-  "premium": "Premium"
+  "premium": "Premium",
+  "boss": "Boss",
+  "bot": "Bot"
 }

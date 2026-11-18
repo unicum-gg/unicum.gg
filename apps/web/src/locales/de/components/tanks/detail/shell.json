@@ -2,5 +2,7 @@
   "subtitle": "World of Tanks-Statistiken für {region}: {tank}, Stufe {tier}, {nation}, {class}.",
   "based-on": "Basierend auf",
   "reward": "Belohnung",
-  "premium": "Premium"
+  "premium": "Premium",
+  "boss": "Boss",
+  "bot": "Bot"
 }

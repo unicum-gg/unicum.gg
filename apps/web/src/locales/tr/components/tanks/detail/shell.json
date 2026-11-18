@@ -2,5 +2,7 @@
   "subtitle": "{region} World of Tanks istatistikleri: {tier} seviye {nation} {class} {tank}.",
   "based-on": "Temel alınan",
   "reward": "Ödül",
-  "premium": "Premium"
+  "premium": "Premium",
+  "boss": "Boss",
+  "bot": "Bot"
 }
