@@ -3,6 +3,7 @@
 import {
   CaretDownIcon,
   GearSixIcon,
+  HeartIcon,
   PlusIcon,
   ShieldIcon,
   SignOutIcon,
@@ -75,7 +76,7 @@ export function AccountMenu({ active }: { active: ActiveSession }) {
         {/* The nickname is the one thing here with no bound: a player names
             themselves, and the strip is as narrow on a phone as on a desktop,
             so it truncates first rather than pushing the tag off the edge. */}
-        <DropdownMenuTrigger className="flex min-w-0 cursor-pointer items-baseline gap-1 text-fd-foreground transition-colors hover:text-brand focus-visible:outline-none aria-expanded:text-brand">
+        <DropdownMenuTrigger className="group flex min-w-0 cursor-pointer items-baseline gap-1 text-fd-foreground focus-visible:outline-none">
           <span className="truncate font-medium tabular-nums">
             {active.user.name}
           </span>
@@ -85,12 +86,15 @@ export function AccountMenu({ active }: { active: ActiveSession }) {
             </span>
           )}
           <CaretDownIcon
-            className="size-3 shrink-0 self-center text-fd-muted-foreground"
+            className="size-3 shrink-0 self-center text-fd-muted-foreground transition-[color,rotate] group-hover:text-fd-foreground group-aria-expanded:rotate-180 group-aria-expanded:text-fd-foreground"
             weight="bold"
             aria-hidden
           />
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="min-w-56">
+        <DropdownMenuContent
+          align="end"
+          className="min-w-56 [&_[role=menuitem]]:cursor-pointer"
+        >
           <AccountLabel
             nickname={active.user.name}
             clan={clan}
@@ -116,6 +120,12 @@ export function AccountMenu({ active }: { active: ActiveSession }) {
           <DropdownMenuItem onSelect={() => setSettingsOpen(true)}>
             <GearSixIcon weight="bold" />
             {t("settings")}
+          </DropdownMenuItem>
+          <DropdownMenuItem asChild>
+            <Link href={ROUTES.SUPPORT}>
+              <HeartIcon weight="fill" className="text-brand" />
+              {t("support")}
+            </Link>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           {others.length > 0 && (
