@@ -293,6 +293,7 @@
   "components/account/account-menu:profile": "2f3df0a939fd",
   "components/account/account-menu:clan": "4ea122c8ca5b",
   "components/account/account-menu:settings": "c7f73bb54d92",
+  "components/account/account-menu:support": "428247e029ab",
   "components/account/account-menu:switch-account": "a28b02337187",
   "components/account/account-menu:add-account": "c74da371a32d",
   "components/account/account-menu:log-out": "6e78c91f5a05",

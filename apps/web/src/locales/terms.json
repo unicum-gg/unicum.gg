@@ -865,7 +865,8 @@
     "better": "أفضل",
     "Log out": "تسجيل الخروج",
     "Privacy": "الخصوصية",
-    "soon": "قريبًا"
+    "soon": "قريبًا",
+    "Become a supporter": "كن داعمًا"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1734,7 +1735,8 @@
     "better": "лепш",
     "Log out": "Выйсці",
     "Privacy": "Прыватнасць",
-    "soon": "хутка"
+    "soon": "хутка",
+    "Become a supporter": "Стаць прыхільнікам"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -2822,7 +2824,8 @@
     "Switch Account": "Смени акаунт",
     "Log out": "Изход",
     "Privacy": "Поверителност",
-    "soon": "скоро"
+    "soon": "скоро",
+    "Become a supporter": "Стани поддръжник"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -3699,7 +3702,8 @@
     "better": "bolje",
     "Log out": "Odjava",
     "Privacy": "Privatnost",
-    "soon": "uskoro"
+    "soon": "uskoro",
+    "Become a supporter": "Postani podržavalac"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -4798,7 +4802,8 @@
     "Switch Account": "Přepnout účet",
     "Log out": "Odhlásit se",
     "Privacy": "Soukromí",
-    "soon": "brzy"
+    "soon": "brzy",
+    "Become a supporter": "Staňte se podporovatelem"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -5903,7 +5908,8 @@
     "Switch Account": "Skift konto",
     "Log out": "Log ud",
     "Privacy": "Privatliv",
-    "soon": "snart"
+    "soon": "snart",
+    "Become a supporter": "Bliv støttemedlem"
   },
   "de": {
     "(optional)": "(optional)",
@@ -7001,7 +7007,8 @@
     "Switch Account": "Konto wechseln",
     "Log out": "Abmelden",
     "Privacy": "Datenschutz",
-    "soon": "bald"
+    "soon": "bald",
+    "Become a supporter": "Unterstützer werden"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -8105,7 +8112,8 @@
     "Switch Account": "Αλλαγή Λογαριασμού",
     "Log out": "Αποσύνδεση",
     "Privacy": "Απόρρητο",
-    "soon": "σύντομα"
+    "soon": "σύντομα",
+    "Become a supporter": "Γίνε υποστηρικτής"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -9189,7 +9197,8 @@
     "Switch Account": "Cambiar cuenta",
     "Log out": "Cerrar sesión",
     "Privacy": "Privacidad",
-    "soon": "próximamente"
+    "soon": "próximamente",
+    "Become a supporter": "Conviértete en colaborador"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -10298,7 +10307,8 @@
     "Switch Account": "Vaihda tiliä",
     "Log out": "Kirjaudu ulos",
     "Privacy": "Yksityisyys",
-    "soon": "pian"
+    "soon": "pian",
+    "Become a supporter": "Ryhdy tukijaksi"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -11386,7 +11396,8 @@
     "Switch Account": "Changer de compte",
     "Log out": "Se déconnecter",
     "Privacy": "Confidentialité",
-    "soon": "bientôt"
+    "soon": "bientôt",
+    "Become a supporter": "Devenir supporter"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -12256,7 +12267,8 @@
     "better": "बेहतर",
     "Log out": "लॉग आउट",
     "Privacy": "गोपनीयता",
-    "soon": "जल्द ही"
+    "soon": "जल्द ही",
+    "Become a supporter": "समर्थक बनें"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -13358,7 +13370,8 @@
     "Switch Account": "Promjeni korisnički račun",
     "Log out": "Odjava",
     "Privacy": "Privatnost",
-    "soon": "uskoro"
+    "soon": "uskoro",
+    "Become a supporter": "Postani podupiratelj"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -14462,7 +14475,8 @@
     "Switch Account": "Felhasználói fiók váltás",
     "Log out": "Kijelentkezés",
     "Privacy": "Adatvédelem",
-    "soon": "hamarosan"
+    "soon": "hamarosan",
+    "Become a supporter": "Legyél támogató"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -15562,7 +15576,8 @@
     "Switch Account": "Cambia Account",
     "Log out": "Disconnetti",
     "Privacy": "Privacy",
-    "soon": "a breve"
+    "soon": "a breve",
+    "Become a supporter": "Diventa un sostenitore"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -16669,7 +16684,8 @@
     "Switch Account": "アカウント切り替え",
     "Log out": "ログアウト",
     "Privacy": "プライバシー",
-    "soon": "近日"
+    "soon": "近日",
+    "Become a supporter": "サポーターになる"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -17539,7 +17555,8 @@
     "better": "жақсырақ",
     "Log out": "Шығу",
     "Privacy": "Құпиялылық",
-    "soon": "жақында"
+    "soon": "жақында",
+    "Become a supporter": "Қолдаушы болу"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -18650,7 +18667,8 @@
     "Switch Account": "계정 전환",
     "Log out": "로그아웃",
     "Privacy": "개인정보 보호",
-    "soon": "곧"
+    "soon": "곧",
+    "Become a supporter": "후원자가 되기"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -19757,7 +19775,8 @@
     "Switch Account": "Pakeisti paskyrą",
     "Log out": "Atsijungti",
     "Privacy": "Privatumas",
-    "soon": "netrukus"
+    "soon": "netrukus",
+    "Become a supporter": "Tapti rėmėju"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -20850,7 +20869,8 @@
     "Switch Account": "Nomainīt kontu",
     "Log out": "Izrakstīties",
     "Privacy": "Privātums",
-    "soon": "drīzumā"
+    "soon": "drīzumā",
+    "Become a supporter": "Kļūt par atbalstītāju"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -21959,7 +21979,8 @@
     "Switch Account": "Wissel account",
     "Log out": "Uitloggen",
     "Privacy": "Privacy",
-    "soon": "binnenkort"
+    "soon": "binnenkort",
+    "Become a supporter": "Word supporter"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -23059,7 +23080,8 @@
     "Switch Account": "Bytt konto",
     "Log out": "Logg ut",
     "Privacy": "Personvern",
-    "soon": "snart"
+    "soon": "snart",
+    "Become a supporter": "Bli støttespiller"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -24156,7 +24178,8 @@
     "Switch Account": "Zmień konto",
     "Log out": "Wyloguj się",
     "Privacy": "Prywatność",
-    "soon": "wkrótce"
+    "soon": "wkrótce",
+    "Become a supporter": "Zostań patronem"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -25246,7 +25269,8 @@
     "Switch Account": "Mudar de Conta",
     "Log out": "Sair",
     "Privacy": "Privacidade",
-    "soon": "em breve"
+    "soon": "em breve",
+    "Become a supporter": "Torne-se um apoiador"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -26336,7 +26360,8 @@
     "Switch Account": "Schimbă cont",
     "Log out": "Deconectare",
     "Privacy": "Confidențialitate",
-    "soon": "în curând"
+    "soon": "în curând",
+    "Become a supporter": "Devino susținător"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -27414,7 +27439,8 @@
     "Switch Account": "Сменить аккаунт",
     "Log out": "Выйти",
     "Privacy": "Конфиденциальность",
-    "soon": "скоро"
+    "soon": "скоро",
+    "Become a supporter": "Стать спонсором"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -28287,7 +28313,8 @@
     "better": "boljši",
     "Log out": "Odhlásiť sa",
     "Privacy": "Zasebnost",
-    "soon": "kmalu"
+    "soon": "kmalu",
+    "Become a supporter": "Postanite podpornik"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -29391,7 +29418,8 @@
     "Switch Account": "Promeni nalog",
     "Log out": "Одјави се",
     "Privacy": "Privatnost",
-    "soon": "uskoro"
+    "soon": "uskoro",
+    "Become a supporter": "Postani podržavalac"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -30500,7 +30528,8 @@
     "Switch Account": "Byt konto",
     "Log out": "Logga ut",
     "Privacy": "Integritet",
-    "soon": "snart"
+    "soon": "snart",
+    "Become a supporter": "Bli supporter"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -31605,7 +31634,8 @@
     "Switch Account": "เปลี่ยนบัญชี",
     "Log out": "ออกจากระบบ",
     "Privacy": "ความเป็นส่วนตัว",
-    "soon": "เร็ว ๆ นี้"
+    "soon": "เร็ว ๆ นี้",
+    "Become a supporter": "มาเป็นผู้สนับสนุน"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -32477,7 +32507,8 @@
     "better": "mas mahusay",
     "Log out": "Mag-log out",
     "Privacy": "Pribasiya",
-    "soon": "malapit na"
+    "soon": "malapit na",
+    "Become a supporter": "Maging tagasuporta"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -33578,7 +33609,8 @@
     "Switch Account": "Hesap Değiştir",
     "Log out": "Çıkış yap",
     "Privacy": "Gizlilik",
-    "soon": "yakında"
+    "soon": "yakında",
+    "Become a supporter": "Destekçi olun"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -34671,7 +34703,8 @@
     "Switch Account": "Змінити акаунт",
     "Log out": "Вийти",
     "Privacy": "Конфіденційність",
-    "soon": "скоро"
+    "soon": "скоро",
+    "Become a supporter": "Стати спонсором"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -35754,7 +35787,8 @@
     "Switch Account": "Chuyển Tài khoản",
     "Log out": "Đăng xuất",
     "Privacy": "Quyền riêng tư",
-    "soon": "sắp có"
+    "soon": "sắp có",
+    "Become a supporter": "Trở thành người ủng hộ"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -36859,6 +36893,7 @@
     "Switch Account": "切换账号",
     "Log out": "退出登录",
     "Privacy": "隐私",
-    "soon": "即将推出"
+    "soon": "即将推出",
+    "Become a supporter": "成为支持者"
   }
 }
