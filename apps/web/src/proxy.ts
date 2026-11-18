@@ -17,6 +17,11 @@ import {
   ROOT_HANDLERS,
   UNLOCALIZED_PAGES,
 } from "@/proxy-routes.generated";
+import {
+  PARTNER_BY_PATH,
+  type Partner,
+  partnerDestination,
+} from "@unicum.gg/core/partners";
 import { isRegion, Region } from "@unicum.gg/wargaming";
 
 const PATHNAME_HEADER = "x-pathname";
@@ -158,8 +163,49 @@ function markdownRewrite(
   return NextResponse.rewrite(url);
 }
 
+/**
+ * Serve a creator's vanity URL, counting the click on the way out.
+ *
+ * This used to be a `next.config` redirect, and the move is what made the
+ * counting possible at all: Next runs those BEFORE the proxy, so nothing here
+ * ever saw `/remi`. The redirect itself is unchanged for whoever follows it,
+ * same destination and the same attribution.
+ *
+ * Two things are deliberate. The count is fire-and-forget behind a dynamic
+ * import, so the redirect leaves at the same moment it always did and a Redis
+ * that is down, or a module that fails to load, costs a tally rather than a
+ * visitor; it also keeps ioredis off the path every other request takes. And
+ * the response refuses to be cached, which is the part that would otherwise
+ * make the whole thing lie: a 307 held at the edge is served to everybody who
+ * follows the link afterwards without ever reaching us, so the counter would
+ * report one click for a stream that sent a hundred.
+ */
+function partnerRedirect(req: NextRequest, partner: Partner): NextResponse {
+  void import("@unicum.gg/core/partners/hits")
+    .then((hits) => hits.recordPartnerHit(partner.slug))
+    .catch(() => {});
+  const { pathname, utm } = partnerDestination(partner);
+  const url = req.nextUrl.clone();
+  url.pathname = pathname;
+  url.search = "";
+  for (const [param, value] of Object.entries(utm)) {
+    url.searchParams.set(param, value);
+  }
+  // Temporary: the target is a partnership, not a permanent fact about the URL.
+  // A permanent redirect would be cached by browsers long after it ends.
+  const response = NextResponse.redirect(url, 307);
+  response.headers.set("Cache-Control", "private, no-store");
+  return response;
+}
+
 export function proxy(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
+
+  // A creator's vanity URL, before anything else touches the path: it is an
+  // exact match on a handful of strings, it carries no locale and no region,
+  // and it leaves the site's own routing untouched.
+  const partner = PARTNER_BY_PATH.get(pathname);
+  if (partner) return partnerRedirect(req, partner);
 
   // Everything that is not a page: the API, `robots.txt`, the sitemap index,
   // `llms.txt`, the agent discovery files. They live outside `app/[locale]`, so

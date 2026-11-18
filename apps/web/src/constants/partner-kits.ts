@@ -1,6 +1,6 @@
 /**
  * The creators we partner with and the assets we hand them, keyed by the same
- * slug as their vanity URL (`config/redirects/partners.ts`), so `/remi` and
+ * slug as their vanity URL (`@unicum.gg/core/partners`), so `/remi` and
  * `/partners/remi` always name the same person.
  *
  * Nothing here is a file. Every asset is rendered on demand by

@@ -19,6 +19,8 @@
     "./mom/refresh-cron": "./src/mom/refresh-cron.ts",
     "./moe": "./src/moe/index.ts",
     "./moe/refresh-cron": "./src/moe/refresh-cron.ts",
+    "./partners": "./src/partners/index.ts",
+    "./partners/hits": "./src/partners/hits.ts",
     "./players": "./src/players/index.ts",
     "./players/resolve-account": "./src/players/resolve-account.ts",
     "./players/mode-ratings": "./src/players/mode-ratings.ts",
