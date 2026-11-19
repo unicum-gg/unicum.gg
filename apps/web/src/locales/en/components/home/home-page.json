@@ -10,6 +10,13 @@
   "rating-scale": {
     "title": "Rating scale"
   },
+  "replays": {
+    "title": "Replays",
+    "heading": "Rewatch your battles",
+    "description": "Every battle players share comes with its full report, what each tank had fitted and a replay you can watch in the browser. Install our mod to share yours as each battle ends.",
+    "browse": "Browse replays",
+    "mod": "Get the mod"
+  },
   "community": {
     "title": "Join the community",
     "heading": "Connect with WoT players",

@@ -1,6 +1,8 @@
 import {
   DiscordLogoIcon,
+  FilmSlateIcon,
   GithubLogoIcon,
+  PuzzlePieceIcon,
 } from "@phosphor-icons/react/dist/ssr";
 import { buttonVariants } from "fumadocs-ui/components/ui/button";
 import Link from "@/components/link";
@@ -18,6 +20,9 @@ import {
 } from "@/components/home/rating-scale";
 import { TopClansOverallPanel } from "@/components/home/top-clans-overall-panel";
 import { LiveSection } from "@/components/home/live-section";
+import { LatestReplays } from "@/components/home/latest-replays";
+import type { BattlesCatalogPayload } from "@/components/battles/list/catalog";
+import ROUTES from "@/constants/routes";
 import { TopPlayers } from "@/components/home/top-players";
 import { TopPlayersOverallPanel } from "@/components/home/top-players-overall-panel";
 import {
@@ -37,6 +42,7 @@ import APP from "@/constants/app";
 import PAGINATION from "@/constants/pagination";
 import ROUTES from "@/constants/routes";
 import {
+  BattleCatalogSort,
   DEFAULT_RATING_METRIC,
   RatingMetric,
   type LiveStreamer,
@@ -88,6 +94,29 @@ async function playersTopByRegions(
   return Object.fromEntries(entries) as Record<Region, TopPlayersSnapshot>;
 }
 
+/** The newest replays of each server, which the reader's region picks from. */
+async function latestReplaysByRegions(
+  locale: string,
+): Promise<Record<Region, BattlesCatalogPayload | null>> {
+  const entries = await Promise.all(
+    REGIONS.map(async (region) => {
+      const payload = await buildSafe(
+        () =>
+          unicum
+            .region(region)
+            .battles.list({ sort: BattleCatalogSort.Recent, limit: LATEST_REPLAYS, language: locale })
+            .then((r) => r as unknown as BattlesCatalogPayload),
+        null,
+      );
+      return [region, payload] as const;
+    }),
+  );
+  return Object.fromEntries(entries) as Record<Region, BattlesCatalogPayload | null>;
+}
+
+/** How many replays the home page lists. */
+const LATEST_REPLAYS = 5;
+
 async function clansTopByRegions(
   metric: RatingMetric,
   period: `${TopClansPeriod}`,
@@ -137,6 +166,7 @@ export async function HomePage({
     topPlayersMonth,
     liveStreamers,
     spotlight,
+    latestReplays,
   ] = await Promise.all([
     // The default metric only. PR and WTR have no value over a window (see
     // `RatingMetric`), so a recent board ranks the accounts active inside it by
@@ -160,6 +190,7 @@ export async function HomePage({
           .then((r) => r.tanks as unknown as SpotlightTankRow[]),
       [] as SpotlightTankRow[],
     ),
+    latestReplaysByRegions(locale),
   ]);
 
   return (
@@ -250,37 +281,68 @@ export async function HomePage({
 
       <PanelSeparator />
 
-      <Panel>
-        <PanelHeader>
-          <PanelTitle>{t("community.title")}</PanelTitle>
-        </PanelHeader>
+      <LatestReplays initial={latestReplays} regionOverride={regionOverride} />
 
-        <PanelContent>
-          <CtaCard
-            heading={t("community.heading")}
-            description={t("community.description")}
-          >
-            <Link
-              href={APP.EXTERNAL.DISCORD}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={buttonVariants({ variant: "primary" })}
+      <PanelSeparator />
+
+      {/* The two calls to action side by side rather than stacked: the same
+          card twice in a column read as one block said twice. */}
+      <div className="grid lg:grid-cols-2 *:min-w-0">
+        <Panel className="flex flex-col lg:border-r-0">
+          <PanelHeader>
+            <PanelTitle>{t("replays.title")}</PanelTitle>
+          </PanelHeader>
+          <PanelContent className="flex-1">
+            <CtaCard
+              heading={t("replays.heading")}
+              description={t("replays.description")}
             >
-              <DiscordLogoIcon weight="fill" className="mr-2 size-4" />
-              {t("community.discord")}
-            </Link>
-            <Link
-              href={APP.EXTERNAL.GITHUB}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={buttonVariants({ variant: "outline" })}
+              <Link
+                href={ROUTES.BATTLES(regionOverride ?? REGIONS[0])}
+                className={buttonVariants({ variant: "primary" })}
+              >
+                <FilmSlateIcon weight="fill" className="mr-2 size-4" />
+                {t("replays.browse")}
+              </Link>
+              <Link href={ROUTES.MOD} className={buttonVariants({ variant: "outline" })}>
+                <PuzzlePieceIcon weight="fill" className="mr-2 size-4" />
+                {t("replays.mod")}
+              </Link>
+            </CtaCard>
+          </PanelContent>
+        </Panel>
+
+        <Panel className="flex flex-col" screenLines={false}>
+          <PanelHeader screenLines={false}>
+            <PanelTitle>{t("community.title")}</PanelTitle>
+          </PanelHeader>
+          <PanelContent className="flex-1">
+            <CtaCard
+              heading={t("community.heading")}
+              description={t("community.description")}
             >
-              <GithubLogoIcon weight="fill" className="mr-2 size-4" />
-              {t("community.github")}
-            </Link>
-          </CtaCard>
-        </PanelContent>
-      </Panel>
+              <Link
+                href={APP.EXTERNAL.DISCORD}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={buttonVariants({ variant: "primary" })}
+              >
+                <DiscordLogoIcon weight="fill" className="mr-2 size-4" />
+                {t("community.discord")}
+              </Link>
+              <Link
+                href={APP.EXTERNAL.GITHUB}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={buttonVariants({ variant: "outline" })}
+              >
+                <GithubLogoIcon weight="fill" className="mr-2 size-4" />
+                {t("community.github")}
+              </Link>
+            </CtaCard>
+          </PanelContent>
+        </Panel>
+      </div>
 
       <PanelSeparator />
 
