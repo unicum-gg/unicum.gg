@@ -94,6 +94,14 @@ export const battleParams = z.object({
   }),
 });
 
+/** Which side of a battle its card is drawn from. */
+export const battleOgQuery = z.object({
+  player: z.coerce.number().int().optional().meta({
+    description:
+      "The account whose battle the card shows: their result, vehicle and figures. Without it, the battle as a whole.",
+  }),
+});
+
 /** Which page of a player's battles to return, how long a page is, and the
  * language it names equipment in. */
 export const playerBattlesQuery = z.object({

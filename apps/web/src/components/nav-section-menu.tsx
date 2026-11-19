@@ -10,6 +10,7 @@ import {
   ChatsCircleIcon,
   CoinsIcon,
   CrosshairIcon,
+  FilmSlateIcon,
   FlagIcon,
   FlagBannerIcon,
   GaugeIcon,
@@ -37,6 +38,7 @@ import { useTranslation } from "@/hooks/use-translation";
  * than in `navSections` so that file stays a plain, footer-safe data module. */
 const LINK_ICON: Record<string, ReactNode> = {
   "top-players": <TrophyIcon />,
+  battles: <FilmSlateIcon />,
   // The same glyph the vehicles' own Marks of Excellence page carries: one
   // subject, one icon, whichever section a reader comes at it from.
   "players-marks": <MedalIcon />,

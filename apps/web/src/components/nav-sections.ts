@@ -63,6 +63,12 @@ export function navSections(
           description: t("links.top-players.description"),
         },
         {
+          id: "battles",
+          label: t("links.battles.label"),
+          href: ROUTES.BATTLES(region),
+          description: t("links.battles.description"),
+        },
+        {
           // Wargaming's own name for the mark level, like the mode names below
           // it: a label that is nothing but a name is already written down per
           // language, so it is looked up rather than written here.

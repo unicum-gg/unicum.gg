@@ -3,7 +3,6 @@ import * as z from "zod";
 import {
   accountsIn,
   battleIdIn,
-  readReplay,
   readReplayHeader,
   ReplayError,
 } from "@unicum.gg/shared";
@@ -13,7 +12,7 @@ import {
 } from "@unicum.gg/core/battles/ingest";
 import {
   assembleReplay,
-  attachReplay,
+  recordReplay,
   discardReplayParts,
   replayExists,
   replayKey,
@@ -23,13 +22,13 @@ import {
   ReplayStoreError,
   storeReplay,
 } from "@unicum.gg/core/battles/replays";
-import { storeLoadoutsFromContainer } from "@unicum.gg/core/battles/loadouts";
-import { storePositionsFromContainer } from "@unicum.gg/core/maps/positions";
 import { consumeQuota } from "@unicum.gg/core/lib/request-quota";
 import {
   accountProof,
   notAuthenticated,
 } from "@/services/game/proven-account";
+import { writeDerived } from "@/services/game/replay-derived";
+import { replayEconomy, replayRecorderOf } from "@/services/game/replay-economy";
 
 export const dynamic = "force-dynamic";
 
@@ -230,7 +229,9 @@ export async function POST(
   }
 
   const piece = new Uint8Array(Buffer.from(body.data.replay, "base64"));
-  const key = replayKey(account.region, startedAt, arenaUniqueId);
+  // Keyed on the recorder: the mod only ever offers its own client's file, and
+  // every participant who runs it records their own point of view.
+  const key = replayKey(account.region, startedAt, arenaUniqueId, account.accountId);
   const split = pieceOf(new URL(req.url));
 
   // A replay too long to travel in one request arrives in pieces, each one
@@ -313,17 +314,21 @@ export async function POST(
   // Between the row check above and here, another of the thirty clients may
   // have placed the same file. Cheap to ask, and it saves writing a megabyte
   // over an identical one.
+  // The same recording offered again (a retry after a lost answer): record
+  // it rather than writing a megabyte over an identical one.
   if (await replayExists(key)) {
-    if (target) await attachReplay(account.region, arenaUniqueId, startedAt, key);
-    // Still read, even though the file is not written again. The loadout is
-    // keyed on the battle and the VEHICLE, so a second reporter contributes
-    // their own vehicle's, which the first could not see; and a file stored
-    // before this was collected at all has none, so an offer of it backfills.
-    // The insert ignores conflicts, so offering the same one twice is free.
-    // The positions are rewritten whole, so a second offer is free too.
-    // Only with a row: both are keyed on the battle, and an archived file can
-    // be read again the day one exists.
-    if (target) await writeDerived(account.region, arenaUniqueId, startedAt, bytes);
+    if (target) {
+      await recordReplay({
+        region: account.region,
+        arenaUniqueId,
+        startedAt,
+        recorder: replayRecorderOf(bytes) ?? account.accountId,
+        key,
+        bytes,
+        personal: replayEconomy(bytes),
+      });
+      await writeDerived(account.region, arenaUniqueId, startedAt, bytes);
+    }
     return refuse(ReplayRefusal.AlreadyStored);
   }
 
@@ -345,7 +350,17 @@ export async function POST(
   // nothing is worse than an object nobody references, because only the first
   // produces a broken download for a reader. With no row there is nothing to
   // write, and an object nobody references yet is the whole point.
-  if (target) await attachReplay(account.region, arenaUniqueId, startedAt, key);
+  if (target) {
+    await recordReplay({
+      region: account.region,
+      arenaUniqueId,
+      startedAt,
+      recorder: replayRecorderOf(bytes) ?? account.accountId,
+      key,
+      bytes,
+      personal: replayEconomy(bytes),
+    });
+  }
 
   // What the recorder had fitted, written down now rather than decoded again
   // on every read. This is the one moment the bytes are already in memory, and
@@ -373,56 +388,6 @@ export async function POST(
   );
 }
 
-/**
- * Decode the file once and store what it says, swallowing any fault.
- *
- * Two things come out of it: the loadouts the recording carries, and where
- * the recorder's team set up and dealt its damage from, for the map's
- * minimap. The decode is the expensive half -- a decryption and an inflate
- * over about a megabyte -- and it happens here rather than on the read path
- * for exactly that reason, once for both. A
- * recording from a client this cannot read simply yields nothing, which is a
- * battle with no loadout and no positions rather than an error: coverage is a
- * thing to measure, not to fail on.
- *
- * Each write is guarded on its own, so a fault in one never costs the other.
- * The reading itself lives in `core` because the backfills do the same work on
- * the same files, and the two must not drift.
- */
-async function writeDerived(
-  region: Parameters<typeof storeLoadoutsFromContainer>[0],
-  arenaUniqueId: string,
-  startedAt: Date,
-  bytes: Uint8Array,
-): Promise<void> {
-  let container;
-  try {
-    container = await readReplay(bytes);
-  } catch (error) {
-    console.error(
-      `[api/game/battles/replay] ${region}/${arenaUniqueId}: unreadable`,
-      error,
-    );
-    return;
-  }
-  try {
-    await storeLoadoutsFromContainer(region, arenaUniqueId, startedAt, container);
-  } catch (error) {
-    console.error(
-      `[api/game/battles/replay] ${region}/${arenaUniqueId}: loadout not stored`,
-      error,
-    );
-  }
-  try {
-    await storePositionsFromContainer(region, arenaUniqueId, startedAt, container);
-  } catch (error) {
-    console.error(
-      `[api/game/battles/replay] ${region}/${arenaUniqueId}: positions not stored`,
-      error,
-    );
-  }
-}
-
 function refuse(reason: ReplayRefusal): Response {
   // 200 and not 4xx: these are all final answers the mod must act on by
   // dropping the file, and an error status invites a retry.
@@ -431,3 +396,4 @@ function refuse(reason: ReplayRefusal): Response {
     { status: 200, headers: { "cache-control": "no-store" } },
   );
 }
+

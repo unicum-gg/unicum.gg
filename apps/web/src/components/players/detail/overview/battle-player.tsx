@@ -13,6 +13,7 @@ import { LineupBreakdown } from "./battle-lineup";
 import Link from "@/components/link";
 import { PlayerName } from "@/components/entity/player-name";
 import { TankIcon } from "@/components/tanks/tank-icon";
+import { CurrencyIcon, type Currency } from "@/components/tanks/currency-icon";
 import { VehicleTypeIcon } from "@/components/tanks/vehicle-type-icon";
 import { Button } from "@/components/ui/button";
 import ROUTES from "@/constants/routes";
@@ -28,7 +29,7 @@ function clock(seconds: number): string {
 }
 
 /** One line of the report: a label, a value, and whether it is a sub-line. */
-type Row = { label: string; value: string; under?: boolean };
+type Row = { label: string; value: string; under?: boolean; currency?: Currency };
 
 /**
  * One player's battle, laid out as the game's own Detailed Report.
@@ -63,6 +64,7 @@ export function BattlePlayerPanel({
   startedAt,
   battleDuration,
   onClose,
+  compact = false,
   t,
   count,
   time,
@@ -71,13 +73,20 @@ export function BattlePlayerPanel({
   participant: Participant;
   /** Whoever destroyed them, when the battle named one. */
   killer: Participant | null;
-  /** Everyone they destroyed, named. A kill count raises this and cannot say it. */
-  victims: string[];
+  /** Everyone they destroyed. A kill count raises this and cannot say it. */
+  victims: Participant[];
   metric: RatingMetric;
   /** The battle's own start, for the Time block. */
   startedAt: string;
   battleDuration: number | null;
-  onClose: () => void;
+  /** Absent where the panel is the page rather than a row opened over it. */
+  onClose?: () => void;
+  /**
+   * The figures summarised to six lines, for a recorder's personal score,
+   * where the earnings sit beside the panel and the itemised version is the
+   * detailed report's tab. The configuration is kept whole.
+   */
+  compact?: boolean;
   t: TranslateFunction;
   count: Intl.NumberFormat;
   time: { format: (at: string | Date | number) => string };
@@ -156,8 +165,8 @@ export function BattlePlayerPanel({
   ];
 
   const earned: (Row | null)[] = [
-    line(t("report.xp"), own.xp),
-    line(t("report.credits"), own.credits),
+    withCurrency(line(t("report.xp"), own.xp), "xp"),
+    withCurrency(line(t("report.credits"), own.credits), "credits"),
     own.health === undefined
       ? null
       : {
@@ -166,11 +175,32 @@ export function BattlePlayerPanel({
         },
   ];
 
-  const blocks: { label: string; rows: (Row | null)[] }[] = [
-    { label: t("report.statistics"), rows: statistics },
-    { label: t("report.time"), rows: timing },
-    { label: t("report.earned"), rows: earned },
+  const summary: (Row | null)[] = [
+    line(t("column.damage"), own.damage),
+    line(
+      t("report.assistance"),
+      own.radio === undefined && own.track === undefined && own.stun === undefined
+        ? undefined
+        : (own.radio ?? 0) + (own.track ?? 0) + (own.stun ?? 0),
+    ),
+    pair(t("report.damaged-destroyed"), own.damaged, own.kills),
+    pair(t("report.hits-pens"), own.hits, own.piercings),
+    line(t("report.blocked"), own.blocked),
+    own.lifeTime === undefined
+      ? null
+      : {
+          label: survived ? t("report.alive-for") : t("report.destroyed-at"),
+          value: clock(own.lifeTime),
+        },
   ];
+
+  const blocks: { label: string; rows: (Row | null)[] }[] = compact
+    ? [{ label: t("report.statistics"), rows: summary }]
+    : [
+        { label: t("report.statistics"), rows: statistics },
+        { label: t("report.time"), rows: timing },
+        { label: t("report.earned"), rows: earned },
+      ];
 
   return (
     <div className="bg-muted/30 flex min-w-0 flex-col">
@@ -227,33 +257,48 @@ export function BattlePlayerPanel({
           <p className="text-muted-foreground text-xs">
             {survived
               ? t("survived-the-battle")
-              : killer?.player
-                ? t("destroyed-by", { nickname: killer.player.nickname })
+              : killer
+                ? (
+                    <>
+                      {t("destroyed-by-label")}{" "}
+                      <ParticipantLink region={region} participant={killer} unnamed={t("unnamed")} />
+                    </>
+                  )
                 : t("destroyed")}
           </p>
           {/* The other direction, which nothing else in the results names: a
-              kill count is a number, and this is who it was. */}
+              kill count is a number, and this is who it was. Each name leads
+              to its player, as the killer's does. */}
           {victims.length > 0 ? (
             <p className="text-muted-foreground text-xs">
-              {t("destroyed-list", { names: victims.join(", ") })}
+              {t("destroyed-list-label")}{" "}
+              {victims.map((victim, index) => (
+                <span key={victim.id}>
+                  <ParticipantLink region={region} participant={victim} unnamed={t("unnamed")} />
+                  {index < victims.length - 1 ? ", " : null}
+                </span>
+              ))}
             </p>
           ) : null}
         </div>
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={onClose}
-          aria-label={t("close")}
-          className="shrink-0"
-        >
-          <XIcon className="size-4" />
-        </Button>
+        {onClose ? (
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={onClose}
+            aria-label={t("close")}
+            className="shrink-0"
+          >
+            <XIcon className="size-4" />
+          </Button>
+        ) : null}
       </div>
 
       <div className="space-y-3 px-4 py-3">
         {blocks.map((block) => {
           const rows = block.rows.filter((row): row is Row => row !== null);
           if (rows.length === 0) return null;
+          const priced = rows.some((row) => row.currency);
           return (
             <div key={block.label}>
               <h4 className="text-muted-foreground mb-1 text-xs font-medium uppercase tracking-wide">
@@ -280,9 +325,17 @@ export function BattlePlayerPanel({
                       className={cn(
                         "shrink-0 tabular-nums",
                         row.under && "text-muted-foreground",
+                        priced && "inline-flex items-center gap-1",
                       )}
                     >
                       {row.value}
+                      {priced ? (
+                        // One fixed slot per line, so a coin and a star (and a line
+                        // with neither) leave every amount on the same right edge.
+                        <span className="inline-flex w-5 justify-center">
+                          {row.currency ? <CurrencyIcon type={row.currency} /> : null}
+                        </span>
+                      ) : null}
                     </dd>
                   </div>
                 ))}
@@ -307,5 +360,34 @@ export function BattlePlayerPanel({
         <BattleLoadout loadouts={participant.loadouts} />
       </div>
     </div>
+  );
+}
+
+/** A line in credits or experience, carrying the site's currency icon. */
+function withCurrency(row: Row | null, currency: Currency): Row | null {
+  return row ? { ...row, currency } : null;
+}
+
+/** A participant's name, linked to their profile when we can name them. */
+function ParticipantLink({
+  region,
+  participant,
+  unnamed,
+}: {
+  region: Region;
+  participant: Participant;
+  unnamed: string;
+}) {
+  if (!participant.player) {
+    return <span>{participant.tank?.shortName ?? unnamed}</span>;
+  }
+  return (
+    <Link
+      href={ROUTES.PLAYER(region, participant.player.nickname)}
+      prefetch={false}
+      className="text-foreground hover:underline"
+    >
+      {participant.player.nickname}
+    </Link>
   );
 }

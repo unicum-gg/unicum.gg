@@ -16,6 +16,7 @@ import {
   readFieldMods,
   readLoadouts,
   readReplay,
+  replayClientVersion,
 } from "@unicum.gg/shared";
 import { db } from "../db";
 import { fetchReplay } from "./replays";
@@ -301,21 +302,6 @@ async function vehiclesOf(
     });
   }
   return out;
-}
-
-/**
- * `2.4.0.2` out of `World of Tanks v. 2.4.0.2 #966`.
- *
- * One copy, because three readers need it and they must agree. The column
- * exists to keep one patch's figures apart from another's, and two spellings
- * of one build would split that in half -- a comparison that looks right and
- * compares nothing. The xml version rather than the exe's, which the header
- * also carries but which stops at the release before a hotfix, and with the
- * non-breaking spaces the client writes these with folded to ordinary ones.
- */
-export function replayClientVersion(full: string): string | null {
-  const found = /v\.\s*([0-9]+(?:\.[0-9]+)+)/.exec(full.replace(/\u00a0/g, " "));
-  return found ? found[1] : null;
 }
 
 /**

@@ -1,4 +1,4 @@
-import { eq } from "drizzle-orm";
+import { and, eq, inArray } from "drizzle-orm";
 import { loadoutPrivacy } from "@unicum.gg/shared";
 import { db } from "@unicum.gg/core/db";
 
@@ -44,4 +44,25 @@ export async function setBattlesHidden(
       target: loadoutPrivacy.wargamingAccount,
       set: { battlesHidden, userId, updatedAt: new Date() },
     });
+}
+
+/** Which of these accounts keep their battle list to themselves, in one read. */
+export async function battlesHiddenAmong(
+  region: string,
+  accountIds: number[],
+): Promise<Set<number>> {
+  if (accountIds.length === 0) return new Set();
+  const rows = await db
+    .select({ account: loadoutPrivacy.wargamingAccount })
+    .from(loadoutPrivacy)
+    .where(
+      and(
+        inArray(
+          loadoutPrivacy.wargamingAccount,
+          accountIds.map((id) => `${region}-${id}`),
+        ),
+        eq(loadoutPrivacy.battlesHidden, true),
+      ),
+    );
+  return new Set(rows.map((row) => Number(row.account.split("-")[1])));
 }

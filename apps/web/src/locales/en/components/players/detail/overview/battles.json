@@ -82,7 +82,7 @@
   "report": {
     "statistics": "Statistics",
     "time": "Time",
-    "earned": "Earned",
+    "earned": "Earned (standard account)",
     "shots": "Shots fired",
     "hits-pens": "Direct hits / penetrations",
     "splash": "Splash damage",
@@ -135,11 +135,11 @@
     "mark-movement": "This battle"
   },
   "tab": {
+    "personal": "Personal score",
     "teams": "Team score",
     "report": "Detailed report",
     "replay": "Replay"
   },
-  "destroyed-list": "Has destroyed {names}",
   "replay": {
     "no-bounds": "This arena has no extent in the catalogue, so the positions cannot be placed on its minimap.",
     "play": "Play",
@@ -154,7 +154,63 @@
     "deaths-none": "Nobody was destroyed in this battle.",
     "deaths-yet": "Everyone is still alive.",
     "deaths-unknown": "a vehicle",
-    "deaths-destroyed": "Destroyed"
+    "deaths-destroyed": "Destroyed",
+    "restart": "Play from the start",
+    "spotted": "In sight",
+    "unspotted": "Out of sight",
+    "observed": "Spotted by the enemy",
+    "estimated": "estimated position, out of the recording’s range",
+    "speed": "Playback speed",
+    "hud": {
+      "hp": "Hit points",
+      "speed": "Speed",
+      "kmh": "{speed} km/h",
+      "damage": "Damage",
+      "damage-hint": "So far. For the recorder, from their own battle feed, which leaves out hits on targets they could not see; for anybody else, from the hits the recording heard, which can fall well short of the results.",
+      "assisted": "Assisted",
+      "blocked": "Blocked",
+      "final-hint": "The battle’s final figure, from the results.",
+      "modules": "Modules and crew",
+      "seen-at": "as the recorder’s commander last saw them, at {time}",
+      "state": {
+        "damaged": "Damaged",
+        "destroyed": "Destroyed",
+        "injured": "Injured"
+      },
+      "part": {
+        "engine": "Engine",
+        "ammoBay": "Ammo rack",
+        "fuelTank": "Fuel tank",
+        "radio": "Radio",
+        "leftTrack": "Left track",
+        "rightTrack": "Right track",
+        "gun": "Gun",
+        "turretRotator": "Turret ring",
+        "surveyingDevice": "Vision",
+        "commander": "Commander",
+        "driver": "Driver",
+        "radioman": "Radio operator",
+        "gunner": "Gunner",
+        "loader": "Loader",
+        "track": "Track"
+      }
+    },
+    "tab": {
+      "chat": "Chat",
+      "log": "Damage log"
+    },
+    "log": {
+      "empty": "Nothing dealt or taken yet.",
+      "kind": {
+        "dealt": "Damage dealt",
+        "received": "Damage received",
+        "blocked": "Blocked by armour",
+        "assist": "Assisted damage",
+        "crit": "Critical hits dealt",
+        "received-crit": "Critical hits received",
+        "module": "Module hit"
+      }
+    }
   },
   "lineup": {
     "more": "+{count}",
@@ -162,5 +218,18 @@
     "heading": "Vehicles in this battle",
     "kills": "Destroyed",
     "time": "Time"
-  }
+  },
+  "earnings": {
+    "title": "Earnings",
+    "standard": "Standard account",
+    "with-bonuses": "With your bonuses",
+    "credits": "Credits",
+    "costs": "Repairs and supplies",
+    "net": "Net credits",
+    "xp": "Experience"
+  },
+  "destroyed-by-label": "Destroyed by",
+  "destroyed-list-label": "Has destroyed",
+  "replay-views": "{count} views",
+  "replay-downloads": "{count} downloads"
 }

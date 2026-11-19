@@ -1,0 +1,23 @@
+{
+  "trigger": "Upload a replay",
+  "title": "Upload a replay",
+  "description": "Add one of your own battles from its .wotreplay file, no mod needed. It gets its own page with its replay, ready to share.",
+  "drop": "Drop a .wotreplay here, or click to choose one",
+  "hint": "Your own replays only, from a battle played to the end. They are in the replays folder of your game directory.",
+  "send": "Upload",
+  "sending": "Uploading…",
+  "error": {
+    "not_collected": "Replay uploads are not available right now.",
+    "archive_full": "Our replay storage is full for now. Try again later.",
+    "not_a_replay": "That file is not a World of Tanks replay we can read.",
+    "unfinished": "That replay was saved before the battle ended, so it has no results.",
+    "not_yours": "That replay was recorded by another account. You can only upload your own.",
+    "wrong_region": "That battle was played on another region than the account you are signed in with.",
+    "too_old": "That battle is older than the ones we keep.",
+    "malformed": "We could not read the results in that replay.",
+    "too_large": "That file is larger than any replay we take (9 MB).",
+    "too_many_uploads": "You have uploaded a lot in the last hour. Try again a bit later.",
+    "unauthenticated": "Your session has expired. Sign in again.",
+    "unknown": "Something went wrong. Try again in a moment."
+  }
+}

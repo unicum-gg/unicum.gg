@@ -14,14 +14,33 @@ export type PlayerBattleFilter = {
   /** The arena, by the game's own id. */
   map?: string;
   result?: BattleResultFilter;
+  /** The game update it was played on, `2.4.1`, whichever hotfix of it. */
+  version?: string;
 };
+
+/**
+ * The update a battle was played on, as SQL: `2.4.1` out of `2.4.1.1`.
+ *
+ * The update rather than the build: a hotfix (`2.4.1.0` to `2.4.1.1`) changes
+ * nothing anybody compares battles on, and the oldest rows still carry the
+ * client's whole version string (`World of Tanks v.2.4.0.0 #930`), which the
+ * pattern reads the same way.
+ */
+export const battleUpdate = (table: BattlesTable) =>
+  sql<string | null>`substring(${table.clientVersion} from '[0-9]+\\.[0-9]+\\.[0-9]+')`;
 
 type BattlesTable = (typeof battlesByRegion)[Region];
 
-/** This account's own line in a battle, as SQL. */
-const ownLine = (table: BattlesTable, accountId: number) => sql`(
+/**
+ * One account's own line in a battle, as SQL.
+ *
+ * The account is an SQL expression rather than a number, so the same reading
+ * serves a player's own list (a literal id) and the replay catalogue, where
+ * each battle is read from its own reporter's line (`reported_by[1]`).
+ */
+const ownLine = (table: BattlesTable, account: SQL) => sql`(
   SELECT v FROM jsonb_array_elements(${table.vehicles}) AS v
-  WHERE (v->>'account')::bigint = ${accountId}
+  WHERE (v->>'account')::bigint = ${account}
   LIMIT 1
 )`;
 
@@ -40,33 +59,77 @@ export function playerBattlesWhere(
   accountId: number,
   filter: PlayerBattleFilter = {},
 ): SQL {
-  const parts: SQL[] = [sql`${table.playerIds} @> ARRAY[${accountId}]::bigint[]`];
+  return sql.join(
+    [
+      sql`${table.playerIds} @> ARRAY[${accountId}]::bigint[]`,
+      ...battleFilterParts(table, sql`${accountId}`, filter),
+    ],
+    sql` AND `,
+  );
+}
+
+/**
+ * The conditions a filter sets on the battle itself: its mode, its map and the
+ * update it was played on, whoever is read in it.
+ */
+export function battleLevelParts(
+  table: BattlesTable,
+  filter: PlayerBattleFilter = {},
+): SQL[] {
+  const parts: SQL[] = [];
   if (filter.battleType !== undefined) {
     parts.push(sql`${table.battleType} = ${filter.battleType}`);
   }
   if (filter.map !== undefined) {
     parts.push(sql`${table.mapName} = ${filter.map}`);
   }
+  if (filter.version !== undefined) {
+    parts.push(sql`${battleUpdate(table)} = ${filter.version}`);
+  }
+  return parts;
+}
+
+/**
+ * The conditions a filter sets on one player's line in a battle (`line` is that
+ * vehicle's JSON): the tank they brought and how the battle ended for them.
+ */
+export function lineFilterParts(
+  table: BattlesTable,
+  line: SQL,
+  filter: PlayerBattleFilter = {},
+): SQL[] {
+  const parts: SQL[] = [];
   if (filter.tank !== undefined) {
     // Any tank of the lineup, not only the first: a Frontline battle fought
     // in three tanks is a battle in each of them, and `tank` alone names the
     // first one (see `BattleVehicle["tanks"]`).
-    const own = ownLine(table, accountId);
     parts.push(
-      sql`((${own}->>'tank')::int = ${filter.tank} OR ${own}->'tanks' @> jsonb_build_array(jsonb_build_object('tank', ${filter.tank}::int)))`,
+      sql`((${line}->>'tank')::int = ${filter.tank} OR ${line}->'tanks' @> jsonb_build_array(jsonb_build_object('tank', ${filter.tank}::int)))`,
     );
   }
-  const ownTeam = sql`(${ownLine(table, accountId)}->>'team')::int`;
+  const team = sql`(${line}->>'team')::int`;
   if (filter.result === BattleResultFilter.Win) {
-    parts.push(sql`${table.winnerTeam} = ${ownTeam}`);
+    parts.push(sql`${table.winnerTeam} = ${team}`);
   } else if (filter.result === BattleResultFilter.Loss) {
     parts.push(
-      sql`${table.winnerTeam} IS NOT NULL AND ${table.winnerTeam} <> 0 AND ${table.winnerTeam} <> ${ownTeam}`,
+      sql`${table.winnerTeam} IS NOT NULL AND ${table.winnerTeam} <> 0 AND ${table.winnerTeam} <> ${team}`,
     );
   } else if (filter.result === BattleResultFilter.Draw) {
     parts.push(sql`${table.winnerTeam} = 0`);
   }
-  return sql.join(parts, sql` AND `);
+  return parts;
+}
+
+/** A filter's conditions, read from one account's line in each battle. */
+export function battleFilterParts(
+  table: BattlesTable,
+  account: SQL,
+  filter: PlayerBattleFilter = {},
+): SQL[] {
+  return [
+    ...battleLevelParts(table, filter),
+    ...lineFilterParts(table, ownLine(table, account), filter),
+  ];
 }
 
 /** One value a filter can take, and how many of the account's battles have it. */
@@ -100,7 +163,26 @@ export async function playerBattleFacets(
   accountId: number,
 ): Promise<PlayerBattleFacets> {
   const table = battlesByRegion[region];
-  const own = ownLine(table, accountId);
+  return battleFacets(
+    region,
+    sql`${accountId}`,
+    playerBattlesWhere(table, accountId),
+  );
+}
+
+/**
+ * The facets of any set of battles, each counted from one account's line.
+ *
+ * `account` names whose line is read (a literal id, or `reported_by[1]` for the
+ * replay catalogue) and `where` which battles are counted.
+ */
+export async function battleFacets(
+  region: Region,
+  account: SQL,
+  where: SQL,
+): Promise<PlayerBattleFacets> {
+  const table = battlesByRegion[region];
+  const own = ownLine(table, account);
   const rows = await db
     .select({
       battleType: table.battleType,
@@ -111,8 +193,25 @@ export async function playerBattleFacets(
       winner: table.winnerTeam,
     })
     .from(table)
-    .where(playerBattlesWhere(table, accountId));
+    .where(where);
+  return facetsFromRows(region, rows);
+}
 
+/** One battle as the facets count it, from the line of the account they follow. */
+export type FacetRow = {
+  battleType: number;
+  map: string;
+  tank: number | null;
+  lineup: { tank: number | null }[] | null;
+  team: number | null;
+  winner: number | null;
+};
+
+/** The facets of rows already read, each counted once. */
+export async function facetsFromRows(
+  region: Region,
+  rows: FacetRow[],
+): Promise<PlayerBattleFacets> {
   const modes = new Map<number, number>();
   const tanks = new Map<number, number>();
   const maps = new Map<string, number>();

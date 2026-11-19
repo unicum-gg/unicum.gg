@@ -1,3 +1,4 @@
+import { CurrencyIcon, type Currency } from "@/components/tanks/currency-icon";
 import { cn } from "@/lib/utils";
 
 /**
@@ -12,6 +13,9 @@ export type Row = {
   free?: string;
   under?: boolean;
   cost?: boolean;
+  /** The site's own currency icon after the value, for a line in credits or
+   * experience, the way every price on the tank pages carries one. */
+  currency?: Currency;
 };
 
 /** One titled block of the report, as the game's own report draws one. */
@@ -26,6 +30,7 @@ export type Block = {
 export function ReportBlock({ block }: { block: Block }) {
   const rows = block.rows.filter((row): row is Row => row !== null);
   if (rows.length === 0) return null;
+  const priced = rows.some((row) => row.currency);
   return (
     <div className="min-w-0">
       <div className="text-muted-foreground mb-1 flex items-baseline justify-between gap-3 text-xs font-medium uppercase tracking-wide">
@@ -61,9 +66,17 @@ export function ReportBlock({ block }: { block: Block }) {
                 // A cost reads as a cost, which is the one thing a column
                 // of positive numbers cannot say.
                 row.cost && "text-red-500",
+                priced && "inline-flex items-center gap-1",
               )}
             >
               {row.value}
+              {priced ? (
+                // One fixed slot per line, so a coin and a star (and a line
+                // with neither) leave every amount on the same right edge.
+                <span className="inline-flex w-5 justify-center">
+                  {row.currency ? <CurrencyIcon type={row.currency} /> : null}
+                </span>
+              ) : null}
             </dd>
             {block.columns ? (
               <dd className="text-muted-foreground w-24 shrink-0 text-end tabular-nums">

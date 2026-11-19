@@ -3,6 +3,7 @@
 import type { TranslateFunction } from "@onruntime/translations";
 import { BattleLoadout } from "./battle-loadout";
 import { ReportBlock, type Block, type Row } from "./battle-report-block";
+import { economyRows } from "./battle-economy";
 import type { Participant } from "./battle-types";
 
 
@@ -160,116 +161,7 @@ export function BattleReport({
         },
   ];
 
-  // The breakdown when the economy is there, the flat figure when it is not.
-  // The vehicle line always carries what the battle itself paid (the public
-  // results' `credits` is the uploader's `creditsBase`), so a report that
-  // showed nothing at all until the mod started sending the breakdown would be
-  // hiding a figure it has.
-  //
-  // `money.credits` is the GROSS, before the bills: it sits above
-  // `creditsSubtotal` on nearly every battle and never equals it less the
-  // costs. So it is the "with bonuses" line, what the listed bonuses do not
-  // account for (the premium account, reserves the results do not itemise) is
-  // its own line, and what reached the account is computed. Printing the gross
-  // as credited turned a battle that cost 90,000 into one that paid 38,000.
-  const costs =
-    (money.repairCost ?? 0) + (money.ammoCost ?? 0) + (money.suppliesCost ?? 0);
-  const listed =
-    (money.creditsBase ?? 0) +
-    (money.creditsBooster ?? 0) +
-    (money.creditsEvent ?? 0) +
-    (money.creditsOrder ?? 0) +
-    (money.creditsWotPlus ?? 0) +
-    (money.creditsCompensation ?? 0) -
-    (money.creditsPenalty ?? 0);
-  const unlisted =
-    money.credits !== undefined && money.creditsBase !== undefined
-      ? money.credits - listed
-      : undefined;
-  const credits: (Row | null)[] = money.credits === undefined
-    ? [line(t("report.earned-for-battle"), own.credits)]
-    : [
-    line(t("report.earned-for-battle"), money.creditsBase),
-    line(t("report.reserves"), money.creditsBooster, { under: true }),
-    line(t("report.missions"), money.creditsEvent, { under: true }),
-    line(t("report.orders"), money.creditsOrder, { under: true }),
-    line(t("report.wot-plus"), money.creditsWotPlus, { under: true }),
-    line(t("report.ally-fine"), money.creditsPenalty, { cost: true, under: true }),
-    line(t("report.compensation"), money.creditsCompensation, { under: true }),
-    line(t("report.other-bonuses"), unlisted !== undefined && unlisted > 0 ? unlisted : undefined, {
-      under: true,
-    }),
-    line(t("report.with-bonuses"), money.credits),
-    line(t("report.repair"), money.repairCost, { cost: true, under: true }),
-    line(t("report.ammo"), money.ammoCost, { cost: true, under: true }),
-    line(t("report.supplies"), money.suppliesCost, { cost: true, under: true }),
-    line(t("report.credited"), money.credits - costs, {
-      // A battle that cost more than it paid reads as a cost.
-      cost: money.credits < costs,
-      render: (v) => (v < 0 ? `-${count.format(-v)}` : count.format(v)),
-    }),
-    line(t("report.piggy-bank"), money.piggyBank),
-  ];
-
-  // An experience line and the free experience behind it, the game's two
-  // columns. Either half can be absent: orders pay only free experience, a
-  // premium vehicle only experience.
-  const xpLine = (
-    label: string,
-    xp: number | undefined,
-    free: number | undefined,
-    opts: { under?: boolean; cost?: boolean } = {},
-  ): Row | null =>
-    xp === undefined && free === undefined
-      ? null
-      : {
-          label,
-          value:
-            xp === undefined
-              ? ""
-              : opts.cost
-                ? `-${count.format(xp)}`
-                : count.format(xp),
-          free: free === undefined ? "" : count.format(free),
-          under: opts.under,
-          cost: opts.cost,
-        };
-  // The first victory of the day multiplies both columns, and the game writes
-  // the factor rather than a figure. Only when it applied: a factor of one is
-  // what every other battle of the day carries.
-  const daily = (money.xpDailyFactor ?? 0) > 10 ? money.xpDailyFactor! / 10 : null;
-  // Whether the mod sent the free experience line by line. A battle reported
-  // before it did has the total alone, which keeps its own line below.
-  const freeColumn =
-    money.freeXpBase !== undefined || money.freeXpSubtotal !== undefined;
-
-  const experience: (Row | null)[] = money.xp === undefined
-    ? [line(t("report.credited"), own.xp)]
-    : [
-    xpLine(t("report.earned-for-battle"), money.xpBase, money.freeXpBase),
-    daily === null
-      ? null
-      : {
-          label: t("report.first-win"),
-          value: `×${daily}`,
-          free: freeColumn ? `×${daily}` : undefined,
-          under: true,
-        },
-    xpLine(t("report.reserves"), money.xpBooster, money.freeXpBooster, { under: true }),
-    xpLine(t("report.missions"), money.xpEvent, money.freeXpEvent, { under: true }),
-    xpLine(t("report.orders"), undefined, money.freeXpOrder, { under: true }),
-    line(t("report.premium-vehicle"), money.xpPremiumVehicle, { under: true }),
-    xpLine(t("report.wot-plus"), money.xpWotPlus, money.freeXpWotPlus, { under: true }),
-    line(t("report.ally-fine"), money.xpPenalty, { cost: true, under: true }),
-    xpLine(t("report.credited"), money.xp, freeColumn ? money.freeXp : undefined),
-    freeColumn ? null : line(t("report.free-xp"), money.freeXp),
-    line(t("report.crew-xp"), money.crewXp),
-  ];
-
-  const bonds: (Row | null)[] = [
-    line(t("report.earned-for-battle"), money.bondsBase),
-    line(t("report.credited"), money.bonds),
-  ];
+  const { credits, experience, bonds, freeColumn } = economyRows({ money, own, t, count });
 
   // The mark of excellence, which is the one figure on this screen that is
   // about the tank rather than about the battle. Its own block and not a line

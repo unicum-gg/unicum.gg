@@ -112,6 +112,19 @@ export function serverDisplayName(region: Region, server: string): string {
   return index > 0 ? `${REGION_LABEL[region]}${index}` : server;
 }
 
+/**
+ * A battle's cluster as a reader is shown it: `EU-202` is EU2.
+ *
+ * Battles carry the cluster as the game writes it in a replay's path, region
+ * and number together, where the servers section stores the number alone. Read
+ * through `serverDisplayName` so a cluster has one name on the whole site.
+ * Anything not of that shape is returned as it came.
+ */
+export function battleServerName(region: Region, server: string): string {
+  const cluster = /^[A-Z]+-(\d+)$/.exec(server)?.[1];
+  return cluster ? serverDisplayName(region, cluster) : server;
+}
+
 /** One cluster as a reader sees it right now, whichever source answered. Null
  * players means the cluster was absent from that reading rather than empty. */
 export type ServerClusterOnline = { server: string; players: number | null };

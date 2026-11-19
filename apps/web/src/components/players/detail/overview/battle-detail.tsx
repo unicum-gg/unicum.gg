@@ -3,6 +3,9 @@
 import useSWR from "swr";
 import { useLocale } from "@onruntime/translations/react";
 import { useState, type ReactNode } from "react";
+import { useRatingMetric } from "@/hooks/use-rating-metric";
+import { EarningsSummary } from "./battle-earnings";
+import { BattleSkeleton } from "./battle-skeleton";
 import { toRoman } from "roman-numerals";
 import {
   CaretDownIcon,
@@ -17,6 +20,8 @@ import {
   ratingColorClass,
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
+import { battleServerName } from "@unicum.gg/shared";
+import { Hint } from "@/components/hint";
 import type { TranslateFunction } from "@onruntime/translations";
 import { PlayerName } from "@/components/entity/player-name";
 import { SegmentedControl } from "@/components/segmented-control";
@@ -32,9 +37,9 @@ import {
   type MapOverlay,
 } from "./battle-types";
 import { BattleShare } from "./battle-share";
+import { BattleDownload } from "./battle-download";
 import { useBattleView } from "./use-battle-view";
 import { SquadBadge } from "./battle-squad";
-import { Spinner } from "@/components/ui/spinner";
 import {
   Table,
   TableBody,
@@ -175,12 +180,15 @@ export function BattleDetail({
   mapImage,
   mapBounds,
   mapOverlay,
-  metric,
+  metric: metricProp,
   highlightAccount,
   initialTab = BattleTab.Teams,
   initialPlayer = null,
   syncUrl = false,
   shareable = true,
+  initial,
+  recorder,
+  personalScore,
 }: {
   region: Region;
   battleId: string;
@@ -203,7 +211,12 @@ export function BattleDetail({
    * has none of it for this account at any price.
    */
   personal: BattleEconomy | null;
-  metric: RatingMetric;
+  /**
+   * The rating the rosters show. Absent on a battle's own page, which follows
+   * the navbar's pick like every per-battle surface: the reader's metric when
+   * it is a WN rating, WNX for PR or WTR, which exist for no single battle.
+   */
+  metric?: RatingMetric;
   /** The player whose page this is, so their own row stands out. */
   highlightAccount?: number;
   /** The view to open on, which a shared link names. A view this battle
@@ -217,6 +230,24 @@ export function BattleDetail({
   /** Whether to offer the share button. Off on the battle's own page, whose
    * title already carries one. */
   shareable?: boolean;
+  /**
+   * The battle, already read by the server, for a page that renders it rather
+   * than unfolding it: the rosters and the report are then in the HTML a
+   * crawler reads, and nothing has to be asked for again. Absent under a row of
+   * a player's list, which reads the battle only once it is opened.
+   */
+  initial?: BattleDetailData;
+  /** Whose recording the replay and the download are, when the battle has
+   * several: each recorder holds their own point of view. */
+  recorder?: number;
+  /**
+   * The recorder's own results screen, rendered by the server, which makes it
+   * the first tab: on a recorder's side of the battle it is what a reader came
+   * for, the way the game opens on it when a battle ends. `header` spans the
+   * tab; `awards` and `performance` sit beside the recorder's own player
+   * panel, around what their economy itemises.
+   */
+  personalScore?: { header: ReactNode; awards: ReactNode; performance: ReactNode };
 }) {
   const { t } = useTranslation(
     "components/players/detail/overview/battles",
@@ -227,10 +258,13 @@ export function BattleDetail({
   // it, and two battles in an evening are told apart by the clock.
   const time = date("HH:mm:ss");
   // The view, and the row a reader has opened by its battle-scoped vehicle id.
+  const { wnMetric } = useRatingMetric();
+  const metric: RatingMetric = metricProp ?? wnMetric;
   const { tab, setTab, opened, setOpened } = useBattleView({
     syncUrl,
     initialTab,
     initialPlayer,
+    defaultTab: personalScore ? BattleTab.Personal : BattleTab.Teams,
   });
   // Experience, which is how the game's own results screen orders a team: it
   // is the one figure that already folds damage, assists, defence and the win
@@ -248,16 +282,19 @@ export function BattleDetail({
   const { data, isLoading, error } = useSWR(
     request().url(),
     () => request().then((r) => r as unknown as BattleDetailData),
-    { revalidateOnFocus: false, shouldRetryOnError: false },
+    {
+      fallbackData: initial,
+      // A battle never changes once fought, so a page handed it has nothing
+      // to ask for again.
+      revalidateOnMount: !initial,
+      revalidateOnFocus: false,
+      shouldRetryOnError: false,
+    },
   );
 
-  if (isLoading) {
-    return (
-      <div className="flex justify-center py-6">
-        <Spinner />
-      </div>
-    );
-  }
+  // The battle's own shape while it loads, not a spinner in a void: the rows
+  // about to be read appear where they will be.
+  if (isLoading) return <BattleSkeleton />;
   if (error || !data) {
     return (
       <p className="text-muted-foreground px-4 py-4 text-sm">
@@ -358,11 +395,14 @@ export function BattleDetail({
             own: there the replay is the whole point, and gating the control
             on an owner who does not exist hid it completely.
           */}
-          {mine || data.hasReplay ? (
+          {mine || data.hasReplay || personalScore ? (
             <SegmentedControl
               active={tab}
               onSelect={setTab}
               segments={[
+                ...(personalScore
+                  ? [{ id: BattleTab.Personal, label: t("tab.personal") }]
+                  : []),
                 { id: BattleTab.Teams, label: t("tab.teams") },
                 ...(mine ? [{ id: BattleTab.Report, label: t("tab.report") }] : []),
                 ...(data.hasReplay
@@ -375,10 +415,24 @@ export function BattleDetail({
           )}
           <span className="text-muted-foreground flex flex-wrap items-center gap-x-3 text-xs">
             <span>{t("battle-length", { length: duration(data.duration) })}</span>
-            {data.server ? <span>{data.server}</span> : null}
+            {/* Named as the servers section names it, the game's own
+                identifier on hover. */}
+            {data.server ? (
+              <Hint content={data.server}>
+                <span>{battleServerName(region, data.server)}</span>
+              </Hint>
+            ) : null}
             {data.clientVersion ? <span>{data.clientVersion}</span> : null}
             {/* Nobody else publishes this: how many clients told us about it. */}
             <span>{t("reported-by", { count: data.reporters })}</span>
+            {data.hasReplay ? (
+              <BattleDownload
+                region={region}
+                battleId={battleId}
+                recorder={recorder}
+                clientVersion={data.clientVersion}
+              />
+            ) : null}
             {shareable ? (
               <BattleShare
                 region={region}
@@ -391,10 +445,53 @@ export function BattleDetail({
           </span>
         </div>
 
-        {tab === BattleTab.Replay && data.hasReplay ? (
+        {tab === BattleTab.Personal && personalScore ? (
+          <>
+            {personalScore.header}
+            {/* The panel a roster row opens, for the recorder, beside what
+                only their own results carry. */}
+            <div className="lg:grid lg:grid-cols-2 lg:gap-px">
+              {mine ? (
+                <BattlePlayerPanel
+                  region={region}
+                  participant={mine}
+                  killer={
+                    mine.own.killer
+                      ? (data.participants.find((p) => p.id === mine.own.killer) ?? null)
+                      : null
+                  }
+                  victims={data.participants.filter((p) => p.own.killer === mine.id)}
+                  metric={metric}
+                  startedAt={startedAt}
+                  battleDuration={data.duration}
+                  compact
+                  t={t}
+                  count={count}
+                  time={time}
+                />
+              ) : (
+                <span />
+              )}
+              {/* No bottom padding: the performance table closes the column
+                  on its own last rule, as the rosters close theirs. */}
+              <div className="flex min-w-0 flex-col gap-5 px-4 pt-3">
+                {personalScore.awards}
+                {/* What the battle paid them, in one glance: the base a
+                    standard account would have had, what their bonuses made
+                    of it, what it cost and what reached the account. The
+                    line-by-line version is the detailed report's tab. */}
+                {personal && mine ? (
+                  <EarningsSummary money={personal} t={t} count={count} />
+                ) : null}
+                {personalScore.performance}
+              </div>
+            </div>
+          </>
+        ) : tab === BattleTab.Replay && data.hasReplay ? (
           <BattleReplay
             region={region}
             battleId={battleId}
+            recorder={recorder}
             hasReplay={data.hasReplay}
             arenaId={arenaId}
             mapImage={mapImage}
@@ -439,7 +536,7 @@ export function BattleDetail({
                 region={region}
                 participant={open}
                 killer={killer}
-                victims={kills.victimsOf.get(open.id) ?? []}
+                victims={data.participants.filter((p) => p.own.killer === open.id)}
                 metric={metric}
                 startedAt={startedAt}
                 battleDuration={data.duration}
@@ -567,7 +664,9 @@ function TeamTable({
       {/* A size down from the page's own: two rosters share the width, and at
           the default size the vehicle names were truncating on most rows. The
           figures are tabular either way. */}
-      <Table className="text-xs">
+      {/* The generic table keeps a prose margin under it, which here left a
+          strip of empty panel below the last row. */}
+      <Table className="text-xs mb-0!">
         <TableHeader>
           <TableRow>
             <TableHead className={cn(gutter, NAME_WIDTH)}>

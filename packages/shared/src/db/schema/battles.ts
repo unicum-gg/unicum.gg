@@ -357,6 +357,17 @@ export function makeBattlesTable(region: string) {
       replayKey: text("replay_key"),
       /** When it landed, which is what retention sweeps by. */
       replayStoredAt: timestamp("replay_stored_at", { withTimezone: true }),
+      /**
+       * Whose client recorded the stored file: the `playerID` in its own
+       * header, which is the name a reader who downloads it will see.
+       *
+       * Read from the file and never from the request that offered it. Every
+       * participant's recording lands on the same key, so the second client
+       * to offer one is not the one whose file is stored; and the first
+       * reporter of the RESULTS (`reported_by[1]`) may never have sent a file
+       * at all. Null until a stored file has been read.
+       */
+      replayBy: bigint("replay_by", { mode: "number" }),
       createdAt: timestamp("created_at", { withTimezone: true })
         .notNull()
         .defaultNow(),

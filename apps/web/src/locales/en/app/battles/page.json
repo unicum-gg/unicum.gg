@@ -1,0 +1,16 @@
+{
+  "meta-title": "World of Tanks battles and replays ({region})",
+  "meta-description": "World of Tanks replays from {region}, shared by players: every battle with its full report, the loadout fitted and a replay to watch in your browser. Filter by tank, map and mode, rank by damage, assist, experience or kills.",
+  "og-title": "Battles and replays",
+  "og-subtitle": "World of Tanks replays from {region}",
+  "title": "World of Tanks {battles} and replays",
+  "title-battles": "battles",
+  "intro": "Every battle players have shared, with its full report, what each tank had fitted and a replay you can watch right here. Rank them by damage or experience, or narrow them down to a tank, a map or a mode.",
+  "about-title": "About these replays",
+  "about-sources": "Each battle here comes with its .wotreplay file: either a player running the unicum.gg mod shared it automatically, or uploaded it on this page. Only battles played to the end can be shared, and only by an account that was in them.",
+  "about-page": "Opening a battle shows both teams, the detailed battle report and a replay on the map, with every tank’s movements, the shots that destroyed them and the chat. Nothing to install and no game client version to match: the replay plays in the browser.",
+  "about-share": "To add your own battles, upload a replay from the replays folder of your game, or install the {mod} so they are shared as you play.",
+  "about-share-mod": "unicum.gg mod",
+  "upload-mod": "Rather have every battle uploaded on its own? {mod} sends them as they end.",
+  "upload-mod-link": "Our mod"
+}

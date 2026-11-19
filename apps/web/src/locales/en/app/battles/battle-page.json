@@ -1,0 +1,23 @@
+{
+  "meta-title": "{tank} by {nickname} on {map}: World of Tanks replay",
+  "meta-title-battle": "{map}, {mode}, {date}: World of Tanks battle replay",
+  "meta-description": {
+    "win": "{nickname} won on {map} in the {tank} ({mode}, {date}): {damage} damage, {kills} kills, {xp} experience.",
+    "loss": "{nickname} lost on {map} in the {tank} ({mode}, {date}): {damage} damage, {kills} kills, {xp} experience.",
+    "draw": "{nickname} drew on {map} in the {tank} ({mode}, {date}): {damage} damage, {kills} kills, {xp} experience.",
+    "unknown": "{nickname} on {map} in the {tank} ({mode}, {date}): {damage} damage, {kills} kills, {xp} experience."
+  },
+  "meta-description-battle": "{mode} on {map}, {date}.",
+  "mode-unknown": "World of Tanks",
+  "og-title": "{tank} on {map}",
+  "og-subtitle": "{nickname} · {damage} damage",
+  "meta-title-no-replay": "{tank} by {nickname} on {map}: World of Tanks battle",
+  "meta-description-replay": "Watch the replay, both teams and the battle report, and download the .wotreplay.",
+  "meta-description-no-replay": "See both teams, what every tank did and the battle report.",
+  "meta-title-battle-no-replay": "{map}, {mode}, {date}: World of Tanks battle",
+  "og-subtitle-battle": "{mode} · {date}",
+  "heading-player": "{nickname} in the {tank} on {map}",
+  "recorded-by": "Recorded by",
+  "also-reported-by": "Also reported by",
+  "reported-by": "Reported by"
+}

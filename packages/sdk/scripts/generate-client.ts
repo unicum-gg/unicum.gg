@@ -102,6 +102,9 @@ const RESOURCES: Resource[] = [
     key: "id",
     client: "BattleClient",
     root: "detail",
+    // `/{region}/battles` is the replay catalogue, every battle whose file was
+    // archived: `unicum.eu.battles.list(query)`.
+    namespaceRoot: NAMESPACE_LIST,
   },
 ];
 
@@ -152,6 +155,9 @@ const GLOBALS: Global[] = [
   // the only shape a comparison can take.
   { name: "servers" },
   { name: "support" },
+  // Replays sent from the site rather than the mod, region-less because the
+  // region is the signed-in account's own, never a parameter to pick.
+  { name: "replays" },
   // The colour scales, region-less: a threshold is the same on every server.
   { name: "ratings" },
   {

@@ -1,0 +1,6 @@
+{
+  "download": "Download the replay",
+  "version": "Plays on {version}",
+  "views": "Views: {value}",
+  "downloads": "Downloads: {value}"
+}

@@ -29,6 +29,7 @@ import { BattleEconomy } from "./economy";
 import { BattleEncounters } from "./encounters";
 import { BattleFilters } from "./filters";
 import { BattlesPrivateNotice, BattlesPrivateOwnerNote } from "./privacy";
+import { UploadReplayButton } from "./upload-replay";
 import { useBattleFilter } from "./use-battle-filter";
 
 /** The row counts a page can hold. The endpoint serves a hundred at most, and
@@ -138,7 +139,7 @@ export function BattlesTab({
     <>
       <PanelSeparator />
       <Panel>
-        <PanelHeader>
+        <PanelHeader className="flex flex-wrap items-center justify-between gap-2">
           <PanelTitle>
             {total > 0 && !refused
               ? t("title-count", {
@@ -147,6 +148,7 @@ export function BattlesTab({
                 })
               : t("title", { nickname })}
           </PanelTitle>
+          <UploadReplayButton />
         </PanelHeader>
         {isOwnProfile && hidden ? <BattlesPrivateOwnerNote /> : null}
         {refused ? (

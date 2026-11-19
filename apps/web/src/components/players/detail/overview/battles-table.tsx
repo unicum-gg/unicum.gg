@@ -1,19 +1,22 @@
 "use client";
 
-import { Fragment, useState } from "react";
+import { Fragment, useState, type ReactNode } from "react";
 import { toRoman } from "roman-numerals";
 import {
   CaretDownIcon,
+  CaretRightIcon,
   CrosshairSimpleIcon,
+  DownloadSimpleIcon,
   EyeIcon,
   HandshakeIcon,
+  MonitorPlayIcon,
   ShieldIcon,
   SkullIcon,
   UsersThreeIcon,
 } from "@phosphor-icons/react";
 import {
   gameplayLabel,
-  isHalloweenBattle,
+  isEventBattle,
   minimapUrl,
   modeLabel,
   RatingMetric,
@@ -140,6 +143,8 @@ export type PlayerBattleRow = {
      * to the player's own page on that vehicle. */
     href?: string;
   };
+  /** For a replay of the catalogue: how often it was opened and downloaded. */
+  replayStats?: { views: number; downloads: number };
 };
 
 /** What `deathReason` says when nobody killed them. Not 0: 0 is a real reason. */
@@ -173,6 +178,48 @@ function clock(seconds: number | null): string | null {
  * and it is why there is no `<table>` here: a six-column table at 400px either
  * scrolls sideways or lies.
  */
+/**
+ * One battle's row: a button that unfolds the battle in place, or, on a list
+ * whose rows lead to the battle's page, the same row over the link that does.
+ * In that case the row lets clicks through to the link under it, except on the
+ * links and tooltips it holds itself.
+ */
+function RowShell({
+  linked,
+  expanded,
+  onToggle,
+  children,
+}: {
+  linked: boolean;
+  expanded: boolean;
+  onToggle: () => void;
+  children: ReactNode;
+}) {
+  const layout = "flex w-full items-stretch gap-3 pe-3 ps-0 text-start transition-colors";
+  if (linked) {
+    return (
+      <div
+        className={cn(
+          layout,
+          "pointer-events-none relative group-hover:bg-foreground/5 [&_a]:pointer-events-auto [&_[data-state]]:pointer-events-auto",
+        )}
+      >
+        {children}
+      </div>
+    );
+  }
+  return (
+    <button
+      type="button"
+      aria-expanded={expanded}
+      onClick={onToggle}
+      className={cn(layout, "hover:bg-foreground/5")}
+    >
+      {children}
+    </button>
+  );
+}
+
 export function PlayerBattlesTable({
   region,
   nickname,
@@ -180,6 +227,7 @@ export function PlayerBattlesTable({
   accountId,
   battles,
   withVehicle = false,
+  battleHref,
 }: {
   region: Region;
   /** Whose list this is. Absent on a list of different players' battles,
@@ -193,6 +241,13 @@ export function PlayerBattlesTable({
    * out, since every row shares it; a map's list shares the map instead, and
    * the vehicle is then the half worth reading. */
   withVehicle?: boolean;
+  /**
+   * Where a row leads, for a list whose rows open the battle's own page rather
+   * than unfolding it in place (the replay catalogue). The whole row is then a
+   * link a crawler follows and a middle click opens, and the names inside it
+   * stay links of their own.
+   */
+  battleHref?: (battle: PlayerBattleRow) => string;
 }) {
   const { t } = useTranslation(
     "components/players/detail/overview/battles",
@@ -218,7 +273,7 @@ export function PlayerBattlesTable({
         const play =
           mode === null ||
           battle.gameplay === "comp7" ||
-          isHalloweenBattle(battle.battleType)
+          isEventBattle(battle.battleType)
             ? null
             : gameplayLabel(battle.gameplay);
         const length = clock(battle.duration);
@@ -227,7 +282,8 @@ export function PlayerBattlesTable({
         const rowKey = battle.player
           ? `${battle.id}-${battle.player.accountId}`
           : battle.id;
-        const expanded = open === rowKey;
+        const href = battleHref?.(battle);
+        const expanded = !href && open === rowKey;
         return (
           <li
             key={rowKey}
@@ -235,13 +291,18 @@ export function PlayerBattlesTable({
               battle.outcome === "win" && "bg-emerald-500/10",
               battle.outcome === "loss" && "bg-red-500/10",
               battle.outcome === "draw" && "bg-muted/40",
+              href && "group relative",
             )}
           >
-          <button
-            type="button"
-            aria-expanded={expanded}
-            onClick={() => setOpen(expanded ? null : rowKey)}
-            className="hover:bg-foreground/5 flex w-full items-stretch gap-3 pe-3 ps-0 text-start transition-colors"
+          {/* A link under the row rather than around it: the player's name and
+              the vehicle inside are links too, and a link cannot hold another. */}
+          {href ? (
+            <Link href={href} aria-label={title} className="absolute inset-0" />
+          ) : null}
+          <RowShell
+            linked={Boolean(href)}
+            expanded={expanded}
+            onToggle={() => setOpen(expanded ? null : rowKey)}
           >
             {/* The result as a full-height rail: it reads straight down the
                 list, and it costs no column. */}
@@ -482,6 +543,26 @@ export function PlayerBattlesTable({
               />
             </span>
 
+            {/* A replay's audience, in a column of its own and of a fixed width
+                so it lines up down the whole list: how often it was opened and
+                downloaded, which the catalogue can also be ranked by. */}
+            {battle.replayStats ? (
+              <span className="flex w-14 shrink-0 flex-col items-end gap-y-0.5 self-center">
+                <Figure
+                  icon={<MonitorPlayIcon className="size-3.5" weight="fill" />}
+                  label={t("replay-views", { count: battle.replayStats.views })}
+                  value={count.format(battle.replayStats.views)}
+                  muted
+                />
+                <Figure
+                  icon={<DownloadSimpleIcon className="size-3.5" weight="bold" />}
+                  label={t("replay-downloads", { count: battle.replayStats.downloads })}
+                  value={count.format(battle.replayStats.downloads)}
+                  muted
+                />
+              </span>
+            ) : null}
+
             {/* The one number that says whether the battle was any good, in the
                 bands the site uses everywhere else. A dash rather than a zero
                 for a vehicle the expected values do not carry. */}
@@ -503,14 +584,21 @@ export function PlayerBattlesTable({
               )}
             </span>
 
-            <CaretDownIcon
-              aria-hidden
-              className={cn(
-                "text-muted-foreground size-4 shrink-0 self-center transition-transform",
-                expanded && "rotate-180",
-              )}
-            />
-          </button>
+            {href ? (
+              <CaretRightIcon
+                aria-hidden
+                className="text-muted-foreground size-4 shrink-0 self-center"
+              />
+            ) : (
+              <CaretDownIcon
+                aria-hidden
+                className={cn(
+                  "text-muted-foreground size-4 shrink-0 self-center transition-transform",
+                  expanded && "rotate-180",
+                )}
+              />
+            )}
+          </RowShell>
 
           {/* Fetched only once opened: a roster is thirty rows and most cards
               are never opened. */}

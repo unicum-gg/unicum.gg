@@ -26,6 +26,8 @@ const readTab = (): BattleTab | null => {
 export function useBattleUrlView(
   initialTab: BattleTab = BattleTab.Teams,
   initialPlayer: number | null = null,
+  /** The view a bare URL means: the teams, or a recorder's results screen. */
+  defaultTab: BattleTab = BattleTab.Teams,
 ): { tab: BattleTab; player: number | null } {
   // The server snapshot is what the page read from the same params, so the
   // render the server sends and the first one in the browser agree.
@@ -39,7 +41,9 @@ export function useBattleUrlView(
     playerStore.read,
     () => initialPlayer,
   );
-  return { tab: tab ?? BattleTab.Teams, player };
+  // An absent `?tab=` is the page's own default view, which is the teams on a
+  // battle and the recorder's results screen on their side of it.
+  return { tab: tab ?? defaultTab, player };
 }
 
 /**
@@ -54,10 +58,12 @@ export function useBattleView({
   syncUrl,
   initialTab,
   initialPlayer,
+  defaultTab = BattleTab.Teams,
 }: {
   syncUrl: boolean;
   initialTab: BattleTab;
   initialPlayer: number | null;
+  defaultTab?: BattleTab;
 }): {
   tab: BattleTab;
   setTab: (tab: BattleTab) => void;
@@ -66,7 +72,7 @@ export function useBattleView({
 } {
   const [localTab, setLocalTab] = useState(initialTab);
   const [localOpened, setLocalOpened] = useState(initialPlayer);
-  const url = useBattleUrlView(initialTab, initialPlayer);
+  const url = useBattleUrlView(initialTab, initialPlayer, defaultTab);
   if (!syncUrl) {
     return {
       tab: localTab,
@@ -78,7 +84,9 @@ export function useBattleView({
   return {
     tab: url.tab,
     // The rosters are the page's default, so they leave the address clean.
-    setTab: (tab) => tabStore.write(tab === BattleTab.Teams ? null : tab),
+    // The page's default view leaves the URL bare, so a shared link stays
+    // the canonical address.
+    setTab: (tab) => tabStore.write(tab === defaultTab ? null : tab),
     opened: url.player,
     setOpened: playerStore.write,
   };

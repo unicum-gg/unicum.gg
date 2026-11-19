@@ -60,3 +60,5 @@ export * from "./player-activity";
 export * from "./player-distribution";
 export * from "./tier-winrate";
 export * from "./mode-economy";
+export * from "./battle-comments";
+export * from "./battle-replays";

@@ -78,6 +78,11 @@ const SERVERS_PATTERN = new RegExp(
 const TOURNAMENTS_PATTERN = new RegExp(
   `^/(?:(?:${REGIONS.join("|")})/)?tournaments(?:/|$)`,
 );
+// A battle is fought on one realm too, so a battle page and the replay
+// catalogue both land on the new region's catalogue.
+const BATTLES_PATTERN = new RegExp(
+  `^/(?:(?:${REGIONS.join("|")})/)?battles(?:/|$)`,
+);
 
 function targetForRegion(
   pathname: string,
@@ -121,6 +126,7 @@ function targetForRegion(
   }
   if (SERVERS_PATTERN.test(pathname)) return ROUTES.SERVERS(region);
   if (TOURNAMENTS_PATTERN.test(pathname)) return ROUTES.TOURNAMENTS(region);
+  if (BATTLES_PATTERN.test(pathname)) return ROUTES.BATTLES(region);
   return ROUTES.HOME(region);
 }
 

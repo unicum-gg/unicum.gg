@@ -1,7 +1,13 @@
-import { and, eq, sql } from "drizzle-orm";
+import { and, eq, isNull, sql } from "drizzle-orm";
 import { env } from "@unicum.gg/shared/env";
 import type { Region } from "@unicum.gg/wargaming";
-import { battlesByRegion } from "@unicum.gg/shared";
+import {
+  battleReplays,
+  battlesByRegion,
+  readReplayHeader,
+  recorderPerformance,
+  type BattleEconomy,
+} from "@unicum.gg/shared";
 import { db } from "@unicum.gg/core/db";
 import { s3Error, s3Request, type S3Target } from "@unicum.gg/core/storage/s3";
 
@@ -32,11 +38,16 @@ export function replayKey(
   region: Region,
   startedAt: Date,
   arenaUniqueId: string,
+  recorder?: number,
 ): string {
   const year = startedAt.getUTCFullYear();
   const month = String(startedAt.getUTCMonth() + 1).padStart(2, "0");
   const day = String(startedAt.getUTCDate()).padStart(2, "0");
-  return `${region}/${year}/${month}/${day}/${arenaUniqueId}.wotreplay`;
+  // One file per recorder: every participant who runs the mod records their
+  // own point of view of the same battle. Files archived before that carry
+  // the battle id alone, and keep it.
+  const name = recorder === undefined ? arenaUniqueId : `${arenaUniqueId}-${recorder}`;
+  return `${region}/${year}/${month}/${day}/${name}.wotreplay`;
 }
 
 /**
@@ -205,7 +216,7 @@ export async function discardReplayParts(key: string, parts: number): Promise<vo
 
 /** What the row says about a battle somebody is offering a replay for. */
 export type ReplayTarget = {
-  /** Already stored, so the sender can stop holding the file. */
+  /** THIS account's recording, already stored, so it can stop holding it. */
   storedKey: string | null;
   /** Whether the sending account actually played in it. */
   wasThere: boolean;
@@ -229,7 +240,12 @@ export async function replayTargetOf(
   const table = battlesByRegion[region];
   const [row] = await db
     .select({
-      storedKey: table.replayKey,
+      storedKey: sql<string | null>`(
+        SELECT ${battleReplays.key} FROM ${battleReplays}
+        WHERE ${battleReplays.region} = ${region}
+          AND ${battleReplays.arenaUniqueId} = ${arenaUniqueId}
+          AND ${battleReplays.accountId} = ${accountId}
+      )`,
       // Asked of Postgres rather than pulled back as an array: `player_ids`
       // holds thirty bigints and the only question is whether one of them is
       // this account, which the GIN index answers without reading the row's
@@ -245,7 +261,8 @@ export async function replayTargetOf(
 }
 
 /**
- * Where this battle's replay sits, or null when none was archived.
+ * Where a battle's replay sits, or null when none was archived: the given
+ * recorder's, or with none named the battle's first.
  *
  * Looked up by `arena_unique_id` alone, without the partition key, which the
  * battle detail already does for the same reason: a reader arrives with a
@@ -254,7 +271,22 @@ export async function replayTargetOf(
 export async function storedReplayKey(
   region: Region,
   arenaUniqueId: string,
+  recorder?: number,
 ): Promise<string | null> {
+  if (recorder !== undefined) {
+    const [row] = await db
+      .select({ key: battleReplays.key })
+      .from(battleReplays)
+      .where(
+        and(
+          eq(battleReplays.region, region),
+          eq(battleReplays.arenaUniqueId, arenaUniqueId),
+          eq(battleReplays.accountId, recorder),
+        ),
+      )
+      .limit(1);
+    return row?.key ?? null;
+  }
   const table = battlesByRegion[region];
   const [row] = await db
     .select({ key: table.replayKey })
@@ -262,6 +294,42 @@ export async function storedReplayKey(
     .where(eq(table.arenaUniqueId, arenaUniqueId))
     .limit(1);
   return row?.key ?? null;
+}
+
+/** Count one download of a recorder's replay. Fire and forget. */
+export async function countReplayDownload(
+  region: Region,
+  arenaUniqueId: string,
+  recorder: number,
+): Promise<void> {
+  await db
+    .update(battleReplays)
+    .set({ downloads: sql`${battleReplays.downloads} + 1` })
+    .where(
+      and(
+        eq(battleReplays.region, region),
+        eq(battleReplays.arenaUniqueId, arenaUniqueId),
+        eq(battleReplays.accountId, recorder),
+      ),
+    );
+}
+
+/** Count one view of a recorder's replay page. Fire and forget. */
+export async function countReplayView(
+  region: Region,
+  arenaUniqueId: string,
+  recorder: number,
+): Promise<void> {
+  await db
+    .update(battleReplays)
+    .set({ views: sql`${battleReplays.views} + 1` })
+    .where(
+      and(
+        eq(battleReplays.region, region),
+        eq(battleReplays.arenaUniqueId, arenaUniqueId),
+        eq(battleReplays.accountId, recorder),
+      ),
+    );
 }
 
 /** What the viewer needs about a battle besides its file: who died, and when. */
@@ -302,11 +370,20 @@ export type ReplayBattle = {
 export async function replayBattle(
   region: Region,
   arenaUniqueId: string,
+  recorder?: number,
 ): Promise<ReplayBattle | null> {
   const table = battlesByRegion[region];
   const [row] = await db
     .select({
-      key: table.replayKey,
+      key:
+        recorder === undefined
+          ? table.replayKey
+          : sql<string | null>`(
+              SELECT ${battleReplays.key} FROM ${battleReplays}
+              WHERE ${battleReplays.region} = ${region}
+                AND ${battleReplays.arenaUniqueId} = ${arenaUniqueId}
+                AND ${battleReplays.accountId} = ${recorder}
+            )`,
       duration: table.duration,
       mapName: table.mapName,
       gameplayId: table.gameplayId,
@@ -337,19 +414,61 @@ export async function replayBattle(
   };
 }
 
-/** Write down where the file went, once it is actually in the bucket. */
-export async function attachReplay(
-  region: Region,
-  arenaUniqueId: string,
-  startedAt: Date,
-  key: string,
-): Promise<void> {
-  const table = battlesByRegion[region];
+/**
+ * Write down a stored recording: its recorder, its key, and what its own
+ * results say about the recorder (economy, per-enemy performance, mastery).
+ *
+ * The battle's `replay_key` / `replay_by` keep naming its FIRST file, which the
+ * readers that only ask "is there a replay" read. An upsert, so a recorder
+ * offering the same file again only refreshes what was read from it.
+ */
+export async function recordReplay(input: {
+  region: Region;
+  arenaUniqueId: string;
+  startedAt: Date;
+  recorder: number;
+  key: string;
+  bytes: Uint8Array;
+  /** The recorder's economy, already mapped by the caller from the file. */
+  personal?: BattleEconomy | null;
+}): Promise<void> {
+  let performance: ReturnType<typeof recorderPerformance> = null;
+  try {
+    performance = recorderPerformance(readReplayHeader(input.bytes));
+  } catch {
+    // An unreadable header still names a stored file; the panel shows less.
+  }
+  await db
+    .insert(battleReplays)
+    .values({
+      region: input.region,
+      arenaUniqueId: input.arenaUniqueId,
+      startedAt: input.startedAt,
+      accountId: input.recorder,
+      key: input.key,
+      personal: input.personal ?? null,
+      details: performance?.details ?? null,
+      markOfMastery: performance?.markOfMastery ?? null,
+    })
+    .onConflictDoUpdate({
+      target: [battleReplays.region, battleReplays.arenaUniqueId, battleReplays.accountId],
+      set: {
+        key: input.key,
+        personal: sql`coalesce(excluded.personal, ${battleReplays.personal})`,
+        details: sql`coalesce(excluded.details, ${battleReplays.details})`,
+        markOfMastery: sql`coalesce(excluded.mark_of_mastery, ${battleReplays.markOfMastery})`,
+      },
+    });
+  const table = battlesByRegion[input.region];
   await db
     .update(table)
-    .set({ replayKey: key, replayStoredAt: new Date() })
+    .set({ replayKey: input.key, replayStoredAt: new Date(), replayBy: input.recorder })
     .where(
-      and(eq(table.startedAt, startedAt), eq(table.arenaUniqueId, arenaUniqueId)),
+      and(
+        eq(table.startedAt, input.startedAt),
+        eq(table.arenaUniqueId, input.arenaUniqueId),
+        isNull(table.replayKey),
+      ),
     );
 }
 
@@ -360,4 +479,54 @@ export async function deleteReplay(key: string): Promise<boolean> {
   const response = await s3Request(target, "DELETE", key);
   // S3 answers 204 for a delete, and also for deleting what was not there.
   return response.ok || response.status === 404;
+}
+
+/**
+ * Read what the archived files say about their recorders (per-enemy
+ * performance and mastery badge) for every replay that does not carry it yet.
+ * Resumable by construction: it only picks rows still missing it.
+ */
+export async function backfillReplayFiles(
+  region: Region,
+  options: { limit?: number; onProgress?: (done: number, filled: number) => void } = {},
+): Promise<{ done: number; filled: number }> {
+  const rows = await db
+    .select({
+      arenaUniqueId: battleReplays.arenaUniqueId,
+      accountId: battleReplays.accountId,
+      key: battleReplays.key,
+    })
+    .from(battleReplays)
+    .where(and(eq(battleReplays.region, region), isNull(battleReplays.markOfMastery)))
+    .limit(options.limit ?? 1_000_000);
+  let done = 0;
+  let filled = 0;
+  for (const row of rows) {
+    const bytes = await fetchReplay(row.key);
+    let performance: ReturnType<typeof recorderPerformance> = null;
+    try {
+      performance = bytes ? recorderPerformance(readReplayHeader(bytes)) : null;
+    } catch {
+      performance = null;
+    }
+    // Marked read either way (-1 when nothing could be), so a file with no
+    // results is not fetched again on every run.
+    await db
+      .update(battleReplays)
+      .set({
+        details: performance?.details ?? null,
+        markOfMastery: performance?.markOfMastery ?? -1,
+      })
+      .where(
+        and(
+          eq(battleReplays.region, region),
+          eq(battleReplays.arenaUniqueId, row.arenaUniqueId),
+          eq(battleReplays.accountId, row.accountId),
+        ),
+      );
+    if (performance) filled += 1;
+    done += 1;
+    if (done % 50 === 0) options.onProgress?.(done, filled);
+  }
+  return { done, filled };
 }

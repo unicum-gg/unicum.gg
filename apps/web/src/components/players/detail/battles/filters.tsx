@@ -1,5 +1,6 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { useLocale } from "@onruntime/translations/react";
 import { toRoman } from "roman-numerals";
 import { BattleResultFilter, modeLabel } from "@unicum.gg/shared";
@@ -40,9 +41,9 @@ export type BattleFacets = {
 const ANY = "any";
 
 /** The bordered box a select sits in, the tank catalogue's own. */
-const SELECT_FRAME =
+export const SELECT_FRAME =
   "flex h-7 items-center overflow-hidden rounded-md border border-fd-border";
-const SELECT_TRIGGER =
+export const SELECT_TRIGGER =
   "h-full! w-44 rounded-none border-0 bg-transparent px-3 text-xs font-medium text-fd-foreground shadow-none focus-visible:ring-0 dark:bg-transparent dark:hover:bg-fd-secondary/40";
 
 /**
@@ -61,11 +62,19 @@ export function BattleFilters({
   filter,
   onChange,
   onClear,
+  clearable,
+  children,
 }: {
   facets: BattleFacets;
   filter: BattleFilterState;
   onChange: (key: BattleFilterKey, value: string | null) => void;
   onClear: () => void;
+  /** Whether "clear" has anything to undo. Derived from `filter` when absent,
+   * which is wrong for a list whose defaults are themselves filters (the
+   * replay catalogue opens on random battles), so such a list says. */
+  clearable?: boolean;
+  /** More controls of the same kind, drawn in the row before "clear". */
+  children?: ReactNode;
 }) {
   const { t } = useTranslation(
     "components/players/detail/overview/battles",
@@ -82,10 +91,11 @@ export function BattleFilters({
     return label ? [{ value, n, label }] : [];
   });
   const active =
-    filter.mode !== undefined ||
-    filter.tank !== undefined ||
-    filter.map !== undefined ||
-    filter.result !== undefined;
+    clearable ??
+    (filter.mode !== undefined ||
+      filter.tank !== undefined ||
+      filter.map !== undefined ||
+      filter.result !== undefined);
 
   return (
     <TooltipProvider delayDuration={100}>
@@ -179,6 +189,7 @@ export function BattleFilters({
             </Select>
           </div>
         ) : null}
+        {children}
         {active ? (
           <button
             type="button"

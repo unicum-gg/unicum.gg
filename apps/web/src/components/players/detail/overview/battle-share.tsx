@@ -67,14 +67,17 @@ export function BattlePageShare({
   arenaId,
   initialTab,
   initialPlayer,
+  defaultTab,
 }: {
   region: Region;
   battleId: string;
   arenaId: string;
   initialTab: BattleTab;
   initialPlayer: number | null;
+  /** The view a bare URL means on this page. */
+  defaultTab?: BattleTab;
 }) {
-  const { tab, player } = useBattleUrlView(initialTab, initialPlayer);
+  const { tab, player } = useBattleUrlView(initialTab, initialPlayer, defaultTab);
   return (
     <BattleShare
       region={region}

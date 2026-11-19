@@ -26,6 +26,8 @@ export type { BattleEconomy };
  * reaches a server component as a client reference rather than as a string.
  */
 export enum BattleTab {
+  /** A recorder's own results screen, on their side of the battle. */
+  Personal = "personal",
   Teams = "teams",
   Report = "report",
   Replay = "replay",
@@ -68,7 +70,12 @@ export type Participant = {
     slug: string | null;
     /** An event mode's vehicle, on which nobody has a published record. */
     isEvent: boolean;
+    /** Metres, top configuration, before crew and equipment. */
+    viewRange?: number | null;
   } | null;
+  /** Their real view range in metres, moving and still, when their whole
+   * loadout is known (the recorder's). */
+  vision?: { moving: number; still: number } | null;
   /** Every tank they fought in, when it was more than one (Frontline). */
   lineup?: LineupTank[];
   /**

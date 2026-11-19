@@ -1,0 +1,48 @@
+{
+  "result": {
+    "win": "Victory",
+    "loss": "Defeat",
+    "draw": "Draw"
+  },
+  "ending": {
+    "extermination": {
+      "win": "All enemy vehicles destroyed",
+      "loss": "All allied vehicles destroyed"
+    },
+    "base": {
+      "win": "Enemy base captured",
+      "loss": "Our base was captured"
+    },
+    "timeout": {
+      "win": "Time ran out",
+      "loss": "Time ran out"
+    }
+  },
+  "destroyed": "Destroyed",
+  "survived": "Survived",
+  "performance": "Battle performance",
+  "unnamed": "Unknown player",
+  "mark-label": {
+    "spotted": "Spotted",
+    "assisted": "Assisted damage",
+    "crits": "Critical hits",
+    "damaged": "Damage dealt",
+    "blocked": "Damage blocked from it",
+    "stunned": "Stuns",
+    "killed": "Destroyed"
+  },
+  "mark-hint": {
+    "spotted": "Spotted: they lit this enemy up for their team",
+    "assisted": "Assisted damage: damage dealt to this enemy thanks to their spotting, tracking or stun",
+    "crits": "Critical hits: they damaged a module or a crew member of this enemy",
+    "damaged": "Damage dealt to this enemy",
+    "blocked": "Damage their armour blocked from this enemy’s shots",
+    "stunned": "Times they stunned this enemy",
+    "killed": "They destroyed this enemy"
+  },
+  "column": {
+    "player": "Player",
+    "vehicle": "Vehicle"
+  },
+  "destroyed-by-label": "Destroyed by"
+}

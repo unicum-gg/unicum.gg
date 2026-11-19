@@ -266,6 +266,10 @@ export interface TopBattle {
   onslaughtBestTier: string | null;
   onslaughtBestRank: number | null;
   onslaughtSeasons: number;
+  /** For a replay in the catalogue: how often its page was opened and its file
+   * downloaded. Absent wherever the battle is not a replay of the catalogue. */
+  views?: number;
+  downloads?: number;
 }
 
 /** How many players and battles one mode holds for a vehicle, whoever they

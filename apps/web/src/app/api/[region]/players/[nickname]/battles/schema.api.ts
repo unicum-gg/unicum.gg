@@ -104,7 +104,7 @@ export const battleLineupTank = z
   });
 
 /** What a battle earned the account that reported it. */
-const battleEconomy = z
+export const battleEconomy = z
   .object({
     creditsBase: z.number().optional(),
     creditsBooster: z.number().optional(),
@@ -309,7 +309,7 @@ export const playerBattle = z
   });
 
 /** Every value each battles filter can take for this account, counted. */
-const playerBattleFacets = z
+export const playerBattleFacets = z
   .object({
     modes: z
       .array(z.object({ value: z.number(), count: z.number() }))

@@ -1,0 +1,17 @@
+{
+  "title": "Battles with a replay ({count})",
+  "empty": "No replay has been shared on this region yet.",
+  "empty-filtered": "No battle matches these filters.",
+  "sort": {
+    "damage": "Damage",
+    "assist": "Assist",
+    "xp": "Experience",
+    "kills": "Kills",
+    "views": "Most viewed",
+    "downloads": "Most downloaded",
+    "recent": "Latest"
+  },
+  "version-current": "Update {version} (current)",
+  "version": "Update {version}",
+  "version-all": "All updates"
+}

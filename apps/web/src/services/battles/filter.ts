@@ -18,5 +18,7 @@ export function battleFilterFrom(query: URLSearchParams): PlayerBattleFilter {
   if (Object.values(BattleResultFilter).includes(result as BattleResultFilter)) {
     filter.result = result as BattleResultFilter;
   }
+  const version = query.get("version");
+  if (version && /^[0-9]+\.[0-9]+\.[0-9]+$/.test(version)) filter.version = version;
   return filter;
 }

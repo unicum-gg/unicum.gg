@@ -87,6 +87,10 @@
       "label": "Top players",
       "description": "All-time player leaderboard"
     },
+    "battles": {
+      "label": "Battles",
+      "description": "Battles and replays shared by players"
+    },
     "players-rampage": {
       "description": "Who ranked highest in Rampage."
     }

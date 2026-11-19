@@ -2,6 +2,7 @@
 // next-openapi-gen scans it.
 import { z } from "zod";
 import {
+  battleEconomy,
   battleLineupTank,
   mapOverlay,
 } from "@/app/api/[region]/players/[nickname]/battles/schema.api";
@@ -133,9 +134,25 @@ const battleParticipant = z
           description:
             "Exists only inside an event mode, so no player has a published record on it.",
         }),
+        viewRange: z.number().nullable().optional().meta({
+          description:
+            "The vehicle's view range in metres, in its top configuration and before crew, equipment or directives. Null when the catalogue holds no specs for it.",
+        }),
       })
       .nullable()
       .meta({ id: "BattleParticipantTank" }),
+    vision: z
+      .object({
+        moving: z.number(),
+        still: z.number(),
+      })
+      .nullable()
+      .optional()
+      .meta({
+        id: "BattleParticipantVision",
+        description:
+          "The view range this vehicle had in the battle, in metres, with its crew, devices, directives, consumables and field modifications, moving and stationary (the binoculars only work once it stands still). Uncapped: the game spots no farther than 445 m whatever this says. Only for a vehicle whose whole loadout the recording holds, which is its recorder's; null for everybody else.",
+      }),
     lineup: z
       .array(battleLineupTank)
       .optional()
@@ -218,6 +235,69 @@ export const BattleDetailResponse = z
       .meta({
         description:
           "Where one player's mark of excellence stood when this battle ended, and where it stood at the end of their previous battle in the same tank, with `account` naming whose gun it is. The figure comes from that client's own results and belongs to them alone, so a reader showing another participant must not show it. The game gives no 'before' of its own, so the movement is only knowable by looking at the battle before. Null when the reporting client is too old to send it, when the mode does not count towards marks, or when no earlier battle in that tank is held.",
+      }),
+    recorders: z
+      .array(
+        z.object({
+          accountId: z.number(),
+          nickname: z.string(),
+          clanTag: z.string().nullable(),
+          personal: battleEconomy.nullable().meta({
+            description: "Their economy, from their own results in the file.",
+          }),
+          details: z
+            .array(
+              z.object({
+                vehicle: z.number().meta({ description: "The enemy's battle-scoped vehicle id." }),
+                spotted: z.boolean(),
+                assisted: z.number().meta({ description: "Assisted damage on it: spotting, tracking and stunning." }),
+                crits: z.boolean().meta({ description: "Whether they damaged a module or crew member of it." }),
+                damageDealt: z.number(),
+                directHits: z.number(),
+                piercings: z.number(),
+                killed: z.boolean(),
+              }),
+            )
+            .meta({
+              description:
+                "What they did to each vehicle they interacted with: the game's own 'battle performance', from their results.",
+            }),
+          markOfMastery: z.number().meta({
+            description: "The mastery badge the battle earned them: 0 none, 1 to 3 third to first class, 4 Ace Tanker.",
+          }),
+          views: z.number(),
+          downloads: z.number(),
+        }),
+      )
+      .meta({
+        description:
+          "Every archived recording of the battle, one per recorder: each is that player's own point of view, with what their own results say. Players who keep their battle list private and accounts we do not track are left out.",
+      }),
+    reportedBy: z
+      .array(z.object({ accountId: z.number(), nickname: z.string() }))
+      .meta({
+        description:
+          "Every client that reported the battle and may be named, in the order they reported it. Players who keep their battle list private and accounts we do not track are left out, so this can be shorter than `reporters`.",
+      }),
+    personal: z
+      .object({ accountId: z.number(), economy: battleEconomy })
+      .nullable()
+      .meta({
+        description:
+          "The economy of the first reporter, whose results are the ones kept, with `accountId` naming whose it is. Null when they keep their battle list private.",
+      }),
+    medals: z
+      .record(
+        z.string(),
+        z.object({
+          key: z.string().meta({ description: "The game's own name for the medal." }),
+          name: z.string().meta({ description: "Its title in the requested language." }),
+          image: z.string(),
+        }),
+      )
+      .meta({
+        description:
+          "The medals awarded in this battle, keyed by the record id a participant's `medals` lists, named in the requested language and pictured. An id that is no medal is absent.",
       }),
     participants: z.array(battleParticipant).meta({
       description: "Every vehicle, both teams, by team then by damage.",

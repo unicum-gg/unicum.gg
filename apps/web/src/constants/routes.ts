@@ -237,12 +237,25 @@ const ROUTES = {
   //   battle was fought on one realm and its id is that realm's.
   BATTLE: (region: Region, id: string) =>
     pathcat("/:region/battles/:id", { region, id }),
+  // One player's side of a battle: any of the thirty, so the URL says nothing
+  // about who reported it. By account id, which a rename does not break.
+  BATTLE_PLAYER: (region: Region, id: string, accountId: number) =>
+    pathcat("/:region/battles/:id/players/:accountId", {
+      region,
+      id,
+      accountId: String(accountId),
+    }),
   TOURNAMENT: (region: Region, id: number | string) =>
     pathcat("/:region/tournaments/:id", { region, id: String(id) }),
   TOURNAMENTS: (region: Region) =>
     region === Region.EU
       ? "/tournaments"
       : pathcat("/:region/tournaments", { region }),
+  // Every battle whose replay was archived, the catalogue a reader browses
+  // replays in. Region-less on EU like the other sections; one battle keeps its
+  // own regional page (`BATTLE`).
+  BATTLES: (region: Region) =>
+    region === Region.EU ? "/battles" : pathcat("/:region/battles", { region }),
   // `team` singular, mirroring the path Wargaming addresses a tournament team
   // on, so a habit from their site lands somewhere familiar.
   TOURNAMENT_TEAM: (region: Region, id: number | string, teamId: number | string) =>

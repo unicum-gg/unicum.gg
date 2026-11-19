@@ -2,12 +2,14 @@ import { and, desc, eq, getTableName, gte, inArray, lt, ne, sql } from "drizzle-
 import type { Region } from "@unicum.gg/wargaming";
 import {
   battleLoadoutsByRegion,
+  battleReplays,
   battlesByRegion,
   clansByRegion,
   EVENT_VEHICLE_VARIANT,
   playersByRegion,
   RatingMetric,
   type BattleEconomy,
+  type BattleEnemyDetail,
   type LoadoutCrewMember,
   type LoadoutShell,
   wn7AccAdd,
@@ -40,6 +42,7 @@ import {
   type ArenaOverlay,
 } from "@unicum.gg/core/wargaming/wot/maps";
 import { resolvePlayerBadges } from "@unicum.gg/core/players/badges";
+import { battlesHiddenAmong } from "@unicum.gg/core/battles/privacy";
 import {
   battleCareers,
   vehicleTankIds,
@@ -671,6 +674,21 @@ export type BattleLoadout = {
 };
 
 /** A whole battle: both teams, named and rated. */
+/** One archived recording of a battle, from its recorder's side. */
+export type BattleRecording = {
+  accountId: number;
+  nickname: string;
+  clanTag: string | null;
+  /** Their economy, from their own results in the file. */
+  personal: BattleEconomy | null;
+  /** What they did to each enemy, from the same results. */
+  details: BattleEnemyDetail[];
+  /** The mastery badge the battle earned them, 0 for none. */
+  markOfMastery: number;
+  views: number;
+  downloads: number;
+};
+
 export type BattleDetail = {
   id: string;
   startedAt: Date;
@@ -725,6 +743,25 @@ export type BattleDetail = {
    * participant's page is looking at a stranger's mark unless the two match.
    */
   mark: { percent: number; previous: number | null; account: number } | null;
+  /**
+   * Every archived recording of the battle, one per recorder: each is that
+   * player's own point of view, with what their own results say. Players who
+   * keep their battle list private and accounts we do not track are left out.
+   */
+  recorders: BattleRecording[];
+  /**
+   * Every client that reported the battle and may be named, in the order they
+   * reported it. Hidden and untracked accounts are left out, so this can be
+   * shorter than `reporters`.
+   */
+  reportedBy: { accountId: number; nickname: string }[];
+  /**
+   * The economy of the FIRST reporter, whose results are the ones kept: what
+   * the battle earned and cost them. `accountId` says whose it is, since it
+   * belongs to that one player and to nobody else on the page. Null when they
+   * keep their battle list private.
+   */
+  personal: { accountId: number; economy: BattleEconomy } | null;
   /** Every vehicle, both teams, ordered by team then by what they did. */
   participants: BattleParticipant[];
 };
@@ -826,10 +863,50 @@ export async function battleDetail(
     (a, b) => a.team - b.team || b.own.damage - a.own.damage,
   );
 
+  // Named only when they let their battles be seen: hiding the list is the
+  // one switch a player has, so it covers being named as a reporter too.
+  const reporterIds = battle.reportedBy.map(Number);
+  const files = await db
+    .select()
+    .from(battleReplays)
+    .where(
+      and(
+        eq(battleReplays.region, region),
+        eq(battleReplays.arenaUniqueId, battle.arenaUniqueId),
+      ),
+    )
+    .orderBy(battleReplays.storedAt);
+  const hidden = await battlesHiddenAmong(region, [
+    ...reporterIds,
+    ...files.map((file) => file.accountId),
+  ]);
+  const nameable = (id: number) => names.has(id) && !hidden.has(id);
+  const first = reporterIds[0];
+
   return {
     id: battle.arenaUniqueId,
     startedAt: battle.startedAt,
-    mark: await markMove(region, battle),
+    // The mark is the first reporter's own figure, so it follows their switch.
+    mark: first !== undefined && !hidden.has(first) ? await markMove(region, battle) : null,
+    recorders: files
+      .filter((file) => nameable(file.accountId))
+      .map((file) => ({
+        accountId: file.accountId,
+        nickname: names.get(file.accountId)!.nickname,
+        clanTag: names.get(file.accountId)!.clanTag,
+        personal: file.personal ?? null,
+        details: file.details ?? [],
+        markOfMastery: Math.max(0, file.markOfMastery ?? 0),
+        views: file.views,
+        downloads: file.downloads,
+      })),
+    reportedBy: reporterIds
+      .filter(nameable)
+      .map((id) => ({ accountId: id, nickname: names.get(id)!.nickname })),
+    personal:
+      first !== undefined && !hidden.has(first) && battle.personal
+        ? { accountId: first, economy: battle.personal }
+        : null,
     map: battle.mapName,
     gameplay: battle.gameplayId,
     battleType: battle.battleType,
