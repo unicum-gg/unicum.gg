@@ -556,12 +556,48 @@ class BattleClient {
     );
   }
 
-  /** Battle replay */
-  replay() {
+  /** Comment on a battle */
+  comment(body: BodyOf<"/{region}/battles/{id}/comment">) {
     const path = { region: this.region, id: this.id };
     return handle(
-      buildUrl(this.baseUrl, "/{region}/battles/{id}/replay", path),
-      () => this.api.GET("/{region}/battles/{id}/replay", { params: { path } }),
+      buildUrl(this.baseUrl, "/{region}/battles/{id}/comment", path),
+      () => this.api.POST("/{region}/battles/{id}/comment", { params: { path }, body }),
+    );
+  }
+
+  /** Battle comments */
+  comments() {
+    const path = { region: this.region, id: this.id };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/battles/{id}/comments", path),
+      () => this.api.GET("/{region}/battles/{id}/comments", { params: { path } }),
+    );
+  }
+
+  /** Battle replay */
+  replay(recorder?: NonNullable<QueryOf<"/{region}/battles/{id}/replay">>["recorder"]) {
+    const path = { region: this.region, id: this.id };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/battles/{id}/replay", path, { recorder }),
+      () => this.api.GET("/{region}/battles/{id}/replay", { params: { path, query: { recorder } } }),
+    );
+  }
+
+  /** Count a replay view */
+  view(body: BodyOf<"/{region}/battles/{id}/view">) {
+    const path = { region: this.region, id: this.id };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/battles/{id}/view", path),
+      () => this.api.POST("/{region}/battles/{id}/view", { params: { path }, body }),
+    );
+  }
+
+  /** Delete a battle comment */
+  commentDelete(body: BodyOf<"/{region}/battles/{id}/comment/delete">) {
+    const path = { region: this.region, id: this.id };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/battles/{id}/comment/delete", path),
+      () => this.api.POST("/{region}/battles/{id}/comment/delete", { params: { path }, body }),
     );
   }
 }
@@ -702,7 +738,8 @@ type TournamentsNamespace = ((id: string) => TournamentClient) & {
 };
 
 type BattlesNamespace = ((id: string) => BattleClient) & {
-
+  /** Battles and replays */
+  list(query?: QueryOf<"/{region}/battles">): RequestHandle<Data<"/{region}/battles">>;
 };
 
 type ServerNamespace = {
@@ -1054,7 +1091,14 @@ class RegionClient {
   get battles(): BattlesNamespace {
     const ns = ((id: string) =>
       new BattleClient(this.api, this.baseUrl, this.region, id)) as BattlesNamespace;
-
+    ns.list = (query) =>
+      handle(
+        buildUrl(this.baseUrl, "/{region}/battles", { region: this.region }, query),
+        () =>
+          this.api.GET("/{region}/battles", {
+            params: { path: { region: this.region }, query },
+          }),
+      );
     return ns;
   }
 
@@ -1171,6 +1215,8 @@ class RegionClient {
   }
 }
 
+type OgBattles = (id: string) => RequestHandle<unknown>;
+
 type OgClans = ((tag: string) => RequestHandle<unknown>) & {
   compare(tags: NonNullable<QueryOf<"/og/{region}/clans/compare">>["tags"]): RequestHandle<unknown>;
 };
@@ -1195,6 +1241,17 @@ class OgRegionClient {
     private readonly baseUrl: string,
     private readonly region: Region,
   ) {}
+
+  get battles(): OgBattles {
+    return (id: string) =>
+      handle(
+        buildUrl(this.baseUrl, "/og/{region}/battles/{id}", { region: this.region, id }),
+        () =>
+          this.api.GET("/og/{region}/battles/{id}", {
+            params: { path: { region: this.region, id } },
+          }),
+      );
+  }
 
   get clans(): OgClans {
     const ns = ((tag: string) =>
@@ -1319,6 +1376,11 @@ type SupportNamespace = {
   funding(): RequestHandle<Data<"/support/funding">>;
   /** Supporters board */
   podium(): RequestHandle<Data<"/support/podium">>;
+};
+
+type ReplaysNamespace = {
+  /** Upload a replay */
+  upload(body: BodyOf<"/replays/upload">): RequestHandle<PostData<"/replays/upload">>;
 };
 
 type RatingsNamespace = {
@@ -1452,6 +1514,16 @@ export class Unicum {
     ns.podium = () =>
       handle(buildUrl(this.baseUrl, "/support/podium"), () =>
         this.api.GET("/support/podium", {}),
+      );
+    return ns;
+  }
+
+  /** Global (not region-scoped) replays. */
+  get replays(): ReplaysNamespace {
+    const ns = {} as ReplaysNamespace;
+    ns.upload = (body) =>
+      handle(buildUrl(this.baseUrl, "/replays/upload"), () =>
+        this.api.POST("/replays/upload", { body }),
       );
     return ns;
   }

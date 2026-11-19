@@ -59,6 +59,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/battles": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Battles and replays
+         * @description Every battle whose `.wotreplay` file was archived, whether the unicum.gg mod sent it or a player uploaded it on the site, each drawn from the player who recorded it, which is the one point of view a replay holds: the map, the mode, their vehicle, what they did and what they had fitted, and a 2D replay on the battle's own page. Ranked by the recorder's damage by default, or their assisted damage, experience or kills, or by date (`recent`). Filtered by mode, map and game update on the battle, and by vehicle and result on the recorder (`version=latest` for the newest update the catalogue holds). A recorder who keeps their battle list private is left out, with their replays.
+         */
+        get: operations["get-{region}-battles"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/{region}/players/compare": {
         parameters: {
             query?: never;
@@ -219,6 +239,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/replays/upload": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Upload a replay
+         * @description Add a finished battle to the site from its `.wotreplay` file, for players who do not run the mod. Requires a signed-in Wargaming account, and the file must have been recorded by that account: a replay names who recorded it, and a battle is a statement about thirty players, so the one claim an account is in a position to make is about the battles it played itself. The battle is read entirely out of the file (results, map, client version) through the same conversion and the same checks as the mod's live reports, so a battle uploaded here and the same battle reported by the mod are one row. The file itself is archived so the battle's 2D replay can be watched on its page. Answers 200 with the battle's id, whether this upload created it or it was already held. 401 when signed out, 413 when too large, 422 with a reason when the file cannot be taken, 429 past 30 uploads an hour.
+         */
+        post: operations["post-replays-upload"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/{region}/players/activity": {
         parameters: {
             query?: never;
@@ -259,6 +299,66 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/battles/{id}/comment": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Comment on a battle
+         * @description Write a comment under a battle's replay. Requires a signed-in Wargaming account. The comment is queued for a moderator and shown to nobody but its author until it is published, so the answer is always `pending`. An account may comment as often as it likes on one battle, within ten comments an hour. 401 when signed out, 404 for an unknown battle or when this deployment takes no comments, 400 for an empty or overlong one, 429 past the hourly limit.
+         */
+        post: operations["post-{region}-battles-{id}-comment"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/battles/{id}/comment/delete": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Delete a battle comment
+         * @description Take down one of the caller's own comments, whether it is still waiting on a moderator or already published. 401 when signed out, 404 when the comment is not the caller's or is already gone.
+         */
+        post: operations["post-{region}-battles-{id}-comment-delete"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/battles/{id}/comments": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Battle comments
+         * @description What players wrote under a battle's replay, oldest first. Every comment is read by a moderator before it is shown, so this answers the published ones; a signed-in reader is also given their own that are still waiting or were turned down, which nobody else sees. `inBattle` says whether the author fought in the battle.
+         */
+        get: operations["get-{region}-battles-{id}-comments"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/{region}/battles/{id}/replay": {
         parameters: {
             query?: never;
@@ -273,6 +373,26 @@ export interface paths {
         get: operations["get-{region}-battles-{id}-replay"];
         put?: never;
         post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/battles/{id}/view": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Count a replay view
+         * @description Record that a reader opened one recording of a battle, which the page shows beside its download count. Sent by the page itself once it is on screen, so a crawler or a link preview that never runs it is not counted, and counted once an hour per address. Always answers `ok`: a view that was not counted is not an error.
+         */
+        post: operations["post-{region}-battles-{id}-view"];
         delete?: never;
         options?: never;
         head?: never;
@@ -2479,6 +2599,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/og/{region}/battles/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Battle OG card
+         * @description A battle's card as a stable, hash-free 1200×630 PNG: its map, mode and minimap, and either one player's side of it (result, vehicle, damage, assistance, kills, experience and WNX) or, without `player`, the battle as a whole (score, length, who recorded it, the top damage). Mirrors the battle pages' link-unfurl image for embedding directly (Discord, social share).
+         */
+        get: operations["get-og-{region}-battles-{id}"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/og/{region}/clans/{tag}": {
         parameters: {
             query?: never;
@@ -2663,6 +2803,48 @@ export interface components {
             value: number | null;
             votes: number;
         };
+        BattleComment: {
+            id: number;
+            /** @description The author's name when they wrote it. */
+            nickname: string;
+            accountId: number;
+            authorRegion: string;
+            body: string;
+            /** Format: date-time */
+            createdAt: Date;
+            /**
+             * @description `approved` for every comment shown to everybody. A signed-in reader is also shown their own `pending` and `rejected` ones, which nobody else sees.
+             * @enum {string}
+             */
+            status: "pending" | "approved" | "rejected" | "removed";
+            /** @description Whether the author fought in this battle. */
+            inBattle: boolean;
+        };
+        BattleCommentBody: {
+            /** @description What to say, plain text. */
+            body: string;
+        };
+        BattleCommentDeleteBody: {
+            /** @description The comment, which must be the caller's own. */
+            id: number;
+        };
+        BattleCommentDeleteResponse: {
+            ok: boolean;
+        };
+        BattleCommentResponse: {
+            id: number;
+            /**
+             * @description Always `pending`: a comment is shown once a moderator has read it.
+             * @enum {string}
+             */
+            status: "pending" | "approved" | "rejected" | "removed";
+        };
+        BattleCommentsResponse: {
+            /** @description Oldest first, like a conversation. */
+            comments: components["schemas"]["BattleComment"][];
+            /** @description Whether comments can be written at all: they wait on a moderator, and a deployment without a moderation channel takes none. */
+            open: boolean;
+        };
         /** @description A whole battle, as the clients that played it reported it. */
         BattleDetailResponse: {
             /** @description The minimap this battle was played on, resolved for its own mode: a mode that redraws the map into a smaller play area ships its own picture, and this is that one. */
@@ -2702,6 +2884,52 @@ export interface components {
                 previous: number | null;
                 account: number;
             } | null;
+            /** @description Every archived recording of the battle, one per recorder: each is that player's own point of view, with what their own results say. Players who keep their battle list private and accounts we do not track are left out. */
+            recorders: {
+                accountId: number;
+                nickname: string;
+                clanTag: string | null;
+                /** @description Their economy, from their own results in the file. */
+                personal: components["schemas"]["BattleEconomy"] | null;
+                /** @description What they did to each vehicle they interacted with: the game's own 'battle performance', from their results. */
+                details: {
+                    /** @description The enemy's battle-scoped vehicle id. */
+                    vehicle: number;
+                    spotted: boolean;
+                    /** @description Assisted damage on it: spotting, tracking and stunning. */
+                    assisted: number;
+                    /** @description Whether they damaged a module or crew member of it. */
+                    crits: boolean;
+                    damageDealt: number;
+                    directHits: number;
+                    piercings: number;
+                    killed: boolean;
+                }[];
+                /** @description The mastery badge the battle earned them: 0 none, 1 to 3 third to first class, 4 Ace Tanker. */
+                markOfMastery: number;
+                views: number;
+                downloads: number;
+            }[];
+            /** @description Every client that reported the battle and may be named, in the order they reported it. Players who keep their battle list private and accounts we do not track are left out, so this can be shorter than `reporters`. */
+            reportedBy: {
+                accountId: number;
+                nickname: string;
+            }[];
+            /** @description The economy of the first reporter, whose results are the ones kept, with `accountId` naming whose it is. Null when they keep their battle list private. */
+            personal: {
+                accountId: number;
+                economy: components["schemas"]["BattleEconomy"];
+            } | null;
+            /** @description The medals awarded in this battle, keyed by the record id a participant's `medals` lists, named in the requested language and pictured. An id that is no medal is absent. */
+            medals: {
+                [key: string]: {
+                    /** @description The game's own name for the medal. */
+                    key: string;
+                    /** @description Its title in the requested language. */
+                    name: string;
+                    image: string;
+                };
+            };
             /** @description Every vehicle, both teams, by team then by damage. */
             participants: components["schemas"]["BattleParticipant"][];
         };
@@ -2821,6 +3049,13 @@ export interface components {
                 slug: string | null;
                 /** @description Exists only inside an event mode, so no player has a published record on it. */
                 isEvent: boolean;
+                /** @description The vehicle's view range in metres, in its top configuration and before crew, equipment or directives. Null when the catalogue holds no specs for it. */
+                viewRange?: number | null;
+            } | null;
+            /** @description The view range this vehicle had in the battle, in metres, with its crew, devices, directives, consumables and field modifications, moving and stationary (the binoculars only work once it stands still). Uncapped: the game spots no farther than 445 m whatever this says. Only for a vehicle whose whole loadout the recording holds, which is its recorder's; null for everybody else. */
+            vision?: {
+                moving: number;
+                still: number;
             } | null;
             /** @description Every tank this vehicle fought in, when it was more than one (Frontline respawns). `tank` is then only the first, and `own` and `rating` cover all of them. */
             lineup?: components["schemas"]["BattleLineupTank"][];
@@ -2964,10 +3199,52 @@ export interface components {
                 };
             } | null;
             mapOverlay: unknown | null;
+            /** @description Every shell the recording client saw fired: the muzzle, and where it burst or the vehicle it struck. From the game's own tracer and explosion events, matched by shot. A shell fired out of the client's sight is not here at all; one whose end it never saw keeps only its heading. */
+            shots: components["schemas"]["BattleReplayShot"][];
+            /** @description The recording player's own view range over time, `[clock ticks, metres]`, exactly as the server sent it to their client: crew, equipment, directives and binoculars included, one entry per change. Uncapped: nothing is spotted past 445 m whatever it says. Empty when the recording does not carry it. */
+            vision: [
+                number,
+                number
+            ][];
+            /** @description The recording player's rounds left, as [clock tick, place in the rack, rounds], one entry per change. The place is the order the client lists them in, which is the loadout's own. */
+            ammo: number[][];
+            /** @description The recording player's own modules and crew, as [clock tick, extra, code]: the extra is the client's vehicle extra (61 engine, 62 ammo rack, 63 fuel tank, 64 radio, 65 and 66 the tracks, 67 gun, 68 turret ring, 69 vision, 70 to 77 the crew), the code the index into the client's DAMAGE_INFO_CODES saying whether it was damaged, destroyed, injured or repaired. */
+            ownDamage: number[][];
+            /** @description The recording player's battle feed, as [clock tick, type, other vehicle, amount]: 7 damage dealt, 10 damage received, 1 radio assist, 2 track assist, 11 stun assist, 5 damage blocked (amount in hit points), 6 critical hits dealt and 9 received (amount in hits). The other vehicle is the target, or whoever did it for what was received or blocked. Never sent for a target the client could not see, so the damage dealt can fall short of the results. */
+            events: number[][];
+            /** @description What the recording player's commander could see of the vehicle under their crosshair: its damaged and destroyed extras (as in ownDamage), each time it changed. Only with the commander skill that shows them, and only for the vehicle aimed at; a vehicle of 0 is no target any more. */
+            targetDamage: {
+                at: number;
+                vehicle: number;
+                damaged: number[];
+                destroyed: number[];
+            }[];
+            /** @description Every hit the recording client heard about, as [clock tick, attacker, victim, hit points taken]. Heard about: a vehicle out of the client's sight reports no health, so a hit on it is missing here while the battle's results still count it. */
+            hits: number[][];
+            /** @description When the recording player was spotted by the enemy, in clock ticks: one entry per time the server told their client, each of which lit the game's sixth sense for two seconds. There is no "no longer spotted" signal. Empty when the recording does not carry it. */
+            observed: number[];
             /** @description One entry per vehicle this battle's recording client could see. A vehicle it never spotted has no track, which is honest fog of war rather than a gap. */
             tracks: components["schemas"]["BattleReplayTrack"][];
             /** @description What the player who recorded this had fitted, one entry per life: one for an ordinary battle, one per tank taken out in a mode with respawns. Only ever theirs, and empty for a recording whose client version this cannot be read from. */
             loadouts: components["schemas"]["BattleReplayLoadout"][];
+        };
+        BattleReplayShot: {
+            /** @description The clock tick it was fired, in the recording's clock. */
+            at: number;
+            /** @description The vehicle that fired it. */
+            by: number;
+            /** @description The muzzle, as [x, z] in the arena's own metres. */
+            from: number[];
+            /** @description Where it ended, as [x, z]: the point it burst on the ground or the scenery, or the vehicle it struck. When the recording never saw it land, a point along its heading, and `landed` is false. */
+            to: number[];
+            /** @description The clock tick it ended, or null when the recording never saw it land. */
+            endAt: number | null;
+            /** @description Whether `to` is where it really ended rather than its heading. */
+            landed: boolean;
+            /** @description The vehicle it struck, when it struck one and did damage. */
+            victim: number | null;
+            /** @description A ricochet the game drew as its own tracer. */
+            ricochet: boolean;
         };
         BattleReplayTrack: {
             /** @description The battle-scoped vehicle id, the same one the battle's participants are keyed by. */
@@ -2980,14 +3257,89 @@ export interface components {
             maxHealth: number;
             /** @description Hit points over time, as [clock tick, hit points], one entry per change. Starts implicitly at maxHealth. A vehicle the recording client lost sight of keeps the last value it was told, so a track can end above the health the results record: the same fog of war the positions have. */
             health: number[][];
+            /** @description Where the gun points over time, as [clock tick, radians from north towards east], the frame the positions use: the hull's heading plus the turret's angle on it, from the vehicle's own gun-angle property. One entry per change of about three degrees or more. Empty for a vehicle the recording client never saw aim, which is the same fog of war the positions have. */
+            aim: number[][];
             /** @description The path, as [clock ticks since the battle started, x, z in the arena's own metres]. Every position the recording client was shown, which is about ten a second; only the moments the vehicle actually moved are kept, so between two points it stood still. */
             points: number[][];
+            /** @description Where the vehicle was while more than 565 m from the recording player, as their minimap drew it: [clock tick, x, z], whole metres, checked every two seconds and sent only when it moved, so between two entries it stood still. Every ally, and every enemy the team had spotted. An entry at -32768, -32768 is the team losing it. Empty when it never left that range, or when the recording's far positions could not be matched to the battle's vehicles. */
+            far: number[][];
         };
         /**
          * @description How the battle ended, as declared by the submitter.
          * @enum {string}
          */
         battleResultField: "victory" | "defeat" | "draw";
+        /** @description One archived replay, drawn from the player who recorded it. */
+        BattlesCatalogEntry: {
+            player: components["schemas"]["BattlesCatalogPlayer"];
+            /** @description How often this recording's page was opened and its file downloaded, each counted at most once an hour per address. */
+            stats: {
+                views: number;
+                downloads: number;
+            };
+            /** @description The battle from the recorder's side, exactly as their own Battles tab answers it, loadout included. */
+            battle: components["schemas"]["PlayerBattle"];
+        };
+        BattlesCatalogPlayer: {
+            nickname: string;
+            accountId: number;
+            clanTag: string | null;
+            clanColor: string | null;
+            isVerified: boolean;
+            isSupporter: boolean;
+            twitchLogin: string | null;
+            tournamentWins: number;
+            tournamentFeaturedWins: number;
+            tournamentBestTitle: string | null;
+            onslaughtBestTier: string | null;
+            onslaughtBestRank: number | null;
+            onslaughtSeasons: number;
+        };
+        battlesCatalogQueryOutput: {
+            language?: Record<string, never>;
+            /** @description Which page of `limit` battles, counted from one. The first by default; `total` in the answer says how many there are. */
+            page?: number;
+            /** @description Battles per page, 20 by default, 100 at most. */
+            limit?: number;
+            /**
+             * @description What the replays are ranked by: the damage their recorder dealt (`damage`, the default), their assisted damage, experience or kills, the newest first (`recent`), or the most opened (`views`) or downloaded (`downloads`).
+             * @enum {string}
+             */
+            sort?: "recent" | "damage" | "assist" | "xp" | "kills" | "views" | "downloads";
+            /** @description Only battles of this mode, by the game's own `bonusType` (1 is random battles). `facets.modes` lists the ones the catalogue has. */
+            mode?: number;
+            /** @description Only replays recorded in this vehicle, by its tank id. `facets.tanks` lists the ones the catalogue has. */
+            tank?: number;
+            /** @description Only battles on this arena, by the game's own map id (`05_prohorovka`). `facets.maps` lists the ones the catalogue has. */
+            map?: string;
+            /**
+             * @description Only replays whose recorder won, lost or drew.
+             * @enum {string}
+             */
+            result?: "win" | "loss" | "draw";
+            /** @description Only battles of this game update, as `2.4.1` (any hotfix of it), or `latest` for the newest update the catalogue holds. `versions` lists the ones it has. */
+            version?: string;
+            /**
+             * @description `true` to also answer what each filter can take, counted.
+             * @enum {string}
+             */
+            facets?: "true" | "false";
+        };
+        /** @description Every battle whose replay file was archived, from the mod or from a replay uploaded on the site. */
+        BattlesCatalogResponse: {
+            battles: components["schemas"]["BattlesCatalogEntry"][];
+            /** @description How many battles match the filters across every page. */
+            total: number;
+            /** @description Present when `facets=true` was asked for, counted over the whole catalogue. */
+            facets?: components["schemas"]["PlayerBattleFacets"];
+            /** @description The game update the list is narrowed to, `latest` resolved, or null for every update. */
+            version: string | null;
+            /** @description The game updates the catalogue holds battles from, newest first, counted. Present with `facets=true`. */
+            versions?: {
+                value: string;
+                count: number;
+            }[];
+        };
         /** @description A vehicle as a battle row names it. */
         BattleTank: {
             /** @description `typeCompDescr`, which is the catalogue's own tank id. */
@@ -3039,6 +3391,13 @@ export interface components {
             /** @description Hit points left, negative on the shot that overkills. */
             health: number;
             maxHealth: number;
+        };
+        BattleViewBody: {
+            /** @description The account whose recording was opened, one of the battle's `recorders`. */
+            recorder: number;
+        };
+        BattleViewResponse: {
+            ok: boolean;
         };
         bracketVerdict: {
             bracket: components["schemas"]["voterBracketField"];
@@ -4319,7 +4678,7 @@ export interface components {
          * @description Top-level battle type a map belongs to.
          * @enum {string}
          */
-        mapBattleTypeField: "random" | "battle_royale" | "frontline" | "onslaught" | "onslaught_night" | "grand_battle" | "clan_wars" | "waffentrager" | "last_stand" | "arcade" | "story_mode" | "training";
+        mapBattleTypeField: "random" | "battle_royale" | "frontline" | "onslaught" | "onslaught_night" | "grand_battle" | "clan_wars" | "waffentrager" | "last_stand" | "black_signal" | "arcade" | "story_mode" | "training";
         mapBracketVerdict: {
             bracket: components["schemas"]["voterBracketField"];
             votes: number;
@@ -4853,8 +5212,7 @@ export interface components {
         /** @description One player's best battle on this map by damage dealt. One battle per player. Players who asked not to be shown are absent here while still counting towards every figure above. */
         MapTopBattle: {
             player: components["schemas"]["MapTopBattlePlayer"];
-            /** @description The battle, exactly as the player's own Battles tab answers it, loadout included. */
-            battle: components["schemas"]["PlayerBattle"];
+            battle: Record<string, never>;
         };
         MapTopBattlePlayer: {
             nickname: string;
@@ -6623,6 +6981,19 @@ export interface components {
             votes: number;
             overall: number | null;
             fun: number | null;
+        };
+        ReplayUploadBody: {
+            /** @description The `.wotreplay` file of a finished battle, recorded by the signed-in account. */
+            replay: string;
+        };
+        ReplayUploadResponse: {
+            /**
+             * @description Game server region.
+             * @enum {string}
+             */
+            region: "eu" | "na" | "asia";
+            id: string;
+            created: boolean;
         };
         researchPathItem: {
             tankId: number;
@@ -8710,6 +9081,49 @@ export interface operations {
             };
         };
     };
+    "get-{region}-battles": {
+        parameters: {
+            query?: {
+                language?: components["schemas"]["answerLanguageField"];
+                /** @description Which page of `limit` battles, counted from one. The first by default; `total` in the answer says how many there are. */
+                page?: number;
+                /** @description Battles per page, 20 by default, 100 at most. */
+                limit?: number;
+                /** @description What the replays are ranked by: the damage their recorder dealt (`damage`, the default), their assisted damage, experience or kills, the newest first (`recent`), or the most opened (`views`) or downloaded (`downloads`). */
+                sort?: "recent" | "damage" | "assist" | "xp" | "kills" | "views" | "downloads";
+                /** @description Only battles of this mode, by the game's own `bonusType` (1 is random battles). `facets.modes` lists the ones the catalogue has. */
+                mode?: number;
+                /** @description Only replays recorded in this vehicle, by its tank id. `facets.tanks` lists the ones the catalogue has. */
+                tank?: number;
+                /** @description Only battles on this arena, by the game's own map id (`05_prohorovka`). `facets.maps` lists the ones the catalogue has. */
+                map?: string;
+                /** @description Only replays whose recorder won, lost or drew. */
+                result?: "win" | "loss" | "draw";
+                /** @description Only battles of this game update, as `2.4.1` (any hotfix of it), or `latest` for the newest update the catalogue holds. `versions` lists the ones it has. */
+                version?: string;
+                /** @description `true` to also answer what each filter can take, counted. */
+                facets?: "true" | "false";
+            };
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BattlesCatalogResponse"];
+                };
+            };
+        };
+    };
     "get-{region}-players-compare": {
         parameters: {
             query: {
@@ -8922,6 +9336,30 @@ export interface operations {
             };
         };
     };
+    "post-replays-upload": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "multipart/form-data": components["schemas"]["ReplayUploadBody"];
+            };
+        };
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ReplayUploadResponse"];
+                };
+            };
+        };
+    };
     "get-{region}-players-activity": {
         parameters: {
             query?: {
@@ -8978,7 +9416,71 @@ export interface operations {
             };
         };
     };
-    "get-{region}-battles-{id}-replay": {
+    "post-{region}-battles-{id}-comment": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description The game's own battle id (`arenaUniqueID`), as digits. A string, not a number: it runs to 19 digits.
+                 * @example 123
+                 */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["BattleCommentBody"];
+            };
+        };
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BattleCommentResponse"];
+                };
+            };
+        };
+    };
+    "post-{region}-battles-{id}-comment-delete": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description The game's own battle id (`arenaUniqueID`), as digits. A string, not a number: it runs to 19 digits.
+                 * @example 123
+                 */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["BattleCommentDeleteBody"];
+            };
+        };
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BattleCommentDeleteResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-battles-{id}-comments": {
         parameters: {
             query?: never;
             header?: never;
@@ -9001,7 +9503,70 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
+                    "application/json": components["schemas"]["BattleCommentsResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-battles-{id}-replay": {
+        parameters: {
+            query?: {
+                /** @description The account whose recording to read, one of the battle's `recorders`. Each participant who recorded the battle has their own point of view; without it, the battle's first recording. */
+                recorder?: number;
+            };
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description The game's own battle id (`arenaUniqueID`), as digits. A string, not a number: it runs to 19 digits.
+                 * @example 123
+                 */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
                     "application/json": components["schemas"]["BattleReplayResponse"];
+                };
+            };
+        };
+    };
+    "post-{region}-battles-{id}-view": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description The game's own battle id (`arenaUniqueID`), as digits. A string, not a number: it runs to 19 digits.
+                 * @example 123
+                 */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["BattleViewBody"];
+            };
+        };
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BattleViewResponse"];
                 };
             };
         };
@@ -11955,6 +12520,37 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["GlossaryTermResponse"];
+                };
+            };
+        };
+    };
+    "get-og-{region}-battles-{id}": {
+        parameters: {
+            query?: {
+                /** @description The account whose battle the card shows: their result, vehicle and figures. Without it, the battle as a whole. */
+                player?: number;
+            };
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description The game's own battle id (`arenaUniqueID`), as digits. A string, not a number: it runs to 19 digits.
+                 * @example 123
+                 */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "image/png": components["schemas"]["ogImageResponse"];
                 };
             };
         };
