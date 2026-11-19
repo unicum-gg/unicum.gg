@@ -2,12 +2,14 @@ import { createHash } from "node:crypto";
 import { isRegion, type Region } from "@unicum.gg/wargaming";
 import {
   activeLayout,
+  minimapIndex,
   readLoadouts,
   readMotion,
   readReplay,
   replayClockOffset,
   type ChatLine,
   type ReplayLoadout,
+  unseenShotEnd,
 } from "@unicum.gg/shared";
 import { normaliseBattleId } from "@unicum.gg/core/battles/ingest";
 import { fetchReplay, replayBattle } from "@unicum.gg/core/battles/replays";
@@ -15,7 +17,7 @@ import { drawing } from "@unicum.gg/core/battles/read";
 import { minimapsByArena } from "@unicum.gg/core/wargaming/wot/maps/index";
 import { measured } from "@/services/perf";
 import { jsonResponse } from "@/services/openapi/json-response";
-import { BattleReplayResponse } from "./schema.api";
+import { BattleReplayResponse, battleReplayQuery } from "./schema.api";
 
 export const dynamic = "force-dynamic";
 
@@ -39,7 +41,7 @@ const TICKS = 100;
  * the version in the validator, an old body simply fails to match and is
  * replaced on the next request.
  */
-const FORMAT = 13;
+const FORMAT = 20;
 
 /**
  * Always revalidate, and the ETag decides.
@@ -87,7 +89,41 @@ type Track = {
    * same fog of war the positions have, not a decoding error.
    */
   health: [number, number][];
+  /** Where the gun points over time, as `[clock ticks, radians]`. */
+  aim: [number, number][];
+  /** Where it was while past the recorder's 565 m, as its minimap drew it. */
+  far: [number, number, number][];
 };
+
+/** A coordinate to a tenth of a metre, which is finer than any map draws. */
+const round1 = (value: number) => Math.round(value * 10) / 10;
+
+/** The smallest change of aim worth sending, in radians: about three degrees. */
+const AIM_STEP = 0.05;
+
+/**
+ * Where a vehicle's gun points over time, from north towards east: the hull's
+ * heading plus the turret's angle on it, read at every moment either changed.
+ * Only moments both are known count, since one without the other points the
+ * gun at nothing in particular.
+ */
+function aimOf(hull: [number, number][], turret: [number, number][]): [number, number][] {
+  const times = [...new Set([...hull, ...turret].map(([at]) => at))].sort((a, b) => a - b);
+  const out: [number, number][] = [];
+  let h = -1;
+  let g = -1;
+  for (const at of times) {
+    while (h + 1 < hull.length && hull[h + 1][0] <= at) h += 1;
+    while (g + 1 < turret.length && turret[g + 1][0] <= at) g += 1;
+    if (h < 0 || g < 0) continue;
+    let angle = hull[h][1] + turret[g][1];
+    angle = Math.atan2(Math.sin(angle), Math.cos(angle));
+    const last = out.at(-1);
+    const turned = last ? Math.abs(Math.atan2(Math.sin(angle - last[1]), Math.cos(angle - last[1]))) : Infinity;
+    if (turned > AIM_STEP) out.push([Math.round(at * TICKS), Math.round(angle * 1000) / 1000]);
+  }
+  return out;
+}
 
 /**
  * Every `stride` ticks at most, keeping the ends.
@@ -132,6 +168,7 @@ function everyNTicks(points: [number, number, number][], stride: number) {
  * Battle replay
  * @description Where every vehicle was through a battle, for the 2D viewer, decoded from the replay file the players' own clients recorded. The decoded positions and nothing else: the file itself carries the whole packet stream the recording client received, the battle chat included, which is not published. 404 when no replay was kept for this battle, which is the ordinary case, since one exists only when a player who was there had recording on and shared it.
  * @pathParams battleParams
+ * @queryParams battleReplayQuery
  * @response BattleReplayResponse
  * @tag Players
  * @openapi
@@ -152,7 +189,17 @@ async function GET__perf(
     return Response.json({ error: "invalid_battle" }, { status: 400 });
   }
 
-  const battle = await replayBattle(region as Region, normaliseBattleId(id));
+  const query = battleReplayQuery.safeParse(
+    Object.fromEntries(new URL(_req.url).searchParams),
+  );
+  if (!query.success) {
+    return Response.json({ error: "invalid_recorder" }, { status: 400 });
+  }
+  const battle = await replayBattle(
+    region as Region,
+    normaliseBattleId(id),
+    query.data.recorder,
+  );
   if (!battle) {
     return Response.json({ error: "no_replay" }, { status: 404 });
   }
@@ -229,7 +276,28 @@ async function GET__perf(
 
   const teams = new Map(battle.vehicles.map((v) => [v.id, v.team]));
   const health = new Map(motion.health.map((h) => [h.id, h.points]));
+  const aims = new Map(motion.tracks.map((t) => [t.id, aimOf(t.hull, t.turret)]));
   const maxHealth = new Map(battle.vehicles.map((v) => [v.id, v.maxHealth]));
+  // The minimap's far positions, by vehicle. A vehicle that never came within
+  // 565 m of the recorder has nothing else, so it gets a track of its own.
+  const farIndex = minimapIndex(
+    motion.minimap,
+    battle.vehicles.map((v) => v.id),
+    motion.tracks.map((t) => ({ id: t.id, points: t.points })),
+  );
+  const far = new Map<number, [number, number, number][]>();
+  if (farIndex) {
+    for (const record of motion.minimap) {
+      const id = farIndex.get(record.key);
+      if (id === undefined) continue;
+      const list = far.get(id) ?? [];
+      list.push([Math.max(0, Math.round(record.at * TICKS)), record.x, record.z]);
+      far.set(id, list);
+    }
+  }
+  for (const id of far.keys()) {
+    if (!built.some((track) => track.id === id)) built.push({ id, points: [], last: 0 });
+  }
   const tracks: Track[] = built.map((track) => {
     const life = died.get(track.id);
     return {
@@ -247,6 +315,8 @@ async function GET__perf(
       health: (health.get(track.id) ?? []).map(
         ([at, hp]) => [Math.round(at * TICKS), hp] as [number, number],
       ),
+      aim: aims.get(track.id) ?? [],
+      far: everyNTicks(far.get(track.id) ?? [], stride),
     };
   });
   if (tracks.length === 0) {
@@ -305,6 +375,43 @@ async function GET__perf(
       // they change.
       startsAt: offset !== null ? Math.round(offset * TICKS) : 0,
       tracks,
+      // The recorder's own view range as the server told them, on the same
+      // clock. Before the countdown ends it can only be the first value.
+      vision: motion.vision.map(
+        ([at, radius]) => [Math.max(0, Math.round(at * TICKS)), radius] as [number, number],
+      ),
+      // When the recorder was spotted, on the same clock: each lit the game's
+      // sixth sense for two seconds.
+      observed: motion.observed.map((at) => Math.max(0, Math.round(at * TICKS))),
+      // The recorder's own state, on the same clock: their rack (shells by
+      // their place in it, which is the order the first full list arrives in
+      // and the loadout's own), their modules and crew, their battle feed,
+      // and what their commander could see of the vehicle they aimed at.
+      ...recorderState(motion, TICKS),
+      // Every hit this client heard about, with its author, on the same clock.
+      hits: motion.hits.map(
+        (hit) =>
+          [Math.max(0, Math.round(hit.at * TICKS)), hit.by, hit.victim, hit.damage] as [
+            number,
+            number,
+            number,
+            number,
+          ],
+      ),
+      // Every shell the recording saw fired, on the same clock as the tracks.
+      shots: motion.shots.map((shot) => {
+        const to = shot.to ?? unseenShotEnd(shot);
+        return {
+          at: Math.round(shot.at * TICKS),
+          by: shot.by,
+          from: [round1(shot.from.x), round1(shot.from.z)] as [number, number],
+          to: [round1(to.x), round1(to.z)] as [number, number],
+          endAt: shot.endAt === null ? null : Math.round(shot.endAt * TICKS),
+          landed: shot.to !== null,
+          victim: shot.victim,
+          ricochet: shot.ricochet,
+        };
+      }),
       // What the player who recorded this had fitted, one entry per life.
       //
       // Flattened to the layout that was in USE. The client keeps two groups
@@ -423,3 +530,57 @@ function thin(
   }
   return out;
 }
+
+/** A clock in seconds to ticks, never before the stream's start. */
+const tickOf = (at: number, ticks: number) => Math.max(0, Math.round(at * ticks));
+
+/**
+ * The recorder's rack, modules, battle feed and view of their target, shaped
+ * for the page. Shells are numbered by their place in the rack, in the order
+ * the client first lists them, which is the loadout's own; consumables are
+ * left out, since only their use would say anything and the loadout already
+ * names them.
+ */
+function recorderState(motion: ReturnType<typeof readMotion>, ticks: number) {
+  const slots: number[] = [];
+  const ammo: [number, number, number][] = [];
+  for (const entry of motion.ammo) {
+    if ((entry.item & 0xf) !== 10) continue;
+    let slot = slots.indexOf(entry.item);
+    if (slot < 0) slot = slots.push(entry.item) - 1;
+    ammo.push([tickOf(entry.at, ticks), slot, entry.quantity]);
+  }
+  return {
+    ammo,
+    ownDamage: motion.ownDamage.map(
+      (entry) => [tickOf(entry.at, ticks), entry.extra, entry.code] as [number, number, number],
+    ),
+    events: motion.events
+      .filter((event) => FEED_TYPES.has(event.type))
+      .map(
+        (event) =>
+          // A critical hit carries a count of hits rather than hit points.
+          [
+            tickOf(event.at, ticks),
+            event.type,
+            event.target,
+            event.type === 6 || event.type === 9 ? event.crits : event.amount,
+          ] as [
+            number,
+            number,
+            number,
+            number,
+          ],
+      ),
+    targetDamage: motion.targetDamage.map((entry) => ({
+      at: tickOf(entry.at, ticks),
+      vehicle: entry.vehicle,
+      damaged: entry.damaged,
+      destroyed: entry.destroyed,
+    })),
+  };
+}
+
+/** The feed events the page uses: damage dealt and received, the three
+ * assists, blocked, and the critical hits either way. */
+const FEED_TYPES = new Set([1, 2, 5, 6, 7, 9, 10, 11]);

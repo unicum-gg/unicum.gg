@@ -9,6 +9,19 @@ import * as z from "zod";
  * so four pixels. No height, because a minimap is a plan view and a tank on a
  * hill is at the same place on it as one under the hill.
  */
+/** Which recording of the battle to read. */
+export const battleReplayQuery = z.object({
+  recorder: z.coerce
+    .number()
+    .int()
+    .positive()
+    .optional()
+    .meta({
+      description:
+        "The account whose recording to read, one of the battle's `recorders`. Each participant who recorded the battle has their own point of view; without it, the battle's first recording.",
+    }),
+});
+
 export const BattleReplayTrack = z.object({
   id: z.number().meta({
     description:
@@ -29,9 +42,17 @@ export const BattleReplayTrack = z.object({
     description:
       "Hit points over time, as [clock tick, hit points], one entry per change. Starts implicitly at maxHealth. A vehicle the recording client lost sight of keeps the last value it was told, so a track can end above the health the results record: the same fog of war the positions have.",
   }),
+  aim: z.array(z.array(z.number()).length(2)).meta({
+    description:
+      "Where the gun points over time, as [clock tick, radians from north towards east], the frame the positions use: the hull's heading plus the turret's angle on it, from the vehicle's own gun-angle property. One entry per change of about three degrees or more. Empty for a vehicle the recording client never saw aim, which is the same fog of war the positions have.",
+  }),
   points: z.array(z.array(z.number()).length(3)).meta({
     description:
       "The path, as [clock ticks since the battle started, x, z in the arena's own metres]. Every position the recording client was shown, which is about ten a second; only the moments the vehicle actually moved are kept, so between two points it stood still.",
+  }),
+  far: z.array(z.array(z.number()).length(3)).meta({
+    description:
+      "Where the vehicle was while more than 565 m from the recording player, as their minimap drew it: [clock tick, x, z], whole metres, checked every two seconds and sent only when it moved, so between two entries it stood still. Every ally, and every enemy the team had spotted. An entry at -32768, -32768 is the team losing it. Empty when it never left that range, or when the recording's far positions could not be matched to the battle's vehicles.",
   }),
 });
 
@@ -169,6 +190,28 @@ export const BattleReplayLoadout = z.object({
   }),
 });
 
+export const BattleReplayShot = z.object({
+  at: z.number().meta({ description: "The clock tick it was fired, in the recording's clock." }),
+  by: z.number().meta({ description: "The vehicle that fired it." }),
+  from: z.array(z.number()).length(2).meta({
+    description: "The muzzle, as [x, z] in the arena's own metres.",
+  }),
+  to: z.array(z.number()).length(2).meta({
+    description:
+      "Where it ended, as [x, z]: the point it burst on the ground or the scenery, or the vehicle it struck. When the recording never saw it land, a point along its heading, and `landed` is false.",
+  }),
+  endAt: z.number().nullable().meta({
+    description: "The clock tick it ended, or null when the recording never saw it land.",
+  }),
+  landed: z.boolean().meta({
+    description: "Whether `to` is where it really ended rather than its heading.",
+  }),
+  victim: z.number().nullable().meta({
+    description: "The vehicle it struck, when it struck one and did damage.",
+  }),
+  ricochet: z.boolean().meta({ description: "A ricochet the game drew as its own tracer." }),
+});
+
 export const BattleReplayResponse = z.object({
   duration: z.number().meta({
     description: "How long the recording runs, in seconds.",
@@ -205,6 +248,47 @@ export const BattleReplayResponse = z.object({
     }),
   mapOverlay: z.unknown().nullable().meta({
     description: "The mode's own overlay for that map, when it has one.",
+  }),
+  shots: z.array(BattleReplayShot).meta({
+    description:
+      "Every shell the recording client saw fired: the muzzle, and where it burst or the vehicle it struck. From the game's own tracer and explosion events, matched by shot. A shell fired out of the client's sight is not here at all; one whose end it never saw keeps only its heading.",
+  }),
+  vision: z.array(z.tuple([z.number(), z.number()])).meta({
+    description:
+      "The recording player's own view range over time, `[clock ticks, metres]`, exactly as the server sent it to their client: crew, equipment, directives and binoculars included, one entry per change. Uncapped: nothing is spotted past 445 m whatever it says. Empty when the recording does not carry it.",
+  }),
+  ammo: z.array(z.array(z.number()).length(3)).meta({
+    description:
+      "The recording player's rounds left, as [clock tick, place in the rack, rounds], one entry per change. The place is the order the client lists them in, which is the loadout's own.",
+  }),
+  ownDamage: z.array(z.array(z.number()).length(3)).meta({
+    description:
+      "The recording player's own modules and crew, as [clock tick, extra, code]: the extra is the client's vehicle extra (61 engine, 62 ammo rack, 63 fuel tank, 64 radio, 65 and 66 the tracks, 67 gun, 68 turret ring, 69 vision, 70 to 77 the crew), the code the index into the client's DAMAGE_INFO_CODES saying whether it was damaged, destroyed, injured or repaired.",
+  }),
+  events: z.array(z.array(z.number()).length(4)).meta({
+    description:
+      "The recording player's battle feed, as [clock tick, type, other vehicle, amount]: 7 damage dealt, 10 damage received, 1 radio assist, 2 track assist, 11 stun assist, 5 damage blocked (amount in hit points), 6 critical hits dealt and 9 received (amount in hits). The other vehicle is the target, or whoever did it for what was received or blocked. Never sent for a target the client could not see, so the damage dealt can fall short of the results.",
+  }),
+  targetDamage: z
+    .array(
+      z.object({
+        at: z.number(),
+        vehicle: z.number(),
+        damaged: z.array(z.number()),
+        destroyed: z.array(z.number()),
+      }),
+    )
+    .meta({
+      description:
+        "What the recording player's commander could see of the vehicle under their crosshair: its damaged and destroyed extras (as in ownDamage), each time it changed. Only with the commander skill that shows them, and only for the vehicle aimed at; a vehicle of 0 is no target any more.",
+    }),
+  hits: z.array(z.array(z.number()).length(4)).meta({
+    description:
+      "Every hit the recording client heard about, as [clock tick, attacker, victim, hit points taken]. Heard about: a vehicle out of the client's sight reports no health, so a hit on it is missing here while the battle's results still count it.",
+  }),
+  observed: z.array(z.number()).meta({
+    description:
+      "When the recording player was spotted by the enemy, in clock ticks: one entry per time the server told their client, each of which lit the game's sixth sense for two seconds. There is no \"no longer spotted\" signal. Empty when the recording does not carry it.",
   }),
   tracks: z.array(BattleReplayTrack).meta({
     description:
