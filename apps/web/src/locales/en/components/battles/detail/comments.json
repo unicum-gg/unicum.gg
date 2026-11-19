@@ -1,0 +1,19 @@
+{
+  "title": "Comments",
+  "title-count": "Comments ({count})",
+  "empty": "No comment yet. What did you make of this battle?",
+  "in-battle": "Played in this battle",
+  "pending": "Awaiting moderation, only you can see it",
+  "rejected": "Not published",
+  "delete": "Delete",
+  "log-in": "Log in to comment",
+  "placeholder": "Say something about this battle…",
+  "moderated": "Comments are read by a moderator before they are published.",
+  "send": "Post comment",
+  "sending": "Posting…",
+  "error": {
+    "rate-limited": "You have posted a lot of comments in the last hour. Try again a bit later.",
+    "unauthenticated": "Your session has expired. Log in again.",
+    "unknown": "Something went wrong. Try again in a moment."
+  }
+}

@@ -30,9 +30,35 @@ import { env } from "../../../env.js";
 /** Which queue a card belongs to, read off the first segment of its custom id.
  * Matched on the segment rather than with a `startsWith`, so a prefix that
  * happens to contain another cannot route a press to the wrong queue. */
-const QUEUES: Record<string, { endpoint: string; subject: string }> = {
-  rating: { endpoint: "tank-ratings", subject: "tank page" },
-  maprating: { endpoint: "map-ratings", subject: "map page" },
+const QUEUES: Record<
+  string,
+  {
+    endpoint: string;
+    subject: string;
+    /** Whether a published text can be taken down again from its card. Battle
+     * comments can: a review is one person's verdict, a comment is a
+     * conversation, and a conversation can go wrong after it was fine. */
+    removable?: boolean;
+    /** What a rejection leaves standing, said to the moderator. */
+    rejected: string;
+  }
+> = {
+  rating: {
+    endpoint: "tank-ratings",
+    subject: "tank page",
+    rejected: "their stars still count towards the average, and they can write another from the tank page",
+  },
+  maprating: {
+    endpoint: "map-ratings",
+    subject: "map page",
+    rejected: "their stars still count towards the average, and they can write another from the map page",
+  },
+  battlecomment: {
+    endpoint: "battle-comments",
+    subject: "battle page",
+    removable: true,
+    rejected: "and they can write another under the battle",
+  },
 };
 
 /** The API base, same resolution as the SDK: the internal container in prod,
@@ -46,18 +72,30 @@ export function isRatingReviewButton(customId: string): boolean {
 }
 
 /** The card, once settled: the buttons go away so the channel reads as a queue
- * of things still to do rather than a wall of already-handled cards. */
+ * of things still to do rather than a wall of already-handled cards. A queue
+ * whose published texts can be taken down keeps that one button, so the card
+ * that published something is also how it is withdrawn. */
 function settledRow(
   prefix: string,
   label: string,
+  remove?: { id: string; digest: string },
 ): ActionRowBuilder<ButtonBuilder> {
-  return new ActionRowBuilder<ButtonBuilder>().addComponents(
+  const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
     new ButtonBuilder()
       .setCustomId(`${prefix}:done`)
       .setLabel(label)
       .setStyle(ButtonStyle.Secondary)
       .setDisabled(true),
   );
+  if (remove) {
+    row.addComponents(
+      new ButtonBuilder()
+        .setCustomId(`${prefix}:remove:${remove.id}:${remove.digest}`)
+        .setLabel("Remove")
+        .setStyle(ButtonStyle.Danger),
+    );
+  }
+  return row;
 }
 
 export async function handleRatingReview(
@@ -73,6 +111,7 @@ export async function handleRatingReview(
   if (!queue) return;
 
   const approved = action === "approve";
+  const removing = action === "remove";
   await interaction.deferReply({ flags: MessageFlags.Ephemeral });
 
   try {
@@ -88,7 +127,7 @@ export async function handleRatingReview(
           authorization: `Bearer ${sharedEnv.CRON_SECRET}`,
         },
         body: JSON.stringify({
-          approved,
+          ...(removing ? { action: "remove" } : { approved }),
           moderatorId: interaction.user.id,
           // Echoed back so the API can refuse a card whose text has since been
           // rewritten. Without it, pressing Publish on an old card would
@@ -119,16 +158,29 @@ export async function handleRatingReview(
       url?: string | null;
     } | null;
 
+    if (removing) {
+      await interaction.editReply(`Removed. It is no longer shown on the ${queue.subject}.`);
+      await interaction.message.edit({
+        components: [settledRow(prefix, `Removed by ${interaction.user.username}`)],
+      });
+      return;
+    }
     const label = approved ? "Published" : "Rejected";
     await interaction.editReply(
       approved
         ? data?.url
           ? `Published. It is live: ${data.url}`
           : `Published. It is live on the ${queue.subject}.`
-        : `Rejected. The author is told, their stars still count towards the average, and they can write another from the ${queue.subject}.`,
+        : `Rejected. The author is told, ${queue.rejected}.`,
     );
     await interaction.message.edit({
-      components: [settledRow(prefix, `${label} by ${interaction.user.username}`)],
+      components: [
+        settledRow(
+          prefix,
+          `${label} by ${interaction.user.username}`,
+          approved && queue.removable ? { id: rawId, digest } : undefined,
+        ),
+      ],
     });
   } catch (err) {
     console.error("[bot] rating review failed:", err);
