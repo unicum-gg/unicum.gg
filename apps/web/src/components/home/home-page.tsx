@@ -22,7 +22,6 @@ import { TopClansOverallPanel } from "@/components/home/top-clans-overall-panel"
 import { LiveSection } from "@/components/home/live-section";
 import { LatestReplays } from "@/components/home/latest-replays";
 import type { BattlesCatalogPayload } from "@/components/battles/list/catalog";
-import ROUTES from "@/constants/routes";
 import { TopPlayers } from "@/components/home/top-players";
 import { TopPlayersOverallPanel } from "@/components/home/top-players-overall-panel";
 import {
