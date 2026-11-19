@@ -1,0 +1,23 @@
+{
+  "meta-title": "Žaidėjo {nickname} mūšis, žaidžiant su {tank}, žemėlapyje {map}: World of Tanks pakartojimas",
+  "meta-title-battle": "{map}, {mode}, {date}: World of Tanks mūšio pakartojimas",
+  "meta-description": {
+    "win": "Žaidėjas {nickname} laimėjo mūšį žemėlapyje {map}, žaisdamas su {tank} ({mode}, {date}): {damage} žalos, {kills} sunaikinimų, {xp} patirties.",
+    "loss": "Žaidėjas {nickname} pralaimėjo mūšį žemėlapyje {map}, žaisdamas su {tank} ({mode}, {date}): {damage} žalos, {kills} sunaikinimų, {xp} patirties.",
+    "draw": "Žaidėjo {nickname} mūšis žemėlapyje {map}, žaidžiant su {tank}, baigėsi lygiosiomis ({mode}, {date}): {damage} žalos, {kills} sunaikinimų, {xp} patirties.",
+    "unknown": "Žaidėjas {nickname} žemėlapyje {map}, žaisdamas su {tank} ({mode}, {date}): {damage} žalos, {kills} sunaikinimų, {xp} patirties."
+  },
+  "meta-description-battle": "{mode} žemėlapyje {map}, {date}.",
+  "mode-unknown": "World of Tanks",
+  "og-title": "{tank} žemėlapyje {map}",
+  "og-subtitle": "{nickname} · {damage} žalos",
+  "meta-title-no-replay": "Žaidėjo {nickname} mūšis, žaidžiant su {tank}, žemėlapyje {map}: World of Tanks mūšis",
+  "meta-description-replay": "Žiūrėkite pakartojimą, abi komandas ir mūšio ataskaitą, taip pat atsisiųskite .wotreplay.",
+  "meta-description-no-replay": "Peržiūrėkite abi komandas, ką atliko kiekvienas tankas, ir mūšio ataskaitą.",
+  "meta-title-battle-no-replay": "{map}, {mode}, {date}: World of Tanks mūšis",
+  "og-subtitle-battle": "{mode} · {date}",
+  "heading-player": "{nickname}, žaidžiantis su {tank} žemėlapyje {map}",
+  "recorded-by": "Įrašė",
+  "also-reported-by": "Taip pat pranešė",
+  "reported-by": "Pranešė"
+}

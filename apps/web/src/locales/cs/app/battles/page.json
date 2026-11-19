@@ -1,0 +1,16 @@
+{
+  "meta-title": "Bitvy a záznamy World of Tanks ({region})",
+  "meta-description": "Záznamy World of Tanks z regionu {region}, sdílené hráči: každá bitva s úplným hlášením, osazenou výbavou a záznamem ke sledování v prohlížeči. Filtrujte podle tanku, mapy a režimu, seřaďte podle poškození, asistence, zkušeností nebo zničení.",
+  "og-title": "Bitvy a záznamy",
+  "og-subtitle": "Záznamy World of Tanks z regionu {region}",
+  "title": "{battles} a záznamy World of Tanks",
+  "title-battles": "bitvy",
+  "intro": "Každá bitva, kterou hráči sdíleli, s úplným hlášením, informacemi o tom, co měl každý tank osazeno, a záznamem, který můžete sledovat přímo zde. Seřaďte je podle poškození nebo zkušeností, případně výběr omezte na tank, mapu nebo režim.",
+  "about-title": "O těchto záznamech",
+  "about-sources": "Každá bitva zde obsahuje soubor .wotreplay: buď ji hráč s modem unicum.gg sdílel automaticky, nebo ji nahrál na této stránce. Sdílet lze pouze bitvy odehrané do konce a pouze z účtu, který se jich účastnil.",
+  "about-page": "Otevřením bitvy zobrazíte oba týmy, podrobné hlášení bitvy a záznam na mapě, včetně pohybu každého tanku, střel, které je zničily, a chatu. Nic není třeba instalovat ani přizpůsobovat verzi herního klienta, záznam se přehrává v prohlížeči.",
+  "about-share": "Chcete-li přidat vlastní bitvy, nahrajte záznam ze složky záznamů své hry nebo si nainstalujte {mod}, aby se sdílely během hraní.",
+  "about-share-mod": "mod unicum.gg",
+  "upload-mod": "Chcete raději nahrávat každou bitvu automaticky? {mod} je odešle, jakmile skončí.",
+  "upload-mod-link": "Náš mod"
+}

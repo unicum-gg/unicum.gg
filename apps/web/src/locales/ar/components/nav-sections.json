@@ -87,6 +87,10 @@
       "label": "أفضل اللاعبين",
       "description": "قائمة المتصدرين للاعبين طوال الوقت"
     },
+    "battles": {
+      "label": "معارك",
+      "description": "معارك وإعادات معارك يشاركها اللاعبون"
+    },
     "players-rampage": {
       "description": "من حقق أعلى ترتيب في Rampage."
     }

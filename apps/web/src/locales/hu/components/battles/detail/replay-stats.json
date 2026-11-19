@@ -1,0 +1,6 @@
+{
+  "download": "A visszajátszás letöltése",
+  "version": "A(z) {version} verzión játszható",
+  "views": "Nézetek: {value}",
+  "downloads": "Letöltések: {value}"
+}

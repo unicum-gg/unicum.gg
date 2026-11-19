@@ -1,0 +1,17 @@
+{
+  "title": "Strider med en repris ({count})",
+  "empty": "Ingen repris har delats i denna region ännu.",
+  "empty-filtered": "Ingen strid matchar dessa filter.",
+  "sort": {
+    "damage": "Skada",
+    "assist": "Assistans",
+    "xp": "Erfarenhet",
+    "kills": "Förstörda",
+    "views": "Mest visade",
+    "downloads": "Mest nedladdade",
+    "recent": "Senaste"
+  },
+  "version-current": "Uppdatera {version} (aktuell)",
+  "version": "Uppdatera {version}",
+  "version-all": "Alla uppdateringar"
+}

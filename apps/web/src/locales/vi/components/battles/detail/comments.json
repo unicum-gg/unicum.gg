@@ -1,0 +1,19 @@
+{
+  "title": "Bình luận",
+  "title-count": "Bình luận ({count})",
+  "empty": "Chưa có bình luận nào. Bạn thấy trận đấu này thế nào?",
+  "in-battle": "Đã chơi trong trận đấu này",
+  "pending": "Đang chờ kiểm duyệt, chỉ bạn mới có thể thấy",
+  "rejected": "Chưa được đăng",
+  "delete": "Xóa",
+  "log-in": "Đăng nhập để bình luận",
+  "placeholder": "Hãy nói điều gì đó về trận đấu này…",
+  "moderated": "Bình luận được người kiểm duyệt đọc trước khi đăng.",
+  "send": "Đăng bình luận",
+  "sending": "Đang đăng…",
+  "error": {
+    "rate-limited": "Bạn đã đăng rất nhiều bình luận trong giờ qua. Hãy thử lại sau một lúc.",
+    "unauthenticated": "Phiên của bạn đã hết hạn. Hãy đăng nhập lại.",
+    "unknown": "Đã xảy ra điều gì đó. Hãy thử lại sau một khoảnh khắc."
+  }
+}

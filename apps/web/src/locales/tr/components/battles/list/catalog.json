@@ -1,0 +1,17 @@
+{
+  "title": "Tekrarı olan savaşlar ({count})",
+  "empty": "Bu bölgede henüz tekrar paylaşılmadı.",
+  "empty-filtered": "Bu filtrelerle eşleşen savaş yok.",
+  "sort": {
+    "damage": "Hasar",
+    "assist": "Destek",
+    "xp": "Deneyim",
+    "kills": "Yok edilenler",
+    "views": "En çok görüntülenen",
+    "downloads": "En çok indirilen",
+    "recent": "En yeni"
+  },
+  "version-current": "Güncelleme {version} (mevcut)",
+  "version": "Güncelleme {version}",
+  "version-all": "Tüm güncellemeler"
+}

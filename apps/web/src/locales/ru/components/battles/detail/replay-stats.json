@@ -1,0 +1,6 @@
+{
+  "download": "Скачать реплей",
+  "version": "Воспроизводится на версии {version}",
+  "views": "Просмотры: {value}",
+  "downloads": "Скачивания: {value}"
+}

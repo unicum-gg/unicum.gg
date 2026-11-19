@@ -1,0 +1,16 @@
+{
+  "meta-title": "World of Tanks mūšiai ir pakartojimai ({region})",
+  "meta-description": "World of Tanks pakartojimai iš regiono {region}, bendri žaidėjų: kiekvienas mūšis su pilna ataskaita, sumontuota įranga ir pakartojimu, kurį galima žiūrėti naršyklėje. Filtruokite pagal tanką, žemėlapį ir režimą, rikiuokite pagal žalą, pagalbą, patirtį arba sunaikinimus.",
+  "og-title": "Mūšiai ir pakartojimai",
+  "og-subtitle": "World of Tanks pakartojimai iš regiono {region}",
+  "title": "World of Tanks {battles} ir pakartojimai",
+  "title-battles": "mūšiai",
+  "intro": "Visi žaidėjų bendri mūšiai su pilna ataskaita, informacija apie tai, kas buvo sumontuota kiekviename tanke, ir pakartojimu, kurį galite žiūrėti čia pat. Rikiuokite juos pagal žalą arba patirtį arba susiaurinkite sąrašą iki tanko, žemėlapio ar režimo.",
+  "about-title": "Apie šiuos pakartojimus",
+  "about-sources": "Kiekvienas čia pateiktas mūšis turi .wotreplay failą: jį automatiškai bendras žaidėjas, vykdantis unicum.gg modą, arba jis buvo įkeltas šiame puslapyje. Bendri gali būti tik iki galo sužaisti mūšiai, ir tik iš juose dalyvavusios paskyros.",
+  "about-page": "Atidarius mūšį rodomos abi komandos, išsami mūšio ataskaita ir pakartojimas žemėlapyje, kuriame matomi visų tankų ėjimai, juos sunaikinę šūviai ir pokalbis. Nieko nereikia įdiegti ir nereikia derinti žaidimo kliento versijos, pakartojimas rodomas naršyklėje.",
+  "about-share": "Norėdami pridėti savo mūšius, įkelkite pakartojimą iš savo žaidimo pakartojimų aplanko arba įdiekite {mod}, kad jie būtų bendri jums žaidžiant.",
+  "about-share-mod": "unicum.gg modas",
+  "upload-mod": "Norite, kad kiekvienas mūšis būtų įkeliamas atskirai? {mod} išsiunčia juos, kai jie baigiasi.",
+  "upload-mod-link": "Mūsų modas"
+}

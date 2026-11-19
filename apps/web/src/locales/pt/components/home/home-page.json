@@ -10,6 +10,13 @@
   "rating-scale": {
     "title": "Escala de avaliação"
   },
+  "replays": {
+    "title": "Replays",
+    "heading": "Assista novamente às suas batalhas",
+    "description": "Cada batalha compartilhada pelos jogadores vem com seu relatório completo, o que cada tanque tinha equipado e um replay que você pode assistir no navegador. Instale nosso mod para compartilhar o seu assim que cada batalha termina.",
+    "browse": "Explorar replays",
+    "mod": "Obter o mod"
+  },
   "community": {
     "title": "Junte-se à comunidade",
     "heading": "Ligue-se a jogadores de WoT",

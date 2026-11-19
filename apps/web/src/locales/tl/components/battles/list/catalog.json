@@ -1,0 +1,17 @@
+{
+  "title": "Mga labanan na may replay ({count})",
+  "empty": "Wala pang replay na ibinahagi sa rehiyong ito.",
+  "empty-filtered": "Walang laban na tumutugma sa mga filter na ito.",
+  "sort": {
+    "damage": "Pinsala",
+    "assist": "Tulong",
+    "xp": "Karanasan",
+    "kills": "Mga napatay",
+    "views": "Pinakamaraming pagtingin",
+    "downloads": "Pinakamaraming download",
+    "recent": "Pinakabago"
+  },
+  "version-current": "I-update ang {version} (kasalukuyan)",
+  "version": "I-update ang {version}",
+  "version-all": "Lahat ng update"
+}

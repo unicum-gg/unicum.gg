@@ -82,7 +82,7 @@
   "report": {
     "statistics": "Statistika",
     "time": "Laikas",
-    "earned": "uždirbta",
+    "earned": "Uždirbta (standartinė paskyra)",
     "shots": "Šūvių",
     "hits-pens": "Tiesioginiai pataikymai / pramušimai",
     "splash": "Skeveldrų žala",
@@ -135,11 +135,11 @@
     "mark-movement": "Šis mūšis"
   },
   "tab": {
+    "personal": "Asmeninis rezultatas",
     "teams": "Komandos rezultatas",
     "report": "Detali ataskaita",
     "replay": "Pakartojimas"
   },
-  "destroyed-list": "Sunaikinta: {names}",
   "replay": {
     "no-bounds": "Ši arena kataloge neturi ribų, todėl minižemėlapis negali atvaizduoti pozicijų.",
     "play": "Žaisti",
@@ -154,7 +154,63 @@
     "deaths-none": "Šiame mūšyje niekas nebuvo sunaikinta.",
     "deaths-yet": "Visa technika vis dar gyva.",
     "deaths-unknown": "transporto priemonė",
-    "deaths-destroyed": "Sunaikinta"
+    "deaths-destroyed": "Sunaikinta",
+    "restart": "Žaisti nuo pradžios",
+    "spotted": "Aptikta",
+    "unspotted": "Nematyti",
+    "observed": "Aptiko priešas",
+    "estimated": "numatoma padėtis, už įrašo diapazono ribų",
+    "speed": "Atkūrimo greitis",
+    "hud": {
+      "hp": "Gyvybės taškai",
+      "speed": "Greitis",
+      "kmh": "{speed} km/h",
+      "damage": "Žala",
+      "damage-hint": "Kol kas. Įrašymo autoriui, iš jo paties mūšio srauto, kuriame neįtraukiami pataikymai į taikinius, kurių jis negalėjo matyti, o visiems kitiems, iš įrašo užfiksuotų pataikymų, kurie gali gerokai neatitikti rezultatų.",
+      "assisted": "Su pagalba",
+      "blocked": "Blokuota",
+      "final-hint": "Galutinis mūšio skaičius pagal rezultatus.",
+      "modules": "Moduliai ir įgula",
+      "seen-at": "taip, kaip įrašymo autorius paskutinį kartą juos matė, ties {time}",
+      "state": {
+        "damaged": "Apgadinta",
+        "destroyed": "Sunaikinta",
+        "injured": "Sužeista"
+      },
+      "part": {
+        "engine": "Variklio",
+        "ammoBay": "Šaudmenų stovas",
+        "fuelTank": "Degalų bakas",
+        "radio": "Radio",
+        "leftTrack": "Kairysis vikšras",
+        "rightTrack": "Dešinysis vikšras",
+        "gun": "Pabūklas",
+        "turretRotator": "Bokštelio žiedas",
+        "surveyingDevice": "Matymas",
+        "commander": "Vadas",
+        "driver": "Vairuotojas",
+        "radioman": "Radio operatorius",
+        "gunner": "Taikytojas",
+        "loader": "Užtaisytojas",
+        "track": "Vikšras"
+      }
+    },
+    "tab": {
+      "chat": "Pokalbis",
+      "log": "Žalos žurnalas"
+    },
+    "log": {
+      "empty": "Nieko dar nepadaryta arba nepaimta.",
+      "kind": {
+        "dealt": "Padaryta žala",
+        "received": "Gauta žala",
+        "blocked": "Blokuota šarvų",
+        "assist": "Pagalbinė žala",
+        "crit": "Kritiniai pataikymai",
+        "received-crit": "Gauti kritiniai pataikymai",
+        "module": "Modulio pataikymas"
+      }
+    }
   },
   "lineup": {
     "more": "+{count}",
@@ -162,5 +218,18 @@
     "heading": "Šio mūšio technika",
     "kills": "Sunaikinta",
     "time": "Laikas"
-  }
+  },
+  "earnings": {
+    "title": "Pajamos",
+    "standard": "Standartinė paskyra",
+    "with-bonuses": "Su jūsų premijomis",
+    "credits": "Kreditai",
+    "costs": "Remontas ir atsargos",
+    "net": "Grynieji kreditai",
+    "xp": "Patirtis"
+  },
+  "destroyed-by-label": "Sunaikino",
+  "destroyed-list-label": "Sunaikino",
+  "replay-views": "{count} peržiūrų",
+  "replay-downloads": "{count} atsisiuntimų"
 }

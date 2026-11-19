@@ -1,0 +1,19 @@
+{
+  "title": "评论",
+  "title-count": "评论（{count}）",
+  "empty": "还没有评论。你觉得这场战斗怎么样？",
+  "in-battle": "已进行此战斗",
+  "pending": "等待审核中，只有你能看到",
+  "rejected": "未发布",
+  "delete": "删除",
+  "log-in": "登录后发表评论",
+  "placeholder": "说说你对这场战斗的看法……",
+  "moderated": "评论将在发布前由版主阅读。",
+  "send": "发表评论",
+  "sending": "发布中……",
+  "error": {
+    "rate-limited": "你在过去一小时内发布了很多评论。请稍后再试。",
+    "unauthenticated": "你的会话已过期。请重新登录。",
+    "unknown": "某些内容出了问题。请稍后再试。"
+  }
+}

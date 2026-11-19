@@ -1,0 +1,16 @@
+{
+  "meta-title": "Bitwy i powtórki World of Tanks z regionu {region}",
+  "meta-description": "Powtórki World of Tanks z regionu {region}, udostępnione przez graczy: każda bitwa z pełnym raportem, zamontowanym wyposażeniem i powtórką do oglądania w przeglądarce. Filtruj według czołgu, mapy i trybu, sortuj według uszkodzeń, asysty, doświadczenia lub zniszczeń.",
+  "og-title": "Bitwy i powtórki",
+  "og-subtitle": "Powtórki World of Tanks z regionu {region}",
+  "title": "World of Tanks: {battles} i powtórki",
+  "title-battles": "bitwy",
+  "intro": "Każda bitwa udostępniona przez graczy, z pełnym raportem, informacjami o wyposażeniu każdego czołgu i powtórką, którą możesz oglądać tutaj. Sortuj je według uszkodzeń lub doświadczenia albo zawęź wyniki do czołgu, mapy lub trybu.",
+  "about-title": "Informacje o tych powtórkach",
+  "about-sources": "Każda bitwa na tej stronie zawiera plik .wotreplay: albo gracz korzystający z moda unicum.gg udostępnił go automatycznie, albo został on przesłany na tej stronie. Udostępniać można tylko bitwy rozegrane do końca i tylko z konta, które brało w nich udział.",
+  "about-page": "Otwarcie bitwy pokazuje obie drużyny, szczegółowy raport z bitwy oraz powtórkę na mapie, z ruchami każdego czołgu, strzałami, które je zniszczyły, i czatem. Niczego nie trzeba instalować ani dopasowywać do wersji klienta gry, ponieważ powtórka jest odtwarzana w przeglądarce.",
+  "about-share": "Aby dodać własne bitwy, prześlij powtórkę z folderu powtórek swojej gry albo zainstaluj {mod}, aby udostępniać je podczas gry.",
+  "about-share-mod": "mod unicum.gg",
+  "upload-mod": "Wolisz, aby każda bitwa była przesyłana automatycznie? {mod} wysyła je, gdy się kończą.",
+  "upload-mod-link": "Nasz mod"
+}

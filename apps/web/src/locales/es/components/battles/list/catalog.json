@@ -1,0 +1,17 @@
+{
+  "title": "Batallas con una repetición ({count})",
+  "empty": "Todavía no se ha compartido ninguna repetición en esta región.",
+  "empty-filtered": "Ninguna batalla coincide con estos filtros.",
+  "sort": {
+    "damage": "Daño",
+    "assist": "Asistencia",
+    "xp": "Experiencia",
+    "kills": "Bajas",
+    "views": "Más vistas",
+    "downloads": "Más descargadas",
+    "recent": "Más recientes"
+  },
+  "version-current": "Actualizar {version} (actual)",
+  "version": "Actualizar {version}",
+  "version-all": "Todas las actualizaciones"
+}

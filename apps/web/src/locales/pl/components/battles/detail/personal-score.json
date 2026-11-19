@@ -1,0 +1,48 @@
+{
+  "result": {
+    "win": "Zwycięstwo",
+    "loss": "Porażka",
+    "draw": "Remis"
+  },
+  "ending": {
+    "extermination": {
+      "win": "Wszystkie pojazdy przeciwnika zniszczone",
+      "loss": "Wszystkie sojusznicze pojazdy zniszczone"
+    },
+    "base": {
+      "win": "Zdobyto bazę przeciwnika",
+      "loss": "Zdobyto naszą bazę"
+    },
+    "timeout": {
+      "win": "Czas minął",
+      "loss": "Czas minął"
+    }
+  },
+  "destroyed": "Zniszczony",
+  "survived": "Przetrwał",
+  "performance": "Osiągi w bitwie",
+  "unnamed": "Nieznany gracz",
+  "mark-label": {
+    "spotted": "Wykryte",
+    "assisted": "Obrażenia z asysty",
+    "crits": "Trafienia krytyczne",
+    "damaged": "Obrażenia zadane",
+    "blocked": "Zablokowane uszkodzenia",
+    "stunned": "Ogłuszenia",
+    "killed": "Zniszczony"
+  },
+  "mark-hint": {
+    "spotted": "Wykryte: ten gracz wykrył tego przeciwnika dla swojej drużyny",
+    "assisted": "Obrażenia z asysty: uszkodzenia zadane temu przeciwnikowi dzięki wykrywaniu, uszkodzeniu gąsienicy lub ogłuszeniu przez tego gracza",
+    "crits": "Trafienia krytyczne: ten gracz uszkodził moduł lub członka załogi tego przeciwnika",
+    "damaged": "Obrażenia zadane temu przeciwnikowi",
+    "blocked": "Uszkodzenia zablokowane przez pancerz tego gracza podczas strzałów przeciwnika",
+    "stunned": "Liczba ogłuszeń tego przeciwnika przez tego gracza",
+    "killed": "Ten gracz zniszczył tego przeciwnika"
+  },
+  "column": {
+    "player": "Gracz",
+    "vehicle": "Pojazd"
+  },
+  "destroyed-by-label": "Zniszczony przez"
+}

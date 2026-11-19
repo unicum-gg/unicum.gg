@@ -1,7 +1,7 @@
 {
-  "loader": "Tagakarga",
+  "loader": "Loader",
   "radioman": "Operator ng Radyo",
   "driver": "Drayber",
-  "gunner": "Tagabaril",
+  "gunner": "Gunner",
   "commander": "Komandante"
 }

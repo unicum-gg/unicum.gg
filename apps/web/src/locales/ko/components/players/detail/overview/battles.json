@@ -28,7 +28,7 @@
     "damage": "피해량",
     "assisted": "지원",
     "blocked": "차단",
-    "kills": "처치",
+    "kills": "격파",
     "spotted": "발견",
     "player": "플레이어",
     "survived": "생존",
@@ -82,7 +82,7 @@
   "report": {
     "statistics": "전적",
     "time": "시간",
-    "earned": "획득",
+    "earned": "획득 (일반 계정)",
     "shots": "사격 횟수",
     "hits-pens": "직접 명중 / 관통력",
     "splash": "스플래시 피해",
@@ -135,11 +135,11 @@
     "mark-movement": "이번 전투"
   },
   "tab": {
+    "personal": "개인 점수",
     "teams": "팀 점수",
     "report": "세부 전투 기록",
     "replay": "리플레이"
   },
-  "destroyed-list": "{names} 격파됨",
   "replay": {
     "no-bounds": "이 전투 지역은 카탈로그에 범위 정보가 없어 위치를 미니맵에 배치할 수 없습니다.",
     "play": "플레이",
@@ -154,7 +154,63 @@
     "deaths-none": "이 전투에서 아무도 격파되지 않았습니다.",
     "deaths-yet": "모두 생존 중입니다.",
     "deaths-unknown": "차량",
-    "deaths-destroyed": "격파"
+    "deaths-destroyed": "격파",
+    "restart": "처음부터 플레이",
+    "spotted": "시야에 포착됨",
+    "unspotted": "시야에서 벗어남",
+    "observed": "적에게 발견됨",
+    "estimated": "추정 위치, 녹화 범위를 벗어남",
+    "speed": "플레이 속도",
+    "hud": {
+      "hp": "생명력",
+      "speed": "속도",
+      "kmh": "{speed} km/h",
+      "damage": "피해량",
+      "damage-hint": "현재까지의 수치입니다. 녹화한 플레이어의 경우, 자신의 전투 기록에서 가져오며 볼 수 없었던 대상에 대한 명중은 제외됩니다. 다른 플레이어의 경우, 녹화에서 확인된 명중을 기준으로 하므로 실제 결과보다 훨씬 낮을 수 있습니다.",
+      "assisted": "도움",
+      "blocked": "차단됨",
+      "final-hint": "결과에서 가져온 전투의 최종 수치입니다.",
+      "modules": "부품 및 승무원",
+      "seen-at": "녹화 중인 지휘관이 마지막으로 본 상태, {time}에",
+      "state": {
+        "damaged": "손상됨",
+        "destroyed": "격파됨",
+        "injured": "부상"
+      },
+      "part": {
+        "engine": "엔진",
+        "ammoBay": "탄약고",
+        "fuelTank": "연료 탱크",
+        "radio": "무전기",
+        "leftTrack": "왼쪽 궤도",
+        "rightTrack": "오른쪽 궤도",
+        "gun": "주포",
+        "turretRotator": "포탑 링",
+        "surveyingDevice": "시야",
+        "commander": "사령관",
+        "driver": "조종수",
+        "radioman": "무전수",
+        "gunner": "포수",
+        "loader": "장전수",
+        "track": "궤도"
+      }
+    },
+    "tab": {
+      "chat": "채팅",
+      "log": "피해 기록"
+    },
+    "log": {
+      "empty": "아직 가하거나 받은 피해가 없습니다.",
+      "kind": {
+        "dealt": "가한 피해",
+        "received": "받은 피해",
+        "blocked": "장갑으로 차단",
+        "assist": "지원 피해",
+        "crit": "가한 치명타 명중",
+        "received-crit": "받은 치명타 명중",
+        "module": "모듈 명중"
+      }
+    }
   },
   "lineup": {
     "more": "+{count}",
@@ -162,5 +218,18 @@
     "heading": "이 전투의 전차",
     "kills": "격파",
     "time": "시간"
-  }
+  },
+  "earnings": {
+    "title": "수익",
+    "standard": "일반 계정",
+    "with-bonuses": "보너스 적용",
+    "credits": "크레딧",
+    "costs": "수리 및 보급품",
+    "net": "순 크레딧",
+    "xp": "일반 경험치"
+  },
+  "destroyed-by-label": "파괴한 전차",
+  "destroyed-list-label": "격파한 전차",
+  "replay-views": "{count}회 조회",
+  "replay-downloads": "{count}회 다운로드"
 }

@@ -1,0 +1,16 @@
+{
+  "meta-title": "Bătălii și reluări World of Tanks ({region})",
+  "meta-description": "Reluări World of Tanks din {region}, partajate de jucători: fiecare bătălie cu raportul complet, echiparea și o reluare de urmărit în browser. Filtrează după tanc, hartă și mod, apoi ordonează după daune, asistență, experiență sau distrugeri.",
+  "og-title": "Bătălii și reluări",
+  "og-subtitle": "Reluări World of Tanks din {region}",
+  "title": "Reluări și {battles} din World of Tanks",
+  "title-battles": "bătălii",
+  "intro": "Fiecare bătălie partajată de jucători, cu raportul complet, ce avea echipat fiecare tanc și o reluare pe care o poți urmări chiar aici. Ordonează-le după daune sau experiență ori restrânge rezultatele la un tanc, o hartă sau un mod.",
+  "about-title": "Despre aceste reluări",
+  "about-sources": "Fiecare bătălie de aici vine cu fișierul său .wotreplay: fie un jucător care folosește modul unicum.gg l-a partajat automat, fie l-a încărcat pe această pagină. Pot fi partajate doar bătăliile jucate până la final și doar de un cont care a participat la ele.",
+  "about-page": "Deschiderea unei bătălii afișează ambele echipe, raportul detaliat al bătăliei și o reluare pe hartă, cu mutările fiecărui tanc, loviturile care le-au distrus și chatul. Nimic de instalat și nicio versiune a clientului de joc de potrivit, reluarea rulează în browser.",
+  "about-share": "Pentru a-ți adăuga propriile bătălii, încarcă o reluare din folderul de reluări al jocului sau instalează {mod} pentru a le partaja pe măsură ce joci.",
+  "about-share-mod": "modul unicum.gg",
+  "upload-mod": "Preferi ca fiecare bătălie să fie încărcată automat? {mod} le trimite când se încheie.",
+  "upload-mod-link": "Modul nostru"
+}

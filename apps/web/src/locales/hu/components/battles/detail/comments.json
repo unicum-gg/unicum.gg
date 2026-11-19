@@ -1,0 +1,19 @@
+{
+  "title": "Hozzászólások",
+  "title-count": "Hozzászólások ({count})",
+  "empty": "Még nincs hozzászólás. Mit gondolsz erről a csatáról?",
+  "in-battle": "Ebben a csatában játszott",
+  "pending": "Moderálásra vár, csak te láthatod",
+  "rejected": "Nincs közzétéve",
+  "delete": "Törlés",
+  "log-in": "Bejelentkezés a hozzászóláshoz",
+  "placeholder": "Írj valamit erről a csatáról…",
+  "moderated": "A hozzászólásokat közzététel előtt egy moderátor olvassa el.",
+  "send": "Hozzászólás közzététele",
+  "sending": "Közzététel…",
+  "error": {
+    "rate-limited": "Az elmúlt órában sok hozzászólást tettél közzé. Próbáld újra egy kicsit később.",
+    "unauthenticated": "A munkameneted lejárt. Jelentkezz be újra.",
+    "unknown": "Valami hiba történt. Próbáld újra egy pillanat múlva."
+  }
+}

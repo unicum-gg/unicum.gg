@@ -10,6 +10,13 @@
   "rating-scale": {
     "title": "Értékelési skála"
   },
+  "replays": {
+    "title": "Visszajátszások",
+    "heading": "Nézd vissza a csatáidat",
+    "description": "Minden, a játékosok által megosztott csatához tartozik egy teljes jelentés, amely megmutatja, mi volt felszerelve az egyes tankokra, valamint egy visszajátszás, amelyet a böngészőben is megtekinthetsz. Telepítsd a modunkat, hogy minden csata végén megoszthasd a sajátodat.",
+    "browse": "Visszajátszások böngészése",
+    "mod": "Mod letöltése"
+  },
   "community": {
     "title": "Csatlakozz a közösséghez",
     "heading": "Lépj kapcsolatba WoT-játékosokkal",

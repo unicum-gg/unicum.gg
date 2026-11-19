@@ -1,0 +1,6 @@
+{
+  "download": "Pobierz powtórkę",
+  "version": "Działa na wersji {version}",
+  "views": "Wyświetlenia: {value}",
+  "downloads": "Pobrano: {value}"
+}

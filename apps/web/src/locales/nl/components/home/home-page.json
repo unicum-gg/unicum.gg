@@ -10,6 +10,13 @@
   "rating-scale": {
     "title": "Beoordelingsschaal"
   },
+  "replays": {
+    "title": "Herhalingen",
+    "heading": "Bekijk je gevechten opnieuw",
+    "description": "Elk gevecht dat spelers delen, komt met een volledig rapport, wat elke tank gemonteerd had en een herhaling die je in de browser kunt bekijken. Installeer onze mod om die van jou te delen zodra elk gevecht eindigt.",
+    "browse": "Herhalingen bekijken",
+    "mod": "Download de mod"
+  },
   "community": {
     "title": "Sluit je aan bij de community",
     "heading": "Kom in contact met WoT-spelers",

@@ -10,6 +10,13 @@
   "rating-scale": {
     "title": "Skala ocjenjivanja"
   },
+  "replays": {
+    "title": "Snimke",
+    "heading": "Ponovno gledaj svoje bitke",
+    "description": "Svaka bitka koju igrači podijele dolazi s potpunim izvješćem, podacima o tome što je svaki tenk imao ugrađeno i snimkom koju možete gledati u pregledniku. Instalirajte naš mod da biste podijelili svoju snimku nakon završetka svake bitke.",
+    "browse": "Pregledaj snimke",
+    "mod": "Preuzmi mod"
+  },
   "community": {
     "title": "Pridružite se zajednici",
     "heading": "Povežite se s igračima WoT-a",

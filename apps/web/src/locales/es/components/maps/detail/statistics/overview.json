@@ -5,7 +5,7 @@
   "finish": {
     "extermination": "Un equipo destruido",
     "base": "Base capturada",
-    "timeout": "Se agotó el tiempo",
+    "timeout": "Se acabó el tiempo",
     "other": "Otro"
   },
   "spawns": "Victorias por aparición",

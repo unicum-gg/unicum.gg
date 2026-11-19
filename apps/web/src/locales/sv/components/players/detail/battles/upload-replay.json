@@ -1,0 +1,23 @@
+{
+  "trigger": "Ladda upp en repris",
+  "title": "Ladda upp en repris",
+  "description": "Lägg till en av dina egna strider från dess .wotreplay-fil, ingen mod behövs. Den får en egen sida med sin repris, redo att delas.",
+  "drop": "Släpp en .wotreplay-fil här eller klicka för att välja en",
+  "hint": "Endast dina egna repriser från en strid som spelades till slutet. De finns i mappen för repriser i din spelkatalog.",
+  "send": "Ladda upp",
+  "sending": "Laddar upp…",
+  "error": {
+    "not_collected": "Det går inte att ladda upp repriser just nu.",
+    "archive_full": "Vårt reprislager är fullt just nu. Försök igen senare.",
+    "not_a_replay": "Den filen är inte en World of Tanks-repris som vi kan läsa.",
+    "unfinished": "Den reprisen sparades innan striden avslutades, så den har inga resultat.",
+    "not_yours": "Den reprisen spelades in av ett annat konto. Du kan bara ladda upp dina egna.",
+    "wrong_region": "Den striden spelades i en annan region än den som kontot du är inloggad med tillhör.",
+    "too_old": "Den striden är äldre än de vi behåller.",
+    "malformed": "Vi kunde inte läsa resultaten i den reprisen.",
+    "too_large": "Den filen är större än någon repris vi tar emot, 9 MB.",
+    "too_many_uploads": "Du har laddat upp mycket under den senaste timmen. Försök igen lite senare.",
+    "unauthenticated": "Din session har gått ut. Logga in igen.",
+    "unknown": "Något gick fel. Försök igen om ett ögonblick."
+  }
+}

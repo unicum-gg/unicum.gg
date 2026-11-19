@@ -1,0 +1,23 @@
+{
+  "meta-title": "{nickname}驾驶{tank}在{map}上的战斗录像：World of Tanks",
+  "meta-title-battle": "{map}、{mode}、{date}：World of Tanks 战斗录像",
+  "meta-description": {
+    "win": "{nickname}驾驶{tank}在{map}上获胜（{mode}，{date}）：造成{damage}点伤害，击杀{kills}名敌人，获得{xp}点经验。",
+    "loss": "{nickname}驾驶{tank}在{map}上丢失（{mode}，{date}）：造成{damage}点伤害，击杀{kills}名敌人，获得{xp}点经验。",
+    "draw": "{nickname}驾驶{tank}在{map}上战平（{mode}，{date}）：造成{damage}点伤害，击杀{kills}名敌人，获得{xp}点经验。",
+    "unknown": "{nickname}驾驶{tank}在{map}上进行战斗（{mode}，{date}）：造成{damage}点伤害，击杀{kills}名敌人，获得{xp}点经验。"
+  },
+  "meta-description-battle": "{date}在{map}上的{mode}战斗。",
+  "mode-unknown": "World of Tanks",
+  "og-title": "{tank}在{map}上",
+  "og-subtitle": "{nickname} · {damage}点伤害",
+  "meta-title-no-replay": "{nickname}驾驶{tank}在{map}上的World of Tanks战斗",
+  "meta-description-replay": "观看战斗录像，查看双方队伍和战斗报告，并下载.wotreplay文件。",
+  "meta-description-no-replay": "查看双方队伍、每辆坦克的表现以及战斗报告。",
+  "meta-title-battle-no-replay": "{map}、{mode}、{date}：World of Tanks 战斗",
+  "og-subtitle-battle": "{mode} · {date}",
+  "heading-player": "{nickname}驾驶{tank}在{map}上进行战斗",
+  "recorded-by": "录制者",
+  "also-reported-by": "同时被举报者",
+  "reported-by": "被举报者"
+}

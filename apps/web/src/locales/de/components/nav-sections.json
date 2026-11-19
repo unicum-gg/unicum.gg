@@ -87,6 +87,10 @@
       "label": "Top-Spieler",
       "description": "Ewige Bestenliste der Spieler"
     },
+    "battles": {
+      "label": "Gefechte",
+      "description": "Gefechte und von Spielern geteilte Replays"
+    },
     "players-rampage": {
       "description": "Wer in Verwüstung den höchsten Rang erreicht hat."
     }

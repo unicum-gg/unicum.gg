@@ -1,0 +1,16 @@
+{
+  "meta-title": "Batallas y repeticiones de World of Tanks ({region})",
+  "meta-description": "Repeticiones de World of Tanks de {region}, compartidas por jugadores: cada batalla con su informe completo, el equipamiento instalado y una repetición para ver en el navegador. Filtra por tanque, mapa y modo, y ordénalas por daño, asistencia, experiencia o bajas.",
+  "og-title": "Batallas y repeticiones",
+  "og-subtitle": "Repeticiones de World of Tanks de {region}",
+  "title": "{battles} y repeticiones de World of Tanks",
+  "title-battles": "batallas",
+  "intro": "Todas las batallas que han compartido los jugadores, con su informe completo, lo que llevaba equipado cada tanque y una repetición que puedes ver aquí mismo. Ordénalas por daño o experiencia, o limítalas a un tanque, un mapa o un modo.",
+  "about-title": "Sobre estas repeticiones",
+  "about-sources": "Cada batalla de aquí incluye su archivo .wotreplay: un jugador con el mod de unicum.gg en ejecución la compartió automáticamente o la subió a esta página. Solo se pueden compartir las batallas jugadas hasta el final y únicamente desde una cuenta que participó en ellas.",
+  "about-page": "Al abrir una batalla se muestran los dos equipos, el informe de batalla detallado y una repetición en el mapa, con los movimientos de cada tanque, los disparos que los destruyeron y el chat. No hay nada que instalar ni que coincidir con la versión del cliente del juego: la repetición se reproduce en el navegador.",
+  "about-share": "Para añadir tus propias batallas, sube una repetición desde la carpeta de repeticiones del juego o instala {mod} para compartirlas mientras juegas.",
+  "about-share-mod": "mod de unicum.gg",
+  "upload-mod": "¿Prefieres que cada batalla se suba automáticamente? {mod} las envía cuando finalizan.",
+  "upload-mod-link": "Nuestro mod"
+}

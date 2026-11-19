@@ -1,0 +1,23 @@
+{
+  "meta-title": "{tank} de {nickname} pe {map}: reluare World of Tanks",
+  "meta-title-battle": "{map}, {mode}, {date}: reluare a bătăliei World of Tanks",
+  "meta-description": {
+    "win": "{nickname} a câștigat pe {map} cu {tank} ({mode}, {date}): {damage} daune, {kills} distrugeri, {xp} experiență.",
+    "loss": "{nickname} a pierdut pe {map} cu {tank} ({mode}, {date}): {damage} daune, {kills} distrugeri, {xp} experiență.",
+    "draw": "{nickname} a făcut remiză pe {map} cu {tank} ({mode}, {date}): {damage} daune, {kills} distrugeri, {xp} experiență.",
+    "unknown": "{nickname} pe {map} cu {tank} ({mode}, {date}): {damage} daune, {kills} distrugeri, {xp} experiență."
+  },
+  "meta-description-battle": "{mode} pe {map}, {date}.",
+  "mode-unknown": "World of Tanks",
+  "og-title": "{tank} pe {map}",
+  "og-subtitle": "{nickname} · {damage} daune",
+  "meta-title-no-replay": "{tank} de {nickname} pe {map}: bătălie World of Tanks",
+  "meta-description-replay": "Urmărește reluarea, ambele echipe și raportul bătăliei, apoi descarcă fișierul .wotreplay.",
+  "meta-description-no-replay": "Vezi ambele echipe, ce a făcut fiecare tanc și raportul bătăliei.",
+  "meta-title-battle-no-replay": "{map}, {mode}, {date}: bătălie World of Tanks",
+  "og-subtitle-battle": "{mode} · {date}",
+  "heading-player": "{nickname} în {tank} pe {map}",
+  "recorded-by": "Înregistrat de",
+  "also-reported-by": "Raportat și de",
+  "reported-by": "Raportat de"
+}

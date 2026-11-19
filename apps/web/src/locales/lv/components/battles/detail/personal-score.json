@@ -1,0 +1,48 @@
+{
+  "result": {
+    "win": "Uzvara",
+    "loss": "Zaudējums",
+    "draw": "Neizšķirts"
+  },
+  "ending": {
+    "extermination": {
+      "win": "Visi ienaidnieka transportlīdzekļi iznīcināti",
+      "loss": "Visi sabiedroto transportlīdzekļi iznīcināti"
+    },
+    "base": {
+      "win": "Pretinieku bāze ieņemta",
+      "loss": "Mūsu bāze tika ieņemta"
+    },
+    "timeout": {
+      "win": "Laiks beidzās",
+      "loss": "Laiks beidzās"
+    }
+  },
+  "destroyed": "Iznīcināts",
+  "survived": "Izdzīvoja",
+  "performance": "Kaujas sniegums",
+  "unnamed": "Nezināms spēlētājs",
+  "mark-label": {
+    "spotted": "Atklāti",
+    "assisted": "Palīdzības bojājumi",
+    "crits": "Kritiskie trāpījumi",
+    "damaged": "Nodarītie bojājumi",
+    "blocked": "No tā bloķētie bojājumi",
+    "stunned": "Apdullināšanas reizes",
+    "killed": "Iznīcināts"
+  },
+  "mark-hint": {
+    "spotted": "Atklāti: viņi atklāja šo ienaidnieku savai komandai",
+    "assisted": "Palīdzības bojājumi: šim ienaidniekam nodarītie bojājumi, pateicoties viņu atklāšanai, kāpurķēdes bojāšanai vai apdullināšanai",
+    "crits": "Kritiskie trāpījumi: viņi sabojāja šī ienaidnieka moduli vai apkalpes locekli",
+    "damaged": "Šim ienaidniekam nodarītie bojājumi",
+    "blocked": "Bojājumi, ko viņa bruņas bloķēja no šī ienaidnieka šāvieniem",
+    "stunned": "Reizes, kad viņi apdullināja šo ienaidnieku",
+    "killed": "Viņi iznīcināja šo ienaidnieku"
+  },
+  "column": {
+    "player": "Spēlētājs",
+    "vehicle": "Tanks"
+  },
+  "destroyed-by-label": "Iznīcināja"
+}

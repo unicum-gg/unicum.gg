@@ -87,6 +87,10 @@
       "label": "顶级玩家",
       "description": "历史玩家排行榜"
     },
+    "battles": {
+      "label": "战斗场次",
+      "description": "玩家分享的战斗场次和战斗录像"
+    },
     "players-rampage": {
       "description": "巅峰战中排名最高的玩家。"
     }

@@ -1,0 +1,48 @@
+{
+  "result": {
+    "win": "Victorie!",
+    "loss": "Înfrângere!",
+    "draw": "Egalitate!"
+  },
+  "ending": {
+    "extermination": {
+      "win": "Toate vehiculele inamice distruse",
+      "loss": "Toate vehiculele aliate distruse"
+    },
+    "base": {
+      "win": "Baza inamică capturată",
+      "loss": "Baza noastră a fost capturată"
+    },
+    "timeout": {
+      "win": "Timp expirat",
+      "loss": "Timp expirat"
+    }
+  },
+  "destroyed": "Distrus",
+  "survived": "Supraviețuit",
+  "performance": "Performanță în bătălie",
+  "unnamed": "Jucător necunoscut",
+  "mark-label": {
+    "spotted": "Detectat",
+    "assisted": "Daune asistate",
+    "crits": "Lovituri critice",
+    "damaged": "Daune provocate",
+    "blocked": "Daune blocate de acesta",
+    "stunned": "Asomări",
+    "killed": "Distrus"
+  },
+  "mark-hint": {
+    "spotted": "Detectat: a detectat acest inamic pentru echipa sa",
+    "assisted": "Daune asistate: daune provocate acestui inamic datorită detectării, șenilei sau asomării sale",
+    "crits": "Lovituri critice: a avariat un modul sau un membru al echipajului acestui inamic",
+    "damaged": "Daune provocate acestui inamic",
+    "blocked": "Daune pe care blindajul său le-a blocat din loviturile acestui inamic",
+    "stunned": "De câte ori a asomat acest inamic",
+    "killed": "A distrus acest inamic"
+  },
+  "column": {
+    "player": "Jucător",
+    "vehicle": "Vehicul"
+  },
+  "destroyed-by-label": "Distrus de"
+}

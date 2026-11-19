@@ -10,6 +10,13 @@
   "rating-scale": {
     "title": "Échelle de notation"
   },
+  "replays": {
+    "title": "Replays",
+    "heading": "Revoyez vos batailles",
+    "description": "Chaque bataille partagée par les joueurs est accompagnée de son rapport complet, de tout ce qui était monté sur chaque char et d’un replay que vous pouvez regarder dans le navigateur. Installez notre mod pour partager le vôtre à la fin de chaque bataille.",
+    "browse": "Parcourir les replays",
+    "mod": "Obtenir le mod"
+  },
   "community": {
     "title": "Rejoignez la communauté",
     "heading": "Échangez avec des joueurs de WoT",

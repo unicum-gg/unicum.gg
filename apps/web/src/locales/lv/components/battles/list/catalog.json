@@ -1,0 +1,17 @@
+{
+  "title": "Kaujas ar atkārtojumu ({count})",
+  "empty": "Šajā reģionā vēl nav koplietots neviens atkārtojums.",
+  "empty-filtered": "Neviena kauja neatbilst šiem filtriem.",
+  "sort": {
+    "damage": "Bojājumi",
+    "assist": "Atbalsts",
+    "xp": "Pieredze",
+    "kills": "Iznīcinātie",
+    "views": "Visvairāk skatītie",
+    "downloads": "Visvairāk lejupielādētie",
+    "recent": "Jaunākās"
+  },
+  "version-current": "Atjauninājums {version} (pašreizējais)",
+  "version": "Atjauninājums {version}",
+  "version-all": "Visi atjauninājumi"
+}

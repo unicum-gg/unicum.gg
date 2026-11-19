@@ -1,0 +1,19 @@
+{
+  "title": "Komentáře",
+  "title-count": "Komentáře ({count})",
+  "empty": "Zatím žádný komentář. Co si o této bitvě myslíte?",
+  "in-battle": "Odehráno v této bitvě",
+  "pending": "Čeká na moderování, vidíte ho pouze vy",
+  "rejected": "Nezveřejněno",
+  "delete": "Smazat",
+  "log-in": "Přihlásit se a komentovat",
+  "placeholder": "Napište něco o této bitvě…",
+  "moderated": "Komentáře před zveřejněním čte moderátor.",
+  "send": "Odeslat komentář",
+  "sending": "Odesílání…",
+  "error": {
+    "rate-limited": "Za poslední hodinu jste zveřejnili mnoho komentářů. Zkuste to znovu o něco později.",
+    "unauthenticated": "Vaše relace vypršela. Přihlaste se znovu.",
+    "unknown": "Něco se pokazilo. Zkuste to znovu za okamžik."
+  }
+}

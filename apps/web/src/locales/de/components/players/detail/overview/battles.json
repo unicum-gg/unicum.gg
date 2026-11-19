@@ -82,7 +82,7 @@
   "report": {
     "statistics": "Statistik",
     "time": "Zeit",
-    "earned": "Verdient",
+    "earned": "Verdient, Standardkonto",
     "shots": "Abgegebene Schüsse",
     "hits-pens": "Treffer / Durchschläge",
     "splash": "Spritzschaden",
@@ -135,11 +135,11 @@
     "mark-movement": "Dieses Gefecht"
   },
   "tab": {
+    "personal": "Persönliche Punktzahl",
     "teams": "Team-Punktzahl",
     "report": "Detaillierter Bericht",
     "replay": "Replay"
   },
-  "destroyed-list": "Hat {names} zerstört",
   "replay": {
     "no-bounds": "Für diese Arena ist im Katalog keine Ausdehnung hinterlegt, daher können die Positionen nicht auf ihrer Minikarte platziert werden.",
     "play": "Spielen",
@@ -154,7 +154,63 @@
     "deaths-none": "Niemand wurde in diesem Gefecht zerstört.",
     "deaths-yet": "Alle Fahrzeuge sind noch aktiv.",
     "deaths-unknown": "ein Fahrzeug",
-    "deaths-destroyed": "Zerstört"
+    "deaths-destroyed": "Zerstört",
+    "restart": "Von Anfang an abspielen",
+    "spotted": "Im Sichtfeld",
+    "unspotted": "Außer Sicht",
+    "observed": "Vom Gegner gesichtet",
+    "estimated": "Geschätzte Position, außerhalb des Bereichs der Aufzeichnung",
+    "speed": "Wiedergabegeschwindigkeit",
+    "hud": {
+      "hp": "Strukturpunkte",
+      "speed": "Geschwindigkeit",
+      "kmh": "{speed} km/h",
+      "damage": "Schaden",
+      "damage-hint": "Bisher. Beim Aufzeichner aus dem eigenen Gefechtsprotokoll, in dem Treffer auf nicht sichtbare Ziele fehlen, bei allen anderen aus den von der Aufzeichnung erfassten Treffern, die deutlich unter den Ergebnissen liegen können.",
+      "assisted": "Unterstützung",
+      "blocked": "Blockiert",
+      "final-hint": "Die endgültige Zahl des Gefechts aus den Ergebnissen.",
+      "modules": "Module und Besatzung",
+      "seen-at": "so, wie der Kommandant der Aufzeichnung sie zuletzt um {time} gesehen hat",
+      "state": {
+        "damaged": "Beschädigt",
+        "destroyed": "Zerstört",
+        "injured": "Verletzt"
+      },
+      "part": {
+        "engine": "Motor",
+        "ammoBay": "Munitionslager",
+        "fuelTank": "Kraftstofftank",
+        "radio": "Funkgerät",
+        "leftTrack": "Desertierte Kette",
+        "rightTrack": "Rechts Kette",
+        "gun": "Geschütz",
+        "turretRotator": "Turmdrehkranz",
+        "surveyingDevice": "Sicht",
+        "commander": "Kommandant",
+        "driver": "Fahrer",
+        "radioman": "Funkgerätbediener",
+        "gunner": "Richtschütze",
+        "loader": "Ladeschütze",
+        "track": "Kette"
+      }
+    },
+    "tab": {
+      "chat": "Chat",
+      "log": "Schadensprotokoll"
+    },
+    "log": {
+      "empty": "Noch kein verursachter oder erhaltener Schaden.",
+      "kind": {
+        "dealt": "Verursachter Schaden",
+        "received": "Schaden erhalten",
+        "blocked": "Durch panzerung blockiert",
+        "assist": "Unterstützungsschaden",
+        "crit": "Verursachte kritische Treffer",
+        "received-crit": "Erhaltene kritische Treffer",
+        "module": "Modultreffer"
+      }
+    }
   },
   "lineup": {
     "more": "+{count}",
@@ -162,5 +218,18 @@
     "heading": "Fahrzeuge in diesem Gefecht",
     "kills": "Zerstört",
     "time": "Zeit"
-  }
+  },
+  "earnings": {
+    "title": "Einnahmen",
+    "standard": "Standard-Konto",
+    "with-bonuses": "Mit deinen Boni",
+    "credits": "Kreditpunkte",
+    "costs": "Reparatur und Verbrauchsmaterial",
+    "net": "Netto-Kreditpunkte",
+    "xp": "Erfahrung"
+  },
+  "destroyed-by-label": "Zerstört von",
+  "destroyed-list-label": "Zerstört",
+  "replay-views": "{count} Ansichten",
+  "replay-downloads": "{count} Downloads"
 }

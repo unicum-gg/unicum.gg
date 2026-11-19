@@ -1,0 +1,23 @@
+{
+  "trigger": "Nahrát záznam",
+  "title": "Nahrát záznam",
+  "description": "Přidejte jednu ze svých bitev pomocí jejího souboru .wotreplay, bez potřeby modu. Záznam získá vlastní stránku s přehráním, připravenou ke sdílení.",
+  "drop": "Přetáhněte sem soubor .wotreplay nebo kliknutím jeden vyberte",
+  "hint": "Pouze vaše vlastní záznamy z bitev odehraných do konce. Najdete je ve složce replays v adresáři hry.",
+  "send": "Nahrát",
+  "sending": "Nahrávání…",
+  "error": {
+    "not_collected": "Nahrávání záznamů není právě dostupné.",
+    "archive_full": "Naše úložiště záznamů je zatím plné. Zkuste to později znovu.",
+    "not_a_replay": "Tento soubor není záznam World of Tanks, který bychom mohli přečíst.",
+    "unfinished": "Tento záznam byl uložen před skončením bitvy, takže nemá žádné výsledky.",
+    "not_yours": "Tento záznam byl zaznamenán dalším účtem. Můžete nahrát pouze své vlastní záznamy.",
+    "wrong_region": "Tato bitva byla odehrána v jiném regionu, než ve kterém je váš účet přihlášen.",
+    "too_old": "Tato bitva je starší než záznamy, které ponecháváme.",
+    "malformed": "Nepodařilo se nám přečíst výsledky v tomto záznamu.",
+    "too_large": "Tento soubor je větší než jakýkoli záznam, který přijímáme (9 MB).",
+    "too_many_uploads": "Během poslední hodiny jste toho nahráli hodně. Zkuste to znovu o něco později.",
+    "unauthenticated": "Platnost vaší relace vypršela. Přihlaste se znovu.",
+    "unknown": "Něco se pokazilo. Zkuste to znovu za okamžik."
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "meta-title": "Powtórka World of Tanks z udziałem gracza {nickname}, w czołgu {tank}, na mapie {map}",
+  "meta-title-battle": "{map}, {mode}, {date}: powtórka bitwy World of Tanks",
+  "meta-description": {
+    "win": "Gracz o nicku {nickname} odniósł zwycięstwo na mapie {map} w czołgu {tank} ({mode}, {date}): {damage} uszkodzenia, {kills} zniszczenia, {xp} doświadczenie.",
+    "loss": "Gracz o nicku {nickname} poniósł porażkę na mapie {map} w czołgu {tank} ({mode}, {date}): {damage} uszkodzenia, {kills} zniszczenia, {xp} doświadczenie.",
+    "draw": "Bitwa gracza o nicku {nickname} na mapie {map} w czołgu {tank} ({mode}, {date}) zakończyła się remisem: {damage} uszkodzenia, {kills} zniszczenia, {xp} doświadczenie.",
+    "unknown": "Rozgrywka gracza o nicku {nickname} na mapie {map} w czołgu {tank} ({mode}, {date}): {damage} uszkodzenia, {kills} zniszczenia, {xp} doświadczenie."
+  },
+  "meta-description-battle": "{mode} na mapie {map}, {date}.",
+  "mode-unknown": "World of Tanks",
+  "og-title": "Czołg {tank} na mapie {map}",
+  "og-subtitle": "Gracz o nicku {nickname} · {damage} uszkodzenia",
+  "meta-title-no-replay": "Bitwa World of Tanks z udziałem gracza {nickname}, w czołgu {tank}, na mapie {map}",
+  "meta-description-replay": "Oglądaj powtórkę, obie drużyny i raport z bitwy oraz pobierz plik .wotreplay.",
+  "meta-description-no-replay": "Zobacz obie drużyny, działania każdego czołgu i raport z bitwy.",
+  "meta-title-battle-no-replay": "{map}, {mode}, {date}: bitwa World of Tanks",
+  "og-subtitle-battle": "{mode} · {date}",
+  "heading-player": "Gracz o nicku {nickname} w czołgu {tank} na mapie {map}",
+  "recorded-by": "Nagrane przez",
+  "also-reported-by": "Zgłoszone również przez",
+  "reported-by": "Zgłoszone przez"
+}

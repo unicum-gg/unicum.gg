@@ -10,6 +10,13 @@
   "rating-scale": {
     "title": "Bewertungsskala"
   },
+  "replays": {
+    "title": "Replays",
+    "heading": "Gefechte erneut ansehen",
+    "description": "Jedes Gefecht, das Spieler gemeinsam nutzen, enthält einen vollständigen Bericht, die eingebaute Ausrüstung jedes Panzers und ein Replay, das du im Browser ansehen kannst. Installiere unseren Mod, um dein Replay nach jedem Gefecht zu teilen.",
+    "browse": "Replays durchsuchen",
+    "mod": "Mod herunterladen"
+  },
   "community": {
     "title": "Der Community beitreten",
     "heading": "Mit WoT-Spielern vernetzen",

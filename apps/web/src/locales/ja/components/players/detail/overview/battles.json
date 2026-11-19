@@ -82,7 +82,7 @@
   "report": {
     "statistics": "成績",
     "time": "時間",
-    "earned": "獲得",
+    "earned": "獲得（標準アカウント）",
     "shots": "射撃数",
     "hits-pens": "命中 / 貫通力",
     "splash": "範囲ダメージ",
@@ -135,11 +135,11 @@
     "mark-movement": "この戦闘"
   },
   "tab": {
+    "personal": "個人スコア",
     "teams": "チームスコア",
     "report": "詳細レポート",
     "replay": "リプレイ"
   },
-  "destroyed-list": "{names}を破壊",
   "replay": {
     "no-bounds": "このアリーナにはカタログ上の範囲がありません。そのため、位置情報をミニマップ上に配置できません。",
     "play": "プレイ",
@@ -154,7 +154,63 @@
     "deaths-none": "この戦闘では誰も破壊されていません。",
     "deaths-yet": "全員がまだ生存しています。",
     "deaths-unknown": "車両",
-    "deaths-destroyed": "撃破数"
+    "deaths-destroyed": "撃破数",
+    "restart": "最初からプレイ",
+    "spotted": "視界内",
+    "unspotted": "視界外",
+    "observed": "敵に発見済み",
+    "estimated": "推定位置、記録の範囲外",
+    "speed": "再生速度",
+    "hud": {
+      "hp": "ヒットポイント",
+      "speed": "速度",
+      "kmh": "{speed} km/h",
+      "damage": "ダメージ",
+      "damage-hint": "現時点の値です。記録者については、自分の戦闘フィードに基づいているため、視認できなかった標的への命中は含まれません。その他のプレイヤーについては、記録が捉えた命中に基づいているため、実際の結果を大きく下回る可能性があります。",
+      "assisted": "アシスト",
+      "blocked": "ブロック",
+      "final-hint": "結果に基づく、戦闘の最終値です。",
+      "modules": "モジュールと搭乗員",
+      "seen-at": "記録者の車長が最後に確認した状態、{time}時点",
+      "state": {
+        "damaged": "損傷",
+        "destroyed": "撃破数",
+        "injured": "負傷"
+      },
+      "part": {
+        "engine": "エンジン",
+        "ammoBay": "弾薬庫",
+        "fuelTank": "燃料タンク",
+        "radio": "無線機",
+        "leftTrack": "退出中履帯",
+        "rightTrack": "右履帯",
+        "gun": "主砲",
+        "turretRotator": "砲塔旋回装置",
+        "surveyingDevice": "視界",
+        "commander": "クランマスター",
+        "driver": "操縦手",
+        "radioman": "無線機操作手",
+        "gunner": "砲手",
+        "loader": "装填手",
+        "track": "履帯"
+      }
+    },
+    "tab": {
+      "chat": "チャット",
+      "log": "ダメージログ"
+    },
+    "log": {
+      "empty": "与ダメージ、被ダメージはまだなし。",
+      "kind": {
+        "dealt": "与ダメージ",
+        "received": "被ダメージ",
+        "blocked": "装甲でブロック",
+        "assist": "アシストダメージ",
+        "crit": "クリティカル命中、与ダメージ",
+        "received-crit": "受けたクリティカル命中",
+        "module": "モジュール命中"
+      }
+    }
   },
   "lineup": {
     "more": "+{count}",
@@ -162,5 +218,18 @@
     "heading": "この戦闘の車輌",
     "kills": "撃破数",
     "time": "時間"
-  }
+  },
+  "earnings": {
+    "title": "収支",
+    "standard": "標準アカウント",
+    "with-bonuses": "ボーナス適用時",
+    "credits": "クレジット",
+    "costs": "修理・補給費",
+    "net": "純クレジット",
+    "xp": "EXP"
+  },
+  "destroyed-by-label": "撃破者",
+  "destroyed-list-label": "撃破数",
+  "replay-views": "{count}回表示",
+  "replay-downloads": "{count}回ダウンロード"
 }

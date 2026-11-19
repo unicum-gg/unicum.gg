@@ -1,0 +1,23 @@
+{
+  "trigger": "Mag-upload ng replay",
+  "title": "Mag-upload ng replay",
+  "description": "Magdagdag ng sarili mong labanan mula sa .wotreplay file nito, hindi kailangan ng mod. Magkakaroon ito ng sariling pahina kasama ang replay nito, na handa nang ibahagi.",
+  "drop": "I-drop dito ang isang .wotreplay, o i-click para pumili ng isa",
+  "hint": "Sarili mo lamang mga replay, mula sa labanan na nilaro hanggang sa matapos. Nasa folder ng mga replay ang mga ito sa direktoryo ng laro mo.",
+  "send": "I-upload",
+  "sending": "Nag-a-upload…",
+  "error": {
+    "not_collected": "Hindi magagamit ang pag-upload ng replay sa ngayon.",
+    "archive_full": "Kumpleto na sa ngayon ang storage namin para sa mga replay. Subukan muli mamaya.",
+    "not_a_replay": "Ang file na iyon ay hindi replay ng World of Tanks na maaari naming basahin.",
+    "unfinished": "Na-save ang replay na iyon bago natapos ang labanan, kaya wala itong mga resulta.",
+    "not_yours": "Ang replay na iyon ay naitala ng isa pang account. Sarili mo lamang ang maaari mong i-upload.",
+    "wrong_region": "Ang labanan na iyon ay nilaro sa ibang rehiyon kaysa sa account kung saan ka naka-sign in.",
+    "too_old": "Mas luma ang labanan na iyon kaysa sa mga replay na pinapanatili namin.",
+    "malformed": "Hindi namin mabasa ang mga resulta sa replay na iyon.",
+    "too_large": "Mas malaki ang file na iyon kaysa sa pinakamalaking replay na tinatanggap namin (9 MB).",
+    "too_many_uploads": "Marami kang na-upload sa nakaraang oras. Subukan muli pagkalipas ng ilang sandali.",
+    "unauthenticated": "Nag-expire na ang sesyon mo. Mag-sign in muli.",
+    "unknown": "May nangyaring mali. Subukan muli pagkalipas ng ilang sandali."
+  }
+}

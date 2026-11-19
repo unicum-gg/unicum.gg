@@ -82,7 +82,7 @@
   "report": {
     "statistics": "Štatistiky",
     "time": "Čas",
-    "earned": "Získané",
+    "earned": "Získané, štandardný účet",
     "shots": "Vystrelené strely",
     "hits-pens": "Priame zásahy / prieraznosti",
     "splash": "Poškodenie výbuchom",
@@ -135,11 +135,11 @@
     "mark-movement": "Ta bitka"
   },
   "tab": {
+    "personal": "Osobné skóre",
     "teams": "Skóre tímu",
     "report": "Podrobná správa",
     "replay": "Replay"
   },
-  "destroyed-list": "Zničené: {names}",
   "replay": {
     "no-bounds": "Táto aréna nemá v katalógu rozsah, takže nie je možné umiestniť pozície na jej minizemljevid.",
     "play": "Igraj",
@@ -154,7 +154,63 @@
     "deaths-none": "Nihče nebol v tejto bitke zničený.",
     "deaths-yet": "Všetci sú stále nažive.",
     "deaths-unknown": "vozidlo",
-    "deaths-destroyed": "Zničené"
+    "deaths-destroyed": "Zničené",
+    "restart": "Igraj od začiatku",
+    "spotted": "V dohľade",
+    "unspotted": "Mimo dohľadu",
+    "observed": "Odhalené nepriateľom",
+    "estimated": "odhadovaná pozícia mimo rozsahu nahrávania",
+    "speed": "Rýchlosť prehrávania",
+    "hud": {
+      "hp": "Životy",
+      "speed": "Rýchlosť",
+      "kmh": "{speed} km/h",
+      "damage": "Poškodenie",
+      "damage-hint": "Priebežná hodnota. U nahrávajúceho hráča pochádza z jeho vlastného bojového informačného kanála, ktorý nezahŕňa zásahy cieľov, ktoré nevidel. U kohokoľvek iného pochádza zo zásahov zachytených nahrávaním, ktoré môžu byť výrazne nižšie než skutočné výsledky.",
+      "assisted": "Asistované",
+      "blocked": "Blokované",
+      "final-hint": "Konečná hodnota bitky podľa výsledkov.",
+      "modules": "Moduly a posádka",
+      "seen-at": "tak, ako ich veliteľ nahrávajúceho hráča naposledy videl, o {time}",
+      "state": {
+        "damaged": "Poškodené",
+        "destroyed": "Zničené",
+        "injured": "Zranené"
+      },
+      "part": {
+        "engine": "Motor",
+        "ammoBay": "Stojan na Strelivo",
+        "fuelTank": "Palivová nádrž",
+        "radio": "Rádio",
+        "leftTrack": "Ľavý pás",
+        "rightTrack": "Pravý pás",
+        "gun": "Delo",
+        "turretRotator": "Prstenec kupoly",
+        "surveyingDevice": "Vízia",
+        "commander": "Veliteľ",
+        "driver": "Vodič",
+        "radioman": "Radista",
+        "gunner": "Strelec",
+        "loader": "Nabíjač",
+        "track": "Gosenica"
+      }
+    },
+    "tab": {
+      "chat": "chat",
+      "log": "Protokol poškodenia"
+    },
+    "log": {
+      "empty": "Zatiaľ nebolo nič spôsobené ani prijaté.",
+      "kind": {
+        "dealt": "Spôsobené poškodenie",
+        "received": "Prijaté poškodenie",
+        "blocked": "Blokované pancierom",
+        "assist": "Asistované poškodenie",
+        "crit": "Spôsobené kritické zásahy",
+        "received-crit": "Prijaté kritické zásahy",
+        "module": "Zásah modulu"
+      }
+    }
   },
   "lineup": {
     "more": "+{count}",
@@ -162,5 +218,18 @@
     "heading": "Vozidlá v tejto bitke",
     "kills": "Zničené",
     "time": "Čas"
-  }
+  },
+  "earnings": {
+    "title": "Zárobky",
+    "standard": "Štandardný račun",
+    "with-bonuses": "S vašimi bonusmi",
+    "credits": "Krediti",
+    "costs": "Opravy a zásoby",
+    "net": "Čisté kredity",
+    "xp": "Skúsenosti"
+  },
+  "destroyed-by-label": "Zničené hráčom",
+  "destroyed-list-label": "Zničil",
+  "replay-views": "{count} zobrazení",
+  "replay-downloads": "{count} stiahnutí"
 }

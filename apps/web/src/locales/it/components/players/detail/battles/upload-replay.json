@@ -1,0 +1,23 @@
+{
+  "trigger": "Carica un replay",
+  "title": "Carica un replay",
+  "description": "Aggiungi una delle tue battaglie dal relativo file .wotreplay, senza necessità di mod. Le verrà dedicata una pagina con il replay, pronta per essere condivisa.",
+  "drop": "Trascina qui un file .wotreplay o clicca per sceglierne uno",
+  "hint": "Solo i tuoi replay, di una battaglia giocata fino al termine. Si trovano nella cartella dei replay della directory del gioco.",
+  "send": "Carica",
+  "sending": "Caricamento in corso…",
+  "error": {
+    "not_collected": "Il caricamento dei replay non è al momento disponibile.",
+    "archive_full": "Il nostro spazio di archiviazione dei replay è momentaneamente completo. Riprova più tardi.",
+    "not_a_replay": "Questo file non è un replay di World of Tanks che possiamo leggere.",
+    "unfinished": "Questo replay è stato salvato prima della fine della battaglia, quindi non contiene risultati.",
+    "not_yours": "Questo replay è stato registrato da un altro account. Puoi caricare solo i tuoi.",
+    "wrong_region": "Quella battaglia è stata giocata in una regione diversa da quella dell’account con cui hai effettuato l’accesso.",
+    "too_old": "Quella battaglia è più vecchia di quelle che conserviamo.",
+    "malformed": "Non siamo riusciti a leggere i risultati di quel replay.",
+    "too_large": "Quel file è più grande di qualsiasi replay che accettiamo (9 MB).",
+    "too_many_uploads": "Hai caricato molti file nell’ultima ora. Riprova un po’ più tardi.",
+    "unauthenticated": "La tua sessione è scaduta. Accedi di nuovo.",
+    "unknown": "Qualcosa è andato storto. Riprova tra un momento."
+  }
+}

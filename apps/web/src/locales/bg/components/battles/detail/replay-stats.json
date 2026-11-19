@@ -1,0 +1,6 @@
+{
+  "download": "Изтегляне на реплея",
+  "version": "Възпроизвежда се на {version}",
+  "views": "Прегледи: {value}",
+  "downloads": "Изтегляния: {value}"
+}

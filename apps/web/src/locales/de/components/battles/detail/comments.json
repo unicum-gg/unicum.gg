@@ -1,0 +1,19 @@
+{
+  "title": "Kommentare",
+  "title-count": "Kommentare ({count})",
+  "empty": "Noch kein Kommentar. Wie fanden Sie dieses Gefecht?",
+  "in-battle": "In diesem Gefecht gespielt",
+  "pending": "Wartet auf Moderation, nur Sie können ihn sehen",
+  "rejected": "Nicht veröffentlicht",
+  "delete": "Löschen",
+  "log-in": "Zum Kommentieren anmelden",
+  "placeholder": "Schreiben Sie etwas über dieses Gefecht …",
+  "moderated": "Kommentare werden vor der Veröffentlichung von einem Moderator gelesen.",
+  "send": "Kommentar veröffentlichen",
+  "sending": "Wird veröffentlicht …",
+  "error": {
+    "rate-limited": "Sie haben in der letzten Stunde viele Kommentare veröffentlicht. Versuchen Sie es etwas später erneut.",
+    "unauthenticated": "Ihre Session ist abgelaufen. Melden Sie sich erneut an.",
+    "unknown": "Etwas ist schiefgelaufen. Versuchen Sie es in einem Moment erneut."
+  }
+}

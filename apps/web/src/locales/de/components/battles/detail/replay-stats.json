@@ -1,0 +1,6 @@
+{
+  "download": "Replay herunterladen",
+  "version": "Spielt mit {version}",
+  "views": "Aufrufe: {value}",
+  "downloads": "Downloads: {value}"
+}

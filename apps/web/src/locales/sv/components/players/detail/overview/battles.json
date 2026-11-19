@@ -28,7 +28,7 @@
     "damage": "Skada",
     "assisted": "Assistans",
     "blocked": "Blockerat",
-    "kills": "Dödanden",
+    "kills": "Förstörda",
     "spotted": "Upptäckt",
     "player": "Spelare",
     "survived": "Vid liv",
@@ -76,13 +76,13 @@
   },
   "close": "Stäng",
   "survived-the-battle": "Överlevde striden",
-  "destroyed": "Förstörda",
+  "destroyed": "Förstörd",
   "destroyed-by": "Förstörd av {nickname}",
   "squad": "Pluton {number}",
   "report": {
     "statistics": "Statistik",
     "time": "Tid",
-    "earned": "Intjänat",
+    "earned": "Intjänat, standardkonto",
     "shots": "Skott avfyrade",
     "hits-pens": "Direkta träffar / penetrationer",
     "splash": "Stänkskada",
@@ -135,11 +135,11 @@
     "mark-movement": "Denna strid"
   },
   "tab": {
+    "personal": "Personlig poäng",
     "teams": "Lagpoäng",
     "report": "Detaljerad rapport",
     "replay": "Återuppspelning"
   },
-  "destroyed-list": "Har förstört {names}",
   "replay": {
     "no-bounds": "Den här arenan har ingen utsträckning i katalogen, så positionerna kan inte få plats på dess minikarta.",
     "play": "Spela",
@@ -154,13 +154,82 @@
     "deaths-none": "Ingen förstördes i den här striden.",
     "deaths-yet": "Alla är fortfarande vid liv.",
     "deaths-unknown": "ett fordon",
-    "deaths-destroyed": "Förstörda"
+    "deaths-destroyed": "Förstörd",
+    "restart": "Spela från början",
+    "spotted": "Upptäckt",
+    "unspotted": "Utanför synhåll",
+    "observed": "Upptäckt av fienden",
+    "estimated": "uppskattad position, utanför inspelningens räckvidd",
+    "speed": "Uppspelningshastighet",
+    "hud": {
+      "hp": "Livpoäng",
+      "speed": "Hastighet",
+      "kmh": "{speed} km/h",
+      "damage": "Skada",
+      "damage-hint": "Hittills. För inspelaren från det egna stridsflödet, som utelämnar träffar på mål som de inte kunde se. För alla andra från träffarna som inspelningen hörde, vilket kan ligga långt under resultaten.",
+      "assisted": "Assistans",
+      "blocked": "Blockerat",
+      "final-hint": "Stridens slutliga figur, från resultaten.",
+      "modules": "Moduler och besättning",
+      "seen-at": "så som inspelarens befälhavare senast såg dem, vid {time}",
+      "state": {
+        "damaged": "Skadad",
+        "destroyed": "Förstörd",
+        "injured": "Sårad"
+      },
+      "part": {
+        "engine": "Motor",
+        "ammoBay": "Ammunitionsrack",
+        "fuelTank": "Bränsletank",
+        "radio": "Radio",
+        "leftTrack": "Vänster band",
+        "rightTrack": "Höger band",
+        "gun": "Kanon",
+        "turretRotator": "Tornring",
+        "surveyingDevice": "Sikt",
+        "commander": "Befälhavare",
+        "driver": "Förare",
+        "radioman": "Radiooperatör",
+        "gunner": "Skytt",
+        "loader": "Laddare",
+        "track": "Band"
+      }
+    },
+    "tab": {
+      "chat": "Chatt",
+      "log": "Skadelogg"
+    },
+    "log": {
+      "empty": "Inget utdelat eller tagna ännu.",
+      "kind": {
+        "dealt": "Utdelad skada",
+        "received": "Mottagen skada",
+        "blocked": "Blockerat av pansar",
+        "assist": "Assisterad skada",
+        "crit": "Utdelade kritiska träffar",
+        "received-crit": "Mottagna kritiska träffar",
+        "module": "Modulträff"
+      }
+    }
   },
   "lineup": {
     "more": "+{count}",
     "hint": "Strid med {count} fordon. Siffrorna på raden gäller hela striden.",
     "heading": "Vagnar i denna strid",
-    "kills": "Förstörda",
+    "kills": "Förstörd",
     "time": "Tid"
-  }
+  },
+  "earnings": {
+    "title": "Intäkter",
+    "standard": "Standardkonto",
+    "with-bonuses": "Med dina bonusar",
+    "credits": "Krediter",
+    "costs": "Reparationer och förnödenheter",
+    "net": "Nettokrediter",
+    "xp": "Erfarenhet"
+  },
+  "destroyed-by-label": "Förstörd av",
+  "destroyed-list-label": "Har förstört",
+  "replay-views": "{count} visningar",
+  "replay-downloads": "{count} nedladdningar"
 }

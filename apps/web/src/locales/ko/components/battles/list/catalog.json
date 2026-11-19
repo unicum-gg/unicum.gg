@@ -1,0 +1,17 @@
+{
+  "title": "리플레이가 있는 전투 ({count})",
+  "empty": "아직 이 지역에서 공유된 리플레이가 없습니다.",
+  "empty-filtered": "이 필터와 일치하는 전투가 없습니다.",
+  "sort": {
+    "damage": "피해량",
+    "assist": "도움",
+    "xp": "일반 경험치",
+    "kills": "격파",
+    "views": "가장 많이 본 항목",
+    "downloads": "가장 많이 다운로드된 항목",
+    "recent": "최신"
+  },
+  "version-current": "업데이트 {version} (현재)",
+  "version": "업데이트 {version}",
+  "version-all": "모든 업데이트"
+}

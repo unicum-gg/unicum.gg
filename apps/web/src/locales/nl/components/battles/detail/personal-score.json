@@ -1,0 +1,48 @@
+{
+  "result": {
+    "win": "Overwinning",
+    "loss": "Verloren",
+    "draw": "Gelijkspel"
+  },
+  "ending": {
+    "extermination": {
+      "win": "Alle vijandelijke voertuigen vernietigd",
+      "loss": "Alle geallieerde voertuigen vernietigd"
+    },
+    "base": {
+      "win": "Vijandelijke basis veroverd",
+      "loss": "Onze basis werd veroverd"
+    },
+    "timeout": {
+      "win": "Tijd verstreken",
+      "loss": "Tijd verstreken"
+    }
+  },
+  "destroyed": "Vernietigd",
+  "survived": "Overleefd",
+  "performance": "Gevechtsprestatie",
+  "unnamed": "Onbekende speler",
+  "mark-label": {
+    "spotted": "Gespot",
+    "assisted": "Assistentieschade",
+    "crits": "Kritieke treffers",
+    "damaged": "Toegebrachte schade",
+    "blocked": "Geblokkeerde schade",
+    "stunned": "Verdovingen",
+    "killed": "Vernietigd"
+  },
+  "mark-hint": {
+    "spotted": "Gespot: ze hebben deze vijand voor hun team zichtbaar gemaakt",
+    "assisted": "Assistentieschade: schade toegebracht aan deze vijand dankzij hun spotten, het volgen van de rupsband of verdoving",
+    "crits": "Kritieke treffers: ze hebben een module of bemanningslid van deze vijand beschadigd",
+    "damaged": "Toegebrachte schade aan deze vijand",
+    "blocked": "Schade die hun pantser blokkeerde van de schoten van deze vijand",
+    "stunned": "Aantal keer dat ze deze vijand hebben verdoofd",
+    "killed": "Ze hebben deze vijand vernietigd"
+  },
+  "column": {
+    "player": "Speler",
+    "vehicle": "Voertuig"
+  },
+  "destroyed-by-label": "Vernietigd door"
+}

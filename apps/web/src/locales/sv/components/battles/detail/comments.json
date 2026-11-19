@@ -1,0 +1,19 @@
+{
+  "title": "Kommentarer",
+  "title-count": "Kommentarer ({count})",
+  "empty": "Ingen kommentar ännu. Vad tyckte du om den här striden?",
+  "in-battle": "Spelade i den här striden",
+  "pending": "Väntar på moderering, bara du kan se den",
+  "rejected": "Inte publicerad",
+  "delete": "Ta bort",
+  "log-in": "Logga in för att kommentera",
+  "placeholder": "Säg något om den här striden…",
+  "moderated": "Kommentarer läses av en moderator innan de publiceras.",
+  "send": "Publicera kommentar",
+  "sending": "Publicerar…",
+  "error": {
+    "rate-limited": "Du har publicerat många kommentarer under den senaste timmen. Försök igen lite senare.",
+    "unauthenticated": "Din session har löpt ut. Logga in igen.",
+    "unknown": "Något gick fel. Försök igen om ett ögonblick."
+  }
+}

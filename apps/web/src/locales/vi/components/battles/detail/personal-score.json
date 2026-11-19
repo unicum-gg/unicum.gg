@@ -1,0 +1,48 @@
+{
+  "result": {
+    "win": "Chiến thắng",
+    "loss": "Thất bại",
+    "draw": "Hòa"
+  },
+  "ending": {
+    "extermination": {
+      "win": "Đã phá hủy toàn bộ xe tăng phe địch",
+      "loss": "Đã phá hủy toàn bộ xe tăng phe ta"
+    },
+    "base": {
+      "win": "Đã chiếm được căn cứ phe địch",
+      "loss": "Căn cứ của chúng ta đã bị chiếm được"
+    },
+    "timeout": {
+      "win": "Hết thời gian",
+      "loss": "Hết thời gian"
+    }
+  },
+  "destroyed": "Đã tiêu diệt",
+  "survived": "Sống sót",
+  "performance": "Hiệu suất trận đấu",
+  "unnamed": "Người chơi không xác định",
+  "mark-label": {
+    "spotted": "Phát hiện",
+    "assisted": "Sát thương hỗ trợ",
+    "crits": "Lần bắn trúng chí mạng",
+    "damaged": "Sát thương gây ra",
+    "blocked": "Sát thương bị chặn từ xe này",
+    "stunned": "Số lần làm choáng",
+    "killed": "Đã tiêu diệt"
+  },
+  "mark-hint": {
+    "spotted": "Phát hiện: người chơi này đã phát hiện kẻ địch để đội của họ nhìn thấy",
+    "assisted": "Sát thương hỗ trợ: sát thương gây ra cho kẻ địch này nhờ phát hiện, phá xích hoặc làm choáng của người chơi này",
+    "crits": "Lần bắn trúng chí mạng: người chơi này đã gây hư hại mô-đun hoặc thành viên kíp lái của kẻ địch này",
+    "damaged": "Sát thương gây ra cho kẻ địch này",
+    "blocked": "Sát thương bị giáp chặn từ các phát bắn của kẻ địch này",
+    "stunned": "Số lần người chơi này làm choáng kẻ địch này",
+    "killed": "Người chơi này đã tiêu diệt kẻ địch này"
+  },
+  "column": {
+    "player": "Người chơi",
+    "vehicle": "Xe tăng"
+  },
+  "destroyed-by-label": "Bị tiêu diệt bởi"
+}

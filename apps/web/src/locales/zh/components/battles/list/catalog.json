@@ -1,0 +1,17 @@
+{
+  "title": "带有战斗录像的战斗场次（{count}）",
+  "empty": "该地区尚未共享战斗录像。",
+  "empty-filtered": "没有符合这些筛选条件的对局。",
+  "sort": {
+    "damage": "损伤",
+    "assist": "协助伤害",
+    "xp": "经验",
+    "kills": "击杀数",
+    "views": "查看最多",
+    "downloads": "下载最多",
+    "recent": "最新"
+  },
+  "version-current": "更新 {version}（当前）",
+  "version": "更新 {version}",
+  "version-all": "所有更新"
+}

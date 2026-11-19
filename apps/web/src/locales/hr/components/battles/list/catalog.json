@@ -1,0 +1,17 @@
+{
+  "title": "Bitke sa snimkom ({count})",
+  "empty": "Na ovoj regiji još nema zajedničke snimke.",
+  "empty-filtered": "Nijedna bitka ne odgovara ovim filtrima.",
+  "sort": {
+    "damage": "Šteta",
+    "assist": "Asistencija",
+    "xp": "Iskustvo",
+    "kills": "Uništenja",
+    "views": "Najviše prikaza",
+    "downloads": "Najviše preuzimanja",
+    "recent": "Najnovije"
+  },
+  "version-current": "Obnovi {version} (trenutni)",
+  "version": "Obnovi {version}",
+  "version-all": "Sva ažuriranja"
+}

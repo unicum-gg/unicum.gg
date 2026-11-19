@@ -1,0 +1,16 @@
+{
+  "meta-title": "Mga laban at mga replay ng World of Tanks ({region})",
+  "meta-description": "Mga replay ng World of Tanks mula sa {region}, ibinahagi ng mga manlalaro: bawat labanan ay may kumpletong ulat, nakakabit na kagamitan at replay na mapapanood sa iyong browser. Salain ayon sa tank, mapa at mode, at ayusin ayon sa pinsala, tulong, karanasan o mga napatay.",
+  "og-title": "Mga labanan at mga replay",
+  "og-subtitle": "Mga replay ng World of Tanks mula sa {region}",
+  "title": "World of Tanks: {battles} at mga replay",
+  "title-battles": "mga labanan",
+  "intro": "Bawat labanan na ibinahagi ng mga manlalaro, kasama ang kumpletong ulat nito, ang nakakabit sa bawat tank at replay na mapapanood mo mismo rito. Ayusin ang mga ito ayon sa pinsala o karanasan, o paliitin ang mga resulta sa isang tank, mapa o mode.",
+  "about-title": "Tungkol sa mga replay na ito",
+  "about-sources": "Bawat labanan dito ay may kasamang .wotreplay file: alinman sa manlalarong nagpapatakbo ng mod ng unicum.gg ang awtomatikong nagbahagi nito, o na-upload ito sa pahinang ito. Mga labanang nilaro hanggang matapos lamang ang maaaring ibahagi, at account lamang na kabilang sa mga iyon ang maaaring magbahagi.",
+  "about-page": "Kapag binuksan ang isang labanan, ipinapakita ang dalawang koponan, ang detalyadong ulat ng labanan at isang replay sa mapa, kasama ang galaw ng bawat tank, ang mga putok na sumira sa mga ito at ang chat. Wala kang kailangang i-install at walang bersyon ng client ng laro na kailangang itugma: nagpe-play ang replay sa browser.",
+  "about-share": "Para idagdag ang sarili mong mga labanan, mag-upload ng replay mula sa folder ng mga replay ng iyong laro, o i-install ang {mod} para maibahagi ang mga ito habang naglalaro ka.",
+  "about-share-mod": "mod ng unicum.gg",
+  "upload-mod": "Mas gusto mo bang awtomatikong ma-upload ang bawat labanan? Ipinapadala ng {mod} ang mga ito kapag nagtatapos na.",
+  "upload-mod-link": "Ang aming mod"
+}

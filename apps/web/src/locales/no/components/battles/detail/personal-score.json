@@ -1,0 +1,48 @@
+{
+  "result": {
+    "win": "Seier",
+    "loss": "Tap",
+    "draw": "Uavgjort"
+  },
+  "ending": {
+    "extermination": {
+      "win": "Alle fiendens kjøretøy er ødelagt",
+      "loss": "Alle allierte kjøretøy er ødelagt"
+    },
+    "base": {
+      "win": "Fiendens base er erobret",
+      "loss": "Basen vår ble erobret"
+    },
+    "timeout": {
+      "win": "Tiden gikk ut",
+      "loss": "Tiden gikk ut"
+    }
+  },
+  "destroyed": "Bekjempet",
+  "survived": "Overlevde",
+  "performance": "Kampens prestasjon",
+  "unnamed": "Ukjent spiller",
+  "mark-label": {
+    "spotted": "Oppdaget",
+    "assisted": "Assistert skade",
+    "crits": "Kritiske treff",
+    "damaged": "Utdelt skade",
+    "blocked": "Skade blokkert fra den",
+    "stunned": "Bedøvelser",
+    "killed": "Bekjempet"
+  },
+  "mark-hint": {
+    "spotted": "Oppdaget: de oppdaget denne fienden for laget sitt",
+    "assisted": "Assistert skade: skade utdelt mot denne fienden takket være deres oppdagelse, belting eller bedøving",
+    "crits": "Kritiske treff: de skadet en modul eller et medlem av mannskapet på denne fienden",
+    "damaged": "Utdelt skade mot denne fienden",
+    "blocked": "Skade som panseret deres blokkerte fra skuddene til denne fienden",
+    "stunned": "Antall ganger de bedøvet denne fienden",
+    "killed": "De bekjempet denne fienden"
+  },
+  "column": {
+    "player": "Spiller",
+    "vehicle": "Kjøretøy"
+  },
+  "destroyed-by-label": "Ødelagt av"
+}

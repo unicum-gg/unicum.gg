@@ -1,0 +1,6 @@
+{
+  "download": "リプレイをダウンロード",
+  "version": "バージョン {version}でプレイ",
+  "views": "表示数: {value}",
+  "downloads": "ダウンロード数: {value}"
+}

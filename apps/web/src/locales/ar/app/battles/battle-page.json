@@ -1,0 +1,23 @@
+{
+  "meta-title": "{tank} بواسطة {nickname} على خريطة {map}: إعادة معركة World of Tanks",
+  "meta-title-battle": "{map}، {mode}، {date}: إعادة معركة World of Tanks",
+  "meta-description": {
+    "win": "فاز {nickname} على خريطة {map} باستخدام {tank} ({mode}، {date}): ألحق {damage} من الضرر، وحقق {kills} من عمليات التدمير، واكتسب {xp} من الخبرة.",
+    "loss": "خسر {nickname} على خريطة {map} باستخدام {tank} ({mode}، {date}): ألحق {damage} من الضرر، وحقق {kills} من عمليات التدمير، واكتسب {xp} من الخبرة.",
+    "draw": "تعادل {nickname} على خريطة {map} باستخدام {tank} ({mode}، {date}): ألحق {damage} من الضرر، وحقق {kills} من عمليات التدمير، واكتسب {xp} من الخبرة.",
+    "unknown": "لعب {nickname} على خريطة {map} باستخدام {tank} ({mode}، {date}): ألحق {damage} من الضرر، وحقق {kills} من عمليات التدمير، واكتسب {xp} من الخبرة."
+  },
+  "meta-description-battle": "{mode} على خريطة {map}، بتاريخ {date}.",
+  "mode-unknown": "World of Tanks",
+  "og-title": "{tank} على خريطة {map}",
+  "og-subtitle": "{nickname} · {damage} من الضرر",
+  "meta-title-no-replay": "{tank} بواسطة {nickname} على خريطة {map}: معركة World of Tanks",
+  "meta-description-replay": "شاهد إعادة المعركة، والفرق، وتقرير المعركة، ونزّل ملف .wotreplay.",
+  "meta-description-no-replay": "اعرض الفرق، وما فعلته كل دبابة، وتقرير المعركة.",
+  "meta-title-battle-no-replay": "{map}، {mode}، {date}: معركة World of Tanks",
+  "og-subtitle-battle": "{mode} · {date}",
+  "heading-player": "{nickname} باستخدام {tank} على خريطة {map}",
+  "recorded-by": "مسجل بواسطة",
+  "also-reported-by": "تم الإبلاغ عنه أيضًا بواسطة",
+  "reported-by": "تم الإبلاغ عنه بواسطة"
+}

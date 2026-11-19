@@ -1,0 +1,16 @@
+{
+  "meta-title": "World of Tanks-Gefechte und Replays ({region})",
+  "meta-description": "World of Tanks-Replays aus der {region}, von Spielern geteilt: jedes Gefecht mit seinem vollständigen Bericht, der eingebauten Ausrüstung und einem Replay, das Sie in Ihrem Browser ansehen können. Filtern Sie nach Panzer, Karte und Modus und sortieren Sie nach Schaden, unterstützung, erfahrung oder Abschüssen.",
+  "og-title": "Gefechte und Replays",
+  "og-subtitle": "World of Tanks-Replays aus der {region}",
+  "title": "World of Tanks {battles} und Replays",
+  "title-battles": "Gefechte",
+  "intro": "Jedes Gefecht, das Spieler geteilt haben, mit seinem vollständigen Bericht, der eingebauten Ausrüstung jedes Panzers und einem Replay, das Sie direkt hier ansehen können. Sortieren Sie nach Schaden oder erfahrung oder grenzen Sie die Auswahl auf einen Panzer, eine Karte oder einen Modus ein.",
+  "about-title": "Über diese Replays",
+  "about-sources": "Jedes Gefecht hier enthält seine .wotreplay-Datei: Entweder hat ein Spieler mit laufendem unicum.gg-Mod sie automatisch geteilt oder auf dieser Seite hochgeladen. Nur bis zum Ende gespielte Gefechte können geteilt werden, und nur von einem Konto, das daran beteiligt war.",
+  "about-page": "Beim Öffnen eines Gefechts werden beide Teams, der detaillierte Gefechtsbericht und ein Replay auf der Karte angezeigt, einschließlich der Bewegungen jedes Panzers, der Schüsse, durch die sie zerstört wurden, und des Chats. Nichts zu installieren und keine passende Spiel-Client-Version erforderlich: Das Replay wird im Browser abgespielt.",
+  "about-share": "Um eigene Gefechte hinzuzufügen, laden Sie ein Replay aus dem Replays-Ordner Ihres Spiels hoch oder installieren Sie {mod}, damit sie während des Spielens geteilt werden.",
+  "about-share-mod": "unicum.gg-Mod",
+  "upload-mod": "Sollen alle Gefechte automatisch hochgeladen werden? {mod} sendet sie, sobald sie enden.",
+  "upload-mod-link": "Unser Mod"
+}

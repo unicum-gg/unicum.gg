@@ -1,0 +1,17 @@
+{
+  "title": "Batalhas com um replay ({count})",
+  "empty": "Nenhum replay foi compartilhado nesta região ainda.",
+  "empty-filtered": "Nenhuma batalha corresponde a estes filtros.",
+  "sort": {
+    "damage": "Dano",
+    "assist": "Assistência",
+    "xp": "Experiência",
+    "kills": "Abates",
+    "views": "Mais visualizados",
+    "downloads": "Mais baixados",
+    "recent": "Mais recentes"
+  },
+  "version-current": "Actualizar {version} (atual)",
+  "version": "Actualizar {version}",
+  "version-all": "Todas as atualizações"
+}

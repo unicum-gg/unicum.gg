@@ -1,0 +1,48 @@
+{
+  "result": {
+    "win": "Sieg",
+    "loss": "Niederlage",
+    "draw": "Unentschieden"
+  },
+  "ending": {
+    "extermination": {
+      "win": "Alle Fahrzeuge des Gegners zerstört",
+      "loss": "Alle verbündeten Fahrzeuge zerstört"
+    },
+    "base": {
+      "win": "Basis des Gegners erobert",
+      "loss": "Unsere Basis wurde erobert"
+    },
+    "timeout": {
+      "win": "Zeit abgelaufen",
+      "loss": "Zeit abgelaufen"
+    }
+  },
+  "destroyed": "Zerstört",
+  "survived": "Überlebt",
+  "performance": "Gefechtleistung",
+  "unnamed": "Unbekannter Spieler",
+  "mark-label": {
+    "spotted": "Aufgeklärt",
+    "assisted": "Unterstützungsschaden",
+    "crits": "Kritische Treffer",
+    "damaged": "Verursachter Schaden",
+    "blocked": "Durch Panzerung abgewehrter Schaden",
+    "stunned": "Betäubungen",
+    "killed": "Zerstört"
+  },
+  "mark-hint": {
+    "spotted": "Aufgeklärt: Dieser Gegner wurde für das eigene Team aufgeklärt",
+    "assisted": "Unterstützungsschaden: An diesem Gegner verursachter Schaden dank Aufklärung, Kettenbeschädigung oder Betäubung",
+    "crits": "Kritische Treffer: Ein Modul oder Besatzungsmitglied dieses Gegners wurde beschädigt",
+    "damaged": "Verursachter Schaden an diesem Gegner",
+    "blocked": "Schaden, den die Panzerung durch Schüsse dieses Gegners abgewehrt hat",
+    "stunned": "Wie oft dieser Gegner betäubt wurde",
+    "killed": "Dieser Gegner wurde zerstört"
+  },
+  "column": {
+    "player": "Spieler",
+    "vehicle": "Fahrzeug"
+  },
+  "destroyed-by-label": "Zerstört von"
+}

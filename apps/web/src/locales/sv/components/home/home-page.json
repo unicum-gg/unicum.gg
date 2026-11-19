@@ -10,6 +10,13 @@
   "rating-scale": {
     "title": "Betygsskala"
   },
+  "replays": {
+    "title": "Repriser",
+    "heading": "Spela om dina strider",
+    "description": "Varje strid som spelare delar kommer med sin fullständiga rapport, vad varje vagn hade monterat och en repris du kan titta på i webbläsaren. Installera vår mod för att dela din repris när varje strid slutar.",
+    "browse": "Bläddra bland repriser",
+    "mod": "Ladda ner modden"
+  },
   "community": {
     "title": "Gå med i gemenskapen",
     "heading": "Kom i kontakt med WoT-spelare",

@@ -1,0 +1,23 @@
+{
+  "meta-title": "{tank} von {nickname} auf {map}: World of Tanks-Replay",
+  "meta-title-battle": "{map}, {mode}, {date}: World of Tanks-Gefecht-Replay",
+  "meta-description": {
+    "win": "{nickname} hat auf {map} mit {tank} ({mode}, {date}) gewonnen: {damage} Schaden, {kills} Abschüsse, {xp} erfahrung.",
+    "loss": "{nickname} hat auf {map} mit {tank} ({mode}, {date}) verloren: {damage} Schaden, {kills} Abschüsse, {xp} erfahrung.",
+    "draw": "{nickname} hat auf {map} mit {tank} ({mode}, {date}) unentschieden gespielt: {damage} Schaden, {kills} Abschüsse, {xp} erfahrung.",
+    "unknown": "{nickname} auf {map} mit {tank} ({mode}, {date}): {damage} Schaden, {kills} Abschüsse, {xp} erfahrung."
+  },
+  "meta-description-battle": "{mode} auf {map}, {date}.",
+  "mode-unknown": "World of Tanks",
+  "og-title": "{tank} auf {map}",
+  "og-subtitle": "{nickname} · {damage} Schaden",
+  "meta-title-no-replay": "{tank} von {nickname} auf {map}: World of Tanks-Gefecht",
+  "meta-description-replay": "Sehen Sie das Replay, beide Teams und den Gefechtsbericht an und laden Sie die .wotreplay-Datei herunter.",
+  "meta-description-no-replay": "Sehen Sie beide Teams, was jeder Panzer gemacht hat, und den Gefechtsbericht an.",
+  "meta-title-battle-no-replay": "{map}, {mode}, {date}: World of Tanks-Gefecht",
+  "og-subtitle-battle": "{mode} · {date}",
+  "heading-player": "{nickname} mit {tank} auf {map}",
+  "recorded-by": "Aufgezeichnet von",
+  "also-reported-by": "Auch gemeldet von",
+  "reported-by": "Gemeldet von"
+}

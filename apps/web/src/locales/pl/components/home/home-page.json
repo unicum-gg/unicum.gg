@@ -10,6 +10,13 @@
   "rating-scale": {
     "title": "Skala oceny"
   },
+  "replays": {
+    "title": "Powtórki",
+    "heading": "Oglądaj ponownie swoje bitwy",
+    "description": "Każda bitwa udostępniona przez graczy zawiera pełny raport, informacje o tym, co było zamontowane w każdym czołgu, oraz powtórkę, którą możesz oglądać w przeglądarce. Zainstaluj naszego moda, aby udostępniać swoje powtórki po zakończeniu każdej bitwy.",
+    "browse": "Przeglądaj powtórki",
+    "mod": "Pobierz mod"
+  },
   "community": {
     "title": "Dołącz do społeczności",
     "heading": "Nawiąż kontakt z graczami WoT",

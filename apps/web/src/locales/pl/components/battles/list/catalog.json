@@ -1,0 +1,17 @@
+{
+  "title": "Bitwy z powtórką ({count})",
+  "empty": "W tym regionie nie udostępniono jeszcze żadnej powtórki.",
+  "empty-filtered": "Żadna bitwa nie pasuje do tych filtrów.",
+  "sort": {
+    "damage": "Zadane uszkodzenia",
+    "assist": "Asysta",
+    "xp": "Doświadczenie",
+    "kills": "Zniszczenia",
+    "views": "Najczęściej oglądane",
+    "downloads": "Najczęściej pobierane",
+    "recent": "Najnowsze"
+  },
+  "version-current": "Odśwież {version} (obecna)",
+  "version": "Odśwież {version}",
+  "version-all": "Wszystkie aktualizacje"
+}

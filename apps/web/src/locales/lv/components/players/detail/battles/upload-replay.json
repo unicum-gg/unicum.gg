@@ -1,0 +1,23 @@
+{
+  "trigger": "Augšupielādēt atkārtojumu",
+  "title": "Augšupielādēt atkārtojumu",
+  "description": "Pievienojiet vienu no savām kaujām no tās .wotreplay faila, mods nav nepieciešams. Tai tiks izveidota sava lapa ar atkārtojumu, kas būs gatavs kopīgošanai.",
+  "drop": "Nometiet .wotreplay šeit vai noklikšķiniet, lai izvēlētos failu",
+  "hint": "Tikai jūsu atkārtojumi no kaujas, kas spēlēta līdz beigām. Tie atrodas jūsu spēles direktorija atkārtojumu mapē.",
+  "send": "Augšupielādēt",
+  "sending": "Notiek augšupielāde…",
+  "error": {
+    "not_collected": "Atkārtojumu augšupielāde pašlaik nav pieejama.",
+    "archive_full": "Mūsu atkārtojumu krātuve pašlaik ir pilna. Mēģiniet vēlāk.",
+    "not_a_replay": "Šis fails nav World of Tanks atkārtojums, ko varam lasīt.",
+    "unfinished": "Šis atkārtojums tika saglabāts pirms kaujas beigām, tāpēc tajā nav rezultātu.",
+    "not_yours": "Šo atkārtojumu ierakstīja cits konts. Varat augšupielādēt tikai savus atkārtojumus.",
+    "wrong_region": "Šī kauja tika spēlēta citā reģionā nekā tas, kurā atrodas konts, ar kuru esat pieteicies.",
+    "too_old": "Šī kauja ir vecāka par tām, ko mēs saglabājam.",
+    "malformed": "Mēs nevarējām nolasīt šī atkārtojuma rezultātus.",
+    "too_large": "Šis fails ir lielāks par jebkuru atkārtojumu, ko pieņemam (9 MB).",
+    "too_many_uploads": "Pēdējās stundas laikā esat augšupielādējis daudz failu. Mēģiniet vēlreiz nedaudz vēlāk.",
+    "unauthenticated": "Jūsu sesija ir beigusies. Piesakieties vēlreiz.",
+    "unknown": "Kaut kas nogāja greizi. Mēģiniet vēlreiz pēc brīža."
+  }
+}

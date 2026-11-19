@@ -1,0 +1,23 @@
+{
+  "trigger": "Bir tekrar yükle",
+  "title": "Bir tekrar yükle",
+  "description": "Kendi savaşlarından birini .wotreplay dosyasından ekle, mod gerekmez. Tekrarının bulunduğu, paylaşmaya hazır kendi sayfası oluşturulur.",
+  "drop": "Buraya bir .wotreplay bırakın veya bir tane seçmek için tıklayın",
+  "hint": "Yalnızca sona erene kadar oynanan savaşlardaki kendi tekrarların. Oyun dizininin tekrarlar klasöründe bulunurlar.",
+  "send": "Yükle",
+  "sending": "Yükleniyor…",
+  "error": {
+    "not_collected": "Tekrar yüklemeleri şu anda mevcut değil.",
+    "archive_full": "Tekrar depolama alanımız şimdilik tam. Daha sonra tekrar deneyin.",
+    "not_a_replay": "Bu dosya, okuyabildiğimiz bir World of Tanks tekrarı değil.",
+    "unfinished": "Bu tekrar savaş sona ermeden önce kaydedildi, bu yüzden sonuçları yok.",
+    "not_yours": "Bu tekrar başka bir hesap tarafından kaydedildi. Yalnızca kendi tekrarlarını yükleyebilirsin.",
+    "wrong_region": "Bu savaş, oturum açtığın hesabın bölgesinden başka bir bölgede oynandı.",
+    "too_old": "Bu savaş, sakladıklarımızdan daha eski.",
+    "malformed": "Bu tekrardaki sonuçları okuyamadık.",
+    "too_large": "Bu dosya, kabul ettiğimiz herhangi bir tekrardan daha büyük (9 MB).",
+    "too_many_uploads": "Son bir saat içinde çok fazla yükleme yaptın. Biraz daha sonra tekrar dene.",
+    "unauthenticated": "Oturumunun süresi doldu. Yeniden oturum aç.",
+    "unknown": "Bir şeyler ters gitti. Birazdan tekrar deneyin."
+  }
+}

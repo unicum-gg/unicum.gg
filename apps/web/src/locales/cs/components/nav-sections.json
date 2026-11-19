@@ -87,6 +87,10 @@
       "label": "Nejlepší hráči",
       "description": "Žebříček za celou dobu v kategorii Hráč"
     },
+    "battles": {
+      "label": "Bitvy",
+      "description": "Bitvy a záznamy sdílené hráči"
+    },
     "players-rampage": {
       "description": "Kdo se umístil nejvýše v režimu Běsnění."
     }

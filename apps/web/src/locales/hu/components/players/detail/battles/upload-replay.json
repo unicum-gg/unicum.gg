@@ -1,0 +1,23 @@
+{
+  "trigger": "Visszajátszás feltöltése",
+  "title": "Visszajátszás feltöltése",
+  "description": "Add hozzá az egyik saját csatádat a .wotreplay fájljából, nincs szükség modra. Saját oldalt kap a visszajátszásával, amely készen áll a megosztásra.",
+  "drop": "Húzz ide egy .wotreplay fájlt, vagy kattintson egy fájl kiválasztásához",
+  "hint": "Csak a saját visszajátszásaidat töltheted fel, olyan csatákból, amelyek véget értek. A játék könyvtárának visszajátszások mappájában találhatók.",
+  "send": "Feltöltés",
+  "sending": "Feltöltés…",
+  "error": {
+    "not_collected": "A visszajátszások feltöltése jelenleg nem elérhető.",
+    "archive_full": "A visszajátszások tárolója jelenleg megtelt. Próbáld meg később.",
+    "not_a_replay": "Ez nem olyan World of Tanks-visszajátszás, amelyet el tudunk olvasni.",
+    "unfinished": "Ez a visszajátszás a csata vége előtt lett mentve, ezért nincsenek benne eredmények.",
+    "not_yours": "Ezt a visszajátszást egy másik fiók rögzítette. Csak a saját visszajátszásaidat töltheted fel.",
+    "wrong_region": "Ezt a csatát egy másik régióban játszották, mint amelyhez a bejelentkezett fiókod tartozik.",
+    "too_old": "Ez a csata régebbi az általunk megtartott csatáknál.",
+    "malformed": "Nem tudtuk elolvasni a visszajátszás eredményeit.",
+    "too_large": "Ez a fájl nagyobb bármely általunk elfogadott visszajátszásnál (9 MB).",
+    "too_many_uploads": "Az elmúlt órában sok mindent töltöttél fel. Próbáld meg kicsit később.",
+    "unauthenticated": "A munkameneted lejárt. Jelentkezz be újra.",
+    "unknown": "Valami hiba történt. Próbáld meg egy pillanat múlva."
+  }
+}

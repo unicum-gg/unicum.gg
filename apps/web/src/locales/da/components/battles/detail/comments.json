@@ -1,0 +1,19 @@
+{
+  "title": "Kommentarer",
+  "title-count": "Kommentarer ({count})",
+  "empty": "Ingen kommentar endnu. Hvad synes du om denne kamp?",
+  "in-battle": "Spillede i denne kamp",
+  "pending": "Afventer moderation, kun du kan se den",
+  "rejected": "Ikke offentliggjort",
+  "delete": "Slet",
+  "log-in": "Log ind for at kommentere",
+  "placeholder": "Skriv noget om denne kamp…",
+  "moderated": "Kommentarer læses af en moderator, før de offentliggøres.",
+  "send": "Slå kommentar op",
+  "sending": "Slår op…",
+  "error": {
+    "rate-limited": "Du har slået mange kommentarer op den seneste time. Prøv igen lidt senere.",
+    "unauthenticated": "Din session er udløbet. Log ind igen.",
+    "unknown": "Noget gik galt. Prøv igen om et øjeblik."
+  }
+}

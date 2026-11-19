@@ -1,0 +1,23 @@
+{
+  "meta-title": "{map}で{nickname}が{tank}に搭乗した戦闘、World of Tanksのリプレイ",
+  "meta-title-battle": "{map}、{mode}、{date}、World of Tanksの戦闘リプレイ",
+  "meta-description": {
+    "win": "{nickname}は{map}で{tank}に搭乗して勝利しました（{mode}、{date}）。ダメージ{damage}、撃破{kills}、経験値{xp}。",
+    "loss": "{nickname}は{map}で{tank}に搭乗して敗北しました（{mode}、{date}）。ダメージ{damage}、撃破{kills}、経験値{xp}。",
+    "draw": "{nickname}は{map}で{tank}に搭乗して引き分けました（{mode}、{date}）。ダメージ{damage}、撃破{kills}、経験値{xp}。",
+    "unknown": "{nickname}が{map}で{tank}に搭乗（{mode}、{date}）。ダメージ{damage}、撃破{kills}、経験値{xp}。"
+  },
+  "meta-description-battle": "{map}での{mode}、{date}。",
+  "mode-unknown": "World of Tanks",
+  "og-title": "{map}での{tank}",
+  "og-subtitle": "{nickname}、ダメージ{damage}",
+  "meta-title-no-replay": "{map}で{nickname}が{tank}に搭乗した戦闘、World of Tanksの戦闘",
+  "meta-description-replay": "リプレイ、両チーム、戦闘レポートを視聴し、.wotreplayをダウンロードできます。",
+  "meta-description-no-replay": "両チーム、各戦車の行動、戦闘レポートを確認できます。",
+  "meta-title-battle-no-replay": "{map}、{mode}、{date}、World of Tanksの戦闘",
+  "og-subtitle-battle": "{mode}、{date}",
+  "heading-player": "{map}で{nickname}が{tank}に搭乗",
+  "recorded-by": "記録者",
+  "also-reported-by": "報告者（その他）",
+  "reported-by": "報告者"
+}

@@ -10,6 +10,13 @@
   "rating-scale": {
     "title": "Scala di valutazione"
   },
+  "replays": {
+    "title": "Replay",
+    "heading": "Riguarda le tue battaglie",
+    "description": "Ogni battaglia condivisa dai giocatori include la segnalazione completa, ciò che ogni carro armato aveva installato e un replay che puoi guardare nel browser. Installa la nostra mod per condividere il tuo al termine di ogni battaglia.",
+    "browse": "Sfoglia i replay",
+    "mod": "Scarica la mod"
+  },
   "community": {
     "title": "Unisciti alla community",
     "heading": "Entra in contatto con i giocatori di WoT",

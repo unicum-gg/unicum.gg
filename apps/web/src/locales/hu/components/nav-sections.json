@@ -87,6 +87,10 @@
       "label": "Legjobb játékosok",
       "description": "Játékosok teljes idős ranglistája"
     },
+    "battles": {
+      "label": "Csaták",
+      "description": "Játékosok által megosztott csaták és visszajátszások"
+    },
     "players-rampage": {
       "description": "Kik értek el legmagasabb helyezést a Dühöngésben?"
     }

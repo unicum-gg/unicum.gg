@@ -1,0 +1,17 @@
+{
+  "title": "Taisteluita, joissa on uusinta ({count})",
+  "empty": "Tällä alueella ei ole vielä jaettu yhtään uusintaa.",
+  "empty-filtered": "Yksikään taistelu ei vastaa näitä suodattimia.",
+  "sort": {
+    "damage": "Vahinkoa aiheutettu",
+    "assist": "Avustus",
+    "xp": "Kokemusta",
+    "kills": "Tuhot",
+    "views": "Eniten katsotut",
+    "downloads": "Eniten ladatut",
+    "recent": "Viimeisimmät"
+  },
+  "version-current": "Päivitys {version} (nykyinen)",
+  "version": "Päivitys {version}",
+  "version-all": "Kaikki päivitykset"
+}

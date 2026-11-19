@@ -28,8 +28,8 @@
     "damage": "Vahinkoa aiheutettu",
     "assisted": "Avustus",
     "blocked": "Estetty",
-    "kills": "Tuhotut",
-    "spotted": "Havaitut",
+    "kills": "Tuhot",
+    "spotted": "Havaittu",
     "player": "Pelaaja",
     "survived": "Elossa",
     "xp": "XP",
@@ -82,7 +82,7 @@
   "report": {
     "statistics": "Tilastot",
     "time": "Aika",
-    "earned": "Ansaitut",
+    "earned": "Ansaitut (tavallinen tili)",
     "shots": "Laukaistut laukaukset",
     "hits-pens": "Suorat osumat / läpäisyt",
     "splash": "Roiskevahinko",
@@ -135,11 +135,11 @@
     "mark-movement": "Tämä taistelu"
   },
   "tab": {
+    "personal": "Henkilökohtainen tulos",
     "teams": "Joukkueen tulos",
     "report": "Yksityiskohtainen raportti",
     "replay": "Uusinta"
   },
-  "destroyed-list": "Tuhottu: {names}",
   "replay": {
     "no-bounds": "Tällä areenalla ei ole laajuutta luettelossa, joten sijainteja ei voi sijoittaa sen minikartalle.",
     "play": "Pelaa",
@@ -154,7 +154,63 @@
     "deaths-none": "Ketään ei tuhottu tässä taistelussa.",
     "deaths-yet": "Kaikki ovat yhä elossa.",
     "deaths-unknown": "ajoneuvo",
-    "deaths-destroyed": "Tuhottu"
+    "deaths-destroyed": "Tuhottu",
+    "restart": "Pelaa alusta",
+    "spotted": "Näkyvissä",
+    "unspotted": "Näkymättömissä",
+    "observed": "Vihollisen havaitsema",
+    "estimated": "arvioitu sijainti, tallennuksen vaihteluvälin ulkopuolella",
+    "speed": "Toistonopeus",
+    "hud": {
+      "hp": "Elinvoima",
+      "speed": "Nopeus",
+      "kmh": "{speed} km/h",
+      "damage": "Vahinkoa aiheutettu",
+      "damage-hint": "Tähän asti. Tallentajalle omasta taistelusyötteestä, josta puuttuvat osumat kohteisiin, joita hän ei voinut nähdä. Kaikille muille tallennuksen kuulemista osumista, mikä voi jäädä selvästi tuloksia pienemmäksi.",
+      "assisted": "Avustettu",
+      "blocked": "Estetty",
+      "final-hint": "Taistelun lopullinen luku tuloksista.",
+      "modules": "Moduulit ja miehistö",
+      "seen-at": "sellaisina kuin tallentajan komentaja näki ne viimeksi, hetkellä {time}",
+      "state": {
+        "damaged": "Vaurioitunut",
+        "destroyed": "Tuhottu",
+        "injured": "Haavoittunut"
+      },
+      "part": {
+        "engine": "Moottori",
+        "ammoBay": "Ammusteline",
+        "fuelTank": "Polttoainesäiliö",
+        "radio": "Radio",
+        "leftTrack": "Vasen tela",
+        "rightTrack": "Oikea tela",
+        "gun": "Tykki",
+        "turretRotator": "Tykkitornin kehä",
+        "surveyingDevice": "Näkemys",
+        "commander": "Johtaja",
+        "driver": "Kuljettaja",
+        "radioman": "Radisti",
+        "gunner": "Ampuja",
+        "loader": "Lataaja",
+        "track": "Tela"
+      }
+    },
+    "tab": {
+      "chat": "Chat",
+      "log": "Vahinkoloki"
+    },
+    "log": {
+      "empty": "Ei mitään aiheutettu tai otettu vielä.",
+      "kind": {
+        "dealt": "Aiheutettu vahinko",
+        "received": "Vahinkoa otettu",
+        "blocked": "Panssarin torjuma",
+        "assist": "Avustettu vahinko",
+        "crit": "Aiheutetut kriittiset osumat",
+        "received-crit": "Vastaanotetut kriittiset osumat",
+        "module": "Osuma moduuliin"
+      }
+    }
   },
   "lineup": {
     "more": "+{count}",
@@ -162,5 +218,18 @@
     "heading": "Tämän taistelun Vaunut",
     "kills": "Tuhottu",
     "time": "Aika"
-  }
+  },
+  "earnings": {
+    "title": "Tulot",
+    "standard": "Normaalitili",
+    "with-bonuses": "Bonuksillasi",
+    "credits": "Krediitit",
+    "costs": "Korjaukset ja tarvikkeet",
+    "net": "Nettokrediitit",
+    "xp": "Kokemusta"
+  },
+  "destroyed-by-label": "Tuhosi",
+  "destroyed-list-label": "On tuhonnut",
+  "replay-views": "{count} näkymää",
+  "replay-downloads": "{count} latausta"
 }

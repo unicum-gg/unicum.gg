@@ -1,0 +1,23 @@
+{
+  "meta-title": "{tank} ni {nickname} sa {map}: replay ng World of Tanks",
+  "meta-title-battle": "{map}, {mode}, {date}: replay ng labanan sa World of Tanks",
+  "meta-description": {
+    "win": "Nanalo si {nickname} sa {map} gamit ang {tank} ({mode}, {date}): {damage} pinsala, {kills} mga napatay, {xp} karanasan.",
+    "loss": "Natalo si {nickname} sa {map} gamit ang {tank} ({mode}, {date}): {damage} pinsala, {kills} mga napatay, {xp} karanasan.",
+    "draw": "Nagtabla si {nickname} sa {map} gamit ang {tank} ({mode}, {date}): {damage} pinsala, {kills} mga napatay, {xp} karanasan.",
+    "unknown": "Si {nickname} sa {map} gamit ang {tank} ({mode}, {date}): {damage} pinsala, {kills} mga napatay, {xp} karanasan."
+  },
+  "meta-description-battle": "{mode} sa {map}, {date}.",
+  "mode-unknown": "World of Tanks",
+  "og-title": "{tank} sa {map}",
+  "og-subtitle": "{nickname} · {damage} pinsala",
+  "meta-title-no-replay": "{tank} ni {nickname} sa {map}: labanan sa World of Tanks",
+  "meta-description-replay": "Panoorin ang replay, ang dalawang koponan at ang ulat ng labanan, at i-download ang .wotreplay.",
+  "meta-description-no-replay": "Tingnan ang dalawang koponan, ang ginawa ng bawat tank at ang ulat ng labanan.",
+  "meta-title-battle-no-replay": "{map}, {mode}, {date}: labanan sa World of Tanks",
+  "og-subtitle-battle": "{mode} · {date}",
+  "heading-player": "Si {nickname} gamit ang {tank} sa {map}",
+  "recorded-by": "Itinala ni",
+  "also-reported-by": "Iniulat din ni",
+  "reported-by": "Iniulat ni"
+}

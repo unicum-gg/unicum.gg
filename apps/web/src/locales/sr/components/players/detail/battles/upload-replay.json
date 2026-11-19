@@ -1,0 +1,23 @@
+{
+  "trigger": "Otpremi snimak bitke",
+  "title": "Otpremi snimak bitke",
+  "description": "Dodaj jednu od svojih bitaka iz .wotreplay datoteke, bez potrebe za modom. Dobiće sopstvenu stranicu sa snimkom bitke, spremnu za deljenje.",
+  "drop": "Prevuci .wotreplay ovde ili klikni da izabereš jednu",
+  "hint": "Samo tvoji snimci bitaka iz bitke odigrane do kraja. Nalaze se u fascikli replays u direktorijumu tvoje igre.",
+  "send": "Otpremi",
+  "sending": "Otpremanje…",
+  "error": {
+    "not_collected": "Otpremanje snimaka bitaka trenutno nije dostupno.",
+    "archive_full": "Naša memorija za snimke bitaka je trenutno potpuno popunjena. Pokušaj kasnije.",
+    "not_a_replay": "Ta datoteka nije snimak bitke iz igre World of Tanks koji možemo da pročitamo.",
+    "unfinished": "Taj snimak bitke je sačuvan pre završetka bitke, pa nema rezultate.",
+    "not_yours": "Taj snimak bitke je zabeležio drugi nalog. Možeš da otpremiš samo svoje snimke bitaka.",
+    "wrong_region": "Ta bitka je odigrana u drugom regionu od onog na kom se nalazi nalog na koji si prijavljen.",
+    "too_old": "Ta bitka je starija od onih koje čuvamo.",
+    "malformed": "Nismo mogli da pročitamo rezultate u tom snimku bitke.",
+    "too_large": "Ta datoteka je veća od bilo kog snimka bitke koji prihvatamo (9 MB).",
+    "too_many_uploads": "Otpremio si mnogo toga tokom poslednjeg sata. Pokušaj ponovo malo kasnije.",
+    "unauthenticated": "Tvoja sesija je istekla. Prijavi se ponovo.",
+    "unknown": "Nešto je pošlo naopako. Pokušaj ponovo za trenutak."
+  }
+}

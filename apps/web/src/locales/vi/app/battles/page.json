@@ -1,0 +1,16 @@
+{
+  "meta-title": "Các trận đấu và bản phát lại World of Tanks ({region})",
+  "meta-description": "Các bản phát lại World of Tanks từ {region}, được người chơi chia sẻ: mọi trận đấu cùng báo cáo đầy đủ, trang bị đã lắp và bản phát lại để xem trên trình duyệt. Lọc theo xe tăng, bản đồ và chế độ, xếp hạng theo sát thương, hỗ trợ, kinh nghiệm hoặc tiêu diệt.",
+  "og-title": "Các trận đấu và bản phát lại",
+  "og-subtitle": "Các bản phát lại World of Tanks từ {region}",
+  "title": "{battles} và bản phát lại World of Tanks",
+  "title-battles": "các trận đấu",
+  "intro": "Mọi trận đấu được người chơi chia sẻ, cùng báo cáo đầy đủ, những gì mỗi xe tăng đã lắp và bản phát lại bạn có thể xem ngay tại đây. Xếp hạng chúng theo sát thương hoặc kinh nghiệm, hoặc thu hẹp theo xe tăng, bản đồ hay chế độ.",
+  "about-title": "Giới thiệu về các bản phát lại này",
+  "about-sources": "Mỗi trận đấu tại đây đều có tệp .wotreplay: một người chơi đang chạy mod unicum.gg đã tự động chia sẻ tệp đó, hoặc đã tải tệp lên trang này. Chỉ các trận đấu đã chơi đến cuối mới có thể được chia sẻ, và chỉ bởi tài khoản đã tham gia trận đấu đó.",
+  "about-page": "Mở một trận đấu sẽ hiển thị cả hai đội, báo cáo trận đấu chi tiết và bản phát lại trên bản đồ, cùng chuyển động của từng xe tăng, các phát bắn đã phá hủy chúng và phần trò chuyện. Không có gì cần cài đặt và không cần khớp phiên bản máy khách trò chơi, bản phát lại sẽ chạy trên trình duyệt.",
+  "about-share": "Để thêm các trận đấu của riêng bạn, hãy tải bản phát lại lên từ thư mục bản phát lại của trò chơi, hoặc cài đặt {mod} để chúng được chia sẻ khi bạn chơi.",
+  "about-share-mod": "mod unicum.gg",
+  "upload-mod": "Muốn mọi trận đấu được tự động tải lên hơn? {mod} sẽ gửi chúng khi trận đấu kết thúc.",
+  "upload-mod-link": "Mod của chúng tôi"
+}

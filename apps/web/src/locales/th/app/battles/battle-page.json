@@ -1,0 +1,23 @@
+{
+  "meta-title": "รีเพลย์ World of Tanks: รถถัง {tank} โดย {nickname} บนแผนที่ {map}",
+  "meta-title-battle": "รีเพลย์การรบ World of Tanks: {map}, {mode}, {date}",
+  "meta-description": {
+    "win": "{nickname} ชนะบนแผนที่ {map} ด้วยรถถัง {tank} ({mode}, {date}): ความเสียหาย {damage}, สังหาร {kills} คัน, ประสบการณ์ {xp}",
+    "loss": "{nickname} แพ้บนแผนที่ {map} ด้วยรถถัง {tank} ({mode}, {date}): ความเสียหาย {damage}, สังหาร {kills} คัน, ประสบการณ์ {xp}",
+    "draw": "{nickname} เสมอบนแผนที่ {map} ด้วยรถถัง {tank} ({mode}, {date}): ความเสียหาย {damage}, สังหาร {kills} คัน, ประสบการณ์ {xp}",
+    "unknown": "{nickname} บนแผนที่ {map} ด้วยรถถัง {tank} ({mode}, {date}): ความเสียหาย {damage}, สังหาร {kills} คัน, ประสบการณ์ {xp}"
+  },
+  "meta-description-battle": "{mode} บนแผนที่ {map}, {date}",
+  "mode-unknown": "World of Tanks",
+  "og-title": "รถถัง {tank} บนแผนที่ {map}",
+  "og-subtitle": "{nickname} · ความเสียหาย {damage}",
+  "meta-title-no-replay": "การรบ World of Tanks: รถถัง {tank} โดย {nickname} บนแผนที่ {map}",
+  "meta-description-replay": "ดูรีเพลย์ ทีมทั้งสองฝ่าย และรายงานการรบ พร้อมดาวน์โหลดไฟล์ .wotreplay",
+  "meta-description-no-replay": "ดูทีมทั้งสองฝ่าย สิ่งที่รถถังแต่ละคันทำ และรายงานการรบ",
+  "meta-title-battle-no-replay": "การรบ World of Tanks: {map}, {mode}, {date}",
+  "og-subtitle-battle": "{mode} · {date}",
+  "heading-player": "{nickname} ในรถถัง {tank} บนแผนที่ {map}",
+  "recorded-by": "บันทึกโดย",
+  "also-reported-by": "รายงานเพิ่มเติมโดย",
+  "reported-by": "รายงานโดย"
+}

@@ -1,0 +1,48 @@
+{
+  "result": {
+    "win": "Pobeda",
+    "loss": "Poraz",
+    "draw": "Nerešeno"
+  },
+  "ending": {
+    "extermination": {
+      "win": "Sva neprijateljska возила уништено",
+      "loss": "Sva savezna возила уништено"
+    },
+    "base": {
+      "win": "Neprijateljska baza je zauzeta",
+      "loss": "Naša baza je zauzeta"
+    },
+    "timeout": {
+      "win": "Isteklo vreme",
+      "loss": "Isteklo vreme"
+    }
+  },
+  "destroyed": "Uništeno",
+  "survived": "Preživeo",
+  "performance": "Učinak u bici",
+  "unnamed": "Nepoznati igrač",
+  "mark-label": {
+    "spotted": "Otkriveno",
+    "assisted": "Asistirana šteta",
+    "crits": "Kritični погоци",
+    "damaged": "Naneta šteta",
+    "blocked": "Blokirana šteta",
+    "stunned": "Omamljivanja",
+    "killed": "Uništeno"
+  },
+  "mark-hint": {
+    "spotted": "Otkriveno: oni su otkrili ovog neprijatelja za svoj tim",
+    "assisted": "Asistirana šteta: šteta naneta ovom neprijatelju zahvaljujući njihovom otkrivanju, oštećenju gusenice ili omamljivanju",
+    "crits": "Kritični погоци: oštetili su modul ili člana posade ovog neprijatelja",
+    "damaged": "Naneta šteta ovom neprijatelju",
+    "blocked": "Šteta koju je njihov okлоп blokirao od hitaca ovog neprijatelja",
+    "stunned": "Broj puta kada su omamili ovog neprijatelja",
+    "killed": "Uništili su ovog neprijatelja"
+  },
+  "column": {
+    "player": "Igrač",
+    "vehicle": "Vozilo"
+  },
+  "destroyed-by-label": "Uništio"
+}

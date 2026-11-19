@@ -87,6 +87,10 @@
       "label": "Top spillere",
       "description": "Spillerrangliste gennem hele historikken"
     },
+    "battles": {
+      "label": "Kampe",
+      "description": "Kampe og replays delt af spillere"
+    },
     "players-rampage": {
       "description": "Hvem der blev rangeret højest i Raseri."
     }

@@ -87,6 +87,10 @@
       "label": "Parhaat pelaajat",
       "description": "Pelaajien kaikkien aikojen tulostaulukko"
     },
+    "battles": {
+      "label": "Taisteluita",
+      "description": "Taisteluita ja pelaajien jakamia uusintoja"
+    },
     "players-rampage": {
       "description": "Ketkä saavuttivat korkeimman sijoituksen Teräsmyrskyssä."
     }

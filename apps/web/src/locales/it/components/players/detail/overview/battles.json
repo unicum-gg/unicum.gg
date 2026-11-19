@@ -82,7 +82,7 @@
   "report": {
     "statistics": "Statistiche",
     "time": "Tempo",
-    "earned": "Guadagnati",
+    "earned": "Guadagnati con un account standard",
     "shots": "Colpi sparati",
     "hits-pens": "Colpi a segno / perforazioni",
     "splash": "Danno ad area",
@@ -135,11 +135,11 @@
     "mark-movement": "Questa battaglia"
   },
   "tab": {
+    "personal": "Punteggio personale",
     "teams": "Punteggio della Squadra",
     "report": "Report dettagliato",
     "replay": "Replay"
   },
-  "destroyed-list": "Ha distrutti {names}",
   "replay": {
     "no-bounds": "Questa arena non ha un’estensione nel catalogo, quindi il lettore non può collocare le posizioni sulla sua minimappa.",
     "play": "Gioca",
@@ -154,7 +154,63 @@
     "deaths-none": "Nessuno è stato distrutto in questa battaglia.",
     "deaths-yet": "Sono tutti ancora attivi.",
     "deaths-unknown": "un veicolo",
-    "deaths-destroyed": "Distrutto"
+    "deaths-destroyed": "Distrutto",
+    "restart": "Gioca dall’inizio",
+    "spotted": "In vista",
+    "unspotted": "Fuori vista",
+    "observed": "Avvistati dal nemico",
+    "estimated": "posizione stimata, fuori dall’intervallo della registrazione",
+    "speed": "Velocità di riproduzione",
+    "hud": {
+      "hp": "Punti colpi",
+      "speed": "Velocità",
+      "kmh": "{speed} km/h",
+      "damage": "Danno",
+      "damage-hint": "Finora. Per chi ha effettuato la registrazione, dal proprio feed di battaglia, che non include i colpi sui bersagli che non poteva vedere. Per chiunque altro, dai colpi rilevati dalla registrazione, che possono essere molto inferiori ai risultati.",
+      "assisted": "Assistenza",
+      "blocked": "Bloccato",
+      "final-hint": "Il dato finale della battaglia, ricavato dai risultati.",
+      "modules": "Moduli ed equipaggio",
+      "seen-at": "come li ha visti per l’ultima volta il comandante che ha effettuato la registrazione, alle {time}",
+      "state": {
+        "damaged": "Danneggiato",
+        "destroyed": "Distrutto",
+        "injured": "Ferito"
+      },
+      "part": {
+        "engine": "Motore",
+        "ammoBay": "Stiva delle munizioni",
+        "fuelTank": "Serbatoio del carburante",
+        "radio": "Radio",
+        "leftTrack": "Cingolo sinistro",
+        "rightTrack": "Cingolo destro",
+        "gun": "Cannone",
+        "turretRotator": "Anello della torretta",
+        "surveyingDevice": "Visione",
+        "commander": "Comandante",
+        "driver": "Pilota",
+        "radioman": "Operatore radio",
+        "gunner": "Cannoniere",
+        "loader": "Servente",
+        "track": "Cingolo"
+      }
+    },
+    "tab": {
+      "chat": "Chat",
+      "log": "Registro dei danni"
+    },
+    "log": {
+      "empty": "Niente inflitto o subito finora.",
+      "kind": {
+        "dealt": "Danno inflitto",
+        "received": "Danni ricevuti",
+        "blocked": "Bloccato dalla corazza",
+        "assist": "Danno assistito",
+        "crit": "Colpi critici inflitti",
+        "received-crit": "Colpi critici ricevuti",
+        "module": "Colpo al modulo"
+      }
+    }
   },
   "lineup": {
     "more": "+{count}",
@@ -162,5 +218,18 @@
     "heading": "Veicoli in questa battaglia",
     "kills": "Distrutto",
     "time": "Tempo"
-  }
+  },
+  "earnings": {
+    "title": "Guadagni",
+    "standard": "Account Standard",
+    "with-bonuses": "Con i tuoi bonus",
+    "credits": "Crediti",
+    "costs": "Riparazioni e rifornimenti",
+    "net": "Crediti netti",
+    "xp": "Esperienza"
+  },
+  "destroyed-by-label": "Distrutto da",
+  "destroyed-list-label": "Ha distrutto",
+  "replay-views": "{count} visualizzazioni",
+  "replay-downloads": "{count} download"
 }

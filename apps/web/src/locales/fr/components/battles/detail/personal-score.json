@@ -1,0 +1,48 @@
+{
+  "result": {
+    "win": "Victoire",
+    "loss": "Défaite",
+    "draw": "Égalité"
+  },
+  "ending": {
+    "extermination": {
+      "win": "Tous les véhicules ennemis détruits",
+      "loss": "Tous les véhicules alliés détruits"
+    },
+    "base": {
+      "win": "Base ennemie capturée",
+      "loss": "Notre base a été capturée"
+    },
+    "timeout": {
+      "win": "Temps écoulé",
+      "loss": "Temps écoulé"
+    }
+  },
+  "destroyed": "Détruits",
+  "survived": "Survécu",
+  "performance": "Performance en bataille",
+  "unnamed": "Joueur inconnu",
+  "mark-label": {
+    "spotted": "Repérés",
+    "assisted": "Dégâts d’assistance",
+    "crits": "Coups critiques",
+    "damaged": "Dégâts infligés",
+    "blocked": "Dégâts bloqués",
+    "stunned": "Étourdissements",
+    "killed": "Détruits"
+  },
+  "mark-hint": {
+    "spotted": "Repérés : ils ont signalé cet ennemi à leur équipe",
+    "assisted": "Dégâts d’assistance : dégâts infligés à cet ennemi grâce à leur détection, à leurs chenilles ou à leur étourdissement",
+    "crits": "Coups critiques : ils ont endommagé un module ou un membre d’équipage de cet ennemi",
+    "damaged": "Dégâts infligés à cet ennemi",
+    "blocked": "Dégâts bloqués par leur blindage lors des tirs de cet ennemi",
+    "stunned": "Nombre de fois où ils ont étourdi cet ennemi",
+    "killed": "Ils ont détruit cet ennemi"
+  },
+  "column": {
+    "player": "Joueur",
+    "vehicle": "Char"
+  },
+  "destroyed-by-label": "Détruit par"
+}

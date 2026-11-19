@@ -1,0 +1,19 @@
+{
+  "title": "Mga komento",
+  "title-count": "Mga komento ({count})",
+  "empty": "Wala pang komento. Ano ang masasabi mo tungkol sa labanan na ito?",
+  "in-battle": "Nilaro ang labanang ito",
+  "pending": "Naghihintay ng moderation, ikaw lamang ang makakakita nito",
+  "rejected": "Hindi na-publish",
+  "delete": "Tanggalin",
+  "log-in": "Mag-log in para magkomento",
+  "placeholder": "Magsabi ng tungkol sa labanang ito…",
+  "moderated": "Binabasa ng moderator ang mga komento bago ma-publish ang mga ito.",
+  "send": "I-post ang komento",
+  "sending": "Nagpo-post…",
+  "error": {
+    "rate-limited": "Marami kang nai-post na komento sa nakaraang oras. Subukan muli pagkalipas ng kaunti.",
+    "unauthenticated": "Nag-expire na ang iyong sesyon. Mag-log in muli.",
+    "unknown": "May nangyaring mali. Subukan muli pagkalipas ng ilang sandali."
+  }
+}

@@ -10,6 +10,13 @@
   "rating-scale": {
     "title": "Scarǎ de evaluare"
   },
+  "replays": {
+    "title": "Reluări",
+    "heading": "Urmărește din nou bătăliile tale",
+    "description": "Fiecare bătălie pe care jucătorii o distribuie vine cu raportul său complet, ce tanc avea echipat și o reluare pe care o poți urmări în browser. Instalează mod-ul nostru pentru a o distribui pe a ta la încheierea fiecărei bătălii.",
+    "browse": "Răsfoiește reluările",
+    "mod": "Descarcă mod-ul"
+  },
   "community": {
     "title": "Alătură-te comunității",
     "heading": "Conectează-te cu jucătorii WoT",

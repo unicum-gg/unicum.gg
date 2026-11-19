@@ -1,0 +1,23 @@
+{
+  "meta-title": "Záznam bitvy ve World of Tanks s tankem {tank}, který hrál hráč {nickname}, na mapě {map}",
+  "meta-title-battle": "{map}, {mode}, {date}: záznam bitvy ve World of Tanks",
+  "meta-description": {
+    "win": "Hráč {nickname} zvítězil na mapě {map} s tankem {tank} ({mode}, {date}): {damage} poškození, {kills} zničení, {xp} zkušeností.",
+    "loss": "Hráč {nickname} byl poražen na mapě {map} s tankem {tank} ({mode}, {date}): {damage} poškození, {kills} zničení, {xp} zkušeností.",
+    "draw": "Hráč {nickname} remizoval na mapě {map} s tankem {tank} ({mode}, {date}): {damage} poškození, {kills} zničení, {xp} zkušeností.",
+    "unknown": "Hráč {nickname} na mapě {map} s tankem {tank} ({mode}, {date}): {damage} poškození, {kills} zničení, {xp} zkušeností."
+  },
+  "meta-description-battle": "{mode} na mapě {map}, {date}.",
+  "mode-unknown": "World of Tanks",
+  "og-title": "Tank {tank} na mapě {map}",
+  "og-subtitle": "{nickname} · {damage} poškození",
+  "meta-title-no-replay": "Záznam bitvy ve World of Tanks s tankem {tank}, který hrál hráč {nickname}, na mapě {map}",
+  "meta-description-replay": "Sledujte záznam, oba týmy a hlášení bitvy a stáhněte si soubor .wotreplay.",
+  "meta-description-no-replay": "Prohlédněte si oba týmy, co každý tank dělal, a hlášení bitvy.",
+  "meta-title-battle-no-replay": "{map}, {mode}, {date}: bitva ve World of Tanks",
+  "og-subtitle-battle": "{mode} · {date}",
+  "heading-player": "Hráč {nickname} s tankem {tank} na mapě {map}",
+  "recorded-by": "Zaznamenal",
+  "also-reported-by": "Také nahlásil",
+  "reported-by": "Nahlásil"
+}

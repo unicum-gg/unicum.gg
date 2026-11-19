@@ -1,0 +1,16 @@
+{
+  "meta-title": "World of Tanks-kampe og replays ({region})",
+  "meta-description": "World of Tanks-replays fra {region}, delt af spillere: hver kamp med sin fulde rapport, den monterede opsætning og et replay, du kan se i din browser. Filtrer efter kampvogn, kort og spiltilstand, og rangér efter skade, assistance, erfaring eller drab.",
+  "og-title": "Kampe og replays",
+  "og-subtitle": "World of Tanks-replays fra {region}",
+  "title": "World of Tanks {battles} og replays",
+  "title-battles": "kampe",
+  "intro": "Hver kamp, spillerne har delt, med sin fulde rapport, hvad hver kampvogn havde monteret og et replay, du kan se lige her. Rangér dem efter skade eller erfaring, eller begræns dem til en kampvogn, et kort eller en spiltilstand.",
+  "about-title": "Om disse replays",
+  "about-sources": "Hver kamp her kommer med sin .wotreplay-fil: enten delte en spiller med det kørende unicum.gg-mod den automatisk, eller også uploadede spilleren den på denne side. Kun kampe, der er spillet til ende, kan deles, og kun af en konto, der var med i dem.",
+  "about-page": "Når du åbner en kamp, vises begge hold, den detaljerede kamprapport og et replay på kortet, med alle kampvognenes bevægelser, skuddene der ødelagde dem, og chatten. Intet skal installeres, og ingen spilklientversion skal matche, replayet afspilles i browseren.",
+  "about-share": "Hvis du vil tilføje dine egne kampe, skal du uploade et replay fra replaymappen i dit spil eller installere {mod}, så de deles, mens du spiller.",
+  "about-share-mod": "unicum.gg-mod",
+  "upload-mod": "Vil du hellere have hver kamp uploadet automatisk? {mod} sender dem, når de slutter.",
+  "upload-mod-link": "Vores mod"
+}

@@ -10,6 +10,13 @@
   "rating-scale": {
     "title": "Arvosteluasteikko"
   },
+  "replays": {
+    "title": "Uusinnat",
+    "heading": "Katso taistelusi uudelleen",
+    "description": "Jokaisen pelaajien jakaman taistelun mukana tulee täysi raportti, tiedot kunkin panssarivaunun asennetuista varusteista ja uusinta, jonka voit katsoa selaimessa. Asenna modimme ja jaa omasi jokaisen taistelun päättyessä.",
+    "browse": "Selaa uusintoja",
+    "mod": "Lataa modi"
+  },
   "community": {
     "title": "Liity yhteisöön",
     "heading": "Yhdistä WoT-pelaajien kanssa",

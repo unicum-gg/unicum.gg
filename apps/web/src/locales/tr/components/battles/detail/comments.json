@@ -1,0 +1,19 @@
+{
+  "title": "Yorumlar",
+  "title-count": "Yorumlar ({count})",
+  "empty": "Henüz yorum yok. Bu savaş hakkında ne düşünüyorsunuz?",
+  "in-battle": "Bu savaşta oynanan",
+  "pending": "Moderasyon bekleniyor, bunu yalnızca siz görebilirsiniz",
+  "rejected": "Yayınlanmadı",
+  "delete": "Sil",
+  "log-in": "Yorum yapmak için Giriş yap",
+  "placeholder": "Bu savaş hakkında bir şey söyleyin…",
+  "moderated": "Yorumlar yayınlanmadan önce bir moderatör tarafından okunur.",
+  "send": "Yorum gönder",
+  "sending": "Gönderiliyor…",
+  "error": {
+    "rate-limited": "Son bir saatte çok sayıda yorum gönderdiniz. Biraz daha sonra tekrar deneyin.",
+    "unauthenticated": "Oturumunuzun süresi doldu. Tekrar Giriş yapın.",
+    "unknown": "Bir şeyler ters gitti. Birazdan tekrar deneyin."
+  }
+}

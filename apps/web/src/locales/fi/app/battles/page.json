@@ -1,0 +1,16 @@
+{
+  "meta-title": "World of Tanks -taistelut ja uusinnat ({region})",
+  "meta-description": "Pelaajien jakamat World of Tanks -uusinnat alueelta {region}: jokainen taistelu täyden raportin, asennetun varustuksen ja selaimessa katsottavan uusinnan kera. Suodata panssarivaunun, kartan ja pelimuodon mukaan, tai järjestä vahingon, avustuksen, kokemuspisteiden tai tuhojen perusteella.",
+  "og-title": "Taistelut ja uusinnat",
+  "og-subtitle": "World of Tanks -uusinnat alueelta {region}",
+  "title": "World of Tanks -{battles} ja uusinnat",
+  "title-battles": "taistelut",
+  "intro": "Kaikki pelaajien jakamat taistelut, joissa on täysi raportti, tiedot jokaisen panssarivaunun asennetusta varustuksesta sekä uusinta, jonka voit katsoa suoraan täällä. Järjestä ne vahingon tai kokemuspisteiden perusteella, tai rajaa ne panssarivaunuun, karttaan tai pelimuotoon.",
+  "about-title": "Tietoja näistä uusinnasta",
+  "about-sources": "Jokaisen taistelun mukana tulee sen .wotreplay-tiedosto: joko unicum.gg-modia käyttävä pelaaja jakoi sen automaattisesti tai se ladattiin tälle sivulle. Vain loppuun pelatut taistelut voidaan jakaa, ja vain niillä olleella tilillä.",
+  "about-page": "Taistelun avaaminen näyttää molemmat joukkueet, yksityiskohtaisen taisteluraportin ja kartalla olevan uusinnan, jossa näkyvät jokaisen panssarivaunun liikkeet, ne tuhonneet laukaukset ja chat. Mitään ei tarvitse asentaa eikä pelin asiakasohjelman versiota sovittaa yhteen, sillä uusinta pelataan selaimessa.",
+  "about-share": "Lisää omat taistelusi lataamalla uusinta pelisi uusinnat-kansiosta tai asentamalla {mod}, jotta ne jaetaan pelatessasi.",
+  "about-share-mod": "unicum.gg-modi",
+  "upload-mod": "Haluaisitko mieluummin, että jokainen taistelu ladataan automaattisesti? {mod} lähettää ne niiden päättyessä.",
+  "upload-mod-link": "Modimme"
+}

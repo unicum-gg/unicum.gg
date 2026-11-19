@@ -9,6 +9,7 @@
     "clan_wars": "Кланавыя войны",
     "waffentrager": "Waffenträger",
     "last_stand": "Апошні рубеж",
+    "black_signal": "Чорны знак",
     "arcade": "Аркада",
     "story_mode": "Сюжэтны рэжым",
     "training": "Трэніроўка"
@@ -106,7 +107,7 @@
   },
   "battle-results": {
     "victory": "Перамога",
-    "defeat": "Паражэнне",
+    "defeat": "Параза",
     "draw": "Нічыя"
   },
   "spawn-directions": {

@@ -1,0 +1,23 @@
+{
+  "trigger": "Tải lên một bản phát lại",
+  "title": "Tải lên một bản phát lại",
+  "description": "Thêm một trong các trận đấu của bạn từ tệp .wotreplay, không cần mod. Tệp sẽ có trang riêng cùng bản phát lại, sẵn sàng để chia sẻ.",
+  "drop": "Thả tệp .wotreplay vào đây hoặc nhấp để chọn một tệp",
+  "hint": "Chỉ các bản phát lại của bạn, từ một trận đấu đã chơi đến khi kết thúc. Chúng nằm trong thư mục bản phát lại của thư mục trò chơi.",
+  "send": "Tải lên",
+  "sending": "Đang tải lên…",
+  "error": {
+    "not_collected": "Hiện không thể tải bản phát lại lên.",
+    "archive_full": "Kho lưu trữ bản phát lại của chúng tôi hiện đã đầy. Hãy thử lại sau.",
+    "not_a_replay": "Tệp đó không phải là bản phát lại World of Tanks mà chúng tôi có thể đọc.",
+    "unfinished": "Bản phát lại đó đã được lưu trước khi trận đấu kết thúc nên không có kết quả.",
+    "not_yours": "Bản phát lại đó được ghi bởi một tài khoản khác. Bạn chỉ có thể tải lên bản phát lại của mình.",
+    "wrong_region": "Trận đấu đó đã được chơi ở một khu vực khác với tài khoản bạn đang đăng nhập.",
+    "too_old": "Trận đấu đó cũ hơn các trận đấu chúng tôi giữ lại.",
+    "malformed": "Chúng tôi không thể đọc kết quả trong bản phát lại đó.",
+    "too_large": "Tệp đó lớn hơn mọi bản phát lại chúng tôi chấp nhận (9 MB).",
+    "too_many_uploads": "Bạn đã tải lên rất nhiều tệp trong giờ qua. Hãy thử lại sau một chút.",
+    "unauthenticated": "Phiên của bạn đã hết hạn. Đăng nhập lại.",
+    "unknown": "Đã xảy ra sự cố. Hãy thử lại sau một lát."
+  }
+}

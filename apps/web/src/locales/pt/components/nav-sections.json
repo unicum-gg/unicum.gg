@@ -87,6 +87,10 @@
       "label": "Top jogadores",
       "description": "Classificação histórica de jogadores"
     },
+    "battles": {
+      "label": "Batalhas",
+      "description": "Batalhas e replays compartilhados por jogadores"
+    },
     "players-rampage": {
       "description": "Quem alcançou a melhor posição em Fúria."
     }

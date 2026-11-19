@@ -87,6 +87,10 @@
       "label": "トッププレイヤー",
       "description": "全期間のプレイヤーランキング"
     },
+    "battles": {
+      "label": "戦闘数",
+      "description": "プレイヤーが共有した戦闘とリプレイ"
+    },
     "players-rampage": {
       "description": "乱戦で最も高い順位のプレイヤー。"
     }

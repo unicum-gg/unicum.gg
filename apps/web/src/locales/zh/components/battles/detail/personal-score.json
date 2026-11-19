@@ -1,0 +1,48 @@
+{
+  "result": {
+    "win": "胜利",
+    "loss": "被击败",
+    "draw": "平局"
+  },
+  "ending": {
+    "extermination": {
+      "win": "所有敌方车辆均已击毁",
+      "loss": "所有我方车辆均已击毁"
+    },
+    "base": {
+      "win": "敌方基地已占领",
+      "loss": "我方基地已被占领"
+    },
+    "timeout": {
+      "win": "时间耗尽",
+      "loss": "时间耗尽"
+    }
+  },
+  "destroyed": "击毁",
+  "survived": "生还",
+  "performance": "战斗表现",
+  "unnamed": "未知玩家",
+  "mark-label": {
+    "spotted": "发现",
+    "assisted": "协助伤害",
+    "crits": "关键命中",
+    "damaged": "造成的伤害",
+    "blocked": "阻挡的伤害",
+    "stunned": "震晕次数",
+    "killed": "击毁"
+  },
+  "mark-hint": {
+    "spotted": "发现：为队伍侦察到该敌人",
+    "assisted": "协助伤害：由于其侦察、破坏履带或震晕，对该敌人造成的伤害",
+    "crits": "关键命中：损伤了该敌人的模块或乘员",
+    "damaged": "对该敌人造成的伤害",
+    "blocked": "装甲阻挡了该敌人炮弹造成的伤害",
+    "stunned": "震晕该敌人的次数",
+    "killed": "已将该敌人击毁"
+  },
+  "column": {
+    "player": "玩家",
+    "vehicle": "坦克"
+  },
+  "destroyed-by-label": "击毁者"
+}

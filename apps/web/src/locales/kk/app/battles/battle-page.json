@@ -1,0 +1,23 @@
+{
+  "meta-title": "{nickname} орындаған {tank} танкі, {map} картасында: World of Tanks реплейі",
+  "meta-title-battle": "{map} картасы, {mode} режимі, {date}: World of Tanks шайқасының реплейі",
+  "meta-description": {
+    "win": "{nickname} ойыншысы {map} картасында {tank} танкімен жеңіске жетті ({mode} режимі, {date}): {damage} зақым, {kills} жою, {xp} тәжірибе.",
+    "loss": "{nickname} ойыншысы {map} картасында {tank} танкімен жеңілді ({mode} режимі, {date}): {damage} зақым, {kills} жою, {xp} тәжірибе.",
+    "draw": "{nickname} ойыншысы {map} картасында {tank} танкімен тең түсті ({mode} режимі, {date}): {damage} зақым, {kills} жою, {xp} тәжірибе.",
+    "unknown": "{nickname} ойыншысы {map} картасында {tank} танкімен ойнады ({mode} режимі, {date}): {damage} зақым, {kills} жою, {xp} тәжірибе."
+  },
+  "meta-description-battle": "{map} картасындағы {mode} режимі, {date}.",
+  "mode-unknown": "World of Tanks",
+  "og-title": "{map} картасындағы {tank} танкі",
+  "og-subtitle": "{nickname} · {damage} зақым",
+  "meta-title-no-replay": "{nickname} орындаған {tank} танкі, {map} картасында: World of Tanks шайқасы",
+  "meta-description-replay": "Реплейді, екі команданы және шайқас есебін көріп, .wotreplay файлын жүктеп алыңыз.",
+  "meta-description-no-replay": "Екі команданы, әр танктің не істегенін және шайқас есебін көріңіз.",
+  "meta-title-battle-no-replay": "{map} картасы, {mode} режимі, {date}: World of Tanks шайқасы",
+  "og-subtitle-battle": "{mode} · {date}",
+  "heading-player": "{nickname} ойыншысы {map} картасында {tank} танкімен",
+  "recorded-by": "Жазған:",
+  "also-reported-by": "Сондай-ақ хабарлаған:",
+  "reported-by": "Хабарлаған:"
+}

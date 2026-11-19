@@ -1,0 +1,48 @@
+{
+  "result": {
+    "win": "Voitto",
+    "loss": "Tappio",
+    "draw": "Tasapeli"
+  },
+  "ending": {
+    "extermination": {
+      "win": "Kaikki vihollisen ajoneuvot tuhottu",
+      "loss": "Kaikki liittolaisten ajoneuvot tuhottu"
+    },
+    "base": {
+      "win": "Vihollisen tukikohta vallattu",
+      "loss": "Tukikohtamme on vallattu"
+    },
+    "timeout": {
+      "win": "Aika loppui",
+      "loss": "Aika loppui"
+    }
+  },
+  "destroyed": "Tuhottu",
+  "survived": "Selviytyi",
+  "performance": "Taistelun suorituskyky",
+  "unnamed": "Tuntematon pelaaja",
+  "mark-label": {
+    "spotted": "Havaittu",
+    "assisted": "Avustettu vahinko",
+    "crits": "Kriittiset osumat",
+    "damaged": "Aiheutettu vahinko",
+    "blocked": "Torjuttu vahinko",
+    "stunned": "Tainnutukset",
+    "killed": "Tuhottu"
+  },
+  "mark-hint": {
+    "spotted": "Havaittu: he havaitsivat tämän vihollisen joukkueelleen",
+    "assisted": "Avustettu vahinko: tälle viholliselle aiheutettu vahinko heidän havaitsemisensa, telan vaurioittamisen tai tainnutuksensa ansiosta",
+    "crits": "Kriittiset osumat: he vahingoittivat tämän vihollisen moduulia tai miehistön jäsentä",
+    "damaged": "Tälle viholliselle aiheutettu vahinko",
+    "blocked": "Vahinko, jonka tämän vihollisen laukaukset osuivat heidän panssariinsa ja jonka panssari torjui",
+    "stunned": "Kuinka monta kertaa he tainnuttivat tämän vihollisen",
+    "killed": "He tuhosivat tämän vihollisen"
+  },
+  "column": {
+    "player": "Pelaaja",
+    "vehicle": "Ajoneuvo"
+  },
+  "destroyed-by-label": "Tuhosi"
+}

@@ -1,0 +1,23 @@
+{
+  "trigger": "Subir una repetición",
+  "title": "Subir una repetición",
+  "description": "Añade una de tus propias batallas desde su archivo .wotreplay, sin necesidad de ningún mod. Tendrá su propia página con la repetición, lista para compartir.",
+  "drop": "Suelta un archivo .wotreplay aquí o haz clic para elegir uno",
+  "hint": "Solo tus propias repeticiones, de una batalla jugada hasta el final. Se encuentran en la carpeta de repeticiones del directorio del juego.",
+  "send": "Subir",
+  "sending": "Subiendo…",
+  "error": {
+    "not_collected": "Las subidas de repeticiones no están disponibles ahora.",
+    "archive_full": "Nuestro almacenamiento de repeticiones está completo por ahora. Inténtalo más tarde.",
+    "not_a_replay": "Ese archivo no es una repetición de World of Tanks que podamos leer.",
+    "unfinished": "Esa repetición se guardó antes de que terminara la batalla, por lo que no tiene resultados.",
+    "not_yours": "Esa repetición fue registrada por otra cuenta. Solo puedes subir las tuyas.",
+    "wrong_region": "Esa batalla se jugó en otra región distinta de la de la cuenta con la que has iniciado sesión.",
+    "too_old": "Esa batalla es más antigua que las que conservamos.",
+    "malformed": "No hemos podido leer los resultados de esa repetición.",
+    "too_large": "Ese archivo es más grande que cualquier repetición que aceptamos, 9 MB.",
+    "too_many_uploads": "Has subido mucho durante la última hora. Inténtalo un poco más tarde.",
+    "unauthenticated": "Tu sesión ha caducado. Inicia sesión de nuevo.",
+    "unknown": "Algo ha salido mal. Inténtalo de nuevo dentro de un momento."
+  }
+}

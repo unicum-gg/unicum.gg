@@ -10,6 +10,13 @@
   "rating-scale": {
     "title": "Escala de calificación"
   },
+  "replays": {
+    "title": "Repeticiones",
+    "heading": "Vuelve a ver tus batallas",
+    "description": "Cada batalla que comparten los jugadores incluye su informe completo, qué llevaba equipado cada tanque y una repetición que puedes ver en el navegador. Instala nuestro mod para compartir las tuyas cuando finalice cada batalla.",
+    "browse": "Explorar repeticiones",
+    "mod": "Descarga el mod"
+  },
   "community": {
     "title": "Únete a la comunidad",
     "heading": "Conecta con jugadores de WoT",

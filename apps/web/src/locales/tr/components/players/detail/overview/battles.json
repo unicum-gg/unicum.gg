@@ -28,8 +28,8 @@
     "damage": "Hasar",
     "assisted": "Destek",
     "blocked": "Engellenen",
-    "kills": "İmha",
-    "spotted": "Tespit",
+    "kills": "Yok edilenler",
+    "spotted": "Tespit edildi",
     "player": "Oyuncu",
     "survived": "Hayatta",
     "xp": "XP",
@@ -76,13 +76,13 @@
   },
   "close": "Kapat",
   "survived-the-battle": "Savaştan sağ çıktı",
-  "destroyed": "İmha edilen",
+  "destroyed": "Yok edildi",
   "destroyed-by": "{nickname} tarafından imha edildi",
   "squad": "Takım {number}",
   "report": {
     "statistics": "İstatistikler",
     "time": "Süre",
-    "earned": "Kazanılan",
+    "earned": "Kazanılanlar (standart hesap)",
     "shots": "Atışlar",
     "hits-pens": "Doğrudan isabetler / delmeler",
     "splash": "Sıçrama hasarı",
@@ -135,11 +135,11 @@
     "mark-movement": "Bu savaş"
   },
   "tab": {
+    "personal": "Kişisel skor",
     "teams": "Ekip skoru",
     "report": "Detaylı Rapor",
     "replay": "Tekrar oynatma"
   },
-  "destroyed-list": "İmha edilenler: {names}",
   "replay": {
     "no-bounds": "Bu arenanın katalogda bir kapsamı yok, bu nedenle konumlar mini haritaya yerleştirilemez.",
     "play": "Oyna",
@@ -154,13 +154,82 @@
     "deaths-none": "Bu savaşta kimse imha edilmedi.",
     "deaths-yet": "Herkes hâlâ hayatta.",
     "deaths-unknown": "bir araç",
-    "deaths-destroyed": "İmha edilen"
+    "deaths-destroyed": "Yok edildi",
+    "restart": "Baştan oyna",
+    "spotted": "Görüş alanında",
+    "unspotted": "Görüş alanı dışında",
+    "observed": "Düşman tarafından tespit edildi",
+    "estimated": "tahmini konum, kaydın menzilinin dışında",
+    "speed": "Oynatma hızı",
+    "hud": {
+      "hp": "Can puanı",
+      "speed": "Hız",
+      "kmh": "{speed} km/sa.",
+      "damage": "Hasar",
+      "damage-hint": "Şu ana kadar. Kayıt sahibi için, kendi savaş akışından, göremedikleri hedeflere isabetleri içermediğinden. Diğer herkes içinse, kaydın duyduğu isabetlerden, sonuçların oldukça altında kalabilir.",
+      "assisted": "Desteklenen",
+      "blocked": "Engellenen",
+      "final-hint": "Sonuçlardan alınan, savaşın nihai sayısı.",
+      "modules": "Parçalar ve mürettebat",
+      "seen-at": "kayıt sahibinin onları son gördüğü hâlleriyle, {time} zamanında",
+      "state": {
+        "damaged": "Hasar almış",
+        "destroyed": "Yok edildi",
+        "injured": "Yaralı"
+      },
+      "part": {
+        "engine": "Motor",
+        "ammoBay": "Mühimmat cephaneliği",
+        "fuelTank": "Yakıt tankı",
+        "radio": "Telsiz",
+        "leftTrack": "Sol palet",
+        "rightTrack": "Sağ palet",
+        "gun": "Top",
+        "turretRotator": "Kule çemberi",
+        "surveyingDevice": "Görüş",
+        "commander": "Komutan",
+        "driver": "Sürücü",
+        "radioman": "Telsiz operatörü",
+        "gunner": "Nişancı",
+        "loader": "Doldurucu",
+        "track": "Palet"
+      }
+    },
+    "tab": {
+      "chat": "Sohbet",
+      "log": "Hasar günlüğü"
+    },
+    "log": {
+      "empty": "Henüz verilen veya alınan hasar yok.",
+      "kind": {
+        "dealt": "Verilen hasar",
+        "received": "Alınan hasar",
+        "blocked": "Zırhla engellenen",
+        "assist": "Destek hasarı",
+        "crit": "Verilen kritik isabetler",
+        "received-crit": "Alınan kritik isabetler",
+        "module": "Modül isabeti"
+      }
+    }
   },
   "lineup": {
     "more": "+{count}",
     "hint": "{count} araçla savaşıldı. Satırdaki değerler tüm savaşa aittir.",
     "heading": "Bu savaştaki araçlar",
-    "kills": "İmha edilen",
+    "kills": "Yok edildi",
     "time": "Süre"
-  }
+  },
+  "earnings": {
+    "title": "Kazançlar",
+    "standard": "Standart Hesap",
+    "with-bonuses": "Bonuslarınızla",
+    "credits": "Kredi",
+    "costs": "Tamir ve ikmal",
+    "net": "Net kredi",
+    "xp": "Deneyim"
+  },
+  "destroyed-by-label": "Yok eden",
+  "destroyed-list-label": "İmha ettikleri",
+  "replay-views": "{count} görüntüleme",
+  "replay-downloads": "{count} indirme"
 }

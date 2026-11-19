@@ -1,0 +1,23 @@
+{
+  "trigger": "Télécharger un replay",
+  "title": "Télécharger un replay",
+  "description": "Ajoutez l’une de vos propres batailles depuis son fichier .wotreplay, sans mod nécessaire. Elle obtient sa propre page avec son replay, prête à être partagée.",
+  "drop": "Déposez un fichier .wotreplay ici ou cliquez pour en choisir un",
+  "hint": "Uniquement vos propres replays, issus d’une bataille jouée jusqu’à la fin. Ils se trouvent dans le dossier des replays de votre répertoire de jeu.",
+  "send": "Télécharger",
+  "sending": "Téléchargement…",
+  "error": {
+    "not_collected": "Le téléchargement de replays n’est pas disponible pour le moment.",
+    "archive_full": "Notre espace de stockage des replays est actuellement plein. Réessayez plus tard.",
+    "not_a_replay": "Ce fichier n’est pas un replay de World of Tanks que nous pouvons lire.",
+    "unfinished": "Ce replay a été enregistré avant la fin de la bataille, il ne contient donc aucun résultat.",
+    "not_yours": "Ce replay a été enregistré par un autre compte. Vous pouvez uniquement télécharger les vôtres.",
+    "wrong_region": "Cette bataille a été jouée dans une autre région que celle du compte avec lequel vous êtes connecté.",
+    "too_old": "Cette bataille est plus ancienne que celles que nous gardons.",
+    "malformed": "Nous n’avons pas pu lire les résultats de ce replay.",
+    "too_large": "Ce fichier est plus volumineux que tous les replays que nous acceptons, 9 Mo.",
+    "too_many_uploads": "Vous avez beaucoup téléchargé au cours de la dernière heure. Réessayez un peu plus tard.",
+    "unauthenticated": "Votre session a expiré. Connectez-vous à nouveau.",
+    "unknown": "Quelque chose s’est mal passé. Réessayez dans un moment."
+  }
+}

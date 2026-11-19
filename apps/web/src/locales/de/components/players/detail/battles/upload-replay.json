@@ -1,0 +1,23 @@
+{
+  "trigger": "Replay hochladen",
+  "title": "Replay hochladen",
+  "description": "Füge eines deiner eigenen Gefechte aus der zugehörigen .wotreplay-Datei hinzu, kein Mod erforderlich. Es erhält eine eigene Seite mit seinem Replay, die zum Teilen bereit ist.",
+  "drop": "Ziehe eine .wotreplay-Datei hierher oder klicke, um eine auszuwählen",
+  "hint": "Nur deine eigenen Replays aus einem bis zum Ende gespielten Gefecht. Du findest sie im Replays-Ordner deines Spielverzeichnisses.",
+  "send": "Hochladen",
+  "sending": "Wird hochgeladen …",
+  "error": {
+    "not_collected": "Das Hochladen von Replays ist derzeit nicht verfügbar.",
+    "archive_full": "Unser Replay-Speicher ist derzeit vollständig belegt. Versuche es später erneut.",
+    "not_a_replay": "Diese Datei ist kein lesbares World of Tanks-Replay.",
+    "unfinished": "Dieses Replay wurde gespeichert, bevor das Gefecht beendet war, und enthält daher keine Ergebnisse.",
+    "not_yours": "Dieses Replay wurde von einem weiteren Konto aufgezeichnet. Du kannst nur deine eigenen hochladen.",
+    "wrong_region": "Dieses Gefecht wurde in einer anderen Region gespielt als der deines angemeldeten Kontos.",
+    "too_old": "Dieses Gefecht ist älter als die Gefechte, die wir behalten.",
+    "malformed": "Wir konnten die Ergebnisse in diesem Replay nicht lesen.",
+    "too_large": "Diese Datei ist größer als jedes Replay, das wir annehmen, 9 MB.",
+    "too_many_uploads": "Du hast in der letzten Stunde sehr viele Dateien hochgeladen. Versuche es etwas später erneut.",
+    "unauthenticated": "Deine Session ist abgelaufen. Melde dich erneut an.",
+    "unknown": "Etwas ist schiefgelaufen. Versuche es gleich noch einmal."
+  }
+}

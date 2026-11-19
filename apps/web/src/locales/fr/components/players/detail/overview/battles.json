@@ -28,8 +28,8 @@
     "damage": "Dégâts",
     "assisted": "Assistance",
     "blocked": "Bloqués",
-    "kills": "Éliminations",
-    "spotted": "Détecté",
+    "kills": "Destructions",
+    "spotted": "Repérés",
     "player": "Joueur",
     "survived": "En vie",
     "xp": "XP",
@@ -82,7 +82,7 @@
   "report": {
     "statistics": "Statistiques",
     "time": "Temps",
-    "earned": "Gagné",
+    "earned": "Gagné, compte standard",
     "shots": "Tirs tirés",
     "hits-pens": "Touches directes / pénétrations",
     "splash": "Dégâts de zone",
@@ -135,11 +135,11 @@
     "mark-movement": "Cette bataille"
   },
   "tab": {
+    "personal": "Score personnel",
     "teams": "Score de l’équipe",
     "report": "Rapport détaillé",
     "replay": "Replay"
   },
-  "destroyed-list": "A détruit {names}",
   "replay": {
     "no-bounds": "Cette arène n’a pas d’étendue dans le catalogue, les positions ne peuvent donc pas être placées sur sa minicarte.",
     "play": "Jouer",
@@ -154,7 +154,63 @@
     "deaths-none": "Personne n’a été détruit dans cette bataille.",
     "deaths-yet": "Tout le monde est encore actif.",
     "deaths-unknown": "un véhicule",
-    "deaths-destroyed": "Détruits"
+    "deaths-destroyed": "Détruits",
+    "restart": "Jouer depuis le début",
+    "spotted": "En vue",
+    "unspotted": "Hors de vue",
+    "observed": "Repéré par l’ennemi",
+    "estimated": "position estimée, hors de la portée de l’enregistrement",
+    "speed": "Vitesse de lecture",
+    "hud": {
+      "hp": "Points de structure",
+      "speed": "Vitesse",
+      "kmh": "{speed} km/h",
+      "damage": "Dégâts",
+      "damage-hint": "Jusqu’à présent. Pour l’enregistrement, d’après leur propre flux de bataille, qui exclut les touches sur les cibles qu’ils ne pouvaient pas voir. Pour tout autre utilisateur, d’après les touches entendues par l’enregistrement, qui peuvent être bien inférieures aux résultats.",
+      "assisted": "Assistance",
+      "blocked": "Bloqués",
+      "final-hint": "Le chiffre final de la bataille, issu des résultats.",
+      "modules": "Éléments et équipage",
+      "seen-at": "tels que le commandant de l’enregistreur les a vus pour la dernière fois, à {time}",
+      "state": {
+        "damaged": "Endommagé",
+        "destroyed": "Détruits",
+        "injured": "Blessé"
+      },
+      "part": {
+        "engine": "Moteur",
+        "ammoBay": "Râtelier de munitions",
+        "fuelTank": "Réservoir de carburant",
+        "radio": "Radio",
+        "leftTrack": "Chenille gauche",
+        "rightTrack": "Chenille droite",
+        "gun": "Canon",
+        "turretRotator": "Couronne de tourelle",
+        "surveyingDevice": "Vision",
+        "commander": "Commandant",
+        "driver": "Pilote",
+        "radioman": "Opérateur radio",
+        "gunner": "Tireur",
+        "loader": "Chargeur",
+        "track": "chenille"
+      }
+    },
+    "tab": {
+      "chat": "chat",
+      "log": "Journal des dégâts"
+    },
+    "log": {
+      "empty": "Rien n’a encore été infligé ou pris.",
+      "kind": {
+        "dealt": "Dégâts infligés",
+        "received": "Dégâts reçus",
+        "blocked": "Bloqué par le blindage",
+        "assist": "Dégâts d’assistance",
+        "crit": "Coups critiques infligés",
+        "received-crit": "Coups critiques reçus",
+        "module": "Module touché"
+      }
+    }
   },
   "lineup": {
     "more": "+{count}",
@@ -162,5 +218,18 @@
     "heading": "Véhicules dans cette bataille",
     "kills": "Détruits",
     "time": "Temps"
-  }
+  },
+  "earnings": {
+    "title": "Gains",
+    "standard": "Compte Standard",
+    "with-bonuses": "Avec vos bonus",
+    "credits": "Crédits",
+    "costs": "Réparations et consommables",
+    "net": "Crédits nets",
+    "xp": "Expérience"
+  },
+  "destroyed-by-label": "Détruit par",
+  "destroyed-list-label": "A détruit",
+  "replay-views": "{count} affichages",
+  "replay-downloads": "{count} téléchargements"
 }

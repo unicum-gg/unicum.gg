@@ -1,0 +1,17 @@
+{
+  "title": "リプレイ付き戦闘数（{count}）",
+  "empty": "この地域ではまだリプレイが共有されていません。",
+  "empty-filtered": "これらのフィルターに一致する戦闘はありません。",
+  "sort": {
+    "damage": "ダメージ",
+    "assist": "アシスト",
+    "xp": "EXP",
+    "kills": "撃破数",
+    "views": "表示数の多い順",
+    "downloads": "ダウンロード数の多い順",
+    "recent": "最新"
+  },
+  "version-current": "更新 {version}（現在）",
+  "version": "更新 {version}",
+  "version-all": "すべての更新"
+}

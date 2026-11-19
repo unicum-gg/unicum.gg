@@ -1,0 +1,6 @@
+{
+  "download": "Scarica il replay",
+  "version": "Riproducibile con la versione {version}",
+  "views": "Visualizzazioni: {value}",
+  "downloads": "Download: {value}"
+}

@@ -1,0 +1,23 @@
+{
+  "meta-title": "{tank} tankkal, {nickname} játékossal, {map} pályán: World of Tanks-visszajátszás",
+  "meta-title-battle": "{map} pálya, {mode}, {date}: World of Tanks csata-visszajátszás",
+  "meta-description": {
+    "win": "{nickname} játékos győzelmet aratott {map} pályán, {tank} tankkal ({mode}, {date}): {damage} sebzés, {kills} megsemmisítés, {xp} tapasztalat.",
+    "loss": "{nickname} játékos vereséget szenvedett {map} pályán, {tank} tankkal ({mode}, {date}): {damage} sebzés, {kills} megsemmisítés, {xp} tapasztalat.",
+    "draw": "{nickname} játékos döntetlent játszott {map} pályán, {tank} tankkal ({mode}, {date}): {damage} sebzés, {kills} megsemmisítés, {xp} tapasztalat.",
+    "unknown": "{nickname} játékos {map} pályán, {tank} tankkal ({mode}, {date}): {damage} sebzés, {kills} megsemmisítés, {xp} tapasztalat."
+  },
+  "meta-description-battle": "{mode}, {map} pálya, {date}.",
+  "mode-unknown": "World of Tanks",
+  "og-title": "{tank} tank, {map} pálya",
+  "og-subtitle": "{nickname} · {damage} sebzés",
+  "meta-title-no-replay": "{tank} tankkal, {nickname} játékossal, {map} pályán: World of Tanks csata",
+  "meta-description-replay": "Tekintsd meg a visszajátszást, mindkét csapatot és a csatajelentést, valamint töltsd le a .wotreplay fájlt.",
+  "meta-description-no-replay": "Tekintsd meg mindkét csapatot, hogy mit csináltak az egyes tankok, valamint a csatajelentést.",
+  "meta-title-battle-no-replay": "{map} pálya, {mode}, {date}: World of Tanks csata",
+  "og-subtitle-battle": "{mode} · {date}",
+  "heading-player": "{nickname} játékos {tank} tankkal, {map} pályán",
+  "recorded-by": "Rögzítette",
+  "also-reported-by": "Szintén bejelentette",
+  "reported-by": "Bejelentette"
+}

@@ -28,8 +28,8 @@
     "damage": "Pinsala",
     "assisted": "May tulong",
     "blocked": "Naharang",
-    "kills": "Mga pagpatay",
-    "spotted": "Nakita",
+    "kills": "Mga napatay",
+    "spotted": "Namataan",
     "player": "Manlalaro",
     "survived": "Buhay",
     "xp": "XP",
@@ -82,7 +82,7 @@
   "report": {
     "statistics": "Estadistika",
     "time": "Oras",
-    "earned": "Nakuha",
+    "earned": "Nakuha (karaniwang account)",
     "shots": "Mga pagpapaputok",
     "hits-pens": "Mga direktang tama / pagtagos",
     "splash": "Pinsala mula sa pagsabog",
@@ -135,11 +135,11 @@
     "mark-movement": "Labanang ito"
   },
   "tab": {
+    "personal": "Personal na score",
     "teams": "Score ng koponan",
     "report": "Detalyadong ulat",
     "replay": "Replay"
   },
-  "destroyed-list": "Nawasak na niya ang {names}",
   "replay": {
     "no-bounds": "Walang extent ang arena na ito sa katalogo, kaya hindi maaari na mailagay ang mga posisyon sa minimapa nito.",
     "play": "Maglaro",
@@ -154,13 +154,82 @@
     "deaths-none": "Walang sinuman ang nawasak sa labanang ito.",
     "deaths-yet": "Buhay pa ang lahat.",
     "deaths-unknown": "isang sasakyan",
-    "deaths-destroyed": "Nawasak"
+    "deaths-destroyed": "Nawasak",
+    "restart": "Maglaro mula sa simula",
+    "spotted": "Nasa paningin",
+    "unspotted": "Wala sa paningin",
+    "observed": "Namataan ng kalaban",
+    "estimated": "tinatayang posisyon, nasa labas ng saklaw ng rekording",
+    "speed": "Bilis ng pag-playback",
+    "hud": {
+      "hp": "Hit points",
+      "speed": "Bilis",
+      "kmh": "{speed} km/h",
+      "damage": "Pinsala",
+      "damage-hint": "Sa ngayon. Para sa nagrekord, mula sa sarili nilang battle feed, na hindi kasama ang mga tama sa mga target na hindi nila nakikita. Para sa iba pa, mula sa mga tama na narinig ng rekording, na maaaring mas mababa nang malaki kaysa sa mga resulta.",
+      "assisted": "May Tulong",
+      "blocked": "Naharang",
+      "final-hint": "Ang huling bilang ng labanan, mula sa mga resulta.",
+      "modules": "Mga module at crew",
+      "seen-at": "gaya ng huling pagkakita ng nagrekord sa kanila, sa {time}",
+      "state": {
+        "damaged": "Napinsala",
+        "destroyed": "Nawasak",
+        "injured": "Nasugatan"
+      },
+      "part": {
+        "engine": "Makina",
+        "ammoBay": "Amunisyon rack",
+        "fuelTank": "Tangke ng gasolina",
+        "radio": "Radyo",
+        "leftTrack": "Kaliwang kadena",
+        "rightTrack": "Kanang kadena",
+        "gun": "Baril",
+        "turretRotator": "Singsing ng Tore",
+        "surveyingDevice": "Bisyon",
+        "commander": "Komandante",
+        "driver": "Drayber",
+        "radioman": "Operator ng radyo",
+        "gunner": "Gunner",
+        "loader": "Loader",
+        "track": "Kadena"
+      }
+    },
+    "tab": {
+      "chat": "Chat",
+      "log": "Talaan ng pinsala"
+    },
+    "log": {
+      "empty": "Wala pang naidulot o natanggap na pinsala.",
+      "kind": {
+        "dealt": "Pinsalang naidulot",
+        "received": "Pinsalang natanggap",
+        "blocked": "Hinarangan ng baluti",
+        "assist": "Pinsalang naitulong",
+        "crit": "Mga kritikal na tama na naidulot",
+        "received-crit": "Mga kritikal na tama na natanggap",
+        "module": "Tama sa module"
+      }
+    }
   },
   "lineup": {
     "more": "+{count}",
     "hint": "Nakipaglaban gamit ang {count} mga sasakyan. Ang mga bilang sa hanay ay para sa buong labanan.",
     "heading": "Mga sasakyan sa labanang ito",
-    "kills": "nawasak",
+    "kills": "Nawasak",
     "time": "Oras"
-  }
+  },
+  "earnings": {
+    "title": "Mga kita",
+    "standard": "Pamantayang account",
+    "with-bonuses": "Kasama ang iyong mga bonus",
+    "credits": "Credits",
+    "costs": "Pagkukumpuni at mga supply",
+    "net": "Netong credits",
+    "xp": "Karanasan"
+  },
+  "destroyed-by-label": "Nawasak ni",
+  "destroyed-list-label": "Nawasak",
+  "replay-views": "{count} pagtingin",
+  "replay-downloads": "{count} download"
 }

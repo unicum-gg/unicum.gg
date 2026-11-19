@@ -87,6 +87,10 @@
       "label": "Geriausi žaidėjai",
       "description": "Viso laiko žaidėjų lyderių lentelė"
     },
+    "battles": {
+      "label": "Mūšiai",
+      "description": "Mūšiai ir bendri žaidėjų pakartojimai"
+    },
     "players-rampage": {
       "description": "Kas užėmė aukščiausią vietą Siautėjime."
     }

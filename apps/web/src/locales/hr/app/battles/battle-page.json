@@ -1,0 +1,23 @@
+{
+  "meta-title": "Snimka bitke World of Tanks: {nickname} igra tenkom {tank} na mapi {map}",
+  "meta-title-battle": "{map}, {mode}, {date}: snimka bitke World of Tanks",
+  "meta-description": {
+    "win": "{nickname} je pobijedio na mapi {map} tenkom {tank} ({mode}, {date}): {damage} štete, {kills} uništenja, {xp} iskustva.",
+    "loss": "{nickname} je izgubio na mapi {map} tenkom {tank} ({mode}, {date}): {damage} štete, {kills} uništenja, {xp} iskustva.",
+    "draw": "{nickname} je odigrao neriješeno na mapi {map} tenkom {tank} ({mode}, {date}): {damage} štete, {kills} uništenja, {xp} iskustva.",
+    "unknown": "{nickname} na mapi {map} tenkom {tank} ({mode}, {date}): {damage} štete, {kills} uništenja, {xp} iskustva."
+  },
+  "meta-description-battle": "{mode} na mapi {map}, {date}.",
+  "mode-unknown": "World of Tanks",
+  "og-title": "{tank} na mapi {map}",
+  "og-subtitle": "{nickname} · {damage} štete",
+  "meta-title-no-replay": "Bitka World of Tanks: {nickname} igra tenkom {tank} na mapi {map}",
+  "meta-description-replay": "Gledaj snimku, oba tima i izvješće o bitci te preuzmi datoteku .wotreplay.",
+  "meta-description-no-replay": "Pogledaj oba tima, što je svaki tenk radio i izvješće o bitci.",
+  "meta-title-battle-no-replay": "{map}, {mode}, {date}: bitka World of Tanks",
+  "og-subtitle-battle": "{mode} · {date}",
+  "heading-player": "{nickname} igra tenkom {tank} na mapi {map}",
+  "recorded-by": "Snimio",
+  "also-reported-by": "Također prijavio",
+  "reported-by": "Prijavio"
+}

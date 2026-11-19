@@ -1,0 +1,23 @@
+{
+  "meta-title": "{tank}, ko vadīja {nickname}, kartē {map}: World of Tanks atkārtojums",
+  "meta-title-battle": "{map}, {mode}, {date}: World of Tanks kaujas atkārtojums",
+  "meta-description": {
+    "win": "{nickname} uzvarēja kartē {map} ar {tank} ({mode}, {date}): {damage} bojājumi, {kills} iznīcinātie, {xp} pieredze.",
+    "loss": "{nickname} zaudēja kartē {map} ar {tank} ({mode}, {date}): {damage} bojājumi, {kills} iznīcinātie, {xp} pieredze.",
+    "draw": "{nickname} spēlēja neizšķirti kartē {map} ar {tank} ({mode}, {date}): {damage} bojājumi, {kills} iznīcinātie, {xp} pieredze.",
+    "unknown": "{nickname} kartē {map} ar {tank} ({mode}, {date}): {damage} bojājumi, {kills} iznīcinātie, {xp} pieredze."
+  },
+  "meta-description-battle": "{mode} kartē {map}, {date}.",
+  "mode-unknown": "World of Tanks",
+  "og-title": "{tank} kartē {map}",
+  "og-subtitle": "{nickname} · {damage} bojājumi",
+  "meta-title-no-replay": "{tank}, ko vadīja {nickname}, kartē {map}: World of Tanks kauja",
+  "meta-description-replay": "Skatīties atkārtojumu, abas komandas un kaujas ziņojumu, kā arī lejupielādēt .wotreplay.",
+  "meta-description-no-replay": "Skatīt abas komandas, katra tanka darbības un kaujas ziņojumu.",
+  "meta-title-battle-no-replay": "{map}, {mode}, {date}: World of Tanks kauja",
+  "og-subtitle-battle": "{mode} · {date}",
+  "heading-player": "{nickname} ar {tank} kartē {map}",
+  "recorded-by": "Ierakstīja",
+  "also-reported-by": "Par to arī ziņoja",
+  "reported-by": "Par to ziņoja"
+}

@@ -1,0 +1,23 @@
+{
+  "trigger": "Prześlij powtórkę",
+  "title": "Prześlij powtórkę",
+  "description": "Dodaj jedną ze swoich bitew z pliku .wotreplay, bez potrzeby używania moda. Otrzyma ona własną stronę z powtórką, gotową do udostępnienia.",
+  "drop": "Upuść plik .wotreplay tutaj lub kliknij, aby wybrać jeden",
+  "hint": "Tylko własne powtórki z bitwy rozegranej do końca. Znajdują się w folderze powtórek w katalogu gry.",
+  "send": "Prześlij",
+  "sending": "Przesyłanie…",
+  "error": {
+    "not_collected": "Przesyłanie powtórek jest teraz niedostępne.",
+    "archive_full": "Nasze miejsce na powtórki jest teraz pełne. Spróbuj ponownie później.",
+    "not_a_replay": "Ten plik nie jest powtórką World of Tanks, którą możemy przeczytać.",
+    "unfinished": "Ta powtórka została zapisana przed zakończeniem bitwy, więc nie ma wyników.",
+    "not_yours": "Ta powtórka została zarejestrowana przez inne konto. Możesz przesyłać tylko własne.",
+    "wrong_region": "Ta bitwa została rozegrana w innym regionie niż region konta, na którym jesteś zalogowany.",
+    "too_old": "Ta bitwa jest starsza niż te, które zachowujemy.",
+    "malformed": "Nie udało się przeczytać wyników z tej powtórki.",
+    "too_large": "Ten plik jest większy niż jakakolwiek powtórka, którą przyjmujemy (9 MB).",
+    "too_many_uploads": "W ciągu ostatniej godziny przesłano dużo plików. Spróbuj ponownie nieco później.",
+    "unauthenticated": "Twoja sesja wygasła. Zaloguj się ponownie.",
+    "unknown": "Coś poszło nie tak. Spróbuj ponownie za moment."
+  }
+}

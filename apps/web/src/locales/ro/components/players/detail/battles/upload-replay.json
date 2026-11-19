@@ -1,0 +1,23 @@
+{
+  "trigger": "Încarcă o reluare",
+  "title": "Încarcă o reluare",
+  "description": "Adaugă una dintre propriile bătălii din fișierul său .wotreplay, fără mod necesar. Primește propria pagină cu reluarea sa, gata de distribuit.",
+  "drop": "Plasează un fișier .wotreplay aici sau fă clic pentru a alege unul",
+  "hint": "Doar propriile reluări, dintr-o bătălie jucată până la capăt. Se află în folderul de reluări din directorul jocului tău.",
+  "send": "Încarcă",
+  "sending": "Se încarcă…",
+  "error": {
+    "not_collected": "Încărcarea reluărilor nu este disponibilă momentan.",
+    "archive_full": "Spațiul nostru de stocare pentru reluări este momentan complet. Încearcă din nou mai târziu.",
+    "not_a_replay": "Fișierul respectiv nu este o reluare World of Tanks pe care o putem citi.",
+    "unfinished": "Reluarea respectivă a fost salvată înainte de încheierea bătăliei, așa că nu are rezultate.",
+    "not_yours": "Reluarea respectivă a fost înregistrată de un alt cont. Poți încărca doar propriile reluări.",
+    "wrong_region": "Bătălia respectivă a fost jucată într-o altă regiune decât cea a contului cu care ești autentificat.",
+    "too_old": "Bătălia respectivă este mai veche decât cele pe care le păstrăm.",
+    "malformed": "Nu am putut citi rezultatele din reluarea respectivă.",
+    "too_large": "Fișierul respectiv este mai mare decât orice reluare pe care o acceptăm (9 MB).",
+    "too_many_uploads": "Ai încărcat multe fișiere în ultima oră. Încearcă din nou puțin mai târziu.",
+    "unauthenticated": "Sesiunea ta a expirat. Autentifică-te din nou.",
+    "unknown": "Ceva nu a funcționat. Încearcă din nou peste un moment."
+  }
+}

@@ -87,6 +87,10 @@
       "label": "शीर्ष खिलाड़ी",
       "description": "अब तक का खिलाड़ी लीडरबोर्ड"
     },
+    "battles": {
+      "label": "युद्ध",
+      "description": "खिलाड़ियों द्वारा साझा किए गए युद्ध और रिप्ले"
+    },
     "players-rampage": {
       "description": "Rampage में सबसे ऊँची रैंक वाले खिलाड़ी।"
     }

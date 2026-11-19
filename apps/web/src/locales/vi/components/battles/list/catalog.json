@@ -1,0 +1,17 @@
+{
+  "title": "Số trận có bản phát lại ({count})",
+  "empty": "Chưa có bản phát lại nào được chia sẻ tại khu vực này.",
+  "empty-filtered": "Không có trận đấu nào phù hợp với các bộ lọc này.",
+  "sort": {
+    "damage": "Sát thương",
+    "assist": "Hỗ trợ",
+    "xp": "Kinh nghiệm",
+    "kills": "Tiêu diệt",
+    "views": "Được xem nhiều nhất",
+    "downloads": "Được tải xuống nhiều nhất",
+    "recent": "Mới nhất"
+  },
+  "version-current": "Cập nhật {version} (hiện tại)",
+  "version": "Cập nhật {version}",
+  "version-all": "Tất cả các bản cập nhật"
+}

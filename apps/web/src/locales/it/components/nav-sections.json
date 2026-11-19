@@ -87,6 +87,10 @@
       "label": "Top giocatori",
       "description": "Classifica giocatori di tutti i tempi"
     },
+    "battles": {
+      "label": "Battaglie",
+      "description": "Battaglie e replay condivisi dai giocatori"
+    },
     "players-rampage": {
       "description": "Chi ha ottenuto la posizione più alta in Furia."
     }

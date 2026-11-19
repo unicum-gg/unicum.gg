@@ -1,0 +1,48 @@
+{
+  "result": {
+    "win": "Vittoria",
+    "loss": "Sconfitta",
+    "draw": "Stallo"
+  },
+  "ending": {
+    "extermination": {
+      "win": "Tutti i veicoli nemici distrutti",
+      "loss": "Tutti i veicoli alleati distrutti"
+    },
+    "base": {
+      "win": "Base nemica catturata",
+      "loss": "La nostra base è stata catturata"
+    },
+    "timeout": {
+      "win": "Tempo scaduto",
+      "loss": "Tempo scaduto"
+    }
+  },
+  "destroyed": "Distrutto",
+  "survived": "Sopravvissuto",
+  "performance": "Prestazioni in battaglia",
+  "unnamed": "Giocatore sconosciuto",
+  "mark-label": {
+    "spotted": "Avvistati",
+    "assisted": "Danno assistito",
+    "crits": "Colpi critici",
+    "damaged": "Danno inflitto",
+    "blocked": "Danno bloccato",
+    "stunned": "Stordimenti",
+    "killed": "Distrutto"
+  },
+  "mark-hint": {
+    "spotted": "Avvistati: hanno individuato questo nemico per la loro squadra",
+    "assisted": "Danno assistito: danno inflitto a questo nemico grazie al loro avvistamento, al tracciamento o allo stordimento",
+    "crits": "Colpi critici: hanno danneggiato un modulo o un membro dell’equipaggio di questo nemico",
+    "damaged": "Danno inflitto a questo nemico",
+    "blocked": "Danno bloccato dalla corazza di questo nemico",
+    "stunned": "Volte in cui hanno stordito questo nemico",
+    "killed": "Hanno distrutto questo nemico"
+  },
+  "column": {
+    "player": "Giocatore",
+    "vehicle": "Carro armato"
+  },
+  "destroyed-by-label": "Distrutto da"
+}

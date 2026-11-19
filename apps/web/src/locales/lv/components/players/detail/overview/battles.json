@@ -29,7 +29,7 @@
     "assisted": "Palīdzība",
     "blocked": "Bloķēts",
     "kills": "Iznīcinātie",
-    "spotted": "Atklāts",
+    "spotted": "Atklāti",
     "player": "Spēlētājs",
     "survived": "Izdzīvoja",
     "xp": "XP",
@@ -82,7 +82,7 @@
   "report": {
     "statistics": "Statistika",
     "time": "Laiks",
-    "earned": "Nopelnīts",
+    "earned": "Nopelnīts (standarta konts)",
     "shots": "Šāvienu skaits",
     "hits-pens": "Tiešie trāpījumi / caursišanas",
     "splash": "Sprādziena bojājumi",
@@ -135,11 +135,11 @@
     "mark-movement": "Šī kauja"
   },
   "tab": {
+    "personal": "Personīgais rezultāts",
     "teams": "Komandas rezultāts",
     "report": "Detalizēta atskaite",
     "replay": "Atkārtojums"
   },
-  "destroyed-list": "Iznīcināts: {names}",
   "replay": {
     "no-bounds": "Šai arēnai katalogā nav noteiktas robežas, tāpēc pozīcijas nevar izvietot tās minikartē.",
     "play": "Spēlēt",
@@ -154,7 +154,63 @@
     "deaths-none": "Neviens šajā kaujā netika iznīcināts.",
     "deaths-yet": "Visi joprojām ir aktīvi.",
     "deaths-unknown": "transportlīdzeklis",
-    "deaths-destroyed": "Iznīcināts"
+    "deaths-destroyed": "Iznīcināts",
+    "restart": "Spēlēt no sākuma",
+    "spotted": "Redzeslokā",
+    "unspotted": "Ārpus redzesloka",
+    "observed": "Atklājis ienaidnieks",
+    "estimated": "aptuvenā pozīcija, ārpus ierakstīšanas diapazona",
+    "speed": "Atskaņošanas ātrums",
+    "hud": {
+      "hp": "Uzturēšanas punkti",
+      "speed": "Ātrums",
+      "kmh": "{speed} km/h",
+      "damage": "Bojājumi",
+      "damage-hint": "Līdz šim. Ierakstītājam no viņa paša kaujas plūsmas, kurā nav iekļauti trāpījumi mērķiem, kurus viņš nevarēja redzēt, bet visiem pārējiem no ierakstā uztvertajiem trāpījumiem, kas var būt krietni mazāki par rezultātiem.",
+      "assisted": "Atbalsts",
+      "blocked": "Bloķēts",
+      "final-hint": "Kaujas galīgais skaitlis no rezultātiem.",
+      "modules": "Moduļi un apkalpe",
+      "seen-at": "kā ierakstītāja komandieris tos pēdējoreiz redzēja, plkst. {time}",
+      "state": {
+        "damaged": "Bojāts",
+        "destroyed": "Iznīcināts",
+        "injured": "Ievainots"
+      },
+      "part": {
+        "engine": "Dzinēji",
+        "ammoBay": "Munīcijas plaukts",
+        "fuelTank": "Degvielas tvertne",
+        "radio": "Radiostacijas",
+        "leftTrack": "Kreisā kāpurķēde",
+        "rightTrack": "Labā kāpurķēde",
+        "gun": "Lielgabali",
+        "turretRotator": "Torņa gredzens",
+        "surveyingDevice": "Redze",
+        "commander": "Komandieris",
+        "driver": "Vadītājs",
+        "radioman": "Radiotelefonists",
+        "gunner": "Tēmētājs",
+        "loader": "Lādētājs",
+        "track": "Kāpurķēde"
+      }
+    },
+    "tab": {
+      "chat": "Tērzēšana",
+      "log": "Bojājumu žurnāls"
+    },
+    "log": {
+      "empty": "Nekas vēl nav nodarīts vai paņemts.",
+      "kind": {
+        "dealt": "Nodarītie bojājumi",
+        "received": "Saņemti bojājumi",
+        "blocked": "Bloķēts ar bruņām",
+        "assist": "Palīdzības bojājumi",
+        "crit": "Nodarītie kritiskie trāpījumi",
+        "received-crit": "Saņemtie kritiskie trāpījumi",
+        "module": "Moduļa trāpījums"
+      }
+    }
   },
   "lineup": {
     "more": "+{count}",
@@ -162,5 +218,18 @@
     "heading": "Bruņutehnika šajā kaujā",
     "kills": "Iznīcināts",
     "time": "Laiks"
-  }
+  },
+  "earnings": {
+    "title": "Ienākumi",
+    "standard": "Standarta konts",
+    "with-bonuses": "Ar jūsu bonusiem",
+    "credits": "Kredīti",
+    "costs": "Remonts un apgāde",
+    "net": "Neto kredīti",
+    "xp": "Pieredze"
+  },
+  "destroyed-by-label": "Iznīcināja",
+  "destroyed-list-label": "Iznīcināja",
+  "replay-views": "{count} skatījumi",
+  "replay-downloads": "{count} lejupielādes"
 }

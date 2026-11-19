@@ -28,8 +28,8 @@
     "damage": "Sát thương",
     "assisted": "Hỗ trợ",
     "blocked": "Chặn",
-    "kills": "Hạ gục",
-    "spotted": "Bị phát hiện",
+    "kills": "Tiêu diệt",
+    "spotted": "Phát hiện",
     "player": "Người chơi",
     "survived": "Còn sống",
     "xp": "XP",
@@ -76,13 +76,13 @@
   },
   "close": "Tắt",
   "survived-the-battle": "Sống sót sau trận đấu",
-  "destroyed": "Đã phá hủy",
+  "destroyed": "Đã tiêu diệt",
   "destroyed-by": "Bị {nickname} phá hủy",
   "squad": "Trung đội {number}",
   "report": {
     "statistics": "Thống kê",
     "time": "Thời gian",
-    "earned": "Đã kiếm được",
+    "earned": "Đã kiếm được (tài khoản tiêu chuẩn)",
     "shots": "Đã bắn",
     "hits-pens": "Bắn trúng trực tiếp / xuyên giáp",
     "splash": "Sát thương lan",
@@ -135,11 +135,11 @@
     "mark-movement": "Trận đấu này"
   },
   "tab": {
+    "personal": "Điểm số cá nhân",
     "teams": "Điểm số Đội",
     "report": "Báo cáo chi tiết",
     "replay": "Bản phát lại"
   },
-  "destroyed-list": "Đã phá hủy {names}",
   "replay": {
     "no-bounds": "Đấu trường này không có phạm vi trong danh mục, vì vậy không thể xác định vị trí trên bản đồ nhỏ của nó.",
     "play": "Chơi",
@@ -154,13 +154,82 @@
     "deaths-none": "Không ai đã bị phá hủy trong trận đấu này.",
     "deaths-yet": "Mọi người vẫn còn sống sót.",
     "deaths-unknown": "một xe tăng",
-    "deaths-destroyed": "Đã phá hủy"
+    "deaths-destroyed": "Đã tiêu diệt",
+    "restart": "Chơi từ đầu",
+    "spotted": "Trong tầm nhìn",
+    "unspotted": "Ngoài tầm nhìn",
+    "observed": "Bị kẻ địch phát hiện",
+    "estimated": "vị trí ước tính, nằm ngoài phạm vi ghi hình",
+    "speed": "Tốc độ phát lại",
+    "hud": {
+      "hp": "Điểm hit",
+      "speed": "Tốc độ",
+      "kmh": "{speed} km/h",
+      "damage": "Sát thương",
+      "damage-hint": "Cho đến hiện tại. Đối với người ghi hình, dựa trên nguồn cấp dữ liệu trận đấu của chính họ, trong đó bỏ qua các lần bắn trúng mục tiêu mà họ không thể nhìn thấy. Đối với bất kỳ ai khác, dựa trên các lần bắn trúng mà bản ghi nghe được, con số này có thể thấp hơn nhiều so với kết quả.",
+      "assisted": "Được hỗ trợ",
+      "blocked": "Chặn",
+      "final-hint": "Hình cuối cùng của trận đấu, lấy từ kết quả.",
+      "modules": "Mô-đun và kíp lái",
+      "seen-at": "theo những gì chỉ huy của người ghi hình nhìn thấy lần cuối, vào lúc {time}",
+      "state": {
+        "damaged": "Bị hư hại",
+        "destroyed": "Đã tiêu diệt",
+        "injured": "Bị thương"
+      },
+      "part": {
+        "engine": "Động cơ",
+        "ammoBay": "Giá đạn",
+        "fuelTank": "Bình nhiên liệu",
+        "radio": "Radio",
+        "leftTrack": "Xích trái",
+        "rightTrack": "Xích phải",
+        "gun": "Nòng pháo",
+        "turretRotator": "Vòng xoay tháp pháo",
+        "surveyingDevice": "Tầm nhìn",
+        "commander": "Chỉ huy",
+        "driver": "Lái xe",
+        "radioman": "Nhân viên Radio",
+        "gunner": "Pháo thủ",
+        "loader": "Nạp đạn viên",
+        "track": "Xích"
+      }
+    },
+    "tab": {
+      "chat": "Trò chuyện",
+      "log": "Nhật ký sát thương"
+    },
+    "log": {
+      "empty": "Chưa có sát thương gây ra hoặc nhận được.",
+      "kind": {
+        "dealt": "Sát thương gây ra",
+        "received": "Sát thương nhận",
+        "blocked": "Sát thương bị giáp chặn",
+        "assist": "Sát thương hỗ trợ",
+        "crit": "Lần bắn trúng chí mạng gây ra",
+        "received-crit": "Lần bắn trúng chí mạng nhận được",
+        "module": "Trúng mô-đun"
+      }
+    }
   },
   "lineup": {
     "more": "+{count}",
     "hint": "Đã chiến đấu trong {count} xe tăng. Số liệu trên hàng là toàn bộ trận đấu.",
     "heading": "Xe trong trận đấu này",
-    "kills": "Đã phá hủy",
+    "kills": "Đã tiêu diệt",
     "time": "Thời gian"
-  }
+  },
+  "earnings": {
+    "title": "Thu nhập",
+    "standard": "Tài khoản Thường",
+    "with-bonuses": "Với tiền thưởng của bạn",
+    "credits": "Bạc",
+    "costs": "Sửa chữa và vật tư",
+    "net": "Bạc ròng",
+    "xp": "Kinh nghiệm"
+  },
+  "destroyed-by-label": "Bị tiêu diệt bởi",
+  "destroyed-list-label": "Đã phá hủy",
+  "replay-views": "{count} lượt xem",
+  "replay-downloads": "{count} lượt tải xuống"
 }

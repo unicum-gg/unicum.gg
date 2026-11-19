@@ -87,6 +87,10 @@
       "label": "Топ гравці",
       "description": "Таблиця лідерів гравців за весь час"
     },
+    "battles": {
+      "label": "Бої",
+      "description": "Бої та спільні реплеї гравців"
+    },
     "players-rampage": {
       "description": "Хто посів найвище місце в Rampage."
     }

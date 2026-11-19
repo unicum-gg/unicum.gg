@@ -1,0 +1,17 @@
+{
+  "title": "Csaták visszajátszással ({count})",
+  "empty": "Ezen a régión még egyetlen visszajátszás sem lett megosztva.",
+  "empty-filtered": "Egyetlen csata sem felel meg ezeknek a szűrőknek.",
+  "sort": {
+    "damage": "Sebzés",
+    "assist": "Segítség",
+    "xp": "Tapasztalat",
+    "kills": "Megsemmisítések",
+    "views": "Legtöbb nézet",
+    "downloads": "Legtöbbször letöltött",
+    "recent": "Legújabb"
+  },
+  "version-current": "{version} frissítés, jelenlegi",
+  "version": "{version} frissítés",
+  "version-all": "Minden frissítés"
+}

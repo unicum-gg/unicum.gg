@@ -10,6 +10,13 @@
   "rating-scale": {
     "title": "Vērtēšanas skala"
   },
+  "replays": {
+    "title": "Atkārtojumi",
+    "heading": "Skatieties savas kaujas vēlreiz",
+    "description": "Katra spēlētāju koplietotā kauja nāk ar pilnu ziņojumu, informāciju par to, kas uzstādīts katram tankam, un atkārtojumu, ko varat skatīties pārlūkprogrammā. Instalējiet mūsu modu, lai dalītos ar savējiem pēc katras kaujas beigām.",
+    "browse": "Pārlūkot atkārtojumus",
+    "mod": "Iegūt modu"
+  },
   "community": {
     "title": "Pievienojieties kopienai",
     "heading": "Sazinieties ar WoT spēlētājiem",

@@ -87,6 +87,10 @@
       "label": "Jucători de top",
       "description": "Clasamentul jucătorilor din toate timpurile"
     },
+    "battles": {
+      "label": "Lupte",
+      "description": "Lupte și reluări partajate de jucători"
+    },
     "players-rampage": {
       "description": "Cine s-a clasat cel mai sus în Exterminare."
     }

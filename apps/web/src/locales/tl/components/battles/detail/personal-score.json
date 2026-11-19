@@ -1,0 +1,48 @@
+{
+  "result": {
+    "win": "Tagumpay",
+    "loss": "Pagkatalo",
+    "draw": "Tabla"
+  },
+  "ending": {
+    "extermination": {
+      "win": "Nawasak ang lahat ng mga sasakyan ng kalaban",
+      "loss": "Nawasak ang lahat ng mga sasakyang kakampi"
+    },
+    "base": {
+      "win": "Nasakop ang base ng kalaban",
+      "loss": "Nasakop ang ating base"
+    },
+    "timeout": {
+      "win": "Naubos ang oras",
+      "loss": "Naubos ang oras"
+    }
+  },
+  "destroyed": "Nawasak",
+  "survived": "Nakaligtas",
+  "performance": "Pagganap sa labanan",
+  "unnamed": "Hindi kilalang manlalaro",
+  "mark-label": {
+    "spotted": "Namataan",
+    "assisted": "Pinsalang naitulong",
+    "crits": "Mga kritikal na tama",
+    "damaged": "Pinsalang naidulot",
+    "blocked": "Pinsalang hinarangan mula rito",
+    "stunned": "Mga pag-stun",
+    "killed": "Nawasak"
+  },
+  "mark-hint": {
+    "spotted": "Namataan: nakita ng manlalaro ang kalabang ito para sa kanilang koponan",
+    "assisted": "Pinsalang naitulong: pinsalang naidulot sa kalabang ito dahil sa pagkakita, pagsira sa kadena o pag-stun ng manlalaro",
+    "crits": "Mga kritikal na tama: napinsala ng manlalaro ang isang module o miyembro ng crew ng kalabang ito",
+    "damaged": "Pinsalang naidulot sa kalabang ito",
+    "blocked": "Pinsalang hinarangan ng baluti ng manlalaro mula sa mga tama ng kalabang ito",
+    "stunned": "Bilang ng pag-stun ng manlalaro sa kalabang ito",
+    "killed": "Nawasak ng manlalaro ang kalabang ito"
+  },
+  "column": {
+    "player": "Manlalaro",
+    "vehicle": "Tangke"
+  },
+  "destroyed-by-label": "Nawasak ni"
+}

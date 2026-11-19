@@ -87,6 +87,10 @@
       "label": "Topp spillere",
       "description": "Spillerrangering totalt"
     },
+    "battles": {
+      "label": "Kamper",
+      "description": "Kamper og replays delt av spillere"
+    },
     "players-rampage": {
       "description": "Hvem som er høyest rangert i Ødeleggelse."
     }

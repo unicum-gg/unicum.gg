@@ -1,0 +1,16 @@
+{
+  "meta-title": "Batalhas e replays de World of Tanks ({region})",
+  "meta-description": "Replays de World of Tanks da {region}, compartilhados por jogadores: cada batalha com seu relatório completo, o equipamento usado e um replay para assistir no navegador. Filtre por tanque, mapa e modo, e ordene por dano, assistência, experiência ou abates.",
+  "og-title": "Batalhas e replays",
+  "og-subtitle": "Replays de World of Tanks da {region}",
+  "title": "{battles} e replays de World of Tanks",
+  "title-battles": "batalhas",
+  "intro": "Todas as batalhas compartilhadas pelos jogadores, com seu relatório completo, o que cada tanque tinha equipado e um replay que você pode assistir aqui mesmo. Ordene-as por dano ou experiência, ou filtre por tanque, mapa ou modo.",
+  "about-title": "Sobre estes replays",
+  "about-sources": "Cada batalha aqui vem com seu arquivo .wotreplay: qualquer jogador que esteja executando o mod unicum.gg pode compartilhá-lo automaticamente, ou enviá-lo nesta página. Apenas batalhas jogadas até o fim podem ser compartilhadas, e somente por uma conta que tenha participado delas.",
+  "about-page": "Abrir uma batalha mostra as duas equipas, o relatório detalhado da batalha e um replay no mapa, com os movimentos de cada tanque, os disparos que os destruíram e o chat. Nada para instalar e nenhuma versão do cliente do jogo para compatibilizar: o replay é reproduzido no navegador.",
+  "about-share": "Para adicionar suas próprias batalhas, envie um replay da pasta de replays do seu jogo ou instale o {mod} para que elas sejam compartilhadas enquanto você joga.",
+  "about-share-mod": "mod unicum.gg",
+  "upload-mod": "Prefere enviar todas as batalhas automaticamente? O {mod} as envia quando terminam.",
+  "upload-mod-link": "Nosso mod"
+}

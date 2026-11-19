@@ -29,7 +29,7 @@
     "assisted": "协助",
     "blocked": "阻挡",
     "kills": "击杀数",
-    "spotted": "发现数",
+    "spotted": "发现",
     "player": "玩家",
     "survived": "存活",
     "xp": "XP",
@@ -82,7 +82,7 @@
   "report": {
     "statistics": "统计",
     "time": "时间",
-    "earned": "获得",
+    "earned": "获得（标准账号）",
     "shots": "射击次数",
     "hits-pens": "直接命中/穿透力",
     "splash": "范围伤害",
@@ -135,11 +135,11 @@
     "mark-movement": "本场战斗"
   },
   "tab": {
+    "personal": "个人分数",
     "teams": "队伍分数",
     "report": "详细战绩",
     "replay": "回放"
   },
-  "destroyed-list": "已击毁 {names}",
   "replay": {
     "no-bounds": "此战场在目录中没有范围，因此无法将这些位置放置在其小地图上。",
     "play": "播放",
@@ -154,7 +154,63 @@
     "deaths-none": "这场战斗中无人被击毁。",
     "deaths-yet": "所有人仍然存活。",
     "deaths-unknown": "一辆车辆",
-    "deaths-destroyed": "击毁"
+    "deaths-destroyed": "击毁",
+    "restart": "从开始播放",
+    "spotted": "在视野内",
+    "unspotted": "在视野外",
+    "observed": "被敌人发现",
+    "estimated": "估计位置，超出录制范围",
+    "speed": "播放速度",
+    "hud": {
+      "hp": "生命值",
+      "speed": "速度",
+      "kmh": "{speed} 千米/小时",
+      "damage": "损伤",
+      "damage-hint": "目前数值。对于录制者，它来自自己的战斗数据，其中不包括对其无法看见的目标造成的命中损伤。对于其他人，它来自录制捕捉到的命中，可能远低于结果。",
+      "assisted": "协助伤害",
+      "blocked": "阻挡",
+      "final-hint": "战斗的最终数值，来自结果。",
+      "modules": "模块和乘员",
+      "seen-at": "按照录制者的指挥官在 {time} 最后看到它们时的状态",
+      "state": {
+        "damaged": "受损",
+        "destroyed": "击毁",
+        "injured": "受伤"
+      },
+      "part": {
+        "engine": "发动机",
+        "ammoBay": "弹药架",
+        "fuelTank": "燃料箱",
+        "radio": "无线电台",
+        "leftTrack": "左侧履带",
+        "rightTrack": "右侧履带",
+        "gun": "火炮",
+        "turretRotator": "炮塔旋转机构",
+        "surveyingDevice": "视野",
+        "commander": "指挥官",
+        "driver": "驾驶员",
+        "radioman": "无线电操作员",
+        "gunner": "炮手",
+        "loader": "装填手",
+        "track": "履带"
+      }
+    },
+    "tab": {
+      "chat": "聊天",
+      "log": "伤害记录"
+    },
+    "log": {
+      "empty": "目前没有造成或承受任何伤害。",
+      "kind": {
+        "dealt": "造成的伤害",
+        "received": "受到损伤",
+        "blocked": "装甲阻挡的伤害",
+        "assist": "协助伤害",
+        "crit": "造成的暴击命中",
+        "received-crit": "受到的暴击命中",
+        "module": "模块命中"
+      }
+    }
   },
   "lineup": {
     "more": "+{count}",
@@ -162,5 +218,18 @@
     "heading": "本场战斗中的坦克",
     "kills": "击毁",
     "time": "时间"
-  }
+  },
+  "earnings": {
+    "title": "收益",
+    "standard": "普通账号",
+    "with-bonuses": "含您的加成",
+    "credits": "银币",
+    "costs": "维修和补给",
+    "net": "净银币",
+    "xp": "经验"
+  },
+  "destroyed-by-label": "击毁者",
+  "destroyed-list-label": "已击毁",
+  "replay-views": "{count} 次查看",
+  "replay-downloads": "{count} 次下载"
 }

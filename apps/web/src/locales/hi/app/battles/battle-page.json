@@ -1,0 +1,23 @@
+{
+  "meta-title": "{map} पर {nickname} द्वारा टैंक {tank}: World of Tanks रिप्ले",
+  "meta-title-battle": "{map}, {mode}, {date}: World of Tanks युद्ध का रिप्ले",
+  "meta-description": {
+    "win": "{nickname} ने {map} पर टैंक {tank} में जीत हासिल की ({mode}, {date}): {damage} क्षति, {kills} किल्स, {xp} अनुभव।",
+    "loss": "{nickname} {map} पर टैंक {tank} में हार गया ({mode}, {date}): {damage} क्षति, {kills} किल्स, {xp} अनुभव।",
+    "draw": "{nickname} का {map} पर टैंक {tank} में मुकाबला बराबरी पर रहा ({mode}, {date}): {damage} क्षति, {kills} किल्स, {xp} अनुभव।",
+    "unknown": "{map} पर टैंक {tank} में {nickname} ({mode}, {date}): {damage} क्षति, {kills} किल्स, {xp} अनुभव।"
+  },
+  "meta-description-battle": "{map} पर {mode}, {date}।",
+  "mode-unknown": "World of Tanks",
+  "og-title": "{map} पर टैंक {tank}",
+  "og-subtitle": "{nickname} · {damage} क्षति",
+  "meta-title-no-replay": "{map} पर {nickname} द्वारा टैंक {tank}: World of Tanks युद्ध",
+  "meta-description-replay": "रिप्ले देखें, दोनों टीमों और युद्ध की रिपोर्ट देखें, और .wotreplay डाउनलोड करें।",
+  "meta-description-no-replay": "दोनों टीमें, हर टैंक ने क्या किया और युद्ध की रिपोर्ट देखें।",
+  "meta-title-battle-no-replay": "{map}, {mode}, {date}: World of Tanks युद्ध",
+  "og-subtitle-battle": "{mode} · {date}",
+  "heading-player": "{map} पर टैंक {tank} में {nickname}",
+  "recorded-by": "दर्ज करने वाला",
+  "also-reported-by": "रिपोर्ट करने वाला भी",
+  "reported-by": "रिपोर्ट करने वाला"
+}

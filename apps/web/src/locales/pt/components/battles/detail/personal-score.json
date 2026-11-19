@@ -1,0 +1,48 @@
+{
+  "result": {
+    "win": "Vitória",
+    "loss": "Derrota",
+    "draw": "Empate"
+  },
+  "ending": {
+    "extermination": {
+      "win": "Todos os veículos inimigos destruídos",
+      "loss": "Todos os veículos aliados destruídos"
+    },
+    "base": {
+      "win": "Base inimiga capturada",
+      "loss": "Nossa base foi capturada"
+    },
+    "timeout": {
+      "win": "Tempo esgotado",
+      "loss": "Tempo esgotado"
+    }
+  },
+  "destroyed": "Destruídos",
+  "survived": "Sobreviveu",
+  "performance": "Desempenho na batalha",
+  "unnamed": "Jogador desconhecido",
+  "mark-label": {
+    "spotted": "Detectado",
+    "assisted": "Dano assistido",
+    "crits": "Acertos críticos",
+    "damaged": "Dano causado",
+    "blocked": "Dano bloqueado por ele",
+    "stunned": "Atordoamentos",
+    "killed": "Destruídos"
+  },
+  "mark-hint": {
+    "spotted": "Detectado: eles revelaram este inimigo para a equipe",
+    "assisted": "Dano assistido: dano causado a este inimigo graças à detecção, à esteira ou ao atordoamento deles",
+    "crits": "Acertos críticos: eles danificaram um módulo ou membro da tripulação deste inimigo",
+    "damaged": "Dano causado a este inimigo",
+    "blocked": "Dano bloqueado pela blindagem deste inimigo",
+    "stunned": "Vezes que eles atordoaram este inimigo",
+    "killed": "Eles destruíram este inimigo"
+  },
+  "column": {
+    "player": "Jogador",
+    "vehicle": "Veículo"
+  },
+  "destroyed-by-label": "Destruído por"
+}

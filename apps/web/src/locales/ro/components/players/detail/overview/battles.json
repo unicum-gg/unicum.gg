@@ -28,8 +28,8 @@
     "damage": "Daune produse",
     "assisted": "Asistență",
     "blocked": "Blocat",
-    "kills": "Eliminări",
-    "spotted": "Detectări",
+    "kills": "Distrugeri",
+    "spotted": "Detectat",
     "player": "Jucător",
     "survived": "În viață",
     "xp": "XP",
@@ -76,13 +76,13 @@
   },
   "close": "Închide",
   "survived-the-battle": "A supraviețuit bătăliei",
-  "destroyed": "Distruse",
+  "destroyed": "Distrus",
   "destroyed-by": "Distrus de {nickname}",
   "squad": "Pluton {number}",
   "report": {
     "statistics": "Statistici",
     "time": "Timp",
-    "earned": "Câștigate",
+    "earned": "Câștigate (cont standard)",
     "shots": "Focuri trase",
     "hits-pens": "Lovituri directe / penetrări",
     "splash": "Daune de dispersie",
@@ -135,11 +135,11 @@
     "mark-movement": "Această bătălie"
   },
   "tab": {
+    "personal": "Scor personal",
     "teams": "Scorul echipei",
     "report": "Raport detaliat",
     "replay": "Reluare"
   },
-  "destroyed-list": "A distrus {names}",
   "replay": {
     "no-bounds": "Această arenă nu are dimensiuni în catalog, astfel că pozițiile nu pot fi plasate pe mini-hartă.",
     "play": "Joacă",
@@ -154,13 +154,82 @@
     "deaths-none": "Nimeni nu a fost distrus în această bătălie.",
     "deaths-yet": "Toată lumea este încă activă.",
     "deaths-unknown": "un vehicul",
-    "deaths-destroyed": "Distrus"
+    "deaths-destroyed": "Distrus",
+    "restart": "Joacă de la început",
+    "spotted": "În raza vizuală",
+    "unspotted": "În afara razei vizuale",
+    "observed": "Detectat de inamic",
+    "estimated": "poziție estimată, în afara razei înregistrării",
+    "speed": "Viteza de redare",
+    "hud": {
+      "hp": "Puncte de viață",
+      "speed": "Viteză",
+      "kmh": "{speed} km/h",
+      "damage": "Daune produse",
+      "damage-hint": "Până acum. Pentru cel care a făcut înregistrarea, din fluxul propriei bătălii, care omite loviturile asupra țintelor pe care nu le putea vedea, pentru oricine altcineva, din loviturile auzite de înregistrare, care pot fi cu mult sub rezultate.",
+      "assisted": "Asistență",
+      "blocked": "Blocat",
+      "final-hint": "Cifra finală a bătăliei, din rezultate.",
+      "modules": "Module și echipaj",
+      "seen-at": "așa cum le-a văzut ultima dată comandantul care a făcut înregistrarea, la {time}",
+      "state": {
+        "damaged": "Avariat",
+        "destroyed": "Distrus",
+        "injured": "Avariat"
+      },
+      "part": {
+        "engine": "Motor",
+        "ammoBay": "Magazie de muniție",
+        "fuelTank": "Rezervor de combustibil",
+        "radio": "Radio",
+        "leftTrack": "Șenila stângă",
+        "rightTrack": "Șenila dreaptă",
+        "gun": "Tun",
+        "turretRotator": "Inelul turelei",
+        "surveyingDevice": "Viziune",
+        "commander": "Comandant",
+        "driver": "Conducător auto",
+        "radioman": "Operator radio",
+        "gunner": "Țintaș",
+        "loader": "Încărcător",
+        "track": "Șenilă"
+      }
+    },
+    "tab": {
+      "chat": "chat",
+      "log": "Jurnal de daune"
+    },
+    "log": {
+      "empty": "Nimic provocat sau primit încă.",
+      "kind": {
+        "dealt": "Daune provocate",
+        "received": "Daune primite",
+        "blocked": "Blocat de blindaj",
+        "assist": "Daune asistate",
+        "crit": "Lovituri critice provocate",
+        "received-crit": "Lovituri critice primite",
+        "module": "Modul lovit"
+      }
+    }
   },
   "lineup": {
     "more": "+{count}",
     "hint": "Jucate cu {count} vehicule. Cifrele de pe rând reprezintă bătălia în întregime.",
     "heading": "Vehicule în această bătălie",
-    "kills": "Distruse",
+    "kills": "Distrus",
     "time": "Timp"
-  }
+  },
+  "earnings": {
+    "title": "Câștiguri",
+    "standard": "Cont standard",
+    "with-bonuses": "Cu bonusurile tale",
+    "credits": "Credite",
+    "costs": "Reparaţii și consumabile",
+    "net": "Credite nete",
+    "xp": "Experienţă"
+  },
+  "destroyed-by-label": "Distrus de",
+  "destroyed-list-label": "A distrus",
+  "replay-views": "{count} vizualizări",
+  "replay-downloads": "{count} descărcări"
 }

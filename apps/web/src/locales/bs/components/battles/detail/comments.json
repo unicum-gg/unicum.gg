@@ -1,0 +1,19 @@
+{
+  "title": "Komentari",
+  "title-count": "Komentari ({count})",
+  "empty": "Još nema komentara. Kako vam se čini ova bitka?",
+  "in-battle": "Odigrano u ovoj bitki",
+  "pending": "Čeka moderaciju, samo vi to možete vidjeti",
+  "rejected": "Nije objavljeno",
+  "delete": "Obriši",
+  "log-in": "Prijavi se za komentarisanje",
+  "placeholder": "Napišite nešto o ovoj bitki…",
+  "moderated": "Moderator čita komentare prije nego što budu objavljeni.",
+  "send": "Objavi komentar",
+  "sending": "Objavljivanje…",
+  "error": {
+    "rate-limited": "Objavili ste mnogo komentara u posljednjih sat vremena. Pokušajte ponovo malo kasnije.",
+    "unauthenticated": "Vaša sesija je istekla. Prijavite se ponovo.",
+    "unknown": "Nešto je pošlo pogrešno. Pokušajte ponovo za trenutak."
+  }
+}

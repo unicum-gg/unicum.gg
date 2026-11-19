@@ -10,6 +10,13 @@
   "rating-scale": {
     "title": "Reitingo skalė"
   },
+  "replays": {
+    "title": "Pakartojimai",
+    "heading": "Dar kartą žiūrėkite savo mūšius",
+    "description": "Kiekvienas žaidėjų bendrinamas mūšis pateikiamas su visa ataskaita, informacija apie tai, kas buvo sumontuota kiekviename tanke, ir pakartojimu, kurį galite žiūrėti naršyklėje. Įdiekite mūsų modą, kad galėtumėte dalytis savais pakartojimais pasibaigus kiekvienam mūšiui.",
+    "browse": "Naršyti pakartojimus",
+    "mod": "Gauti modą"
+  },
   "community": {
     "title": "Prisijunkite prie bendruomenės",
     "heading": "Bendraukite su WoT žaidėjais",

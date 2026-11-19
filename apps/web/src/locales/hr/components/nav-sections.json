@@ -87,6 +87,10 @@
       "label": "Najbolji igrači",
       "description": "Ljestvica igrača za cijelo vrijeme"
     },
+    "battles": {
+      "label": "Bitke",
+      "description": "Bitke i snimke koje su podijelili igrači"
+    },
     "players-rampage": {
       "description": "Tko je najbolje rangiran u Divljanju."
     }

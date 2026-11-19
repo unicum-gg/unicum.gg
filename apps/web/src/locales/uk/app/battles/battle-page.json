@@ -1,0 +1,23 @@
+{
+  "meta-title": "{tank} від {nickname} на карті {map}: реплей World of Tanks",
+  "meta-title-battle": "{map}, {mode}, {date}: реплей бою World of Tanks",
+  "meta-description": {
+    "win": "{nickname} здобув перемогу на карті {map} на танку {tank} ({mode}, {date}): {damage} шкоди, {kills} знищень, {xp} досвіду.",
+    "loss": "{nickname} зазнав поразки на карті {map} на танку {tank} ({mode}, {date}): {damage} шкоди, {kills} знищень, {xp} досвіду.",
+    "draw": "{nickname} зіграв унічию на карті {map} на танку {tank} ({mode}, {date}): {damage} шкоди, {kills} знищень, {xp} досвіду.",
+    "unknown": "{nickname} на карті {map} на танку {tank} ({mode}, {date}): {damage} шкоди, {kills} знищень, {xp} досвіду."
+  },
+  "meta-description-battle": "{mode} на карті {map}, {date}.",
+  "mode-unknown": "World of Tanks",
+  "og-title": "{tank} на карті {map}",
+  "og-subtitle": "{nickname} · {damage} шкоди",
+  "meta-title-no-replay": "{tank} від {nickname} на карті {map}: бій World of Tanks",
+  "meta-description-replay": "Дивіться реплей, обидві команди та звіт про бій, а також завантажте файл .wotreplay.",
+  "meta-description-no-replay": "Перегляньте обидві команди, дії кожного танка та звіт про бій.",
+  "meta-title-battle-no-replay": "{map}, {mode}, {date}: бій World of Tanks",
+  "og-subtitle-battle": "{mode} · {date}",
+  "heading-player": "{nickname} на танку {tank} на карті {map}",
+  "recorded-by": "Записав",
+  "also-reported-by": "Також повідомив",
+  "reported-by": "Повідомив"
+}

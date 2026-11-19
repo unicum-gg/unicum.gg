@@ -82,7 +82,7 @@
   "report": {
     "statistics": "Statistik",
     "time": "Tid",
-    "earned": "Optjent",
+    "earned": "Optjent, standardkonto",
     "shots": "Skud affyret",
     "hits-pens": "Direkte træffere / gennemtrængning",
     "splash": "Stænkskade",
@@ -135,11 +135,11 @@
     "mark-movement": "Denne kamp"
   },
   "tab": {
+    "personal": "Personlig score",
     "teams": "Holdscore",
     "report": "Detaljeret rapport",
     "replay": "Replay"
   },
-  "destroyed-list": "Har ødelagt {names}",
   "replay": {
     "no-bounds": "Denne arena har ingen udstrækning i kataloget, så placeringerne kan ikke placeres på dens minikort.",
     "play": "Spil",
@@ -154,7 +154,63 @@
     "deaths-none": "Ingen blev ødelagt i denne kamp.",
     "deaths-yet": "Alle er stadig i live.",
     "deaths-unknown": "et køretøj",
-    "deaths-destroyed": "Ødelagt"
+    "deaths-destroyed": "Ødelagt",
+    "restart": "Spil fra start",
+    "spotted": "I syne",
+    "unspotted": "Ude af syne",
+    "observed": "Opdaget af fjenden",
+    "estimated": "estimeret position, uden for optagelsens rækkevidde",
+    "speed": "Afspilningshastighed",
+    "hud": {
+      "hp": "Livspunkter",
+      "speed": "Hastighed",
+      "kmh": "{speed} km/t",
+      "damage": "Skade",
+      "damage-hint": "Indtil videre. For optageren fra dennes eget kampfeed, som udelader træffere på mål, de ikke kunne se. For alle andre fra de træffere, optagelsen hørte, hvilket kan være langt under resultaterne.",
+      "assisted": "Assisteret",
+      "blocked": "Blokeret",
+      "final-hint": "Kampens endelige tal fra resultaterne.",
+      "modules": "Moduler og besætning",
+      "seen-at": "som optagerens chef sidst så dem, på {time}",
+      "state": {
+        "damaged": "Beskadiget",
+        "destroyed": "Ødelagt",
+        "injured": "Såret"
+      },
+      "part": {
+        "engine": "Motor",
+        "ammoBay": "Ammunition ammorack",
+        "fuelTank": "Brændstoftank",
+        "radio": "Radio",
+        "leftTrack": "Venstre larvebånd",
+        "rightTrack": "Højre larvebånd",
+        "gun": "Kanon",
+        "turretRotator": "Tårnkrans",
+        "surveyingDevice": "Syn",
+        "commander": "Kommandør",
+        "driver": "Chauffør",
+        "radioman": "Radiooperatør",
+        "gunner": "Skytte",
+        "loader": "Lader",
+        "track": "Bælte"
+      }
+    },
+    "tab": {
+      "chat": "chat",
+      "log": "Skadelog"
+    },
+    "log": {
+      "empty": "Intet uddelt eller taget endnu.",
+      "kind": {
+        "dealt": "Uddelt skade",
+        "received": "Skade modtaget",
+        "blocked": "Blokeret af panser",
+        "assist": "Assisteret skade",
+        "crit": "Kritiske træffere uddelt",
+        "received-crit": "Kritiske træffere modtaget",
+        "module": "Modultræffer"
+      }
+    }
   },
   "lineup": {
     "more": "+{count}",
@@ -162,5 +218,18 @@
     "heading": "Køretøjer i denne kamp",
     "kills": "Ødelagt",
     "time": "Tid"
-  }
+  },
+  "earnings": {
+    "title": "Indtjening",
+    "standard": "Standard Konto",
+    "with-bonuses": "Med dine bonusser",
+    "credits": "credits",
+    "costs": "Reparationer og forsyninger",
+    "net": "Netto credits",
+    "xp": "Xp"
+  },
+  "destroyed-by-label": "Ødelagt af",
+  "destroyed-list-label": "Har ødelagt",
+  "replay-views": "{count} visninger",
+  "replay-downloads": "{count} downloads"
 }

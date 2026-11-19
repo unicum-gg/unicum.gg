@@ -29,7 +29,7 @@
     "assisted": "Támogatás",
     "blocked": "Lekérdezés",
     "kills": "Megsemmisítések",
-    "spotted": "Felderített",
+    "spotted": "Felderítve",
     "player": "Játékos",
     "survived": "Életben maradt",
     "xp": "XP",
@@ -82,7 +82,7 @@
   "report": {
     "statistics": "Statisztika",
     "time": "Idő",
-    "earned": "megszerzett",
+    "earned": "Megszerezve (normál fiókkal)",
     "shots": "Leadott lövések",
     "hits-pens": "Közvetlen találatok / átütések",
     "splash": "Területi sebzés",
@@ -135,11 +135,11 @@
     "mark-movement": "Ez a csata"
   },
   "tab": {
+    "personal": "Személyes pontszám",
     "teams": "Csapat pontszáma",
     "report": "Részletes jelentés",
     "replay": "Visszajátszás"
   },
-  "destroyed-list": "Megsemmisített: {names}",
   "replay": {
     "no-bounds": "Ennek az arénának nincs kiterjedése a katalógusban, ezért a pozíciókat nem lehet a minitérképre helyezni.",
     "play": "Lejátszás",
@@ -154,7 +154,63 @@
     "deaths-none": "Ebben a csatában senki sem lett megsemmisítve.",
     "deaths-yet": "Még mindenki élő.",
     "deaths-unknown": "egy jármű",
-    "deaths-destroyed": "Megsemmisítve"
+    "deaths-destroyed": "Megsemmisítve",
+    "restart": "Lejátszás a kezdéstől",
+    "spotted": "Látótávolságban",
+    "unspotted": "Látótávolságon kívül",
+    "observed": "Az ellenség által felderítve",
+    "estimated": "Becsült pozíció, a felvétel tartományán kívül",
+    "speed": "Lejátszási sebesség",
+    "hud": {
+      "hp": "Életerő",
+      "speed": "Sebesség",
+      "kmh": "{speed} km/h",
+      "damage": "Sebzés",
+      "damage-hint": "Eddig. A felvétel készítője esetében a saját csatajelentéséből származik, amely nem tartalmazza a nem látott célpontokat ért találatokat. Mindenki más esetében a felvétel által rögzített találatokból származik, ami jóval elmaradhat az eredményektől.",
+      "assisted": "Segített",
+      "blocked": "Lekérdezés",
+      "final-hint": "A csata végső ábrája az eredményekből.",
+      "modules": "Modulok és legénység",
+      "seen-at": "ahogy a felvételt készítő parancsnok utoljára látta őket, ekkor: {time}",
+      "state": {
+        "damaged": "Sérült",
+        "destroyed": "Megsemmisítve",
+        "injured": "Megsebesült"
+      },
+      "part": {
+        "engine": "Motor",
+        "ammoBay": "Lőszerrekesz",
+        "fuelTank": "Üzemanyagtartály",
+        "radio": "Rádió",
+        "leftTrack": "Bal lánctalp",
+        "rightTrack": "Jobb lánctalp",
+        "gun": "Löveg",
+        "turretRotator": "Toronygyűrű",
+        "surveyingDevice": "Látás",
+        "commander": "Parancsnok",
+        "driver": "Vezető",
+        "radioman": "Rádiós",
+        "gunner": "Lövész",
+        "loader": "Töltő",
+        "track": "Követés"
+      }
+    },
+    "tab": {
+      "chat": "chat",
+      "log": "Sebzésnapló"
+    },
+    "log": {
+      "empty": "Eddig nincs okozott vagy elszenvedett sebzés.",
+      "kind": {
+        "dealt": "Okozott sebzés",
+        "received": "Elszenvedett sebzés",
+        "blocked": "Páncélzattal blokkolt",
+        "assist": "Segített sebzés",
+        "crit": "Okozott kritikus találatok",
+        "received-crit": "Elszenvedett kritikus találatok",
+        "module": "Modultalálat"
+      }
+    }
   },
   "lineup": {
     "more": "+{count}",
@@ -162,5 +218,18 @@
     "heading": "Járművek ebben a csatában",
     "kills": "Megsemmisítve",
     "time": "Idő"
-  }
+  },
+  "earnings": {
+    "title": "Kereset",
+    "standard": "Alap felhasználói fiók",
+    "with-bonuses": "A bónuszaiddal",
+    "credits": "Kredit",
+    "costs": "Javítások és ellátmány",
+    "net": "Nettó kredit",
+    "xp": "Tapasztalat"
+  },
+  "destroyed-by-label": "Megsemmisítette",
+  "destroyed-list-label": "Megsemmisített",
+  "replay-views": "{count} megtekintés",
+  "replay-downloads": "{count} letöltés"
 }

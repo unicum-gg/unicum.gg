@@ -1,0 +1,16 @@
+{
+  "meta-title": "World of Tanks-strider och repriser ({region})",
+  "meta-description": "World of Tanks-repriser från {region}, delade av spelare: varje strid med sin fullständiga rapport, den monterade utrustningen och en repris att titta på i webbläsaren. Filtrera efter vagn, karta och läge, och rangordna efter skada, assistans, erfarenhet eller förstörda.",
+  "og-title": "Strider och repriser",
+  "og-subtitle": "World of Tanks-repriser från {region}",
+  "title": "World of Tanks {battles} och repriser",
+  "title-battles": "strider",
+  "intro": "Varje strid som spelare har delat, med sin fullständiga rapport, vad varje vagn hade monterat och en repris som du kan titta på här. Rangordna dem efter skada eller erfarenhet, eller begränsa dem till en vagn, en karta eller ett läge.",
+  "about-title": "Om dessa repriser",
+  "about-sources": "Varje strid här kommer med sin .wotreplay-fil: antingen delade en spelare som körde unicum.gg-modden den automatiskt, eller så laddade spelaren upp den på denna sida. Endast strider som spelades till slutet kan delas, och endast av ett konto som deltog i dem.",
+  "about-page": "När du öppnar en strid visas båda lagen, den detaljerade stridsrapporten och en repris på kartan, med alla vagnars förflyttningar, skotten som förstörde dem och chatten. Inget att installera och ingen spelklientversion att matcha, reprisen spelas i webbläsaren.",
+  "about-share": "Lägg till dina egna strider genom att ladda upp en repris från spelets repris-mapp, eller installera {mod} så att de delas medan du spelar.",
+  "about-share-mod": "unicum.gg-mod",
+  "upload-mod": "Vill du hellre att varje strid laddas upp automatiskt? {mod} skickar dem när de slutar.",
+  "upload-mod-link": "Vår mod"
+}

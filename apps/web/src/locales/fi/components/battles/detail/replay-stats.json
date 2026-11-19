@@ -1,0 +1,6 @@
+{
+  "download": "Lataa uusinta",
+  "version": "Pelaa versiolla {version}",
+  "views": "Näkymät: {value}",
+  "downloads": "Lataukset: {value}"
+}

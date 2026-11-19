@@ -87,6 +87,10 @@
       "label": "Najbolji igrači",
       "description": "Ljestvica igrača svih vremena"
     },
+    "battles": {
+      "label": "Bitke",
+      "description": "Bitke i snimci koje su podijelili igrači"
+    },
     "players-rampage": {
       "description": "Ko je imao najvišu poziciju u režimu Rampage."
     }

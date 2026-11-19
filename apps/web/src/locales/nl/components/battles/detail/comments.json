@@ -1,0 +1,19 @@
+{
+  "title": "Opmerkingen",
+  "title-count": "Opmerkingen ({count})",
+  "empty": "Nog geen opmerking. Wat vond je van dit gevecht?",
+  "in-battle": "Gespeeld in dit gevecht",
+  "pending": "In afwachting van moderatie, alleen jij kunt dit zien",
+  "rejected": "Niet gepubliceerd",
+  "delete": "Verwijderen",
+  "log-in": "Inloggen om een opmerking te plaatsen",
+  "placeholder": "Zeg iets over dit gevecht…",
+  "moderated": "Opmerkingen worden door een moderator gelezen voordat ze worden gepubliceerd.",
+  "send": "Opmerking plaatsen",
+  "sending": "Plaatsen…",
+  "error": {
+    "rate-limited": "Je hebt het afgelopen uur veel opmerkingen geplaatst. Probeer het iets later opnieuw.",
+    "unauthenticated": "Je sessie is verlopen. Log opnieuw in.",
+    "unknown": "Er is iets misgegaan. Probeer het over een moment opnieuw."
+  }
+}

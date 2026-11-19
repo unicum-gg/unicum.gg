@@ -1,0 +1,17 @@
+{
+  "title": "Lupte cu o reluare ({count})",
+  "empty": "Nicio reluare nu a fost partajată încă în această regiune.",
+  "empty-filtered": "Nicio bătălie nu corespunde acestor filtre.",
+  "sort": {
+    "damage": "Daune produse",
+    "assist": "Asistență",
+    "xp": "Experienţă",
+    "kills": "Distrugeri",
+    "views": "Cele mai vizualizate",
+    "downloads": "Cele mai descărcate",
+    "recent": "Cele mai recente"
+  },
+  "version-current": "Actualizează {version} (curent)",
+  "version": "Actualizează {version}",
+  "version-all": "Toate actualizările"
+}

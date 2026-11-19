@@ -1,0 +1,19 @@
+{
+  "title": "Commentaires",
+  "title-count": "Commentaires ({count})",
+  "empty": "Aucun commentaire pour le moment. Qu’avez-vous pensé de cette bataille ?",
+  "in-battle": "Joué dans cette bataille",
+  "pending": "En attente de modération, visible uniquement par vous",
+  "rejected": "Non publié",
+  "delete": "Supprimer",
+  "log-in": "Se connecter pour commenter",
+  "placeholder": "Dites quelque chose sur cette bataille…",
+  "moderated": "Les commentaires sont lus par un modérateur avant d’être publiés.",
+  "send": "Publier le commentaire",
+  "sending": "Publication…",
+  "error": {
+    "rate-limited": "Vous avez publié beaucoup de commentaires au cours de la dernière heure. Réessayez un peu plus tard.",
+    "unauthenticated": "Votre session a expiré. Connectez-vous à nouveau.",
+    "unknown": "Quelque chose s’est mal passé. Réessayez dans un moment."
+  }
+}

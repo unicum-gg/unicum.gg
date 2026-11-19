@@ -87,6 +87,10 @@
       "label": "En iyi oyuncular",
       "description": "Tüm zamanların oyuncu liderlik tablosu"
     },
+    "battles": {
+      "label": "Savaşlar",
+      "description": "Oyuncular tarafından paylaşılan savaşlar ve tekrarlar"
+    },
     "players-rampage": {
       "description": "Hücum’da en üst sırada yer alan oyuncular."
     }

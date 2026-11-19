@@ -1,0 +1,23 @@
+{
+  "trigger": "Įkelti pakartojimą",
+  "title": "Įkelti pakartojimą",
+  "description": "Pridėkite vieną iš savo mūšių iš jo .wotreplay failo, nereikia modo. Mūšiui bus sukurtas atskiras puslapis su jo pakartojimu, paruoštas dalytis.",
+  "drop": "Nuvilkite .wotreplay čia arba spustelėkite, kad pasirinktumėte vieną",
+  "hint": "Tik jūsų pakartojimai iš iki galo žaisto mūšio. Jie yra žaidimo katalogo pakartojimų aplanke.",
+  "send": "Įkelti",
+  "sending": "Įkeliama…",
+  "error": {
+    "not_collected": "Pakartojimų įkėlimas šiuo metu neprieinamas.",
+    "archive_full": "Mūsų pakartojimų saugykla kol kas pilna. Pabandykite vėliau.",
+    "not_a_replay": "Šis failas nėra World of Tanks pakartojimas, kurį galime skaityti.",
+    "unfinished": "Šis pakartojimas buvo išsaugotas prieš mūšiui baigiantis, todėl jame nėra rezultatų.",
+    "not_yours": "Šį pakartojimą užfiksavo kita paskyra. Galite įkelti tik savo.",
+    "wrong_region": "Šis mūšis buvo žaistas kitame regione nei paskyra, prie kurios esate prisijungę.",
+    "too_old": "Šis mūšis senesnis už tuos, kuriuos išlaikome.",
+    "malformed": "Nepavyko perskaityti šio pakartojimo rezultatų.",
+    "too_large": "Šis failas didesnis už bet kurį pakartojimą, kurį priimame (9 MB).",
+    "too_many_uploads": "Per pastarąją valandą įkėlėte daug failų. Pabandykite kiek vėliau.",
+    "unauthenticated": "Jūsų sesija baigėsi. Prisijunkite dar kartą.",
+    "unknown": "Kažkas nutiko. Pabandykite po akimirkos."
+  }
+}

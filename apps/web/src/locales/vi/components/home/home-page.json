@@ -10,6 +10,13 @@
   "rating-scale": {
     "title": "Thang đánh giá"
   },
+  "replays": {
+    "title": "Các bản phát lại",
+    "heading": "Xem lại các trận đấu của bạn",
+    "description": "Mỗi trận đấu được người chơi chia sẻ đều có báo cáo đầy đủ, thông tin về những gì từng xe tăng đã lắp và bản phát lại mà bạn có thể xem trên trình duyệt. Hãy cài đặt mod của chúng tôi để chia sẻ bản phát lại của bạn ngay khi mỗi trận đấu kết thúc.",
+    "browse": "Duyệt các bản phát lại",
+    "mod": "Tải mod"
+  },
   "community": {
     "title": "Tham gia cộng đồng",
     "heading": "Kết nối với người chơi WoT",

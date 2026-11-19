@@ -1,0 +1,19 @@
+{
+  "title": "Komentarze",
+  "title-count": "Komentarze ({count})",
+  "empty": "Brak komentarzy. Co sądzisz o tej bitwie?",
+  "in-battle": "Udział w tej bitwie",
+  "pending": "Oczekuje na moderację, widoczne tylko dla Ciebie",
+  "rejected": "Nie opublikowano",
+  "delete": "Usuń",
+  "log-in": "Zaloguj się, aby komentować",
+  "placeholder": "Napisz coś o tej bitwie…",
+  "moderated": "Komentarze są sprawdzane przez moderatora przed opublikowaniem.",
+  "send": "Opublikuj komentarz",
+  "sending": "Publikowanie…",
+  "error": {
+    "rate-limited": "W ciągu ostatniej godziny opublikowano przez Ciebie wiele komentarzy. Spróbuj ponownie nieco później.",
+    "unauthenticated": "Twoja sesja wygasła. Zaloguj się ponownie.",
+    "unknown": "Coś poszło nie tak. Spróbuj ponownie za moment."
+  }
+}

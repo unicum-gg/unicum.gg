@@ -1,0 +1,23 @@
+{
+  "trigger": "Last opp et replay",
+  "title": "Last opp et replay",
+  "description": "Legg til en av dine egne kamper fra .wotreplay-filen, uten behov for en mod. Den får sin egen side med replayet, klar til å deles.",
+  "drop": "Slipp et .wotreplay her, eller klikk for å velge en",
+  "hint": "Bare dine egne replays, fra en kamp som ble spilt til slutt. De ligger i replay-mappen i spillmappen din.",
+  "send": "Last opp",
+  "sending": "Laster opp…",
+  "error": {
+    "not_collected": "Opplasting av replays er ikke tilgjengelig akkurat nå.",
+    "archive_full": "Lagringen vår for replays er full akkurat nå. Prøv igjen senere.",
+    "not_a_replay": "Filen er ikke et World of Tanks-replay vi kan lese.",
+    "unfinished": "Dette replayet ble lagret før kampen var avsluttet, så det har ingen resultater.",
+    "not_yours": "Dette replayet ble registrert av en annen konto. Du kan bare laste opp dine egne.",
+    "wrong_region": "Kampen ble spilt i en annen region enn den kontoen du er logget inn med.",
+    "too_old": "Denne kampen er eldre enn de vi beholder.",
+    "malformed": "Vi kunne ikke lese resultatene i dette replayet.",
+    "too_large": "Filen er større enn noe replay vi tar imot (9 MB).",
+    "too_many_uploads": "Du har lastet opp mye den siste timen. Prøv igjen litt senere.",
+    "unauthenticated": "Økten din har utløpt. Logg inn igjen.",
+    "unknown": "Noe gikk galt. Prøv igjen om et øyeblikk."
+  }
+}

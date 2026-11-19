@@ -1,0 +1,23 @@
+{
+  "meta-title": "{tank} af {nickname} på {map}: World of Tanks-replay",
+  "meta-title-battle": "{map}, {mode}, {date}: World of Tanks-kampreplay",
+  "meta-description": {
+    "win": "{nickname} vandt på {map} med {tank} ({mode}, {date}): {damage} skade, {kills} drab, {xp} erfaring.",
+    "loss": "{nickname} tabte på {map} med {tank} ({mode}, {date}): {damage} skade, {kills} drab, {xp} erfaring.",
+    "draw": "{nickname} spillede uafgjort på {map} med {tank} ({mode}, {date}): {damage} skade, {kills} drab, {xp} erfaring.",
+    "unknown": "{nickname} på {map} med {tank} ({mode}, {date}): {damage} skade, {kills} drab, {xp} erfaring."
+  },
+  "meta-description-battle": "{mode} på {map}, {date}.",
+  "mode-unknown": "World of Tanks",
+  "og-title": "{tank} på {map}",
+  "og-subtitle": "{nickname} · {damage} skade",
+  "meta-title-no-replay": "{tank} af {nickname} på {map}: World of Tanks-kamp",
+  "meta-description-replay": "Se replayet, begge hold og kampens rapport, og download .wotreplay-filen.",
+  "meta-description-no-replay": "Se begge hold, hvad hver kampvogn gjorde, og kampens rapport.",
+  "meta-title-battle-no-replay": "{map}, {mode}, {date}: World of Tanks-kamp",
+  "og-subtitle-battle": "{mode} · {date}",
+  "heading-player": "{nickname} i {tank} på {map}",
+  "recorded-by": "Optaget af",
+  "also-reported-by": "Også rapporteret af",
+  "reported-by": "Rapporteret af"
+}

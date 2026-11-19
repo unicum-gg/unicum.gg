@@ -87,6 +87,10 @@
       "label": "Najlepsi gracze",
       "description": "Klasyfikacja graczy wszech czasów"
     },
+    "battles": {
+      "label": "Bitwy",
+      "description": "Bitwy i powtórki udostępnione przez graczy"
+    },
     "players-rampage": {
       "description": "Kto zajął najwyższe miejsce w Rozwałce."
     }

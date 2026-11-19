@@ -87,6 +87,10 @@
       "label": "Najbolji igrači",
       "description": "Ранг-листа играча за све време"
     },
+    "battles": {
+      "label": "Borbi",
+      "description": "Bitke i snimci bitaka koje dele igrači"
+    },
     "players-rampage": {
       "description": "Ko ima najviši rang u režimu Boj do poslednjeg."
     }

@@ -1,0 +1,16 @@
+{
+  "meta-title": "World of Tanks csaták és visszajátszások ({region})",
+  "meta-description": "World of Tanks-visszajátszások {region} régióból, játékosok megosztásával: minden csata teljes jelentéssel, felszerelt felszereléssel és böngészőben megtekinthető visszajátszással. Szűrés tank, pálya és játékmód szerint, helyezés sebzés, támogatás, tapasztalat vagy megsemmisítések alapján.",
+  "og-title": "Csaták és visszajátszások",
+  "og-subtitle": "World of Tanks-visszajátszások {region} régióból",
+  "title": "World of Tanks {battles} és visszajátszások",
+  "title-battles": "csaták",
+  "intro": "Minden játékosok által megosztott csata teljes jelentéssel, az egyes tankokra felszerelt felszereléssel és közvetlenül itt megtekinthető visszajátszással. Helyezés sebzés vagy tapasztalat alapján, illetve szűkítés tankra, pályára vagy játékmódra.",
+  "about-title": "A visszajátszásokról",
+  "about-sources": "Minden itt található csatához tartozik .wotreplay fájl: bármelyik, az unicum.gg modot futtató játékos automatikusan megosztotta, vagy feltöltötte ezen az oldalon. Csak a végigjátszott csaták oszthatók meg, és csak olyan fiókkal, amely részt vett bennük.",
+  "about-page": "Egy csata megnyitásakor megjelenik mindkét csapat, a részletes csatajelentés és a pályán lejátszható visszajátszás, benne minden tank mozgásával, az őket megsemmisítő lövésekkel és a chattel. Semmit sem kell telepíteni, és nincs szükség a játék kliensverziójának egyeztetésére, a visszajátszás a böngészőben játszható le.",
+  "about-share": "Saját csatáid hozzáadásához tölts fel egy visszajátszást a játékod visszajátszásokat tartalmazó mappájából, vagy telepítsd az {mod} modot, hogy játék közben megosztásra kerüljenek.",
+  "about-share-mod": "unicum.gg mod",
+  "upload-mod": "Inkább minden csatát automatikusan töltenél fel? Az {mod} mod a végükön elküldi őket.",
+  "upload-mod-link": "A modunk"
+}

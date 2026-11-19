@@ -28,8 +28,8 @@
     "damage": "Poškození",
     "assisted": "Asistence",
     "blocked": "Blokováno",
-    "kills": "Zabití",
-    "spotted": "Odhalený",
+    "kills": "Zničení",
+    "spotted": "Odhaleno",
     "player": "Hráč",
     "survived": "Živý",
     "xp": "XP",
@@ -82,7 +82,7 @@
   "report": {
     "statistics": "Statistiky",
     "time": "Čas",
-    "earned": "Získané",
+    "earned": "Získané (standardní účet)",
     "shots": "Výstřelů",
     "hits-pens": "Přímé zásahy / průbojnosti",
     "splash": "Poškození výbuchem",
@@ -135,11 +135,11 @@
     "mark-movement": "Tato bitva"
   },
   "tab": {
+    "personal": "Osobní skóre",
     "teams": "Skóre týmu",
     "report": "Podrobná zpráva",
     "replay": "Záznam"
   },
-  "destroyed-list": "Zničeno: {names}",
   "replay": {
     "no-bounds": "Tato aréna nemá v katalogu uvedený rozsah, takže pozice nelze umístit na její minimapu.",
     "play": "Přehrát",
@@ -154,7 +154,63 @@
     "deaths-none": "Nikdo nebyl v této bitvě zničen.",
     "deaths-yet": "Všichni jsou stále aktivní.",
     "deaths-unknown": "vozidlo",
-    "deaths-destroyed": "Zničeno"
+    "deaths-destroyed": "Zničeno",
+    "restart": "Přehrát od začátku",
+    "spotted": "V dohledu",
+    "unspotted": "Mimo dohled",
+    "observed": "Odhaleno nepřítelem",
+    "estimated": "Odhadovaná pozice, mimo rozsah nahrávání",
+    "speed": "Rychlost přehrávání",
+    "hud": {
+      "hp": "Body výdrže",
+      "speed": "Rychlost",
+      "kmh": "{speed} km/h",
+      "damage": "Poškození",
+      "damage-hint": "Dosud. U nahrávajícího vychází z jeho vlastního průběhu bitvy, který vynechává zásahy cílů, jež nemohl vidět. U ostatních vychází ze zásahů zachycených nahráváním, které mohou být výrazně nižší než výsledky.",
+      "assisted": "Asistence",
+      "blocked": "Blokováno",
+      "final-hint": "Konečný údaj bitvy podle výsledků.",
+      "modules": "Moduly a posádka",
+      "seen-at": "jak je velitel nahrávání naposledy viděl, v {time}",
+      "state": {
+        "damaged": "Poškozeno",
+        "destroyed": "Zničeno",
+        "injured": "Zraněno"
+      },
+      "part": {
+        "engine": "Motory",
+        "ammoBay": "Muniční sklad",
+        "fuelTank": "Palivová nádrž",
+        "radio": "Rádia",
+        "leftTrack": "Levý pás",
+        "rightTrack": "Pravý pás",
+        "gun": "Děla",
+        "turretRotator": "Prstenec věže",
+        "surveyingDevice": "Vidění",
+        "commander": "Velitel",
+        "driver": "Řidič",
+        "radioman": "Radista",
+        "gunner": "Střelec",
+        "loader": "Nabíječ",
+        "track": "Pás"
+      }
+    },
+    "tab": {
+      "chat": "Chat",
+      "log": "Protokol poškození"
+    },
+    "log": {
+      "empty": "Zatím nebylo uděleno ani obdrženo žádné poškození.",
+      "kind": {
+        "dealt": "Způsobené poškození",
+        "received": "Obdržené poškození",
+        "blocked": "Blokováno díky pancéřování",
+        "assist": "Asistované poškození",
+        "crit": "Způsobené kritické zásahy",
+        "received-crit": "Obdržené kritické zásahy",
+        "module": "Zásah modulu"
+      }
+    }
   },
   "lineup": {
     "more": "+{count}",
@@ -162,5 +218,18 @@
     "heading": "Vozidla v této bitvě",
     "kills": "Zničeno",
     "time": "Čas"
-  }
+  },
+  "earnings": {
+    "title": "Výdělky",
+    "standard": "Standardní účet",
+    "with-bonuses": "S vašimi bonusy",
+    "credits": "Kredity",
+    "costs": "Opravy a zásoby",
+    "net": "Čisté kredity",
+    "xp": "Zkušenosti"
+  },
+  "destroyed-by-label": "Zničil",
+  "destroyed-list-label": "Zničil",
+  "replay-views": "{count} zobrazení",
+  "replay-downloads": "{count} stažení"
 }

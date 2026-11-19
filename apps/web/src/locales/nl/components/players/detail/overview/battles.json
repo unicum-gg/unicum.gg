@@ -82,7 +82,7 @@
   "report": {
     "statistics": "Statistieken",
     "time": "Tijd",
-    "earned": "Verdiend",
+    "earned": "Verdiend (standaardaccount)",
     "shots": "Schoten afgevuurd",
     "hits-pens": "Treffers / penetraties",
     "splash": "Spreidingsschade",
@@ -135,11 +135,11 @@
     "mark-movement": "Dit gevecht"
   },
   "tab": {
+    "personal": "Persoonlijke score",
     "teams": "Teamscore",
     "report": "Gedetailleerd rapport",
     "replay": "Replay"
   },
-  "destroyed-list": "Heeft {names} vernietigd",
   "replay": {
     "no-bounds": "Deze arena heeft geen omvang in de catalogus, dus de posities kunnen niet op de minimap worden geplaatst.",
     "play": "Spelen",
@@ -154,7 +154,63 @@
     "deaths-none": "Niemand is vernietigd in dit gevecht.",
     "deaths-yet": "Iedereen is nog in leven.",
     "deaths-unknown": "een voertuig",
-    "deaths-destroyed": "Vernietigd"
+    "deaths-destroyed": "Vernietigd",
+    "restart": "Vanaf het begin spelen",
+    "spotted": "In zicht",
+    "unspotted": "Uit het zicht",
+    "observed": "Gespot door de vijand",
+    "estimated": "geschatte positie, buiten het bereik van de opname",
+    "speed": "Afspeelsnelheid",
+    "hud": {
+      "hp": "Hitpoints",
+      "speed": "Snelheid",
+      "kmh": "{speed} km/u",
+      "damage": "Beschadig",
+      "damage-hint": "Tot nu toe. Voor de maker van de opname uit hun eigen gevechtsfeed, waarin treffers op doelen die ze niet konden zien ontbreken. Voor alle overige spelers uit de treffers die de opname heeft gehoord, wat aanzienlijk lager kan zijn dan de resultaten.",
+      "assisted": "Assistentie",
+      "blocked": "Geblokkeerd",
+      "final-hint": "Het definitieve cijfer van het gevecht, uit de resultaten.",
+      "modules": "Modules en bemanning",
+      "seen-at": "zoals de commandant die de opname maakte ze voor het laatst zag, op {time}",
+      "state": {
+        "damaged": "Beschadigd",
+        "destroyed": "Vernietigd",
+        "injured": "Gewond"
+      },
+      "part": {
+        "engine": "Motor",
+        "ammoBay": "Munitie rek",
+        "fuelTank": "Brandstoftank",
+        "radio": "Radio",
+        "leftTrack": "Linker rupsband",
+        "rightTrack": "Rechter rupsband",
+        "gun": "Kanon",
+        "turretRotator": "Koepelring",
+        "surveyingDevice": "Zicht",
+        "commander": "Commandant",
+        "driver": "Bestuurder",
+        "radioman": "Radiotelegrafist",
+        "gunner": "Schutter",
+        "loader": "Lader",
+        "track": "Rupsband"
+      }
+    },
+    "tab": {
+      "chat": "chat",
+      "log": "Schadelogboek"
+    },
+    "log": {
+      "empty": "Niets toegebracht of ontvangen tot nu toe.",
+      "kind": {
+        "dealt": "Toegebrachte schade",
+        "received": "Schade ontvangen",
+        "blocked": "Geblokkeerd door pantser",
+        "assist": "Assistentieschade",
+        "crit": "Kritieke treffers toegebracht",
+        "received-crit": "Ontvangen kritieke treffers",
+        "module": "Module geraakt"
+      }
+    }
   },
   "lineup": {
     "more": "+{count}",
@@ -162,5 +218,18 @@
     "heading": "Voertuigen in dit gevecht",
     "kills": "Vernietigd",
     "time": "Tijd"
-  }
+  },
+  "earnings": {
+    "title": "Inkomsten",
+    "standard": "Standaardaccount",
+    "with-bonuses": "Met je bonussen",
+    "credits": "Credits",
+    "costs": "Reparatie en bevoorrading",
+    "net": "Netto credits",
+    "xp": "Ervaring"
+  },
+  "destroyed-by-label": "Vernietigd door",
+  "destroyed-list-label": "Heeft vernietigd",
+  "replay-views": "{count} weergaven",
+  "replay-downloads": "{count} downloads"
 }

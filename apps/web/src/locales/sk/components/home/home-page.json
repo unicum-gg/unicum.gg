@@ -10,6 +10,13 @@
   "rating-scale": {
     "title": "Hodnotiaca škála"
   },
+  "replays": {
+    "title": "Záznamy",
+    "heading": "Znova si pozrite svoje bitky",
+    "description": "Každá bitka, ktorú hráči zdieľajú, obsahuje úplné poročilo, informácie o tom, čo mal každý tank nameščeno, a záznam, ktorý môžete sledovať v prehliadači. Nainštalujte si náš mod a zdieľajte svoje bitky po ich skončení.",
+    "browse": "Prehľadávať záznamy",
+    "mod": "Prenesi mod"
+  },
   "community": {
     "title": "Zapojte sa do komunity",
     "heading": "Spojte sa s hráčmi WoT",

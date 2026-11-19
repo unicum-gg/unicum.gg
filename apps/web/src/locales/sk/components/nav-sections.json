@@ -87,6 +87,10 @@
       "label": "Najlepší hráči",
       "description": "Rebríček hráčov za celé obdobie"
     },
+    "battles": {
+      "label": "Bitky",
+      "description": "Bitky a záznamy zdieľané hráčmi"
+    },
     "players-rampage": {
       "description": "Ktorí hráči boli najvyššie hodnotení v režime Rampage."
     }

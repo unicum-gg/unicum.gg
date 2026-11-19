@@ -1,0 +1,17 @@
+{
+  "title": "Bitky so záznamom ({count})",
+  "empty": "V tomto regióne zatiaľ nebol zdieľaný žiadny záznam.",
+  "empty-filtered": "Týmto filtrom nezodpovedá žiadna bitka.",
+  "sort": {
+    "damage": "Poškodenie",
+    "assist": "Asistenca",
+    "xp": "Skúsenosti",
+    "kills": "Zničenia",
+    "views": "Najviac zobrazení",
+    "downloads": "Najviac stiahnutí",
+    "recent": "Najnovšie"
+  },
+  "version-current": "Posodobitev {version} (aktuálne)",
+  "version": "Posodobitev {version}",
+  "version-all": "Všetky posodobitve"
+}

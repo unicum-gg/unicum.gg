@@ -1,0 +1,48 @@
+{
+  "result": {
+    "win": "Győzelem",
+    "loss": "Vereség",
+    "draw": "Döntetlen"
+  },
+  "ending": {
+    "extermination": {
+      "win": "Minden ellenséges jármű megsemmisítve",
+      "loss": "Minden szövetséges jármű megsemmisítve"
+    },
+    "base": {
+      "win": "Az ellenséges bázis elfoglalva",
+      "loss": "A saját bázisunkat elfoglalták"
+    },
+    "timeout": {
+      "win": "Lejárt az idő",
+      "loss": "Lejárt az idő"
+    }
+  },
+  "destroyed": "Megsemmisítve",
+  "survived": "Túlélte",
+  "performance": "Csata teljesítménye",
+  "unnamed": "Ismeretlen játékos",
+  "mark-label": {
+    "spotted": "Felderítve",
+    "assisted": "Segített sebzés",
+    "crits": "Kritikus találatok",
+    "damaged": "Okozott sebzés",
+    "blocked": "Blokkolt sebzés",
+    "stunned": "Kábítások",
+    "killed": "Megsemmisítve"
+  },
+  "mark-hint": {
+    "spotted": "Felderítve: felderítették ezt az ellenséget a csapatuk számára",
+    "assisted": "Segített sebzés: ezen az ellenségen a felderítésüknek, lánctalpazásuknak vagy kábításuknak köszönhetően okozott sebzés",
+    "crits": "Kritikus találatok: megrongálták ennek az ellenségnek egy modulját vagy egy legénységi tagját",
+    "damaged": "Az ezen az ellenségen okozott sebzés",
+    "blocked": "Az ellenség lövései által okozott, a páncélzatuk által blokkolt sebzés",
+    "stunned": "Alkalmak, amikor elkábították ezt az ellenséget",
+    "killed": "Megsemmisítették ezt az ellenséget"
+  },
+  "column": {
+    "player": "Játékos",
+    "vehicle": "Jármű"
+  },
+  "destroyed-by-label": "Megsemmisítette"
+}

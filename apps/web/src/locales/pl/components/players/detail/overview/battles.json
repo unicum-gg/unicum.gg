@@ -29,7 +29,7 @@
     "assisted": "Asysta",
     "blocked": "Blokowane",
     "kills": "Zniszczenia",
-    "spotted": "Wykryty",
+    "spotted": "Wykryte",
     "player": "Gracz",
     "survived": "Żywy",
     "xp": "XP",
@@ -82,7 +82,7 @@
   "report": {
     "statistics": "Statystyki",
     "time": "Czas",
-    "earned": "Zdobyte",
+    "earned": "Zdobyte (konto standardowe)",
     "shots": "Oddane strzały",
     "hits-pens": "Trafienia bezpośrednie / penetracje",
     "splash": "Uszkodzenia odłamkowe",
@@ -135,11 +135,11 @@
     "mark-movement": "Ta bitwa"
   },
   "tab": {
+    "personal": "Wynik osobisty",
     "teams": "Wynik drużyny",
     "report": "Raport szczegółowy",
     "replay": "Powtórka"
   },
-  "destroyed-list": "Zniszczone przez niego: {names}",
   "replay": {
     "no-bounds": "Ta arena nie ma określonego zasięgu w katalogu, więc nie można znaleźć dla pozycji miejsca na jej minimapie.",
     "play": "Graj",
@@ -154,7 +154,63 @@
     "deaths-none": "Nikt nie został zniszczony w tej bitwie.",
     "deaths-yet": "Wszyscy są nadal żywi.",
     "deaths-unknown": "pojazd",
-    "deaths-destroyed": "Zniszczony"
+    "deaths-destroyed": "Zniszczony",
+    "restart": "Graj od początku",
+    "spotted": "W zasięgu wzroku",
+    "unspotted": "Poza zasięgiem wzroku",
+    "observed": "Wykryte przez przeciwnika",
+    "estimated": "szacowana pozycja, poza zakresem nagrywania",
+    "speed": "Prędkość odtwarzania",
+    "hud": {
+      "hp": "Punkty wytrzymałości",
+      "speed": "Prędkość",
+      "kmh": "{speed} km/h",
+      "damage": "Zadane uszkodzenia",
+      "damage-hint": "Do tej pory. Dla rejestrującego, na podstawie jego własnego kanału bitwy, który pomija trafienia w cele, których nie mógł zobaczyć. Dla wszystkich innych, na podstawie trafień zarejestrowanych przez nagrywanie, które mogą znacznie odbiegać od wyników.",
+      "assisted": "Asysta",
+      "blocked": "Blokowane",
+      "final-hint": "Końcowa liczba z bitwy, na podstawie wyników.",
+      "modules": "Moduły i załoga",
+      "seen-at": "w stanie, w jakim dowódca rejestrującego widział je ostatnio, o {time}",
+      "state": {
+        "damaged": "Uszkodzony",
+        "destroyed": "Zniszczony",
+        "injured": "Ranny"
+      },
+      "part": {
+        "engine": "Silniki",
+        "ammoBay": "Magazyn amunicji",
+        "fuelTank": "Zbiornik paliwa",
+        "radio": "Radia",
+        "leftTrack": "Lewa gąsienica",
+        "rightTrack": "Prawa gąsienica",
+        "gun": "Działa",
+        "turretRotator": "Pierścień wieży",
+        "surveyingDevice": "Widzenie",
+        "commander": "Dowódca",
+        "driver": "Kierowca",
+        "radioman": "Radiooperator",
+        "gunner": "Celowniczy",
+        "loader": "Ładowniczy",
+        "track": "Śledź"
+      }
+    },
+    "tab": {
+      "chat": "Czat",
+      "log": "Dziennik uszkodzeń"
+    },
+    "log": {
+      "empty": "Nic jeszcze nie zadano ani nie otrzymano.",
+      "kind": {
+        "dealt": "Obrażenia zadane",
+        "received": "Otrzymane uszkodzenia",
+        "blocked": "Blokowane przez pancerz",
+        "assist": "Obrażenia z asysty",
+        "crit": "Trafienia krytyczne zadane",
+        "received-crit": "Otrzymane trafienia krytyczne",
+        "module": "Trafienie modułu"
+      }
+    }
   },
   "lineup": {
     "more": "+{count}",
@@ -162,5 +218,18 @@
     "heading": "Pojazdy w tej bitwie",
     "kills": "Zniszczony",
     "time": "Czas"
-  }
+  },
+  "earnings": {
+    "title": "Zarobki",
+    "standard": "Konto standardowe",
+    "with-bonuses": "Z Twoimi bonusami",
+    "credits": "Kredyty",
+    "costs": "Naprawa i zaopatrzenie",
+    "net": "Kredyty netto",
+    "xp": "Doświadczenie"
+  },
+  "destroyed-by-label": "Zniszczony przez",
+  "destroyed-list-label": "Zniszczył",
+  "replay-views": "{count} wyświetleń",
+  "replay-downloads": "{count} pobrań"
 }

@@ -1,0 +1,19 @@
+{
+  "title": "Comentarii",
+  "title-count": "Comentarii ({count})",
+  "empty": "Niciun comentariu deocamdată. Ce părere ai despre această bătălie?",
+  "in-battle": "A jucat în această bătălie",
+  "pending": "În așteptarea moderării, doar tu îl poți vedea",
+  "rejected": "Nepublicat",
+  "delete": "Șterge",
+  "log-in": "Conectează-te pentru a comenta",
+  "placeholder": "Spune ceva despre această bătălie…",
+  "moderated": "Comentariile sunt citite de un moderator înainte de a fi publicate.",
+  "send": "Publică comentariul",
+  "sending": "Se publică…",
+  "error": {
+    "rate-limited": "Ai publicat multe comentarii în ultima oră. Încearcă din nou puțin mai târziu.",
+    "unauthenticated": "Sesiunea ta a expirat. Conectează-te din nou.",
+    "unknown": "Ceva nu a funcționat. Încearcă din nou peste un moment."
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "title": "Komentáre",
+  "title-count": "Komentáre ({count})",
+  "empty": "Zatiaľ žiadny komentár. Čo si myslíte o tejto bitke?",
+  "in-battle": "Odohrané v tejto bitke",
+  "pending": "Čaká na moderovanie, vidíte ho iba vy",
+  "rejected": "Nebolo zverejnené",
+  "delete": "Odstrániť",
+  "log-in": "Prihlásiť sa a komentovať",
+  "placeholder": "Napíšte niečo o tejto bitke…",
+  "moderated": "Komentáre pred zverejnením číta moderátor.",
+  "send": "Zverejniť komentár",
+  "sending": "Zverejňuje sa…",
+  "error": {
+    "rate-limited": "Za poslednú hodinu ste zverejnili veľa komentárov. Skúste to znova o niečo neskôr.",
+    "unauthenticated": "Platnosť vašej relácie vypršala. Prihláste sa znova.",
+    "unknown": "Niečo sa pokazilo. Skúste to znova o chvíľu."
+  }
+}

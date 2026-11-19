@@ -1,0 +1,17 @@
+{
+  "title": "Bitvy se záznamem ({count})",
+  "empty": "V tomto regionu zatím nebyl sdílen žádný záznam.",
+  "empty-filtered": "Žádná bitva neodpovídá těmto filtrům.",
+  "sort": {
+    "damage": "Poškození",
+    "assist": "Asistence",
+    "xp": "Zkušenosti",
+    "kills": "Zničení",
+    "views": "Nejvíce zobrazení",
+    "downloads": "Nejvíce stažení",
+    "recent": "Nejnovější"
+  },
+  "version-current": "Aktualizovat {version} (aktuální)",
+  "version": "Aktualizovat {version}",
+  "version-all": "Všechny aktualizace"
+}

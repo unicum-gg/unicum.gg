@@ -76,13 +76,13 @@
   },
   "close": "Cerrar",
   "survived-the-battle": "Sobrevivió a la batalla",
-  "destroyed": "Destruidos",
+  "destroyed": "Destruido",
   "destroyed-by": "Destruido por {nickname}",
   "squad": "Pelotón {number}",
   "report": {
     "statistics": "Estadísticas",
     "time": "Tiempo",
-    "earned": "Obtenido",
+    "earned": "Obtenido, cuenta estándar",
     "shots": "Disparos efectuados",
     "hits-pens": "Impactos directos / penetraciones",
     "splash": "Daño de explosión",
@@ -135,11 +135,11 @@
     "mark-movement": "Esta batalla"
   },
   "tab": {
+    "personal": "Puntuación personal",
     "teams": "Puntuación del equipo",
     "report": "Informe detallado",
     "replay": "Repetición"
   },
-  "destroyed-list": "Ha destruido {names}",
   "replay": {
     "no-bounds": "Esta arena no tiene extensión en el catálogo, por lo que no se puede colocar las posiciones en su minimapa.",
     "play": "Jugar",
@@ -154,7 +154,63 @@
     "deaths-none": "No hubo vehículos destruidos en esta batalla.",
     "deaths-yet": "Todos siguen vivos.",
     "deaths-unknown": "un vehículo",
-    "deaths-destroyed": "Destruidos"
+    "deaths-destroyed": "Destruido",
+    "restart": "Jugar desde el principio",
+    "spotted": "A la vista",
+    "unspotted": "Fuera de la vista",
+    "observed": "Detectado por el enemigo",
+    "estimated": "posición estimada, fuera del alcance de lo que se estaba grabando",
+    "speed": "Velocidad de reproducción",
+    "hud": {
+      "hp": "Puntos de vida",
+      "speed": "Velocidad",
+      "kmh": "{speed} km/h",
+      "damage": "Daño",
+      "damage-hint": "Hasta ahora. Para quien estaba grabando, a partir de su propio registro de batalla, que no incluye los impactos contra objetivos que no podía ver. Para cualquier otro, a partir de los impactos que captó la grabación, que pueden quedar muy por debajo de los resultados.",
+      "assisted": "Con asistencia",
+      "blocked": "Bloqueado",
+      "final-hint": "La cifra final de la batalla, según los resultados.",
+      "modules": "Módulos y tripulación",
+      "seen-at": "como los vio por última vez el comandante que estaba grabando, a las {time}",
+      "state": {
+        "damaged": "Dañado",
+        "destroyed": "Destruido",
+        "injured": "Herido"
+      },
+      "part": {
+        "engine": "Motor",
+        "ammoBay": "Bastidor de munición",
+        "fuelTank": "Depósito de combustible",
+        "radio": "Radio",
+        "leftTrack": "Oruga ausente",
+        "rightTrack": "Oruga derecha",
+        "gun": "Cañón",
+        "turretRotator": "Anillo de torreta",
+        "surveyingDevice": "Visión",
+        "commander": "Comandante",
+        "driver": "Conductor",
+        "radioman": "Operador de radio",
+        "gunner": "Artillero",
+        "loader": "Cargador",
+        "track": "Oruga"
+      }
+    },
+    "tab": {
+      "chat": "chat",
+      "log": "Registro de daño"
+    },
+    "log": {
+      "empty": "Nada infligido o recibido todavía.",
+      "kind": {
+        "dealt": "Daño causado",
+        "received": "Daño recibido",
+        "blocked": "Bloqueado por el blindaje",
+        "assist": "Daño asistido",
+        "crit": "Impactos críticos infligidos",
+        "received-crit": "Impactos críticos recibidos",
+        "module": "Impacto en el módulo"
+      }
+    }
   },
   "lineup": {
     "more": "+{count}",
@@ -162,5 +218,18 @@
     "heading": "Vehículos en esta batalla",
     "kills": "Destruidos",
     "time": "Tiempo"
-  }
+  },
+  "earnings": {
+    "title": "Ganancias",
+    "standard": "Cuenta estándar",
+    "with-bonuses": "Con tus bonificaciones",
+    "credits": "Créditos",
+    "costs": "Reparaciones y suministros",
+    "net": "Créditos netos",
+    "xp": "Experiencia"
+  },
+  "destroyed-by-label": "Destruido por",
+  "destroyed-list-label": "Ha destruido",
+  "replay-views": "{count} vistas",
+  "replay-downloads": "{count} descargas"
 }

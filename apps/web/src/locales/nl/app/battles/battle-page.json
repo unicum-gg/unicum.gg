@@ -1,0 +1,23 @@
+{
+  "meta-title": "{tank} door {nickname} op {map}: herhaling van World of Tanks",
+  "meta-title-battle": "{map}, {mode}, {date}: herhaling van een World of Tanks-gevecht",
+  "meta-description": {
+    "win": "{nickname} won op {map} met {tank} ({mode}, {date}): {damage} schade, {kills} vernietigingen, {xp} ervaring.",
+    "loss": "{nickname} verloor op {map} met {tank} ({mode}, {date}): {damage} schade, {kills} vernietigingen, {xp} ervaring.",
+    "draw": "{nickname} speelde gelijk op {map} met {tank} ({mode}, {date}): {damage} schade, {kills} vernietigingen, {xp} ervaring.",
+    "unknown": "{nickname} op {map} met {tank} ({mode}, {date}): {damage} schade, {kills} vernietigingen, {xp} ervaring."
+  },
+  "meta-description-battle": "{mode} op {map}, {date}.",
+  "mode-unknown": "World of Tanks",
+  "og-title": "{tank} op {map}",
+  "og-subtitle": "{nickname} · {damage} schade",
+  "meta-title-no-replay": "{tank} door {nickname} op {map}: World of Tanks-gevecht",
+  "meta-description-replay": "Bekijk de herhaling, beide teams en het gevechtsrapport, en download de .wotreplay.",
+  "meta-description-no-replay": "Bekijk beide teams, wat elke tank deed en het gevechtsrapport.",
+  "meta-title-battle-no-replay": "{map}, {mode}, {date}: World of Tanks-gevecht",
+  "og-subtitle-battle": "{mode} · {date}",
+  "heading-player": "Gevecht van {nickname} met {tank} op {map}",
+  "recorded-by": "Opgenomen door",
+  "also-reported-by": "Ook gemeld door",
+  "reported-by": "Gerapporteerd door"
+}

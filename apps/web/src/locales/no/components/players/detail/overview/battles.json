@@ -82,7 +82,7 @@
   "report": {
     "statistics": "Statistikk",
     "time": "Tid",
-    "earned": "Opptjent",
+    "earned": "Opptjent (standardkonto)",
     "shots": "Avfyrte skudd",
     "hits-pens": "Direkte treff / gjennomslag",
     "splash": "Sprutskade",
@@ -135,11 +135,11 @@
     "mark-movement": "Denne kampen"
   },
   "tab": {
+    "personal": "Personlig poengsum",
     "teams": "Lagpoengsum",
     "report": "Detaljert rapport",
     "replay": "Replay"
   },
-  "destroyed-list": "Har ødelagt {names}",
   "replay": {
     "no-bounds": "Denne arenaen har ingen utstrekning i katalogen, så posisjonene kan ikke få plass på minikartet.",
     "play": "Spill av",
@@ -154,7 +154,63 @@
     "deaths-none": "Ingen ble ødelagt i denne kampen.",
     "deaths-yet": "Alle er fortsatt live.",
     "deaths-unknown": "et kjøretøy",
-    "deaths-destroyed": "Bekjempet"
+    "deaths-destroyed": "Bekjempet",
+    "restart": "Spill av fra start",
+    "spotted": "I sikte",
+    "unspotted": "Ute av syne",
+    "observed": "Oppdaget av fienden",
+    "estimated": "Estimert posisjon, utenfor opptakets rekkevidde",
+    "speed": "Avspillingshastighet",
+    "hud": {
+      "hp": "Livpoeng",
+      "speed": "Hastighet",
+      "kmh": "{speed} km/t",
+      "damage": "Skade",
+      "damage-hint": "Så langt. For opptakeren, fra deres eget kampfeed, som utelater treff på mål de ikke kunne se. For alle andre, fra treffene opptaket registrerte, som kan være langt unna resultatene.",
+      "assisted": "Assistert",
+      "blocked": "Blokkerte",
+      "final-hint": "Kampens endelige tall, fra resultatene.",
+      "modules": "Moduler og mannskap",
+      "seen-at": "slik de sist ble sett av opptakerens kommandør, kl. {time}",
+      "state": {
+        "damaged": "Skadet",
+        "destroyed": "Bekjempet",
+        "injured": "Skadet"
+      },
+      "part": {
+        "engine": "Motor",
+        "ammoBay": "Ammunisjonsstativ",
+        "fuelTank": "Drivstofftank",
+        "radio": "Radio",
+        "leftTrack": "Forlatt belte",
+        "rightTrack": "Høyre belte",
+        "gun": "Kanon",
+        "turretRotator": "Tårnkrans",
+        "surveyingDevice": "Syn",
+        "commander": "Kommandør",
+        "driver": "Sjåfør",
+        "radioman": "Radiooperatør",
+        "gunner": "Skytter",
+        "loader": "Lader",
+        "track": "Belte"
+      }
+    },
+    "tab": {
+      "chat": "Chat",
+      "log": "Skadelogg"
+    },
+    "log": {
+      "empty": "Ingenting utdelt eller tatt ennå.",
+      "kind": {
+        "dealt": "Utdelt skade",
+        "received": "Skade mottatt",
+        "blocked": "Blokkert av panser",
+        "assist": "Assistert skade",
+        "crit": "Kritiske treff utdelt",
+        "received-crit": "Kritiske treff mottatt",
+        "module": "Modultreff"
+      }
+    }
   },
   "lineup": {
     "more": "+{count}",
@@ -162,5 +218,18 @@
     "heading": "Kjøretøy i denne kampen",
     "kills": "Bekjempet",
     "time": "Tid"
-  }
+  },
+  "earnings": {
+    "title": "Inntjening",
+    "standard": "Standardkonto",
+    "with-bonuses": "Med bonusene dine",
+    "credits": "Kreditter",
+    "costs": "Reparasjoner og forsyninger",
+    "net": "Netto credits",
+    "xp": "Erfaring"
+  },
+  "destroyed-by-label": "Ødelagt av",
+  "destroyed-list-label": "Har bekjempet",
+  "replay-views": "{count} visninger",
+  "replay-downloads": "{count} nedlastinger"
 }

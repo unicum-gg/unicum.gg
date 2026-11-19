@@ -1,0 +1,6 @@
+{
+  "download": "Tekrarı indir",
+  "version": "{version} sürümünde oynanır",
+  "views": "Görüntülenme: {value}",
+  "downloads": "İndirmeler: {value}"
+}

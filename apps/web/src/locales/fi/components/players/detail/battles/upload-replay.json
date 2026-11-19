@@ -1,0 +1,23 @@
+{
+  "trigger": "Lataa uusinta",
+  "title": "Lataa uusinta",
+  "description": "Lisää yksi omista taisteluistasi sen .wotreplay-tiedostosta, modia ei tarvita. Se saa oman sivun, jolla on uusinta valmiina jaettavaksi.",
+  "drop": "Pudota .wotreplay-tiedosto tähän tai napsauta valitaksesi yhden",
+  "hint": "Vain omat uusintasi, taistelusta joka pelattiin loppuun asti. Ne ovat pelihakemistosi replays-kansiossa.",
+  "send": "Lataa",
+  "sending": "Ladataan…",
+  "error": {
+    "not_collected": "Uusintojen lataaminen ei ole tällä hetkellä saatavilla.",
+    "archive_full": "Uusintatallennustilamme on tällä hetkellä täysi. Yritä myöhemmin uudelleen.",
+    "not_a_replay": "Tämä tiedosto ei ole luettavissa oleva World of Tanks -uusinta.",
+    "unfinished": "Tämä uusinta tallennettiin ennen taistelun päättymistä, joten siinä ei ole tuloksia.",
+    "not_yours": "Tämän uusinnan tallensi toinen tili. Voit ladata vain omia uusintojasi.",
+    "wrong_region": "Tämä taistelu pelattiin eri alueella kuin se, jolla kirjautuneen tilisi taistelut pelataan.",
+    "too_old": "Tämä taistelu on vanhempi kuin säilyttämämme taistelut.",
+    "malformed": "Emme voineet lukea tämän uusinnan tuloksia.",
+    "too_large": "Tämä tiedosto on suurempi kuin suurin hyväksymämme uusinta (9 MB).",
+    "too_many_uploads": "Olet ladannut paljon viimeisen tunnin aikana. Yritä hetken kuluttua uudelleen.",
+    "unauthenticated": "Pelisessiosi on vanhentunut. Kirjaudu uudelleen.",
+    "unknown": "Jotain meni pieleen. Yritä hetken kuluttua uudelleen."
+  }
+}

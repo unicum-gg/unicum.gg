@@ -1,0 +1,16 @@
+{
+  "meta-title": "Bitke i snimci bitaka World of Tanks ({region})",
+  "meta-description": "Snimci bitaka World of Tanks iz regiona {region}, koje su podelili igrači: svaka bitka sa potpunim izveštajem, opremom tenka i snimkom bitke koji možete gledati u pregledaču. Filtrirajte po tenku, mapi i režimu, a rangirajte po šteti, asistenciji, iskustvu ili uništenjima.",
+  "og-title": "Bitke i snimci bitaka",
+  "og-subtitle": "Snimci bitaka World of Tanks iz regiona {region}",
+  "title": "{battles} i snimci bitaka World of Tanks",
+  "title-battles": "bitke",
+  "intro": "Svaka bitka koju su igrači podelili, sa potpunim izveštajem, opremom svakog tenka i snimkom bitke koji možete gledati upravo ovde. Rangirajte ih po šteti ili iskustvu, ili ih suzite na tenk, mapu ili režim.",
+  "about-title": "O ovim snimcima bitaka",
+  "about-sources": "Svaka bitka ovde dolazi sa svojom .wotreplay datotekom: bilo koji igrač koji koristi unicum.gg mod podelio ju je automatski ili ju je otpremio na ovu stranicu. Mogu se podeliti samo bitke odigrane do kraja i to samo sa naloga koji je učestvovao u njima.",
+  "about-page": "Otvaranje bitke prikazuje oba tima, detaljan izveštaj bitke i snimak bitke na mapi, sa kretanjem svakog tenka, hicima koji su ih uništili i četom. Ništa za instaliranje i nema potrebe za usklađivanjem verzije klijenta igre: snimak bitke se reprodukuje u pregledaču.",
+  "about-share": "Da biste dodali sopstvene bitke, otpremite snimak bitke iz fascikle sa snimcima bitaka svoje igre ili instalirajte {mod} da se dele dok igrate.",
+  "about-share-mod": "unicum.gg mod",
+  "upload-mod": "Želite da se svaka bitka otpremi zasebno? {mod} ih šalje čim se završe.",
+  "upload-mod-link": "Naš mod"
+}

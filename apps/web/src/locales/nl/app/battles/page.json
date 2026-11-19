@@ -1,0 +1,16 @@
+{
+  "meta-title": "World of Tanks-gevechten en herhalingen ({region})",
+  "meta-description": "World of Tanks-herhalingen uit {region}, gedeeld door spelers: elk gevecht met het volledige rapport, de gemonteerde uitrusting en een herhaling die je in je browser kunt bekijken. Filter op tank, kaart en speltype, en rangschik op schade, assistentie, ervaring of vernietigingen.",
+  "og-title": "Gevechten en herhalingen",
+  "og-subtitle": "World of Tanks-herhalingen uit {region}",
+  "title": "{battles} en herhalingen van World of Tanks",
+  "title-battles": "gevechten",
+  "intro": "Elk gevecht dat spelers hebben gedeeld, met het volledige rapport, wat op elke tank gemonteerd was en een herhaling die je hier kunt bekijken. Rangschik ze op schade of ervaring, of beperk ze tot een tank, een kaart of een speltype.",
+  "about-title": "Over deze herhalingen",
+  "about-sources": "Elk gevecht hier bevat het .wotreplay-bestand: een speler die de unicum.gg-mod actief heeft, heeft het automatisch gedeeld of het op deze pagina geüpload. Alleen gevechten die tot het einde zijn gespeeld kunnen worden gedeeld, en alleen door een account dat eraan deelnam.",
+  "about-page": "Als je een gevecht opent, zie je beide teams, het gedetailleerde gevechtsrapport en een herhaling op de kaart, met de verplaatsingen van elke tank, de schoten waardoor ze werden vernietigd en de chat. Niets om te installeren en geen spelclientversie die moet overeenkomen: de herhaling wordt in de browser afgespeeld.",
+  "about-share": "Voeg je eigen gevechten toe door een herhaling uit de map met herhalingen van je spel te uploaden, of installeer de {mod} zodat ze tijdens het spelen worden gedeeld.",
+  "about-share-mod": "unicum.gg-mod",
+  "upload-mod": "Wil je liever elk gevecht automatisch laten uploaden? {mod} verstuurt ze zodra ze eindigen.",
+  "upload-mod-link": "Onze mod"
+}

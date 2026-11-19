@@ -1,0 +1,23 @@
+{
+  "meta-title": "Panssarivaunu {tank}, pelaajana {nickname}, kartalla {map}: World of Tanks -uusinta",
+  "meta-title-battle": "{map}, {mode}, {date}: World of Tanks -taistelun uusinta",
+  "meta-description": {
+    "win": "Pelaaja {nickname} voitti kartalla {map} panssarivaunulla {tank} ({mode}, {date}): {damage} vahinkoa, {kills} tuhoa, {xp} kokemuspistettä.",
+    "loss": "Pelaaja {nickname} hävisi kartalla {map} panssarivaunulla {tank} ({mode}, {date}): {damage} vahinkoa, {kills} tuhoa, {xp} kokemuspistettä.",
+    "draw": "Pelaaja {nickname} päätyi tasapeliin kartalla {map} panssarivaunulla {tank} ({mode}, {date}): {damage} vahinkoa, {kills} tuhoa, {xp} kokemuspistettä.",
+    "unknown": "Pelaaja {nickname} kartalla {map} panssarivaunulla {tank} ({mode}, {date}): {damage} vahinkoa, {kills} tuhoa, {xp} kokemuspistettä."
+  },
+  "meta-description-battle": "{mode} kartalla {map}, {date}.",
+  "mode-unknown": "World of Tanks",
+  "og-title": "Panssarivaunu {tank} kartalla {map}",
+  "og-subtitle": "Pelaaja {nickname} · {damage} vahinkoa",
+  "meta-title-no-replay": "Panssarivaunu {tank}, pelaajana {nickname}, kartalla {map}: World of Tanks -taistelu",
+  "meta-description-replay": "Katso uusinta, molemmat joukkueet ja taisteluraportti sekä lataa .wotreplay.",
+  "meta-description-no-replay": "Katso molemmat joukkueet, mitä jokainen panssarivaunu teki, ja taisteluraportti.",
+  "meta-title-battle-no-replay": "{map}, {mode}, {date}: World of Tanks -taistelu",
+  "og-subtitle-battle": "{mode} · {date}",
+  "heading-player": "Nimimerkki {nickname} panssarivaunulla {tank} kartalla {map}",
+  "recorded-by": "Tallentaja",
+  "also-reported-by": "Ilmoittaja myös",
+  "reported-by": "Ilmoittaja"
+}

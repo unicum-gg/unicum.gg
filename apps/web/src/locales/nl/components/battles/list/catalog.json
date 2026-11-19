@@ -1,0 +1,17 @@
+{
+  "title": "Gevechten met een herhaling ({count})",
+  "empty": "Er is nog geen herhaling gedeeld in deze regio.",
+  "empty-filtered": "Geen gevecht komt overeen met deze filters.",
+  "sort": {
+    "damage": "Beschadig",
+    "assist": "Assistentie",
+    "xp": "Ervaring",
+    "kills": "Vernietigingen",
+    "views": "Meest bekeken",
+    "downloads": "Meest gedownload",
+    "recent": "Nieuwste"
+  },
+  "version-current": "Updaten {version} (huidig)",
+  "version": "Updaten {version}",
+  "version-all": "Alle updates"
+}

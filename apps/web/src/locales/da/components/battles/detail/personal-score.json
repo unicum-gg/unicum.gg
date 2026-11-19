@@ -1,0 +1,48 @@
+{
+  "result": {
+    "win": "Sejr",
+    "loss": "Nederlag",
+    "draw": "Uafgjort"
+  },
+  "ending": {
+    "extermination": {
+      "win": "Alle fjendtlige køretøjer ødelagt",
+      "loss": "Alle allierede køretøjer ødelagt"
+    },
+    "base": {
+      "win": "Fjendens base erobret",
+      "loss": "Vores base blev erobret"
+    },
+    "timeout": {
+      "win": "Tiden udløb",
+      "loss": "Tiden udløb"
+    }
+  },
+  "destroyed": "Ødelagt",
+  "survived": "Overlevede",
+  "performance": "Kamppræstation",
+  "unnamed": "Ukendt spiller",
+  "mark-label": {
+    "spotted": "Opdaget",
+    "assisted": "Assisteret skade",
+    "crits": "Kritiske træffere",
+    "damaged": "Uddelt skade",
+    "blocked": "Blokeret skade fra den",
+    "stunned": "Bedøvelser",
+    "killed": "Ødelagt"
+  },
+  "mark-hint": {
+    "spotted": "Opdaget: de oplyste denne fjende for deres hold",
+    "assisted": "Assisteret skade: skade uddelt til denne fjende takket være deres spotting, larvebåndsskud eller bedøvelse",
+    "crits": "Kritiske træffere: de beskadigede et modul eller et besætningsmedlem på denne fjende",
+    "damaged": "Skade uddelt til denne fjende",
+    "blocked": "Skade, som deres panser blokerede fra denne fjendes skud",
+    "stunned": "Antal gange, de bedøvede denne fjende",
+    "killed": "De ødelagde denne fjende"
+  },
+  "column": {
+    "player": "Spiller",
+    "vehicle": "Køretøj"
+  },
+  "destroyed-by-label": "Ødelagt af"
+}

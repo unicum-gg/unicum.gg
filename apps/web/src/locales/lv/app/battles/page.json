@@ -1,0 +1,16 @@
+{
+  "meta-title": "World of Tanks kaujas un atkārtojumi ({region})",
+  "meta-description": "World of Tanks atkārtojumi no reģiona {region}, ko koplietojuši spēlētāji: katra kauja ar pilnu ziņojumu, uzstādīto aprīkojumu un atkārtojumu, ko var skatīties pārlūkprogrammā. Filtrē pēc tanka, kartes un režīma, kārto pēc bojājumiem, palīdzības, pieredzes vai iznīcinātajiem.",
+  "og-title": "Kaujas un atkārtojumi",
+  "og-subtitle": "World of Tanks atkārtojumi no reģiona {region}",
+  "title": "World of Tanks {battles} un atkārtojumi",
+  "title-battles": "kaujas",
+  "intro": "Katra spēlētāju koplietotā kauja ar pilnu ziņojumu, informāciju par katram tankam uzstādīto aprīkojumu un atkārtojumu, ko vari skatīties tepat. Kārto pēc bojājumiem vai pieredzes, vai sašaurini izvēli līdz tankam, kartei vai režīmam.",
+  "about-title": "Par šiem atkārtojumiem",
+  "about-sources": "Katrai šeit esošajai kaujai ir savs .wotreplay fails: vai nu spēlētājs, kuram darbojas unicum.gg mod, to koplietojis automātiski, vai arī augšupielādējis šajā lapā. Koplietot var tikai līdz galam izspēlētas kaujas, turklāt to var darīt tikai konts, kas tajās piedalījās.",
+  "about-page": "Atverot kauju, tiek parādītas abas komandas, detalizēts kaujas ziņojums un atkārtojums kartē ar katra tanka pārvietošanos, šāvieniem, kas tos iznīcināja, un tērzēšanu. Nekas nav jāinstalē un nav jāsaskaņo spēles klienta versija, atkārtojums tiek atskaņots pārlūkprogrammā.",
+  "about-share": "Lai pievienotu savas kaujas, augšupielādē atkārtojumu no savas spēles atkārtojumu mapes vai instalē {mod}, lai tie tiktu koplietoti spēles laikā.",
+  "about-share-mod": "unicum.gg mod",
+  "upload-mod": "Vai vēlies, lai katra kauja tiktu augšupielādēta automātiski? {mod} nosūta tās, tiklīdz tās beidzas.",
+  "upload-mod-link": "Mūsu mod"
+}

@@ -1,0 +1,19 @@
+{
+  "title": "Kommentit",
+  "title-count": "Kommentit ({count})",
+  "empty": "Ei vielä kommentteja. Mitä mieltä olet tästä taistelusta?",
+  "in-battle": "Pelasi tässä taistelussa",
+  "pending": "Odottaa moderointia, vain sinä voit nähdä sen",
+  "rejected": "Ei julkaistu",
+  "delete": "Poista",
+  "log-in": "Kirjaudu sisään kommentoidaksesi",
+  "placeholder": "Sano jotain tästä taistelusta…",
+  "moderated": "Moderaattori lukee kommentit ennen niiden julkaisua.",
+  "send": "Lähetä kommentti",
+  "sending": "Lähetetään…",
+  "error": {
+    "rate-limited": "Olet lähettänyt viimeisen tunnin aikana paljon kommentteja. Yritä uudelleen hieman myöhemmin.",
+    "unauthenticated": "Pelisessiosi on vanhentunut. Kirjaudu uudelleen sisään.",
+    "unknown": "Jotain meni pieleen. Yritä hetken kuluttua uudelleen."
+  }
+}

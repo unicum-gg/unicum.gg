@@ -87,6 +87,10 @@
       "label": "Người chơi hàng đầu",
       "description": "Bảng xếp hạng người chơi mọi thời điểm"
     },
+    "battles": {
+      "label": "Số trận",
+      "description": "Các trận đấu và bản phát lại được người chơi chia sẻ"
+    },
     "players-rampage": {
       "description": "Ai được xếp hạng cao nhất trong Chiến đấu Tới cùng."
     }

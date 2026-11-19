@@ -87,6 +87,10 @@
       "label": "Meilleurs joueurs",
       "description": "Classement des joueurs de tous les temps"
     },
+    "battles": {
+      "label": "Batailles",
+      "description": "Batailles et replays partagés par les joueurs"
+    },
     "players-rampage": {
       "description": "Qui a obtenu le meilleur classement en Ravages."
     }

@@ -10,6 +10,13 @@
   "rating-scale": {
     "title": "Hodnotící škála"
   },
+  "replays": {
+    "title": "Záznamy",
+    "heading": "Znovu sledujte své bitvy",
+    "description": "Každá bitva, kterou hráči sdílejí, obsahuje úplné hlášení, co měl každý tank osazeno, a záznam, který můžete sledovat v prohlížeči. Nainstalujte si náš mod, abyste mohli své záznamy sdílet po skončení každé bitvy.",
+    "browse": "Procházet záznamy",
+    "mod": "Stáhnout mod"
+  },
   "community": {
     "title": "Připojte se ke komunitě",
     "heading": "Spojte se s hráči WoT",

@@ -1,0 +1,48 @@
+{
+  "result": {
+    "win": "Seger",
+    "loss": "Förlust",
+    "draw": "Oavgjort"
+  },
+  "ending": {
+    "extermination": {
+      "win": "Alla fiendens fordon förstörda",
+      "loss": "Alla allierade fordon förstörda"
+    },
+    "base": {
+      "win": "Fiendens bas erövrad",
+      "loss": "Vår bas erövrad"
+    },
+    "timeout": {
+      "win": "Tiden tog slut",
+      "loss": "Tiden tog slut"
+    }
+  },
+  "destroyed": "Förstörd",
+  "survived": "Överlevde",
+  "performance": "Stridsprestanda",
+  "unnamed": "Okänd spelare",
+  "mark-label": {
+    "spotted": "Upptäckt",
+    "assisted": "Assisterad skada",
+    "crits": "Kritiska träffar",
+    "damaged": "Utdelad skada",
+    "blocked": "Blockerad skada från den",
+    "stunned": "Bedövningar",
+    "killed": "Förstörd"
+  },
+  "mark-hint": {
+    "spotted": "Upptäckt: de lyste upp denna fiende för sitt lag",
+    "assisted": "Assisterad skada: skada utdelad mot denna fiende tack vare deras spaning, band eller bedövning",
+    "crits": "Kritiska träffar: de skadade en modul eller en besättningsmedlem på denna fiende",
+    "damaged": "Skada utdelad mot denna fiende",
+    "blocked": "Skada som fiendens pansar blockerade från skotten",
+    "stunned": "Antal gånger de bedövade denna fiende",
+    "killed": "De förstörde denna fiende"
+  },
+  "column": {
+    "player": "Spelare",
+    "vehicle": "Fordon"
+  },
+  "destroyed-by-label": "Förstörd av"
+}

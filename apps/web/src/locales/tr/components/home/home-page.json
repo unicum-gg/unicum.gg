@@ -10,6 +10,13 @@
   "rating-scale": {
     "title": "Derecelendirme ölçeği"
   },
+  "replays": {
+    "title": "Tekrarlar",
+    "heading": "Savaşlarını tekrar izle",
+    "description": "Oyuncuların paylaştığı her savaş, tam raporuyla, her tankta hangi donanımların takılı olduğu bilgisiyle ve tarayıcıda izleyebileceğiniz bir tekrarla gelir. Her savaş sona erdiğinde sizinkini paylaşmak için modumuzu yükleyin.",
+    "browse": "Tekrarları gözden geçir",
+    "mod": "Modu al"
+  },
   "community": {
     "title": "Topluluğa katılın",
     "heading": "WoT oyuncularıyla bağlantı kurun",

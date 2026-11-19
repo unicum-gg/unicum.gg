@@ -5,7 +5,7 @@
   "finish": {
     "extermination": "Et lag ble ødelagt",
     "base": "Base tatt",
-    "timeout": "Tiden løp ut",
+    "timeout": "Tiden gikk ut",
     "other": "Annet"
   },
   "spawns": "Seire etter gytepunkt",

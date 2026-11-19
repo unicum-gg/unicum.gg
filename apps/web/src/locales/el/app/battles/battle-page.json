@@ -1,0 +1,23 @@
+{
+  "meta-title": "{tank} από τον/την {nickname} στον χάρτη {map}: επανάληψη World of Tanks",
+  "meta-title-battle": "{map}, {mode}, {date}: επανάληψη μάχης World of Tanks",
+  "meta-description": {
+    "win": "Ο/Η {nickname} κέρδισε στον χάρτη {map} με το άρμα {tank} ({mode}, {date}): {damage} ζημιά, {kills} καταστροφές, {xp} εμπειρία.",
+    "loss": "Ο/Η {nickname} έχασε στον χάρτη {map} με το άρμα {tank} ({mode}, {date}): {damage} ζημιά, {kills} καταστροφές, {xp} εμπειρία.",
+    "draw": "Ο/Η {nickname} έφερε ισοπαλία στον χάρτη {map} με το άρμα {tank} ({mode}, {date}): {damage} ζημιά, {kills} καταστροφές, {xp} εμπειρία.",
+    "unknown": "Ο/Η {nickname} στον χάρτη {map} με το άρμα {tank} ({mode}, {date}): {damage} ζημιά, {kills} καταστροφές, {xp} εμπειρία."
+  },
+  "meta-description-battle": "{mode} στον χάρτη {map}, {date}.",
+  "mode-unknown": "World of Tanks",
+  "og-title": "{tank} στον χάρτη {map}",
+  "og-subtitle": "{nickname} · {damage} ζημιά",
+  "meta-title-no-replay": "{tank} από τον/την {nickname} στον χάρτη {map}: μάχη World of Tanks",
+  "meta-description-replay": "Παρακολούθηση της επανάληψης, των δύο ομάδων και της αναφοράς μάχης, καθώς και λήψη του αρχείου .wotreplay.",
+  "meta-description-no-replay": "Δείτε τις δύο ομάδες, τι έκανε κάθε άρμα και την αναφορά μάχης.",
+  "meta-title-battle-no-replay": "{map}, {mode}, {date}: μάχη World of Tanks",
+  "og-subtitle-battle": "{mode} · {date}",
+  "heading-player": "Ο/Η {nickname} με το άρμα {tank} στον χάρτη {map}",
+  "recorded-by": "Καταγράφηκε από",
+  "also-reported-by": "Αναφέρθηκε επίσης από",
+  "reported-by": "Αναφέρθηκε από"
+}

@@ -87,6 +87,10 @@
       "label": "Mga nangungunang manlalaro",
       "description": "Talaan ng ranggo ng mga manlalaro sa lahat ng oras"
     },
+    "battles": {
+      "label": "Mga labanan",
+      "description": "Mga labanan at replay na ibinahagi ng mga manlalaro"
+    },
     "players-rampage": {
       "description": "Sino ang may pinakamataas na ranggo sa Rampage."
     }

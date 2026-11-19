@@ -1,0 +1,17 @@
+{
+  "title": "Mūšiai su pakartojimu ({count})",
+  "empty": "Šiame regione dar nebuvo bendrinamas nė vienas pakartojimas.",
+  "empty-filtered": "Šių filtrų neatitinka nė vienas mūšis.",
+  "sort": {
+    "damage": "Žala",
+    "assist": "Pagalba",
+    "xp": "Patirtis",
+    "kills": "Sunaikinimai",
+    "views": "Daugiausia peržiūrų",
+    "downloads": "Daugiausia atsisiuntimų",
+    "recent": "Naujausi"
+  },
+  "version-current": "Atnaujinimas {version} (dabartinis)",
+  "version": "Atnaujinimas {version}",
+  "version-all": "Visi atnaujinimai"
+}

@@ -1,0 +1,48 @@
+{
+  "result": {
+    "win": "Zafer",
+    "loss": "Yenilgi",
+    "draw": "Berabere"
+  },
+  "ending": {
+    "extermination": {
+      "win": "Tüm düşman araçlar imha edildi",
+      "loss": "Tüm müttefik araçlar imha edildi"
+    },
+    "base": {
+      "win": "Düşman üssü ele geçirildi",
+      "loss": "Üssümüz ele geçirildi"
+    },
+    "timeout": {
+      "win": "Süre doldu",
+      "loss": "Süre doldu"
+    }
+  },
+  "destroyed": "Yok edildi",
+  "survived": "Hayatta kaldı",
+  "performance": "Savaş performansı",
+  "unnamed": "Bilinmeyen oyuncu",
+  "mark-label": {
+    "spotted": "Tespit edildi",
+    "assisted": "Destek hasarı",
+    "crits": "Kritik isabetler",
+    "damaged": "Verilen hasar",
+    "blocked": "Engellenen hasar",
+    "stunned": "Sersemletmeler",
+    "killed": "Yok edildi"
+  },
+  "mark-hint": {
+    "spotted": "Tespit edildi: Bu düşmanı takımları için görünür hâle getirdiler",
+    "assisted": "Destek hasarı: Tespitleri, palet kırmaları veya sersemletmeleri sayesinde bu düşmana verilen hasar",
+    "crits": "Kritik isabetler: Bu düşmanın bir modülüne veya mürettebat üyesine hasar verdiler",
+    "damaged": "Bu düşmana verilen hasar",
+    "blocked": "Zırhlarının bu düşmanın atışlarından engellediği hasar",
+    "stunned": "Bu düşmanı sersemlettikleri sefer sayısı",
+    "killed": "Bu düşmanı imha ettiler"
+  },
+  "column": {
+    "player": "Oyuncu",
+    "vehicle": "Tank"
+  },
+  "destroyed-by-label": "Yok eden"
+}

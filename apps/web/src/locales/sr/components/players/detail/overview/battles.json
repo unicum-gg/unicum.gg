@@ -29,7 +29,7 @@
     "assisted": "Asistirana šteta",
     "blocked": "Blokirano",
     "kills": "Uništenja",
-    "spotted": "откривено",
+    "spotted": "Otkriveno",
     "player": "Igrač",
     "survived": "Preživeo",
     "xp": "XP",
@@ -82,7 +82,7 @@
   "report": {
     "statistics": "Statistika",
     "time": "Vreme",
-    "earned": "Зарађено",
+    "earned": "Зарађено (standardni nalog)",
     "shots": "Ispaljeni hici",
     "hits-pens": "Direktni pogoci / probijanja",
     "splash": "Eksplozivna šteta",
@@ -135,11 +135,11 @@
     "mark-movement": "Ова битка"
   },
   "tab": {
+    "personal": "Lični rezultat",
     "teams": "Rezultat tima",
     "report": "Detaljan izveštaj",
     "replay": "Snimak bitke"
   },
-  "destroyed-list": "Уништено {names}",
   "replay": {
     "no-bounds": "Ova arena nema granice u katalogu, pa mesta ne mogu da se postave na mini-mapa.",
     "play": "Igraj",
@@ -154,7 +154,63 @@
     "deaths-none": "Нико није уништен у овој битки.",
     "deaths-yet": "Сви су још живи.",
     "deaths-unknown": "возило",
-    "deaths-destroyed": "Uništeno"
+    "deaths-destroyed": "Uništeno",
+    "restart": "Igraj od početka",
+    "spotted": "U vidokrugu",
+    "unspotted": "Van vidokruga",
+    "observed": "Otkriveno od neprijatelja",
+    "estimated": "procenjena pozicija, izvan opsega snimanja",
+    "speed": "Brzina reprodukcije",
+    "hud": {
+      "hp": "Pogođeni hitovi",
+      "speed": "Brzina",
+      "kmh": "{speed} km/h",
+      "damage": "Naneta šteta",
+      "damage-hint": "Dosad. Za onoga koji snima, iz sopstvenog izveštaja o bitci, koji izostavlja pogotke na ciljevima koje nije mogao da vidi, a za sve ostale, iz pogodaka koje je snimanje zabeležilo, što može biti znatno manje od rezultata.",
+      "assisted": "Asistencija",
+      "blocked": "Blokirano",
+      "final-hint": "Konačna figura bitke, prema rezultatima.",
+      "modules": "Moduli i posada",
+      "seen-at": "kako ih je komandir koji je snimao poslednji put video, u {time}",
+      "state": {
+        "damaged": "Oštećeno",
+        "destroyed": "Uništeno",
+        "injured": "Povređeno"
+      },
+      "part": {
+        "engine": "Motor",
+        "ammoBay": "Stalak za municiju",
+        "fuelTank": "Rezervoar za gorivo",
+        "radio": "Radio",
+        "leftTrack": "Leva gusenica",
+        "rightTrack": "Desna gusenica",
+        "gun": "Top",
+        "turretRotator": "Prsten kupole",
+        "surveyingDevice": "Vizija",
+        "commander": "Komandir",
+        "driver": "Vozač",
+        "radioman": "Radiooperater",
+        "gunner": "Nišandžija",
+        "loader": "Punilac",
+        "track": "Gusenica"
+      }
+    },
+    "tab": {
+      "chat": "чет",
+      "log": "Dnevnik štete"
+    },
+    "log": {
+      "empty": "Ništa još nije naneto niti primljeno.",
+      "kind": {
+        "dealt": "Naneta šteta",
+        "received": "Primljena šteta",
+        "blocked": "Blokirano oklopom",
+        "assist": "Asistirana šteta",
+        "crit": "Naneta šteta kritičnim pogocima",
+        "received-crit": "Primljena šteta od kritičnih pogodaka",
+        "module": "Pogođen modul"
+      }
+    }
   },
   "lineup": {
     "more": "+{count}",
@@ -162,5 +218,18 @@
     "heading": "Vozila u ovoj bitki",
     "kills": "Uništeno",
     "time": "Vreme"
-  }
+  },
+  "earnings": {
+    "title": "Zarada",
+    "standard": "Standardni nalog",
+    "with-bonuses": "Sa vašim bonusima",
+    "credits": "Krediti",
+    "costs": "Popravke i potrošni materijal",
+    "net": "Neto krediti",
+    "xp": "Iskustvo"
+  },
+  "destroyed-by-label": "Uništio",
+  "destroyed-list-label": "Uništio",
+  "replay-views": "{count} pregleda",
+  "replay-downloads": "{count} preuzimanja"
 }

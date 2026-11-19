@@ -1,0 +1,17 @@
+{
+  "title": "Gefechte mit einem Replay ({count})",
+  "empty": "In dieser Region wurde noch kein Replay gemeinsam genutzt.",
+  "empty-filtered": "Keine Gefechte entsprechen diesen Filtern.",
+  "sort": {
+    "damage": "Schaden",
+    "assist": "Unterstützung",
+    "xp": "Erfahrung",
+    "kills": "Abschüsse",
+    "views": "Am häufigsten angesehen",
+    "downloads": "Am häufigsten heruntergeladen",
+    "recent": "Neueste"
+  },
+  "version-current": "Aktualisierung {version} (aktuell)",
+  "version": "Aktualisierung {version}",
+  "version-all": "Alle Aktualisierungen"
+}

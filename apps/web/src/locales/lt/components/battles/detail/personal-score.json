@@ -1,0 +1,48 @@
+{
+  "result": {
+    "win": "Pergalė",
+    "loss": "Pralaimėjimas",
+    "draw": "Lygiosios"
+  },
+  "ending": {
+    "extermination": {
+      "win": "Sunaikintos visos priešo transporto priemonės",
+      "loss": "Sunaikintos visos sąjungininkų transporto priemonės"
+    },
+    "base": {
+      "win": "Užimta priešo bazė",
+      "loss": "Užimta mūsų bazė"
+    },
+    "timeout": {
+      "win": "Baigėsi laikas",
+      "loss": "Baigėsi laikas"
+    }
+  },
+  "destroyed": "Sunaikinta",
+  "survived": "Išgyveno",
+  "performance": "Mūšio našumas",
+  "unnamed": "Nežinomas žaidėjas",
+  "mark-label": {
+    "spotted": "Aptikta",
+    "assisted": "Pagalbinė žala",
+    "crits": "Kritiniai pataikymai",
+    "damaged": "Padaryta žala",
+    "blocked": "Nuo jo užblokuota žala",
+    "stunned": "Apsvaiginimai",
+    "killed": "Sunaikinta"
+  },
+  "mark-hint": {
+    "spotted": "Aptikta: jie atskleidė šį priešą savo komandai",
+    "assisted": "Pagalbinė žala: šiam priešui padaryta žala dėl jų aptikimo, vikšrų pažeidimo arba apsvaiginimo",
+    "crits": "Kritiniai pataikymai: jie apgadino šio priešo modulį arba įgulos narį",
+    "damaged": "Šiam priešui padaryta žala",
+    "blocked": "Žala, kurią jų šarvai užblokavo nuo šio priešo šūvių",
+    "stunned": "Kiek kartų jie apsvaigino šį priešą",
+    "killed": "Jie sunaikino šį priešą"
+  },
+  "column": {
+    "player": "Žaidėjas",
+    "vehicle": "Transporto priemonė"
+  },
+  "destroyed-by-label": "Sunaikino"
+}

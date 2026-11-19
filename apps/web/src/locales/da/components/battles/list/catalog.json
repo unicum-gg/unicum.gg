@@ -1,0 +1,17 @@
+{
+  "title": "Kampe med replay ({count})",
+  "empty": "Der er endnu ikke delt nogen replay i denne region.",
+  "empty-filtered": "Ingen kamp matcher disse filtre.",
+  "sort": {
+    "damage": "Skade",
+    "assist": "Assistance",
+    "xp": "Xp",
+    "kills": "Drab",
+    "views": "Mest viste",
+    "downloads": "Mest downloadede",
+    "recent": "Seneste"
+  },
+  "version-current": "Opdatering {version} (nuværende)",
+  "version": "Opdatering {version}",
+  "version-all": "Alle opdateringer"
+}

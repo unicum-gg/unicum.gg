@@ -10,6 +10,13 @@
   "rating-scale": {
     "title": "Bedømmelsesskala"
   },
+  "replays": {
+    "title": "Replays",
+    "heading": "Se dine kampe igen",
+    "description": "Hver kamp, spillerne deler, kommer med sin fulde rapport, hvad hver kampvogn havde monteret, og en replay, du kan se i browseren. Installér vores mod for at dele din, når hver kamp slutter.",
+    "browse": "Gennemse replays",
+    "mod": "Hent moddet"
+  },
   "community": {
     "title": "Bliv en del af fællesskabet",
     "heading": "Forbind med WoT-spillere",

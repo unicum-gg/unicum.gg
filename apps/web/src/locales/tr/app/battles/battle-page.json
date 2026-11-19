@@ -1,0 +1,23 @@
+{
+  "meta-title": "World of Tanks savaş tekrarı: {map} haritasında {nickname} tarafından {tank} ile oynanan savaş",
+  "meta-title-battle": "{map} haritası, {mode} modu, {date}: World of Tanks savaş tekrarı",
+  "meta-description": {
+    "win": "{nickname}, {map} haritasında {mode} modunda {tank} ile kazandı ({date}): {damage} hasar, {kills} yok edilenler, {xp} deneyim.",
+    "loss": "{nickname}, {map} haritasında {mode} modunda {tank} ile kaybetti ({date}): {damage} hasar, {kills} yok edilenler, {xp} deneyim.",
+    "draw": "{nickname}, {map} haritasında {mode} modunda {tank} ile berabere kaldı ({date}): {damage} hasar, {kills} yok edilenler, {xp} deneyim.",
+    "unknown": "{nickname}, {map} haritasında {mode} modunda {tank} ile oynadı ({date}): {damage} hasar, {kills} yok edilenler, {xp} deneyim."
+  },
+  "meta-description-battle": "{map} haritasında {mode} modu, {date}.",
+  "mode-unknown": "World of Tanks",
+  "og-title": "{map} haritasında {tank}",
+  "og-subtitle": "{nickname} · {damage} hasar",
+  "meta-title-no-replay": "World of Tanks savaşı: {map} haritasında {nickname} tarafından {tank} ile oynanan savaş",
+  "meta-description-replay": "Tekrarı, her iki takımı ve savaş raporunu görün, ayrıca .wotreplay dosyasını indirin.",
+  "meta-description-no-replay": "Her iki takımı, her tankın yaptıklarını ve savaş raporunu görün.",
+  "meta-title-battle-no-replay": "{map} haritası, {mode} modu, {date}: World of Tanks savaşı",
+  "og-subtitle-battle": "{mode} modu · {date}",
+  "heading-player": "{map} haritasında {nickname}, {tank} ile",
+  "recorded-by": "Kaydeden",
+  "also-reported-by": "Ayrıca bildiren",
+  "reported-by": "Bildiren"
+}

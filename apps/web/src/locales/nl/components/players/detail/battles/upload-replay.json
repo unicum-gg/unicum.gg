@@ -1,0 +1,23 @@
+{
+  "trigger": "Een herhaling uploaden",
+  "title": "Een herhaling uploaden",
+  "description": "Voeg een van je eigen gevechten toe vanuit het .wotreplay-bestand, zonder mod. Het krijgt een eigen pagina met de herhaling, klaar om te delen.",
+  "drop": "Sleep hier een .wotreplay-bestand naartoe of klik om er een te kiezen",
+  "hint": "Alleen je eigen herhalingen, van een gevecht dat tot het einde is gespeeld. Ze staan in de map met herhalingen van je spelmap.",
+  "send": "Uploaden",
+  "sending": "Uploaden…",
+  "error": {
+    "not_collected": "Herhalingen uploaden is momenteel niet beschikbaar.",
+    "archive_full": "Onze opslag voor herhalingen is momenteel volledig gevuld. Probeer het later opnieuw.",
+    "not_a_replay": "Dat bestand is geen herhaling van World of Tanks die we kunnen lezen.",
+    "unfinished": "Die herhaling is opgeslagen voordat het gevecht was beëindigd en bevat daarom geen resultaten.",
+    "not_yours": "Die herhaling is geregistreerd door een ander account. Je kunt alleen je eigen herhalingen uploaden.",
+    "wrong_region": "Dat gevecht is gespeeld in een andere regio dan de regio van het account waarmee je bent aangemeld.",
+    "too_old": "Dat gevecht is ouder dan de gevechten die we behouden.",
+    "malformed": "We konden de resultaten in die herhaling niet lezen.",
+    "too_large": "Dat bestand is groter dan elke herhaling die we accepteren (9 MB).",
+    "too_many_uploads": "Je hebt het afgelopen uur veel geüpload. Probeer het iets later opnieuw.",
+    "unauthenticated": "Je sessie is verlopen. Meld je opnieuw aan.",
+    "unknown": "Iets is misgegaan. Probeer het over een moment opnieuw."
+  }
+}

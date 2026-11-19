@@ -87,6 +87,10 @@
       "label": "Top spēlētāji",
       "description": "Spēlētāju līderu saraksts visā vēsturē"
     },
+    "battles": {
+      "label": "Kaujas",
+      "description": "Kaujas un spēlētāju koplietotie atkārtojumi"
+    },
     "players-rampage": {
       "description": "Kurš Plosīšanās režīmā ieguva augstāko vietu."
     }

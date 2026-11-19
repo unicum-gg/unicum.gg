@@ -1,0 +1,19 @@
+{
+  "title": "Comentarios",
+  "title-count": "Comentarios ({count})",
+  "empty": "Todavía no hay comentarios. ¿Qué te pareció esta batalla?",
+  "in-battle": "Jugó en esta batalla",
+  "pending": "Pendiente de moderación, solo tú puedes verlo",
+  "rejected": "No publicado",
+  "delete": "Eliminar",
+  "log-in": "Iniciar sesión para comentar",
+  "placeholder": "Di algo sobre esta batalla…",
+  "moderated": "Un moderador lee los comentarios antes de publicarlos.",
+  "send": "Publicar comentario",
+  "sending": "Publicando…",
+  "error": {
+    "rate-limited": "Has publicado muchos comentarios durante la última hora. Inténtalo de nuevo un poco más tarde.",
+    "unauthenticated": "Tu sesión ha caducado. Inicia sesión de nuevo.",
+    "unknown": "Algo ha salido mal. Inténtalo de nuevo en un momento."
+  }
+}

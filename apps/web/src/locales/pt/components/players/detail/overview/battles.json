@@ -82,7 +82,7 @@
   "report": {
     "statistics": "Estatísticas",
     "time": "Tempo",
-    "earned": "Obtida",
+    "earned": "Obtida, conta padrão",
     "shots": "Disparos",
     "hits-pens": "Tiros Directos / penetrações",
     "splash": "Dano de explosão",
@@ -135,11 +135,11 @@
     "mark-movement": "Esta batalha"
   },
   "tab": {
+    "personal": "Pontuação pessoal",
     "teams": "Pontuação da equipa",
     "report": "Relatório Detalhado",
     "replay": "Replay"
   },
-  "destroyed-list": "Destruiu {names}",
   "replay": {
     "no-bounds": "Esta arena não tem extensão no catálogo, portanto o minimapa não pode exibir as posições.",
     "play": "Jogar",
@@ -154,7 +154,63 @@
     "deaths-none": "Ninguém foi destruído nesta batalha.",
     "deaths-yet": "Todos ainda estão vivos.",
     "deaths-unknown": "um veículo",
-    "deaths-destroyed": "Destruídos"
+    "deaths-destroyed": "Destruídos",
+    "restart": "Jogar desde o começo",
+    "spotted": "Detectado",
+    "unspotted": "Fora de vista",
+    "observed": "Detectado pelo inimigo",
+    "estimated": "posição estimada, fora do alcance da gravação",
+    "speed": "Velocidade de reprodução",
+    "hud": {
+      "hp": "Pontos de vida",
+      "speed": "Velocidade",
+      "kmh": "{speed} km/h",
+      "damage": "Dano",
+      "damage-hint": "Até agora. Para quem fez a gravação, a partir do próprio registro da batalha, que deixa de fora os acertos em alvos que não poderia ver. Para qualquer outra pessoa, a partir dos acertos que a gravação registrou, que podem ficar bem abaixo dos resultados.",
+      "assisted": "Assistência",
+      "blocked": "Bloqueado",
+      "final-hint": "O valor final da batalha, obtido a partir dos resultados.",
+      "modules": "Módulos e tripulação",
+      "seen-at": "como o comandante que fez a gravação os viu pela última vez, em {time}",
+      "state": {
+        "damaged": "Danificado",
+        "destroyed": "Destruídos",
+        "injured": "Ferido"
+      },
+      "part": {
+        "engine": "Motor",
+        "ammoBay": "Compartimento de Munição",
+        "fuelTank": "Tanque de combustível",
+        "radio": "Rádio",
+        "leftTrack": "Lagarta esquerda",
+        "rightTrack": "Lagarta direita",
+        "gun": "Arma",
+        "turretRotator": "Anel da torre",
+        "surveyingDevice": "Visão",
+        "commander": "Comandante",
+        "driver": "Motorista",
+        "radioman": "Operador de rádio",
+        "gunner": "Artilheiro",
+        "loader": "Carregador",
+        "track": "Lagarta"
+      }
+    },
+    "tab": {
+      "chat": "chat",
+      "log": "Registo de danos"
+    },
+    "log": {
+      "empty": "Nada causado ou recebido ainda.",
+      "kind": {
+        "dealt": "Dano causado",
+        "received": "Dano recebido",
+        "blocked": "Bloqueado pela blindagem",
+        "assist": "Dano assistido",
+        "crit": "Acertos críticos causados",
+        "received-crit": "Acertos críticos recebidos",
+        "module": "Módulo atingido"
+      }
+    }
   },
   "lineup": {
     "more": "+{count}",
@@ -162,5 +218,18 @@
     "heading": "Veículos nesta batalha",
     "kills": "Destruídos",
     "time": "Tempo"
-  }
+  },
+  "earnings": {
+    "title": "Ganhos",
+    "standard": "Conta Normal",
+    "with-bonuses": "Com os seus bónus",
+    "credits": "Créditos",
+    "costs": "Reparações e consumíveis",
+    "net": "Créditos líquidos",
+    "xp": "Experiência"
+  },
+  "destroyed-by-label": "Destruído por",
+  "destroyed-list-label": "Destruiu",
+  "replay-views": "{count} visualizações",
+  "replay-downloads": "{count} transferências"
 }

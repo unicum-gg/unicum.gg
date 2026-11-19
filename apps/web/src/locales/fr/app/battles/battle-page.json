@@ -1,0 +1,23 @@
+{
+  "meta-title": "Replay du {tank} de {nickname} sur {map} : World of Tanks",
+  "meta-title-battle": "{map}, {mode}, {date} : replay de bataille World of Tanks",
+  "meta-description": {
+    "win": "{nickname} a remporté la victoire sur {map} à bord du {tank} ({mode}, {date}) : {damage} dégâts, {kills} destructions, {xp} expérience.",
+    "loss": "{nickname} a perdu sur {map} à bord du {tank} ({mode}, {date}) : {damage} dégâts, {kills} destructions, {xp} expérience.",
+    "draw": "{nickname} a fait match nul sur {map} à bord du {tank} ({mode}, {date}) : {damage} dégâts, {kills} destructions, {xp} expérience.",
+    "unknown": "{nickname} sur {map} à bord du {tank} ({mode}, {date}) : {damage} dégâts, {kills} destructions, {xp} expérience."
+  },
+  "meta-description-battle": "{mode} sur {map}, {date}.",
+  "mode-unknown": "World of Tanks",
+  "og-title": "{tank} sur {map}",
+  "og-subtitle": "{nickname} · {damage} dégâts",
+  "meta-title-no-replay": "Bataille du {tank} menée par {nickname} sur {map} : World of Tanks",
+  "meta-description-replay": "Regardez le replay, les deux équipes et le rapport de bataille, puis téléchargez le fichier .wotreplay.",
+  "meta-description-no-replay": "Découvrez les deux équipes, ce que chaque char a fait et le rapport de bataille.",
+  "meta-title-battle-no-replay": "{map}, {mode}, {date} : bataille World of Tanks",
+  "og-subtitle-battle": "{mode} · {date}",
+  "heading-player": "{nickname} à bord du {tank} sur {map}",
+  "recorded-by": "Enregistré par",
+  "also-reported-by": "Également signalé par",
+  "reported-by": "Signalé par"
+}

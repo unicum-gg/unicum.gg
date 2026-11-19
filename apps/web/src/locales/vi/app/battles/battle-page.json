@@ -1,0 +1,23 @@
+{
+  "meta-title": "{tank} của {nickname} trên {map}: bản phát lại World of Tanks",
+  "meta-title-battle": "{map}, {mode}, {date}: bản phát lại trận đấu World of Tanks",
+  "meta-description": {
+    "win": "{nickname} đã thắng trên {map} với xe tăng {tank} ({mode}, {date}): {damage} sát thương, {kills} tiêu diệt, {xp} kinh nghiệm.",
+    "loss": "{nickname} đã mất trên {map} với xe tăng {tank} ({mode}, {date}): {damage} sát thương, {kills} tiêu diệt, {xp} kinh nghiệm.",
+    "draw": "{nickname} hòa trên {map} với xe tăng {tank} ({mode}, {date}): {damage} sát thương, {kills} tiêu diệt, {xp} kinh nghiệm.",
+    "unknown": "{nickname} trên {map} với xe tăng {tank} ({mode}, {date}): {damage} sát thương, {kills} tiêu diệt, {xp} kinh nghiệm."
+  },
+  "meta-description-battle": "{mode} trên {map}, {date}.",
+  "mode-unknown": "World of Tanks",
+  "og-title": "{tank} trên {map}",
+  "og-subtitle": "{nickname} · {damage} sát thương",
+  "meta-title-no-replay": "{tank} của {nickname} trên {map}: trận đấu World of Tanks",
+  "meta-description-replay": "Xem bản phát lại, cả hai đội và báo cáo trận đấu, đồng thời tải xuống tệp .wotreplay.",
+  "meta-description-no-replay": "Xem cả hai đội, những gì mỗi xe tăng đã làm và báo cáo trận đấu.",
+  "meta-title-battle-no-replay": "{map}, {mode}, {date}: trận đấu World of Tanks",
+  "og-subtitle-battle": "{mode} · {date}",
+  "heading-player": "{nickname} với xe tăng {tank} trên {map}",
+  "recorded-by": "Được ghi lại bởi",
+  "also-reported-by": "Cũng được báo cáo bởi",
+  "reported-by": "Được báo cáo bởi"
+}

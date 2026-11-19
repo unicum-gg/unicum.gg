@@ -1,0 +1,23 @@
+{
+  "trigger": "Učitaj snimak",
+  "title": "Učitaj snimak",
+  "description": "Dodaj jednu od svojih bitaka iz njene .wotreplay datoteke, bez potrebe za modom. Dobit će vlastitu stranicu sa svojim snimkom, spremnu za dijeljenje.",
+  "drop": "Prevuci .wotreplay ovdje ili klikni da odabereš jedan",
+  "hint": "Samo tvoji snimci iz bitke odigrane do kraja. Nalaze se u fascikli sa snimcima u direktoriju tvoje igre.",
+  "send": "Učitaj",
+  "sending": "Učitavanje…",
+  "error": {
+    "not_collected": "Učitavanje snimaka trenutno nije dostupno.",
+    "archive_full": "Naša arhiva snimaka je trenutno puna. Pokušaj ponovo kasnije.",
+    "not_a_replay": "Ta datoteka nije snimak bitke iz World of Tanks koji možemo pročitati.",
+    "unfinished": "Taj snimak je sačuvan prije nego što je bitka završena, pa rezultati nisu dostupni.",
+    "not_yours": "Taj snimak je zabilježen na drugom računu. Možeš učitati samo svoje snimke.",
+    "wrong_region": "Ta bitka je odigrana u drugoj regiji od one na kojoj je tvoj račun prijavljen.",
+    "too_old": "Ta bitka je starija od onih koje zadržavamo.",
+    "malformed": "Nismo mogli pročitati rezultate tog snimka.",
+    "too_large": "Ta datoteka je veća od bilo kojeg snimka koji prihvatamo, 9 MB.",
+    "too_many_uploads": "Učitao si mnogo toga u posljednjem satu. Pokušaj ponovo malo kasnije.",
+    "unauthenticated": "Tvoja sesija je istekla. Prijavi se ponovo.",
+    "unknown": "Nešto nije u redu. Pokušaj ponovo za koji trenutak."
+  }
+}

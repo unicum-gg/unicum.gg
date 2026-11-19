@@ -1,0 +1,23 @@
+{
+  "trigger": "Prenesi snimku",
+  "title": "Prenesi snimku",
+  "description": "Dodaj jednu od vlastitih bitaka iz datoteke .wotreplay, bez potrebe za modom. Dobit će vlastitu stranicu sa svojom snimkom, spremnu za dijeljenje.",
+  "drop": "Ispusti .wotreplay ovdje ili kliknite za odabir",
+  "hint": "Samo vlastite snimke iz bitke odigrane do kraja. Nalaze se u mapi sa snimkama unutar direktorija igre.",
+  "send": "Prenesi",
+  "sending": "Prijenos…",
+  "error": {
+    "not_collected": "Prijenos snimki trenutačno nije dostupan.",
+    "archive_full": "Naša je pohrana snimki trenutačno puna. Pokušajte ponovno kasnije.",
+    "not_a_replay": "Ta datoteka nije snimka igre World of Tanks koju možemo pročitati.",
+    "unfinished": "Ta je snimka spremljena prije završetka bitke, pa nema rezultata.",
+    "not_yours": "Tu je snimku zabilježio drugi račun. Možete prenijeti samo vlastite snimke.",
+    "wrong_region": "Ta je bitka odigrana u drugoj regiji od one povezane s računom na koji ste prijavljeni.",
+    "too_old": "Ta je bitka starija od onih koje zadržavamo.",
+    "malformed": "Nismo mogli pročitati rezultate u toj snimci.",
+    "too_large": "Ta je datoteka veća od najveće snimke koju prihvaćamo (9 MB).",
+    "too_many_uploads": "U posljednjih ste sat vremena prenijeli mnogo datoteka. Pokušajte ponovno malo kasnije.",
+    "unauthenticated": "Vaša je sesija istekla. Prijavite se ponovno.",
+    "unknown": "Nešto nije uspjelo. Pokušajte ponovno za trenutak."
+  }
+}

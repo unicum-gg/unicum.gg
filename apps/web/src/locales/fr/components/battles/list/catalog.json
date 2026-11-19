@@ -1,0 +1,17 @@
+{
+  "title": "Batailles avec un replay ({count})",
+  "empty": "Aucun replay n’a encore été partagé dans cette région.",
+  "empty-filtered": "Aucune bataille ne correspond à ces filtres.",
+  "sort": {
+    "damage": "Dégâts",
+    "assist": "Assistance",
+    "xp": "Expérience",
+    "kills": "Destructions",
+    "views": "Plus regardées",
+    "downloads": "Plus téléchargées",
+    "recent": "Plus récentes"
+  },
+  "version-current": "Mise à jour {version} (actuelle)",
+  "version": "Mise à jour {version}",
+  "version-all": "Toutes les mises à jour"
+}

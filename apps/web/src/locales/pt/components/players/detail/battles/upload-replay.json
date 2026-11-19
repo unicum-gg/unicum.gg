@@ -1,0 +1,23 @@
+{
+  "trigger": "Enviar um replay",
+  "title": "Enviar um replay",
+  "description": "Adicione uma de suas próprias batalhas a partir do arquivo .wotreplay, sem precisar de mod. Ela terá sua própria página com o replay, pronta para compartilhar.",
+  "drop": "Solte um .wotreplay aqui ou clique para escolher um",
+  "hint": "Somente seus próprios replays, de uma batalha jogada até o fim. Eles estão na pasta de replays do diretório do seu jogo.",
+  "send": "Enviar",
+  "sending": "Enviando…",
+  "error": {
+    "not_collected": "O envio de replays não está disponível no momento.",
+    "archive_full": "Nosso armazenamento de replays está completo por enquanto. Tente novamente mais tarde.",
+    "not_a_replay": "Esse arquivo não é um replay de World of Tanks que podemos ler.",
+    "unfinished": "Esse replay foi salvo antes de a batalha terminar, por isso não tem resultados.",
+    "not_yours": "Esse replay foi registrado por outra conta. Você só pode enviar os seus próprios.",
+    "wrong_region": "Essa batalha foi jogada em outra região que não a da conta com a qual você está conectado.",
+    "too_old": "Essa batalha é mais antiga do que as que mantemos.",
+    "malformed": "Não foi possível ler os resultados desse replay.",
+    "too_large": "Esse arquivo é maior do que qualquer replay que aceitamos, 9 MB.",
+    "too_many_uploads": "Você enviou muitos arquivos na última hora. Tente novamente um pouco mais tarde.",
+    "unauthenticated": "Sua sessão expirou. Entre novamente.",
+    "unknown": "Algo deu errado. Tente novamente em um momento."
+  }
+}

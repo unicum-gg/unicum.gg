@@ -1,0 +1,19 @@
+{
+  "title": "Komentarai",
+  "title-count": "Komentarai ({count})",
+  "empty": "Komentarų dar nėra. Ką manote apie šį mūšį?",
+  "in-battle": "Sužaista šiame mūšyje",
+  "pending": "Laukiama moderavimo, matote tik jūs",
+  "rejected": "Nepaskelbta",
+  "delete": "Ištrinti",
+  "log-in": "Prisijunkite, kad galėtumėte komentuoti",
+  "placeholder": "Parašykite ką nors apie šį mūšį…",
+  "moderated": "Komentarus moderatorius perskaito prieš juos paskelbiant.",
+  "send": "Skelbti komentarą",
+  "sending": "Skelbiama…",
+  "error": {
+    "rate-limited": "Per pastarąją valandą paskelbėte daug komentarų. Pabandykite dar kartą šiek tiek vėliau.",
+    "unauthenticated": "Jūsų sesija baigėsi. Prisijunkite dar kartą.",
+    "unknown": "Kažkas nutiko. Pabandykite dar kartą po akimirkos."
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "title": "Komentāri",
+  "title-count": "Komentāri ({count})",
+  "empty": "Vēl nav komentāru. Ko tu domāji par šo kauju?",
+  "in-battle": "Spēlēja šajā kaujā",
+  "pending": "Gaida moderēšanu, to vari redzēt tikai tu",
+  "rejected": "Nav publicēts",
+  "delete": "Dzēst",
+  "log-in": "Pieslēgties, lai komentētu",
+  "placeholder": "Uzraksti kaut ko par šo kauju…",
+  "moderated": "Komentārus pirms publicēšanas izlasa moderators.",
+  "send": "Publicēt komentāru",
+  "sending": "Publicē…",
+  "error": {
+    "rate-limited": "Pēdējās stundas laikā esi publicējis daudz komentāru. Mēģini vēlreiz nedaudz vēlāk.",
+    "unauthenticated": "Tavas sesijas derīguma termiņš ir beidzies. Pieslēdzies vēlreiz.",
+    "unknown": "Kaut kas nogāja greizi. Mēģini vēlreiz pēc brīža."
+  }
+}

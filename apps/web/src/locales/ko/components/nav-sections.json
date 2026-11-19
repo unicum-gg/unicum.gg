@@ -87,6 +87,10 @@
       "label": "상위 플레이어들",
       "description": "전체 기간 플레이어 순위표"
     },
+    "battles": {
+      "label": "전투",
+      "description": "플레이어들이 공유한 전투 및 리플레이"
+    },
     "players-rampage": {
       "description": "무한 결사전에서 가장 높게 랭크된 플레이어들"
     }

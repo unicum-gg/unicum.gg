@@ -1,0 +1,48 @@
+{
+  "result": {
+    "win": "Víťazstvo",
+    "loss": "Porážka",
+    "draw": "Remíza"
+  },
+  "ending": {
+    "extermination": {
+      "win": "Vsa vozila nepriateľa so zničené",
+      "loss": "Všetky spojenecké vozidlá sú zničené"
+    },
+    "base": {
+      "win": "Osnova nepriateľa je obsadená",
+      "loss": "Naša osnova bola obsadená"
+    },
+    "timeout": {
+      "win": "Vypršal čas",
+      "loss": "Vypršal čas"
+    }
+  },
+  "destroyed": "Zničené",
+  "survived": "Prežilo",
+  "performance": "Výkon v bitke",
+  "unnamed": "Neznámy hráč",
+  "mark-label": {
+    "spotted": "Odhalené",
+    "assisted": "Asistované poškodenie",
+    "crits": "Kritické zásahy",
+    "damaged": "Spôsobené poškodenie",
+    "blocked": "Zablokované poškodenie",
+    "stunned": "Omráčenia",
+    "killed": "Zničené"
+  },
+  "mark-hint": {
+    "spotted": "Odhalené: tento hráč odhalil nepriateľa svojmu tímu",
+    "assisted": "Asistované poškodenie: poškodenie spôsobené tomuto nepriateľovi vďaka jeho odhaleniu, poškodeniu pásu alebo omráčeniu",
+    "crits": "Kritické zásahy: poškodil modul alebo člena posádky tohto nepriateľa",
+    "damaged": "Poškodenie spôsobené tomuto nepriateľovi",
+    "blocked": "Poškodenie, ktoré pancier zablokoval pred strelami tohto nepriateľa",
+    "stunned": "Počet omráčení tohto nepriateľa",
+    "killed": "Tento hráč zničil tohto nepriateľa"
+  },
+  "column": {
+    "player": "Hráč",
+    "vehicle": "Vozidlo"
+  },
+  "destroyed-by-label": "Zničené hráčom"
+}

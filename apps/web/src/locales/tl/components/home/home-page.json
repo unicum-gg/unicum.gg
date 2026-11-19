@@ -10,6 +10,13 @@
   "rating-scale": {
     "title": "Sukatan ng rating"
   },
+  "replays": {
+    "title": "Mga replay",
+    "heading": "Panoorin muli ang iyong mga labanan",
+    "description": "Ang bawat labanan na ibinabahagi ng mga manlalaro ay may kasamang kumpletong ulat, impormasyon tungkol sa mga nakakabit sa bawat tank, at replay na maaari mong panoorin sa browser. I-install ang aming mod para maibahagi ang iyo habang nagtatapos ang bawat labanan.",
+    "browse": "Mag-browse ng mga replay",
+    "mod": "Kunin ang mod"
+  },
   "community": {
     "title": "Sumali sa komunidad",
     "heading": "Kumonekta sa mga manlalaro ng WoT",

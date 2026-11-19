@@ -1,0 +1,23 @@
+{
+  "meta-title": "{map}에서 {nickname} 플레이어가 {tank} 전차로 플레이한 World of Tanks 리플레이",
+  "meta-title-battle": "{map}, {mode}, {date}: World of Tanks 전투 리플레이",
+  "meta-description": {
+    "win": "{nickname} 플레이어가 {map}에서 {tank} 전차로 승리했습니다({mode}, {date}). 피해 {damage}, 격파 {kills}, 경험치 {xp}.",
+    "loss": "{nickname} 플레이어가 {map}에서 {tank} 전차로 패배했습니다({mode}, {date}). 피해 {damage}, 격파 {kills}, 경험치 {xp}.",
+    "draw": "{nickname} 플레이어가 {map}에서 {tank} 전차로 무승부를 기록했습니다({mode}, {date}). 피해 {damage}, 격파 {kills}, 경험치 {xp}.",
+    "unknown": "{nickname} 플레이어가 {map}에서 {tank} 전차로 플레이했습니다({mode}, {date}). 피해 {damage}, 격파 {kills}, 경험치 {xp}."
+  },
+  "meta-description-battle": "{map}에서의 {mode} 전투, {date}.",
+  "mode-unknown": "World of Tanks",
+  "og-title": "{map}에서의 {tank} 전차",
+  "og-subtitle": "{nickname} · 피해 {damage}",
+  "meta-title-no-replay": "{map}에서 {nickname} 플레이어가 {tank} 전차로 플레이한 World of Tanks 전투",
+  "meta-description-replay": "리플레이와 양 팀, 전투 보고서를 확인하고 .wotreplay 파일을 다운로드하세요.",
+  "meta-description-no-replay": "양 팀과 각 전차의 활약, 전투 보고서를 확인하세요.",
+  "meta-title-battle-no-replay": "{map}, {mode}, {date}: World of Tanks 전투",
+  "og-subtitle-battle": "{mode} · {date}",
+  "heading-player": "{map}에서 {tank} 전차로 플레이한 {nickname}",
+  "recorded-by": "기록한 플레이어",
+  "also-reported-by": "신고한 플레이어",
+  "reported-by": "신고한 플레이어"
+}
