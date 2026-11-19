@@ -96,7 +96,19 @@ export function mapName(
   tMaps: TranslateFunction,
 ): string {
   const name = tMaps(arenaId);
-  return name === arenaId ? fallback : name;
+  if (name !== arenaId) return name;
+  // An event plays an existing map under an arena of its own, named after it
+  // (`114_czech_fortrush_26` is Pilsen for Black Signal, `05_prohorovka_wt` for
+  // Waffenträger) and catalogued nowhere the site reads, or only in English. The
+  // map it is a version of is named in every language already, so each suffix is
+  // dropped in turn until an id the catalogue knows: no rule to write when the
+  // next event ships, and never a raw arena id on screen.
+  for (let cut = arenaId.lastIndexOf("_"); cut > 0; cut = arenaId.lastIndexOf("_", cut - 1)) {
+    const base = arenaId.slice(0, cut);
+    const baseName = tMaps(base);
+    if (baseName !== base) return baseName;
+  }
+  return fallback;
 }
 
 /**

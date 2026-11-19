@@ -10,7 +10,6 @@ import type { TranslateFunction } from "@onruntime/translations";
 import {
   BattleType,
   LoadoutMode,
-  SPAWN_DIRECTION_LABEL,
   spawnDirection,
   type MapDetail,
   type MapVariantLayout,
@@ -18,11 +17,17 @@ import {
 import type { ViewGeometry } from "@/components/maps/detail/minimap-overlay";
 import { battleTypeName, mapModeName } from "@/components/game-name";
 
-/** The side a team starts from on this view, e.g. "South". Null when the mode
- * declares neither spawns nor bases, where the legend just names the team. */
-export function teamSide(view: ViewGeometry, team: 1 | 2): string | null {
+/** The side a team starts from on this view, in the reader's language ("Sud").
+ * Null when the mode declares neither spawns nor bases, where the legend just
+ * names the team. Read from `game/vocabulary` like every other surface naming a
+ * side, never from the English label. */
+export function teamSide(
+  view: ViewGeometry,
+  team: 1 | 2,
+  tGame: TranslateFunction,
+): string | null {
   const direction = spawnDirection(view, team);
-  return direction ? SPAWN_DIRECTION_LABEL[direction] : null;
+  return direction ? tGame(`spawn-directions.${direction}`) : null;
 }
 
 /** View key of the Onslaught play area, the one view that is not a random

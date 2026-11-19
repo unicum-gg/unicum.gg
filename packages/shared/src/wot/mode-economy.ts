@@ -1,5 +1,5 @@
 import type { Region } from "@unicum.gg/wargaming";
-import { BATTLE_MODE_LABEL, modeLabel } from "./battle-modes";
+import { MODE_LABEL, modeLabel } from "./battle-modes";
 import { LOADOUT_WINDOW_DAYS, loadoutModeOf } from "./loadout-stats";
 
 /**
@@ -166,7 +166,7 @@ export const PLAYER_MODE_ECONOMY_MIN_BATTLES = 5;
 /** The first `bonusType` the game gives each name: objects iterate integer
  * keys in ascending order, so the Random Battle economies lead with Random. */
 const FIRST_MODE_NAMED = new Map<string, number>();
-for (const [type, label] of Object.entries(BATTLE_MODE_LABEL)) {
+for (const [type, label] of Object.entries(MODE_LABEL)) {
   if (!FIRST_MODE_NAMED.has(label)) FIRST_MODE_NAMED.set(label, Number(type));
 }
 

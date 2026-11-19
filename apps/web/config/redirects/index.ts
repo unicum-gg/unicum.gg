@@ -1,4 +1,4 @@
-import { BattleType } from "@unicum.gg/shared";
+import { BattleType, EVENT_ARENAS, slugifyMapName } from "@unicum.gg/shared";
 import type { NextConfig } from "next";
 
 // The tab definitions themselves, so the legacy-query rules below list the
@@ -17,6 +17,25 @@ const MAP_TYPE_TABS = Object.values(BattleType).map((type) => ({
 }));
 
 /**
+ * The event arenas folded onto the map they replay, derived rather than listed.
+ *
+ * Until its pack was read, an event's arena was a card of its own named after
+ * its raw id (`/maps/114-czech-fortrush-26` for Black Signal on Pilsen), so
+ * that slug may have been crawled. Generated from the same table that folds the
+ * arena (`EVENT_ARENAS`), so the next event's arenas redirect without a line
+ * added here. The base map's slug is its English name's, which is the arena's
+ * own name by construction: an arena only folds when it is called what its map
+ * is called.
+ */
+function eventVariantRedirects(): [string, string, string][] {
+  return Object.entries(EVENT_ARENAS).flatMap(([id, arena]) =>
+    arena.baseId && arena.battleType
+      ? [[slugifyMapName(id), slugifyMapName(arena.name), arena.battleType]]
+      : [],
+  );
+}
+
+/**
  * The variant pages that were folded into their base map, as permanent
  * redirects onto the view that replaced them.
  *
@@ -32,6 +51,7 @@ const mapVariantRedirects = [
   ["nordskar-last-stand", "nordskar", BattleType.LastStand],
   ["siegfried-line-last-stand", "siegfried-line", BattleType.LastStand],
   ["nordskar-story-mode", "nordskar", BattleType.StoryMode],
+  ...eventVariantRedirects(),
 ].flatMap(([from, to, view]) => [
   {
     source: `/:region(eu|na|asia)/maps/${from}`,

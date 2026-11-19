@@ -1,3 +1,5 @@
+import { EVENT_ARENAS } from "../event-modes.generated";
+
 // Every top-level battle type a map can belong to. Derived from the game's
 // static client scripts, except Clan Wars, whose map pool is the live Global Map
 // season (set server-side), and Onslaught Night, which is the maps that have a
@@ -13,6 +15,11 @@ export enum BattleType {
   ClanWars = "clan_wars",
   Waffentrager = "waffentrager",
   LastStand = "last_stand",
+  // The event modes the client's packs declare, written by
+  // `scripts/generate-event-modes` between these two lines. Edit above them.
+  // generated:event-battle-types
+  BlackSignal = "black_signal",
+  // end:event-battle-types
   Arcade = "arcade",
   StoryMode = "story_mode",
   Training = "training",
@@ -34,6 +41,9 @@ export const BATTLE_TYPE_LABEL: Record<BattleType, string> = {
   [BattleType.ClanWars]: "Clan Wars",
   [BattleType.Waffentrager]: "Waffenträger",
   [BattleType.LastStand]: "Last Stand",
+  // generated:event-battle-type-labels
+  [BattleType.BlackSignal]: "Black Signal",
+  // end:event-battle-type-labels
   [BattleType.Arcade]: "Arcade",
   [BattleType.StoryMode]: "Story Mode",
   [BattleType.Training]: "Training",
@@ -126,6 +136,29 @@ const VARIANT_RULES: {
 
 /** Classify an arena id as an event/mode variant of a base map, or null. */
 export function variantOf(arenaId: string): MapVariant | null {
+  return manualVariantOf(arenaId) ?? eventVariantOf(arenaId);
+}
+
+/**
+ * The event arenas the client's packs declare as a version of a map, generated
+ * (`scripts/generate-event-modes`): an arena named after the map it replays and
+ * played in the pack's own mode, `114_czech_fortrush_26` for Black Signal on
+ * Pilsen. Behind the rules above, which win where both apply.
+ */
+function eventVariantOf(arenaId: string): MapVariant | null {
+  const event = EVENT_ARENAS[arenaId];
+  if (!event?.baseId || !event.battleType) return null;
+  const battleType = event.battleType as BattleType;
+  return {
+    baseId: event.baseId,
+    tag: BATTLE_TYPE_LABEL[battleType] ?? event.battleType,
+    battleType,
+    foldedIntoBase: true,
+  };
+}
+
+/** The hand-written rules alone, which the event generator defers to. */
+export function manualVariantOf(arenaId: string): MapVariant | null {
   for (const rule of VARIANT_RULES) {
     const m = rule.re.exec(arenaId);
     if (m) {

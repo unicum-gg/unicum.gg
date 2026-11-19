@@ -1,6 +1,6 @@
 import { sql } from "drizzle-orm";
 import {
-  BATTLE_MODE_LABEL,
+  MODE_LABEL,
   battlesByRegion,
   economyModeKey,
   LOADOUT_MODES,
@@ -45,7 +45,7 @@ type AggregateRow = {
  * accounts behind a row are counted distinct, so the game's variants of a mode
  * have to be folded before the aggregate rather than summed after it. */
 export function modeOfBattleType() {
-  const branches = Object.keys(BATTLE_MODE_LABEL).map(Number).map(
+  const branches = Object.keys(MODE_LABEL).map(Number).map(
     (type) => sql`WHEN ${type} THEN ${economyModeKey(type)}`,
   );
   return sql`CASE b.battle_type ${sql.join(branches, sql` `)} ELSE 'type-' || b.battle_type END`;

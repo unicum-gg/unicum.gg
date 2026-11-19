@@ -150,6 +150,16 @@ export function MinimapViewer({
   // fallback the overlay draws with, so the legend never names a kind the map
   // does not show, nor leaves a drawn marker unnamed.
   const poiKinds = [...new Set((view?.pois ?? []).map((p) => poiKindOf(p.type)))];
+  // A team is named only where the view places something of its own, a base or
+  // a spawn: an event arena whose client definition declares neither (Black
+  // Signal's, where the server places everything at battle time) would otherwise
+  // show two teams that mark nothing.
+  const spawnTeams = ([1, 2] as const).filter(
+    (n) =>
+      (view?.spawns[`team${n}`].length ?? 0) +
+        (view?.bases[`team${n}`].length ?? 0) >
+      0,
+  );
   // Onslaught is played on its own reduced area and runs no events, so the
   // toggle only exists on the random-battle views.
   const canShowEvents = detail.randomEvents.length > 0 && !view?.onslaught;
@@ -240,7 +250,12 @@ export function MinimapViewer({
         <GuideOverlay state={guideState} guide={guide} />
       </div>
 
-      {view && (
+      {view &&
+        (hasBases ||
+          spawnTeams.length > 0 ||
+          view.controlPoint ||
+          poiKinds.length > 0 ||
+          eventsOn) && (
         <div className="flex flex-wrap items-center gap-x-5 gap-y-2 px-4 py-4 text-sm text-fd-muted-foreground">
           {hasBases && (
             <span className="flex items-center gap-2">
@@ -253,16 +268,13 @@ export function MinimapViewer({
               they spawned at the bottom of the minimap, not that they were
               team 1. The side is read off the geometry already drawn above, so
               the legend cannot disagree with the markers. */}
-          <span className="flex items-center gap-2">
-            <Image src={spawnUrl("team1", 0)} alt="" width={26} height={26} />
-            {tCopy("team", { n: 1 })}
-            {teamSide(view, 1) ? ` · ${teamSide(view, 1)}` : ""}
-          </span>
-          <span className="flex items-center gap-2">
-            <Image src={spawnUrl("team2", 0)} alt="" width={26} height={26} />
-            {tCopy("team", { n: 2 })}
-            {teamSide(view, 2) ? ` · ${teamSide(view, 2)}` : ""}
-          </span>
+          {spawnTeams.map((n) => (
+            <span key={n} className="flex items-center gap-2">
+              <Image src={spawnUrl(`team${n}`, 0)} alt="" width={26} height={26} />
+              {tCopy("team", { n })}
+              {teamSide(view, n, tGame) ? ` · ${teamSide(view, n, tGame)}` : ""}
+            </span>
+          ))}
           {view.controlPoint && (
             <span className="flex items-center gap-2">
               <Image src={CONTROL_POINT} alt="" width={28} height={28} />

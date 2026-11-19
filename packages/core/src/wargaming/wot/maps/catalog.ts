@@ -37,7 +37,7 @@ const REDIS_TTL_SECONDS = 24 * 60 * 60;
 // resolution changes, since the names are resolved before the array is
 // serialized and a stale payload would keep serving the previous spelling (and
 // therefore the previous slugs) for a day.
-const SHAPE_VERSION = 4;
+const SHAPE_VERSION = 5;
 const redisKey = (region: Region) => `mapcatalog:v${SHAPE_VERSION}:${region}`;
 const cache = new Map<Region, { value: MapCatalog; expiresAt: number }>();
 // One build per region at a time, like the Clan Wars pool next door. The memo

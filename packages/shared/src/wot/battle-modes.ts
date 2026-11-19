@@ -1,3 +1,5 @@
+import { EVENT_MODE_LABEL } from "./event-modes.generated";
+
 /**
  * The game's own `bonusType`, which is what a battle's results call its mode.
  *
@@ -97,6 +99,19 @@ export const BATTLE_MODE_LABEL: Record<BattleMode, string> = {
 };
 
 /**
+ * Every mode we can name: the client's own, by hand, over the event modes the
+ * client's event packs declare, generated (`scripts/generate-event-modes`).
+ *
+ * The hand-kept table wins where both name one, so a correction is made there.
+ * Read this, never `BATTLE_MODE_LABEL` alone, wherever every mode is walked,
+ * or an event mode is named on a battle and missing from the tables beside it.
+ */
+export const MODE_LABEL: Record<number, string> = {
+  ...EVENT_MODE_LABEL,
+  ...BATTLE_MODE_LABEL,
+};
+
+/**
  * What a `bonusType` is called, or null for one we have no name for.
  *
  * Null rather than a humanized number: a battle whose mode we cannot name
@@ -104,19 +119,16 @@ export const BATTLE_MODE_LABEL: Record<BattleMode, string> = {
  * page would be the site showing its own plumbing.
  */
 export function modeLabel(bonusType: number): string | null {
-  return BATTLE_MODE_LABEL[bonusType as BattleMode] ?? null;
+  return MODE_LABEL[bonusType] ?? null;
 }
 
 /**
- * Whether a battle is one of the Halloween event's. Its arena declares `ctf` as
- * a placeholder, so its gameplay says nothing about how it was played.
+ * Whether a battle was played in an event mode, which is any mode an event pack
+ * declares (Halloween, Last Stand, Black Signal…). Their arenas declare `ctf` as
+ * a placeholder, so their gameplay says nothing about how they were played.
  */
-export function isHalloweenBattle(bonusType: number): boolean {
-  return (
-    bonusType === BattleMode.Halloween ||
-    bonusType === BattleMode.HalloweenMedium ||
-    bonusType === BattleMode.HalloweenHard
-  );
+export function isEventBattle(bonusType: number): boolean {
+  return bonusType in EVENT_MODE_LABEL;
 }
 
 /**

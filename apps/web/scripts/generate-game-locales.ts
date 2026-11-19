@@ -56,6 +56,7 @@ import {
   isGameClientNamespace,
 } from "../src/lib/game-vocabulary";
 import { DEFAULT_LOCALE, type Locale } from "../src/lib/translations";
+import { eventPacks } from "./event-packs";
 import {
   GAME_OWNED_PATH,
   type GameOwnedKeys,
@@ -168,8 +169,11 @@ async function read(
   return response.text();
 }
 
-/** The event modes whose arenas and items are named in catalogues of their own. */
-const EVENT_PACKS = ["halloween", "last_stand", "story_mode"];
+/**
+ * The packs read when the mirror cannot be listed: the ones known when the
+ * listing replaced this list. A failed listing must not empty the event names.
+ */
+const KNOWN_EVENT_PACKS = ["halloween", "last_stand", "story_mode", "fort_rush"];
 
 /**
  * The names the event modes add, in English.
@@ -190,14 +194,47 @@ async function eventCatalogues() {
     if (!response.ok) throw new Error(`${url}: HTTP ${response.status}`);
     return response.text();
   };
+  // Found by listing the mirror, so the next event is named without anybody
+  // adding it here (Black Signal's `fort_rush` was missed for a week).
+  const packs = await eventPacks().catch((error) => {
+    console.warn(`[game-locales] could not list the event packs (${error}), reading the known ones`);
+    return KNOWN_EVENT_PACKS;
+  });
   const [arenas, artefacts] = await Promise.all([
-    Promise.all(EVENT_PACKS.map((pack) => read(pack, "arenas"))),
-    Promise.all(EVENT_PACKS.map((pack) => read(pack, "artefacts"))),
+    Promise.all(packs.map((pack) => read(pack, "arenas"))),
+    Promise.all(packs.map((pack) => read(pack, "artefacts"))),
   ]);
   return {
     maps: Object.assign({}, ...arenas.map((text) => parseArenaCatalogue(text).maps)),
     equipment: Object.assign({}, ...artefacts.map((text) => parseNamedCatalogue(text).names)),
   } as { maps: Record<string, string>; equipment: Record<string, string> };
+}
+
+/**
+ * The event arenas that are not a version of a map, under that map's own name.
+ *
+ * An event usually plays existing maps under arenas of its own, named after them
+ * (`114_czech_fortrush_26` is Pilsen). Written here, such an arena would carry
+ * the event's English name into every language, over the map's own name in the
+ * reader's language that `mapName` falls back to for an arena with no entry. So
+ * those are dropped, and an arena the event renamed (Steel Hunter's Halloween
+ * `251_br_battle_city3_hw25`, "Babylon Anomaly" rather than Arzagir 4.04) keeps
+ * its entry. Compared in English, the language the event names are in.
+ */
+function ownNamesOnly(
+  events: Record<string, string>,
+  english: Record<string, string>,
+): Record<string, string> {
+  const baseName = (id: string) => {
+    for (let cut = id.lastIndexOf("_"); cut > 0; cut = id.lastIndexOf("_", cut - 1)) {
+      const name = english[id.slice(0, cut)];
+      if (name !== undefined) return name;
+    }
+    return undefined;
+  };
+  return Object.fromEntries(
+    Object.entries(events).filter(([id, name]) => baseName(id) !== name),
+  );
 }
 
 /** Everything one language contributes, from the catalogues that carry it. */
@@ -573,13 +610,19 @@ async function main(): Promise<void> {
   const englishParams = englishTankParams();
 
   const events = eventCatalogues();
+  // The English map names as last written, to tell an event arena that only
+  // replays a map from one the event renamed (see `ownNamesOnly`).
+  const englishMaps = readJson(localePath(DEFAULT_LOCALE, "game/maps")) as Record<string, string>;
   for (const [locale, language] of entries) {
     let catalogue: Awaited<ReturnType<typeof catalogueFor>> | null = null;
     try {
       const [own, event] = await Promise.all([catalogueFor(language), events]);
       catalogue = {
         ...own,
-        arenas: { ...own.arenas, maps: { ...event.maps, ...own.arenas.maps } },
+        arenas: {
+          ...own.arenas,
+          maps: { ...ownNamesOnly(event.maps, englishMaps), ...own.arenas.maps },
+        },
         artefacts: {
           ...own.artefacts,
           names: { ...event.equipment, ...own.artefacts.names },

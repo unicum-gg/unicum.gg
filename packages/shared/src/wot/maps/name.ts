@@ -1,3 +1,4 @@
+import { EVENT_ARENAS } from "../event-modes.generated";
 import { variantOf } from "./battle-types";
 
 /** Turn a raw arena id into a readable fallback name ("120_graf_zeppelin" ->
@@ -49,5 +50,10 @@ export function resolveMapName(
   }
   // `poName === arenaId` is the SDK's own "no entry" fallback, not a name.
   const named = poName !== undefined && poName !== "" && poName !== arenaId;
-  return { name: named ? poName : humanizeArenaId(arenaId), resolved: named };
+  if (named) return { name: poName, resolved: true };
+  // An event names its own arenas in a catalogue of its own, which the client
+  // ships beside `arenas.po` (Steel Hunter's Halloween `Babylon Anomaly`).
+  const event = EVENT_ARENAS[arenaId]?.name;
+  if (event) return { name: event, resolved: true };
+  return { name: humanizeArenaId(arenaId), resolved: false };
 }
