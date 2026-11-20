@@ -8,6 +8,7 @@ import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import { useTranslation } from "@/hooks/use-translation";
 import { localizePath } from "@/lib/translations";
+import { unicumPublic } from "@/services/sdk";
 import { BattleParam, BattleTab } from "./battle-types";
 import { useBattleUrlView } from "./use-battle-view";
 
@@ -53,6 +54,10 @@ export function BattleShare({
       url={url}
       shareText={url}
       nativeShareTitle={title}
+      // The battle's own card, whichever view the link opens on: that view
+      // rides in the query, and the page's `og:image` does not read it, so this
+      // is the image the link unfurls with.
+      ogImage={unicumPublic.og.region(region).battles(battleId).url()}
     />
   );
 }
