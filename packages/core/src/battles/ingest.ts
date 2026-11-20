@@ -2,6 +2,7 @@ import { sql } from "drizzle-orm";
 import type { Region } from "@unicum.gg/wargaming";
 import { battlesByRegion, type NewBattleRow } from "@unicum.gg/shared";
 import { db } from "@unicum.gg/core/db";
+import { discoverPlayersBackground } from "@unicum.gg/core/discovery/players";
 
 /**
  * Writing down the battles players' own clients report.
@@ -195,15 +196,52 @@ export async function recordBattles(
   );
   const rows = [...unique.values()];
   if (rows.length === 0) return { stored: [], known: [], failed: [] };
+  let result: BattleIngestResult;
   try {
-    return { ...(await insert(region, rows)), failed: [] };
+    result = { ...(await insert(region, rows)), failed: [] };
   } catch (error) {
     console.error(
       `[battles] ${region}: a batch of ${rows.length} failed, falling back to one at a time:`,
       error,
     );
-    return oneAtATime(region, rows);
+    result = await oneAtATime(region, rows);
   }
+  discoverParticipants(region, rows, result.stored);
+  return result;
+}
+
+/**
+ * Queue every account a newly stored battle names, so the players table holds
+ * them from now on.
+ *
+ * The results are the only place some of these accounts ever reach us. An
+ * anonymized player is in the battle under a made-up name with no account id,
+ * so the client has nothing to ask `/resolve` about while the battle is on, and
+ * a player in no clan is reachable from none of discovery's clan walks: a
+ * 172,000-battle veteran sat unnamed on every battle page for exactly that
+ * reason. The results carry the real account, so this is where it is learned.
+ *
+ * Only the battles this call stored: a battle already held was discovered by
+ * whichever client sent it first. Fire-and-forget, so the mod's answer never
+ * waits on a write it did not ask for, and `discoverPlayers` leaves every
+ * account we already hold untouched.
+ */
+function discoverParticipants(
+  region: Region,
+  rows: NewBattleRow[],
+  stored: string[],
+): void {
+  if (stored.length === 0) return;
+  const fresh = new Set(stored);
+  const accounts = new Set<number>();
+  for (const row of rows) {
+    if (!fresh.has(row.arenaUniqueId)) continue;
+    for (const id of row.playerIds) if (id > 0) accounts.add(id);
+  }
+  discoverPlayersBackground(
+    region,
+    [...accounts].map((accountId) => ({ accountId })),
+  );
 }
 
 type Placed = { stored: string[]; known: string[] };
