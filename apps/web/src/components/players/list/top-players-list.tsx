@@ -33,6 +33,7 @@ export function TopPlayersList({
   rankOffset = 0,
   locale,
   recent = false,
+  pending = false,
 }: {
   region: Region;
   results: TopPlayerByLanguageResult[];
@@ -47,10 +48,19 @@ export function TopPlayersList({
    * already recent.
    */
   recent?: boolean;
+  /**
+   * The rows are a PAGE and the rest of the ranking is still on its way.
+   *
+   * It only decides whether the empty state may be SAID: "no player matches"
+   * is a false answer while the board is still fetching the rows a filter
+   * reaches, and a nickname ranked past the first page read as absent for as
+   * long as that took.
+   */
+  pending?: boolean;
 }) {
   const { t } = useTranslation("components/players/list/view");
   const { t: tOwn } = useTranslation("components/players/list/top-players-list");
-  if (results.length === 0) {
+  if (results.length === 0 && !pending) {
     return (
       <div className="px-4 py-12 text-center text-sm text-muted-foreground">
         {tOwn("no-players-match-this-filter")}</div>

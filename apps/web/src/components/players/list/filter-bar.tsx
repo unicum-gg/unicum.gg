@@ -26,12 +26,23 @@ export function LeaderboardFilterBar<T>({
   filters,
   searchNoun,
   extra,
+  pending = false,
 }: {
   filters: LeaderboardFilters<T>;
   /** What the board holds, as a key into `components/filter-bar`. See
    * `FilterSubject`: the placeholder is a whole sentence per subject. */
   searchNoun: FilterSubject;
   extra?: ReactNode;
+  /**
+   * The rows are a PAGE of the list and the rest is still on its way.
+   *
+   * The count is withheld until it lands, because a board that searches the
+   * hundred rows it holds while naming the three thousand it is about to hold
+   * answers "0 of 3,385" for a player who is on it. Measured: a nickname
+   * ranked 3,001st read as absent for the first 900 ms, and for good if the
+   * fetch failed.
+   */
+  pending?: boolean;
 }) {
   const { locale } = useLocale();
   const { t: tStats } = useStatLabels();
@@ -85,7 +96,7 @@ export function LeaderboardFilterBar<T>({
       </div>
       )}
       {extra}
-      {filters.active && (
+      {filters.active && !pending && (
         <span className="text-xs text-fd-muted-foreground tabular-nums">
           {numberFormat(locale).format(filters.resultCount)} of{" "}
           {numberFormat(locale).format(filters.totalCount)}

@@ -140,6 +140,11 @@ export function TopPlayersBoard({
     { keepPreviousData: true, revalidateOnFocus: false },
   );
   const source = full ?? (wanted !== (page ?? 1) ? (pageRows ?? results) : results);
+  // Asked for and not yet here. Until it lands the rows are one page, so the
+  // bar must not count over them and call it the ranking: a nickname ranked
+  // past the first page read as absent for as long as the fetch took, and for
+  // good when it failed.
+  const pending = wantFull && !full;
   const { filtered, filters } = useLeaderboardFilter(source, {
     searchFields,
     rangeCols,
@@ -170,16 +175,23 @@ export function TopPlayersBoard({
   return (
     <>
       <div className="border-b border-fd-border px-4 py-2.5">
-        <LeaderboardFilterBar filters={filters} searchNoun={FilterSubject.Players} />
+        <LeaderboardFilterBar
+          filters={filters}
+          searchNoun={FilterSubject.Players}
+          pending={pending}
+        />
       </div>
-      <TopPlayersList
-        locale={locale}
-        region={region}
-        results={paged}
-        metric={metric}
-        rankOffset={pager.firstShown - 1}
-        recent={recent}
-      />
+      <div className={pending ? "opacity-60 transition-opacity" : undefined}>
+        <TopPlayersList
+          locale={locale}
+          region={region}
+          results={paged}
+          metric={metric}
+          rankOffset={pager.firstShown - 1}
+          recent={recent}
+          pending={pending}
+        />
+      </div>
       {pager.total > 0 && <TablePager pager={pager} />}
     </>
   );

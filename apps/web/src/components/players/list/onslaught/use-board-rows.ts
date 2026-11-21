@@ -62,6 +62,9 @@ export function useOnslaughtBoardRows({
    * bar is read after this hook runs, so the board arms it from there too. */
   wantFull: boolean;
   requestFull: () => void;
+  /** Asked for and not yet here. What the board holds is a page, so nothing
+   * counted over it may be presented as counted over the board. */
+  pending: boolean;
 } {
   const [wantFull, setWantFull] = useState(false);
   if (narrowing && !wantFull) setWantFull(true);
@@ -119,5 +122,6 @@ export function useOnslaughtBoardRows({
     serverTotal: fullData ? undefined : ranked,
     wantFull,
     requestFull: () => setWantFull(true),
+    pending: wantFull && !fullData,
   };
 }

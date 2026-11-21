@@ -164,7 +164,7 @@ export function OnslaughtBoard({
     tierSel.size > 0 ||
     activitySel.size > 0 ||
     showLost;
-  const { source, lostRows, serverTotal, wantFull, requestFull } =
+  const { source, lostRows, serverTotal, wantFull, requestFull, pending } =
     useOnslaughtBoardRows({
       region,
       seasonId,
@@ -335,6 +335,7 @@ export function OnslaughtBoard({
                 <LeaderboardFilterBar
                   filters={filters}
                   searchNoun={FilterSubject.Players}
+                  pending={pending}
                   extra={
                     <>
                       {rankChips}
@@ -348,7 +349,12 @@ export function OnslaughtBoard({
               <div className="px-4 py-12 text-center text-sm text-muted-foreground">
                 {tOwn("no-onslaught-standings-yet")}
               </div>
-            ) : processed.length === 0 ? (
+            ) : processed.length === 0 && !pending ? (
+              // Only once the rows are all here. Said while the rest of the
+              // board is still on its way, it is a false answer: a nickname
+              // ranked past the first page read as "no player matches" for the
+              // second or two the fetch took. Pending, the table below draws
+              // its headings over whatever has matched so far, faded.
               <div className="px-4 py-12 text-center text-sm text-muted-foreground">
                 {tOwn("no-player-matches-the-current")}
               </div>
@@ -356,6 +362,7 @@ export function OnslaughtBoard({
               <Table
                 className={cn(
                   "my-0! table-fixed",
+                  pending && "opacity-60 transition-opacity",
                   "[&_td]:min-w-0 [&_td]:py-2!",
                   "[&_tbody_td:first-child]:pl-4! [&_tbody_td:last-child]:pr-4!",
                   "[&_thead_th:first-child]:pl-4! [&_thead_th:last-child]:pr-4!",
