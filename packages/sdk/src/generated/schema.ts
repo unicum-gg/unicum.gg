@@ -3794,28 +3794,28 @@ export interface components {
             /** @description Entries whose team finished first in one of the brackets. */
             wins: number;
         };
-        /** @description A tank the clan has played, with battle-weighted averages and WN7/WN8/WNX ratings across all members. */
-        ClanVehicle: {
-            tankId: number;
-            name: string;
-            shortName: string | null;
-            tier: number | null;
-            nation: string | null;
-            type: string | null;
-            isPremium: boolean;
-            role: string | null;
-            isReward: boolean;
-            memberCount: number;
-            battles: number;
-            avgDamage: number | null;
-            avgXp: number | null;
-            winrate: number | null;
-            wn7: number | null;
-            wn8: number | null;
-            wnx: number | null;
+        /** @description The tanks the clan has played, one array per field, with battle-weighted averages and WN7/WN8/WNX ratings across all members. */
+        ClanVehicleColumns: {
+            tankId: (number | null)[] | null;
+            name: (string | null)[] | null;
+            shortName: (string | null)[] | null;
+            tier: (number | null)[] | null;
+            nation: (string | null)[] | null;
+            type: (string | null)[] | null;
+            isPremium: (boolean | null)[] | null;
+            role: (string | null)[] | null;
+            isReward: (boolean | null)[] | null;
+            memberCount: (number | null)[] | null;
+            battles: (number | null)[] | null;
+            avgDamage: (number | null)[] | null;
+            avgXp: (number | null)[] | null;
+            winrate: (number | null)[] | null;
+            wn7: (number | null)[] | null;
+            wn8: (number | null)[] | null;
+            wnx: (number | null)[] | null;
         };
         ClanVehiclesResponse: {
-            vehicles: components["schemas"]["ClanVehicle"][];
+            vehicles: components["schemas"]["ClanVehicleColumns"];
         };
         ClanVideosResponse: {
             videos: components["schemas"]["videoBattleWithTank"][];
@@ -6712,7 +6712,7 @@ export interface components {
             maxDamage: number | null;
         };
         PlayerTanksResponse: {
-            tanks: components["schemas"]["PlayerVehicle"][];
+            tanks: components["schemas"]["PlayerVehicleColumns"];
             /** @description The mode the rows describe, or null for the vehicle's whole record. */
             mode: components["schemas"]["battleMode"] | null;
             /** @description Every mode this player has a record in, in mode order. Empty for a player whose vehicles predate the breakdown being collected, which fills in on their next refresh: Wargaming reports lifetime totals, so there is nothing historical to backfill. */
@@ -6777,33 +6777,36 @@ export interface components {
              */
             lastAt: Date;
         };
-        /** @description A tank in the player's record, with per-battle averages and WN7/WN8/WNX ratings. Normally a tank they have battles in, which is all Wargaming publishes about a stranger. On an account whose owner has signed in here, the list is their actual garage instead: vehicles they have sold are marked `owned: false`, and vehicles they own but have never driven appear with zero battles and null averages. */
-        PlayerVehicle: {
-            tankId: number;
-            name: string;
-            shortName: string | null;
-            tag: string | null;
-            tier: number | null;
-            nation: string | null;
-            type: string | null;
-            isPremium: boolean;
-            /** @description Whether the account still holds this vehicle. Null means nobody has verified that garage: Wargaming answers `in_garage` null for every caller but the account itself, so a vehicle sold years ago is indistinguishable from one still owned. Only a player who has signed in with Wargaming.net ID can turn this into a real boolean, and when they have, a false row is a vehicle they no longer have. */
-            owned?: boolean | null;
-            mom: number | null;
-            moe: number | null;
-            /** @description Progress towards the next mark of excellence, 0-100 with two decimals. Only ever known for an account running the mod: the value lives in the client's own vehicle dossier and is in neither the public API nor the portal. Null when nobody has reported it. */
-            moePercent: number | null;
-            markReach?: components["schemas"]["TankMarkReach"] | null;
-            battles: number;
-            avgDamage: number | null;
-            avgXp: number | null;
-            winrate: number | null;
-            wn7: number | null;
-            wn8: number | null;
-            wnx: number | null;
-            buyGold: number | null;
-            buyCredits: number | null;
-            researchXp: number | null;
+        /** @description The player's vehicles, one array per field. Normally the tanks they have battles in, which is all Wargaming publishes about a stranger. On an account whose owner has signed in here, the list is their actual garage instead: vehicles they have sold are marked `owned: false`, and vehicles they own but have never driven appear with zero battles and null averages. */
+        PlayerVehicleColumns: {
+            tankId: (number | null)[] | null;
+            slug: (string | null)[] | null;
+            name: (string | null)[] | null;
+            shortName: (string | null)[] | null;
+            tag: (string | null)[] | null;
+            tier: (number | null)[] | null;
+            nation: (string | null)[] | null;
+            type: (string | null)[] | null;
+            role: (string | null)[] | null;
+            isPremium: (boolean | null)[] | null;
+            isReward: (boolean | null)[] | null;
+            /** @description Whether the account still holds each vehicle. Null for a vehicle means nobody has verified that garage: Wargaming answers `in_garage` null for every caller but the account itself, so a vehicle sold years ago is indistinguishable from one still owned. Only a player who has signed in with Wargaming.net ID can turn this into real booleans, and when they have, a false entry is a vehicle they no longer have. The whole column is null on an unverified garage. */
+            owned: (boolean | null)[] | null;
+            mom: (number | null)[] | null;
+            moe: (number | null)[] | null;
+            /** @description Progress towards the next mark of excellence, 0-100 with two decimals. Only ever known for an account running the mod: the value lives in the client's own vehicle dossier and is in neither the public API nor the portal. The whole column is null when nobody has reported it. */
+            moePercent: (number | null)[] | null;
+            battles: (number | null)[] | null;
+            avgDamage: (number | null)[] | null;
+            avgXp: (number | null)[] | null;
+            winrate: (number | null)[] | null;
+            wn7: (number | null)[] | null;
+            wn8: (number | null)[] | null;
+            wnx: (number | null)[] | null;
+            buyGold: (number | null)[] | null;
+            buyCredits: (number | null)[] | null;
+            researchXp: (number | null)[] | null;
+            markReach: components["schemas"]["TankMarkReachColumns"];
         };
         /** @description One supporter on the board, ranked by the net total they have given since launch. The amount is never exposed. */
         PodiumSupporter: {
@@ -7901,19 +7904,19 @@ export interface components {
              */
             updatedAt: Date | null;
         };
-        /** @description Where the account's own combined damage sits against the region's three Marks of Excellence bars on this vehicle: `combined` over `markN` is how much of that mark's bar the player's average covers, and 1 or more means it already clears it. Null where no honest reading exists: below tier 5 (the game awards no marks there), under 25 battles on the vehicle, or when the region has no usable bars for it. This is an average against a published bar, never the game's own rolling-window progress, which is `moePercent`. */
-        TankMarkReach: {
-            combined: number;
-            battles: number;
+        /** @description Where the account's own combined damage sits against the region's three Marks of Excellence bars on each vehicle: `combined` over `markN` is how much of that mark's bar the player's average covers, and 1 or more means it already clears it. A vehicle's entry is absent (null in every column) where no honest reading exists: below tier 5 (the game awards no marks there), under 25 battles on the vehicle, or when the region has no usable bars for it. This is an average against a published bar, never the game's own rolling-window progress, which is `moePercent`. The whole object is null when no vehicle in the garage has a comparison. */
+        TankMarkReachColumns: {
+            combined: (number | null)[] | null;
+            battles: (number | null)[] | null;
             /**
-             * @description Which average `combined` was taken over: the last 30 days when the vehicle saw enough battles, its lifetime otherwise.
-             * @enum {string}
+             * @description Which average `combined` was taken over, per vehicle: the last 30 days when the vehicle saw enough battles, its lifetime otherwise. Null where no comparison exists for that vehicle.
+             * @enum {string|null}
              */
-            window: "recent" | "lifetime";
-            mark1: number;
-            mark2: number;
-            mark3: number;
-        };
+            window: "recent" | "lifetime" | null;
+            mark1: (number | null)[] | null;
+            mark2: (number | null)[] | null;
+            mark3: (number | null)[] | null;
+        } | null;
         /** @description The combined-damage thresholds for the 1st, 2nd and 3rd Marks of Excellence on a tank, mirrored per region. */
         TankMarksOfExcellence: {
             mark1: number | null;

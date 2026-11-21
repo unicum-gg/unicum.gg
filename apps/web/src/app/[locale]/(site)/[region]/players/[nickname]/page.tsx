@@ -42,7 +42,7 @@ import {
   type PlayerSession,
   type PlayerTankRecord,
   DEFAULT_TANK_BATTLE_MODE,
-  type PlayerTanksPayload,
+  type PlayerTanksColumnsPayload,
   type StoredPlayerLoadout,
 } from "@unicum.gg/shared";
 import { type Region, isRegion } from "@unicum.gg/wargaming";
@@ -442,7 +442,7 @@ async function PlayerProfileServer({
   // demand. Server-render it only for a `?section=tanks` deep-link (SEO /
   // crawlers); with the static section default it is normally null, so the
   // client loads it lazily when the section is first opened.
-  const initialTanks: PlayerTanksPayload | null =
+  const initialTanks: PlayerTanksColumnsPayload | null =
     section === PlayerSection.Tanks
       ? ((await unicum
           .region(region)
@@ -450,7 +450,7 @@ async function PlayerProfileServer({
           // The mode the tab opens on, so the server renders the table the
           // client is about to want rather than one it would immediately
           // refetch. There is no overall view; see `DEFAULT_TANK_BATTLE_MODE`.
-          .tanks(DEFAULT_TANK_BATTLE_MODE)) as unknown as PlayerTanksPayload)
+          .tanks(DEFAULT_TANK_BATTLE_MODE)) as unknown as PlayerTanksColumnsPayload)
       : null;
   // Same treatment for the medal cabinet: server-rendered when the visitor
   // landed straight on `/achievements`, so a crawler (and the first paint) get

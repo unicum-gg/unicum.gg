@@ -3,10 +3,14 @@
 import { useFormat } from "@/hooks/use-format";
 
 import Link from "@/components/link";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import useSWR from "swr";
 import { toRoman } from "roman-numerals";
-import type { PlayerTankRow } from "@unicum.gg/shared";
+import { playerTankRows } from "@unicum.gg/shared";
+import type {
+  PlayerTankRow,
+  PlayerTanksColumnsPayload,
+} from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import {
   Table,
@@ -97,10 +101,20 @@ export function MarksMatrix<K extends string>({
   // every profile and this list is a few hundred rows.
   const [armed, setArmed] = useState(false);
   const request = () => unicum.region(region).players(nickname).tanks();
-  const { data: tanks } = useSWR(
+  const { data } = useSWR(
     // The same key the Tanks tab uses, so whichever asks first serves both.
     armed ? request().url() : null,
-    () => request().then((r) => r.tanks as unknown as PlayerTankRow[]),
+    // The WHOLE payload, which is what the tab's own fetcher caches under this
+    // key: returning the rows alone left two shapes under one key, and
+    // whichever asked second read the other's (a reader who had opened the
+    // Value section and then hovered a cell here was handed the payload as
+    // though it were the list).
+    () => request().then((r) => r as unknown as PlayerTanksColumnsPayload),
+  );
+  // One array per field on the wire, rows here. See `playerTankColumns`.
+  const tanks = useMemo(
+    () => (data ? playerTankRows(data.tanks) : undefined),
+    [data],
   );
 
   if (rows.length === 0) return null;

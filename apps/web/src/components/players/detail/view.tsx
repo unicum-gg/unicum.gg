@@ -27,7 +27,7 @@ import {
   type PlayerDetailData,
   type PlayerSession,
   type PlayerTankRecord,
-  type PlayerTanksPayload,
+  type PlayerTanksColumnsPayload,
   inferPlayerLanguages,
 } from "@unicum.gg/shared";
 import type { LiveUpdate } from "@unicum.gg/sdk";
@@ -70,7 +70,7 @@ export function PlayerProfile({
   initialData: PlayerDetailData;
   // Present only when Tanks is the section the server rendered (so its rows are
   // in the initial HTML); null otherwise, so the tabs view fetches on demand.
-  initialTanks: PlayerTanksPayload | null;
+  initialTanks: PlayerTanksColumnsPayload | null;
   /** The vehicle record the URL names, rendered beside the tank table. */
   tankDetail: PlayerTankRecord | null;
   /** The loadout panel for the open vehicle, rendered on the SERVER and

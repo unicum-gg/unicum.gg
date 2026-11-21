@@ -28,7 +28,7 @@ import { UnicumError } from "@unicum.gg/sdk";
 import type {
   ClanRankBadge as ClanRankBadgeData,
   ClanRatings,
-  ClanVehicleRow,
+  ClanVehicleColumns,
 } from "@unicum.gg/shared";
 import type { ClanFullInfo } from "@unicum.gg/core/wargaming/wot/clans/info";
 import type { ClanNameHistoryEntry } from "@unicum.gg/core/clans/name-history";
@@ -353,7 +353,7 @@ async function ClanProfileServer({
     clanWars,
   } as unknown as ClanTabsInitialData;
   const initialVehicles = vehicles
-    ? (vehicles.vehicles as unknown as ClanVehicleRow[])
+    ? (vehicles.vehicles as unknown as ClanVehicleColumns)
     : null;
   const initialVideos = videos.videos as unknown as TankVideoCardData[];
   const initialTournaments = tournaments

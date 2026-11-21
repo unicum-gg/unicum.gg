@@ -1,7 +1,11 @@
 import { after } from "next/server";
 import { eq } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
-import { clansByRegion, buildClanVehicleRows } from "@unicum.gg/shared";
+import {
+  clansByRegion,
+  buildClanVehicleRows,
+  clanVehicleColumns,
+} from "@unicum.gg/shared";
 import { getClanTankAggregates } from "@unicum.gg/core/clans/repository/tanks";
 import { getClanIdByAddress } from "@unicum.gg/core/clans/address";
 import { jsonResponse } from "@/services/openapi/json-response";
@@ -63,7 +67,12 @@ async function GET__perf(
         .where(eq(clansByRegion[region].id, clanId))
         .catch(() => {}),
     );
-    return jsonResponse(ClanVehiclesResponse, { vehicles });
+    // Transposed on the way out: the aggregation and the ratings are computed
+    // here, and one array per field is how the rows cross the wire (see
+    // `clanVehicleColumns`, which measured 2.76x on a 974-vehicle clan).
+    return jsonResponse(ClanVehiclesResponse, {
+      vehicles: clanVehicleColumns(vehicles),
+    });
   } catch (err) {
     console.error(`[api/${region}/clans/${tag}/vehicles] failed:`, err);
     return Response.json({ error: "upstream_failure" }, { status: 502 });

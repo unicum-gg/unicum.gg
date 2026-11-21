@@ -21,7 +21,7 @@ import type { ClanFullInfo } from "@unicum.gg/core/wargaming/wot/clans/info";
 import type {
   ClanMemberStats,
   ClanRatings,
-  ClanVehicleRow,
+  ClanVehicleColumns,
 } from "@unicum.gg/shared";
 import type { ClanRankBadge as ClanRankBadgeData } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
@@ -73,7 +73,7 @@ export function ClanProfile({
   initialClan: ClanFullInfo;
   initialRatings: ClanRatings;
   initialData: ClanTabsInitialData;
-  initialVehicles: ClanVehicleRow[] | null;
+  initialVehicles: ClanVehicleColumns | null;
   initialTournaments: ClanTournamentRecord | null;
   /** Maneuvers record, server-rendered on a direct `/maneuvers` landing. */
   initialManeuvers: ClanManeuversData | null;

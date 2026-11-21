@@ -16,5 +16,6 @@ export * from "./stats";
 export * from "./stronghold-stats";
 export * from "./tank-detail";
 export * from "./tank-modes";
+export * from "./tank-columns";
 export * from "./tanks";
 export * from "./valuation";

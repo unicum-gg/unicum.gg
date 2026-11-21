@@ -7,4 +7,5 @@ export * from "./search-result";
 export * from "./snapshot-stats";
 export * from "./stronghold-policy";
 export * from "./tank-aggregate";
+export * from "./vehicle-columns";
 export * from "./vehicles";

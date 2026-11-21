@@ -3,7 +3,7 @@
 import { useLocale } from "@onruntime/translations/react";
 import { useRouter } from "@/hooks/use-router";
 import { useAccount } from "@/hooks/use-account";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 import useSWR from "swr";
 import { Panel, PanelHeader, PanelSeparator } from "@/components/panel";
@@ -56,6 +56,7 @@ import {
   DEFAULT_TANK_BATTLE_MODE,
   SessionGranularity,
   modeWinrateColor,
+  playerTankRows,
   wnRatingMetric,
 } from "@unicum.gg/shared";
 import type {
@@ -63,7 +64,7 @@ import type {
   PlayerDetailData,
   PlayerSession,
   PlayerTankRecord,
-  PlayerTanksPayload,
+  PlayerTanksColumnsPayload,
   RatingMetric,
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
@@ -115,7 +116,7 @@ export type PlayerTabsViewProps = {
   // Present only when Tanks is the section the server rendered, so its content
   // is in the initial HTML (SEO for `?section=tanks`); null otherwise, so the
   // section fetches on demand when first opened.
-  initialTanks: PlayerTanksPayload | null;
+  initialTanks: PlayerTanksColumnsPayload | null;
   /** The vehicle record the URL names, server-rendered beside the table. */
   tankDetail: PlayerTankRecord | null;
   /** The loadout panel for the open vehicle, rendered on the SERVER and
@@ -211,7 +212,7 @@ export function PlayerTabsView({
     // The URL carries the mode, so switching mode is a new key and a new fetch
     // rather than a stale table under a new label.
     needsTanks ? tanksReq().url() : null,
-    () => tanksReq().then((r) => r as unknown as PlayerTanksPayload),
+    () => tanksReq().then((r) => r as unknown as PlayerTanksColumnsPayload),
     {
       // The server renders the default mode, so it only seeds the default: a
       // reader who arrives with `?mode=` already set gets a fetch rather than a
@@ -226,7 +227,14 @@ export function PlayerTabsView({
       keepPreviousData: true,
     },
   );
-  const tanks = tanksData?.tanks;
+  // The list crosses the wire as one array per field, which is what keeps a
+  // 972-vehicle garage to a third of its former weight both here and in the
+  // prerendered page this tab is sometimes seeded from. Expanded once, where it
+  // lands: everything below reads the rows it always did.
+  const tanks = useMemo(
+    () => (tanksData ? playerTankRows(tanksData.tanks) : undefined),
+    [tanksData],
+  );
   // `keepPreviousData` holds the previous mode's rows while the next ones load,
   // which is what keeps the option list from blinking. The payload says which
   // mode its rows describe, so anything that LABELS them reads that rather than

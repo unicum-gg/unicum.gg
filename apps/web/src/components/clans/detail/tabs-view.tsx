@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "@/hooks/use-router";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import useSWR from "swr";
 import { ExpandableDescription } from "@/components/clans/detail/description";
 import {
@@ -36,8 +36,9 @@ import {
 import { unicum } from "@/services/sdk";
 import type { ClanRecentEvent } from "@unicum.gg/wargaming";
 import {
+  clanVehicleRows,
   type ClanMemberStats,
-  type ClanVehicleRow,
+  type ClanVehicleColumns,
   type ClanGlobalMapView,
   type ClanStrongholdView,
 } from "@unicum.gg/shared";
@@ -81,7 +82,7 @@ export type ClanTabsViewProps = {
   // Present only when Tanks is the section the server rendered, so its content
   // is in the initial HTML (SEO for `?section=tanks`); null otherwise, so the
   // section fetches on demand when first opened.
-  initialVehicles: ClanVehicleRow[] | null;
+  initialVehicles: ClanVehicleColumns | null;
   /** The tournaments read, when the server rendered this section. Null when it
    * rendered another one, which is when the browser fetches on demand. */
   initialTournaments: ClanTournamentRecord | null;
@@ -139,10 +140,12 @@ export function ClanTabsView({
   // Only the Tanks section needs an on-demand fetch. The key is the request's
   // own `.url()`, and only runs when Tanks is active (null key = no request).
   const seededVehicles = initialVehicles != null;
-  const { data: vehicles } = useSWR(
+  const { data: vehicleColumns } = useSWR(
     section === ClanSection.Tanks ? clanApi.vehicles().url() : null,
     () =>
-      clanApi.vehicles().then((r) => r.vehicles as unknown as ClanVehicleRow[]),
+      clanApi
+        .vehicles()
+        .then((r) => r.vehicles as unknown as ClanVehicleColumns),
     {
       fallbackData: initialVehicles ?? undefined,
       // When the server already rendered Tanks (`initialVehicles` seeds the
@@ -151,6 +154,15 @@ export function ClanTabsView({
       // the section from another one actually fetches.
       revalidateOnMount: !seededVehicles,
     },
+  );
+
+  // One array per field on the wire, which is what keeps a 974-vehicle clan to
+  // a third of its former weight both here and in the prerendered page this tab
+  // is sometimes seeded from. Expanded once, where it lands: the table below
+  // reads the rows it always did. See `clanVehicleColumns`.
+  const vehicles = useMemo(
+    () => (vehicleColumns ? clanVehicleRows(vehicleColumns) : undefined),
+    [vehicleColumns],
   );
 
   // Seeded by the server render when this is the section being rendered, the
