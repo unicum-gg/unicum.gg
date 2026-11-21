@@ -16,6 +16,7 @@ const eslintConfig = defineConfig([
     // Next server runtime and by PM2), so they legitimately use
     // `require`/`module.exports`.
     "config/cache-handler.js",
+    "config/isr-tiers.js",
     "ecosystem.config.cjs",
   ]),
   // The OG image pipeline. These files are not rendered by a browser: satori

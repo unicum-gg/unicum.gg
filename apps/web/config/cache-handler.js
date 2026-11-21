@@ -85,7 +85,32 @@ function buildFingerprint() {
 const DEPLOY = buildFingerprint();
 const CACHE_PREFIX = `isr:${DEPLOY}:v:`;
 const TAGS_PREFIX = `isr:${DEPLOY}:tag:`;
-const LRU_INDEX = `isr:${DEPLOY}:lru`;
+// One index per POPULATION, not one for the whole store, and that split is the
+// whole point of this file's eviction policy.
+//
+// Measured 2026-11-18 on the live store: of its 2,761 page entries, 2,650 were
+// a single player, clan, tank or tournament team, in 36 languages. `/clans`,
+// `/maps`, `/players/onslaught`, `/players/marks` and `/coverage` held ZERO
+// entries between them and `/players` held one. The pages a reader actually
+// clicks between were not merely evicted sometimes, they were absent, so every
+// such click was a full re-render at the origin: 532 ms for `/fr/clans` and
+// 3,572 ms for `/fr/players/onslaught`, measured in the browser against
+// production.
+//
+// The cause is that one LRU cannot serve two populations of wildly different
+// size. The sections are a few dozen patterns; the rest is millions of pages a
+// crawler walks once and nobody asks for again. Under a single LRU whatever is
+// being walked is always the more recently used, so the bounded population is
+// always what loses, which is exactly backwards.
+const SECTION_INDEX = `isr:${DEPLOY}:lru:section`;
+const TAIL_INDEX = `isr:${DEPLOY}:lru:tail`;
+// What each entry costs, so a tier can be bounded in bytes rather than in keys.
+// A count cap is what let the store fill to its Redis ceiling in the first
+// place: `MAX_REDIS_KEYS` is 10,000 and the entries average 1.17 MB, so the cap
+// stood at 11.7 GB against a 4 GB ceiling and never once applied. Redis's own
+// `allkeys-lru` was doing all the evicting, and it cannot tell a leaderboard
+// from a crawled profile.
+const SIZES = `isr:${DEPLOY}:size`;
 
 // Must stay ABOVE the longest page `revalidate` (currently 24h on the entity
 // pages) so the entry survives in Redis for the whole cache window: if it aged
@@ -93,7 +118,21 @@ const LRU_INDEX = `isr:${DEPLOY}:lru`;
 // the edge still wants the page. 2 days gives the 24h pages headroom for their
 // background revalidation.
 const TTL_SECONDS = Number(process.env.NEXT_ISR_CACHE_TTL_SECONDS) || 172_800;
+// A per-tier member cap, kept alongside the byte budgets because it bounds what
+// a trim itself costs: the pass reads a tier's whole index and weighs it in one
+// `hmget`, so an index nobody capped would make its own eviction the expensive
+// part. The bytes are what decide which entries go; this only decides how many
+// an index may hold before the oldest are dropped regardless of their size.
 const MAX_REDIS_KEYS = Number(process.env.NEXT_ISR_CACHE_MAX_KEYS) || 10_000;
+// The two tiers' budgets. They must SUM BELOW the Redis `maxmemory` ceiling
+// (4 GiB on the dedicated instance), because the whole point is that this
+// handler decides what goes rather than leaving it to `allkeys-lru`: once the
+// instance reaches its ceiling, Redis evicts blind and no policy here can hold
+// a page it has decided to drop. The remainder is headroom for the tag sets,
+// the two indexes and the size hash.
+const SECTION_BYTES =
+  Number(process.env.NEXT_ISR_SECTION_BYTES) || 1_610_612_736; // 1.5 GiB
+const TAIL_BYTES = Number(process.env.NEXT_ISR_TAIL_BYTES) || 2_147_483_648; // 2 GiB
 const TIMEOUT_MS = 1_000;
 
 // Prefer a DEDICATED Redis for the ISR cache, falling back to the shared one.
@@ -239,21 +278,51 @@ function withTimeout(promise) {
   ]);
 }
 
-// Trim the oldest keys once the cap is exceeded (access-time ordered LRU).
+const {
+  isSectionKey,
+  trimTier,
+  sweepStaleNamespaces,
+} = require("./isr-tiers");
+
+// Which tier a key belongs to, read once per op.
+const indexFor = (key) => (isSectionKey(key) ? SECTION_INDEX : TAIL_INDEX);
+
+const TIER_CONTEXT = {
+  prefix: CACHE_PREFIX,
+  sizes: SIZES,
+  maxKeys: MAX_REDIS_KEYS,
+};
+
+// Trim both tiers to their budgets. Best-effort and never awaited by a request.
 async function evictIfNeeded() {
   if (!redis || !ready) return;
   try {
-    const count = await redis.zcard(LRU_INDEX);
-    if (count <= MAX_REDIS_KEYS) return;
-    const oldest = await redis.zrange(LRU_INDEX, 0, count - MAX_REDIS_KEYS - 1);
-    if (!oldest.length) return;
-    const pipe = redis.pipeline();
-    for (const k of oldest) pipe.del(CACHE_PREFIX + k);
-    pipe.zrem(LRU_INDEX, ...oldest);
-    await pipe.exec();
+    await trimTier(redis, TIER_CONTEXT, SECTION_INDEX, SECTION_BYTES);
+    await trimTier(redis, TIER_CONTEXT, TAIL_INDEX, TAIL_BYTES);
   } catch {
     // eviction is best-effort
   }
+}
+
+// Past the rolling update's drain, so the containers being replaced keep their
+// cache for the seconds they are still serving (see `sweepStaleNamespaces`).
+const SWEEP_DELAY_MS = Number(process.env.NEXT_ISR_SWEEP_DELAY_MS) || 60_000;
+if (redis && DEPLOY) {
+  const timer = setTimeout(() => {
+    if (!ready) return;
+    sweepStaleNamespaces(redis, DEPLOY)
+      .then((dropped) => {
+        if (dropped) {
+          console.log(`[isr-cache] dropped ${dropped} key(s) from older builds`);
+        }
+      })
+      .catch(() => {
+        // A sweep that fails costs the store nothing it did not already have:
+        // those entries still age out on their own TTL.
+      });
+  }, SWEEP_DELAY_MS);
+  // Never hold the process open for a cache sweep.
+  if (typeof timer.unref === "function") timer.unref();
 }
 
 module.exports = class CacheHandler {
@@ -267,8 +336,10 @@ module.exports = class CacheHandler {
         const buf = await withTimeout(redis.getBuffer(CACHE_PREFIX + key));
         if (buf) {
           const entry = v8.deserialize(buf);
-          // bump access time for LRU, populate the hot tier
-          redis.zadd(LRU_INDEX, Date.now(), key).catch(() => {});
+          // bump access time in this key's OWN tier, populate the hot tier
+          redis
+            .zadd(indexFor(key), Date.now(), key)
+            .catch(() => {});
           // `buf.length` is what the entry costs, already in hand here, so the
           // hot tier is weighed without serialising anything a second time.
           lruSet(key, entry, buf.length);
@@ -301,10 +372,13 @@ module.exports = class CacheHandler {
     lruSet(key, entry, buf ? buf.length : ASSUMED_ENTRY_BYTES);
     if (!buf) return; // no Redis, or unserialisable: the hot tier has it
     try {
+      const index = indexFor(key);
       const pipe = redis.pipeline();
       pipe.set(CACHE_PREFIX + key, buf, "EX", TTL_SECONDS);
-      pipe.zadd(LRU_INDEX, Date.now(), key);
-      pipe.expire(LRU_INDEX, TTL_SECONDS); // don't let the index outlive its entries
+      pipe.zadd(index, Date.now(), key);
+      pipe.hset(SIZES, key, buf.length);
+      pipe.expire(index, TTL_SECONDS); // don't let the index outlive its entries
+      pipe.expire(SIZES, TTL_SECONDS);
       for (const tag of tags) {
         pipe.sadd(TAGS_PREFIX + tag, key);
         pipe.expire(TAGS_PREFIX + tag, TTL_SECONDS);
@@ -333,7 +407,9 @@ module.exports = class CacheHandler {
         const pipe = redis.pipeline();
         for (const k of keys) {
           pipe.del(CACHE_PREFIX + k);
-          pipe.zrem(LRU_INDEX, k);
+          pipe.zrem(SECTION_INDEX, k);
+          pipe.zrem(TAIL_INDEX, k);
+          pipe.hdel(SIZES, k);
         }
         pipe.del(TAGS_PREFIX + tag);
         await withTimeout(pipe.exec());

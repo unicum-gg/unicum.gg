@@ -15,6 +15,11 @@ import { fileURLToPath } from "node:url";
 const webRoot = join(dirname(fileURLToPath(import.meta.url)), "..");
 const appRoot = join(webRoot, "src", "app");
 const outFile = join(webRoot, "src", "proxy-routes.generated.ts");
+// Read by `config/cache-handler.js`, which is CommonJS loaded by the Next
+// config and cannot import the TypeScript list above. JSON rather than a second
+// `.ts` for that reason alone, and generated from the same walk so the two can
+// never describe different route trees.
+const sectionsFile = join(webRoot, "config", "isr-section-routes.generated.json");
 
 const REGION_SEGMENT = "[region]";
 const LOCALE_SEGMENT = "[locale]";
@@ -154,6 +159,38 @@ ${list(paginated)}
 `;
 
 writeFileSync(outFile, body);
+
+// The pages a reader NAVIGATES BETWEEN, which is every page whose address is
+// fixed once the region is chosen.
+//
+// They are a bounded population and the rest of the site is not: a page
+// carrying a `[nickname]`, a `[tag]` or a `[slug]` is one of millions, and the
+// ISR store measured 2,650 of its 2,761 entries holding exactly those, in 36
+// languages, with the leaderboards themselves down to a single entry and
+// `/clans`, `/maps` and `/players/onslaught` at none at all. One LRU cannot
+// serve both populations: whatever a crawler walks is always the more recently
+// used, so the handful of pages a reader clicks between is always what gets
+// evicted, and every click then pays a full re-render at the origin (measured
+// 532 ms to 3,572 ms).
+//
+// `[n]` and `[language]` are deliberately NOT treated as bounded here even
+// though they enumerate: six `lang` patterns across 36 languages, 36 locales
+// and 3 regions is 23,000 pages, which is larger than the store and would put
+// this list back in the same position as the long tail it exists to be
+// protected from. A deeper page and a language view take their chances with
+// everything else.
+const sectionPatterns = [
+  ...new Set([...regionless, ...regional]),
+]
+  .filter((pattern) => {
+    const dynamic = pattern.match(/\[[^\]]+\]/g) ?? [];
+    return dynamic.every((segment) => segment === REGION_SEGMENT);
+  })
+  .sort();
+writeFileSync(sectionsFile, `${JSON.stringify(sectionPatterns, null, 2)}\n`);
 console.log(
   `[page-routes] ${regionless.size} region-less + ${regional.size} regional + ${unlocalized.size} unlocalized page(s), ${paginated.size} paginated, ${rootHandlers.size} root handler(s) → ${relative(webRoot, outFile)}`,
+);
+console.log(
+  `[page-routes] ${sectionPatterns.length} section page(s) the ISR cache protects → ${relative(webRoot, sectionsFile)}`,
 );

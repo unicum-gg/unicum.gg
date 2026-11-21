@@ -52,6 +52,7 @@ next-env.d.ts
 apps/web/src/services/openapi/openapi.generated.json
 apps/web/src/services/sdk/local-routes.generated.ts
 apps/web/src/proxy-routes.generated.ts
+apps/web/config/isr-section-routes.generated.json
 # Per-locale dictionary modules (static imports of src/locales/<locale>/**.json)
 apps/web/src/locales/generated/
 # glossary markdown compiled for core (source of truth is entries/<category>/*.md)
