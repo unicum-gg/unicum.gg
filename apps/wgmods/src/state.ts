@@ -21,6 +21,11 @@ export type State = {
    */
   notesLost?: string;
   /**
+   * The tag last announced as held behind a version in review, so the wait is
+   * said once per release rather than on every pass.
+   */
+  held?: string;
+  /**
    * The WG ID security token's expiry as last seen. It did not move on a silent
    * re-login when measured (2026-11-06), which is what caps a session at about
    * fourteen days; if it ever does move without a login, that is worth knowing.

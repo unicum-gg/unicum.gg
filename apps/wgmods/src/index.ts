@@ -10,7 +10,7 @@ import fs from "node:fs";
 import { config } from "./config.js";
 import { ensureLoggedIn, loggedIn, securityTokenExpiry, showLogin, withBrowser } from "./browser.js";
 import { readAllNotes, readRelease, verifySignature } from "./github.js";
-import { addVersion, hasVersion, missingNotes, reviewReport, syncChangeLog } from "./hub.js";
+import { addVersion, cancelReview, hasVersion, missingNotes, reviewReport, syncChangeLog, versionInReview } from "./hub.js";
 import { loginLink, notify } from "./notify.js";
 import { serveRemote, upgradeRemote } from "./remote.js";
 import { readState, updateState } from "./state.js";
@@ -35,6 +35,12 @@ async function publish(tag: string): Promise<void> {
     if (!(await ensureLoggedIn(context))) return "logged-out" as const;
     const release = await readRelease(tag);
     if (await hasVersion(context, release.version)) return "already" as const;
+    // Never stacked on a version in review: see `versionInReview`.
+    const inReview = await versionInReview(context);
+    if (inReview) {
+      if (!(await cancelReview(context, inReview.id))) return { held: inReview.version };
+      log(`${tag}: review of ${inReview.version} cancelled to send ${release.version} in its place`);
+    }
     const id = await addVersion(context, release);
     log(`${tag}: version ${id} created for client ${release.client}`);
     return "sent" as const;
@@ -46,9 +52,27 @@ async function publish(tag: string): Promise<void> {
     await alertLoggedOut(`${tag} is waiting for it.`);
     return;
   }
+  if (typeof outcome === "object") {
+    // Kept as pending, so every keep-alive pass tries again once the review is
+    // settled; a newer release replaces it and only the newest is sent.
+    const announced = readState().held === tag;
+    updateState((state) => {
+      state.pending = tag;
+      state.held = tag;
+    });
+    log(`${tag}: held, ${outcome.held} is in review and the hub refuses to cancel it`);
+    if (!announced) {
+      await notify(
+        `${tag} is held: ${outcome.held} is still in review on wgmods and the hub refuses to cancel it. ` +
+          `It goes out on the first pass after the review is settled.`,
+      );
+    }
+    return;
+  }
   updateState((state) => {
     state.published = tag;
     if (state.pending === tag) delete state.pending;
+    if (state.held === tag) delete state.held;
   });
   await updateChangeLog();
   if (outcome === "sent") {

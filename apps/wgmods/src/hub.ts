@@ -16,6 +16,8 @@ const VERSIONS = `${HUB}/api/mods/versions/`;
 const COMMENTS = () => `${HUB}/api/mods/comments/?mod_id=${config.modId}`;
 // How the hub numbers a version's review (MOD_VERSION_STATUS in its own bundle).
 const VERSION_STATUS = ["in review", "published", "rejected"];
+// MOD_STATE.PUBLISHED_UPDATE_IN_REVIEW in the same bundle.
+const MOD_STATE_UPDATE_IN_REVIEW = 4;
 // The edit page carries the client versions it offers inside a JS string
 // literal, where every quote is the six characters ".
 const GAME_VERSIONS = /(?:\\u0022|")gameVersions(?:\\u0022|")\s*:\s*(\[.*?\])/s;
@@ -162,6 +164,37 @@ export async function syncChangeLog(
     added: missing.map((release) => release.version),
     moved: untouched(before) !== untouched(after) || before.state !== after.state,
   };
+}
+
+/**
+ * The version waiting for the reviewers, if any. The edit page offers no way
+ * to add a version while one is in review and the API does: adding anyway
+ * does not queue the new one behind it, it files the one under review away as
+ * though it were published (status still "in review", never approved, and
+ * refused deletion as the "last published version") and puts the new one in
+ * its place. Six releases sent that way between 2026-10-14 and 11-18 left five
+ * versions stranded and reset the review every time, so nothing was approved.
+ */
+export async function versionInReview(context: BrowserContext): Promise<{ id: number; version: string } | undefined> {
+  const mod = await json(context, OWNER());
+  if (mod.state !== MOD_STATE_UPDATE_IN_REVIEW) return undefined;
+  const newest = (mod.versions ?? [])[0];
+  return newest && newest.status === 0 ? { id: Number(newest.id), version: String(newest.version) } : undefined;
+}
+
+/**
+ * The edit page's "Cancel review": delete the version under review. False when
+ * the hub refuses, which it does while no version of the mod has ever been
+ * approved (403 "Last published version cannot be deleted.", 2026-11-21).
+ */
+export async function cancelReview(context: BrowserContext, id: number): Promise<boolean> {
+  const response = await context.request.delete(`${VERSIONS}${id}/`, {
+    headers: await hubHeaders(context),
+    failOnStatusCode: false,
+  });
+  if ([200, 202, 204].includes(response.status())) return true;
+  if (response.status() === 403) return false;
+  throw new Error(`${VERSIONS}${id}/: HTTP ${response.status()} ${(await response.text()).slice(0, 400)}`);
 }
 
 /** Upload the archive and create the version. Wargaming reviews it before it shows. */
