@@ -1,0 +1,6 @@
+{
+  "all-tiers": "{skirmish}, visi līmeņi",
+  "older-formats": "Vecāki formāti",
+  "note": "Līmeņi tiek saskaitīti, pamatojoties uz šī spēlētāja transportlīdzekļiem, jo sadursme tiek izspēlēta ar sava līmeņa transportlīdzekļiem. 24 stundu, 7 dienu un 30 dienu rādītāji pa līmeņiem ir reģistrēti kopš 2026. gada novembra, tāpēc logs paliek tukšs, līdz šis rekords to aptver.",
+  "note-older-formats": "Vecāki formāti ir kaujas, kas izspēlētas ar citu līmeņu transportlīdzekļiem, no gadiem, kad sadursme ierobežoja līmeni (līdz VI, VIII vai X), nevis to fiksēja."
+}

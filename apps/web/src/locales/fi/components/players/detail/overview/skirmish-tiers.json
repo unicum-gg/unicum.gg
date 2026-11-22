@@ -1,0 +1,6 @@
+{
+  "all-tiers": "{skirmish}, kaikki tasot",
+  "older-formats": "Aiemmat formaatit",
+  "note": "Tämän pelaajan ajoneuvoista saadut tasot on lisätty yhteen, koska kahakassa taistellaan sen oman tason ajoneuvoilla. Tasokohtaiset luvut 24 tunnin, 7 päivän ja 30 päivän ajalta on tallennettu marraskuusta 2026 lähtien, joten ikkuna pysyy tyhjänä, kunnes ennätys kattaa sen.",
+  "note-older-formats": "Aiemmat formaatit ovat taisteluja, jotka on taisteltu muiden tasojen ajoneuvoilla niiltä vuosilta, jolloin kahakan taso rajoitettiin ylärajaan, enintään tasoon VI, VIII tai X, sen sijaan, että se olisi ollut kiinteä."
+}

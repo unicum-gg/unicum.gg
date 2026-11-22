@@ -906,7 +906,11 @@
     "watch": "مشاهدة",
     "wotreplay": "wotreplay",
     "wrong": "خاطئ",
-    "together": "معًا"
+    "together": "معًا",
+    "VIII": "VIII",
+    "hour": "ساعة",
+    "instead": "بدلاً من",
+    "tiers": "المستويات"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1816,7 +1820,11 @@
     "watch": "глядзець",
     "wotreplay": "wotreplay",
     "wrong": "няправільна",
-    "together": "разам"
+    "together": "разам",
+    "VIII": "VIII",
+    "hour": "гадзіна",
+    "instead": "замест",
+    "tiers": "узроўні"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -2945,7 +2953,10 @@
     "watch": "гледане",
     "wotreplay": "wotreplay",
     "wrong": "грешен",
-    "together": "заедно"
+    "together": "заедно",
+    "hour": "час",
+    "instead": "вместо",
+    "tiers": "нива"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -3863,7 +3874,11 @@
     "watch": "gledaj",
     "wotreplay": "wotreplay",
     "wrong": "pogrešno",
-    "together": "zajedno"
+    "together": "zajedno",
+    "VIII": "VIII",
+    "hour": "sat",
+    "instead": "umjesto",
+    "tiers": "nivoi"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -5003,7 +5018,10 @@
     "watch": "sledovat",
     "wotreplay": "wotreplay",
     "wrong": "nesprávně",
-    "together": "společně"
+    "together": "společně",
+    "hour": "hodina",
+    "instead": "místo toho",
+    "tiers": "úrovně"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -6149,7 +6167,10 @@
     "watch": "se",
     "wotreplay": "wotreplay",
     "wrong": "forkert",
-    "together": "sammen"
+    "together": "sammen",
+    "hour": "time",
+    "instead": "i stedet",
+    "tiers": "niveauer"
   },
   "de": {
     "(optional)": "(optional)",
@@ -7288,7 +7309,10 @@
     "watch": "ansehen",
     "wotreplay": "wotreplay",
     "wrong": "falsch",
-    "together": "zusammen"
+    "together": "zusammen",
+    "hour": "Stunde",
+    "instead": "stattdessen",
+    "tiers": "Stufen"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -8433,7 +8457,10 @@
     "watch": "παρακολούθηση",
     "wotreplay": "wotreplay",
     "wrong": "λάθος",
-    "together": "μαζί"
+    "together": "μαζί",
+    "hour": "ώρα",
+    "instead": "αντί",
+    "tiers": "επίπεδα"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -9559,7 +9586,10 @@
     "watch": "ver",
     "wotreplay": "wotreplay",
     "wrong": "mal",
-    "together": "juntos"
+    "together": "juntos",
+    "hour": "hora",
+    "instead": "en su lugar",
+    "tiers": "niveles"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -10709,7 +10739,10 @@
     "watch": "katso",
     "wotreplay": "wotreplay",
     "wrong": "väärin",
-    "together": "yhdessä"
+    "together": "yhdessä",
+    "hour": "tunti",
+    "instead": "sijaan",
+    "tiers": "tasot"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -11838,7 +11871,10 @@
     "watch": "regarder",
     "wotreplay": "wotreplay",
     "wrong": "incorrect",
-    "together": "ensemble"
+    "together": "ensemble",
+    "hour": "heure",
+    "instead": "à la place",
+    "tiers": "rangs"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -12749,7 +12785,11 @@
     "watch": "देखें",
     "wotreplay": "wotreplay",
     "wrong": "गलत",
-    "together": "साथ"
+    "together": "साथ",
+    "VIII": "VIII",
+    "hour": "घंटा",
+    "instead": "के बजाय",
+    "tiers": "टियर"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -13892,7 +13932,10 @@
     "watch": "gledaj",
     "wotreplay": "wotreplay",
     "wrong": "pogrešno",
-    "together": "zajedno"
+    "together": "zajedno",
+    "hour": "sat",
+    "instead": "umjesto",
+    "tiers": "razine"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -15037,7 +15080,10 @@
     "watch": "megtekintés",
     "wotreplay": "wotreplay",
     "wrong": "rossz",
-    "together": "együtt"
+    "together": "együtt",
+    "hour": "óra",
+    "instead": "helyette",
+    "tiers": "szintek"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -16178,7 +16224,10 @@
     "watch": "guarda",
     "wotreplay": "wotreplay",
     "wrong": "errato",
-    "together": "insieme"
+    "together": "insieme",
+    "hour": "ora",
+    "instead": "invece",
+    "tiers": "livelli"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -17326,7 +17375,10 @@
     "watch": "視聴",
     "wotreplay": "wotreplay",
     "wrong": "間違い",
-    "together": "一緒に"
+    "together": "一緒に",
+    "hour": "時間",
+    "instead": "代わりに",
+    "tiers": "Tier"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -18237,7 +18289,11 @@
     "watch": "көру",
     "wotreplay": "wotreplay",
     "wrong": "қате",
-    "together": "бірге"
+    "together": "бірге",
+    "VIII": "VIII",
+    "hour": "сағат",
+    "instead": "орнына",
+    "tiers": "деңгейлер"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -19389,7 +19445,10 @@
     "watch": "시청",
     "wotreplay": "wotreplay",
     "wrong": "잘못됨",
-    "together": "함께"
+    "together": "함께",
+    "hour": "시간",
+    "instead": "대신",
+    "tiers": "단계"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -20537,7 +20596,10 @@
     "watch": "žiūrėti",
     "wotreplay": "wotreplay",
     "wrong": "neteisinga",
-    "together": "kartu"
+    "together": "kartu",
+    "hour": "valanda",
+    "instead": "vietoj",
+    "tiers": "lygiai"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -21672,7 +21734,10 @@
     "watch": "skatīties",
     "wotreplay": "wotreplay",
     "wrong": "greizi",
-    "together": "kopā"
+    "together": "kopā",
+    "hour": "stunda",
+    "instead": "tā vietā",
+    "tiers": "līmeņi"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -22822,7 +22887,10 @@
     "watch": "bekijken",
     "wotreplay": "wotreplay",
     "wrong": "fout",
-    "together": "samen"
+    "together": "samen",
+    "hour": "uur",
+    "instead": "in plaats daarvan",
+    "tiers": "niveaus"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -23963,7 +24031,10 @@
     "watch": "se",
     "wotreplay": "wotreplay",
     "wrong": "feil",
-    "together": "sammen"
+    "together": "sammen",
+    "hour": "time",
+    "instead": "i stedet",
+    "tiers": "nivåer"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -25101,7 +25172,10 @@
     "watch": "oglądaj",
     "wotreplay": "wotreplay",
     "wrong": "nieprawidłowe",
-    "together": "razem"
+    "together": "razem",
+    "hour": "godzina",
+    "instead": "zamiast",
+    "tiers": "poziomy"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -26232,7 +26306,10 @@
     "watch": "assistir",
     "wotreplay": "wotreplay",
     "wrong": "incorreto",
-    "together": "juntos"
+    "together": "juntos",
+    "hour": "hora",
+    "instead": "em vez",
+    "tiers": "níveis"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -27364,7 +27441,10 @@
     "watch": "urmărește",
     "wotreplay": "wotreplay",
     "wrong": "greșit",
-    "together": "împreună"
+    "together": "împreună",
+    "hour": "oră",
+    "instead": "în schimb",
+    "tiers": "niveluri"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -28484,7 +28564,10 @@
     "watch": "смотреть",
     "wotreplay": "wotreplay",
     "wrong": "неверно",
-    "together": "вместе"
+    "together": "вместе",
+    "hour": "час",
+    "instead": "вместо",
+    "tiers": "уровни"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -29398,7 +29481,11 @@
     "watch": "sledovať",
     "wotreplay": "wotreplay",
     "wrong": "nesprávne",
-    "together": "skupaj"
+    "together": "skupaj",
+    "VIII": "VIII",
+    "hour": "ura",
+    "instead": "namesto",
+    "tiers": "stopnje"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -30543,7 +30630,10 @@
     "watch": "gledaj",
     "wotreplay": "wotreplay",
     "wrong": "po zlu",
-    "together": "zajedno"
+    "together": "zajedno",
+    "hour": "sat",
+    "instead": "umesto",
+    "tiers": "nivoi"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -31694,7 +31784,10 @@
     "watch": "titta",
     "wotreplay": "wotreplay",
     "wrong": "fel",
-    "together": "tillsammans"
+    "together": "tillsammans",
+    "hour": "timme",
+    "instead": "istället",
+    "tiers": "nivåer"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -32840,7 +32933,10 @@
     "watch": "ดู",
     "wotreplay": "wotreplay",
     "wrong": "ไม่ถูกต้อง",
-    "together": "ร่วมกัน"
+    "together": "ร่วมกัน",
+    "hour": "ชั่วโมง",
+    "instead": "แทน",
+    "tiers": "ระดับ"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -33753,7 +33849,11 @@
     "watch": "panoorin",
     "wotreplay": "wotreplay",
     "wrong": "mali",
-    "together": "magkasama"
+    "together": "magkasama",
+    "VIII": "VIII",
+    "hour": "oras",
+    "instead": "sa halip",
+    "tiers": "mga tier"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -34896,7 +34996,10 @@
     "watch": "izle",
     "wotreplay": "wotreplay",
     "wrong": "yanlış",
-    "together": "birlikte"
+    "together": "birlikte",
+    "hour": "saat",
+    "instead": "yerine",
+    "tiers": "seviyeler"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -36031,7 +36134,10 @@
     "watch": "дивитися",
     "wotreplay": "wotreplay",
     "wrong": "не так",
-    "together": "разом"
+    "together": "разом",
+    "hour": "година",
+    "instead": "натомість",
+    "tiers": "рівні"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -37155,7 +37261,10 @@
     "watch": "xem",
     "wotreplay": "wotreplay",
     "wrong": "sai",
-    "together": "cùng nhau"
+    "together": "cùng nhau",
+    "hour": "giờ",
+    "instead": "thay vì",
+    "tiers": "cấp"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -38301,6 +38410,9 @@
     "watch": "观看",
     "wotreplay": "wotreplay",
     "wrong": "出错",
-    "together": "一起"
+    "together": "一起",
+    "hour": "小时",
+    "instead": "而不是",
+    "tiers": "等级"
   }
 }
