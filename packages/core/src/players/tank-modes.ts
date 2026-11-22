@@ -2,6 +2,7 @@ import { and, eq, sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
 import {
   TANK_MODES_STORED,
+  TankBattleMode,
   type NewTankModeRow,
   type TankModeRow,
   type TankModeStatistics,
@@ -9,6 +10,7 @@ import {
   tankModesByRegion,
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
+import { recordSkirmishTierHistory } from "@unicum.gg/core/players/skirmish-tier-history";
 
 const MODE_INSERT_CHUNK = 500;
 
@@ -136,6 +138,17 @@ export async function bulkUpsertTankModes(
           updatedAt: sql`EXCLUDED.updated_at`,
         },
       });
+  }
+
+  // The Skirmish split by tier is the one read that diffs this table, and the
+  // table keeps no history, so its totals are recorded beside it. Derived, so a
+  // failure here is logged and never undoes the breakdown that just landed.
+  if (rows.some((r) => r.mode === TankBattleMode.Skirmish)) {
+    try {
+      await recordSkirmishTierHistory(region, [playerId]);
+    } catch (err) {
+      console.error(`[skirmish-tier-history-${region}] player ${playerId}:`, err);
+    }
   }
 }
 

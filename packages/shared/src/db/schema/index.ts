@@ -31,6 +31,7 @@ export * from "./player-name-history";
 export * from "./clan-name-history";
 export * from "./player-refresh-queue";
 export * from "./player-archived-modes";
+export * from "./player-skirmish-tiers";
 export * from "./player-snapshots";
 export * from "./tank-loadouts";
 export * from "./tank-mom";

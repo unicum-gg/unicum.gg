@@ -13,6 +13,7 @@ import { PlayerTabsView } from "@/components/players/detail/tabs-view";
 import type { PlayerTournamentRecord } from "@/components/players/detail/tournaments/row";
 import type { PlayerOnslaughtData } from "@/components/players/detail/onslaught";
 import type { PlayerManeuversData } from "@/components/players/detail/maneuvers";
+import type { PlayerSkirmishData } from "@/components/players/detail/overview/skirmish-tiers";
 import type { PlayerBattlesPayload } from "@/components/players/detail/overview/battles";
 import type { PlayerBattleEncounters } from "@unicum.gg/core/battles/met";
 import type { PlayerModeEconomy } from "@unicum.gg/shared";
@@ -55,6 +56,7 @@ export function PlayerProfile({
   initialTournaments,
   initialOnslaught,
   initialManeuvers,
+  initialSkirmish,
   initialBattles,
   initialEncounters,
   initialEconomy,
@@ -90,6 +92,8 @@ export function PlayerProfile({
   initialOnslaught: PlayerOnslaughtData | null;
   /** Maneuvers record, server-rendered on a direct `/maneuvers` landing. */
   initialManeuvers: PlayerManeuversData | null;
+  /** Skirmishes by tier, server-rendered on a direct `/skirmish` landing. */
+  initialSkirmish: PlayerSkirmishData | null;
   /** Battles shared through the mod, server-rendered under Overview. */
   initialBattles: PlayerBattlesPayload | null;
   /** Who the player meets in those battles, server-rendered on the Battles tab. */
@@ -218,6 +222,7 @@ export function PlayerProfile({
         initialTournaments={initialTournaments}
         initialOnslaught={initialOnslaught}
         initialManeuvers={initialManeuvers}
+        initialSkirmish={initialSkirmish}
         initialBattles={initialBattles}
         initialEncounters={initialEncounters}
         isOwnProfile={isOwnProfile}

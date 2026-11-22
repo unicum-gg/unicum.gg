@@ -31,6 +31,10 @@ import {
 } from "@/components/players/detail/overview/stronghold";
 import { modeRatingRows } from "@/components/players/detail/overview/stronghold-stats-table";
 import {
+  useSkirmishTierSections,
+  type PlayerSkirmishData,
+} from "@/components/players/detail/overview/skirmish-tiers";
+import {
   PLAYER_MODE_TANK_VIEW,
   hasPlayedMode,
 } from "@/components/players/detail/overview/mode-tank-view";
@@ -139,6 +143,8 @@ export type PlayerTabsViewProps = {
   /** Maneuvers record, server-rendered on a direct `/maneuvers` landing; null
    * on every other view, where the client fetches it when the mode is opened. */
   initialManeuvers: PlayerManeuversData | null;
+  /** Skirmishes by tier, server-rendered on a direct `/skirmish` landing. */
+  initialSkirmish: PlayerSkirmishData | null;
   /** Battles shared through the mod, server-rendered under Overview (its last
    * ten) and on the Battles tab (its first page). */
   initialBattles: PlayerBattlesPayload | null;
@@ -168,6 +174,7 @@ export function PlayerTabsView({
   initialTournaments,
   initialOnslaught,
   initialManeuvers,
+  initialSkirmish,
   initialBattles,
   initialEncounters,
   isOwnProfile,
@@ -298,6 +305,26 @@ export function PlayerTabsView({
       revalidateOnFocus: false,
       shouldRetryOnError: false,
     },
+  );
+
+  // Same on-demand shape for the Skirmishes by tier.
+  const skirmishReq = () =>
+    unicum.region(region).players(nickname).skirmish();
+  const onSkirmish =
+    section === PlayerSection.Overview && mode === PlayerMode.Skirmish;
+  const { data: skirmish } = useSWR(
+    onSkirmish ? skirmishReq().url() : null,
+    () => skirmishReq(),
+    {
+      fallbackData: initialSkirmish ?? undefined,
+      revalidateOnMount: initialSkirmish == null,
+      revalidateOnFocus: false,
+      shouldRetryOnError: false,
+    },
+  );
+  const skirmishTiers = useSkirmishTierSections(
+    onSkirmish ? skirmish : null,
+    playerSectionHref(basePath, PlayerSection.Tanks),
   );
 
   // Same on-demand shape for the Maneuvers record.
@@ -537,6 +564,7 @@ export function PlayerTabsView({
           // block for, which is where the link would promise one.
           tankView={PLAYER_MODE_TANK_VIEW[mode]}
           tanksHref={overall.tanksHref}
+          {...(mode === PlayerMode.Skirmish ? skirmishTiers : {})}
         />
       )}
     </>

@@ -109,6 +109,15 @@ class PlayerClient {
     );
   }
 
+  /** Player Skirmishes by tier */
+  skirmish() {
+    const path = { region: this.region, nickname: this.nickname };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/players/{nickname}/skirmish", path),
+      () => this.api.GET("/{region}/players/{nickname}/skirmish", { params: { path } }),
+    );
+  }
+
   /** Player tanks */
   tanks(mode?: NonNullable<QueryOf<"/{region}/players/{nickname}/tanks">>["mode"]) {
     const path = { region: this.region, nickname: this.nickname };

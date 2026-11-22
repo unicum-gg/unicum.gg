@@ -21,6 +21,7 @@ import { AccountLockedView } from "@/components/players/detail/account-locked";
 import type { PlayerTournamentRecord } from "@/components/players/detail/tournaments/row";
 import type { PlayerOnslaughtData } from "@/components/players/detail/onslaught";
 import type { PlayerManeuversData } from "@/components/players/detail/maneuvers";
+import type { PlayerSkirmishData } from "@/components/players/detail/overview/skirmish-tiers";
 import type { PlayerBattlesPayload } from "@/components/players/detail/overview/battles";
 import type { PlayerBattleEncounters } from "@unicum.gg/core/battles/met";
 import type { PlayerModeEconomy } from "@unicum.gg/shared";
@@ -514,6 +515,15 @@ async function PlayerProfileServer({
           .then((r) => r as unknown as PlayerManeuversData)
           .catch(() => null)
       : null;
+  // And for the Skirmishes by tier, caught for the same reason.
+  const initialSkirmish: PlayerSkirmishData | null =
+    mode === PlayerMode.Skirmish
+      ? await unicum
+          .region(region)
+          .players(decoded)
+          .skirmish()
+          .catch(() => null)
+      : null;
   const initialSessions: PlayerSession[] | null =
     section === PlayerSection.Sessions
       ? ((
@@ -616,6 +626,7 @@ async function PlayerProfileServer({
         initialTournaments={initialTournaments}
         initialOnslaught={initialOnslaught}
         initialManeuvers={initialManeuvers}
+        initialSkirmish={initialSkirmish}
         initialBattles={initialBattles}
         initialEncounters={initialEncounters}
         initialEconomy={initialEconomy}

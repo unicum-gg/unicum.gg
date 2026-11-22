@@ -579,6 +579,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/players/{nickname}/skirmish": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Player Skirmishes by tier
+         * @description This player's Skirmishes split by tier (VI, VIII, X, XI), which Wargaming publishes for clans and not for players. Rebuilt from the player's per-vehicle Skirmish records, since a skirmish is fought with vehicles of its own tier; it adds up to the account's Skirmish total. Battles on vehicles of any other tier, from the years when a skirmish capped the tier instead of fixing it, land in one entry with a null tier. Each tier carries its lifetime totals and what it gained over the last 24 hours, 7 days and 30 days. 404 when the nickname is unknown in this region.
+         */
+        get: operations["get-{region}-players-{nickname}-skirmish"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/{region}/players/{nickname}/tanks": {
         parameters: {
             query?: never;
@@ -6487,6 +6507,42 @@ export interface components {
             granularity: string;
             sessions: components["schemas"]["PlayerSession"][];
         };
+        /** @description A player's Skirmishes split by tier, rebuilt from their per-vehicle records. */
+        PlayerSkirmishResponse: {
+            accountId: number;
+            nickname: string;
+            /** @description One entry per tier played, in tier order, the older formats last. Empty for a player who never fought a skirmish. */
+            tiers: components["schemas"]["PlayerSkirmishTier"][];
+        };
+        /** @description The player's Skirmishes at one tier. */
+        PlayerSkirmishTier: {
+            /** @description The tier the skirmishes were fought at (6, 8, 10 or 11). Null for the battles on vehicles of any other tier, from the years when a skirmish capped the tier (I-VI, I-VIII, I-X) instead of fixing it. */
+            tier: number | null;
+            /** @description How many of the player's vehicles carry these battles. */
+            vehicles: number;
+            stats: components["schemas"]["PlayerSkirmishTierStats"];
+            periods: components["schemas"]["PlayerSkirmishTierPeriods"];
+        };
+        /** @description What the tier gained over the last 24 hours, 7 days and 30 days. Null where our per-tier history does not reach back that far yet: it began in November 2026 and cannot be reconstructed before it. */
+        PlayerSkirmishTierPeriods: {
+            h24: components["schemas"]["PlayerSkirmishTierStats"] | null;
+            d7: components["schemas"]["PlayerSkirmishTierStats"] | null;
+            d30: components["schemas"]["PlayerSkirmishTierStats"] | null;
+        };
+        /** @description Skirmish totals at one tier, same fields as `StrongholdStats`. */
+        PlayerSkirmishTierStats: {
+            battles: number;
+            wins: number;
+            losses: number;
+            draws: number;
+            survivedBattles: number;
+            frags: number;
+            damageDealt: number;
+            spotted: number;
+            capturePoints: number;
+            droppedCapturePoints: number;
+            battleAvgXp: number;
+        };
         /** @description Random-battles totals from the account's latest snapshot. */
         PlayerStats: {
             battles: number;
@@ -9879,6 +9935,34 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["PlayerSessions"];
+                };
+            };
+        };
+    };
+    "get-{region}-players-{nickname}-skirmish": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Player nickname.
+                 * @example Animal
+                 */
+                nickname: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PlayerSkirmishResponse"];
                 };
             };
         };

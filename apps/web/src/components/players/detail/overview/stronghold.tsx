@@ -12,6 +12,7 @@ import {
   type RowDef,
   StrongholdStatsTable,
   type StrongholdPeriods,
+  type StrongholdTableSection,
   type WinrateColorFn,
 } from "@/components/players/detail/overview/stronghold-stats-table";
 import { StatsPeriodSelect } from "@/components/stats-period-select";
@@ -21,6 +22,7 @@ import { styles } from "@/lib/styles";
 import { tankModeName } from "@/components/game-name";
 import { withTankMode } from "@/hooks/use-tank-mode";
 import { cn } from "@/lib/utils";
+import type { ReactNode } from "react";
 import type { StrongholdStats, TankBattleMode } from "@unicum.gg/shared";
 
 export type StrongholdData = {
@@ -39,6 +41,9 @@ export function StrongholdTab({
   winrateColorFn,
   tankView,
   tanksHref,
+  sections,
+  leadTitle,
+  note,
 }: {
   nickname: string;
   label: string;
@@ -50,6 +55,12 @@ export function StrongholdTab({
   tankView?: TankBattleMode;
   /** The Tanks tab's own path, which the link above is built from. */
   tanksHref?: string;
+  /** Blocks of the mode's own under the shared rows (Skirmish's tiers), with
+   * the band naming the shared rows against them and a note saying where
+   * they come from. */
+  sections?: StrongholdTableSection[];
+  leadTitle?: ReactNode;
+  note?: ReactNode;
 }) {
   const { t } = useTranslation("components/players/detail/overview/stronghold");
   const { t: tGame } = useTranslation("game/vocabulary");
@@ -72,11 +83,18 @@ export function StrongholdTab({
               periods={data.periods}
               trailingRows={trailingRows}
               winrateColorFn={winrateColorFn}
+              sections={sections}
+              leadTitle={leadTitle}
             />
           ) : (
             <div className={`p-4 ${styles.mutedDescription}`}>
               {t("no-data-yet-check-back", { label })}</div>
           )}
+          {note && data.current !== null ? (
+            <p className={`border-t border-fd-border p-4 ${styles.mutedDescription}`}>
+              {note}
+            </p>
+          ) : null}
           {/* The way through to the same mode vehicle by vehicle, which nothing
               else on the page points at. Named after the DESTINATION rather
               than the tab it sits under: the three Clan Wars tabs all land on

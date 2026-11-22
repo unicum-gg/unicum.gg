@@ -6,6 +6,11 @@ export enum StrongholdTier {
   T6 = "t6",
 }
 
+/** The vehicle tiers Skirmishes are fought at, one tier a battle. A vehicle of
+ * any other tier carrying Skirmish battles fought them in the formats that came
+ * before (IV-VI, VI-VIII, VIII-X). */
+export const SKIRMISH_TIERS: readonly number[] = [6, 8, 10, 11];
+
 export enum StrongholdSort {
   Rating = "sr",
   RatingBattles = "srb",

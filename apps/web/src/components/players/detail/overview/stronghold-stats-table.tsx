@@ -3,6 +3,7 @@
 import type { NumberFormatter } from "@/lib/format";
 
 import { useFormat } from "@/hooks/use-format";
+import { Fragment, type ReactNode } from "react";
 import { statLabel } from "@/components/stat-label";
 import { useTranslation } from "@/hooks/use-translation";
 import { useStatLabels } from "@/hooks/use-stat-labels";
@@ -243,6 +244,34 @@ function PeriodSkeleton({ hideOnMobile }: { hideOnMobile?: boolean }) {
   );
 }
 
+/**
+ * A block of rows under a band of its own, after the table's own rows: the
+ * clan stronghold table's shape, where each tier heads its own few rows, with
+ * the same four columns as the rows above it.
+ */
+export type StrongholdTableSection = {
+  id: string;
+  /** The band's text, a link where the section leads somewhere. */
+  title: ReactNode;
+  stats: StrongholdStats;
+  periods: StrongholdPeriods;
+  /** Which of the table's rows the section repeats, by label. */
+  rows: string[];
+};
+
+function SectionBand({ title }: { title: ReactNode }) {
+  return (
+    <TableRow>
+      <TableCell
+        colSpan={9}
+        className="bg-muted/40 text-xs font-semibold text-muted-foreground uppercase"
+      >
+        {title}
+      </TableCell>
+    </TableRow>
+  );
+}
+
 /** Pass `{ loading }` to render the same shell + row labels with placeholder
  * cells (one `ROW_DEFS`, so the skeleton can't drift from the real table). */
 export function StrongholdStatsTable(
@@ -253,6 +282,10 @@ export function StrongholdStatsTable(
         periods: StrongholdPeriods;
         trailingRows?: RowDef[];
         winrateColorFn?: WinrateColorFn;
+        sections?: StrongholdTableSection[];
+        /** The band over the table's own rows, drawn only with sections under
+         * them, where the account figure needs naming against the tiers. */
+        leadTitle?: ReactNode;
       },
 ) {
   const { num } = useFormat();
@@ -303,6 +336,9 @@ export function StrongholdStatsTable(
         </TableRow>
       </TableHeader>
       <TableBody>
+        {!loading && props.sections?.length && props.leadTitle ? (
+          <SectionBand title={props.leadTitle} />
+        ) : null}
         {rows.map((row) => {
           const cells = loading
             ? null
@@ -349,6 +385,38 @@ export function StrongholdStatsTable(
             </TableRow>
           );
         })}
+        {!loading &&
+          props.sections?.map((section) => (
+            <Fragment key={section.id}>
+              <SectionBand title={section.title} />
+              {rows
+                .filter((row) => section.rows.includes(row.label))
+                .map((row) => (
+                  <TableRow key={row.label}>
+                    <TableCell className="py-1.5! font-medium">
+                      <GlossaryLabel label={row.label}>
+                        {statLabel(row.label, tStats)}
+                      </GlossaryLabel>
+                    </TableCell>
+                    <PeriodCells
+                      cell={row.render(section.stats, num)}
+                      hideOnMobile={off(StrongholdPeriod.Overall)}
+                    />
+                    {([
+                      [section.periods.h24, StrongholdPeriod.Day],
+                      [section.periods.d7, StrongholdPeriod.Week],
+                      [section.periods.d30, StrongholdPeriod.Month],
+                    ] as const).map(([stats, period]) => (
+                      <PeriodCells
+                        key={period}
+                        cell={stats ? row.render(stats, num) : EMPTY_CELL}
+                        hideOnMobile={off(period)}
+                      />
+                    ))}
+                  </TableRow>
+                ))}
+            </Fragment>
+          ))}
       </TableBody>
     </Table>
   );
