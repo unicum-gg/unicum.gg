@@ -36,34 +36,42 @@ import { fieldModSlots } from "@unicum.gg/core/wargaming/wot/tanks/field-mods";
  */
 
 type PackedRow = PerPlayerRow & {
+  tank_id: string | number;
   account_id: string | number;
   field_mods_packed: (string | number)[];
 };
 
 export async function fieldModUsage(
   region: Region,
-  tankId: number,
+  /** The vehicle first, then its twins when the reader asked for them. */
+  tankIds: number[],
   mode: LoadoutMode,
   sample: number,
   context: RatingContext,
 ): Promise<PopularSetup[]> {
   const rows = (await db.execute(sql`
-    WITH observed AS (${battlesCte(region, tankId, mode)})
-    SELECT field_mods_packed, account_id, ${PER_PLAYER_COLUMNS}
+    WITH observed AS (${battlesCte(region, tankIds, mode)})
+    SELECT tank_id, field_mods_packed, account_id, ${PER_PLAYER_COLUMNS}
     FROM observed
     WHERE field_mods_packed IS NOT NULL AND cardinality(field_mods_packed) > 0
-    GROUP BY field_mods_packed, account_id
+    GROUP BY tank_id, field_mods_packed, account_id
   `)) as unknown as PackedRow[];
   if (rows.length === 0) return [];
 
-  const distinct = new Map<string, number[]>();
+  // Keyed on the vehicle as well as the value: read across twins, each battle
+  // decodes against the tree of the vehicle it was fought in.
+  const keyOf = (row: PackedRow) =>
+    `${row.tank_id}:${row.field_mods_packed.map(Number).join(",")}`;
+  const distinct = new Map<string, { tankId: number; packed: number[] }>();
   for (const row of rows) {
-    const packed = row.field_mods_packed.map(Number);
-    distinct.set(packed.join(","), packed);
+    distinct.set(keyOf(row), {
+      tankId: Number(row.tank_id),
+      packed: row.field_mods_packed.map(Number),
+    });
   }
   const decoded = new Map<string, string[]>();
   await Promise.all(
-    [...distinct].map(async ([id, packed]) => {
+    [...distinct].map(async ([id, { tankId, packed }]) => {
       const slots = await fieldModSlots(region, tankId, packed).catch(() => []);
       decoded.set(
         id,
@@ -77,7 +85,7 @@ export async function fieldModUsage(
   // player's counters are summed under the tree rather than counted twice.
   const byTree = new Map<string, { items: string[]; players: Map<string, PerPlayerRow> }>();
   for (const row of rows) {
-    const items = decoded.get(row.field_mods_packed.map(Number).join(",")) ?? [];
+    const items = decoded.get(keyOf(row)) ?? [];
     if (items.length === 0) continue;
     const id = items.join("|");
     const tree = byTree.get(id) ?? { items, players: new Map<string, PerPlayerRow>() };

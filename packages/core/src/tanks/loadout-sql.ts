@@ -65,7 +65,9 @@ import {
  */
 export function battlesCte(
   region: Region,
-  tankId: number,
+  /** One vehicle, or a vehicle and its twins read as one (see `getTankTwins`).
+   * Each battle keeps its own `tank_id`, for what has to be read per vehicle. */
+  tankIds: number[],
   mode: LoadoutMode | null,
 ): SQL {
   const loadouts = battleLoadoutsByRegion[region];
@@ -82,6 +84,7 @@ export function battlesCte(
     SELECT x.*
     FROM (
       SELECT
+        l.tank_id,
         l.account_id,
         l.started_at,
         l.arena_unique_id,
@@ -121,7 +124,10 @@ export function battlesCte(
         LIMIT 1
       ) v
       LEFT JOIN ${players} p ON p.account_id = l.account_id
-      WHERE l.tank_id = ${tankId}
+      WHERE l.tank_id IN (${sql.join(
+        tankIds.map((id) => sql`${id}`),
+        sql`, `,
+      )})
         AND l.account_id IS NOT NULL
         AND l.opt_devices IS NOT NULL
         AND l.started_at >= now() - make_interval(days => ${LOADOUT_WINDOW_DAYS})

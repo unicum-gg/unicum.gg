@@ -242,13 +242,15 @@ export async function loadTankLoadouts(
   slug: string,
   /** Names the fitted items of the best battles, which the endpoint draws. */
   locale: string,
+  /** Count the vehicle's twins with it (see `getTankTwins`). */
+  twins = false,
 ): Promise<TankLoadoutModeView[]> {
   return buildSafe(async () => {
     const ask = (mode: LoadoutMode) =>
       unicum
         .region(region)
         .tanks(slug)
-        .loadouts({ mode, language: locale })
+        .loadouts({ mode, language: locale, ...(twins ? { twins: "true" as const } : {}) })
         .then((r) => r as unknown as TankLoadoutsPayload)
         // A slug the catalogue does not know is not a loadout failure: the tab
         // resolves the vehicle through `loadTankTab`, which is what calls

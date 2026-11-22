@@ -53,13 +53,14 @@ type ItemRow = PerformanceRow & { kind: string; key: string };
  */
 async function itemUsage(
   region: Region,
-  tankId: number,
+  /** The vehicle first, then its twins when the reader asked for them. */
+  tankIds: number[],
   mode: LoadoutMode,
   sample: number,
   context: RatingContext,
 ): Promise<LoadoutItemUsage[]> {
   const rows = (await db.execute(sql`
-    WITH observed AS (${battlesCte(region, tankId, mode)}),
+    WITH observed AS (${battlesCte(region, tankIds, mode)}),
     fitted AS (
       SELECT o.*, i.kind, i.key
       FROM observed o
@@ -116,13 +117,14 @@ type SetupRow = PerformanceRow & { kind: string; items: string[] | null };
  */
 async function popularSetups(
   region: Region,
-  tankId: number,
+  /** The vehicle first, then its twins when the reader asked for them. */
+  tankIds: number[],
   mode: LoadoutMode,
   sample: number,
   context: RatingContext,
 ): Promise<PopularSetup[]> {
   const rows = (await db.execute(sql`
-    WITH observed AS (${battlesCte(region, tankId, mode)}),
+    WITH observed AS (${battlesCte(region, tankIds, mode)}),
     keyed AS (
       SELECT o.*, f.kind, f.items, f.slotted
       FROM observed o
@@ -187,11 +189,12 @@ type SummaryRow = {
  */
 async function sampleSummary(
   region: Region,
-  tankId: number,
+  /** The vehicle first, then its twins when the reader asked for them. */
+  tankIds: number[],
   mode: LoadoutMode,
 ): Promise<SummaryRow> {
   const [row] = (await db.execute(sql`
-    WITH observed AS (${battlesCte(region, tankId, mode)})
+    WITH observed AS (${battlesCte(region, tankIds, mode)})
     SELECT
       COUNT(DISTINCT account_id)   AS sample,
       COUNT(*)                     AS battles,
@@ -214,10 +217,11 @@ type ModeRow = { battle_type: string | number; players: string | number; battles
  */
 async function modeBreakdown(
   region: Region,
-  tankId: number,
+  /** The vehicle first, then its twins when the reader asked for them. */
+  tankIds: number[],
 ): Promise<LoadoutModeBreakdown[]> {
   const rows = (await db.execute(sql`
-    WITH observed AS (${battlesCte(region, tankId, null)})
+    WITH observed AS (${battlesCte(region, tankIds, null)})
     SELECT battle_type, COUNT(DISTINCT account_id) AS players, COUNT(*) AS battles
     FROM observed
     GROUP BY battle_type
@@ -252,10 +256,14 @@ export async function getTankLoadoutStats(
   region: Region,
   tankId: number,
   mode: LoadoutMode = LoadoutMode.Random,
+  /** Twins to read together with it (see `getTankTwins`), none by default.
+   * The ratings stay this vehicle's: twins share every characteristic. */
+  twinIds: number[] = [],
 ): Promise<TankLoadoutStats> {
+  const tankIds = [tankId, ...twinIds];
   const [modes, summary] = await Promise.all([
-    modeBreakdown(region, tankId),
-    sampleSummary(region, tankId, mode),
+    modeBreakdown(region, tankIds),
+    sampleSummary(region, tankIds, mode),
   ]);
   const sample = Number(summary.sample ?? 0);
 
@@ -266,12 +274,12 @@ export async function getTankLoadoutStats(
 
   const context = await ratingContext(region, tankId);
   const [items, fieldMods, crewSkills, setups, topPlayers, topBattles] = await Promise.all([
-    itemUsage(region, tankId, mode, sample, context),
-    fieldModUsage(region, tankId, mode, sample, context),
-    crewSkillUsage(region, tankId, mode, context),
-    popularSetups(region, tankId, mode, sample, context),
-    topTankPlayers(region, tankId, mode, context),
-    topTankBattles(region, tankId, mode),
+    itemUsage(region, tankIds, mode, sample, context),
+    fieldModUsage(region, tankIds, mode, sample, context),
+    crewSkillUsage(region, tankIds, mode, context),
+    popularSetups(region, tankIds, mode, sample, context),
+    topTankPlayers(region, tankIds, mode, context),
+    topTankBattles(region, tankIds, mode),
   ]);
 
   const ammo: AmmoSummary = {

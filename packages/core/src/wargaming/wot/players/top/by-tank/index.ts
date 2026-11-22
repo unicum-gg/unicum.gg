@@ -12,6 +12,9 @@ export type TopTankPlayer = {
   avg_damage: number;
   winrate: number;
   value: number;
+  /** The vehicle the row was earned on. Only set on a board read across twins
+   * (see `mergeTopPlayersByTank`), where it is not always the page's own. */
+  tank_id?: number;
 };
 
 export type TopTankPlayersByMetric = {
@@ -154,3 +157,4 @@ export async function getTopPlayersByTankAllMetrics(
     computedAt: perMetric.find((p) => p.computedAt)?.computedAt ?? null,
   };
 }
+export { mergeTopPlayersByTank, combineTankStats } from "./twins";

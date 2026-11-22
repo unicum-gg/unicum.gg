@@ -7,6 +7,9 @@ import {
   tankMetadata,
 } from "@/app/[locale]/(site)/[region]/tanks/[slug]/(detail)/page";
 import { LoadoutsTab } from "@/components/tanks/detail/loadouts";
+import { PanelSeparator } from "@/components/panel";
+import { TwinsView } from "@/components/tanks/detail/twins/control";
+import { TwinsPanel } from "@/components/tanks/detail/twins/panel";
 import { TankDetailTab } from "@/components/tanks/detail/tabs";
 import { withDictionaries } from "@/components/dictionaries";
 
@@ -39,8 +42,7 @@ async function TankLoadoutsPage({
     loadTankTab(region, slug, TankDetailTab.Loadouts, locale),
     loadTankLoadouts(region, slug, locale),
   ]);
-
-  return (
+  const own = (
     <LoadoutsTab
       region={region}
       slug={detail.slug}
@@ -49,6 +51,40 @@ async function TankLoadoutsPage({
       modes={modes}
       locale={locale}
     />
+  );
+  if (detail.twins.length === 0) return own;
+
+  // Both readings rendered here, the switch picking one on the client, for the
+  // same reason the modes are: the page is static and cannot see `?twins=`.
+  const withTwins = await loadTankLoadouts(region, detail.slug, locale, true);
+  return (
+    <>
+      <TwinsPanel
+        region={region}
+        tankName={detail.meta.name}
+        twins={detail.twins}
+        tab="/loadouts"
+        locale={locale}
+      />
+      <PanelSeparator />
+      <TwinsView
+        own={own}
+        combined={
+          <LoadoutsTab
+            region={region}
+            slug={detail.slug}
+            tankId={detail.tankId}
+            // Named for every vehicle it counts, like the Performances tab.
+            tankName={[detail.meta.name, ...detail.twins.map((twin) => twin.name)].join(" + ")}
+            modes={withTwins}
+            twins={Object.fromEntries(
+              detail.twins.map((twin) => [twin.tankId, { slug: twin.slug, name: twin.name }]),
+            )}
+            locale={locale}
+          />
+        }
+      />
+    </>
   );
 }
 

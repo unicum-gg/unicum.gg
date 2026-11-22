@@ -290,6 +290,9 @@ export interface LoadoutModeBreakdown {
 export interface TopPlayer {
   nickname: string;
   accountId: number;
+  /** The vehicle their latest recorded battle, and the career beside it, are
+   * on: the tab's own, or a twin when the reader asked for them. */
+  tankId: number;
   clanTag: string | null;
   clanColor: string | null;
   isVerified: boolean;

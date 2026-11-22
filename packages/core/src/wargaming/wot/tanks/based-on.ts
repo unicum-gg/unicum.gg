@@ -32,7 +32,9 @@ export type BasedOn = {
  * client's own codes: it has never heard of the catalogue a site routes by.
  * Resolving those to a tank is this side's job.
  */
-function origins(branch?: WotSrcBranch): Promise<Record<string, string>> {
+export function getTankOrigins(
+  branch?: WotSrcBranch,
+): Promise<Record<string, string>> {
   const ref = modelsRefFor(branch);
   return cachedInRedis(
     `models:based-on${ref ? `:${ref}` : ""}`,
@@ -80,7 +82,7 @@ export async function getTankBasedOn(
   tag: string,
   branch?: WotSrcBranch,
 ): Promise<BasedOn | null> {
-  const from = (await origins(branch))[tag];
+  const from = (await getTankOrigins(branch))[tag];
   if (!from) return null;
   const dataset = await getTankDataset(region);
   const donor = dataset.find((row) => row.identity.tag === from);

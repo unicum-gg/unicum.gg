@@ -67,11 +67,15 @@ const RATING_COLOR: Record<WnRatingMetric, (value: number) => string> = {
 
 export function TopPlayers({
   slug,
+  twins,
   rows,
   labels,
 }: {
   /** The vehicle's slug: a name leads to that player's page on it. */
   slug: string;
+  /** The twins read together with it, by id, so a row on one of them leads
+   * to that vehicle and says so. */
+  twins?: Record<number, { slug: string; name: string }>;
   rows: TopPlayerRow[];
   labels: Record<
     "player" | "build" | "battles" | "damage" | "winrate" | "crew" | "showCrew",
@@ -141,7 +145,18 @@ export function TopPlayers({
                   <PlayerName
                     region={row.region}
                     player={row.identity}
-                    href={ROUTES.PLAYER_TANK(row.region, row.identity.nickname, slug)}
+                    href={ROUTES.PLAYER_TANK(
+                      row.region,
+                      row.identity.nickname,
+                      twins?.[row.tankId]?.slug ?? slug,
+                    )}
+                    trailing={
+                      twins?.[row.tankId] ? (
+                        <span className="text-xs text-fd-muted-foreground">
+                          {twins[row.tankId]!.name}
+                        </span>
+                      ) : undefined
+                    }
                   />
                 </TableCell>
                 <TableCell className="py-1.5">

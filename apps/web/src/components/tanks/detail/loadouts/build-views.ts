@@ -195,6 +195,7 @@ function topPlayerRows(
       onslaughtSeasons: player.onslaughtSeasons,
     },
     region: naming.region,
+    tankId: player.tankId,
     battles: player.battles,
     winrate: player.winrate,
     avgDamage: player.avgDamage,

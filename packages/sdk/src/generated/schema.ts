@@ -4547,6 +4547,11 @@ export interface components {
              */
             mode?: "random" | "onslaught" | "skirmish" | "advance";
             language?: Record<string, never>;
+            /**
+             * @description Count this vehicle's twins with it, false by default: the vehicles that are this one under another name, listed in the tank detail's `twins` (the Dream Chaser is the SDP wz 66 Grom). Wargaming records each id apart, so their battles are otherwise counted on their own page only. Each best player's `tankId` says which of them their row is on.
+             * @enum {string}
+             */
+            twins?: "true" | "false";
         };
         /** @description One Maneuvers edition for a region: its frame, both boards, and what a rewarded place costs right now. */
         ManeuversBoardResponse: {
@@ -7570,13 +7575,7 @@ export interface components {
             /** @description Canonical slug. Callers that reached the tank through a legacy id or wrong-case slug should redirect to it. */
             slug: string;
             meta: components["schemas"]["VehicleMeta"];
-            topByMetric: {
-                wn7: components["schemas"]["topTankPlayer"][];
-                wn8: components["schemas"]["topTankPlayer"][];
-                wnx: components["schemas"]["topTankPlayer"][];
-                /** Format: date-time */
-                computedAt: Date | null;
-            };
+            topByMetric: components["schemas"]["tankDetailTopByMetric"];
             serverStats: components["schemas"]["TankServerStats"] | null;
             wn8Expected: {
                 expDamage: number;
@@ -7671,6 +7670,13 @@ export interface components {
                 geometry: string[];
                 /** @description The maps those meshes wear, at the standard definition the hero opens on. The client's shared micro-grain is deliberately absent: it is six megabytes, every vehicle names it, and the viewer stands the tank up without it. */
                 textures: string[];
+            } | null;
+            /** @description The vehicles that are this one under another name: declared made from the same vehicle by the game client AND equal on every characteristic (the Dream Chaser is the SDP wz 66 Grom). Wargaming keeps a separate record for each id. Only twins with server stats, most played first. Empty for a vehicle that stands alone. */
+            twins: components["schemas"]["tankDetailTwin"][];
+            /** @description `topByMetric` and `serverStats` read across this vehicle and its `twins`. A player who owns several keeps their best row, tagged with the vehicle it was earned on. Null when there are no twins. */
+            withTwins: {
+                topByMetric: components["schemas"]["tankDetailTopByMetric"];
+                serverStats: components["schemas"]["TankServerStats"] | null;
             } | null;
         };
         /** @description Everything the tank page renders: identity, best players per rating metric, server averages, WN8/WNX expected values, combat specs, Marks of Excellence/Mastery (current and history) and the research path. */
@@ -7679,13 +7685,7 @@ export interface components {
             /** @description Canonical slug. Callers that reached the tank through a legacy id or wrong-case slug should redirect to it. */
             slug: string;
             meta: components["schemas"]["VehicleMeta"];
-            topByMetric: {
-                wn7: components["schemas"]["topTankPlayer"][];
-                wn8: components["schemas"]["topTankPlayer"][];
-                wnx: components["schemas"]["topTankPlayer"][];
-                /** Format: date-time */
-                computedAt: Date | null;
-            };
+            topByMetric: components["schemas"]["tankDetailTopByMetric"];
             serverStats: components["schemas"]["TankServerStats"] | null;
             wn8Expected: {
                 expDamage: number;
@@ -7781,6 +7781,27 @@ export interface components {
                 /** @description The maps those meshes wear, at the standard definition the hero opens on. The client's shared micro-grain is deliberately absent: it is six megabytes, every vehicle names it, and the viewer stands the tank up without it. */
                 textures: string[];
             } | null;
+            /** @description The vehicles that are this one under another name: declared made from the same vehicle by the game client AND equal on every characteristic (the Dream Chaser is the SDP wz 66 Grom). Wargaming keeps a separate record for each id. Only twins with server stats, most played first. Empty for a vehicle that stands alone. */
+            twins: components["schemas"]["tankDetailTwin"][];
+            /** @description `topByMetric` and `serverStats` read across this vehicle and its `twins`. A player who owns several keeps their best row, tagged with the vehicle it was earned on. Null when there are no twins. */
+            withTwins: {
+                topByMetric: components["schemas"]["tankDetailTopByMetric"];
+                serverStats: components["schemas"]["TankServerStats"] | null;
+            } | null;
+        };
+        tankDetailTopByMetric: {
+            wn7: components["schemas"]["topTankPlayer"][];
+            wn8: components["schemas"]["topTankPlayer"][];
+            wnx: components["schemas"]["topTankPlayer"][];
+            /** Format: date-time */
+            computedAt: Date | null;
+        };
+        tankDetailTwin: {
+            tankId: number;
+            slug: string;
+            name: string;
+            /** @description Players the nightly pass ranked on that vehicle. */
+            players: number;
         };
         /** @description A tank's economics: purchase price (credits / gold), shell and ammo cost, research XP from its direct parent, and total free XP to reach it from a tier 1 (cheapest path, prerequisite modules included). */
         TankEconomics: {
@@ -8298,6 +8319,8 @@ export interface components {
         TankTopPlayer: {
             nickname: string;
             accountId: number;
+            /** @description The vehicle their latest recorded battle and their career beside it are on: this one, or a twin with `twins=true`. */
+            tankId: number;
             clanTag: string | null;
             clanColor: string | null;
             isVerified: boolean;
@@ -8492,6 +8515,8 @@ export interface components {
             onslaught_best_tier?: string | null;
             onslaught_best_rank?: number | null;
             onslaught_seasons?: number;
+            /** @description The vehicle the row was earned on. Only on the board read across twins (`withTwins`), where it is not always this one. */
+            tank_id?: number;
         };
         /**
          * @description How a stage's teams are paired up.
@@ -11063,6 +11088,8 @@ export interface operations {
                 /** @description Which battle mode to count, random by default. Modes are never pooled: each has its own economy and its own idea of a good result, so every figure in the response belongs to the one asked for. The modes field says which ones hold anything for this vehicle. */
                 mode?: "random" | "onslaught" | "skirmish" | "advance";
                 language?: components["schemas"]["answerLanguageField"];
+                /** @description Count this vehicle's twins with it, false by default: the vehicles that are this one under another name, listed in the tank detail's `twins` (the Dream Chaser is the SDP wz 66 Grom). Wargaming records each id apart, so their battles are otherwise counted on their own page only. Each best player's `tankId` says which of them their row is on. */
+                twins?: "true" | "false";
             };
             header?: never;
             path: {

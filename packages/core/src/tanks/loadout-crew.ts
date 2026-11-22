@@ -37,12 +37,13 @@ type CrewRow = PerformanceRow & {
  */
 export async function crewSkillUsage(
   region: Region,
-  tankId: number,
+  /** The vehicle first, then its twins when the reader asked for them. */
+  tankIds: number[],
   mode: LoadoutMode,
   context: RatingContext,
 ): Promise<CrewSkillUsage[]> {
   const rows = (await db.execute(sql`
-    WITH observed AS (${battlesCte(region, tankId, mode)}),
+    WITH observed AS (${battlesCte(region, tankIds, mode)}),
     trained AS (
       SELECT o.*, t.role, t.skill
       FROM observed o

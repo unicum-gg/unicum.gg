@@ -26,6 +26,13 @@ export const loadoutsQuery = z.object({
   // names on hover. `.optional()` here rather than in the shared field, or the
   // generator documents it as required.
   language: answerLanguageField.optional(),
+  twins: z
+    .enum(["true", "false"])
+    .optional()
+    .meta({
+      description:
+        "Count this vehicle's twins with it, false by default: the vehicles that are this one under another name, listed in the tank detail's `twins` (the Dream Chaser is the SDP wz 66 Grom). Wargaming records each id apart, so their battles are otherwise counted on their own page only. Each best player's `tankId` says which of them their row is on.",
+    }),
 });
 
 const ratings = z.object({
@@ -131,6 +138,10 @@ const topPlayer = z
   .object({
     nickname: z.string(),
     accountId: z.number().int(),
+    tankId: z.number().int().meta({
+      description:
+        "The vehicle their latest recorded battle and their career beside it are on: this one, or a twin with `twins=true`.",
+    }),
     clanTag: z.string().nullable(),
     clanColor: z.string().nullable(),
     isVerified: z.boolean(),

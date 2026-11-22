@@ -2,6 +2,7 @@ import { LoadoutMode } from "@unicum.gg/shared";
 import { battleOfAccount } from "@unicum.gg/core/battles/read";
 import { getTankLoadoutStats } from "@unicum.gg/core/tanks/loadout-aggregate";
 import { getTankBySlug } from "@unicum.gg/core/wargaming/wot/tanks/resolve";
+import { getTankTwins } from "@unicum.gg/core/wargaming/wot/tanks/twins";
 import { isRegion } from "@unicum.gg/wargaming";
 import { jsonResponse } from "@/services/openapi/json-response";
 import { pictureBattleRows } from "@/services/battles/rows";
@@ -40,12 +41,17 @@ async function GET__perf(
   // only picks a view, so the worst a bad one can do is answer a neighbouring
   // question, and refusing would break a reader whose only mistake was an
   // edited URL.
-  const asked = new URL(req.url).searchParams.get("mode");
+  const url = new URL(req.url);
+  const asked = url.searchParams.get("mode");
   const mode = Object.values(LoadoutMode).includes(asked as LoadoutMode)
     ? (asked as LoadoutMode)
     : LoadoutMode.Random;
+  const twins =
+    url.searchParams.get("twins") === "true"
+      ? (await getTankTwins(region, tank.tankId)).map((twin) => twin.tankId)
+      : [];
 
-  const stats = await getTankLoadoutStats(region, tank.tankId, mode);
+  const stats = await getTankLoadoutStats(region, tank.tankId, mode, twins);
 
   // The best battles are drawn as a player's own Battles tab draws them: read
   // through the same reader, as seen by the player who fought them, and

@@ -1,28 +1,16 @@
 import { numberFormat } from "@/lib/format";
 import { getTranslation } from "@/lib/translations.server";
-import { Interpolate } from "@/components/interpolate";
-import type { ReactNode } from "react";
-import {
-  RATING_METRIC_LABEL,
-  WN_RATING_METRICS,
-  type VehicleMeta,
-  RATING_COLOR_CLASS,
-  winrateColor,
-  wn7Color,
-  wn8Color,
-  wnxColor,
-  type WN8Expected,
-  type WNXExpected,
+import type {
+  VehicleMeta,
+  WN8Expected,
+  WNXExpected,
 } from "@unicum.gg/shared";
-import { Region, REGION_LABEL } from "@unicum.gg/wargaming";
+import type { Region } from "@unicum.gg/wargaming";
 import type {
   TankServerStats,
   TopTankPlayersByMetric,
 } from "@unicum.gg/core/wargaming/wot/players/top/by-tank";
-import { RatingMetricInlineSelect } from "@/components/rating-metric-inline-select";
-import { RatingFallbackNote } from "@/components/rating-fallback-note";
-import { RatingFallbackReason } from "@/components/rating-fallback-reason";
-import { TankTopPlayers } from "./top-players";
+import type { TankTwin } from "@unicum.gg/core/wargaming/wot/tanks/twins";
 import {
   Panel,
   PanelContent,
@@ -30,7 +18,10 @@ import {
   PanelSeparator,
   PanelTitle,
 } from "@/components/panel";
-import { cn } from "@/lib/utils";
+import { TwinsView } from "@/components/tanks/detail/twins/control";
+import { TwinsPanel } from "@/components/tanks/detail/twins/panel";
+import { PerformanceFigures } from "./figures";
+import { Stat } from "./stat";
 
 const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 const DEC_FORMAT = {
@@ -43,7 +34,8 @@ const PCT_FORMAT = {
 } as const;
 
 /** The Performances tab: server-average stats, top players per rating metric,
- * and the WN8/WNX expected values. */
+ * and the WN8/WNX expected values. A vehicle with twins offers to read the
+ * first two across them. */
 export async function Performances({
   region,
   tankId,
@@ -51,7 +43,10 @@ export async function Performances({
   serverStats,
   topByMetric,
   wn8Expected,
-  wnxExpected, locale,
+  wnxExpected,
+  twins,
+  withTwins,
+  locale,
 }: {
   region: Region;
   tankId: number;
@@ -60,207 +55,62 @@ export async function Performances({
   topByMetric: TopTankPlayersByMetric;
   wn8Expected: WN8Expected | null;
   wnxExpected: WNXExpected | null;
+  /** The vehicles that are this one under another name (see `getTankTwins`). */
+  twins: TankTwin[];
+  /** The figures above read across this vehicle and its twins. */
+  withTwins: {
+    serverStats: TankServerStats | null;
+    topByMetric: TopTankPlayersByMetric;
+  } | null;
   locale: string;
 }) {
   const { t } = await getTranslation("components/tanks/detail/performances/index", locale);
+  const figures = (
+    <PerformanceFigures
+      region={region}
+      meta={meta}
+      serverStats={serverStats}
+      topByMetric={topByMetric}
+      locale={locale}
+    />
+  );
   return (
     <>
-      {serverStats && (
+      {withTwins && twins.length > 0 ? (
         <>
-          <Panel>
-            <PanelHeader>
-              <PanelTitle>{t("server-average", { tank: meta.name })}</PanelTitle>
-            </PanelHeader>
-            <PanelContent className="space-y-3 p-4">
-              <p className="text-sm text-fd-muted-foreground">
-                {t("how-the-average-performs", {
-                  region: REGION_LABEL[region],
-                  tank: meta.shortName,
-                  players: numberFormat(locale, INT_FORMAT).format(serverStats.players),
-                })}
-                {serverStats.total_battles !== null
-                  ? t("with-battles", {
-                      battles: numberFormat(locale, INT_FORMAT).format(serverStats.total_battles),
-                    })
-                  : t("min-battles-each")}
-                ).
-              </p>
-              <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
-                <Stat
-                  label={t("avg-battles")}
-                  value={numberFormat(locale, INT_FORMAT).format(serverStats.avg_battles)}
-                />
-                <Stat
-                  label={t("avg-damage")}
-                  value={numberFormat(locale, INT_FORMAT).format(serverStats.avg_damage)}
-                />
-                <Stat
-                  label={t("win-rate")}
-                  value={numberFormat(locale, PCT_FORMAT).format(serverStats.winrate / 100)}
-                  colorClass={
-                    RATING_COLOR_CLASS[winrateColor(serverStats.winrate / 100)]
-                  }
-                />
-                <Stat
-                  label={t("player-wr")}
-                  value={
-                    serverStats.player_wr !== null
-                      ? numberFormat(locale, PCT_FORMAT).format(serverStats.player_wr / 100)
-                      : "—"
-                  }
-                  colorClass={
-                    serverStats.player_wr !== null
-                      ? RATING_COLOR_CLASS[
-                          winrateColor(serverStats.player_wr / 100)
-                        ]
-                      : undefined
-                  }
-                />
-                {/* Only the card matching the active rating metric shows, via
-                    the html[data-rating-wn] cookie-painted CSS toggle: a
-                    vehicle has no PR or WTR, so those show the WNX card. */}
-                <div className="contents" data-rating-wn-col="wn7">
-                  <Stat
-                    label={<RatingMetricInlineSelect wnOnly />}
-                    value={
-                      serverStats.wn7 !== null
-                        ? numberFormat(locale, INT_FORMAT).format(serverStats.wn7)
-                        : "—"
-                    }
-                    colorClass={
-                      serverStats.wn7 !== null
-                        ? RATING_COLOR_CLASS[wn7Color(serverStats.wn7)]
-                        : undefined
-                    }
-                  />
-                </div>
-                <div className="contents" data-rating-wn-col="wn8">
-                  <Stat
-                    label={<RatingMetricInlineSelect wnOnly />}
-                    value={
-                      serverStats.wn8 !== null
-                        ? numberFormat(locale, INT_FORMAT).format(serverStats.wn8)
-                        : "—"
-                    }
-                    colorClass={
-                      serverStats.wn8 !== null
-                        ? RATING_COLOR_CLASS[wn8Color(serverStats.wn8)]
-                        : undefined
-                    }
-                  />
-                </div>
-                <div className="contents" data-rating-wn-col="wnx">
-                  <Stat
-                    label={<RatingMetricInlineSelect wnOnly />}
-                    value={
-                      serverStats.wnx !== null
-                        ? numberFormat(locale, INT_FORMAT).format(serverStats.wnx)
-                        : "—"
-                    }
-                    colorClass={
-                      serverStats.wnx !== null
-                        ? RATING_COLOR_CLASS[wnxColor(serverStats.wnx)]
-                        : undefined
-                    }
-                  />
-                </div>
-                <Stat
-                  label={t("assists")}
-                  value={
-                    serverStats.avg_assist !== null
-                      ? numberFormat(locale, INT_FORMAT).format(serverStats.avg_assist)
-                      : "—"
-                  }
-                />
-                <Stat
-                  label={t("spots")}
-                  value={
-                    serverStats.avg_spots !== null
-                      ? numberFormat(locale, DEC_FORMAT).format(serverStats.avg_spots)
-                      : "—"
-                  }
-                />
-                <Stat
-                  label={t("kdr")}
-                  value={
-                    serverStats.kdr !== null
-                      ? numberFormat(locale, DEC_FORMAT).format(serverStats.kdr)
-                      : "—"
-                  }
-                />
-                <Stat
-                  label={t("hit")}
-                  value={
-                    serverStats.hit_pct !== null
-                      ? numberFormat(locale, PCT_FORMAT).format(serverStats.hit_pct / 100)
-                      : "—"
-                  }
-                />
-                <Stat
-                  label={t("pen")}
-                  value={
-                    serverStats.pen_pct !== null
-                      ? numberFormat(locale, PCT_FORMAT).format(serverStats.pen_pct / 100)
-                      : "—"
-                  }
-                />
-                <Stat
-                  label={t("blocked")}
-                  value={
-                    serverStats.avg_blocked !== null
-                      ? numberFormat(locale, INT_FORMAT).format(serverStats.avg_blocked)
-                      : "—"
-                  }
-                />
-                <Stat
-                  label={t("survival")}
-                  value={
-                    serverStats.survival !== null
-                      ? numberFormat(locale, PCT_FORMAT).format(serverStats.survival / 100)
-                      : "—"
-                  }
-                />
-              </div>
-            </PanelContent>
-          </Panel>
+          <TwinsPanel
+            region={region}
+            tankName={meta.name}
+            twins={twins}
+            players={serverStats?.players}
+            combinedPlayers={withTwins.serverStats?.players}
+            tab="/performances"
+            locale={locale}
+          />
           <PanelSeparator />
-        </>
-      )}
-
-      <Panel>
-        <PanelHeader className="flex items-center justify-between gap-3">
-          <PanelTitle>
-            <Interpolate
-              template={t("top-tank-players-by", { tank: meta.name })}
-              values={{
-                by: (
-                  <span className="text-fd-muted-foreground">{t("by")}</span>
-                ),
-                metric: <RatingMetricInlineSelect wnOnly />,
-              }}
-            />
-          </PanelTitle>
-        </PanelHeader>
-        <PanelContent className="p-0">
-          <div className="px-4 py-3 text-sm text-fd-muted-foreground">
-            {t("best-players-on-ranked-by", { shortName: meta.shortName, region: REGION_LABEL[region] })}
-            <RatingFallbackNote
-              reason={RatingFallbackReason.Vehicle}
-              className="mt-1"
-            />
-          </div>
-          {WN_RATING_METRICS.map((m) => (
-            <div key={m} data-rating-wn-col={m}>
-              <TankTopPlayers
-                players={topByMetric[m]}
-                metric={m}
-                metricLabel={RATING_METRIC_LABEL[m]}
+          <TwinsView
+            own={figures}
+            combined={
+              <PerformanceFigures
                 region={region}
+                // Named for every vehicle it counts, so a heading over 24,836
+                // players does not read as the 3 of the page's own.
+                meta={{
+                  ...meta,
+                  name: [meta.name, ...twins.map((twin) => twin.name)].join(" + "),
+                  shortName: [meta.shortName, ...twins.map((twin) => twin.name)].join(" + "),
+                }}
+                serverStats={withTwins.serverStats}
+                topByMetric={withTwins.topByMetric}
+                twinNames={Object.fromEntries(twins.map((twin) => [twin.tankId, twin.name]))}
+                locale={locale}
               />
-            </div>
-          ))}
-        </PanelContent>
-      </Panel>
+            }
+          />
+        </>
+      ) : (
+        figures
+      )}
 
       {(wn8Expected || wnxExpected) && (
         <>
@@ -297,41 +147,5 @@ export async function Performances({
         </>
       )}
     </>
-  );
-}
-
-function Stat({
-  label,
-  value,
-  colorClass,
-}: {
-  label: ReactNode;
-  value: string;
-  colorClass?: string;
-}) {
-  // Each stat is a framed card. A rating stat (WN8/WNX) colours the whole card
-  // with its rating colour + white text, instead of a bare pill floating around
-  // the number among unframed stats.
-  const colored = !!colorClass;
-  return (
-    <div
-      className={cn(
-        "flex flex-col gap-1 rounded-lg border p-3",
-        colored ? cn(colorClass, "border-transparent") : "border-fd-border",
-      )}
-    >
-      {/* Fixed-height, centered label row so a card whose label is a taller
-          control (the rating metric select) keeps its value aligned with the
-          plain-text cards. */}
-      <div
-        className={cn(
-          "flex h-6 items-center text-xs uppercase tracking-wide",
-          colored ? "text-white/75" : "text-fd-muted-foreground",
-        )}
-      >
-        {label}
-      </div>
-      <div className="text-xl font-semibold tabular-nums">{value}</div>
-    </div>
   );
 }

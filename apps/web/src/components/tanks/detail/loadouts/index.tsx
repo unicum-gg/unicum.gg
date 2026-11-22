@@ -53,6 +53,7 @@ export async function LoadoutsTab({
   tankId,
   tankName,
   modes,
+  twins,
   locale,
 }: {
   region: Region;
@@ -63,6 +64,9 @@ export async function LoadoutsTab({
   tankName: string;
   /** Every mode with battles. */
   modes: TankLoadoutModeView[];
+  /** The twins these battles are read together with, by id, on the reading
+   * that includes them. */
+  twins?: Record<number, { slug: string; name: string }>;
   locale: string;
 }) {
   const [{ t }, { t: tGame }] = await Promise.all([
@@ -114,6 +118,7 @@ export async function LoadoutsTab({
               key={view.mode}
               region={region}
               slug={slug}
+              twins={twins}
               naming={naming}
               stats={view.stats}
               heading={(key) => t(key, { tank: tankName, mode: modeName })}
@@ -131,6 +136,7 @@ export async function LoadoutsTab({
 async function ModePanels({
   region,
   slug,
+  twins,
   naming,
   stats,
   heading,
@@ -138,6 +144,7 @@ async function ModePanels({
 }: {
   region: Region;
   slug: string;
+  twins?: Record<number, { slug: string; name: string }>;
   naming: LoadoutNaming;
   stats: TankLoadoutsPayload;
   /** A heading key, filled with this vehicle and this mode. */
@@ -232,6 +239,7 @@ async function ModePanels({
               </p>
               <TopPlayers
                 slug={slug}
+                twins={twins}
                 rows={views.topPlayers}
                 labels={{
                   player: t("col.player"),

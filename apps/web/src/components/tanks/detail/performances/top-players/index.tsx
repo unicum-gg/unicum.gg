@@ -34,11 +34,14 @@ export function TankTopPlayers(
         metric: RatingMetric;
         metricLabel: string;
         region: Region;
+        /** The twins' names by id, on a board read across them, so a row
+         * earned on one of them says which. */
+        twinNames?: Record<number, string>;
       },
 ) {
   const { t } = useTranslation("components/tanks/detail/performances/top-players/index");
   if ("loading" in props) return <TopPlayersSkeleton />;
-  const { players, metric, metricLabel, region } = props;
+  const { players, metric, metricLabel, region, twinNames } = props;
   if (players.length === 0) {
     return (
       <div className="border-t border-fd-border p-6 text-center text-sm text-fd-muted-foreground">
@@ -75,6 +78,9 @@ export function TankTopPlayers(
             rank={i + 1}
             region={region}
             metric={metric}
+            twinName={
+              p.tank_id != null ? twinNames?.[p.tank_id] : undefined
+            }
           />
         ))}
       </TableBody>
@@ -87,11 +93,14 @@ function PlayerRow({
   rank,
   region,
   metric,
+  twinName,
 }: {
   player: TopTankPlayer;
   rank: number;
   region: Region;
   metric: RatingMetric;
+  /** The twin this row was earned on, when it is not the page's vehicle. */
+  twinName?: string;
 }) {
   const { num } = useFormat();
   const colorClass = ratingColorClass(metric, player.value);
@@ -105,7 +114,17 @@ function PlayerRow({
         )}
       </TableCell>
       <TableCell className="min-w-0">
-        <PlayerName region={region} player={identityFromRow(player)} />
+        <PlayerName
+          region={region}
+          player={identityFromRow(player)}
+          trailing={
+            twinName ? (
+              <span className="truncate text-xs text-fd-muted-foreground">
+                {twinName}
+              </span>
+            ) : undefined
+          }
+        />
       </TableCell>
       <TableCell className="hidden text-right tabular-nums text-muted-foreground sm:table-cell">
         {num(INT_FORMAT).format(player.battles)}

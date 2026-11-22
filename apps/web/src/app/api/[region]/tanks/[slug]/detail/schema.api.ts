@@ -57,6 +57,26 @@ const topTankPlayer = z.object({
   onslaught_best_tier: z.string().nullable().optional(),
   onslaught_best_rank: z.number().nullable().optional(),
   onslaught_seasons: z.number().optional(),
+  tank_id: z.number().optional().meta({
+    description:
+      "The vehicle the row was earned on. Only on the board read across twins (`withTwins`), where it is not always this one.",
+  }),
+});
+
+const tankDetailTopByMetric = z.object({
+  wn7: z.array(topTankPlayer),
+  wn8: z.array(topTankPlayer),
+  wnx: z.array(topTankPlayer),
+  computedAt: z.coerce.date().nullable(),
+});
+
+const tankDetailTwin = z.object({
+  tankId: z.number(),
+  slug: z.string(),
+  name: z.string(),
+  players: z.number().meta({
+    description: "Players the nightly pass ranked on that vehicle.",
+  }),
 });
 
 const researchPathItem = z.object({
@@ -77,12 +97,7 @@ export const TankDetailResponse = z
         "Canonical slug. Callers that reached the tank through a legacy id or wrong-case slug should redirect to it.",
     }),
     meta: vehicleMeta,
-    topByMetric: z.object({
-      wn7: z.array(topTankPlayer),
-      wn8: z.array(topTankPlayer),
-      wnx: z.array(topTankPlayer),
-      computedAt: z.coerce.date().nullable(),
-    }),
+    topByMetric: tankDetailTopByMetric,
     serverStats: tankServerStats.nullable(),
     wn8Expected: z
       .object({
@@ -237,6 +252,20 @@ export const TankDetailResponse = z
       .meta({
         description:
           "Which build of the geometry mirror the 3D hero should read this vehicle at, so it uses the one this payload was resolved against instead of resolving its own. Two answers that drift apart mean the vehicle is downloaded twice. Null for a vehicle the mirror does not carry, which is drawn from a photograph.",
+      }),
+    twins: z.array(tankDetailTwin).meta({
+      description:
+        "The vehicles that are this one under another name: declared made from the same vehicle by the game client AND equal on every characteristic (the Dream Chaser is the SDP wz 66 Grom). Wargaming keeps a separate record for each id. Only twins with server stats, most played first. Empty for a vehicle that stands alone.",
+    }),
+    withTwins: z
+      .object({
+        topByMetric: tankDetailTopByMetric,
+        serverStats: tankServerStats.nullable(),
+      })
+      .nullable()
+      .meta({
+        description:
+          "`topByMetric` and `serverStats` read across this vehicle and its `twins`. A player who owns several keeps their best row, tagged with the vehicle it was earned on. Null when there are no twins.",
       }),
   })
   .meta({

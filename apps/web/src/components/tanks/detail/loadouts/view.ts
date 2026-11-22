@@ -66,6 +66,8 @@ export interface CrewSeatRows {
 export interface TopPlayerRow {
   identity: PlayerIdentity;
   region: Region;
+  /** The vehicle the row is on: this one, or a twin read together with it. */
+  tankId: number;
   battles: number;
   winrate: number | null;
   avgDamage: number | null;

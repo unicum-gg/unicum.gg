@@ -46,12 +46,13 @@ type BestRow = {
 
 export async function topTankBattles(
   region: Region,
-  tankId: number,
+  /** The vehicle first, then its twins when the reader asked for them. */
+  tankIds: number[],
   mode: LoadoutMode,
 ): Promise<TopBattle[]> {
   const clans = clansByRegion[region];
   const rows = (await db.execute(sql`
-    WITH observed AS (${battlesCte(region, tankId, mode)}),
+    WITH observed AS (${battlesCte(region, tankIds, mode)}),
     best AS (
       SELECT DISTINCT ON (account_id) *
       FROM observed o

@@ -44,6 +44,7 @@ import {
 const TOP_PLAYER_COUNT = 10;
 
 type CandidateRow = {
+  tank_id: string | number;
   account_id: string | number;
   nickname: string | null;
   clan_tag: string | null;
@@ -69,14 +70,15 @@ type CandidateRow = {
 
 export async function topTankPlayers(
   region: Region,
-  tankId: number,
+  /** The vehicle first, then its twins when the reader asked for them. */
+  tankIds: number[],
   mode: LoadoutMode,
   context: RatingContext,
 ): Promise<TopPlayer[]> {
   const clans = clansByRegion[region];
   const snapshots = tankSnapshotsByRegion[region];
   const rows = (await db.execute(sql`
-    WITH observed AS (${battlesCte(region, tankId, mode)}),
+    WITH observed AS (${battlesCte(region, tankIds, mode)}),
     -- How many directive slots this vehicle shows in the battles we hold. A
     -- layout with no directive mounted can arrive with its slot list empty
     -- rather than holding a free slot, and every vehicle has at least one.
@@ -96,7 +98,7 @@ export async function topTankPlayers(
       ORDER BY account_id, started_at DESC
     )
     SELECT
-      l.account_id, l.nickname, c.tag AS clan_tag, c.color AS clan_color,
+      l.tank_id, l.account_id, l.nickname, c.tag AS clan_tag, c.color AS clan_color,
       l.arena_unique_id, l.started_at,
       -- By slot, free ones included, which are SQL nulls inside the arrays.
       -- As JSON, because a raw read of a text array hands a null back as the
@@ -113,7 +115,7 @@ export async function topTankPlayers(
     JOIN LATERAL (
       SELECT *
       FROM ${snapshots}
-      WHERE player_id = l.player_id AND tank_id = ${tankId}
+      WHERE player_id = l.player_id AND tank_id = l.tank_id
       ORDER BY taken_at DESC, battles DESC
       LIMIT 1
     ) s ON TRUE
@@ -159,7 +161,7 @@ export async function topTankPlayers(
     Promise.all(
       top.map(({ row }) =>
         row.field_mods_packed?.length
-          ? fieldModSlots(region, tankId, row.field_mods_packed.map(Number)).catch(() => [])
+          ? fieldModSlots(region, Number(row.tank_id), row.field_mods_packed.map(Number)).catch(() => [])
           : Promise.resolve(null),
       ),
     ),
@@ -167,7 +169,7 @@ export async function topTankPlayers(
   // The tree's own slots, for a player who has taken no modification at all:
   // drawn empty rather than left out, so the row says "none of seven".
   const tree = fieldMods.some((slots) => slots === null)
-    ? await getTankFieldMods(region, tankId).catch(() => null)
+    ? await getTankFieldMods(region, tankIds[0]).catch(() => null)
     : null;
   const emptyTree: (string | null)[] = (tree?.steps ?? [])
     .filter((step) => step.pair)
@@ -186,6 +188,7 @@ export async function topTankPlayers(
     return {
       nickname: row.nickname ?? String(accountId),
       accountId,
+      tankId: Number(row.tank_id),
       clanTag: row.clan_tag,
       clanColor: row.clan_color,
       isVerified: badge?.verified ?? false,

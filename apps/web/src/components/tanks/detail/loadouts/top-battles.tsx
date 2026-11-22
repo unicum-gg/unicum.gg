@@ -44,7 +44,13 @@ export function TopBattles({
           ...row,
           player: {
             ...row.player,
-            href: ROUTES.PLAYER_TANK(region, row.player.identity.nickname, slug),
+            // The battle's own vehicle, which is a twin of this one when the
+            // reader asked to read them together.
+            href: ROUTES.PLAYER_TANK(
+              region,
+              row.player.identity.nickname,
+              row.tank?.slug ?? slug,
+            ),
           },
         }
       : row,

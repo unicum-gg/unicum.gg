@@ -32,7 +32,8 @@ async function TankPerformancesPage({
   if (!isRegion(region)) notFound();
   const detail = await loadTankTab(region, slug, TankDetailTab.Performances, locale);
   return (
-    <Performances locale={locale}
+    <Performances
+      locale={locale}
       region={region}
       tankId={detail.tankId}
       meta={detail.meta}
@@ -40,6 +41,8 @@ async function TankPerformancesPage({
       topByMetric={detail.topByMetric}
       wn8Expected={detail.wn8Expected}
       wnxExpected={detail.wnxExpected}
+      twins={detail.twins}
+      withTwins={detail.withTwins}
     />
   );
 }

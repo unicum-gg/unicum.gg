@@ -9,9 +9,14 @@ import { getTankPaintLock } from "./paint-lock";
 import { getVehicleFirstPaint } from "./mirror";
 import { getTankModules } from "@unicum.gg/core/wargaming/wot/tanks/modules";
 import {
+  combineTankStats,
   getTankStats,
   getTopPlayersByTankAllMetrics,
+  mergeTopPlayersByTank,
+  type TankServerStats,
+  type TopTankPlayersByMetric,
 } from "@unicum.gg/core/wargaming/wot/players/top/by-tank";
+import { getTankTwins, type TankTwin } from "./twins";
 import {
   getWN8ExpectedValues,
   getWNXExpectedValues,
@@ -40,6 +45,43 @@ import { WotSrcBranch, type Region } from "@unicum.gg/wargaming";
 import { getTankRatingHeadline } from "@unicum.gg/core/tanks/ratings-read";
 
 const TOP_LIMIT = 25;
+
+/** The Performances figures read across this vehicle and its twins. */
+export type TankTwinsCombined = {
+  topByMetric: TopTankPlayersByMetric;
+  serverStats: TankServerStats | null;
+};
+
+/**
+ * The twins' boards and averages, folded into this vehicle's. Null when it has
+ * none, so a tank that stands alone costs one dataset read and nothing else.
+ */
+async function readWithTwins(
+  region: Region,
+  tankId: number,
+  twins: TankTwin[],
+  own: { topByMetric: TopTankPlayersByMetric; serverStats: TankServerStats | null },
+): Promise<TankTwinsCombined | null> {
+  if (twins.length === 0) return null;
+  const others = await Promise.all(
+    twins.map(async (twin) => ({
+      tankId: twin.tankId,
+      board: await getTopPlayersByTankAllMetrics(region, twin.tankId, TOP_LIMIT),
+      stats: await getTankStats(region, twin.tankId),
+    })),
+  );
+  return {
+    topByMetric: mergeTopPlayersByTank(
+      [{ tankId, board: own.topByMetric }, ...others],
+      TOP_LIMIT,
+    ),
+    serverStats: combineTankStats(
+      [own.serverStats, ...others.map((other) => other.stats)].filter(
+        (stats): stats is TankServerStats => stats != null,
+      ),
+    ),
+  };
+}
 
 // Fails-open boundary: the five wot-src sections (configs/crew/loadout/field-mods/
 // skill-tree) and the two Poliroid mark histories each hide gracefully on a
@@ -105,6 +147,7 @@ export async function assembleTankDetail(
     basedOn,
     paintLock,
     model,
+    twins,
   ] = await Promise.all([
     getTopPlayersByTankAllMetrics(region, tankId, TOP_LIMIT),
     getTankStats(region, tankId),
@@ -146,7 +189,15 @@ export async function assembleTankDetail(
     // uses the one this payload was resolved against instead of resolving its
     // own and downloading everything a second time.
     safe(() => getVehicleFirstPaint(meta.tag, branch), null),
+    // The vehicles that are this one under another name, which the
+    // Performances tab offers to read together with it.
+    safe(() => getTankTwins(region, tankId), [] as TankTwin[]),
   ]);
+
+  const withTwins = await safe(
+    () => readWithTwins(region, tankId, twins, { topByMetric, serverStats }),
+    null,
+  );
 
   // The crests, folded into the payload rather than attached per request: this
   // whole assembly is cached and served back as a raw string, so attaching them
@@ -156,7 +207,10 @@ export async function assembleTankDetail(
   // without any crest at all does not, since it contradicts every other list on
   // the site. `SHAPE_VERSION` is bumped alongside, or the entries already in
   // Redis would come back missing these fields.
-  const topByMetricWithBadges = await withPlayerBadges(region, topByMetric);
+  const [topByMetricWithBadges, twinsTopWithBadges] = await Promise.all([
+    withPlayerBadges(region, topByMetric),
+    withTwins ? withPlayerBadges(region, withTwins.topByMetric) : null,
+  ]);
 
   return {
     tankId,
@@ -198,5 +252,12 @@ export async function assembleTankDetail(
     testVersion,
     rating,
     model,
+    twins,
+    // This vehicle's Performances read across its twins, for the switch that
+    // offers them. Null on a vehicle with none.
+    withTwins:
+      withTwins && twinsTopWithBadges
+        ? { ...withTwins, topByMetric: twinsTopWithBadges }
+        : null,
   };
 }
