@@ -1,0 +1,5 @@
+{
+  "description": "{twins} corresponde a {tank} con otro nombre: el mismo vehículo, con cada característica igual. Wargaming conserva un récord separado para cada uno, por lo que sus jugadores y batallas se pueden leer aquí por separado o juntos.",
+  "description-many": "{twins} son nombres alternativos de {tank}: el mismo vehículo, con cada característica igual. Wargaming conserva un récord separado para cada uno, por lo que sus jugadores y batallas se pueden leer aquí por separado o juntos.",
+  "title": "Otros nombres para {tank}"
+}

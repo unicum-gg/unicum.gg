@@ -1,6 +1,6 @@
 {
   "result": {
-    "win": "Zwycięstwo",
+    "win": "Wygrana",
     "loss": "Porażka",
     "draw": "Remis"
   },

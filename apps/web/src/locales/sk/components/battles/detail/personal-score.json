@@ -42,7 +42,7 @@
   },
   "column": {
     "player": "Hráč",
-    "vehicle": "Vozidlo"
+    "vehicle": "Vozilo"
   },
   "destroyed-by-label": "Zničené hráčom"
 }

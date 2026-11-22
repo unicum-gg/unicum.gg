@@ -1,0 +1,5 @@
+{
+  "description": "La denominazione {twins} indica lo stesso veicolo di {tank}, con un altro nome e ogni caratteristica uguale. Wargaming mantiene un record separato per ciascuno, così qui è possibile consultare i relativi giocatori e le relative battaglie singolarmente o insieme.",
+  "description-many": "Le denominazioni {twins} indicano lo stesso veicolo di {tank}, con nomi diversi e ogni caratteristica uguale. Wargaming mantiene un record separato per ciascuno, così qui è possibile consultare i relativi giocatori e le relative battaglie singolarmente o insieme.",
+  "title": "Il carro armato associato a {tank}, noto con altri nomi"
+}

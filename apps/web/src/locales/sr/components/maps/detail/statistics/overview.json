@@ -5,7 +5,7 @@
   "finish": {
     "extermination": "Uništen je tim",
     "base": "Osvojena baza",
-    "timeout": "Vreme je isteklo",
+    "timeout": "Isteklo vreme",
     "other": "Drugo"
   },
   "spawns": "Pobede po mestu pojavljivanja",

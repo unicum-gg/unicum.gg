@@ -5,7 +5,7 @@
   "finish": {
     "extermination": "O echipă distrusă",
     "base": "Bază capturată",
-    "timeout": "Timpul a expirat",
+    "timeout": "Timp expirat",
     "other": "Altele"
   },
   "spawns": "Victorii în funcție de apariție",

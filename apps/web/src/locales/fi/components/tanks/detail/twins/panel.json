@@ -1,0 +1,5 @@
+{
+  "description": "{twins} on toisella nimellä esiintyvä {tank}: sama ajoneuvo, kaikki ominaisuudet ovat samat. Wargaming säilyttää kummastakin erillisen ennätyksen, joten niiden pelaajat ja taistelut voidaan lukea täällä erikseen tai yhdessä.",
+  "description-many": "{twins} ovat toisilla nimillä esiintyvä {tank}: sama ajoneuvo, kaikki ominaisuudet ovat samat. Wargaming säilyttää kustakin erillisen ennätyksen, joten niiden pelaajat ja taistelut voidaan lukea täällä erikseen tai yhdessä.",
+  "title": "Toisilla nimillä esiintyvä {tank}"
+}

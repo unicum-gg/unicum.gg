@@ -5,7 +5,7 @@
   "finish": {
     "extermination": "Een team vernietigd",
     "base": "Basis veroverd",
-    "timeout": "De tijd is verstreken",
+    "timeout": "Tijd verstreken",
     "other": "Overig"
   },
   "spawns": "Overwinningen per spawn",

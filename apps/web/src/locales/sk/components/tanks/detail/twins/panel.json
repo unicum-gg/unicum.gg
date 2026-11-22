@@ -1,0 +1,5 @@
+{
+  "description": "{twins} predstavuje tanko s názvom {tank} pod iným menom: rovnaké vozidlo, každá vlastnosť je rovnaká. Wargaming ohranja samostatný záznam pre každé z nich, takže ich hráči a bitky sa dajú čítať tu samostatne alebo skupaj.",
+  "description-many": "{twins} predstavujú tanko s názvom {tank} pod inými menami: rovnaké vozidlo, každá vlastnosť je rovnaká. Wargaming ohranja samostatný záznam pre každé z nich, takže ich hráči a bitky sa dajú čítať tu samostatne alebo skupaj.",
+  "title": "Iné mená pre tanko {tank}"
+}

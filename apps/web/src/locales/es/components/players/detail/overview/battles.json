@@ -216,7 +216,7 @@
     "more": "+{count}",
     "hint": "Combatió en {count} vehículos. Las cifras de la fila corresponden a toda la batalla.",
     "heading": "Vehículos en esta batalla",
-    "kills": "Destruidos",
+    "kills": "Destruido",
     "time": "Tiempo"
   },
   "earnings": {

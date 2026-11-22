@@ -1,0 +1,5 @@
+{
+  "description": "{twins} ugyanaz a jármű, mint {tank}, csak másik néven: minden jellemzője azonos. A Wargaming mindegyikhez külön rekordot tart meg, így játékosaik és csatáik itt külön-külön vagy együtt olvashatók.",
+  "description-many": "{twins} ugyanazt a járművet jelölik, mint {tank}, csak más nevek alatt: minden jellemzőjük azonos. A Wargaming mindegyikhez külön rekordot tart meg, így játékosaik és csatáik itt külön-külön vagy együtt olvashatók.",
+  "title": "Más nevek alatt ugyanaz a jármű, mint {tank}"
+}

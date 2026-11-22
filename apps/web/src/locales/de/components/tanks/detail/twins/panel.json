@@ -1,0 +1,5 @@
+{
+  "description": "Bei {twins} handelt es sich um {tank} unter einem anderen Namen: dasselbe Fahrzeug mit identischen Eigenschaften. Wargaming behält für jedes Fahrzeug einen separaten Rekord, sodass Spieler und Gefechte hier einzeln oder zusammen gelesen werden können.",
+  "description-many": "Bei {twins} handelt es sich um {tank} unter anderen Namen: dasselbe Fahrzeug mit identischen Eigenschaften. Wargaming behält für jedes Fahrzeug einen separaten Rekord, sodass Spieler und Gefechte hier einzeln oder zusammen gelesen werden können.",
+  "title": "Andere Namen für {tank}"
+}

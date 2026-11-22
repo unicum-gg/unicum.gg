@@ -5,7 +5,7 @@
   "finish": {
     "extermination": "Et hold blev ødelagt",
     "base": "Base erobret",
-    "timeout": "Tiden løb ud",
+    "timeout": "Tiden udløb",
     "other": "Andet"
   },
   "spawns": "Sejre efter startposition",

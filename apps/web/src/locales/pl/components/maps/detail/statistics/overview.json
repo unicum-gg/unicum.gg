@@ -5,7 +5,7 @@
   "finish": {
     "extermination": "Drużyna zniszczona",
     "base": "Baza przejęta",
-    "timeout": "Upłynął czas",
+    "timeout": "Czas minął",
     "other": "Inne"
   },
   "spawns": "Zwycięstwa według odrodzenia",

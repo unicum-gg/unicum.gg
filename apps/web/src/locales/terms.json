@@ -905,7 +905,8 @@
     "uploaded": "تم الرفع",
     "watch": "مشاهدة",
     "wotreplay": "wotreplay",
-    "wrong": "خاطئ"
+    "wrong": "خاطئ",
+    "together": "معًا"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1814,7 +1815,8 @@
     "uploaded": "запампавана",
     "watch": "глядзець",
     "wotreplay": "wotreplay",
-    "wrong": "няправільна"
+    "wrong": "няправільна",
+    "together": "разам"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -2942,7 +2944,8 @@
     "uploaded": "качен",
     "watch": "гледане",
     "wotreplay": "wotreplay",
-    "wrong": "грешен"
+    "wrong": "грешен",
+    "together": "заедно"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -3859,7 +3862,8 @@
     "uploaded": "učitano",
     "watch": "gledaj",
     "wotreplay": "wotreplay",
-    "wrong": "pogrešno"
+    "wrong": "pogrešno",
+    "together": "zajedno"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -4998,7 +5002,8 @@
     "uploaded": "nahráno",
     "watch": "sledovat",
     "wotreplay": "wotreplay",
-    "wrong": "nesprávně"
+    "wrong": "nesprávně",
+    "together": "společně"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -6143,7 +6148,8 @@
     "uploaded": "uploadet",
     "watch": "se",
     "wotreplay": "wotreplay",
-    "wrong": "forkert"
+    "wrong": "forkert",
+    "together": "sammen"
   },
   "de": {
     "(optional)": "(optional)",
@@ -7281,7 +7287,8 @@
     "uploaded": "hochgeladen",
     "watch": "ansehen",
     "wotreplay": "wotreplay",
-    "wrong": "falsch"
+    "wrong": "falsch",
+    "together": "zusammen"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -8425,7 +8432,8 @@
     "uploaded": "ανέβηκε",
     "watch": "παρακολούθηση",
     "wotreplay": "wotreplay",
-    "wrong": "λάθος"
+    "wrong": "λάθος",
+    "together": "μαζί"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -9550,7 +9558,8 @@
     "uploaded": "subido",
     "watch": "ver",
     "wotreplay": "wotreplay",
-    "wrong": "mal"
+    "wrong": "mal",
+    "together": "juntos"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -10699,7 +10708,8 @@
     "uploaded": "ladattu",
     "watch": "katso",
     "wotreplay": "wotreplay",
-    "wrong": "väärin"
+    "wrong": "väärin",
+    "together": "yhdessä"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -11827,7 +11837,8 @@
     "uploaded": "téléversé",
     "watch": "regarder",
     "wotreplay": "wotreplay",
-    "wrong": "incorrect"
+    "wrong": "incorrect",
+    "together": "ensemble"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -12737,7 +12748,8 @@
     "uploaded": "अपलोड किया गया",
     "watch": "देखें",
     "wotreplay": "wotreplay",
-    "wrong": "गलत"
+    "wrong": "गलत",
+    "together": "साथ"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -13879,7 +13891,8 @@
     "uploaded": "učitano",
     "watch": "gledaj",
     "wotreplay": "wotreplay",
-    "wrong": "pogrešno"
+    "wrong": "pogrešno",
+    "together": "zajedno"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -15023,7 +15036,8 @@
     "uploaded": "feltöltve",
     "watch": "megtekintés",
     "wotreplay": "wotreplay",
-    "wrong": "rossz"
+    "wrong": "rossz",
+    "together": "együtt"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -16163,7 +16177,8 @@
     "uploaded": "caricato",
     "watch": "guarda",
     "wotreplay": "wotreplay",
-    "wrong": "errato"
+    "wrong": "errato",
+    "together": "insieme"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -17310,7 +17325,8 @@
     "uploaded": "アップロード済み",
     "watch": "視聴",
     "wotreplay": "wotreplay",
-    "wrong": "間違い"
+    "wrong": "間違い",
+    "together": "一緒に"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -18220,7 +18236,8 @@
     "uploaded": "жүктелді",
     "watch": "көру",
     "wotreplay": "wotreplay",
-    "wrong": "қате"
+    "wrong": "қате",
+    "together": "бірге"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -19371,7 +19388,8 @@
     "uploaded": "업로드됨",
     "watch": "시청",
     "wotreplay": "wotreplay",
-    "wrong": "잘못됨"
+    "wrong": "잘못됨",
+    "together": "함께"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -20518,7 +20536,8 @@
     "uploaded": "įkelta",
     "watch": "žiūrėti",
     "wotreplay": "wotreplay",
-    "wrong": "neteisinga"
+    "wrong": "neteisinga",
+    "together": "kartu"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -21652,7 +21671,8 @@
     "uploaded": "augšupielādēts",
     "watch": "skatīties",
     "wotreplay": "wotreplay",
-    "wrong": "greizi"
+    "wrong": "greizi",
+    "together": "kopā"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -22801,7 +22821,8 @@
     "uploaded": "geüpload",
     "watch": "bekijken",
     "wotreplay": "wotreplay",
-    "wrong": "fout"
+    "wrong": "fout",
+    "together": "samen"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -23941,7 +23962,8 @@
     "uploaded": "lastet opp",
     "watch": "se",
     "wotreplay": "wotreplay",
-    "wrong": "feil"
+    "wrong": "feil",
+    "together": "sammen"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -25078,7 +25100,8 @@
     "uploaded": "przesłane",
     "watch": "oglądaj",
     "wotreplay": "wotreplay",
-    "wrong": "nieprawidłowe"
+    "wrong": "nieprawidłowe",
+    "together": "razem"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -26208,7 +26231,8 @@
     "uploaded": "enviado",
     "watch": "assistir",
     "wotreplay": "wotreplay",
-    "wrong": "incorreto"
+    "wrong": "incorreto",
+    "together": "juntos"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -27339,7 +27363,8 @@
     "uploaded": "încărcat",
     "watch": "urmărește",
     "wotreplay": "wotreplay",
-    "wrong": "greșit"
+    "wrong": "greșit",
+    "together": "împreună"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -28458,7 +28483,8 @@
     "uploaded": "загружено",
     "watch": "смотреть",
     "wotreplay": "wotreplay",
-    "wrong": "неверно"
+    "wrong": "неверно",
+    "together": "вместе"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -29371,7 +29397,8 @@
     "uploaded": "nahrané",
     "watch": "sledovať",
     "wotreplay": "wotreplay",
-    "wrong": "nesprávne"
+    "wrong": "nesprávne",
+    "together": "skupaj"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -30515,7 +30542,8 @@
     "uploaded": "otpremljeno",
     "watch": "gledaj",
     "wotreplay": "wotreplay",
-    "wrong": "po zlu"
+    "wrong": "po zlu",
+    "together": "zajedno"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -31665,7 +31693,8 @@
     "uploaded": "uppladdad",
     "watch": "titta",
     "wotreplay": "wotreplay",
-    "wrong": "fel"
+    "wrong": "fel",
+    "together": "tillsammans"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -32810,7 +32839,8 @@
     "uploaded": "อัปโหลดแล้ว",
     "watch": "ดู",
     "wotreplay": "wotreplay",
-    "wrong": "ไม่ถูกต้อง"
+    "wrong": "ไม่ถูกต้อง",
+    "together": "ร่วมกัน"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -33722,7 +33752,8 @@
     "uploaded": "na-upload",
     "watch": "panoorin",
     "wotreplay": "wotreplay",
-    "wrong": "mali"
+    "wrong": "mali",
+    "together": "magkasama"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -34864,7 +34895,8 @@
     "uploaded": "yüklendi",
     "watch": "izle",
     "wotreplay": "wotreplay",
-    "wrong": "yanlış"
+    "wrong": "yanlış",
+    "together": "birlikte"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -35998,7 +36030,8 @@
     "uploaded": "завантажено",
     "watch": "дивитися",
     "wotreplay": "wotreplay",
-    "wrong": "не так"
+    "wrong": "не так",
+    "together": "разом"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -37121,7 +37154,8 @@
     "uploaded": "đã tải lên",
     "watch": "xem",
     "wotreplay": "wotreplay",
-    "wrong": "sai"
+    "wrong": "sai",
+    "together": "cùng nhau"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -38266,6 +38300,7 @@
     "uploaded": "已上传",
     "watch": "观看",
     "wotreplay": "wotreplay",
-    "wrong": "出错"
+    "wrong": "出错",
+    "together": "一起"
   }
 }
