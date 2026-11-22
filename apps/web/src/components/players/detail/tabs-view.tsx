@@ -12,7 +12,7 @@ import {
   PlayerSectionNav,
 } from "@/components/players/detail/tabs-nav";
 import {
-  ARCHIVED_PLAYER_MODES,
+  PLAYER_MODES,
   PlayerMode,
   PlayerSection,
   playerModeHref,
@@ -32,7 +32,7 @@ import {
 import { modeRatingRows } from "@/components/players/detail/overview/stronghold-stats-table";
 import {
   PLAYER_MODE_TANK_VIEW,
-  archivedModeRecord,
+  hasPlayedMode,
 } from "@/components/players/detail/overview/mode-tank-view";
 import { PLAYER_MODE_RATING } from "@/components/players/detail/overview/mode-rating";
 import { AchievementsTab } from "@/components/players/detail/achievements";
@@ -380,13 +380,11 @@ export function PlayerTabsView({
     [PlayerMode.PermanentTeams]: detail.strongholds.regularTeam ?? EMPTY_MODE,
     [PlayerMode.Historical]: detail.strongholds.historical ?? EMPTY_MODE,
   };
-  // Which ended modes this account actually has, so the nav offers only those.
-  // Through the same lookup the page uses to decide the route exists at all, or
-  // a tab could be offered for a URL that redirects away.
-  const playedArchived = new Set<PlayerMode>(
-    ARCHIVED_PLAYER_MODES.filter(
-      (m) => archivedModeRecord(detail, m) !== null,
-    ),
+  // Which modes this account has played, so the nav offers only those.
+  // Through the same check the page uses to keep an empty mode out of the
+  // index, so the two cannot disagree on which tabs exist.
+  const playedModes = new Set<PlayerMode>(
+    PLAYER_MODES.map((m) => m.id).filter((m) => hasPlayedMode(detail, m)),
   );
   // Which mode's own population this tab's rating reads against, when it has
   // one. Undefined drops the rating rows rather than dashing them, the same
@@ -404,7 +402,10 @@ export function PlayerTabsView({
     !onAchievements &&
     !onSessions &&
     !onTournaments &&
-    !onBattles;
+    !onBattles &&
+    // A row holding Random Battles alone is a tab bar with nowhere to go,
+    // which is most accounts that never left random battles.
+    (mode !== PlayerMode.Overall || playedModes.size > 1);
 
   return (
     <>
@@ -434,7 +435,7 @@ export function PlayerTabsView({
               <PlayerModeNav
                 basePath={basePath}
                 mode={mode}
-                played={playedArchived}
+                played={playedModes}
                 onSelect={selectMode}
               />
             </PanelHeader>

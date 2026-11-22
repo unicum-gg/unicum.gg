@@ -12,7 +12,6 @@ import { TabBar, tabItemClass } from "@/components/ui/tab-bar";
 import {
   PLAYER_MODES,
   PLAYER_SECTIONS,
-  isArchivedPlayerMode,
   PlayerMode,
   PlayerSection,
   playerModeHref,
@@ -157,11 +156,11 @@ export function PlayerSectionNav({
 // Bottom row: the battle-mode sub-tabs, shown only while the Overview section
 // is active.
 //
-// The longest row on the site, and the reason `TabBar` matters here: ten modes
-// already overflowed a 1512px viewport by 68px in French, and the five ended
-// ones take it to fifteen for the accounts that played them. The rail shows an
-// arrow where a bare `overflow-x-auto` clipped the last tab mid-word with
-// nothing to say it was there.
+// Only the modes the account has played are offered (see `hasPlayedMode`), but
+// a veteran of everything still fills fifteen tabs, which is why `TabBar`
+// matters here: ten modes already overflowed a 1512px viewport by 68px in
+// French. The rail shows an arrow where a bare `overflow-x-auto` clipped the
+// last tab mid-word with nothing to say it was there.
 export function PlayerModeNav({
   basePath,
   mode,
@@ -170,17 +169,16 @@ export function PlayerModeNav({
 }: {
   basePath: string;
   mode: PlayerMode;
-  /** The finished modes this account has a record in. The others are never
-   * offered: nobody can add to them, so "no data yet, check back" would be a
-   * lie. The mode currently open is always kept, so a link to one stays
-   * readable. See `isArchivedPlayerMode`. */
+  /** The modes this account has something under. The others are not offered:
+   * an empty tab is the same line on every profile that never played the mode.
+   * The mode currently open is always kept, so a link to one stays readable.
+   * See `hasPlayedMode`. */
   played: ReadonlySet<PlayerMode>;
   onSelect: (mode: PlayerMode) => void;
 }) {
   const { t } = useTranslation("game/vocabulary");
   const shown = PLAYER_MODES.filter(
-    (m) =>
-      !isArchivedPlayerMode(m.id) || played.has(m.id) || mode === m.id,
+    (m) => played.has(m.id) || mode === m.id,
   );
 
   return (

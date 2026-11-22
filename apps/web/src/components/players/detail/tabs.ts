@@ -66,14 +66,14 @@ const MODE_SEGMENT: Record<PlayerMode, string | null> = {
 };
 
 /**
- * The modes that are offered to everybody.
+ * The modes nobody can play any more.
  *
- * The rest are finished: `account/info` still answers their totals, but nobody
- * can add to them, so a tab saying "no data yet, check back" would be a lie. A
- * player who played one gets its tab, everyone else never sees it. Same rule as
- * the map page's History tab, and the same reason.
+ * `account/info` still answers their totals, but nobody can add to them, so an
+ * account with no record in one has no page for it at all: the route redirects
+ * to the profile, where a live mode left empty is only kept out of the index
+ * (see `hasPlayedMode`).
  */
-export const ARCHIVED_PLAYER_MODES: PlayerMode[] = [
+const ARCHIVED_PLAYER_MODES: PlayerMode[] = [
   PlayerMode.ClanBattles,
   PlayerMode.TankCompany,
   PlayerMode.TeamBattles,
@@ -83,7 +83,7 @@ export const ARCHIVED_PLAYER_MODES: PlayerMode[] = [
 
 const ARCHIVED_MODES = new Set<PlayerMode>(ARCHIVED_PLAYER_MODES);
 
-/** Whether this mode is only shown to an account that has a record in it. */
+/** Whether this mode's route only exists for an account with a record in it. */
 export function isArchivedPlayerMode(mode: PlayerMode): boolean {
   return ARCHIVED_MODES.has(mode);
 }
@@ -160,12 +160,15 @@ export const PLAYER_MODES = MODE_VIEWS.map((v) => ({
 /**
  * The modes every account is offered, which is what a skeleton can know.
  *
- * Whether an ended mode appears depends on the payload, and a skeleton has
- * none: painting all fifteen would flash five tabs that vanish on hydration,
- * on the longest row on the site.
+ * Every other tab depends on what the account has played, and a skeleton has
+ * no payload: painting them all would flash tabs that vanish on hydration, on
+ * the longest row on the site. Random Battles is the profile itself. The view
+ * hides the row entirely when that is all an account has, which the skeleton
+ * cannot know either: it bets on the row, the commoner case among the profiles
+ * people actually open.
  */
 export const ALWAYS_SHOWN_PLAYER_MODES = PLAYER_MODES.filter(
-  (m) => !isArchivedPlayerMode(m.id),
+  (m) => m.id === PlayerMode.Overall,
 );
 
 /** The view at the bare player path: Overview, Random Battles. */

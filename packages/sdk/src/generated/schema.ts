@@ -6066,6 +6066,8 @@ export interface components {
             tankCount: number;
             achievementCount: number;
             tournamentCount: number;
+            /** @description Maneuvers editions this account held a place on. Absent from a payload cached before the field existed. */
+            maneuversEditions?: number;
             /** @description Battles shared through the unicum.gg mod that this account fought. Absent from a payload cached before the field existed, and when the player keeps their battles private. */
             battleCount?: number;
             /** @description The player keeps their battle list to themselves: the battles endpoint answers them alone, and `battleCount` is withheld. */

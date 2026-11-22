@@ -370,6 +370,10 @@ export const PlayerDetailResponse = z.object({
   tankCount: z.number(),
   achievementCount: z.number(),
   tournamentCount: z.number(),
+  maneuversEditions: z.number().optional().meta({
+    description:
+      "Maneuvers editions this account held a place on. Absent from a payload cached before the field existed.",
+  }),
   battleCount: z.number().optional().meta({
     description:
       "Battles shared through the unicum.gg mod that this account fought. Absent from a payload cached before the field existed, and when the player keeps their battles private.",

@@ -55,13 +55,26 @@ export const PLAYER_MODE_TANK_VIEW: Partial<Record<PlayerMode, TankBattleMode>> 
   };
 
 /**
- * Where an ended mode's record sits in the detail payload.
+ * Where a mode's record sits in the detail payload.
  *
  * The payload keys follow Wargaming's block names and the enum follows the
  * route segments, so the two spellings differ; mapped once here rather than
  * inline at each reader, since the page uses it to decide whether the route
- * exists at all and the view uses it to decide whether the tab does.
+ * exists (an ended mode) or is indexed (a live one) and the view uses it to
+ * decide whether the tab is offered.
  */
+const LIVE_MODE_KEY: Partial<Record<PlayerMode, keyof PlayerStrongholdModes>> =
+  {
+    [PlayerMode.Skirmish]: "skirmish",
+    [PlayerMode.Advances]: "fortified",
+    [PlayerMode.GrandBattles]: "epic",
+    [PlayerMode.RankedBattles]: "ranked",
+    [PlayerMode.ClanWarsX]: "cwAbsolute",
+    [PlayerMode.ClanWarsVIII]: "cwChampion",
+    [PlayerMode.ClanWarsVI]: "cwMiddle",
+    [PlayerMode.Rampage]: "fallout",
+  };
+
 const ARCHIVED_MODE_KEY: Partial<
   Record<PlayerMode, keyof PlayerStrongholdModes>
 > = {
@@ -80,4 +93,34 @@ export function archivedModeRecord(
 ): StrongholdModeData | null {
   const key = ARCHIVED_MODE_KEY[mode];
   return key ? ((detail.strongholds[key] as StrongholdModeData | null) ?? null) : null;
+}
+
+/**
+ * Whether this account has anything to show under a mode tab.
+ *
+ * A tab with nothing under it is the same empty line on two million profiles,
+ * so the mode row offers only the modes the account has played and the page
+ * keeps an empty one out of the index (an ended one redirects instead, see
+ * `archivedModeRecord`). Random Battles is the profile itself and always
+ * counts. Onslaught and Maneuvers are not snapshot blocks: they read the
+ * season counts our own board captures leave on the payload, and a payload
+ * cached before `maneuversEditions` existed counts as played rather than
+ * hiding a tab it cannot judge.
+ */
+export function hasPlayedMode(
+  detail: {
+    strongholds: PlayerStrongholdModes;
+    onslaughtSeasons: number;
+    maneuversEditions?: number;
+  },
+  mode: PlayerMode,
+): boolean {
+  if (mode === PlayerMode.Overall) return true;
+  if (mode === PlayerMode.Onslaught) return detail.onslaughtSeasons > 0;
+  if (mode === PlayerMode.Maneuvers) return (detail.maneuversEditions ?? 1) > 0;
+  const key = LIVE_MODE_KEY[mode] ?? ARCHIVED_MODE_KEY[mode];
+  const record = key
+    ? (detail.strongholds[key] as StrongholdModeData | null)
+    : null;
+  return (record?.current?.battles ?? 0) > 0;
 }

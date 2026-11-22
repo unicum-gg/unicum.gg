@@ -68,6 +68,7 @@ import type { Region } from "@unicum.gg/wargaming";
 import { countEarnedAchievements } from "@unicum.gg/core/players/achievements";
 import { countPlayerTournaments } from "@unicum.gg/core/tournaments/read";
 import { countPlayerBattles } from "@unicum.gg/core/battles/read";
+import { countPlayerManeuversEditions } from "@unicum.gg/core/maneuvers/count";
 import { isBattlesHidden } from "@unicum.gg/core/battles/privacy";
 import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/tanks/encyclopedia";
 import { getAllTankSpecs } from "@unicum.gg/core/wargaming/wot/tanks/specs";
@@ -122,6 +123,7 @@ export async function buildPlayerDetail(args: {
     achievementCount,
     tournamentCount,
     battleCount,
+    maneuversEditions,
     moeThresholds,
     garage,
     battlesHidden,
@@ -149,6 +151,9 @@ export async function buildPlayerDetail(args: {
     // reasoning as the tournaments above: the GIN index on `player_ids`
     // answers it in milliseconds, and the label belongs on every section.
     countPlayerBattles(region, accountId),
+    // Maneuvers editions ranked in, which decides whether the mode row offers
+    // the tab at all. Same index scan shape as the two above.
+    countPlayerManeuversEditions(region, accountId),
     // The region's Marks of Excellence bars, for the profile's marks panel.
     // A cached catalogue read (see `@unicum.gg/core/moe`), so it rides here
     // without adding a scan per profile view.
@@ -332,6 +337,7 @@ export async function buildPlayerDetail(args: {
     tankCount: vehicles.length,
     achievementCount,
     tournamentCount,
+    maneuversEditions,
     ...(battlesHidden ? { battlesHidden } : { battleCount }),
     valuation: computePlayerValuation(vehicles, region, garage?.verifiedAt),
     markProgress,

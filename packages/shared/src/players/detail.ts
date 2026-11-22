@@ -121,6 +121,12 @@ export type PlayerDetailData = {
    */
   tournamentCount: number;
   /**
+   * Maneuvers editions this account held a place on, which decides whether the
+   * mode row offers the tab. Optional for the reason `battleCount` is: an entry
+   * cached before the field existed is served without it.
+   */
+  maneuversEditions?: number;
+  /**
    * Battles shared through the mod that this account fought, for the
    * "Battles (N)" tab label. Optional because the payload is cached as JSON,
    * and an entry written before this field existed is served without it.

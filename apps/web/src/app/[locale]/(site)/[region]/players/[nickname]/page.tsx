@@ -13,7 +13,10 @@ import {
   playerViewHref,
 } from "@/components/players/detail/tabs";
 import { PlayerProfile } from "@/components/players/detail/view";
-import { archivedModeRecord } from "@/components/players/detail/overview/mode-tank-view";
+import {
+  archivedModeRecord,
+  hasPlayedMode,
+} from "@/components/players/detail/overview/mode-tank-view";
 import { AccountLockedView } from "@/components/players/detail/account-locked";
 import type { PlayerTournamentRecord } from "@/components/players/detail/tournaments/row";
 import type { PlayerOnslaughtData } from "@/components/players/detail/onslaught";
@@ -238,19 +241,15 @@ export async function playerMetadata(
   // a battle shared, and their tab is an offer to install the mod, the same
   // across two million profiles.
   //
-  // The Maneuvers tab likewise when the event never ranked them: most accounts
-  // play no Stronghold event, and their tab is the same empty line across two
-  // million profiles. Same call the page makes, so it is deduped in the render.
+  // Any mode tab likewise when the account never played the mode: the nav
+  // no longer offers it, but the segment still resolves for a shared link, and
+  // its body is the same empty line across two million profiles. Same check
+  // the nav uses (`hasPlayedMode`), so a tab that exists is a page indexed.
   const noIndex =
     view.section === PlayerSection.Achievements ||
     (view.section === PlayerSection.Battles && !detail.battleCount) ||
-    (view.mode === PlayerMode.Maneuvers &&
-      !(await unicum
-        .region(region)
-        .players(decoded)
-        .maneuvers()
-        .then((r) => r.current != null || r.editions.length > 0)
-        .catch(() => false)));
+    (view.section === PlayerSection.Overview &&
+      !hasPlayedMode(detail, view.mode));
 
   const { current } = detail;
   const copy = viewCopy(
