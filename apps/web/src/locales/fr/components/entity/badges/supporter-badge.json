@@ -1,3 +1,8 @@
 {
-  "supporter": "Supporter"
+  "supporter": "Supporter",
+  "thanks": "Merci de soutenir {NAME}",
+  "since-one": "Soutien à {NAME} chaque mois depuis 1 mois",
+  "since": "Soutien à {NAME} chaque mois depuis {count} mois",
+  "hidden-anonymous": "Votre badge de supporter est masqué lorsque vous apparaissez anonymement. Désactivez l’anonymat sur la page de soutien pour l’afficher.",
+  "invite": "Soutenez {NAME} pour obtenir ce badge"
 }

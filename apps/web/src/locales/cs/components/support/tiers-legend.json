@@ -1,0 +1,5 @@
+{
+  "intro": "Odznak podporovatele roste s vámi: při delším ponechání měsíčního příspěvku se mění na bronzový, stříbrný a poté na odznak ze zlaťáků.",
+  "from-the-start": "Od prvního měsíce",
+  "after-months": "Po {count, plural, one {# měsíci} few {# měsících} many {# měsících} other {# měsících}}"
+}

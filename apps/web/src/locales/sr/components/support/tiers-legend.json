@@ -1,0 +1,5 @@
+{
+  "intro": "Značka podržavaoca raste zajedno s vama: postaje bronzana, srebrna, a zatim zlatna što duže zadržite mesečnu donaciju.",
+  "from-the-start": "Od prvog meseca",
+  "after-months": "Nakon {count, plural, one {# meseca} few {# meseca} many {# meseci} other {# meseci}}"
+}

@@ -1,3 +1,8 @@
 {
-  "supporter": "Podpornik"
+  "supporter": "Podpornik",
+  "thanks": "Hvala za podporo {NAME}",
+  "since-one": "Mesečno podpirate {NAME} že 1 mesiac",
+  "since": "Mesečno podpirate {NAME} že {count} mesiacov",
+  "hidden-anonymous": "Vaša značka podporovateľa je skrytá, ko se pojavijo kot anonymni. Izklopite anonimnost na strani podpory, da jo prikaži.",
+  "invite": "Podpri {NAME}, da pridobiš to značko"
 }

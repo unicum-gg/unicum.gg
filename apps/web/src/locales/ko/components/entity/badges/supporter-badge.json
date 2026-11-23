@@ -1,3 +1,8 @@
 {
-  "supporter": "후원자"
+  "supporter": "후원자",
+  "thanks": "{NAME} 후원에 감사드립니다",
+  "since-one": "매월 {NAME} 후원, 1개월째",
+  "since": "매월 {NAME} 후원, {count}개월째",
+  "hidden-anonymous": "익명으로 표시되는 동안 후원자 배지가 숨겨집니다. 표시하려면 후원 페이지에서 익명 설정을 끄세요.",
+  "invite": "이 배지를 받으려면 {NAME}을(를) 후원하세요"
 }

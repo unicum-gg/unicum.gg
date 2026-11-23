@@ -1,3 +1,8 @@
 {
-  "supporter": "Apoiador"
+  "supporter": "Apoiador",
+  "thanks": "Agradecimento por apoiar {NAME}",
+  "since-one": "Apoiando {NAME} todos os meses há 1 mês",
+  "since": "Apoiando {NAME} todos os meses há {count} meses",
+  "hidden-anonymous": "Seu distintivo de apoiador fica oculto enquanto você aparecer como anônimo. Desative o anonimato na página de apoio para mostrá-lo.",
+  "invite": "Suporte {NAME} para obter este distintivo"
 }

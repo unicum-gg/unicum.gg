@@ -1,3 +1,8 @@
 {
-  "supporter": "Unterstützer"
+  "supporter": "Unterstützer",
+  "thanks": "Danke, dass du {NAME} deine Unterstützung gibst",
+  "since-one": "Du unterstützt {NAME} jeden Monat seit Monat Nummer 1",
+  "since": "Du unterstützt {NAME} jeden Monat seit {count} Monat(en)",
+  "hidden-anonymous": "Dein Unterstützer-Abzeichen ist verborgen, während du anonym erscheinst. Deaktiviere die Anonymität auf der Unterstützungsseite, um es anzuzeigen.",
+  "invite": "Unterstütze {NAME}, um dieses Abzeichen zu erhalten"
 }

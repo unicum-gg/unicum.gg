@@ -1,3 +1,8 @@
 {
-  "supporter": "Sumusuporta"
+  "supporter": "Sumusuporta",
+  "thanks": "Salamat sa pagsuporta kay {NAME}",
+  "since-one": "Sumusuporta kay {NAME} buwan-buwan sa loob ng 1 buwan",
+  "since": "Sumusuporta kay {NAME} buwan-buwan sa loob ng {count} buwan",
+  "hidden-anonymous": "Nakatago ang iyong insignia ng tagasuporta kapag lumitaw kang anonymous. I-off ang anonymity sa pahina ng suporta para ipakita ito.",
+  "invite": "Magbigay ng suporta kay {NAME} para makuha ang insignia na ito"
 }

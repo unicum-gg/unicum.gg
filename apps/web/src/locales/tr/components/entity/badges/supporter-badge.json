@@ -1,3 +1,8 @@
 {
-  "supporter": "Destekçi"
+  "supporter": "Destekçi",
+  "thanks": "{NAME} için desteğinizden dolayı teşekkür ederiz",
+  "since-one": "1 aydır her ay {NAME} için destek veriyorsunuz",
+  "since": "{count} aydır her ay {NAME} için destek veriyorsunuz",
+  "hidden-anonymous": "Anonim olarak görünürken destekçi rozetiniz gizlidir. Göstermek için destek sayfasından anonimliği kapatın.",
+  "invite": "Bu rozeti almak için {NAME} için Destekçi olun"
 }

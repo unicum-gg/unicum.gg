@@ -1,3 +1,8 @@
 {
-  "supporter": "Supporter"
+  "supporter": "Supporter",
+  "thanks": "Dziękujemy za wsparcie {NAME}",
+  "since-one": "Wspierasz {NAME} co miesiąc od 1 miesiąca",
+  "since": "Wspierasz {NAME} co miesiąc od {count, plural, one {# miesiąca} few {# miesięcy} many {# miesięcy} other {# miesiąca}}",
+  "hidden-anonymous": "Twoja odznaka wspierającego jest ukryta, gdy pojawiasz się anonimowo. Wyłącz anonimowość na stronie wsparcia, aby ją pokazać.",
+  "invite": "Wesprzyj {NAME}, aby otrzymać tę odznakę"
 }

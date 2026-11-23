@@ -1,3 +1,8 @@
 {
-  "supporter": "Podporovatel"
+  "supporter": "Podporovatel",
+  "thanks": "Poděkovat za podporu {NAME}",
+  "since-one": "Podpora {NAME} každý měsíc po dobu 1 měsíce",
+  "since": "Podpora {NAME} každý měsíc po dobu {count, plural, one {# měsíce} few {# měsíců} many {# měsíců} other {# měsíců}}",
+  "hidden-anonymous": "Váš odznak podporovatele je skrytý, když se zobrazujete anonymně. Vypněte anonymitu na stránce podpory, aby se zobrazil.",
+  "invite": "Podpůrný příspěvek pro {NAME} vám odemkne tento odznak"
 }

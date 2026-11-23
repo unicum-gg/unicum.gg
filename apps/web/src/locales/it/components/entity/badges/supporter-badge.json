@@ -1,3 +1,8 @@
 {
-  "supporter": "Sostenitore"
+  "supporter": "Sostenitore",
+  "thanks": "Grazie per il supporto a {NAME}",
+  "since-one": "Supporto mensile a {NAME} da 1 mese",
+  "since": "Supporto mensile a {NAME} da {count} mesi",
+  "hidden-anonymous": "Il tuo distintivo da sostenitore è nascosto mentre compari in modalità anonima. Disattiva l’anonimato nella pagina del supporto per mostrarlo.",
+  "invite": "Supporta {NAME} per ottenere questo distintivo"
 }

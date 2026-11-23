@@ -1,3 +1,8 @@
 {
-  "supporter": "支持者"
+  "supporter": "支持者",
+  "thanks": "感谢支持 {NAME}",
+  "since-one": "每月支持 {NAME} 已持续 1 月",
+  "since": "每月支持 {NAME} 已持续 {count} 月",
+  "hidden-anonymous": "您以匿名身份出现时，您的支持者徽章会隐藏。请在支持页面关闭匿名状态以显示徽章。",
+  "invite": "成为 {NAME} 的支援型以获得此徽章"
 }

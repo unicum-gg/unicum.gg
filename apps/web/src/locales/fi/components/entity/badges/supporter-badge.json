@@ -1,3 +1,8 @@
 {
-  "supporter": "Tukija"
+  "supporter": "Tukija",
+  "thanks": "Kiitos, että tuet käyttäjää {NAME}",
+  "since-one": "Olet tukenut käyttäjää {NAME} kuukausittain yhden kuukauden ajan",
+  "since": "Olet tukenut käyttäjää {NAME} kuukausittain {count} kuukauden ajan",
+  "hidden-anonymous": "Tukijamerkkisi on piilotettu, kun tietosi näkyvät nimettöminä. Poista nimettömyys tukisivulla ja näytä se.",
+  "invite": "Tue käyttäjää {NAME} saadaksesi tämän merkin"
 }

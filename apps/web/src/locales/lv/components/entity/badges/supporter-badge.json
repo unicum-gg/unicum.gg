@@ -1,3 +1,8 @@
 {
-  "supporter": "Atbalstītājs"
+  "supporter": "Atbalstītājs",
+  "thanks": "Paldies, ka atbalstāt {NAME}",
+  "since-one": "Atbalstāt {NAME} katru mēnesi jau 1 mēnesi",
+  "since": "{count, plural, one {Atbalstāt {NAME} katru mēnesi jau # mēnesi} other {Atbalstāt {NAME} katru mēnesi jau # mēnešus}}",
+  "hidden-anonymous": "Jūsu atbalstītāja nozīmīte ir paslēpta, kamēr parādāties anonīmi. Izslēdziet anonimitāti atbalsta lapā, lai tā tiktu rādīta.",
+  "invite": "Atbalstiet {NAME}, lai iegūtu šo nozīmīti"
 }

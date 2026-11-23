@@ -1,3 +1,8 @@
 {
-  "supporter": "Rėmėjas"
+  "supporter": "Rėmėjas",
+  "thanks": "Dėkojame už paramą {NAME}",
+  "since-one": "1 mėnesį kiekvieną mėnesį remiate {NAME}",
+  "since": "{count} mėnesius kiekvieną mėnesį remiate {NAME}",
+  "hidden-anonymous": "Jūsų rėmėjo ženklelis nerodomas, kol pasirodote anonimiškai. Išjunkite anonimiškumą paramos puslapyje, kad galėtumėte jį rodyti.",
+  "invite": "Tapkite {NAME} Pagalbininku, kad gautumėte šį ženklelį"
 }

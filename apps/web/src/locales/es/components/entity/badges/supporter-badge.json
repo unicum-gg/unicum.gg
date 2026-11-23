@@ -1,3 +1,8 @@
 {
-  "supporter": "Soporte"
+  "supporter": "Soporte",
+  "thanks": "Gracias por tu apoyo a {NAME}",
+  "since-one": "Apoyando a {NAME} cada mes durante 1 mes",
+  "since": "Apoyando a {NAME} cada mes durante {count} meses",
+  "hidden-anonymous": "Tu insignia de colaborador está oculta mientras apareces como anónimo. Desactiva el anonimato en la página de apoyo para mostrarla.",
+  "invite": "Apoya a {NAME} para obtener esta insignia"
 }

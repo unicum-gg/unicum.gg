@@ -1,3 +1,8 @@
 {
-  "supporter": "Supporter"
+  "supporter": "Supporter",
+  "thanks": "Tack för att du stödjer {NAME}",
+  "since-one": "Stödjer {NAME} varje månad i 1 månad",
+  "since": "Stödjer {NAME} varje månad i {count} månader",
+  "hidden-anonymous": "Ditt supportermärke är dolt medan du visas som anonym. Stäng av anonymiteten på stödsidan för att visa det.",
+  "invite": "Understödsvagn {NAME} för att få det här märket"
 }

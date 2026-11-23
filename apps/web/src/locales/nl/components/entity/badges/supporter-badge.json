@@ -1,3 +1,8 @@
 {
-  "supporter": "Supporter"
+  "supporter": "Supporter",
+  "thanks": "Bedankt voor je steun aan {NAME}",
+  "since-one": "Je steunt {NAME} elke maand, nu al 1 maand",
+  "since": "Je steunt {NAME} elke maand, nu al {count} maanden",
+  "hidden-anonymous": "Je supporterbadge is verborgen zolang je anoniem verschijnt. Schakel anonimiteit uit op de steunpagina om de badge te tonen.",
+  "invite": "Ondersteun {NAME} om deze badge te krijgen"
 }

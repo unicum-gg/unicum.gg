@@ -1,3 +1,8 @@
 {
-  "supporter": "Người hỗ trợ"
+  "supporter": "Người hỗ trợ",
+  "thanks": "Cảm ơn bạn đã hỗ trợ {NAME}",
+  "since-one": "Đã hỗ trợ {NAME} hàng tháng được 1 tháng",
+  "since": "Đã hỗ trợ {NAME} hàng tháng được {count} tháng",
+  "hidden-anonymous": "Huy hiệu người ủng hộ của bạn bị ẩn khi bạn xuất hiện ở chế độ ẩn danh. Tắt chế độ ẩn danh trên trang hỗ trợ để hiển thị huy hiệu.",
+  "invite": "Hỗ trợ {NAME} để nhận huy hiệu này"
 }

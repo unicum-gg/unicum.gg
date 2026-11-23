@@ -1,3 +1,8 @@
 {
-  "supporter": "Támogató"
+  "supporter": "Támogató",
+  "thanks": "Köszönet {NAME} támogatásáért",
+  "since-one": "Havi támogatás {NAME} számára 1 hónapja",
+  "since": "Havi támogatás {NAME} számára {count} hónapja",
+  "hidden-anonymous": "A támogatói jelvényed rejtve van, amikor a profilod anonimként jelenik meg. Kapcsold ki az anonimitást a támogatási oldalon, ekkor a jelvény megjelenik.",
+  "invite": "Támogatóként nyújts támogatást {NAME} számára, hogy megszerezd ezt a jelvényt"
 }

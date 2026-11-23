@@ -1,3 +1,8 @@
 {
-  "supporter": "Suportator"
+  "supporter": "Suportator",
+  "thanks": "Mulțumim că susții {NAME}",
+  "since-one": "Susținere lunară pentru {NAME}, timp de 1 lună",
+  "since": "Susținere lunară pentru {NAME}, timp de {count} luni",
+  "hidden-anonymous": "Insigna ta de susținător este ascunsă cât timp apari ca anonim. Dezactivează anonimatul pe pagina de susținere pentru a o afișa.",
+  "invite": "Acordă asistență lui {NAME} pentru a primi această insignă"
 }

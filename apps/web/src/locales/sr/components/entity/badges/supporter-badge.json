@@ -1,3 +1,8 @@
 {
-  "supporter": "Podržavalac"
+  "supporter": "Podržavalac",
+  "thanks": "Zahvala za podršku {NAME}",
+  "since-one": "Podržavate {NAME} mesečno već 1 месец",
+  "since": "Podržavate {NAME} mesečno već {count, plural, one {# месец} few {# месеца} many {# месеци} other {# месеци}}",
+  "hidden-anonymous": "Vaša supporter značka je skrivena dok se pojavljujete anonimno. Isključite anonimnost na страница za podršku da biste je prikazali.",
+  "invite": "Podrška za {NAME} donosi ovu značku"
 }
