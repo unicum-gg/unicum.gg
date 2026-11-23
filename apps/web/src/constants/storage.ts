@@ -13,6 +13,9 @@ const STORAGE = {
     // answers rather than the vehicle's, which is why they are kept here and
     // not in the shared link.
     VIEWER_PREFS: "unicum.viewer-prefs",
+    // When the owner last answered "not now" to the support ask on their own
+    // profile, as epoch milliseconds.
+    SUPPORT_NUDGE_DISMISSED: "unicum.support-nudge-dismissed",
   },
   // BroadcastChannel names. Same `unicum.*` namespace as the rest: a channel
   // name is shared with every other script on the origin exactly like a storage

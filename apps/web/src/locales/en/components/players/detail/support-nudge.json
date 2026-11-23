@@ -1,0 +1,8 @@
+{
+  "title": "{NAME} is {pct}% funded",
+  "body": "No ads and never will be, so {NAME} runs on the players who use it: supporters have covered {received} of the {goal} spent so far. A monthly pledge from {min} adds the supporter badge next to your name.",
+  "body-gave": "Thank you for the {given} you have given. A monthly pledge from {min} is what keeps the server bill covered month after month, and it adds the supporter badge next to your name.",
+  "cta": "Become a supporter",
+  "cta-gave": "Pledge monthly",
+  "dismiss": "Not now"
+}

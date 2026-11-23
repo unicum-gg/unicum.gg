@@ -7,6 +7,7 @@ import { wgIdentityFromEmail } from "@/lib/wg-session";
 import { LiveSync } from "@/components/live-sync";
 import { Panel, PanelContent, PanelSeparator } from "@/components/panel";
 import { PlayerHeader } from "@/components/players/detail/header";
+import { SupportNudge } from "@/components/players/detail/support-nudge";
 import { SupporterBadgeState } from "@/components/entity/badges/supporter-badge";
 import { PlayerMode, PlayerSection } from "@/components/players/detail/tabs";
 import { PlayerTabsView } from "@/components/players/detail/tabs-view";
@@ -141,17 +142,17 @@ export function PlayerProfile({
   // The owner's private support status (public `detail.isSupporter` is false for
   // anonymous supporters, so it cannot tell "anonymous" from "not a supporter").
   const [me, setMe] = useState<{
+    enabled: boolean;
     isSupporter: boolean;
     anonymous: boolean;
+    contributedCents: number;
   } | null>(null);
   useEffect(() => {
     if (!isOwnProfile) return;
     let alive = true;
     fetch("/api/support/me")
       .then((r) => r.json())
-      .then(
-        (d: { isSupporter: boolean; anonymous: boolean }) => alive && setMe(d),
-      )
+      .then((d: NonNullable<typeof me>) => alive && setMe(d))
       .catch(() => {});
     return () => {
       alive = false;
@@ -203,6 +204,9 @@ export function PlayerProfile({
           />
         </PanelContent>
       </Panel>
+      {isOwnProfile && me?.enabled && !me.isSupporter && (
+        <SupportNudge contributedCents={me.contributedCents} />
+      )}
       <PanelSeparator />
       <PlayerTabsView
         region={region}
