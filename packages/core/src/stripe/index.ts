@@ -270,6 +270,7 @@ export async function syncSubscription(sub: Stripe.Subscription): Promise<void> 
     currency: item?.price?.currency ?? "eur",
     currentPeriodEnd: periodEnd(sub),
     cancelAtPeriodEnd: sub.cancel_at_period_end,
+    startedAt: sub.start_date ? new Date(sub.start_date * 1000) : null,
   });
   // Grant/revoke the Discord supporter role to match the new status (only acts if
   // the user ever claimed it). Best-effort, never throws.

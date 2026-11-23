@@ -10,6 +10,7 @@ import { FundingBar } from "./funding-bar";
 import { ClansBoard } from "./clans-board";
 import { SupportersPodium } from "./podium";
 import { SupportBox } from "./support-box";
+import { SupporterTiersLegend } from "./tiers-legend";
 
 /**
  * The /support page body (server component): a clean hero, the funding bar +
@@ -84,6 +85,7 @@ export async function SupportView({ locale }: { locale: string }) {
               <h2 className="text-xl font-semibold">{t("become-a-supporter")}</h2>
               <p className="text-sm text-fd-muted-foreground">
                 {t("every-euro-keeps-running-supporters", { NAME: APP.NAME })}</p>
+              <SupporterTiersLegend />
             </div>
             <SupportBox />
           </section>

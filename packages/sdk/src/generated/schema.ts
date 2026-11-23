@@ -2059,6 +2059,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/support/tiers": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Supporter seniority
+         * @description Every public supporter with the start of their current monthly pledge. The supporter crest turns bronze after 3 months, silver after 6 and gold after 12; this is what it is read from. Anonymous supporters are not listed.
+         */
+        get: operations["get-support-tiers"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/mcp": {
         parameters: {
             query?: never;
@@ -7527,6 +7547,21 @@ export interface components {
             results: components["schemas"]["StrongholdLeaderboardEntry"][];
             computed_at: string | null;
         };
+        /** @description One public supporter and how long they have held their monthly pledge. */
+        SupporterSince: {
+            /**
+             * @description Game server region.
+             * @enum {string}
+             */
+            region: "eu" | "na" | "asia";
+            accountId: number;
+            nickname: string;
+            /**
+             * Format: date-time
+             * @description When the supporter's current monthly pledge began. Cancelling and coming back starts it again.
+             */
+            since: Date;
+        };
         /** @description Everyone who has contributed, ranked by the net total given since launch, highest first. Individual amounts are never exposed; anonymous supporters appear as "Anonymous". */
         SupportersPodium: {
             supporters: components["schemas"]["PodiumSupporter"][];
@@ -7546,6 +7581,14 @@ export interface components {
             monthlyPledgedCents: number;
             /** @description Total amount received from supporters since launch, net of refunds, in EUR cents (aggregate only, for the cumulative funding bar). Monthly charges and one-off donations alike. */
             receivedCents: number;
+        };
+        /** @description Every public supporter with the start of their current monthly pledge, which is what the supporter crest's metal is read from: bronze after 3 months, silver after 6, gold after 12. Anonymous supporters are not listed. */
+        SupporterTiers: {
+            supporters: components["schemas"]["SupporterSince"][];
+        };
+        /** @description Every public supporter with the start of their current monthly pledge, which is what the supporter crest's metal is read from: bronze after 3 months, silver after 6, gold after 12. Anonymous supporters are not listed. */
+        SupporterTiersResponse: {
+            supporters: components["schemas"]["SupporterSince"][];
         };
         /** @description One medal earned on this vehicle. For a tiered medal the count is the tier reached, not a number of awards. */
         TankAward: {
@@ -11934,6 +11977,26 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["SupportersPodium"];
+                };
+            };
+        };
+    };
+    "get-support-tiers": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SupporterTiers"];
                 };
             };
         };

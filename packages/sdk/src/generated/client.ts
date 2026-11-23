@@ -1394,6 +1394,8 @@ type SupportNamespace = {
   funding(): RequestHandle<Data<"/support/funding">>;
   /** Supporters board */
   podium(): RequestHandle<Data<"/support/podium">>;
+  /** Supporter seniority */
+  tiers(): RequestHandle<Data<"/support/tiers">>;
 };
 
 type ReplaysNamespace = {
@@ -1532,6 +1534,10 @@ export class Unicum {
     ns.podium = () =>
       handle(buildUrl(this.baseUrl, "/support/podium"), () =>
         this.api.GET("/support/podium", {}),
+      );
+    ns.tiers = () =>
+      handle(buildUrl(this.baseUrl, "/support/tiers"), () =>
+        this.api.GET("/support/tiers", {}),
       );
     return ns;
   }

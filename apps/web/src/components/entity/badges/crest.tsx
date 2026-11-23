@@ -17,6 +17,9 @@ import { cn } from "@/lib/utils";
 export enum CrestKind {
   Verified = "verified",
   Supporter = "supporter",
+  SupporterBronze = "supporter-bronze",
+  SupporterSilver = "supporter-silver",
+  SupporterGold = "supporter-gold",
   Streamer = "streamer",
   CommonTest = "common-test",
   Tournament = "tournament",
@@ -143,6 +146,12 @@ function rankTincture(tier: OnslaughtRank): { fill: string; edge: string } {
 const TINCTURE: Record<CrestKind, { fill: string; edge: string }> = {
   [CrestKind.Verified]: { fill: "#3b9eff", edge: "#1f6fd6" },
   [CrestKind.Supporter]: { fill: BRAND_COLOR, edge: "#b8390f" },
+  // The seniority metals, in the tints the site already draws a podium step and
+  // a Mark of Mastery in, so this gold is the gold everywhere else. The heart is
+  // what keeps the silver and gold apart from the tournament crests at 16px.
+  [CrestKind.SupporterBronze]: { fill: "#D68C4E", edge: "#9E5A24" },
+  [CrestKind.SupporterSilver]: { fill: "#C4C9D1", edge: "#8E97A5" },
+  [CrestKind.SupporterGold]: { fill: "#FFBA00", edge: "#b07407" },
   [CrestKind.Streamer]: { fill: "#9147ff", edge: "#6d28d9" },
   [CrestKind.CommonTest]: { fill: BRAND_COLOR, edge: "#b8390f" },
   // Steel for a win, gold for one Wargaming flagged as featured: the two tiers
@@ -199,6 +208,13 @@ const ONSLAUGHT_CHARGE = (
   </g>
 );
 
+const SUPPORTER_CHARGE = (
+  <path
+    d="M50 61 C28 45 29 26 41 26 C47 26 50 31 50 34 C50 31 53 26 59 26 C71 26 72 45 50 61 Z"
+    fill="#fff"
+  />
+);
+
 // White charges, centred on the hexagon (~50, 43.3).
 const CHARGE: Record<CrestKind, ReactNode> = {
   [CrestKind.Verified]: (
@@ -211,12 +227,10 @@ const CHARGE: Record<CrestKind, ReactNode> = {
       strokeLinejoin="round"
     />
   ),
-  [CrestKind.Supporter]: (
-    <path
-      d="M50 61 C28 45 29 26 41 26 C47 26 50 31 50 34 C50 31 53 26 59 26 C71 26 72 45 50 61 Z"
-      fill="#fff"
-    />
-  ),
+  [CrestKind.Supporter]: SUPPORTER_CHARGE,
+  [CrestKind.SupporterBronze]: SUPPORTER_CHARGE,
+  [CrestKind.SupporterSilver]: SUPPORTER_CHARGE,
+  [CrestKind.SupporterGold]: SUPPORTER_CHARGE,
   [CrestKind.Streamer]: <path d="M40 27 L67 43 L40 59 Z" fill="#fff" />,
   [CrestKind.Tournament]: TOURNAMENT_CHARGE,
   [CrestKind.TournamentFeatured]: TOURNAMENT_CHARGE,

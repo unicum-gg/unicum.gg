@@ -34,3 +34,48 @@ export function clampSupportAmount(cents: number): number {
     SUPPORT_MAX_CENTS,
   );
 }
+
+/**
+ * How long a supporter has held their monthly pledge, as the crest wears it:
+ * the plain supporter crest, then bronze, silver and gold. Only seniority moves
+ * it, never the amount, so a 3 EUR pledge held for a year outranks a large one
+ * started last week: what the crest rewards is staying.
+ */
+export enum SupporterTier {
+  Base = "base",
+  Bronze = "bronze",
+  Silver = "silver",
+  Gold = "gold",
+}
+
+/** Months of unbroken monthly support each metal takes. */
+export const SUPPORTER_TIER_MONTHS: Record<
+  Exclude<SupporterTier, SupporterTier.Base>,
+  number
+> = {
+  [SupporterTier.Bronze]: 3,
+  [SupporterTier.Silver]: 6,
+  [SupporterTier.Gold]: 12,
+};
+
+/**
+ * Whole calendar months from `since` to `nowMs`, the way a subscription is
+ * billed: a pledge started on the 31st has its first month on the last day of
+ * the next one rather than drifting by the length of February.
+ */
+export function supporterMonths(since: Date, nowMs: number): number {
+  const now = new Date(nowMs);
+  let months =
+    (now.getUTCFullYear() - since.getUTCFullYear()) * 12 +
+    (now.getUTCMonth() - since.getUTCMonth());
+  if (now.getUTCDate() < since.getUTCDate()) months -= 1;
+  return Math.max(0, months);
+}
+
+/** The tier a supporter of `months` months wears. */
+export function supporterTier(months: number): SupporterTier {
+  if (months >= SUPPORTER_TIER_MONTHS[SupporterTier.Gold]) return SupporterTier.Gold;
+  if (months >= SUPPORTER_TIER_MONTHS[SupporterTier.Silver]) return SupporterTier.Silver;
+  if (months >= SUPPORTER_TIER_MONTHS[SupporterTier.Bronze]) return SupporterTier.Bronze;
+  return SupporterTier.Base;
+}

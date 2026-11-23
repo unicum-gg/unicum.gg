@@ -100,6 +100,7 @@ export type UpsertSubscriptionInput = {
   currency: string;
   currentPeriodEnd: Date | null;
   cancelAtPeriodEnd: boolean;
+  startedAt: Date | null;
 };
 
 /** Insert or update the user's subscription (keyed by userId) from Stripe state. */
@@ -117,6 +118,7 @@ export async function upsertSubscription(input: UpsertSubscriptionInput): Promis
         currency: input.currency,
         currentPeriodEnd: input.currentPeriodEnd,
         cancelAtPeriodEnd: input.cancelAtPeriodEnd,
+        startedAt: input.startedAt,
       },
     });
 }
@@ -341,4 +343,42 @@ export async function getSupportersPodium(limit = 50): Promise<PodiumEntry[]> {
       ? null
       : (wgIdentityFromAccountKey(r.accountKey)?.region ?? null),
   }));
+}
+
+/** One public supporter's seniority, as the crests read it. */
+export type SupporterSince = {
+  region: Region;
+  accountId: number;
+  nickname: string;
+  since: Date;
+};
+
+/**
+ * When every public supporter's current pledge began: the active, non-anonymous
+ * ones, the same set that wears the public crest. The crests turn this into a
+ * metal on the client, so the dozens of payloads that carry `isSupporter` stay
+ * as they are; it is a handful of rows, and an anonymous supporter is left out
+ * for the reason they are left off the board.
+ */
+export async function getPublicSupportersSince(): Promise<SupporterSince[]> {
+  const rows = await db
+    .select({
+      accountKey: account.accountId,
+      nickname: user.name,
+      since: sql<Date>`coalesce(${subscription.startedAt}, ${subscription.createdAt})`,
+    })
+    .from(subscription)
+    .innerJoin(user, eq(user.id, subscription.userId))
+    .innerJoin(
+      account,
+      and(eq(account.userId, user.id), eq(account.providerId, "wargaming")),
+    )
+    .leftJoin(supportProfile, eq(supportProfile.userId, subscription.userId))
+    .where(publicSupporterFilter());
+  return rows.flatMap((r) => {
+    const wg = wgIdentityFromAccountKey(r.accountKey);
+    return wg
+      ? [{ ...wg, nickname: r.nickname, since: new Date(r.since) }]
+      : [];
+  });
 }

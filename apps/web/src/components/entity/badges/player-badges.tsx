@@ -6,6 +6,7 @@ import {
   SupporterBadge,
   SupporterBadgeState,
 } from "@/components/entity/badges/supporter-badge";
+import { useSupporterTier } from "@/components/entity/badges/supporter-tier";
 import { VerifiedBadge } from "@/components/entity/badges/verified-badge";
 import { StreamerBadge } from "@/components/entity/badges/streamer-badge";
 import { OnslaughtBadge } from "@/components/entity/badges/onslaught-badge";
@@ -49,6 +50,7 @@ export function buildPlayerBadges({
   nickname,
   isVerified,
   supporterState,
+  supporterKind = CrestKind.Supporter,
   twitchLogin,
   tournamentWins,
   tournamentFeaturedWins,
@@ -80,6 +82,9 @@ export function buildPlayerBadges({
   tStats: TranslateFunction;
   /** Null when there is no supporter crest to draw at all. */
   supporterState: SupporterBadgeState | null;
+  /** The metal an active supporter's seniority earns (`useSupporterTier`),
+   * so the folded crest and the "+N" carry it too and not only the badge. */
+  supporterKind?: CrestKind;
   twitchLogin: string | null;
   tournamentWins: number;
   tournamentFeaturedWins: number;
@@ -151,9 +156,24 @@ export function buildPlayerBadges({
       // would be a way of losing links rather than of saving room.
       href: ROUTES.SUPPORT,
       label: tStats("supporter"),
-      crest: <Crest kind={CrestKind.Supporter} muted={supporterMuted} />,
-      tint: crestTincture(CrestKind.Supporter, supporterMuted),
-      node: <SupporterBadge state={supporterState} size={size} />,
+      crest: (
+        <Crest
+          kind={supporterMuted ? CrestKind.Supporter : supporterKind}
+          muted={supporterMuted}
+        />
+      ),
+      tint: crestTincture(
+        supporterMuted ? CrestKind.Supporter : supporterKind,
+        supporterMuted,
+      ),
+      node: (
+        <SupporterBadge
+          state={supporterState}
+          region={region}
+          nickname={nickname}
+          size={size}
+        />
+      ),
     });
   }
 
@@ -206,6 +226,10 @@ export function PlayerBadges({
   const { t } = useTranslation("components/entity/badges/player-badges");
   const { t: tGame } = useTranslation("game/vocabulary");
   const { t: tStats } = useStatLabels();
+  const { kind: supporterKind } = useSupporterTier(
+    player.isSupporter ? region : undefined,
+    player.nickname,
+  );
   const badges = buildPlayerBadges({
     t,
     tGame,
@@ -214,6 +238,7 @@ export function PlayerBadges({
     nickname: player.nickname,
     isVerified: Boolean(player.isVerified),
     supporterState: player.isSupporter ? SupporterBadgeState.Active : null,
+    supporterKind,
     twitchLogin: player.twitchLogin ?? null,
     tournamentWins: player.tournamentWins ?? 0,
     tournamentFeaturedWins: player.tournamentFeaturedWins ?? 0,

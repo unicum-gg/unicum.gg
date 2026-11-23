@@ -33,6 +33,12 @@ export const subscription = pgTable(
     currency: text("currency").notNull().default("eur"),
     currentPeriodEnd: timestamp("current_period_end"),
     cancelAtPeriodEnd: boolean("cancel_at_period_end").default(false).notNull(),
+    // When this subscription began, as Stripe dates it (`start_date`). It is
+    // the supporter's seniority, which is what the crest's metal is read from,
+    // and it is not `created_at`: the row is one per user and outlives the
+    // subscriptions it mirrors, so a supporter who cancelled and came back
+    // would otherwise keep a seniority they broke.
+    startedAt: timestamp("started_at"),
     createdAt: timestamp("created_at").defaultNow().notNull(),
     updatedAt: timestamp("updated_at")
       .defaultNow()

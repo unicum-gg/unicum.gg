@@ -1,3 +1,8 @@
 {
-  "supporter": "Supporter"
+  "supporter": "Supporter",
+  "thanks": "Thank you for supporting {NAME}",
+  "since-one": "Supporting {NAME} every month for 1 month",
+  "since": "Supporting {NAME} every month for {count} months",
+  "hidden-anonymous": "Your supporter badge is hidden while you appear anonymous. Turn off anonymity on the support page to show it.",
+  "invite": "Support {NAME} to get this badge"
 }

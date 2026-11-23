@@ -18,6 +18,7 @@ import { LiveBadge } from "@/components/live-badge";
 import { PlayerActionsMenu } from "@/components/players/detail/actions-menu";
 import { PlayerSettingsButton } from "@/components/players/detail/settings-button";
 import { SupporterBadgeState } from "@/components/entity/badges/supporter-badge";
+import { useSupporterTier } from "@/components/entity/badges/supporter-tier";
 import type { ClanStint } from "@unicum.gg/shared";
 import { Interpolate } from "@/components/interpolate";
 import { DateShape } from "@/lib/date-shapes";
@@ -58,6 +59,15 @@ export function PlayerHeader(
   );
   const { t: tStats } = useStatLabels();
   const formatDate = useDateFormat();
+  // Before the loading branch, as every hook must be: nothing is asked for
+  // until the header knows it is drawing an active supporter.
+  const { kind: supporterKind } = useSupporterTier(
+    !("loading" in props) &&
+      props.supporterBadge === SupporterBadgeState.Active
+      ? props.region
+      : undefined,
+    props.nickname,
+  );
   if ("loading" in props) {
     return <PlayerHeaderSkeleton nickname={props.nickname} />;
   }
@@ -94,6 +104,7 @@ export function PlayerHeader(
     nickname,
     isVerified: verified,
     supporterState: supporterBadge,
+    supporterKind,
     twitchLogin,
     tournamentWins,
     tournamentFeaturedWins,
