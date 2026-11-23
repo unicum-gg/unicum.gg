@@ -1,4 +1,5 @@
 import {
+  EMPTY_TANK_OVERALL,
   availableTankModes,
   buildPlayerTankRows,
   isRatedTankMode,
@@ -87,12 +88,29 @@ export async function loadPlayerTanks(
   }
 
   const rowsByTank = groupModeRowsByTank(modeRows);
+  // A vehicle only ever taken into a mode outside `all` (Skirmishes, Advances,
+  // Global Map...) has no snapshot at all, since Wargaming reports it with
+  // `all.battles` at 0 and nothing is recorded for that. The whole of the tier
+  // XI Skirmish fleet is in that state (the 7x7 copies, Black Rock), so walking
+  // the snapshots alone dropped its rows from every mode view while the tier
+  // split on the profile still counted their battles. Such a vehicle joins the
+  // mode views with an empty overall block (see `EMPTY_TANK_OVERALL`), so it
+  // stays out of the Random list exactly as before.
+  const tracked = new Set(overall.map((tank: TankStats) => tank.tank_id));
+  const modeOnly: TankStats[] = [...rowsByTank.keys()]
+    .filter((tankId) => !tracked.has(tankId))
+    .map((tankId) => ({
+      tank_id: tankId,
+      mark_of_mastery: null,
+      all: { ...EMPTY_TANK_OVERALL },
+    }));
+  const withModeOnly = [...overall, ...modeOnly];
   // Derived ONCE per vehicle and read twice. Both the option list and the mode
   // filter need every mode's block, and deriving them separately meant up to
   // eleven block objects built twice per vehicle (around 14,400 of them on a
   // 655-vehicle account) to keep one.
   const blocksByTank = new Map(
-    overall.map((tank: TankStats) => [
+    withModeOnly.map((tank: TankStats) => [
       tank.tank_id,
       tankModeBlockMap(
         tank.all,
@@ -108,7 +126,7 @@ export async function loadPlayerTanks(
   const tanks =
     mode === null
       ? overall
-      : overall.flatMap((tank: TankStats) => {
+      : withModeOnly.flatMap((tank: TankStats) => {
           const block = blocksByTank.get(tank.tank_id)?.get(mode);
           return block ? [{ ...tank, all: block }] : [];
         });

@@ -57,6 +57,27 @@ export function tankModeBlockFromRow(row: TankModeRow): TankRecordBlock {
 }
 
 /**
+ * The overall block of a vehicle we hold no snapshot for: nothing in `all`.
+ *
+ * Wargaming reports a vehicle only ever taken into a mode outside `all`
+ * (Skirmishes, Advances, Global Map...) with `all.battles` at 0, and nothing is
+ * recorded for that, so its record lives in its mode rows alone. The readers
+ * stand this in for the missing snapshot: it derives no Random block, so the
+ * vehicle appears in the modes it was played in and nowhere else.
+ */
+export const EMPTY_TANK_OVERALL: TankRecordBlock = {
+  battles: 0,
+  wins: 0,
+  damage_dealt: 0,
+  spotted: 0,
+  frags: 0,
+  dropped_capture_points: 0,
+  radio_assisted_damage: 0,
+  track_assisted_damage: 0,
+  xp: 0,
+};
+
+/**
  * Random Battles, worked out from the overall block and the two other parts of
  * it.
  *
