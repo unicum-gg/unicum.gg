@@ -1,7 +1,6 @@
 "use client";
 
 import { useFormat } from "@/hooks/use-format";
-import { statLabel } from "@/components/stat-label";
 
 import type { TankSpec } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
@@ -12,7 +11,6 @@ import {
 } from "@/components/tanks/free-xp-controls";
 import { useFreeXpSettings } from "@/hooks/use-free-xp";
 import { useTranslation } from "@/hooks/use-translation";
-import { useStatLabels } from "@/hooks/use-stat-labels";
 import {
   Tooltip,
   TooltipContent,
@@ -55,7 +53,6 @@ export function TankCost({
   isReward: boolean;
 }) {
   const { num, locale } = useFormat();
-  const { t: tStats } = useStatLabels();
   const { t } = useTranslation("components/tanks/detail/cost");
   const { tier, setTier, rate, rateInput, setRate } = useFreeXpSettings();
   const fmt = moneyFmt(region, locale);
@@ -133,7 +130,7 @@ export function TankCost({
             key={r.label}
             className="flex items-end justify-between gap-1 whitespace-nowrap"
           >
-            <span className="text-sm opacity-80">{statLabel(r.label, tStats)}</span>
+            <span className="text-sm opacity-80">{r.label}</span>
             <span className="mx-2 mb-1 flex-1 border-b border-dotted border-white/40" />
             <Tooltip>
               <TooltipTrigger asChild>
