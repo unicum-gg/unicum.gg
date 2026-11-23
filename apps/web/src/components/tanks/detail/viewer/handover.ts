@@ -1,4 +1,4 @@
-import { TANK_DETAIL_TABS } from "@/components/tanks/detail/tabs";
+import { isVehiclePage } from "@/components/tanks/detail/tabs";
 
 /**
  * The hangar held still while one vehicle gives way to another.
@@ -43,62 +43,6 @@ type Held = {
 
 let sheet: HTMLCanvasElement | null = null;
 let held: Held | null = null;
-/**
- * Whether the page being moved to is another vehicle's.
- *
- * **A frame is held for someone, or not at all.** The sheet exists to cover the
- * moment between two vehicles, and nothing about the outgoing one says whether
- * there is an incoming one: it is torn down the same way whether the reader
- * picked another tank or left the section entirely. Held regardless, the last
- * tank stayed painted over whatever came next, the home page, the maps, a
- * player's profile, until the window above ran out.
- *
- * Read from the address rather than from the incoming viewer, which cannot be
- * asked in time: the teardown and the next viewer's first line race, and which
- * of them runs first depends on whether the router suspended. The address does
- * not race. It is already the new one by the time a page is torn down, since
- * that teardown is the transition committing.
- */
-// **Both prefixes, because a tank page can carry two.** The region has always
-// been in the path and the language joined it: `/tanks/is-7` is also
-// `/eu/tanks/is-7` and `/fr/eu/tanks/is-7`, and the same page in Spanish on NA
-// is three segments deep. Written for one optional prefix, this matched an
-// English reader's URL and no other, so every reader browsing in a language
-// lost the held frame: the hangar went black between two vehicles, and between
-// two 3D styles on the same vehicle, which is where it shows most since
-// nothing about the page changed.
-const TANK_PAGE = /^\/(?:[a-z]{2,4}(?:-[a-z]{2,4})?\/){0,2}tanks\/(.+)$/;
-
-/** The tabs a vehicle keeps its room under, read from the bar that draws them. */
-const TAB_SEGMENTS = TANK_DETAIL_TABS.map((tab) => tab.segment).filter(
-  (segment): segment is string => segment !== null,
-);
-
-/**
- * Segments that stand where a vehicle's slug stands and name a section.
- *
- * `/tanks/changes` and `/tanks/community` are in the menu every page carries,
- * so each is one click away from the vehicle whose frame is being held.
- */
-const SECTIONS = ["all", "changes", "community"];
-
-/**
- * Whether this address is a vehicle's own page, where a room is coming.
- *
- * **Read to the end, which is the whole of the test.** Matched as a prefix,
- * every path that merely begins at a vehicle answered yes, and the comparison
- * does: `/tanks/is-3/vs/is-6` draws no room at all, so the frame went up over
- * a page of tables and sat there unclaimed until the backstop let it go. What
- * a reader saw was the tank again, briefly, over the comparison they had just
- * asked for.
- */
-function showsAVehicle(pathname: string): boolean {
-  const rest = TANK_PAGE.exec(pathname)?.[1];
-  if (!rest) return false;
-  const [slug, tab, ...deeper] = rest.split("/").filter(Boolean);
-  if (!slug || SECTIONS.includes(slug) || deeper.length > 0) return false;
-  return tab === undefined || TAB_SEGMENTS.includes(tab);
-}
 let fading: ReturnType<typeof setTimeout> | null = null;
 /** Drops the sheet if no vehicle arrives to draw over it. */
 let abandoned: ReturnType<typeof setTimeout> | null = null;
@@ -148,9 +92,19 @@ export function hold(
   // where this used to read its geometry from: the sheet was painted, lifted
   // and sized to nothing, so the room went out exactly as before.
   if (box.width < 1 || box.height < 1) return;
-  // Nobody is coming: this is a reader leaving the section, and the room they
-  // are leaving has no business following them onto the next page.
-  if (!showsAVehicle(window.location.pathname)) return;
+  // **A frame is held for someone, or not at all.** The sheet exists to cover
+  // the moment between two vehicles, and nothing about the outgoing one says
+  // whether there is an incoming one: it is torn down the same way whether the
+  // reader picked another tank or left the section entirely. Held regardless,
+  // the last tank stayed painted over whatever came next, the home page, the
+  // maps, a player's profile, until the window above ran out.
+  //
+  // Read from the address rather than from the incoming viewer, which cannot be
+  // asked in time: the teardown and the next viewer's first line race, and
+  // which of them runs first depends on whether the router suspended. The
+  // address does not race. It is already the new one by the time a page is torn
+  // down, since that teardown is the transition committing.
+  if (!isVehiclePage(window.location.pathname)) return;
   const made = surfaceFor();
   if (fading) {
     clearTimeout(fading);

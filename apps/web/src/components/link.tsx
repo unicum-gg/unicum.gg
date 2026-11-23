@@ -4,7 +4,9 @@ import { useLocale } from "@onruntime/translations/react";
 import NextLink from "next/link";
 import type { ComponentProps, FocusEvent, MouseEvent, TouchEvent } from "react";
 import { useState } from "react";
+import { isVehiclePage } from "@/components/tanks/detail/tabs";
 import STORAGE from "@/constants/storage";
+import { usePathname } from "@/hooks/use-pathname";
 import { matchesAnyRoute } from "@/lib/route-match";
 import { DEFAULT_LOCALE, isLocale, localizePath } from "@/lib/translations";
 import { UNLOCALIZED_PAGES } from "@/proxy-routes.generated";
@@ -57,6 +59,7 @@ export default function Link({
   locale,
   onClick,
   prefetch,
+  scroll,
   onMouseEnter,
   onFocus,
   onTouchStart,
@@ -64,6 +67,29 @@ export default function Link({
 }: LinkProps) {
   const { locale: current } = useLocale();
   const target = isLocale(locale) ? locale : isLocale(current) ? current : DEFAULT_LOCALE;
+
+  /**
+   * Whether Next may scroll on this navigation, which between two vehicles it
+   * must not.
+   *
+   * **What it scrolls to is the segment that changed, and on a vehicle's page
+   * that segment sits under the hangar.** Both pages share the detail layout,
+   * so the only thing React replaces is the tab's own content, which begins
+   * about 770 pixels down, below a 600 pixel picture. Next scrolls a changed
+   * segment into view whenever it is not already there, so on any window
+   * shorter than that the reader clicked a tank and the hangar they were
+   * looking at left through the top of the screen. Measured at 768 pixels of
+   * viewport: every click from one vehicle to another, and every tab, landed
+   * with the picture gone.
+   *
+   * Kept where it is rather than forced to the top, because the reader is
+   * looking at the hero and staying put is the one outcome with no movement in
+   * it. Arrivals from anywhere else are untouched, so the catalogue still opens
+   * a vehicle at the top of its page.
+   */
+  const here = usePathname();
+  const destination = typeof href === "string" ? href : (href.pathname ?? "");
+  const scrolls = scroll ?? (isVehiclePage(here) && isVehiclePage(destination) ? false : undefined);
 
   // One-way: a reader who has reached for this link once is not un-reached for,
   // and flipping back would throw away a prefetch that has already been paid
@@ -119,6 +145,7 @@ export default function Link({
         href={untouched ? href : localizePath(href, target)}
         onClick={handleClick}
         prefetch={resolvedPrefetch}
+        scroll={scrolls}
         {...intent}
         {...props}
       />
@@ -135,6 +162,7 @@ export default function Link({
       }
       onClick={handleClick}
       prefetch={resolvedPrefetch}
+      scroll={scrolls}
       {...intent}
       {...props}
     />
