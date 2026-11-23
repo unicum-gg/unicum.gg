@@ -9,6 +9,10 @@ import {
 } from "@unicum.gg/core/subscription";
 import { stripeConfigured } from "@unicum.gg/core/stripe";
 import {
+  getCurrentClanOfUser,
+  getSupportClanOfUser,
+} from "@unicum.gg/core/subscription/clan";
+import {
   getDiscordUserId,
   isSupporterRoleEnabled,
 } from "@unicum.gg/core/discord/supporter-role";
@@ -21,12 +25,15 @@ const EMPTY = {
   anonymous: false,
   contributedCents: 0,
   discordLinked: false,
+  currentClan: null,
+  supportClan: null,
 };
 
 /**
  * The logged-in user's support status, for the /support page: whether the
  * feature is configured, whether they hold an active pledge, what they have
- * given in total, and their board anonymity preference. Never throws for
+ * given in total, their board anonymity preference, and the clan they count
+ * their support for. Never throws for
  * logged-out users (returns not-supporter).
  *
  * The pledge and the total are two different answers and the page needs both:
@@ -42,16 +49,23 @@ export async function GET(): Promise<Response> {
   if (!session?.user) {
     return NextResponse.json({ enabled: true, discordRoleEnabled, ...EMPTY });
   }
-  const [sub, profile, contributedCents] = await Promise.all([
-    getSubscription(session.user.id),
-    getSupportProfile(session.user.id),
-    getContributedCents(session.user.id),
-  ]);
+  const [sub, profile, contributedCents, currentClan, supportClan] =
+    await Promise.all([
+      getSubscription(session.user.id),
+      getSupportProfile(session.user.id),
+      getContributedCents(session.user.id),
+      getCurrentClanOfUser(session.user.id),
+      getSupportClanOfUser(session.user.id),
+    ]);
   return NextResponse.json({
     enabled: true,
     isSupporter: sub ? isActiveStatus(sub.status) : false,
     anonymous: profile?.anonymous ?? false,
     contributedCents,
+    // The clan the switch would count their support for, and the one it
+    // counts for now (null once they have left it).
+    currentClan,
+    supportClan,
     discordRoleEnabled,
     discordLinked: discordRoleEnabled
       ? !!(await getDiscordUserId(session.user.id))

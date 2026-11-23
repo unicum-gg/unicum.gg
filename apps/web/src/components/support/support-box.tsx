@@ -15,6 +15,7 @@ import { useMoney } from "@/hooks/use-money";
 import { useRouter } from "@/hooks/use-router";
 import { useTranslation } from "@/hooks/use-translation";
 import { useSession } from "@/lib/auth-client";
+import { ClanSupportSwitch, type SupportBoxClan } from "./clan-switch";
 import { PaymentMarks } from "./payment-marks";
 import { SupportForm } from "./support-form";
 
@@ -25,6 +26,8 @@ type MeStatus = {
   contributedCents: number;
   discordRoleEnabled: boolean;
   discordLinked: boolean;
+  currentClan: SupportBoxClan | null;
+  supportClan: SupportBoxClan | null;
 };
 
 const UNKNOWN: MeStatus = {
@@ -34,6 +37,8 @@ const UNKNOWN: MeStatus = {
   contributedCents: 0,
   discordRoleEnabled: false,
   discordLinked: false,
+  currentClan: null,
+  supportClan: null,
 };
 
 async function postJson(
@@ -194,6 +199,16 @@ export function SupportBox() {
       <Switch checked={me.anonymous} onCheckedChange={toggleAnonymous} />
     </div>
   ) : null;
+  // Absent from a response served before the field existed, hence `??`.
+  const clanSwitch = me.currentClan ? (
+    <ClanSupportSwitch
+      currentClan={me.currentClan}
+      supportClan={me.supportClan ?? null}
+      onChange={(clan) =>
+        setStatus((s) => (s ? { ...s, supportClan: clan } : s))
+      }
+    />
+  ) : null;
 
   if (me.isSupporter) {
     return (
@@ -202,6 +217,7 @@ export function SupportBox() {
           {t("you-are-a-supporter-thank", { NAME: APP.NAME })}
         </p>
         {anonymitySwitch}
+        {clanSwitch}
         {me.discordRoleEnabled && (
           <div className="flex flex-col gap-2">
             <Button
@@ -262,6 +278,11 @@ export function SupportBox() {
         busy={busy}
         onCheckout={checkout}
       />
+      {/* Offered before anything has been given too: someone deciding whether
+          to give should see that it can be counted for their clan. */}
+      {clanSwitch && (
+        <div className="border-t border-fd-border pt-4">{clanSwitch}</div>
+      )}
       {contributed && (
         <div className="flex flex-col gap-4 border-t border-fd-border pt-4">
           <p className="text-center text-sm text-fd-muted-foreground">

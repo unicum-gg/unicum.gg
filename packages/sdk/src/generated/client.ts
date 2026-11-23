@@ -259,6 +259,15 @@ class ClanClient {
     );
   }
 
+  /** Clan supporters */
+  supporters() {
+    const path = { region: this.region, tag: this.tag };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/clans/{tag}/supporters", path),
+      () => this.api.GET("/{region}/clans/{tag}/supporters", { params: { path } }),
+    );
+  }
+
   /** Clan vehicles */
   vehicles() {
     const path = { region: this.region, tag: this.tag };

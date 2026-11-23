@@ -7,6 +7,7 @@ import ROUTES from "@/constants/routes";
 import { unicum } from "@/services/sdk";
 import { Region } from "@unicum.gg/wargaming";
 import { FundingBar } from "./funding-bar";
+import { ClansBoard } from "./clans-board";
 import { SupportersPodium } from "./podium";
 import { SupportBox } from "./support-box";
 
@@ -28,6 +29,9 @@ export async function SupportView({ locale }: { locale: string }) {
     unicum.support.podium(),
   ]);
   const { supporters, monthlyPledgedCents, receivedCents } = podium;
+  // Absent from an API one deploy behind this render (the SDK loopback only
+  // covers the build), so it defaults rather than trusts.
+  const clans = podium.clans ?? [];
   // Stripe collects in EUR and the bills are in EUR, so nothing is converted
   // here: the funding bar renders the conversion at the live rate.
   const costs = coverage.infrastructure.costs;
@@ -122,6 +126,26 @@ export async function SupportView({ locale }: { locale: string }) {
                 {t("no-supporters-yet-be-the")}</p>
             ) : (
               <SupportersPodium supporters={supporters} />
+            )}
+            <div className="space-y-1 border-t border-fd-border pt-6">
+              <h2 className="text-xl font-semibold">{t("top-clans")}</h2>
+              <p className="text-xs text-fd-muted-foreground">
+                {t("clans-ranked-by")}
+              </p>
+            </div>
+            {clans.length === 0 ? (
+              <p className="py-6 text-center text-sm text-fd-muted-foreground">
+                {t("no-clans-yet")}
+              </p>
+            ) : (
+              <ClansBoard
+                clans={clans}
+                supportersLabel={(count) =>
+                  count === 1
+                    ? t("clan-supporters-one", { count })
+                    : t("clan-supporters", { count })
+                }
+              />
             )}
           </section>
         </PanelContent>

@@ -16,6 +16,10 @@ import { type Region } from "@unicum.gg/wargaming";
 import ROUTES from "@/constants/routes";
 import { TournamentBadge } from "@/components/entity/badges/tournament-badge";
 import {
+  ClanSupporterBadge,
+  useClanSupportersLabel,
+} from "@/components/clans/clan-supporters-badge";
+import {
   BadgeCluster,
   type ClusterBadge,
 } from "@/components/entity/badges/badge-cluster";
@@ -173,6 +177,8 @@ export function ClanBadges({
   tournamentWins = 0,
   tournamentFeaturedWins = 0,
   tournamentBestTitle = null,
+  supporters = 0,
+  supporterInvite = false,
   size = 16,
   max = 3,
 }: {
@@ -185,6 +191,11 @@ export function ClanBadges({
   tournamentWins?: number;
   tournamentFeaturedWins?: number;
   tournamentBestTitle?: string | null;
+  /** Current members who fund the site in the clan's name. */
+  supporters?: number;
+  /** Draw the muted supporter crest when nobody supports yet: true only for a
+   * signed-in member of this clan. */
+  supporterInvite?: boolean;
   size?: number;
   /** How many crests to show before folding the rest into "+N". */
   max?: number;
@@ -196,6 +207,7 @@ export function ClanBadges({
   const { t: tPlayer } = useTranslation(
     "components/entity/badges/player-badges",
   );
+  const supportersLabel = useClanSupportersLabel(supporters, tag ?? "");
   // Folded by the same component the player crests use, so a clan and a player
   // standing on the same row cannot cap their clusters differently.
   const cluster: ClusterBadge[] = (badges ?? []).map((b) => ({
@@ -244,6 +256,21 @@ export function ClanBadges({
           href={tag ? ROUTES.CLAN_TOURNAMENTS(region, tag) : undefined}
           size={size}
         />
+      ),
+    });
+  }
+  // After what the clan earned, as on a player: a supporter crest says what its
+  // members give, which matters, but a standing or a title is rarer.
+  if (supporters > 0 || supporterInvite) {
+    const muted = supporters === 0;
+    cluster.push({
+      key: "supporter",
+      href: ROUTES.SUPPORT,
+      label: supportersLabel,
+      crest: <Crest kind={CrestKind.Supporter} muted={muted} />,
+      tint: crestTincture(CrestKind.Supporter, muted),
+      node: (
+        <ClanSupporterBadge count={supporters} tag={tag ?? ""} size={size} />
       ),
     });
   }

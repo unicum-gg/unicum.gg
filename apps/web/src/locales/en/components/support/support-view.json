@@ -12,5 +12,10 @@
   "same-numbers-as": "The exact same numbers as the {link}.",
   "title": "Support {name}",
   "top-supporters": "Top supporters",
-  "where-your-money-goes": "Where your money goes"
+  "where-your-money-goes": "Where your money goes",
+  "top-clans": "Top clans",
+  "clans-ranked-by": "Ranked by the total given by their current members who count their support for the clan.",
+  "no-clans-yet": "No clan on the board yet. Count your support for yours to put it here.",
+  "clan-supporters-one": "{count} supporter",
+  "clan-supporters": "{count} supporters"
 }

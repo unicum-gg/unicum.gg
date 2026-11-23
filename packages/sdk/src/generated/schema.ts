@@ -899,6 +899,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/clans/{tag}/supporters": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Clan supporters
+         * @description How many of this clan's current members hold an active monthly pledge to unicum.gg and count it for the clan. A member only ever counts for the clan they are in, and stops counting the day they leave it. 404 when the tag is unknown in this region.
+         */
+        get: operations["get-{region}-clans-{tag}-supporters"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/{region}/clans/{tag}/videos": {
         parameters: {
             query?: never;
@@ -2028,7 +2048,7 @@ export interface paths {
         };
         /**
          * Supporters board
-         * @description Everyone who has contributed, ranked by the net total they have given since launch, highest first, so a monthly pledge and a one-off donation are counted alike. Individual amounts are never exposed, only the ranking; anonymous supporters appear as "Anonymous". The aggregate monthly pledge is returned beside it for the funding run-rate.
+         * @description Everyone who has contributed, ranked by the net total they have given since launch, highest first, so a monthly pledge and a one-off donation are counted alike. Individual amounts are never exposed, only the ranking; anonymous supporters appear as "Anonymous". Beside it, the clans board ranks clans by what their current members have given and counted for them. The aggregate monthly pledge is returned beside it for the funding run-rate.
          */
         get: operations["get-support-podium"];
         put?: never;
@@ -3760,6 +3780,16 @@ export interface components {
             tournament_wins?: number;
             tournament_featured_wins?: number;
             tournament_best_title?: string | null;
+        };
+        /** @description How many of a clan's current members fund unicum.gg in its name. Zero for nearly every clan. */
+        ClanSupporters: {
+            /** @description Current members holding an active monthly pledge to unicum.gg that they count for this clan. Anonymous supporters are counted, since a number names nobody. */
+            supporters: number;
+        };
+        /** @description How many of a clan's current members fund unicum.gg in its name. Zero for nearly every clan. */
+        ClanSupportersResponse: {
+            /** @description Current members holding an active monthly pledge to unicum.gg that they count for this clan. Anonymous supporters are counted, since a number names nobody. */
+            supporters: number;
         };
         /** @description One tournament a clan entered, and how its team finished. */
         ClanTournamentEntry: {
@@ -6871,6 +6901,22 @@ export interface components {
             researchXp: (number | null)[] | null;
             markReach: components["schemas"]["TankMarkReachColumns"];
         };
+        /** @description One clan on the clans board, ranked by what its current members have given in total and counted for it. The amount is never exposed. */
+        PodiumClan: {
+            rank: number;
+            /**
+             * @description Game server region.
+             * @enum {string}
+             */
+            region: "eu" | "na" | "asia";
+            /** @description Wargaming clan id. */
+            id: number;
+            tag: string;
+            /** @description The clan's colour, as a CSS hex. */
+            color: string;
+            /** @description Current members who have given something and count it for this clan. */
+            supporters: number;
+        };
         /** @description One supporter on the board, ranked by the net total they have given since launch. The amount is never exposed. */
         PodiumSupporter: {
             rank: number;
@@ -7484,6 +7530,8 @@ export interface components {
         /** @description Everyone who has contributed, ranked by the net total given since launch, highest first. Individual amounts are never exposed; anonymous supporters appear as "Anonymous". */
         SupportersPodium: {
             supporters: components["schemas"]["PodiumSupporter"][];
+            /** @description The clans board: clans whose current members count their support for them, ranked by the net total those members have given. A member who leaves takes their share with them. */
+            clans: components["schemas"]["PodiumClan"][];
             /** @description Total monthly pledge across all active supporters, in EUR cents (aggregate only, for the funding bar's run-rate line). One-off donations are not in it: it answers what recurs every month, not what came in. */
             monthlyPledgedCents: number;
             /** @description Total amount received from supporters since launch, net of refunds, in EUR cents (aggregate only, for the cumulative funding bar). Monthly charges and one-off donations alike. */
@@ -7492,6 +7540,8 @@ export interface components {
         /** @description Everyone who has contributed, ranked by the net total given since launch, highest first. Individual amounts are never exposed; anonymous supporters appear as "Anonymous". */
         SupportersPodiumResponse: {
             supporters: components["schemas"]["PodiumSupporter"][];
+            /** @description The clans board: clans whose current members count their support for them, ranked by the net total those members have given. A member who leaves takes their share with them. */
+            clans: components["schemas"]["PodiumClan"][];
             /** @description Total monthly pledge across all active supporters, in EUR cents (aggregate only, for the funding bar's run-rate line). One-off donations are not in it: it answers what recurs every month, not what came in. */
             monthlyPledgedCents: number;
             /** @description Total amount received from supporters since launch, net of refunds, in EUR cents (aggregate only, for the cumulative funding bar). Monthly charges and one-off donations alike. */
@@ -10409,6 +10459,34 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ClanManeuversResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-clans-{tag}-supporters": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Clan tag.
+                 * @example FAME
+                 */
+                tag: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ClanSupporters"];
                 };
             };
         };

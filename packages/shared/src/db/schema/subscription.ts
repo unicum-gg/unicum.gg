@@ -4,6 +4,7 @@ import {
   timestamp,
   boolean,
   integer,
+  bigint,
   index,
 } from "drizzle-orm/pg-core";
 import { user } from "./auth";
@@ -62,22 +63,36 @@ export const subscription = pgTable(
  * resolution read; this one is the user's customer, written once when we create
  * it.
  */
-export const supportProfile = pgTable("support_profile", {
-  userId: text("user_id")
-    .primaryKey()
-    .references(() => user.id, { onDelete: "cascade" }),
-  // Null until the user opens their first checkout: a preference can be set
-  // before any money has moved, and is kept after a subscription is gone.
-  stripeCustomerId: text("stripe_customer_id"),
-  // Hides the name on the supporters board, and with it the public supporter
-  // badge on the player page.
-  anonymous: boolean("anonymous").default(false).notNull(),
-  createdAt: timestamp("created_at").defaultNow().notNull(),
-  updatedAt: timestamp("updated_at")
-    .defaultNow()
-    .$onUpdate(() => /* @__PURE__ */ new Date())
-    .notNull(),
-});
+export const supportProfile = pgTable(
+  "support_profile",
+  {
+    userId: text("user_id")
+      .primaryKey()
+      .references(() => user.id, { onDelete: "cascade" }),
+    // Null until the user opens their first checkout: a preference can be set
+    // before any money has moved, and is kept after a subscription is gone.
+    stripeCustomerId: text("stripe_customer_id"),
+    // Hides the name on the supporters board, and with it the public supporter
+    // badge on the player page.
+    anonymous: boolean("anonymous").default(false).notNull(),
+    // The clan the supporter counts their support for, null when they count it
+    // for nobody. Only ever set to the clan they belong to at that moment, and
+    // only honoured while they still do: the reads join the player row, so a
+    // member who leaves stops counting for their old clan without anything
+    // having to clear this.
+    clanRegion: text("clan_region"),
+    clanId: bigint("clan_id", { mode: "number" }),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+    updatedAt: timestamp("updated_at")
+      .defaultNow()
+      .$onUpdate(() => /* @__PURE__ */ new Date())
+      .notNull(),
+  },
+  // A clan's supporters, read on its page and summed for the clans board.
+  (table) => [
+    index("support_profile_clan_idx").on(table.clanRegion, table.clanId),
+  ],
+);
 
 /**
  * Ledger of every successful support payment (one row per successful Stripe

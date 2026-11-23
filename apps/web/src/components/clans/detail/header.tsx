@@ -17,6 +17,9 @@ import { ClanBadges } from "@/components/entity/badges/clan-rank-badge";
 import type { ClanRankBadge as ClanRankBadgeData } from "@unicum.gg/shared";
 import { AutoFitText } from "@/components/auto-fit-text";
 import { RosterBoostBadge } from "@/components/clans/roster-boost-badge";
+import { useClanSupporters } from "@/components/clans/clan-supporters-badge";
+import { useSession } from "@/lib/auth-client";
+import { wgIdentityFromEmail } from "@/lib/wg-session";
 import { ClanActionsMenu } from "@/components/clans/detail/actions-menu";
 import { CompareWithButton } from "@/components/clans/detail/compare-with-button";
 import { LanguageFlags } from "@/components/language-flags";
@@ -152,6 +155,12 @@ export function ClanHeader(
     loading ? props.tag : props.clan.tag,
     loading ? null : props.clan.updatedAt,
   );
+  const supporters = useClanSupporters(
+    props.region,
+    loading ? props.tag : props.clan.tag,
+    !loading && !props.clan.isDisbanded,
+  );
+  const { data: session } = useSession();
 
   if (loading) {
     return <ClanHeaderSkeleton tag={props.tag} color={props.color} />;
@@ -162,6 +171,14 @@ export function ClanHeader(
   // Same roster-level boost share the stronghold boards flag, computed from the
   // current members so the clan page carries the warning too.
   const boostRatio = rosterBoostRatio(members);
+  // A signed-in member of this clan is shown the muted supporter crest while
+  // nobody supports yet, as a player is shown theirs on their own page.
+  const wg = wgIdentityFromEmail(session?.user?.email);
+  const viewerIsMember =
+    !!wg &&
+    wg.region === region &&
+    !clan.isDisbanded &&
+    members.some((m) => m.accountId === wg.accountId);
   return (
     <header className="flex flex-col sm:flex-row sm:items-stretch">
       <div className="flex items-stretch sm:contents">
@@ -219,6 +236,8 @@ export function ClanHeader(
               tournamentWins={props.tournamentWins}
               tournamentFeaturedWins={props.tournamentFeaturedWins}
               tournamentBestTitle={props.tournamentBestTitle}
+              supporters={supporters}
+              supporterInvite={viewerIsMember}
               size={24}
             />
             <RosterBoostBadge boostRatio={boostRatio} />
