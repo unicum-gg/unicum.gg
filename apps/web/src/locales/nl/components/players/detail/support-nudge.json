@@ -1,0 +1,8 @@
+{
+  "title": "{NAME} is voor {pct}% gefinancierd",
+  "body": "Geen advertenties en dat zal nooit veranderen, dus {NAME} draait op de spelers die het gebruiken: supporters hebben tot nu toe {received} van de {goal} uitgegeven. Een maandelijkse toezegging vanaf {min} voegt de supporterbadge naast je naam toe.",
+  "body-gave": "Bedankt voor de {given} die je hebt gegeven. Een maandelijkse toezegging vanaf {min} zorgt ervoor dat de serverfactuur maand na maand betaald blijft en voegt de supporterbadge naast je naam toe.",
+  "cta": "Word supporter",
+  "cta-gave": "Maandelijks toezeggen",
+  "dismiss": "Niet nu"
+}

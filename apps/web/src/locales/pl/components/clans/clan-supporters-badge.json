@@ -1,0 +1,5 @@
+{
+  "tooltip-one": "Jeden członek tego klanu co miesiąc wspiera {NAME} w imieniu klanu",
+  "tooltip": "{count, plural, one {# członek tego klanu co miesiąc wspiera {NAME} w imieniu klanu} few {# członków tego klanu co miesiąc wspiera {NAME} w imieniu klanu} many {# członków tego klanu co miesiąc wspiera {NAME} w imieniu klanu} other {# członków tego klanu co miesiąc wspiera {NAME} w imieniu klanu}}",
+  "invite": "Udziel wsparcia {NAME} i przypisz je do [{tag}], aby dać swojemu klanowi tę odznakę"
+}

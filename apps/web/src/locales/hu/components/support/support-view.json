@@ -12,5 +12,10 @@
   "same-numbers-as": "Pontosan ugyanazok a számok, mint a(z) {link} esetében.",
   "title": "Támogató {name}",
   "top-supporters": "Legjobb Támogatók",
-  "where-your-money-goes": "Mire fordítjuk a pénzedet"
+  "where-your-money-goes": "Mire fordítjuk a pénzedet",
+  "top-clans": "Legjobb klánok",
+  "clans-ranked-by": "A jelenlegi tagjaik által a klán javára adott összes támogatás alapján rangsorolva.",
+  "no-clans-yet": "Még nincs klán a ranglistán. Számítsd be a támogatásodat a tiéd javára, hogy ide kerüljön.",
+  "clan-supporters-one": "{count} támogató",
+  "clan-supporters": "{count} támogató"
 }

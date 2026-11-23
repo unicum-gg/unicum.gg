@@ -12,5 +12,10 @@
   "same-numbers-as": "{link}와(과) 정확히 같은 수치입니다.",
   "title": "지원 {name}",
   "top-supporters": "최고 후원자들",
-  "where-your-money-goes": "후원금 사용처"
+  "where-your-money-goes": "후원금 사용처",
+  "top-clans": "상위 클랜스",
+  "clans-ranked-by": "현재 후원을 클랜에 수로 반영하는 구성원들이 기부한 합계에 따라 순위별로 정렬됩니다.",
+  "no-clans-yet": "아직 리더보드에 클랜이 없습니다. 여러분의 클랜에 후원을 수로 반영하여 이곳에 표시하세요.",
+  "clan-supporters-one": "{count}명의 후원자",
+  "clan-supporters": "{count}명의 후원자"
 }

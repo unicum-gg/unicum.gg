@@ -1,0 +1,5 @@
+{
+  "tooltip-one": "Um membro deste clã dá apoio a {NAME} todos os meses em nome do clã",
+  "tooltip": "{count} membros deste clã dão apoio a {NAME} todos os meses em nome do clã",
+  "invite": "Dê apoio a {NAME} e conte esse apoio para [{tag}] para dar este distintivo ao seu clã"
+}

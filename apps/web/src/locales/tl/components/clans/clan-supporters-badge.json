@@ -1,0 +1,5 @@
+{
+  "tooltip-one": "Isang miyembro ng klan na ito ang nagbibigay ng suporta kay {NAME} buwan-buwan sa pangalan nito",
+  "tooltip": "{count} mga miyembro ng klan na ito ang nagbibigay ng suporta kay {NAME} buwan-buwan sa pangalan nito",
+  "invite": "Magbigay ng suporta kay {NAME} at bilangin ito para sa [{tag}] upang mabigyan ang iyong klano ng insignia na ito"
+}

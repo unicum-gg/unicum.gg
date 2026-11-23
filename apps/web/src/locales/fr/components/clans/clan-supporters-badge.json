@@ -1,0 +1,5 @@
+{
+  "tooltip-one": "Un membre de ce clan soutient {NAME} chaque mois en son nom",
+  "tooltip": "{count} membres de ce clan soutiennent {NAME} chaque mois en son nom",
+  "invite": "Soutenez {NAME} et faites-le compter pour [{tag}] afin de donner ce badge à votre clan"
+}

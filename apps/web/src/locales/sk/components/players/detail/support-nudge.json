@@ -1,0 +1,8 @@
+{
+  "title": "{NAME} je financovaný na {pct} %",
+  "body": "Žiadne reklamy a nikdy nebudú, takže {NAME} funguje vďaka hráčom, ktorí ho používajú. Podporovatelia doteraz pokryli {received} z {goal} vynaložených prostriedkov. Mesačná obljuba od {min} pridáva značku podporovateľa vedľa vášho mena.",
+  "body-gave": "Hvala za {given}, ktoré ste darovali. Mesačná obljuba od {min} udržiava účet za server pokrytý mesiac čo mesiac a pridáva značku podporovateľa vedľa vášho mena.",
+  "cta": "Postanite podpornik",
+  "cta-gave": "Prisľúbte mesačnú podporu",
+  "dismiss": "Teraz nie"
+}

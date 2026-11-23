@@ -1,0 +1,5 @@
+{
+  "tooltip-one": "A klán egy tagja minden hónapban támogatást ad {NAME} nevében",
+  "tooltip": "A klán {count} tagja minden hónapban támogatást ad {NAME} nevében",
+  "invite": "Adj támogatást {NAME} számára, és számítsd be [{tag}] javára, hogy a klánod megkapja ezt a jelvényt"
+}

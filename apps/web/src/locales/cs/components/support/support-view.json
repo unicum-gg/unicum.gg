@@ -12,5 +12,10 @@
   "same-numbers-as": "Naprosto stejná čísla najdete i zde: {link}.",
   "title": "Podpůrný {name}",
   "top-supporters": "Nejlepší podporovatelé",
-  "where-your-money-goes": "Na co jdou vaše peníze"
+  "where-your-money-goes": "Na co jdou vaše peníze",
+  "top-clans": "Nejlepší klany",
+  "clans-ranked-by": "Hodnocené podle celkové částky darované jejich aktuálními členy, kteří započítávají svou podporu pro klan.",
+  "no-clans-yet": "Na žebříčku zatím není žádný klan. Započítejte svou podporu pro váš klan, abyste ho sem dostali.",
+  "clan-supporters-one": "{count} podporovatel",
+  "clan-supporters": "{count, plural, one {# podporovatel} few {# podporovatelé} many {# podporovatelů} other {# podporovatelů}}"
 }

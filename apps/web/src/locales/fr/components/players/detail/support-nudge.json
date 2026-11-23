@@ -1,0 +1,8 @@
+{
+  "title": "{NAME} est financé à {pct} %",
+  "body": "Il n’y a pas de publicité et il n’y en aura jamais, alors {NAME} fonctionne grâce aux joueurs qui l’utilisent : les supporters ont couvert {received} sur les {goal} dépensés jusqu’à présent. Un engagement mensuel à partir de {min} ajoute le badge de supporter à côté de votre nom.",
+  "body-gave": "Merci pour les {given} que vous avez versés. Un engagement mensuel à partir de {min} permet de couvrir la facture du serveur mois après mois et ajoute le badge de supporter à côté de votre nom.",
+  "cta": "Devenir supporter",
+  "cta-gave": "S’engager chaque mois",
+  "dismiss": "Pas maintenant"
+}

@@ -1,0 +1,8 @@
+{
+  "title": "{NAME} er {pct}% finansiert",
+  "body": "Ingen annonser, og det kommer aldri til å bli noen, så {NAME} drives av spillerne som bruker det: Støttespillere har dekket {received} av {goal} som er brukt så langt. Et månedlig løfte på {min} gir merket for støttespillere ved siden av navnet ditt.",
+  "body-gave": "Takk for {given} du har gitt. Et månedlig løfte på {min} er det som holder serverregningen dekket måned etter måned, og det gir merket for støttespillere ved siden av navnet ditt.",
+  "cta": "Bli støttespiller",
+  "cta-gave": "Gi et månedlig løfte",
+  "dismiss": "Ikke nå"
+}

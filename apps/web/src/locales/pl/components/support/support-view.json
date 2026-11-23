@@ -12,5 +12,10 @@
   "same-numbers-as": "Dokładnie te same wartości co w {link}.",
   "title": "Wsparcie {name}",
   "top-supporters": "Najlepsi supporterzy",
-  "where-your-money-goes": "Na co przeznaczamy twoje pieniądze"
+  "where-your-money-goes": "Na co przeznaczamy twoje pieniądze",
+  "top-clans": "Najlepsze klany",
+  "clans-ranked-by": "Ranking według łącznej kwoty przekazanej przez ich obecnych członków, którzy przypisują swoje wsparcie do klanu.",
+  "no-clans-yet": "Na tabeli nie ma jeszcze żadnego klanu. Przypisz swoje wsparcie do swojego, aby go tu umieścić.",
+  "clan-supporters-one": "{count, plural, one {# wspierający} few {# wspierających} many {# wspierających} other {# wspierających}}",
+  "clan-supporters": "{count, plural, one {# wspierający} few {# wspierających} many {# wspierających} other {# wspierających}}"
 }

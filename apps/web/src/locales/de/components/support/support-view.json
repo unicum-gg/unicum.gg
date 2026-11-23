@@ -12,5 +12,10 @@
   "same-numbers-as": "Exakt dieselben Zahlen wie bei {link}.",
   "title": "Unterstützung {name}",
   "top-supporters": "Top Unterstützer",
-  "where-your-money-goes": "Wohin dein Geld fließt"
+  "where-your-money-goes": "Wohin dein Geld fließt",
+  "top-clans": "Top-Clans",
+  "clans-ranked-by": "Gewertet nach der insgesamt von ihren aktuellen Mitgliedern gegebenen Unterstützung, die diese dem Clan zurechnen.",
+  "no-clans-yet": "Noch kein Clan in der Rangliste. Zähle deine Unterstützung für deinen Clan, um ihn hier einzutragen.",
+  "clan-supporters-one": "{count} Unterstützer",
+  "clan-supporters": "{count} Unterstützer"
 }

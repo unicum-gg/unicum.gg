@@ -12,5 +12,10 @@
   "same-numbers-as": "Tieši tādi paši skaitļi kā {link}.",
   "title": "Atbalstītājs {name}",
   "top-supporters": "Labākie atbalstītāji",
-  "where-your-money-goes": "Kur nonāk tava nauda"
+  "where-your-money-goes": "Kur nonāk tava nauda",
+  "top-clans": "Top klani",
+  "clans-ranked-by": "Ranga pamatā ir kopā ziedotais, ko ziedojuši to pašreizējie biedri, kuri savu atbalstu ieskaita klanam.",
+  "no-clans-yet": "Tabulā vēl nav neviena klana. Ieskaiti savu atbalstu jūsu klanam, lai to šeit iekļautu.",
+  "clan-supporters-one": "{count} atbalstītājs",
+  "clan-supporters": "{count} atbalstītāji"
 }

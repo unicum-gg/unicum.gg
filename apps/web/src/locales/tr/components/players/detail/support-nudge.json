@@ -1,0 +1,8 @@
+{
+  "title": "{NAME}, %{pct} oranında finanse edildi",
+  "body": "Reklam yok ve asla olmayacak, bu yüzden {NAME} onu kullanan oyuncuların desteğiyle çalışır: destekçiler şimdiye kadar harcanan {goal} tutarının {received} kadarını karşıladı. Aylık en az {min} tutarında taahhüt, adınızın yanına destekçi rozetini ekler.",
+  "body-gave": "Verdiğiniz {given} için teşekkür ederiz. Sunucu faturasını aydan aya karşılamak ve adınızın yanına destekçi rozetini eklemek için aylık {min} tutarında taahhütte bulunmanız yeterlidir.",
+  "cta": "Destekçi olun",
+  "cta-gave": "Aylık taahhütte bulunun",
+  "dismiss": "Şimdi değil"
+}

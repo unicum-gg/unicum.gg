@@ -1,0 +1,8 @@
+{
+  "title": "{NAME} finanszírozottsága: {pct}%",
+  "body": "Nincsenek hirdetések, és soha nem is lesznek, ezért {NAME} a játékosok támogatásából fut: a támogatók eddig {received} összeget fedeztek a teljes {goal} kiadásból. A {min} összegű havi felajánlás hozzáadja a támogató jelvényt a neved mellé.",
+  "body-gave": "Köszönjük az általad adott {given} összeget. A {min} összegű havi felajánlás biztosítja, hogy a szerver számlája hónapról hónapra fedezve maradjon, és hozzáadja a támogató jelvényt a neved mellé.",
+  "cta": "Legyél támogató",
+  "cta-gave": "Havi felajánlás",
+  "dismiss": "Most nem"
+}

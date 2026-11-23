@@ -1,0 +1,8 @@
+{
+  "title": "{NAME} ir finansēts par {pct}%",
+  "body": "Reklāmu nav un nekad nebūs, tāpēc {NAME} darbojas, pateicoties spēlētājiem, kuri to izmanto: atbalstītāji līdz šim ir seguši {received} no iztērētajiem {goal}. Ikmēneša ziedojuma solījums, sākot no {min}, pievieno atbalstītāja nozīmīti blakus tavam nosaukumam.",
+  "body-gave": "Paldies par {given}, ko esi ziedojis. Ikmēneša ziedojuma solījums, sākot no {min}, katru mēnesi patur servera rēķinu segtu un pievieno atbalstītāja nozīmīti blakus tavam nosaukumam.",
+  "cta": "Kļūt par atbalstītāju",
+  "cta-gave": "Ikmēneša ziedojuma solījums",
+  "dismiss": "Ne tagad"
+}

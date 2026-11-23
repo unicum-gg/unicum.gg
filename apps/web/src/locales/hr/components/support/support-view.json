@@ -12,5 +12,10 @@
   "same-numbers-as": "Potpuno isti podaci kao na stranici {link}.",
   "title": "Potpora {name}",
   "top-supporters": "Najbolji podržavatelji",
-  "where-your-money-goes": "Kamo odlazi vaš novac"
+  "where-your-money-goes": "Kamo odlazi vaš novac",
+  "top-clans": "Najbolje klanske jedinice",
+  "clans-ranked-by": "Rangirano prema ukupno doniranom iznosu njihovih trenutnih članova koji svoju podršku računaju za klan.",
+  "no-clans-yet": "Još nema klana na ljestvici. Ubroj svoju podršku za svoj klan kako bi ga postavio ovdje.",
+  "clan-supporters-one": "{count} podržavatelj",
+  "clan-supporters": "{count} podržavatelja"
 }

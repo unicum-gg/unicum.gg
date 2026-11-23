@@ -1,0 +1,8 @@
+{
+  "title": "Kohteen {NAME} rahoitusaste on {pct} %",
+  "body": "Ei mainoksia, eikä niitä tule koskaan olemaan, joten sitä käyttävien pelaajien tuki pitää kohteen {NAME} toiminnassa: tukijat ovat kattaneet {received} / {goal} tähän asti käytetystä summasta. Kuukausittainen vähintään {min} suuruinen lupaus lisää nimesi viereen tukijan merkin.",
+  "body-gave": "Kiitos antamastasi summasta {given}. Kuukausittainen vähintään {min} suuruinen lupaus pitää palvelinlaskun katettuna kuukaudesta toiseen, ja se lisää nimesi viereen tukijan merkin.",
+  "cta": "Ryhdy tukijaksi",
+  "cta-gave": "Tee lupaus kuukausittain",
+  "dismiss": "Ei nyt"
+}

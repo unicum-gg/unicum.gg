@@ -12,5 +12,10 @@
   "same-numbers-as": "Exact aceleași numere ca {link}.",
   "title": "Asistență {name}",
   "top-supporters": "Suportatori de top",
-  "where-your-money-goes": "Unde ajung banii tăi"
+  "where-your-money-goes": "Unde ajung banii tăi",
+  "top-clans": "Clanuri de top",
+  "clans-ranked-by": "Clasate după totalul donat de membrii lor curenți care își pun susținerea la număr pentru clan.",
+  "no-clans-yet": "Niciun clan în clasament încă. Pune susținerea la număr pentru al tău ca să-l aduci aici.",
+  "clan-supporters-one": "{count} susținător",
+  "clan-supporters": "{count} susținători"
 }

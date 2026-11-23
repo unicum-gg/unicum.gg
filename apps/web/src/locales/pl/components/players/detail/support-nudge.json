@@ -1,0 +1,8 @@
+{
+  "title": "{NAME} ma finansowanie na poziomie {pct}%",
+  "body": "Brak reklam i nigdy ich nie będzie, więc {NAME} działa dzięki graczom, którzy z niego korzystają. Wspierający pokryli kwotę {received} z {goal} wydanych dotychczas. Miesięczne zobowiązanie w wysokości {min} dodaje odznakę wspierającego obok twojej nazwy.",
+  "body-gave": "Dziękujemy za przekazane przez Ciebie {given}. Miesięczne zobowiązanie w wysokości {min} pozwala co miesiąc opłacać rachunek za serwer i dodaje odznakę wspierającego obok twojej nazwy.",
+  "cta": "Zostań patronem",
+  "cta-gave": "Złóż miesięczne zobowiązanie",
+  "dismiss": "Nie teraz"
+}

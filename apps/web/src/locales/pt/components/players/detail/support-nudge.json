@@ -1,0 +1,8 @@
+{
+  "title": "{NAME} tem {pct}% do financiamento garantido",
+  "body": "Sem anúncios, e nunca haverá, por isso {NAME} funciona graças aos jogadores que o utilizam: os apoiadores cobriram {received} dos {goal} gastos até agora. Um compromisso mensal de {min} adiciona o distintivo de apoiador ao lado do seu nome.",
+  "body-gave": "Obrigado pelo valor {given} doado. Um compromisso mensal de {min} é o que mantém a conta do servidor coberta mês após mês e adiciona o distintivo de apoiador ao lado do seu nome.",
+  "cta": "Torne-se um apoiador",
+  "cta-gave": "Compromisso mensal",
+  "dismiss": "Agora não"
+}

@@ -1,0 +1,8 @@
+{
+  "title": "Il finanziamento di {NAME} è al {pct}%",
+  "body": "Niente pubblicità e non ce ne saranno mai, quindi {NAME} funziona grazie ai giocatori che lo usano: i sostenitori hanno coperto {received} dei {goal} spesi finora. Un contributo mensile di {min} aggiunge il distintivo di sostenitore accanto al tuo nome.",
+  "body-gave": "Grazie per il {given} che hai dato. A partire da {min}, un contributo mensile mantiene il conto del server coperto mese dopo mese e aggiunge il distintivo del sostenitore accanto al tuo nome.",
+  "cta": "Diventa un sostenitore",
+  "cta-gave": "Contribuisci ogni mese",
+  "dismiss": "Non ora"
+}

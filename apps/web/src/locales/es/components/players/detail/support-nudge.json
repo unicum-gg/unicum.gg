@@ -1,0 +1,8 @@
+{
+  "title": "{NAME} tiene una financiación del {pct}%",
+  "body": "No hay anuncios y nunca los habrá, así que {NAME} se mantiene gracias a los jugadores que lo usan: los colaboradores han cubierto {received} de los {goal} gastados hasta ahora. Un compromiso mensual desde {min} añade la insignia de colaborador junto a tu nombre.",
+  "body-gave": "Gracias por los {given} que has donado. Un compromiso mensual desde {min} es lo que conserva cubierta la factura del servidor mes tras mes y añade la insignia de colaborador junto a tu nombre.",
+  "cta": "Conviértete en colaborador",
+  "cta-gave": "Compromiso mensual",
+  "dismiss": "Ahora no"
+}

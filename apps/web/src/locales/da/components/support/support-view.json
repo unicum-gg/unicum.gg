@@ -12,5 +12,10 @@
   "same-numbers-as": "Præcis de samme tal som {link}.",
   "title": "Støtte {name}",
   "top-supporters": "Top supportere",
-  "where-your-money-goes": "Hvor dine penge går hen"
+  "where-your-money-goes": "Hvor dine penge går hen",
+  "top-clans": "Top klaner",
+  "clans-ranked-by": "Rangliste efter det samlede beløb, der er givet af deres nuværende medlemmer, som tæller deres støtte med for klanen.",
+  "no-clans-yet": "Ingen klan på ranglisten endnu. Tæl din støtte med for din klan for at få den her.",
+  "clan-supporters-one": "{count} bidragyder",
+  "clan-supporters": "{count} bidragydere"
 }

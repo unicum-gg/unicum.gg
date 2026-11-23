@@ -1,0 +1,8 @@
+{
+  "title": "{NAME} finansavimas siekia {pct} %",
+  "body": "Čia nėra ir niekada nebus reklamų, todėl {NAME} veikia dėl juo besinaudojančių žaidėjų: rėmėjai iki šiol padengė {received} iš iki šiol išleistų {goal}. Mėnesio įsipareigojimas nuo {min} prideda rėmėjo ženklelį šalia jūsų vardo.",
+  "body-gave": "Dėkojame už paaukotą sumą: {given}. Mėnesio įsipareigojimas nuo {min} kas mėnesį išlaiko apmokėtą serverio sąskaitą ir prideda rėmėjo ženklelį šalia jūsų vardo.",
+  "cta": "Tapti rėmėju",
+  "cta-gave": "Įsipareigoti kas mėnesį",
+  "dismiss": "Ne dabar"
+}

@@ -1,0 +1,8 @@
+{
+  "title": "Finansiranje za {NAME} iznosi {pct}%",
+  "body": "Nema oglasa niti će ih ikad biti, zato {NAME} radi zahvaljujući igračima koji ga koriste: podržavaoci su pokrili {received} od {goal} potrošenih do sada. Mesečna donacija od {min} dodaje značku podržavaoca pored tvog imena.",
+  "body-gave": "Hvala ti za dato: {given}. Mesečna donacija od {min} održava račun servera pokrivenim iz meseca u mesec i dodaje značku podržavaoca pored tvog imena.",
+  "cta": "Postani podržavalac",
+  "cta-gave": "Daj mesečnu donaciju",
+  "dismiss": "Ne sada"
+}

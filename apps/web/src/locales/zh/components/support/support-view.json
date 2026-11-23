@@ -12,5 +12,10 @@
   "same-numbers-as": "与{link}完全相同的数据。",
   "title": "支援型 {name}",
   "top-supporters": "顶尖支持者",
-  "where-your-money-goes": "您的资金去向"
+  "where-your-money-goes": "您的资金去向",
+  "top-clans": "顶级车队",
+  "clans-ranked-by": "按当前将支持计入该军团的成员已提供的总计排名。",
+  "no-clans-yet": "榜单上还没有军团。将你的支持计入你的军团，即可将其列入此处。",
+  "clan-supporters-one": "{count} 名支持者",
+  "clan-supporters": "{count} 名支持者"
 }

@@ -12,5 +12,10 @@
   "same-numbers-as": "Exakt samma siffror som i {link}.",
   "title": "Understödsvagn {name}",
   "top-supporters": "Topp Supporter",
-  "where-your-money-goes": "Dit går dina pengar"
+  "where-your-money-goes": "Dit går dina pengar",
+  "top-clans": "Toppklaner",
+  "clans-ranked-by": "Rankad efter totalsumman som skänkts av deras aktuella medlemmar som räknar sitt stöd för klanen.",
+  "no-clans-yet": "Ingen klan finns på topplistan ännu. Räkna ditt stöd för din klan för att placera den här.",
+  "clan-supporters-one": "{count} supporter",
+  "clan-supporters": "{count} supporters"
 }

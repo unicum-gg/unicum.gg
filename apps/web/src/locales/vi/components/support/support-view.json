@@ -12,5 +12,10 @@
   "same-numbers-as": "Các con số hoàn toàn giống với {link}.",
   "title": "Hỗ trợ {name}",
   "top-supporters": "Người hỗ trợ hàng đầu",
-  "where-your-money-goes": "Tiền của bạn được sử dụng vào đâu"
+  "where-your-money-goes": "Tiền của bạn được sử dụng vào đâu",
+  "top-clans": "Bang hội hàng đầu",
+  "clans-ranked-by": "Xếp hạng theo tổng khoản đã đóng góp bởi các thành viên hiện tại, những người tính hỗ trợ của họ cho Clan.",
+  "no-clans-yet": "Chưa có Clan nào trên bảng xếp hạng. Hãy tính hỗ trợ của bạn cho Clan của mình để đưa Clan đó lên đây.",
+  "clan-supporters-one": "{count} người ủng hộ",
+  "clan-supporters": "{count} người ủng hộ"
 }

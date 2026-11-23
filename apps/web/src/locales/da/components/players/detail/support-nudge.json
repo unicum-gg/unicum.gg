@@ -1,0 +1,8 @@
+{
+  "title": "{NAME} er {pct}% finansieret",
+  "body": "Ingen reklamer, og det kommer aldrig til at ændre sig, så {NAME} kører på de spillere, der bruger det: Bidragydere har dækket {received} af de {goal}, der indtil videre er brugt. Et månedligt bidrag på {min} tilføjer mærket som bidragyder ved siden af dit navn.",
+  "body-gave": "Tak for {given}, som du har givet. Et månedligt bidrag på {min} er det, der holder serverregningen dækket måned efter måned, og det tilføjer mærket som bidragyder ved siden af dit navn.",
+  "cta": "Bliv støttemedlem",
+  "cta-gave": "Bidrag månedligt",
+  "dismiss": "Ikke nu"
+}

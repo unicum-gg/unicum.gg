@@ -12,5 +12,10 @@
   "same-numbers-as": "Lygiai tokie patys skaičiai kaip {link}.",
   "title": "Pagalbininkas {name}",
   "top-supporters": "Geriausi rėmėjai",
-  "where-your-money-goes": "Kur keliauja jūsų pinigai"
+  "where-your-money-goes": "Kur keliauja jūsų pinigai",
+  "top-clans": "Geriausi klanai",
+  "clans-ranked-by": "Klanai reitinguojami pagal bendrą dabartinių narių, įskaitančių savo paramą klanui, paaukotą sumą.",
+  "no-clans-yet": "Kol kas lentelėje nėra nė vieno klano. Įskaitykite savo paramą savo klanui, kad jis čia atsirastų.",
+  "clan-supporters-one": "{count} rėmėjas",
+  "clan-supporters": "Rėmėjai: {count}"
 }

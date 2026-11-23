@@ -12,5 +12,10 @@
   "same-numbers-as": "Potpuno isti brojevi kao na stranici {link}.",
   "title": "Podrška {name}",
   "top-supporters": "Najbolji podržavaoci",
-  "where-your-money-goes": "Gde odlazi tvoj novac"
+  "where-your-money-goes": "Gde odlazi tvoj novac",
+  "top-clans": "Najbolji klanovi",
+  "clans-ranked-by": "Rangirano prema tome koliko su ukupno dali njihovi тренутни članovi koji računaju svoju podršku za klan.",
+  "no-clans-yet": "Još nijedan klan nije na табела. Broj svoju podršku za vaš klan da ga postaviš ovde.",
+  "clan-supporters-one": "{count} подржавалац",
+  "clan-supporters": "{count, plural, one {# подржавалац} few {# подржаваоца} other {# подржаваоци}}"
 }

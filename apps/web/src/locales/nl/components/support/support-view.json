@@ -12,5 +12,10 @@
   "same-numbers-as": "Precies dezelfde cijfers als bij {link}.",
   "title": "Ondersteuning {name}",
   "top-supporters": "Top supporters",
-  "where-your-money-goes": "Waar je geld naartoe gaat"
+  "where-your-money-goes": "Waar je geld naartoe gaat",
+  "top-clans": "Top clans",
+  "clans-ranked-by": "Gerangschikt op het totaal dat is gegeven door hun huidige leden die hun steun voor de clan laten meetellen.",
+  "no-clans-yet": "Er staat nog geen clan in het klassement. Laat je steun voor jouw clan meetellen om die hier te plaatsen.",
+  "clan-supporters-one": "{count} supporter",
+  "clan-supporters": "{count} supporters"
 }

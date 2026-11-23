@@ -910,7 +910,14 @@
     "VIII": "VIII",
     "hour": "ساعة",
     "instead": "بدلاً من",
-    "tiers": "المستويات"
+    "tiers": "المستويات",
+    "Thank": "شكر",
+    "bill": "فاتورة",
+    "given": "مُقدَّم",
+    "pledge": "تعهّد",
+    "runs": "جولات",
+    "support": "دعم",
+    "yours": "خاصتك"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1824,7 +1831,14 @@
     "VIII": "VIII",
     "hour": "гадзіна",
     "instead": "замест",
-    "tiers": "узроўні"
+    "tiers": "узроўні",
+    "Thank": "Падзякаваць",
+    "bill": "рахунак",
+    "given": "ахвяравана",
+    "pledge": "ахвяраванне",
+    "runs": "працуе",
+    "support": "падтрымка",
+    "yours": "ваш"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -2956,7 +2970,14 @@
     "together": "заедно",
     "hour": "час",
     "instead": "вместо",
-    "tiers": "нива"
+    "tiers": "нива",
+    "Thank": "Благодари",
+    "bill": "сметка",
+    "given": "дарено",
+    "pledge": "обещание",
+    "runs": "пускания",
+    "support": "подкрепа",
+    "yours": "вашите"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -3878,7 +3899,14 @@
     "VIII": "VIII",
     "hour": "sat",
     "instead": "umjesto",
-    "tiers": "nivoi"
+    "tiers": "nivoi",
+    "Thank": "Hvala",
+    "bill": "račun",
+    "given": "dato",
+    "pledge": "obećanje",
+    "runs": "radi",
+    "support": "podrška",
+    "yours": "vaše"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -5021,7 +5049,14 @@
     "together": "společně",
     "hour": "hodina",
     "instead": "místo toho",
-    "tiers": "úrovně"
+    "tiers": "úrovně",
+    "Thank": "Poděkovat",
+    "bill": "účet",
+    "given": "darováno",
+    "pledge": "příspěvek",
+    "runs": "provoz",
+    "support": "podpora",
+    "yours": "vaše"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -6170,7 +6205,14 @@
     "together": "sammen",
     "hour": "time",
     "instead": "i stedet",
-    "tiers": "niveauer"
+    "tiers": "niveauer",
+    "Thank": "Tak",
+    "bill": "regning",
+    "given": "givet",
+    "pledge": "bidrag",
+    "runs": "kører",
+    "support": "støtte",
+    "yours": "din"
   },
   "de": {
     "(optional)": "(optional)",
@@ -7312,7 +7354,14 @@
     "together": "zusammen",
     "hour": "Stunde",
     "instead": "stattdessen",
-    "tiers": "Stufen"
+    "tiers": "Stufen",
+    "Thank": "Danke",
+    "bill": "Kosten",
+    "given": "gegeben",
+    "pledge": "Zusage",
+    "runs": "Betrieb",
+    "support": "Unterstützung",
+    "yours": "deine"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -8460,7 +8509,14 @@
     "together": "μαζί",
     "hour": "ώρα",
     "instead": "αντί",
-    "tiers": "επίπεδα"
+    "tiers": "επίπεδα",
+    "Thank": "Ευχαριστώ",
+    "bill": "λογαριασμός",
+    "given": "δοθέντα",
+    "pledge": "δέσμευση",
+    "runs": "εκτελέσεις",
+    "support": "υποστήριξη",
+    "yours": "δικό σας"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -9589,7 +9645,14 @@
     "together": "juntos",
     "hour": "hora",
     "instead": "en su lugar",
-    "tiers": "niveles"
+    "tiers": "niveles",
+    "Thank": "Gracias",
+    "bill": "factura",
+    "given": "donado",
+    "pledge": "compromiso",
+    "runs": "partidas",
+    "support": "apoyo",
+    "yours": "tuyos"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -10742,7 +10805,14 @@
     "together": "yhdessä",
     "hour": "tunti",
     "instead": "sijaan",
-    "tiers": "tasot"
+    "tiers": "tasot",
+    "Thank": "Kiitos",
+    "bill": "lasku",
+    "given": "annettu",
+    "pledge": "lupaus",
+    "runs": "ajot",
+    "support": "tuki",
+    "yours": "sinun"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -11874,7 +11944,14 @@
     "together": "ensemble",
     "hour": "heure",
     "instead": "à la place",
-    "tiers": "rangs"
+    "tiers": "rangs",
+    "Thank": "Merci",
+    "bill": "facture",
+    "given": "versé",
+    "pledge": "engagement",
+    "runs": "parties",
+    "support": "soutien",
+    "yours": "le vôtre"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -12789,7 +12866,14 @@
     "VIII": "VIII",
     "hour": "घंटा",
     "instead": "के बजाय",
-    "tiers": "टियर"
+    "tiers": "टियर",
+    "Thank": "धन्यवाद",
+    "bill": "बिल",
+    "given": "दिया गया",
+    "pledge": "योगदान",
+    "runs": "रन",
+    "support": "सहायता",
+    "yours": "आपका"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -13935,7 +14019,14 @@
     "together": "zajedno",
     "hour": "sat",
     "instead": "umjesto",
-    "tiers": "razine"
+    "tiers": "razine",
+    "Thank": "Zahvala",
+    "bill": "račun",
+    "given": "donirano",
+    "pledge": "donacija",
+    "runs": "radi",
+    "support": "podrška",
+    "yours": "vaše"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -15083,7 +15174,14 @@
     "together": "együtt",
     "hour": "óra",
     "instead": "helyette",
-    "tiers": "szintek"
+    "tiers": "szintek",
+    "Thank": "Köszönet",
+    "bill": "számla",
+    "given": "adott",
+    "pledge": "felajánlás",
+    "runs": "fut",
+    "support": "támogatás",
+    "yours": "tiéd"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -16227,7 +16325,14 @@
     "together": "insieme",
     "hour": "ora",
     "instead": "invece",
-    "tiers": "livelli"
+    "tiers": "livelli",
+    "Thank": "Grazie",
+    "bill": "conto",
+    "given": "dato",
+    "pledge": "contributo",
+    "runs": "funziona",
+    "support": "supporto",
+    "yours": "tuo"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -17378,7 +17483,14 @@
     "together": "一緒に",
     "hour": "時間",
     "instead": "代わりに",
-    "tiers": "Tier"
+    "tiers": "Tier",
+    "Thank": "感謝",
+    "bill": "費用",
+    "given": "寄付額",
+    "pledge": "支援",
+    "runs": "運営",
+    "support": "支援",
+    "yours": "あなたの"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -18293,7 +18405,14 @@
     "VIII": "VIII",
     "hour": "сағат",
     "instead": "орнына",
-    "tiers": "деңгейлер"
+    "tiers": "деңгейлер",
+    "Thank": "Алғыс",
+    "bill": "шот",
+    "given": "берілген",
+    "pledge": "жарна",
+    "runs": "ойындар",
+    "support": "қолдау",
+    "yours": "сіздікі"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -19448,7 +19567,14 @@
     "together": "함께",
     "hour": "시간",
     "instead": "대신",
-    "tiers": "단계"
+    "tiers": "단계",
+    "Thank": "감사",
+    "bill": "비용",
+    "given": "기부금",
+    "pledge": "후원 약정",
+    "runs": "운영",
+    "support": "후원",
+    "yours": "여러분의"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -20599,7 +20725,14 @@
     "together": "kartu",
     "hour": "valanda",
     "instead": "vietoj",
-    "tiers": "lygiai"
+    "tiers": "lygiai",
+    "Thank": "Dėkoti",
+    "bill": "sąskaita",
+    "given": "paaukota",
+    "pledge": "įsipareigojimas",
+    "runs": "veikia",
+    "support": "parama",
+    "yours": "jūsų"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -21737,7 +21870,14 @@
     "together": "kopā",
     "hour": "stunda",
     "instead": "tā vietā",
-    "tiers": "līmeņi"
+    "tiers": "līmeņi",
+    "Thank": "Paldies",
+    "bill": "rēķins",
+    "given": "ziedots",
+    "pledge": "ziedojuma solījums",
+    "runs": "darbojas",
+    "support": "atbalsts",
+    "yours": "jūsu"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -22890,7 +23030,14 @@
     "together": "samen",
     "hour": "uur",
     "instead": "in plaats daarvan",
-    "tiers": "niveaus"
+    "tiers": "niveaus",
+    "Thank": "Bedankt",
+    "bill": "factuur",
+    "given": "gegeven",
+    "pledge": "toezegging",
+    "runs": "draait",
+    "support": "steun",
+    "yours": "jouw"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -24034,7 +24181,14 @@
     "together": "sammen",
     "hour": "time",
     "instead": "i stedet",
-    "tiers": "nivåer"
+    "tiers": "nivåer",
+    "Thank": "Takk",
+    "bill": "regning",
+    "given": "gitt",
+    "pledge": "løfte",
+    "runs": "kjøringer",
+    "support": "støtte",
+    "yours": "dine"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -25175,7 +25329,14 @@
     "together": "razem",
     "hour": "godzina",
     "instead": "zamiast",
-    "tiers": "poziomy"
+    "tiers": "poziomy",
+    "Thank": "Podziękuj",
+    "bill": "rachunek",
+    "given": "przekazano",
+    "pledge": "zobowiązanie",
+    "runs": "działa",
+    "support": "wsparcie",
+    "yours": "twoje"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -26309,7 +26470,14 @@
     "together": "juntos",
     "hour": "hora",
     "instead": "em vez",
-    "tiers": "níveis"
+    "tiers": "níveis",
+    "Thank": "Agradecimento",
+    "bill": "conta",
+    "given": "doado",
+    "pledge": "compromisso",
+    "runs": "funciona",
+    "support": "apoio",
+    "yours": "seu"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -27444,7 +27612,14 @@
     "together": "împreună",
     "hour": "oră",
     "instead": "în schimb",
-    "tiers": "niveluri"
+    "tiers": "niveluri",
+    "Thank": "Mulțumesc",
+    "bill": "factură",
+    "given": "donat",
+    "pledge": "angajament",
+    "runs": "funcționează",
+    "support": "susținere",
+    "yours": "ale tale"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -28567,7 +28742,14 @@
     "together": "вместе",
     "hour": "час",
     "instead": "вместо",
-    "tiers": "уровни"
+    "tiers": "уровни",
+    "Thank": "Спасибо",
+    "bill": "счёт",
+    "given": "пожертвовано",
+    "pledge": "взнос",
+    "runs": "запуски",
+    "support": "поддержка",
+    "yours": "ваши"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -29485,7 +29667,14 @@
     "VIII": "VIII",
     "hour": "ura",
     "instead": "namesto",
-    "tiers": "stopnje"
+    "tiers": "stopnje",
+    "Thank": "Hvala",
+    "bill": "račun",
+    "given": "dano",
+    "pledge": "obljuba",
+    "runs": "deluje",
+    "support": "podpora",
+    "yours": "tvoje"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -30633,7 +30822,14 @@
     "together": "zajedno",
     "hour": "sat",
     "instead": "umesto",
-    "tiers": "nivoi"
+    "tiers": "nivoi",
+    "Thank": "Zahvala",
+    "bill": "račun",
+    "given": "dato",
+    "pledge": "donacija",
+    "runs": "radi",
+    "support": "podrška",
+    "yours": "vaš"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -31787,7 +31983,14 @@
     "together": "tillsammans",
     "hour": "timme",
     "instead": "istället",
-    "tiers": "nivåer"
+    "tiers": "nivåer",
+    "Thank": "Tack",
+    "bill": "räkning",
+    "given": "skänkt",
+    "pledge": "löfte",
+    "runs": "körningar",
+    "support": "stöd",
+    "yours": "dina"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -32936,7 +33139,14 @@
     "together": "ร่วมกัน",
     "hour": "ชั่วโมง",
     "instead": "แทน",
-    "tiers": "ระดับ"
+    "tiers": "ระดับ",
+    "Thank": "ขอบคุณ",
+    "bill": "ค่าใช้จ่าย",
+    "given": "บริจาคแล้ว",
+    "pledge": "เงินสมทบ",
+    "runs": "ดำเนินงาน",
+    "support": "การสนับสนุน",
+    "yours": "ของคุณ"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -33853,7 +34063,14 @@
     "VIII": "VIII",
     "hour": "oras",
     "instead": "sa halip",
-    "tiers": "mga tier"
+    "tiers": "mga tier",
+    "Thank": "Salamat",
+    "bill": "bayarin",
+    "given": "ibinigay",
+    "pledge": "pangako",
+    "runs": "takbo",
+    "support": "suporta",
+    "yours": "iyo"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -34999,7 +35216,14 @@
     "together": "birlikte",
     "hour": "saat",
     "instead": "yerine",
-    "tiers": "seviyeler"
+    "tiers": "seviyeler",
+    "Thank": "Teşekkür",
+    "bill": "fatura",
+    "given": "verilen",
+    "pledge": "taahhüt",
+    "runs": "çalışır",
+    "support": "destek",
+    "yours": "sizin"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -36137,7 +36361,14 @@
     "together": "разом",
     "hour": "година",
     "instead": "натомість",
-    "tiers": "рівні"
+    "tiers": "рівні",
+    "Thank": "Подякувати",
+    "bill": "рахунок",
+    "given": "надано",
+    "pledge": "внесок",
+    "runs": "запуски",
+    "support": "підтримка",
+    "yours": "ваші"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -37264,7 +37495,14 @@
     "together": "cùng nhau",
     "hour": "giờ",
     "instead": "thay vì",
-    "tiers": "cấp"
+    "tiers": "cấp",
+    "Thank": "Cảm ơn",
+    "bill": "hóa đơn",
+    "given": "đã đóng góp",
+    "pledge": "cam kết",
+    "runs": "lượt chạy",
+    "support": "hỗ trợ",
+    "yours": "của bạn"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -38413,6 +38651,13 @@
     "together": "一起",
     "hour": "小时",
     "instead": "而不是",
-    "tiers": "等级"
+    "tiers": "等级",
+    "Thank": "感谢",
+    "bill": "账单",
+    "given": "已提供",
+    "pledge": "承诺",
+    "runs": "运行",
+    "support": "支持",
+    "yours": "你的"
   }
 }

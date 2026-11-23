@@ -12,5 +12,10 @@
   "same-numbers-as": "{link} ile tamamen aynı sayılar.",
   "title": "Destekçi {name}",
   "top-supporters": "En iyi destekçiler",
-  "where-your-money-goes": "Paranız nereye gidiyor"
+  "where-your-money-goes": "Paranız nereye gidiyor",
+  "top-clans": "En iyi klanlar",
+  "clans-ranked-by": "Mevcut üyelerinin klan adına saydırdığı toplam verilen desteğe göre sıralanır.",
+  "no-clans-yet": "Henüz tabloda klan yok. Desteğinizi kendi klanınız adına saydırarak onu buraya koyun.",
+  "clan-supporters-one": "{count} destekçi",
+  "clan-supporters": "{count} destekçi"
 }

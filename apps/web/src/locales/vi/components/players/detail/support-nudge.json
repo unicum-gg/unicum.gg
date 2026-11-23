@@ -1,0 +1,8 @@
+{
+  "title": "{NAME} được tài trợ {pct}%",
+  "body": "Không có quảng cáo và sẽ không bao giờ có, vì vậy {NAME} hoạt động nhờ những người chơi sử dụng nó. Những người ủng hộ đã chi trả {received} trong số {goal} đã chi tiêu cho đến nay. Cam kết hàng tháng từ {min} sẽ thêm huy hiệu người ủng hộ bên cạnh tên bạn.",
+  "body-gave": "Cảm ơn khoản {given} bạn đã đóng góp. Cam kết hàng tháng từ {min} là điều giữ cho hóa đơn máy chủ được thanh toán qua từng tháng, đồng thời thêm huy hiệu người ủng hộ bên cạnh tên bạn.",
+  "cta": "Trở thành người ủng hộ",
+  "cta-gave": "Cam kết hàng tháng",
+  "dismiss": "Để sau"
+}

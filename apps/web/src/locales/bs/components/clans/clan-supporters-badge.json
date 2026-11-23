@@ -1,0 +1,5 @@
+{
+  "tooltip-one": "Jedan član ovog klana podržava {NAME} svaki mjesec u ime klana",
+  "tooltip": "{count} članova ovog klana podržava {NAME} svaki mjesec u ime klana",
+  "invite": "Podržite {NAME} i uračunajte podršku za [{tag}] da biste svom klanu dali ovu značku"
+}

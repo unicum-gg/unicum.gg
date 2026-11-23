@@ -1,0 +1,5 @@
+{
+  "tooltip-one": "Yksi tämän klaanin jäsen antaa kuukausittain tukea kohteelle {NAME} klaanin nimissä",
+  "tooltip": "Tämän klaanin {count} jäsentä antaa kuukausittain tukea kohteelle {NAME} klaanin nimissä",
+  "invite": "Tue kohdetta {NAME} ja kohdista tuki klaanille [{tag}], jotta klaanisi saa tämän merkin"
+}

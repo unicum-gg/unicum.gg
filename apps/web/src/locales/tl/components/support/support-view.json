@@ -12,5 +12,10 @@
   "same-numbers-as": "Eksaktong parehong mga numero gaya ng nasa {link}.",
   "title": "Suportahan si {name}",
   "top-supporters": "Nangungunang mga sumusuporta",
-  "where-your-money-goes": "Saan napupunta ang iyong pera"
+  "where-your-money-goes": "Saan napupunta ang iyong pera",
+  "top-clans": "Mga nangungunang klan",
+  "clans-ranked-by": "Niranggo ayon sa kabuuang ibinigay ng kanilang kasalukuyang mga miyembro na ibinibilang ang kanilang suporta para sa klano.",
+  "no-clans-yet": "Wala pang klano sa talahanayan ng ranggo. Bilangin ang suporta mo para sa iyo upang mailagay ito rito.",
+  "clan-supporters-one": "{count} tagasuporta",
+  "clan-supporters": "{count} mga tagasuporta"
 }

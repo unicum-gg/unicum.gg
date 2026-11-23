@@ -1,0 +1,8 @@
+{
+  "title": "{NAME} ist zu {pct}% finanziert",
+  "body": "Keine Werbung und wird es auch nie geben, daher läuft {NAME} mit den Spielern, die es nutzen: Unterstützer haben bisher {received} von den ausgegebenen {goal} übernommen. Eine monatliche Zusage ab {min} fügt das Unterstützer-Abzeichen neben deinem Namen hinzu.",
+  "body-gave": "Danke für die {given}, die du gegeben hast. Eine monatliche Zusage ab {min} hält die Serverkosten Monat für Monat gedeckt und fügt das Unterstützer-Abzeichen neben deinem Namen hinzu.",
+  "cta": "Unterstützer werden",
+  "cta-gave": "Monatlich zusagen",
+  "dismiss": "Jetzt nicht"
+}

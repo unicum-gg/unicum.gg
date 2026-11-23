@@ -1,0 +1,8 @@
+{
+  "title": "{NAME} este finanțat în proporție de {pct}%",
+  "body": "Nu există reclame și nici nu vor exista, așa că {NAME} funcționează datorită jucătorilor care îl folosesc: susținătorii au acoperit {received} din {goal} cheltuiți până acum. Un angajament lunar de {min} adaugă insigna de susținător lângă numele tău.",
+  "body-gave": "Mulțumesc pentru suma de {given} donată. Un angajament lunar de {min} menține factura serverului plătită lună de lună și adaugă insigna de susținător lângă numele tău.",
+  "cta": "Devino susținător",
+  "cta-gave": "Fă un angajament lunar",
+  "dismiss": "Nu acum"
+}

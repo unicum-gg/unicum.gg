@@ -1,0 +1,8 @@
+{
+  "title": "Pinopondohan si {NAME} ng {pct}%",
+  "body": "Walang mga ad at hindi kailanman magkakaroon ng mga ad, kaya nakasalalay ang pagpapatakbo ni {NAME} sa mga manlalarong gumagamit nito: sinagot ng mga tagasuporta ang {received} sa {goal} na nagastos sa ngayon. Ang pangakong buwan-buwan na {min} ay nagdaragdag ng insignia ng tagasuporta sa tabi ng iyong pangalan.",
+  "body-gave": "Salamat sa {given} na ibinigay mo. Ang pangakong buwan-buwan na {min} ang pinapanatiling bayad ang bayarin sa server buwan-buwan, at nagdaragdag ito ng insignia ng tagasuporta sa tabi ng iyong pangalan.",
+  "cta": "Maging tagasuporta",
+  "cta-gave": "Mangako buwan-buwan",
+  "dismiss": "Hindi ngayon"
+}

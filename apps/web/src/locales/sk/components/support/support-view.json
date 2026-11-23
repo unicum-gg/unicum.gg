@@ -12,5 +12,10 @@
   "same-numbers-as": "Presne rovnaké čísla ako {link}.",
   "title": "Podpora {name}",
   "top-supporters": "Najboljši podporniki",
-  "where-your-money-goes": "Kam idú vaše peniaze"
+  "where-your-money-goes": "Kam idú vaše peniaze",
+  "top-clans": "Najlepšie clany",
+  "clans-ranked-by": "Uvrščeno podľa celkovej sumy danej ich aktuálnymi členmi, ktorí započítavajú svoju podporu pre klan.",
+  "no-clans-yet": "Na lestvici zatiaľ nie je žiadny klan. Započítajte svoju podporu pre svoj klan a umiestnite ho sem.",
+  "clan-supporters-one": "{count} podporovateľ",
+  "clan-supporters": "{count} podporovatelia"
 }

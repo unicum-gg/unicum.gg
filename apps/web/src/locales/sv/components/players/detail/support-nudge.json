@@ -1,0 +1,8 @@
+{
+  "title": "{NAME} är finansierad till {pct} %",
+  "body": "Inga annonser och kommer aldrig att finnas, så {NAME} körs av spelarna som använder det: supporters har täckt {received} av de {goal} som hittills har spenderats. Ett månadsvis löfte på {min} lägger till supportermärket bredvid ditt namn.",
+  "body-gave": "Tack för {given} du har skänkt. Ett månadsvis löfte på {min} är det som håller serverräkningen täckt månad efter månad, och det lägger till supportermärket bredvid ditt namn.",
+  "cta": "Bli supporter",
+  "cta-gave": "Ge ett månadsvis löfte",
+  "dismiss": "Inte nu"
+}

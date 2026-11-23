@@ -12,5 +12,10 @@
   "same-numbers-as": "{link} とまったく同じ数値",
   "title": "支援型 {name}",
   "top-supporters": "トップサポーター",
-  "where-your-money-goes": "支援金の使い道"
+  "where-your-money-goes": "支援金の使い道",
+  "top-clans": "トップクラン",
+  "clans-ranked-by": "クランへの支援を数えている現在のメンバーが寄付した合計額でランク付けされています。",
+  "no-clans-yet": "まだランキングにクランはありません。あなたのクランへの支援を数えて、ここに表示しましょう。",
+  "clan-supporters-one": "{count}人の支援者",
+  "clan-supporters": "{count}人の支援者"
 }

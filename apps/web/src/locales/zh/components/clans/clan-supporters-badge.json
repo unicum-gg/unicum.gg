@@ -1,0 +1,5 @@
+{
+  "tooltip-one": "该军团的一名成员每月以其名义支持 {NAME}",
+  "tooltip": "{count} 名成员每月以其名义支持 {NAME}",
+  "invite": "支持 {NAME}，并将其计入 [{tag}]，即可为你的军团获得此徽章"
+}

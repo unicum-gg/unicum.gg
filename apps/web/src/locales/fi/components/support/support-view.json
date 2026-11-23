@@ -12,5 +12,10 @@
   "same-numbers-as": "Täsmälleen samat luvut kuin lähteessä {link}.",
   "title": "Tukija {name}",
   "top-supporters": "Parhaat tukijat",
-  "where-your-money-goes": "Mihin rahasi menevät"
+  "where-your-money-goes": "Mihin rahasi menevät",
+  "top-clans": "Parhaat klaanit",
+  "clans-ranked-by": "Rankattu niiden nykyisten jäsenten antaman tuen yhteismäärän perusteella, jotka laskevat tukensa klaanille.",
+  "no-clans-yet": "Klaaneja ei ole vielä tulostaulukossa. Kohdista tukesi sinun klaanillesi, jotta se pääsee tänne.",
+  "clan-supporters-one": "{count} tukija",
+  "clan-supporters": "{count} tukijaa"
 }

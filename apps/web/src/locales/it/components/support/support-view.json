@@ -12,5 +12,10 @@
   "same-numbers-as": "Esattamente gli stessi dati disponibili su {link}.",
   "title": "Supporto {name}",
   "top-supporters": "Top sostenitori",
-  "where-your-money-goes": "Come vengono utilizzati i tuoi contributi"
+  "where-your-money-goes": "Come vengono utilizzati i tuoi contributi",
+  "top-clans": "Top clan",
+  "clans-ranked-by": "Classificate in base al totale donato dai membri attuali che conteggiano il loro supporto per il clan.",
+  "no-clans-yet": "Nessun clan ancora in classifica. Conteggia il tuo supporto per il tuo clan per inserirlo qui.",
+  "clan-supporters-one": "{count} sostenitore",
+  "clan-supporters": "{count} sostenitori"
 }
