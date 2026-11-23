@@ -239,14 +239,36 @@ export function useTankFilters<T extends FilterableTank>(
   }, []);
   /* eslint-enable react-hooks/set-state-in-effect */
 
-  // Skip the write-back on the first commit so the mount-time seed above (which
-  // runs after) is never clobbered by an empty-state URL write.
-  const skipNextWriteback = useRef(true);
+  // Write back only when a filter actually moved. The first run is skipped so
+  // the mount-time seed above is never clobbered by the empty initial state,
+  // and so is any rerun with the values already seen: React replays effects
+  // (Strict Mode does it on every mount), and a "skip the first time" flag was
+  // spent on the first pass, so the replay wrote the empty state over the URL.
+  // When the table then unmounted before the seeded render (it does on a mode
+  // deep link, while the mode's rows load), nothing put the filters back and
+  // `?mode=stronghold_skirmish&tier=11` landed on every tier.
+  const lastSeen = useRef<unknown[] | null>(null);
   useEffect(() => {
-    if (skipNextWriteback.current) {
-      skipNextWriteback.current = false;
-      return;
-    }
+    const seen = [
+      query,
+      tiersSel,
+      nationsSel,
+      classesSel,
+      rolesSel,
+      categorySel,
+      testOnly,
+      eventOnly,
+      withBots,
+      moeSel,
+      momSel,
+      garageSel,
+      rangeCol,
+      minVal,
+      maxVal,
+    ];
+    const previous = lastSeen.current;
+    lastSeen.current = seen;
+    if (!previous || previous.every((v, i) => Object.is(v, seen[i]))) return;
     const params = new URLSearchParams(window.location.search);
     const setOrDel = (key: string, val: string) => {
       if (val) params.set(key, val);

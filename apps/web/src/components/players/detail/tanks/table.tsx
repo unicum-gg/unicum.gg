@@ -70,6 +70,21 @@ const TYPE_ABBR: Record<string, string> = {
   SPG: "SPG",
 };
 
+/**
+ * A record path carrying the filters the table is showing.
+ *
+ * The filters live in the URL, written with `replaceState` as they change, so
+ * nothing re-renders when they do and the href a row was rendered with carries
+ * only the mode. Read at click time instead: the record opens beside the same
+ * table, which seeds its filters from the URL on mount, so a reader who picked
+ * tier XI and a nation does not land back on the whole garage. The mode is in
+ * that query already whenever it is not the default.
+ */
+function withLiveQuery(href: string): string {
+  const [path] = href.split("?");
+  return `${path}${window.location.search}`;
+}
+
 function sortValue(
   row: PlayerTankRow,
   key: string,
@@ -431,7 +446,10 @@ export function PlayerTanksTable({
                       // both the row and the record they just asked for off
                       // screen. An unplayed row leaves this page entirely, so
                       // it keeps the normal scroll-to-top.
-                      router.push(href, unplayed ? undefined : { scroll: false });
+                      router.push(
+                        unplayed ? href : withLiveQuery(href),
+                        unplayed ? undefined : { scroll: false },
+                      );
                     }}
                     className={cn(
                       href && "cursor-pointer",
@@ -492,6 +510,16 @@ export function PlayerTanksTable({
                             // rather than as a second destination.
                             href={href}
                             scroll={unplayed ? undefined : false}
+                            // The row's own handler navigates with the live
+                            // filters; letting the link navigate too would
+                            // race it with the bare href.
+                            onClick={(e) => {
+                              if (unplayed || e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) {
+                                e.stopPropagation();
+                                return;
+                              }
+                              e.preventDefault();
+                            }}
                             className="hover:underline"
                           >
                             {name}
