@@ -19,9 +19,20 @@
  * 6,459, then 6,864) with even its high bound below the straight line. Unlike
  * Onslaught, whose line chases a few hundred places, this one sits deep in a
  * board of tens of thousands who all play the same windows, and points only add
- * up. Nothing is projected before `MANEUVERS_FORECAST_MIN_EVENINGS` watched
- * evenings, and the range is the slowest and fastest evening seen, so a last
- * weekend's rush can still beat it.
+ * up.
+ *
+ * The pace is the last three evenings', not the whole edition's, because the
+ * line can also speed up. Over the second week the same vehicle line gained
+ * 693, 726, 734, 734 and 740, and the edition-wide mean trailed it: replayed,
+ * it missed the line three evenings out by 3.7% where the last three missed by
+ * 1.5%, while the gold line, which never sped up, came out the same either way.
+ * Fitting a trend through the gains was tried too and swung by 45% on the gold
+ * line in the first week. Nothing is projected before
+ * `MANEUVERS_FORECAST_MIN_EVENINGS` watched evenings. The range is at least the
+ * distance still to travel give or take `RANGE_SHARE`, which is what that replay
+ * missed by six evenings out, and wider when the evenings the pace is read from
+ * spread further. The first week still cannot see a second week's speed-up: a
+ * week out, the vehicle line ended 18% of the distance above the projection.
  */
 
 const HOUR_SECONDS = 3_600;
@@ -38,6 +49,12 @@ const SETTLED_SECONDS = 2 * HOUR_SECONDS;
 
 /** Complete evenings, each seen moving, before a projection is published. */
 export const MANEUVERS_FORECAST_MIN_EVENINGS = 3;
+
+/** How many of the latest gains the pace is the mean of. */
+const PACE_EVENINGS = 3;
+
+/** The least share of the distance still to travel the range spans each way. */
+const RANGE_SHARE = 0.15;
 
 export type ManeuversCutoffSample = { t: number; cutoff: number | null };
 
@@ -165,7 +182,8 @@ export function maneuversCutoffForecast(
     const days = Math.max(1, Math.round((watched[i].t - watched[i - 1].t) / DAY_SECONDS));
     paces.push(Math.max(0, watched[i].points - watched[i - 1].points) / days);
   }
-  const pace = paces.reduce((a, b) => a + b, 0) / paces.length;
+  const recent = paces.slice(-PACE_EVENINGS);
+  const pace = recent.reduce((a, b) => a + b, 0) / recent.length;
   const remaining = Math.max(0, Math.floor((editionEnd - last.t) / DAY_SECONDS));
 
   // Anchored on the line the board shows, so the forecast never argues with the
@@ -179,8 +197,8 @@ export function maneuversCutoffForecast(
     now,
     projection: {
       points: at(pace),
-      low: at(Math.min(...paces)),
-      high: at(Math.max(...paces)),
+      low: at(Math.min(...recent, pace * (1 - RANGE_SHARE))),
+      high: at(Math.max(...recent, pace * (1 + RANGE_SHARE))),
       at: editionEnd,
     },
   };
