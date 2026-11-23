@@ -1,3 +1,5 @@
+import { TANK_DETAIL_TABS } from "@/components/tanks/detail/tabs";
+
 /**
  * The hangar held still while one vehicle gives way to another.
  *
@@ -65,7 +67,38 @@ let held: Held | null = null;
 // lost the held frame: the hangar went black between two vehicles, and between
 // two 3D styles on the same vehicle, which is where it shows most since
 // nothing about the page changed.
-const TANK_PAGE = /^\/(?:[a-z]{2,4}(?:-[a-z]{2,4})?\/){0,2}tanks\/[^/]+/;
+const TANK_PAGE = /^\/(?:[a-z]{2,4}(?:-[a-z]{2,4})?\/){0,2}tanks\/(.+)$/;
+
+/** The tabs a vehicle keeps its room under, read from the bar that draws them. */
+const TAB_SEGMENTS = TANK_DETAIL_TABS.map((tab) => tab.segment).filter(
+  (segment): segment is string => segment !== null,
+);
+
+/**
+ * Segments that stand where a vehicle's slug stands and name a section.
+ *
+ * `/tanks/changes` and `/tanks/community` are in the menu every page carries,
+ * so each is one click away from the vehicle whose frame is being held.
+ */
+const SECTIONS = ["all", "changes", "community"];
+
+/**
+ * Whether this address is a vehicle's own page, where a room is coming.
+ *
+ * **Read to the end, which is the whole of the test.** Matched as a prefix,
+ * every path that merely begins at a vehicle answered yes, and the comparison
+ * does: `/tanks/is-3/vs/is-6` draws no room at all, so the frame went up over
+ * a page of tables and sat there unclaimed until the backstop let it go. What
+ * a reader saw was the tank again, briefly, over the comparison they had just
+ * asked for.
+ */
+function showsAVehicle(pathname: string): boolean {
+  const rest = TANK_PAGE.exec(pathname)?.[1];
+  if (!rest) return false;
+  const [slug, tab, ...deeper] = rest.split("/").filter(Boolean);
+  if (!slug || SECTIONS.includes(slug) || deeper.length > 0) return false;
+  return tab === undefined || TAB_SEGMENTS.includes(tab);
+}
 let fading: ReturnType<typeof setTimeout> | null = null;
 /** Drops the sheet if no vehicle arrives to draw over it. */
 let abandoned: ReturnType<typeof setTimeout> | null = null;
@@ -117,7 +150,7 @@ export function hold(
   if (box.width < 1 || box.height < 1) return;
   // Nobody is coming: this is a reader leaving the section, and the room they
   // are leaving has no business following them onto the next page.
-  if (!TANK_PAGE.test(window.location.pathname)) return;
+  if (!showsAVehicle(window.location.pathname)) return;
   const made = surfaceFor();
   if (fading) {
     clearTimeout(fading);
