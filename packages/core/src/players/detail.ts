@@ -253,12 +253,17 @@ export async function buildPlayerDetail(args: {
 
   function mode(
     fromSnap: (s: PlayerSnapshot) => StrongholdStats | null,
+    /** The mode's total experience, which the period average is built from
+     * (see `diffStrongholdStats`). */
+    xpOf: (s: PlayerSnapshot) => number | null | undefined,
   ): StrongholdModeData {
     const current = fromSnap(latest);
     function diffFor(snap: PlayerSnapshot | null): StrongholdStats | null {
       if (!current || !snap) return null;
       const past = fromSnap(snap);
-      return past !== null ? diffStrongholdStats(current, past) : null;
+      return past !== null
+        ? diffStrongholdStats(current, past, { curr: xpOf(latest), prev: xpOf(snap) })
+        : null;
     }
     return {
       current,
@@ -367,14 +372,14 @@ export async function buildPlayerDetail(args: {
     ratingHistory: ratingHistory.points,
     clanHistory,
     strongholds: {
-      skirmish: mode(skirmishStatsFromSnapshot),
-      fortified: mode(fortifiedStatsFromSnapshot),
-      epic: mode(epicStatsFromSnapshot),
-      ranked: mode(rankedStatsFromSnapshot),
-      fallout: mode(falloutStatsFromSnapshot),
-      cwAbsolute: mode(cwAbsoluteStatsFromSnapshot),
-      cwChampion: mode(cwChampionStatsFromSnapshot),
-      cwMiddle: mode(cwMiddleStatsFromSnapshot),
+      skirmish: mode(skirmishStatsFromSnapshot, (s) => s.skirmishXp),
+      fortified: mode(fortifiedStatsFromSnapshot, (s) => s.fortifiedXp),
+      epic: mode(epicStatsFromSnapshot, (s) => s.epicXp),
+      ranked: mode(rankedStatsFromSnapshot, (s) => s.rankedXp),
+      fallout: mode(falloutStatsFromSnapshot, (s) => s.falloutXp),
+      cwAbsolute: mode(cwAbsoluteStatsFromSnapshot, (s) => s.cwAbsoluteXp),
+      cwChampion: mode(cwChampionStatsFromSnapshot, (s) => s.cwChampionXp),
+      cwMiddle: mode(cwMiddleStatsFromSnapshot, (s) => s.cwMiddleXp),
       // Finished records, so a total and no periods. Null where the account
       // never played the mode, which is what keeps its tab off the nav.
       ...archivedModes(initial.archivedModes),

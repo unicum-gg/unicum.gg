@@ -105,12 +105,34 @@ export function fortifiedStatsFromSnapshot(s: PlayerSnapshot): StrongholdStats |
   };
 }
 
+/**
+ * What a mode gained between two snapshots.
+ *
+ * Every counter subtracts, except the experience, which Wargaming hands over as
+ * an average: subtracting two career averages gives a few points either way
+ * (it read "-3.00" over 177 Skirmishes), not the average of the battles in
+ * between. That average is the gained total over the gained battles, so it
+ * needs the totals: exact when both snapshots stored the mode's `xp`, rebuilt
+ * from `battle_avg_xp * battles` otherwise. The rebuild is off by the rounding
+ * of the two averages spread over the window's battles, so it is close on a
+ * busy window and never absurd; it is floored at zero for the windows thin
+ * enough for that rounding to push it under.
+ */
 export function diffStrongholdStats(
   curr: StrongholdStats,
   prev: StrongholdStats,
+  xp: { curr: number | null | undefined; prev: number | null | undefined } = {
+    curr: null,
+    prev: null,
+  },
 ): StrongholdStats {
+  const battles = curr.battles - prev.battles;
+  const gainedXp =
+    xp.curr != null && xp.prev != null
+      ? xp.curr - xp.prev
+      : curr.battleAvgXp * curr.battles - prev.battleAvgXp * prev.battles;
   return {
-    battles: curr.battles - prev.battles,
+    battles,
     wins: curr.wins - prev.wins,
     losses: curr.losses - prev.losses,
     draws: curr.draws - prev.draws,
@@ -120,7 +142,7 @@ export function diffStrongholdStats(
     spotted: curr.spotted - prev.spotted,
     capturePoints: curr.capturePoints - prev.capturePoints,
     droppedCapturePoints: curr.droppedCapturePoints - prev.droppedCapturePoints,
-    battleAvgXp: curr.battleAvgXp - prev.battleAvgXp,
+    battleAvgXp: battles > 0 ? Math.max(0, gainedXp / battles) : 0,
   };
 }
 
@@ -299,6 +321,7 @@ function snapshotFromInfo(
     skirmishCapturePoints: sk?.capture_points ?? null,
     skirmishDroppedCapturePoints: sk?.dropped_capture_points ?? null,
     skirmishBattleAvgXp: sk?.battle_avg_xp ?? null,
+    skirmishXp: sk?.xp ?? null,
     fortifiedBattles: fo?.battles ?? null,
     fortifiedWins: fo?.wins ?? null,
     fortifiedLosses: fo?.losses ?? null,
@@ -310,6 +333,7 @@ function snapshotFromInfo(
     fortifiedCapturePoints: fo?.capture_points ?? null,
     fortifiedDroppedCapturePoints: fo?.dropped_capture_points ?? null,
     fortifiedBattleAvgXp: fo?.battle_avg_xp ?? null,
+    fortifiedXp: fo?.xp ?? null,
     epicBattles: ep?.battles ?? null,
     epicWins: ep?.wins ?? null,
     epicLosses: ep?.losses ?? null,
@@ -321,6 +345,7 @@ function snapshotFromInfo(
     epicCapturePoints: ep?.capture_points ?? null,
     epicDroppedCapturePoints: ep?.dropped_capture_points ?? null,
     epicBattleAvgXp: ep?.battle_avg_xp ?? null,
+    epicXp: ep?.xp ?? null,
     falloutBattles: fa?.battles ?? null,
     falloutWins: fa?.wins ?? null,
     falloutLosses: fa?.losses ?? null,
@@ -332,6 +357,7 @@ function snapshotFromInfo(
     falloutCapturePoints: fa?.capture_points ?? null,
     falloutDroppedCapturePoints: fa?.dropped_capture_points ?? null,
     falloutBattleAvgXp: fa?.battle_avg_xp ?? null,
+    falloutXp: fa?.xp ?? null,
     rankedBattles: rk?.battles ?? null,
     rankedWins: rk?.wins ?? null,
     rankedLosses: rk?.losses ?? null,
@@ -343,6 +369,7 @@ function snapshotFromInfo(
     rankedCapturePoints: rk?.capture_points ?? null,
     rankedDroppedCapturePoints: rk?.dropped_capture_points ?? null,
     rankedBattleAvgXp: rk?.battle_avg_xp ?? null,
+    rankedXp: rk?.xp ?? null,
     cwAbsoluteBattles: cwa?.battles ?? null,
     cwAbsoluteWins: cwa?.wins ?? null,
     cwAbsoluteLosses: cwa?.losses ?? null,
@@ -354,6 +381,7 @@ function snapshotFromInfo(
     cwAbsoluteCapturePoints: cwa?.capture_points ?? null,
     cwAbsoluteDroppedCapturePoints: cwa?.dropped_capture_points ?? null,
     cwAbsoluteBattleAvgXp: cwa?.battle_avg_xp ?? null,
+    cwAbsoluteXp: cwa?.xp ?? null,
     cwChampionBattles: cwc?.battles ?? null,
     cwChampionWins: cwc?.wins ?? null,
     cwChampionLosses: cwc?.losses ?? null,
@@ -365,6 +393,7 @@ function snapshotFromInfo(
     cwChampionCapturePoints: cwc?.capture_points ?? null,
     cwChampionDroppedCapturePoints: cwc?.dropped_capture_points ?? null,
     cwChampionBattleAvgXp: cwc?.battle_avg_xp ?? null,
+    cwChampionXp: cwc?.xp ?? null,
     cwMiddleBattles: cwm?.battles ?? null,
     cwMiddleWins: cwm?.wins ?? null,
     cwMiddleLosses: cwm?.losses ?? null,
@@ -376,6 +405,7 @@ function snapshotFromInfo(
     cwMiddleCapturePoints: cwm?.capture_points ?? null,
     cwMiddleDroppedCapturePoints: cwm?.dropped_capture_points ?? null,
     cwMiddleBattleAvgXp: cwm?.battle_avg_xp ?? null,
+    cwMiddleXp: cwm?.xp ?? null,
   };
 }
 
@@ -513,6 +543,7 @@ export async function recordCurrentSnapshot(
         skirmishCapturePoints: snap.skirmishCapturePoints,
         skirmishDroppedCapturePoints: snap.skirmishDroppedCapturePoints,
         skirmishBattleAvgXp: snap.skirmishBattleAvgXp,
+        skirmishXp: snap.skirmishXp,
         fortifiedBattles: snap.fortifiedBattles,
         fortifiedWins: snap.fortifiedWins,
         fortifiedLosses: snap.fortifiedLosses,
@@ -524,6 +555,7 @@ export async function recordCurrentSnapshot(
         fortifiedCapturePoints: snap.fortifiedCapturePoints,
         fortifiedDroppedCapturePoints: snap.fortifiedDroppedCapturePoints,
         fortifiedBattleAvgXp: snap.fortifiedBattleAvgXp,
+        fortifiedXp: snap.fortifiedXp,
         epicBattles: snap.epicBattles,
         epicWins: snap.epicWins,
         epicLosses: snap.epicLosses,
@@ -535,6 +567,7 @@ export async function recordCurrentSnapshot(
         epicCapturePoints: snap.epicCapturePoints,
         epicDroppedCapturePoints: snap.epicDroppedCapturePoints,
         epicBattleAvgXp: snap.epicBattleAvgXp,
+        epicXp: snap.epicXp,
         falloutBattles: snap.falloutBattles,
         falloutWins: snap.falloutWins,
         falloutLosses: snap.falloutLosses,
@@ -546,6 +579,7 @@ export async function recordCurrentSnapshot(
         falloutCapturePoints: snap.falloutCapturePoints,
         falloutDroppedCapturePoints: snap.falloutDroppedCapturePoints,
         falloutBattleAvgXp: snap.falloutBattleAvgXp,
+        falloutXp: snap.falloutXp,
         rankedBattles: snap.rankedBattles,
         rankedWins: snap.rankedWins,
         rankedLosses: snap.rankedLosses,
@@ -557,6 +591,7 @@ export async function recordCurrentSnapshot(
         rankedCapturePoints: snap.rankedCapturePoints,
         rankedDroppedCapturePoints: snap.rankedDroppedCapturePoints,
         rankedBattleAvgXp: snap.rankedBattleAvgXp,
+        rankedXp: snap.rankedXp,
         cwAbsoluteBattles: snap.cwAbsoluteBattles,
         cwAbsoluteWins: snap.cwAbsoluteWins,
         cwAbsoluteLosses: snap.cwAbsoluteLosses,
@@ -568,6 +603,7 @@ export async function recordCurrentSnapshot(
         cwAbsoluteCapturePoints: snap.cwAbsoluteCapturePoints,
         cwAbsoluteDroppedCapturePoints: snap.cwAbsoluteDroppedCapturePoints,
         cwAbsoluteBattleAvgXp: snap.cwAbsoluteBattleAvgXp,
+        cwAbsoluteXp: snap.cwAbsoluteXp,
         cwChampionBattles: snap.cwChampionBattles,
         cwChampionWins: snap.cwChampionWins,
         cwChampionLosses: snap.cwChampionLosses,
@@ -579,6 +615,7 @@ export async function recordCurrentSnapshot(
         cwChampionCapturePoints: snap.cwChampionCapturePoints,
         cwChampionDroppedCapturePoints: snap.cwChampionDroppedCapturePoints,
         cwChampionBattleAvgXp: snap.cwChampionBattleAvgXp,
+        cwChampionXp: snap.cwChampionXp,
         cwMiddleBattles: snap.cwMiddleBattles,
         cwMiddleWins: snap.cwMiddleWins,
         cwMiddleLosses: snap.cwMiddleLosses,
@@ -590,6 +627,7 @@ export async function recordCurrentSnapshot(
         cwMiddleCapturePoints: snap.cwMiddleCapturePoints,
         cwMiddleDroppedCapturePoints: snap.cwMiddleDroppedCapturePoints,
         cwMiddleBattleAvgXp: snap.cwMiddleBattleAvgXp,
+        cwMiddleXp: snap.cwMiddleXp,
       },
     })
     .returning();
@@ -954,6 +992,7 @@ export async function getLatestPlayerSnapshotsByAccounts(
     skirmish_capture_points: number | null;
     skirmish_dropped_capture_points: number | null;
     skirmish_battle_avg_xp: number | null;
+    skirmish_xp?: number | string | null;
     fortified_battles: number | null;
     fortified_wins: number | null;
     fortified_losses: number | null;
@@ -965,6 +1004,7 @@ export async function getLatestPlayerSnapshotsByAccounts(
     fortified_capture_points: number | null;
     fortified_dropped_capture_points: number | null;
     fortified_battle_avg_xp: number | null;
+    fortified_xp?: number | string | null;
     epic_battles: number | null;
     epic_wins: number | null;
     epic_losses: number | null;
@@ -976,6 +1016,7 @@ export async function getLatestPlayerSnapshotsByAccounts(
     epic_capture_points: number | null;
     epic_dropped_capture_points: number | null;
     epic_battle_avg_xp: number | null;
+    epic_xp?: number | string | null;
     fallout_battles: number | null;
     fallout_wins: number | null;
     fallout_losses: number | null;
@@ -987,6 +1028,7 @@ export async function getLatestPlayerSnapshotsByAccounts(
     fallout_capture_points: number | null;
     fallout_dropped_capture_points: number | null;
     fallout_battle_avg_xp: number | null;
+    fallout_xp?: number | string | null;
     ranked_battles: number | null;
     ranked_wins: number | null;
     ranked_losses: number | null;
@@ -998,6 +1040,7 @@ export async function getLatestPlayerSnapshotsByAccounts(
     ranked_capture_points: number | null;
     ranked_dropped_capture_points: number | null;
     ranked_battle_avg_xp: number | null;
+    ranked_xp?: number | string | null;
     cw_absolute_battles: number | null;
     cw_absolute_wins: number | null;
     cw_absolute_losses: number | null;
@@ -1009,6 +1052,7 @@ export async function getLatestPlayerSnapshotsByAccounts(
     cw_absolute_capture_points: number | null;
     cw_absolute_dropped_capture_points: number | null;
     cw_absolute_battle_avg_xp: number | null;
+    cw_absolute_xp?: number | string | null;
     cw_champion_battles: number | null;
     cw_champion_wins: number | null;
     cw_champion_losses: number | null;
@@ -1020,6 +1064,7 @@ export async function getLatestPlayerSnapshotsByAccounts(
     cw_champion_capture_points: number | null;
     cw_champion_dropped_capture_points: number | null;
     cw_champion_battle_avg_xp: number | null;
+    cw_champion_xp?: number | string | null;
     cw_middle_battles: number | null;
     cw_middle_wins: number | null;
     cw_middle_losses: number | null;
@@ -1031,6 +1076,7 @@ export async function getLatestPlayerSnapshotsByAccounts(
     cw_middle_capture_points: number | null;
     cw_middle_dropped_capture_points: number | null;
     cw_middle_battle_avg_xp: number | null;
+    cw_middle_xp?: number | string | null;
   }>;
 
   const playerIdToAccount = new Map<number, number>();
@@ -1077,6 +1123,7 @@ export async function getLatestPlayerSnapshotsByAccounts(
       skirmishCapturePoints: row.skirmish_capture_points == null ? null : Number(row.skirmish_capture_points),
       skirmishDroppedCapturePoints: row.skirmish_dropped_capture_points == null ? null : Number(row.skirmish_dropped_capture_points),
       skirmishBattleAvgXp: row.skirmish_battle_avg_xp == null ? null : Number(row.skirmish_battle_avg_xp),
+      skirmishXp: row.skirmish_xp == null ? null : Number(row.skirmish_xp),
       fortifiedBattles: row.fortified_battles == null ? null : Number(row.fortified_battles),
       fortifiedWins: row.fortified_wins == null ? null : Number(row.fortified_wins),
       fortifiedLosses: row.fortified_losses == null ? null : Number(row.fortified_losses),
@@ -1088,6 +1135,7 @@ export async function getLatestPlayerSnapshotsByAccounts(
       fortifiedCapturePoints: row.fortified_capture_points == null ? null : Number(row.fortified_capture_points),
       fortifiedDroppedCapturePoints: row.fortified_dropped_capture_points == null ? null : Number(row.fortified_dropped_capture_points),
       fortifiedBattleAvgXp: row.fortified_battle_avg_xp == null ? null : Number(row.fortified_battle_avg_xp),
+      fortifiedXp: row.fortified_xp == null ? null : Number(row.fortified_xp),
       epicBattles: row.epic_battles == null ? null : Number(row.epic_battles),
       epicWins: row.epic_wins == null ? null : Number(row.epic_wins),
       epicLosses: row.epic_losses == null ? null : Number(row.epic_losses),
@@ -1099,6 +1147,7 @@ export async function getLatestPlayerSnapshotsByAccounts(
       epicCapturePoints: row.epic_capture_points == null ? null : Number(row.epic_capture_points),
       epicDroppedCapturePoints: row.epic_dropped_capture_points == null ? null : Number(row.epic_dropped_capture_points),
       epicBattleAvgXp: row.epic_battle_avg_xp == null ? null : Number(row.epic_battle_avg_xp),
+      epicXp: row.epic_xp == null ? null : Number(row.epic_xp),
       falloutBattles: row.fallout_battles == null ? null : Number(row.fallout_battles),
       falloutWins: row.fallout_wins == null ? null : Number(row.fallout_wins),
       falloutLosses: row.fallout_losses == null ? null : Number(row.fallout_losses),
@@ -1110,6 +1159,7 @@ export async function getLatestPlayerSnapshotsByAccounts(
       falloutCapturePoints: row.fallout_capture_points == null ? null : Number(row.fallout_capture_points),
       falloutDroppedCapturePoints: row.fallout_dropped_capture_points == null ? null : Number(row.fallout_dropped_capture_points),
       falloutBattleAvgXp: row.fallout_battle_avg_xp == null ? null : Number(row.fallout_battle_avg_xp),
+      falloutXp: row.fallout_xp == null ? null : Number(row.fallout_xp),
       rankedBattles: row.ranked_battles == null ? null : Number(row.ranked_battles),
       rankedWins: row.ranked_wins == null ? null : Number(row.ranked_wins),
       rankedLosses: row.ranked_losses == null ? null : Number(row.ranked_losses),
@@ -1121,6 +1171,7 @@ export async function getLatestPlayerSnapshotsByAccounts(
       rankedCapturePoints: row.ranked_capture_points == null ? null : Number(row.ranked_capture_points),
       rankedDroppedCapturePoints: row.ranked_dropped_capture_points == null ? null : Number(row.ranked_dropped_capture_points),
       rankedBattleAvgXp: row.ranked_battle_avg_xp == null ? null : Number(row.ranked_battle_avg_xp),
+      rankedXp: row.ranked_xp == null ? null : Number(row.ranked_xp),
       cwAbsoluteBattles: row.cw_absolute_battles == null ? null : Number(row.cw_absolute_battles),
       cwAbsoluteWins: row.cw_absolute_wins == null ? null : Number(row.cw_absolute_wins),
       cwAbsoluteLosses: row.cw_absolute_losses == null ? null : Number(row.cw_absolute_losses),
@@ -1132,6 +1183,7 @@ export async function getLatestPlayerSnapshotsByAccounts(
       cwAbsoluteCapturePoints: row.cw_absolute_capture_points == null ? null : Number(row.cw_absolute_capture_points),
       cwAbsoluteDroppedCapturePoints: row.cw_absolute_dropped_capture_points == null ? null : Number(row.cw_absolute_dropped_capture_points),
       cwAbsoluteBattleAvgXp: row.cw_absolute_battle_avg_xp == null ? null : Number(row.cw_absolute_battle_avg_xp),
+      cwAbsoluteXp: row.cw_absolute_xp == null ? null : Number(row.cw_absolute_xp),
       cwChampionBattles: row.cw_champion_battles == null ? null : Number(row.cw_champion_battles),
       cwChampionWins: row.cw_champion_wins == null ? null : Number(row.cw_champion_wins),
       cwChampionLosses: row.cw_champion_losses == null ? null : Number(row.cw_champion_losses),
@@ -1143,6 +1195,7 @@ export async function getLatestPlayerSnapshotsByAccounts(
       cwChampionCapturePoints: row.cw_champion_capture_points == null ? null : Number(row.cw_champion_capture_points),
       cwChampionDroppedCapturePoints: row.cw_champion_dropped_capture_points == null ? null : Number(row.cw_champion_dropped_capture_points),
       cwChampionBattleAvgXp: row.cw_champion_battle_avg_xp == null ? null : Number(row.cw_champion_battle_avg_xp),
+      cwChampionXp: row.cw_champion_xp == null ? null : Number(row.cw_champion_xp),
       cwMiddleBattles: row.cw_middle_battles == null ? null : Number(row.cw_middle_battles),
       cwMiddleWins: row.cw_middle_wins == null ? null : Number(row.cw_middle_wins),
       cwMiddleLosses: row.cw_middle_losses == null ? null : Number(row.cw_middle_losses),
@@ -1154,6 +1207,7 @@ export async function getLatestPlayerSnapshotsByAccounts(
       cwMiddleCapturePoints: row.cw_middle_capture_points == null ? null : Number(row.cw_middle_capture_points),
       cwMiddleDroppedCapturePoints: row.cw_middle_dropped_capture_points == null ? null : Number(row.cw_middle_dropped_capture_points),
       cwMiddleBattleAvgXp: row.cw_middle_battle_avg_xp == null ? null : Number(row.cw_middle_battle_avg_xp),
+      cwMiddleXp: row.cw_middle_xp == null ? null : Number(row.cw_middle_xp),
     });
   }
   return out;

@@ -109,6 +109,7 @@ type RawPlayerSnapshot = {
   skirmish_capture_points: number | null;
   skirmish_dropped_capture_points: number | null;
   skirmish_battle_avg_xp: number | null;
+  skirmish_xp?: number | string | null;
   fortified_battles: number | null;
   fortified_wins: number | null;
   fortified_losses: number | null;
@@ -120,6 +121,7 @@ type RawPlayerSnapshot = {
   fortified_capture_points: number | null;
   fortified_dropped_capture_points: number | null;
   fortified_battle_avg_xp: number | null;
+  fortified_xp?: number | string | null;
   epic_battles: number | null;
   epic_wins: number | null;
   epic_losses: number | null;
@@ -131,6 +133,7 @@ type RawPlayerSnapshot = {
   epic_capture_points: number | null;
   epic_dropped_capture_points: number | null;
   epic_battle_avg_xp: number | null;
+  epic_xp?: number | string | null;
   fallout_battles: number | null;
   fallout_wins: number | null;
   fallout_losses: number | null;
@@ -142,6 +145,7 @@ type RawPlayerSnapshot = {
   fallout_capture_points: number | null;
   fallout_dropped_capture_points: number | null;
   fallout_battle_avg_xp: number | null;
+  fallout_xp?: number | string | null;
   ranked_battles: number | null;
   ranked_wins: number | null;
   ranked_losses: number | null;
@@ -153,6 +157,7 @@ type RawPlayerSnapshot = {
   ranked_capture_points: number | null;
   ranked_dropped_capture_points: number | null;
   ranked_battle_avg_xp: number | null;
+  ranked_xp?: number | string | null;
   cw_absolute_battles: number | null;
   cw_absolute_wins: number | null;
   cw_absolute_losses: number | null;
@@ -164,6 +169,7 @@ type RawPlayerSnapshot = {
   cw_absolute_capture_points: number | null;
   cw_absolute_dropped_capture_points: number | null;
   cw_absolute_battle_avg_xp: number | null;
+  cw_absolute_xp?: number | string | null;
   cw_champion_battles: number | null;
   cw_champion_wins: number | null;
   cw_champion_losses: number | null;
@@ -175,6 +181,7 @@ type RawPlayerSnapshot = {
   cw_champion_capture_points: number | null;
   cw_champion_dropped_capture_points: number | null;
   cw_champion_battle_avg_xp: number | null;
+  cw_champion_xp?: number | string | null;
   cw_middle_battles: number | null;
   cw_middle_wins: number | null;
   cw_middle_losses: number | null;
@@ -186,6 +193,7 @@ type RawPlayerSnapshot = {
   cw_middle_capture_points: number | null;
   cw_middle_dropped_capture_points: number | null;
   cw_middle_battle_avg_xp: number | null;
+  cw_middle_xp?: number | string | null;
 };
 
 type RawTankSnapshot = {
@@ -372,6 +380,7 @@ function snapshotFromRaw(r: RawPlayerSnapshot): PlayerSnapshot {
     skirmishCapturePoints: r.skirmish_capture_points == null ? null : Number(r.skirmish_capture_points),
     skirmishDroppedCapturePoints: r.skirmish_dropped_capture_points == null ? null : Number(r.skirmish_dropped_capture_points),
     skirmishBattleAvgXp: r.skirmish_battle_avg_xp == null ? null : Number(r.skirmish_battle_avg_xp),
+    skirmishXp: nullableNumber(r.skirmish_xp ?? null),
     fortifiedBattles: r.fortified_battles == null ? null : Number(r.fortified_battles),
     fortifiedWins: r.fortified_wins == null ? null : Number(r.fortified_wins),
     fortifiedLosses: r.fortified_losses == null ? null : Number(r.fortified_losses),
@@ -383,6 +392,7 @@ function snapshotFromRaw(r: RawPlayerSnapshot): PlayerSnapshot {
     fortifiedCapturePoints: r.fortified_capture_points == null ? null : Number(r.fortified_capture_points),
     fortifiedDroppedCapturePoints: r.fortified_dropped_capture_points == null ? null : Number(r.fortified_dropped_capture_points),
     fortifiedBattleAvgXp: r.fortified_battle_avg_xp == null ? null : Number(r.fortified_battle_avg_xp),
+    fortifiedXp: nullableNumber(r.fortified_xp ?? null),
     epicBattles: r.epic_battles == null ? null : Number(r.epic_battles),
     epicWins: r.epic_wins == null ? null : Number(r.epic_wins),
     epicLosses: r.epic_losses == null ? null : Number(r.epic_losses),
@@ -394,6 +404,7 @@ function snapshotFromRaw(r: RawPlayerSnapshot): PlayerSnapshot {
     epicCapturePoints: r.epic_capture_points == null ? null : Number(r.epic_capture_points),
     epicDroppedCapturePoints: r.epic_dropped_capture_points == null ? null : Number(r.epic_dropped_capture_points),
     epicBattleAvgXp: r.epic_battle_avg_xp == null ? null : Number(r.epic_battle_avg_xp),
+    epicXp: nullableNumber(r.epic_xp ?? null),
     falloutBattles: r.fallout_battles == null ? null : Number(r.fallout_battles),
     falloutWins: r.fallout_wins == null ? null : Number(r.fallout_wins),
     falloutLosses: r.fallout_losses == null ? null : Number(r.fallout_losses),
@@ -405,6 +416,7 @@ function snapshotFromRaw(r: RawPlayerSnapshot): PlayerSnapshot {
     falloutCapturePoints: r.fallout_capture_points == null ? null : Number(r.fallout_capture_points),
     falloutDroppedCapturePoints: r.fallout_dropped_capture_points == null ? null : Number(r.fallout_dropped_capture_points),
     falloutBattleAvgXp: r.fallout_battle_avg_xp == null ? null : Number(r.fallout_battle_avg_xp),
+    falloutXp: nullableNumber(r.fallout_xp ?? null),
     rankedBattles: r.ranked_battles == null ? null : Number(r.ranked_battles),
     rankedWins: r.ranked_wins == null ? null : Number(r.ranked_wins),
     rankedLosses: r.ranked_losses == null ? null : Number(r.ranked_losses),
@@ -416,6 +428,7 @@ function snapshotFromRaw(r: RawPlayerSnapshot): PlayerSnapshot {
     rankedCapturePoints: r.ranked_capture_points == null ? null : Number(r.ranked_capture_points),
     rankedDroppedCapturePoints: r.ranked_dropped_capture_points == null ? null : Number(r.ranked_dropped_capture_points),
     rankedBattleAvgXp: r.ranked_battle_avg_xp == null ? null : Number(r.ranked_battle_avg_xp),
+    rankedXp: nullableNumber(r.ranked_xp ?? null),
     cwAbsoluteBattles: r.cw_absolute_battles == null ? null : Number(r.cw_absolute_battles),
     cwAbsoluteWins: r.cw_absolute_wins == null ? null : Number(r.cw_absolute_wins),
     cwAbsoluteLosses: r.cw_absolute_losses == null ? null : Number(r.cw_absolute_losses),
@@ -427,6 +440,7 @@ function snapshotFromRaw(r: RawPlayerSnapshot): PlayerSnapshot {
     cwAbsoluteCapturePoints: r.cw_absolute_capture_points == null ? null : Number(r.cw_absolute_capture_points),
     cwAbsoluteDroppedCapturePoints: r.cw_absolute_dropped_capture_points == null ? null : Number(r.cw_absolute_dropped_capture_points),
     cwAbsoluteBattleAvgXp: r.cw_absolute_battle_avg_xp == null ? null : Number(r.cw_absolute_battle_avg_xp),
+    cwAbsoluteXp: nullableNumber(r.cw_absolute_xp ?? null),
     cwChampionBattles: r.cw_champion_battles == null ? null : Number(r.cw_champion_battles),
     cwChampionWins: r.cw_champion_wins == null ? null : Number(r.cw_champion_wins),
     cwChampionLosses: r.cw_champion_losses == null ? null : Number(r.cw_champion_losses),
@@ -438,6 +452,7 @@ function snapshotFromRaw(r: RawPlayerSnapshot): PlayerSnapshot {
     cwChampionCapturePoints: r.cw_champion_capture_points == null ? null : Number(r.cw_champion_capture_points),
     cwChampionDroppedCapturePoints: r.cw_champion_dropped_capture_points == null ? null : Number(r.cw_champion_dropped_capture_points),
     cwChampionBattleAvgXp: r.cw_champion_battle_avg_xp == null ? null : Number(r.cw_champion_battle_avg_xp),
+    cwChampionXp: nullableNumber(r.cw_champion_xp ?? null),
     cwMiddleBattles: r.cw_middle_battles == null ? null : Number(r.cw_middle_battles),
     cwMiddleWins: r.cw_middle_wins == null ? null : Number(r.cw_middle_wins),
     cwMiddleLosses: r.cw_middle_losses == null ? null : Number(r.cw_middle_losses),
@@ -449,6 +464,7 @@ function snapshotFromRaw(r: RawPlayerSnapshot): PlayerSnapshot {
     cwMiddleCapturePoints: r.cw_middle_capture_points == null ? null : Number(r.cw_middle_capture_points),
     cwMiddleDroppedCapturePoints: r.cw_middle_dropped_capture_points == null ? null : Number(r.cw_middle_dropped_capture_points),
     cwMiddleBattleAvgXp: r.cw_middle_battle_avg_xp == null ? null : Number(r.cw_middle_battle_avg_xp),
+    cwMiddleXp: nullableNumber(r.cw_middle_xp ?? null),
   };
 }
 

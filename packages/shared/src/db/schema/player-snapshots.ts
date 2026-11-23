@@ -62,6 +62,7 @@ export function makePlayerSnapshotsTable(
       skirmishCapturePoints: integer("skirmish_capture_points"),
       skirmishDroppedCapturePoints: integer("skirmish_dropped_capture_points"),
       skirmishBattleAvgXp: integer("skirmish_battle_avg_xp"),
+      skirmishXp: bigint("skirmish_xp", { mode: "number" }),
 
       fortifiedBattles: integer("fortified_battles"),
       fortifiedWins: integer("fortified_wins"),
@@ -74,6 +75,7 @@ export function makePlayerSnapshotsTable(
       fortifiedCapturePoints: integer("fortified_capture_points"),
       fortifiedDroppedCapturePoints: integer("fortified_dropped_capture_points"),
       fortifiedBattleAvgXp: integer("fortified_battle_avg_xp"),
+      fortifiedXp: bigint("fortified_xp", { mode: "number" }),
 
       epicBattles: integer("epic_battles"),
       epicWins: integer("epic_wins"),
@@ -86,6 +88,7 @@ export function makePlayerSnapshotsTable(
       epicCapturePoints: integer("epic_capture_points"),
       epicDroppedCapturePoints: integer("epic_dropped_capture_points"),
       epicBattleAvgXp: integer("epic_battle_avg_xp"),
+      epicXp: bigint("epic_xp", { mode: "number" }),
 
       falloutBattles: integer("fallout_battles"),
       falloutWins: integer("fallout_wins"),
@@ -98,6 +101,7 @@ export function makePlayerSnapshotsTable(
       falloutCapturePoints: integer("fallout_capture_points"),
       falloutDroppedCapturePoints: integer("fallout_dropped_capture_points"),
       falloutBattleAvgXp: integer("fallout_battle_avg_xp"),
+      falloutXp: bigint("fallout_xp", { mode: "number" }),
 
       rankedBattles: integer("ranked_battles"),
       rankedWins: integer("ranked_wins"),
@@ -110,6 +114,7 @@ export function makePlayerSnapshotsTable(
       rankedCapturePoints: integer("ranked_capture_points"),
       rankedDroppedCapturePoints: integer("ranked_dropped_capture_points"),
       rankedBattleAvgXp: integer("ranked_battle_avg_xp"),
+      rankedXp: bigint("ranked_xp", { mode: "number" }),
 
       cwAbsoluteBattles: integer("cw_absolute_battles"),
       cwAbsoluteWins: integer("cw_absolute_wins"),
@@ -122,6 +127,7 @@ export function makePlayerSnapshotsTable(
       cwAbsoluteCapturePoints: integer("cw_absolute_capture_points"),
       cwAbsoluteDroppedCapturePoints: integer("cw_absolute_dropped_capture_points"),
       cwAbsoluteBattleAvgXp: integer("cw_absolute_battle_avg_xp"),
+      cwAbsoluteXp: bigint("cw_absolute_xp", { mode: "number" }),
 
       cwChampionBattles: integer("cw_champion_battles"),
       cwChampionWins: integer("cw_champion_wins"),
@@ -134,6 +140,7 @@ export function makePlayerSnapshotsTable(
       cwChampionCapturePoints: integer("cw_champion_capture_points"),
       cwChampionDroppedCapturePoints: integer("cw_champion_dropped_capture_points"),
       cwChampionBattleAvgXp: integer("cw_champion_battle_avg_xp"),
+      cwChampionXp: bigint("cw_champion_xp", { mode: "number" }),
 
       cwMiddleBattles: integer("cw_middle_battles"),
       cwMiddleWins: integer("cw_middle_wins"),
@@ -146,6 +153,7 @@ export function makePlayerSnapshotsTable(
       cwMiddleCapturePoints: integer("cw_middle_capture_points"),
       cwMiddleDroppedCapturePoints: integer("cw_middle_dropped_capture_points"),
       cwMiddleBattleAvgXp: integer("cw_middle_battle_avg_xp"),
+      cwMiddleXp: bigint("cw_middle_xp", { mode: "number" }),
     },
     (t) => [
       index(`${region}_snapshots_player_id_taken_at_idx`).on(
