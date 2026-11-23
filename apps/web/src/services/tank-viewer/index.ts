@@ -24,6 +24,7 @@ import { wardrobe } from "./styling";
 
 import { runningGear } from "./running-gear";
 import { materialShop, type Brush } from "./materials";
+import { arrive } from "./dressing";
 import { layBelts } from "./belts";
 import { mechanism, type Animated } from "./mechanism";
 import { mendPositions } from "./mending";
@@ -156,7 +157,17 @@ export async function loadVisual({
     { renderer, model, root, fresh, definition },
     brush,
   );
-  const { texture, material, materials, painted, surfaces, arriving, upgradeDetail } = shop;
+  const {
+    texture,
+    material,
+    painted,
+    surfaces,
+    arriving,
+    upgradeDetail,
+    dress,
+    define,
+    dressing,
+  } = shop;
 
 
   // A vehicle ships several turrets and guns, one per module a player can
@@ -384,6 +395,25 @@ export async function loadVisual({
      * vehicle was raised on is replaced when it lands.
      */
     upgradeDetail,
+    /**
+     * Put the vehicle's own maps on, once they have all landed.
+     *
+     * Beside the atlas rather than inside it: both happen once there is a
+     * vehicle to look at, but one is a close-up layer nobody is waiting for and
+     * this is the paint, which is most of what a reader came to see.
+     */
+    dress,
+    /**
+     * Bring the vehicle into the room, which has been on screen for a while.
+     *
+     * **Nothing of it is drawn before this.** The studio is shown as soon as it
+     * is lit, so everything between that moment and this one would otherwise be
+     * a tank assembling itself in front of the reader: its hull landing, then
+     * its turret, then a belt being laid round its wheels. Every fragment is
+     * dropped until this is called, and what calls it is the vehicle being
+     * finished.
+     */
+    stand: (awake?: (ms: number) => void) => arrive(dressing, room.ground, awake),
     /** Whether the mirror has a high-definition set for this vehicle. */
     hasHd: model.materials.some((m) =>
       Object.values(m.textures ?? {}).some((t) => t.hd),
@@ -400,20 +430,16 @@ export async function loadVisual({
       // next one is asked for.
       while (arriving.size > 0) await Promise.all([...arriving]);
     },
-    /** Swap every material between the two definitions, in place. */
-    define(next: Definition) {
-      if (next === definition) return;
-      definition = next;
-      for (const { maps, built } of materials) {
-        if (!built) continue;
-        const surface = texture(maps.metallicGlossMap);
-        built.map = texture(maps.diffuseMap);
-        built.normalMap = texture(maps.normalMap);
-        built.aoMap = texture(maps.excludeMaskAndAOMap);
-        built.roughnessMap = surface;
-        built.metalnessMap = surface;
-        built.needsUpdate = true;
-      }
-    },
+    /**
+     * Swap every material between the two definitions, in place.
+     *
+     * **The shop's, not a second copy of it.** This used to walk the materials
+     * here and assign each map itself, which went wrong twice over: the paths
+     * came from the shop's own `definition` rather than from this one, so it
+     * reassigned the set the vehicle was already wearing and the sharp files
+     * were never once fetched, and it bound maps straight onto the slots the
+     * dressing holds stand-ins in, which would undress a standing tank.
+     */
+    define,
   };
 }

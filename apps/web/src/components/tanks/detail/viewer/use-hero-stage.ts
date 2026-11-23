@@ -36,6 +36,15 @@ export function useHeroStage({
   const restored = useRef(false);
   const [shown, setShown] = useState(false);
   /**
+   * Whether a vehicle is standing in it, which is not the same question.
+   *
+   * The canvas is shown as soon as the studio is lit, and the vehicle arrives
+   * in it a second or two later. Everything that acts ON the vehicle, the view
+   * switches and the dials, waits for this one: a toolbar offered over an
+   * empty room is a set of buttons with nothing to answer them.
+   */
+  const [standing, setStanding] = useState(false);
+  /**
    * Whether this vehicle is taking over from one still on screen.
    *
    * **It decides whether the canvas fades in or simply appears.** Arriving
@@ -118,6 +127,7 @@ export function useHeroStage({
       setReading,
       setRolls,
       setShown,
+      setStanding,
       setView,
       setViews,
       setWorks,
@@ -127,6 +137,7 @@ export function useHeroStage({
   return {
     handles,
     shown,
+    standing,
     crossing,
     moved,
     views,

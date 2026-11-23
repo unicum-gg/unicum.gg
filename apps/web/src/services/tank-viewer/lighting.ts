@@ -126,6 +126,14 @@ export function hangar() {
  * scene again, since the armour views share this canvas and draw flat answers
  * an environment map would wash out.
  */
+/**
+ * How dark the ground takes a shadow, named because two places need it: the
+ * ground is built at this strength and the arrival brings it up to it, and a
+ * value read back off the material instead would be whatever the last fade
+ * left there.
+ */
+export const SHADOW_STRENGTH = 0.45;
+
 export function studio(renderer: THREE.WebGLRenderer, scene: THREE.Scene) {
   // Lit like a hangar, and only while this view is the one on screen: the
   // armour views draw their own answers and an environment map would wash them.
@@ -175,7 +183,7 @@ export function studio(renderer: THREE.WebGLRenderer, scene: THREE.Scene) {
   // shows through and nothing is added to the scene that the tank is not.
   const shadowCatcher = new THREE.Mesh(
     new THREE.PlaneGeometry(40, 40),
-    new THREE.ShadowMaterial({ opacity: 0.45 }),
+    new THREE.ShadowMaterial({ opacity: SHADOW_STRENGTH }),
   );
   shadowCatcher.rotation.x = -Math.PI / 2;
   shadowCatcher.receiveShadow = true;
@@ -218,6 +226,16 @@ export function studio(renderer: THREE.WebGLRenderer, scene: THREE.Scene) {
   return {
     environment,
     lights,
+    /**
+     * The ground, so the shadow can come up with the vehicle that casts it.
+     *
+     * A tank is drawn by its own materials and its shadow is not: it is cast
+     * into a depth map by a material three substitutes, so nothing a shader
+     * patch does to the vehicle reaches it. Left alone it would land at full
+     * strength under a vehicle that is still arriving, which is a shadow with
+     * nothing above it.
+     */
+    ground: shadowCatcher,
     /**
      * Give the room back.
      *

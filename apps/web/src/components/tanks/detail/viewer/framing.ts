@@ -1,3 +1,6 @@
+import type * as Three from "three";
+import type { OrbitControls as Controls } from "three/examples/jsm/controls/OrbitControls.js";
+
 // Where the camera stands, and what it is aiming at.
 //
 // The angle and the distance the hero is framed at, kept apart from everything
@@ -152,4 +155,53 @@ export function standOff(
     distance *= overshoot;
   }
   return { distance, target: aim };
+}
+
+/**
+ * How high the camera looks when there is no vehicle to measure, in metres.
+ *
+ * The rig aims at the middle of the one it has, which runs from about a metre
+ * on a scout to a metre and a half on a Maus. This is the middle of that, and
+ * it is only ever on screen for the second or two before the meshes land.
+ */
+const EMPTY_STAGE_EYE = 1.25;
+
+/**
+ * Point the camera at an empty stage, before there is a vehicle to measure.
+ *
+ * **The distance and the angles are not fitted to the vehicle**, which is what
+ * makes this possible at all: they are the constants above, so the only thing
+ * the vehicle decides is how high the camera looks, and the rig corrects that
+ * when the meshes land. Left where it was created, at the origin, the camera
+ * draws the studio from inside its own floor.
+ *
+ * **Where a vehicle is being taken over from, that camera wins outright.** The
+ * guess above is a height, and a height is the one thing the floor reads: the
+ * grid is at zero and the camera is not, so a room drawn from 1.25 and a room
+ * drawn from the last vehicle's own middle put their floor in two different
+ * places. The frame of the outgoing vehicle is held over the band while this
+ * one is built, so those two floors are on screen at once and slide against
+ * each other as the sheet dissolves. The rig puts the camera back there
+ * anyway once the meshes land, so this is the same decision taken early
+ * enough to be true of the first frame rather than of the tenth.
+ */
+export function standCamera(
+  camera: Three.PerspectiveCamera,
+  controls: Controls,
+  /** Where the vehicle being taken over from was last seen, where there is one. */
+  from?: { position: number[]; target: number[] } | null,
+): void {
+  if (from) {
+    camera.position.fromArray(from.position);
+    controls.target.fromArray(from.target);
+    controls.update();
+    return;
+  }
+  camera.position.set(
+    Math.cos(ELEVATION) * Math.sin(AZIMUTH) * DISTANCE,
+    EMPTY_STAGE_EYE + Math.sin(ELEVATION) * DISTANCE,
+    Math.cos(ELEVATION) * Math.cos(AZIMUTH) * DISTANCE,
+  );
+  controls.target.set(0, EMPTY_STAGE_EYE, 0);
+  controls.update();
 }

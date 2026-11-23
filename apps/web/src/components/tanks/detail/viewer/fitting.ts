@@ -158,9 +158,11 @@ export function fitVehicle(
   page.setCanDeploy(collision?.mounts?.siege != null);
   applyStance();
   page.define.current = (next) => {
-    // The other set has to be fetched, so this stays up while it lands.
+    // The other set has to be fetched, so this stays up while it lands, and
+    // again when it does: the sharp set is megabytes and arrives long after
+    // any deadline worth holding the loop awake for.
     wake(3000);
-    built.define(next);
+    void built.define(next).then(() => wake());
   };
   page.setSharpenable(built.hasHd);
   page.insignia.current = (count: number) => {
@@ -173,9 +175,11 @@ export function fitVehicle(
   if (built.marksAvailable > 0 && page.marksRef.current > 0) {
     void built.mark(page.marksRef.current);
   }
-  // Straight to the larger set, on a tank that is already drawn. A reader
-  // who has since asked for the standard one is not overruled.
-  if (built.hasHd && page.sharpRef.current) built.define("hd");
+  // What this reader last asked for, offered rather than applied: the shop
+  // drops a set the vehicle has not been dressed in yet, because the sharp one
+  // is megabytes in front of a picture that is still being waited for. A reader
+  // who asks again once it is standing gets it.
+  if (built.hasHd && page.sharpRef.current) void built.define("hd");
   if (armour) page.setRange(armour.range);
   // **Hull down is a pose, not a hidden hull.** It is where a vehicle sits
   // when it has put a ridge under its nose: facing whoever is shooting at

@@ -134,7 +134,7 @@ export function TankViewer({
    */
   const ghost = useRef<HTMLCanvasElement>(null);
   const stage = useHeroStage({ canvas, ghost });
-  const { view, shown, hullDown, reading } = stage;
+  const { view, shown, standing, hullDown, reading } = stage;
   /**
    * Which of them the view is answering for. The standard one until asked.
    *
@@ -331,8 +331,10 @@ export function TankViewer({
         aria-hidden
         className="pointer-events-none absolute inset-0 h-full w-full opacity-0 max-sm:h-[calc(100%-6rem)]"
       />
-      <VehicleWaiting show={!shown && !absent} />
-      {shown ? (
+      {/* The room being on screen is not the vehicle being there: what is
+        waited for here is the tank, and the panels act on the tank. */}
+      <VehicleWaiting show={!standing && !absent} />
+      {standing ? (
         // **The panels are reading, so they keep to the column.** The picture
         // runs to the edges of the window and they do not: left against the
         // canvas they ended up out at the margins, further from the vehicle

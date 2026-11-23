@@ -6,6 +6,7 @@ import type { loadArmour } from "@/services/tank-viewer/armour";
 import type { loadVisual, Mounted } from "@/services/tank-viewer";
 import type { Collision } from "@/services/tank-viewer/armour/plates";
 import { hangar } from "@/components/tanks/detail/viewer/hangar";
+import { standCamera } from "@/components/tanks/detail/viewer/framing";
 import { SKIN_FOLDER } from "@/services/tank-viewer/styles";
 import { grab } from "@/services/tank-viewer/spare";
 
@@ -53,7 +54,9 @@ export async function buildStage({
   skin,
   undressed,
   live,
+  seen,
   nudge,
+  lit,
 }: {
   surface: HTMLCanvasElement;
   THREE: typeof import("three");
@@ -75,7 +78,23 @@ export async function buildStage({
   undressed?: () => void;
   /** Whether the page still wants this build, which a navigation ends. */
   live: () => boolean;
+  /**
+   * Where the vehicle being taken over from was last seen, where there is one.
+   *
+   * The room's first frame is drawn from it rather than from the empty stage's
+   * own guess, so the floor lands exactly where the held frame has it. See
+   * `standCamera`.
+   */
+  seen?: { position: number[]; target: number[] } | null;
   nudge: RefObject<((ms?: number) => void) | null>;
+  /**
+   * The studio is lit and has been drawn once, so the canvas is worth showing.
+   *
+   * Fired before a single byte of the vehicle has been asked for: a reader
+   * waits in the room the tank arrives into rather than in front of a band
+   * that stays empty until everything is ready.
+   */
+  lit?: () => void;
 }): Promise<Built | null> {
   const renderer = new THREE.WebGLRenderer({
     canvas: surface,
@@ -271,10 +290,24 @@ export async function buildStage({
       // fifty, stretched across a band eight times wider.
       ready: () => {
         const { clientWidth: w, clientHeight: h } = surface;
-        if (!w || !h) return;
-        renderer.setSize(w, h, false);
-        camera.aspect = w / h;
-        camera.updateProjectionMatrix();
+        if (w && h) {
+          renderer.setSize(w, h, false);
+          camera.aspect = w / h;
+          camera.updateProjectionMatrix();
+        }
+        // Framed where the last vehicle was seen from, or, on a first visit,
+        // where the empty stage guesses: the correction the rig makes when it
+        // finally measures one is then a glide at the instant the tank
+        // appears rather than the floor moving under an empty room.
+        standCamera(camera, controls, seen);
+        // **One frame, and then nothing until the vehicle arrives.** What is in
+        // the scene at this moment is the floor, the grid and the lamps, and
+        // none of it moves, so a loop here would redraw the same picture a
+        // hundred times for nothing. The vehicle's own meshes go in as they are
+        // fetched and are drawn by a shader that discards every fragment of
+        // them until `stand`, so this frame is the room and only the room.
+        renderer.render(scene, camera);
+        lit?.();
       },
       // **A 3D style is the same vehicle from another folder.** It is a
       // complete set of pieces with textures of its own, published beside

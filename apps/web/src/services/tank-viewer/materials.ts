@@ -2,7 +2,8 @@ import * as THREE from "three";
 
 import type { MirrorMaterial, MirrorModel, MirrorTexture } from "@unicum.gg/wargaming";
 import { compile, withDetail, type CamoUniforms, type PaintedMaterial } from "./shader";
-import { BLANK, FLAT } from "./textures";
+import { BLANK, FLAT, PRIMER, UNFINISHED, UNSHADOWED } from "./textures";
+import { dressingFrom, dressingRack, until, type Dressed } from "./dressing";
 import { switched } from "./switches";
 import { picture } from "./spare";
 
@@ -68,11 +69,38 @@ export function materialShop(
    * would rather wait can.
    */
   const arriving = new Set<Promise<void>>();
+  /**
+   * The same arrivals, filed by path, including the ones nothing waits for.
+   *
+   * `arriving` is what the first frame holds out for. This is how a map asked
+   * for after the vehicle is up is still followed in: whoever put a stand-in
+   * in its slot has to know when to take it out. Keyed by path like `loaded`,
+   * so two materials naming one file get the one arrival.
+   */
+  const landing = new Map<string, Promise<void>>();
+  /**
+   * How far this vehicle is between primer and its own paint, carried to every
+   * material's shader: the maps go on together, so they come up together, and
+   * a tank is never found half dressed.
+   */
+  const dressing = dressingFrom(PRIMER);
+  /**
+   * What each material is still owed, and the one pass that puts it on.
+   *
+   * Asked for through the shop, which is what knows the paths, which of the
+   * two definitions is being read and which files are already in hand.
+   */
+  const rack = dressingRack(
+    (entry) => ({ map: texture(entry, "loose"), coming: landing.get(choose(entry)) }),
+    dressing,
+  );
   const maxAnisotropy = renderer.capabilities.getMaxAnisotropy();
   const materials: {
     spec: MirrorMaterial | undefined;
     maps: Record<string, MirrorTexture>;
     built?: THREE.MeshStandardMaterial;
+    /** The slots it was built with, which a later pass must not dress. */
+    builtWith?: readonly Dressed[];
   }[] = [];
   // The client ships each texture twice, the second at twice the side. Which of
   // the pair a material samples is the only difference between the two
@@ -108,6 +136,7 @@ export function materialShop(
       const waiting = new Promise<void>((done) => {
         arrived = done;
       });
+      landing.set(at, waiting);
       if (wait === "held") {
         arriving.add(waiting);
         void waiting.then(() => arriving.delete(waiting));
@@ -152,15 +181,33 @@ export function materialShop(
   function material(spec: MirrorMaterial | undefined) {
     const maps = spec?.textures ?? {};
     materials.push({ spec, maps });
-    // The mirror already rewrites the client's gloss-metal texture into the
-    // metal-roughness layout, so it is sampled straight.
-    const surface = texture(maps.metallicGlossMap);
+    const values = spec?.values ?? {};
+    /**
+     * **The cut is the one map the first frame cannot be drawn without.**
+     *
+     * A BigWorld material that alpha-tests opens its gaps against a mask the
+     * mirror packs in the normal map's blue, and the shader snapshots that very
+     * texture when it compiles. A belt raised on a stand-in would read a mask
+     * of one everywhere, come up as a solid ribbon, and stay one. So this one
+     * is held and the other four are not, which costs the two small track files
+     * and nothing else.
+     */
+    const cuts = masked && Boolean(values.alphaTestEnable);
+    // Where the mirror carries no mask, the same gaps are cut by the albedo's
+    // own alpha instead, and a stand-in that is opaque everywhere would close
+    // them until the real one landed. Held for exactly the same reason.
+    const carved = !masked && Boolean(spec?.alphaTest);
+    /** What it is built with rather than dressed in, which is never both. */
+    const builtWith: Dressed[] = cuts ? ["normalMap"] : carved ? ["map"] : [];
+    const relief = cuts ? texture(maps.normalMap, "held") : null;
     const built = new THREE.MeshStandardMaterial({
-      map: texture(maps.diffuseMap),
-      normalMap: texture(maps.normalMap),
-      aoMap: texture(maps.excludeMaskAndAOMap),
-      roughnessMap: surface,
-      metalnessMap: surface,
+      map: carved ? texture(maps.diffuseMap, "held") : until(maps.diffuseMap, PRIMER),
+      normalMap: cuts ? relief : until(maps.normalMap, FLAT),
+      aoMap: until(maps.excludeMaskAndAOMap, UNSHADOWED),
+      // One file for both: the mirror already rewrites the client's gloss-metal
+      // texture into the metal-roughness layout, so it is sampled straight.
+      roughnessMap: until(maps.metallicGlossMap, UNFINISHED),
+      metalnessMap: until(maps.metallicGlossMap, UNFINISHED),
       // Without these a track draws as a solid ribbon: its gaps are cut by an
       // alpha test, and its far side only exists when both are drawn.
       // What the client says, which is single-sided for a hull or a turret and
@@ -230,14 +277,15 @@ export function materialShop(
       painted.push({ uniforms: camo, part: brush.part, piece: brush.piece });
     }
 
-    const values = spec?.values ?? {};
-    if (masked && values.alphaTestEnable && built.normalMap) {
+    rack.owes(built, maps, builtWith);
+    built.userData.dressing = dressing;
+    if (cuts && built.normalMap) {
       const reference = numberAt(values, "alphaReference", 0.5);
       const against = reference > 1 ? reference / 255 : reference;
       built.userData.cut = { bias: numberAt(values, "g_maskBias", 0), against };
       built.transparent = false;
     }
-    materials[materials.length - 1].built = built;
+    Object.assign(materials[materials.length - 1]!, { built, builtWith });
     /**
      * **The vehicle is raised on the invented grain, never on the real one.**
      *
@@ -299,6 +347,27 @@ export function materialShop(
       const map = texture(detailEntry, "loose");
       if (!map) return;
       for (const uniform of detailing) uniform.value = map;
+    },
+    dress: rack.dress,
+    /** Where this vehicle stands between absent, primer and painted. */
+    dressing,
+    /**
+     * Swap the vehicle onto the other texture set, where it can be swapped.
+     *
+     * **A set it has not been dressed in yet is not swapped, it is dropped.**
+     * The reader's stored preference is handed over while the vehicle is still
+     * being built, which is the one moment honouring it is wrong: the sharp set
+     * is 16 MB against the standard one's 3.5 on an IS-3, and putting that in
+     * front of a picture nobody has asked to improve is exactly what this file
+     * spent the rest of its length getting out of the way. Asked for by a
+     * reader looking at a tank that is already standing, it is honoured.
+     */
+    async define(next: "hd" | "sd"): Promise<void> {
+      if (next === definition || rack.owing) return;
+      definition = next;
+      for (const { built, maps, builtWith } of materials)
+        if (built) rack.owes(built, maps, builtWith ?? []);
+      await rack.dress();
     },
     /**
      * Free every map and every material this cursor made.

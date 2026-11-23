@@ -117,6 +117,42 @@ export function flat<T extends THREE.Texture>(map: T): T {
 }
 
 export const BLANK = flat(new THREE.DataTexture(new Uint8Array([0, 0, 0, 0]), 1, 1));
+
+/**
+ * The vehicle before its paint: primer, which is a real thing a tank wears.
+ *
+ * **A stand-in has to be a surface, not an absence.** What stood in the albedo
+ * slot before the real map landed was nothing, and an unbound sampler reads
+ * black, so the belt came up black and the hull white: a vehicle assembling
+ * itself out of parts rather than one still being painted. These three and the
+ * `FLAT` below them are what a plate looks like with no map of its own, so an
+ * undressed vehicle reads as one colour under one light, and the maps go on
+ * together.
+ */
+export const PRIMER = flat(
+  // **Measured against a painted vehicle, not picked.** Under this room's
+  // light, a plate reflects about 2.7 times what its map says, so the first
+  // grey tried came up at 187 where the IS-3's own paint reads 120 and the
+  // vehicle stood there white: the paint landing then read as the lights
+  // coming down rather than as a tank being painted. This one renders at the
+  // paint's own value, so what changes is the detail and nothing else.
+  new THREE.DataTexture(new Uint8Array([78, 79, 75, 255]), 1, 1),
+);
+PRIMER.colorSpace = THREE.SRGBColorSpace;
+
+/**
+ * Rough and barely metallic, in the layout three reads: roughness from green,
+ * metalness from blue. A plate is neither a mirror nor a sheet of foil.
+ */
+export const UNFINISHED = flat(
+  new THREE.DataTexture(new Uint8Array([0, 196, 36, 255]), 1, 1),
+);
+
+/** Nothing in shadow, for a surface whose own occlusion has not landed. */
+export const UNSHADOWED = flat(
+  new THREE.DataTexture(new Uint8Array([255, 255, 255, 255]), 1, 1),
+);
+
 // A normal map's own idea of "no relief", which is not black: an unbound
 // sampler reads zero and decodes to a normal pointing back into the surface.
 export const FLAT = flat(new THREE.DataTexture(new Uint8Array([128, 128, 255, 255]), 1, 1));

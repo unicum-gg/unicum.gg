@@ -8,6 +8,7 @@
 // Its source of truth stays `unicum-gg/wot.build`, `preview/visual.js`.
 import * as THREE from "three";
 
+import type { Dressing } from "./dressing";
 import { GRAIN, softRelief } from "./textures";
 import { paintCamouflage } from "./shader-camouflage";
 
@@ -131,6 +132,9 @@ export function withDetail(
  * client ships, weighted by the client's own `g_detailPower*` numbers.
  */
 export function compile(material: THREE.MeshStandardMaterial) {
+  // Where this vehicle stands between primer and its own paint, if it is being
+  // dressed at all. Everything the dressing puts on fades up on this one value.
+  const dressing = material.userData.dressing as Dressing | undefined;
   // **Every branch below has to be named in the cache key.**
   //
   // three compiles one program per material *configuration* and shares it
@@ -155,6 +159,7 @@ export function compile(material: THREE.MeshStandardMaterial) {
       material.userData.detail ? "grain" : "nograin",
       material.aoMap ? "ao" : "noao",
       material.userData.camo ? "camo" : "nocamo",
+      dressing ? "dressing" : "nodressing",
     ].join("/");
 
   material.onBeforeCompile = (shader) => {
@@ -181,10 +186,14 @@ export function compile(material: THREE.MeshStandardMaterial) {
          mapN = normalize( vec3( mapN.xy * 0.5, mapN.z ) );`
       : `vec3 mapN = vec3( texture2D( normalMap, vNormalMapUv ).xy * 2.0 - 1.0, 0.0 );
          mapN.z = sqrt( max( 0.0, 1.0 - dot( mapN.xy, mapN.xy ) ) );`;
+    // Flat until the vehicle is dressed, for the same reason its plates are one
+    // colour: relief arriving before the paint is a second change to watch.
+    const raised = dressing ? "mapN = mix( vec3( 0.0, 0.0, 1.0 ), mapN, dressed );" : "";
     shader.fragmentShader = shader.fragmentShader.replace(
       "#include <normal_fragment_maps>",
       `#if defined( USE_NORMALMAP_TANGENTSPACE )
          ${rebuildZ}
+         ${raised}
          mapN.xy *= normalScale;
          normal = normalize( tbn * mapN );
        #else
@@ -247,11 +256,87 @@ export function compile(material: THREE.MeshStandardMaterial) {
         `float bakedOcclusion = texture2D( aoMap, vAoMapUv ).r;
          // Softened, or the deepest parts of the map go to pure black: it was
          // baked to sit under the game's own ambient, not to replace lighting.
-         outgoingLight *= mix( 1.0, pow( bakedOcclusion, 0.7 ), 0.85 );
+         outgoingLight *= mix( 1.0, pow( bakedOcclusion, 0.7 ), ${dressing ? "0.85 * dressed" : "0.85"} );
          #include <opaque_fragment>`,
       );
     }
     if (readsUv(material)) paintCamouflage(material, shader);
+
+    // **Last, because everything else writes this colour.** The map, the
+    // camouflage and the grain all compose `diffuseColor`, and the fade has to
+    // sit after all three or it would be painted over by whichever ran later.
+    // `lights_physical_fragment` is where the colour is read rather than
+    // written, and nothing else here patches it.
+    if (dressing) {
+      shader.uniforms.dressed = dressing.worn;
+      shader.uniforms.here = dressing.here;
+      shader.uniforms.primer = { value: dressing.primer };
+      shader.fragmentShader = shader.fragmentShader
+        .replace(
+          "#include <common>",
+          `#include <common>
+           uniform float dressed;
+           uniform float here;
+           uniform vec3 primer;`,
+        )
+        .replace(
+          "#include <lights_physical_fragment>",
+          `diffuseColor.rgb = mix( primer, diffuseColor.rgb, dressed );
+           #include <lights_physical_fragment>`,
+        )
+        // **Arriving is a discard, not an opacity.** The room is on screen
+        // before the vehicle is, so the vehicle has to come into it, and the
+        // obvious way is to turn a material transparent and raise its alpha.
+        // That one asks the renderer to sort a hundred thousand triangles of a
+        // tank against each other, which it cannot do: the far side of a hull
+        // draws over the near side and the belt shows through its own guards.
+        // Dropping fragments by their position on screen instead costs no
+        // sorting and no second pass and leaves depth correct at every stage.
+        // The threshold is of the pixel rather than of the frame, so a
+        // fragment that is in stays in: pixels arrive one after another
+        // instead of flickering.
+        //
+        // **Ordered, not random.** A hash was tried first and it moutonne:
+        // random values clump, so a half-arrived hull comes up in blotches
+        // the size of the clumps. A Bayer threshold spreads the same number of
+        // pixels evenly over every four by four, which at a device pixel is
+        // under anything an eye resolves and reads as a tone rather than as
+        // grain.
+        //
+        // First in the shader, before anything is sampled: a fragment that is
+        // not going to be drawn should not be paid for.
+        .replace(
+          "#include <common>",
+          `#include <common>
+           // The 4x4 ordered threshold, built rather than tabulated: two 2x2
+           // patterns, the finer one at a quarter weight inside the coarser.
+           float coarse( vec2 at ) {
+             at = floor( at );
+             return fract( at.x * 0.5 + at.y * at.y * 0.75 );
+           }
+           float ordered( vec2 at ) {
+             return coarse( at * 0.5 ) * 0.25 + coarse( at );
+           }`,
+        )
+        .replace(
+          "#include <clipping_planes_fragment>",
+          `#include <clipping_planes_fragment>
+           // **At or above, not above.** One cell of the sixteen holds zero,
+           // so a strict comparison draws a sixteenth of the vehicle before it
+           // has begun arriving: a stipple of it, blocking the grid behind.
+           if ( here < 1.0 && ordered( gl_FragCoord.xy ) >= here ) discard;`,
+        )
+        // **And it comes up out of the dark as it fills in.** Half the pixels
+        // of a half-arrived vehicle is a speckle, and a speckle at full
+        // brightness over a dark floor is exactly as loud as it sounds. Dimmed
+        // by the same value, the noisiest moment is also the faintest, and
+        // what a reader sees is a shape gathering rather than a sieve.
+        .replace(
+          "#include <opaque_fragment>",
+          `outgoingLight *= here;
+           #include <opaque_fragment>`,
+        );
+    }
 
     const detail = material.userData.detail;
     if (!detail) return;

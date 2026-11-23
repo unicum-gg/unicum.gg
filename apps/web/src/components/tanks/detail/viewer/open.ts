@@ -5,6 +5,8 @@ import type { RefObject } from "react";
 import type { PaintLock } from "@unicum.gg/shared";
 
 import { buildStage } from "@/components/tanks/detail/viewer/build";
+import { heldFrame } from "@/components/tanks/detail/viewer/held-frame";
+import { revealVehicle } from "@/components/tanks/detail/viewer/reveal";
 import { loadArmour } from "@/services/tank-viewer/armour";
 import type { Cinematic } from "@/components/tanks/detail/viewer/cinematic";
 import { fitVehicle, type Fitting } from "@/components/tanks/detail/viewer/fitting";
@@ -43,6 +45,11 @@ export type Opening = Fitting &
     reset: RefObject<(() => void) | null>;
     nudge: RefObject<((ms?: number) => void) | null>;
     setCrossing: (on: boolean) => void;
+    /**
+     * A vehicle is standing in the room, which `setShown` no longer means: the
+     * canvas is shown as soon as the studio is lit and the tank arrives later.
+     */
+    setStanding: (on: boolean) => void;
     setMoved: (on: boolean) => void;
     setCentred: (on: boolean) => void;
     setView: (next: View) => void;
@@ -103,6 +110,7 @@ export async function openStage(
     import("@/services/tank-viewer"),
   ]);
   handles.setShown(false);
+  handles.setStanding(false);
   // **The build the page named, where it named one.** The address is pinned to
   // a commit, so the commit is part of every path under it: a page that preloads
   // one build while this resolves another names the same files at two addresses
@@ -139,31 +147,8 @@ export async function openStage(
     return;
   }
 
-  const hold = () =>
-    new Promise<void>((done) => {
-      const sheet = handles.ghost.current;
-      if (!sheet) return done();
-      requestAnimationFrame(() => {
-        sheet.width = surface.width;
-        sheet.height = surface.height;
-        sheet.getContext("2d")?.drawImage(surface, 0, 0);
-        sheet.style.transition = "none";
-        sheet.style.opacity = "1";
-        // Read back so the browser takes the jump to full before the fade
-        // is asked for, rather than folding the two into no transition.
-        void sheet.offsetWidth;
-        done();
-      });
-    });
-
-  /** Fade the held photograph off, once what replaced it has been drawn. */
-  const dissolve = () =>
-    requestAnimationFrame(() => {
-      const sheet = handles.ghost.current;
-      if (!sheet) return;
-      sheet.style.transition = `opacity ${VIEW_DISSOLVE}ms ease-out`;
-      sheet.style.opacity = "0";
-    });
+  // The outgoing picture, held on a sheet while the next one is drawn under it.
+  const { hold, dissolve } = heldFrame(surface, handles.ghost);
 
   // **What the vehicle is standing in, which is not always its own geometry.**
   // A reward vehicle is usually another tank plus a style the game will not let
@@ -189,7 +174,19 @@ export async function openStage(
     skin: dressed,
     undressed: from.onUndressed,
     live,
+    // Where the vehicle before it stood, so the room's very first frame holds
+    // the same floor as the frame being handed over rather than correcting it
+    // a few hundred milliseconds later.
+    seen: previous,
     nudge: handles.nudge,
+    // **The room first, and the vehicle into it.** Measured on a throttled
+    // connection, the studio is lit about a second and a half before the
+    // geometry has landed, and holding the canvas back for that second and a
+    // half is what made the band look empty while something was very much
+    // happening in it.
+    lit: () => {
+      if (live()) handles.setShown(true);
+    },
   });
   if (!made) {
     from.onAbsent?.();
@@ -243,6 +240,14 @@ export async function openStage(
     // armour views came up black.
     wake(VIEW_DISSOLVE + 400);
     void hold().then(() => {
+      // **The floor loses its shadow here, and it is not yet fixed.** What
+      // casts it is the visual model, which these views take off the scene, so
+      // the patch under the vehicle goes out with it and the plates stand on a
+      // bare grid. The plates cannot cast it in its place: the shadow pass
+      // tests every object against the camera's own layers, and they are drawn
+      // on layers of their own through targets of their own. Holding the map
+      // over the switch (`shadowMap.autoUpdate`) was tried and measured, and
+      // the shadow does not survive it either.
       built?.show(next === View.Visual);
       armour?.show(next !== View.Visual);
       if (next !== View.Visual) {
@@ -350,13 +355,22 @@ export async function openStage(
     if (from.opening.hullDown) handles.ridge.current?.(true);
     if (from.opening.aim) from.takeAim(from.opening.aim.bearing, from.opening.aim.pitch);
   }
-  // **Nothing is shown until there is nothing left to arrive.**
+  // **Only what cannot be stood in for.**
   //
   // A texture is handed to a material before its bytes are there, which is
-  // what lets the first frame draw early. It also meant the fade opened on
-  // a white hull with black tracks and the paint landing a piece at a time:
-  // the vehicle assembled itself in front of the reader, which is the one
-  // thing the fade exists to avoid.
+  // what lets the first frame draw early. Shown raw, that opened on a white
+  // hull with black tracks and the paint landing a piece at a time: a vehicle
+  // assembling itself in front of the reader, which is the one thing the fade
+  // exists to avoid. So the maps that only dress a surface are not waited for
+  // at all now, they are stood in for (`PRIMER` and its neighbours) and put on
+  // together by `dress` once the vehicle is up. What is waited for here is the
+  // belt's cut mask, which no stand-in can fake, and the few maps read as
+  // values rather than as paint.
+  //
+  // The vehicle therefore appears as soon as it exists rather than as soon as
+  // it is finished: measured, its meshes are in the browser seconds before its
+  // three megabytes of paint, and standing a tank in primer in the meantime is
+  // a picture instead of an empty studio.
   //
   // Waited in this order: the definition and the marks ask for more
   // textures, so they are settled after them, and the shaders are compiled
@@ -377,20 +391,14 @@ export async function openStage(
     stop();
     return;
   }
-  // The first frame is painted outright: the loop only paints what has
-  // changed, and at this point nothing has, though the vehicle has just
-  // been built. Then the loop is started, awake long enough to carry the
-  // arrival: the fade, the styles landing, the marks going on.
-  frameOnce();
-  wake(2000);
-  draw();
-  handles.setShown(true);
-  // **Now, and not a moment earlier.** The nation's detail atlas is the single
-  // largest file a tank page fetches and it is a close-up layer that contributes
-  // nothing at this framing, so it is asked for once there is a vehicle to look
-  // at rather than while the reader is waiting for one. Unawaited on purpose:
-  // the picture is finished without it.
-  built.upgradeDetail();
+  revealVehicle({
+    built,
+    frameOnce,
+    wake,
+    draw,
+    setShown: handles.setShown,
+    setStanding: handles.setStanding,
+  });
   // **And the camera stays exactly where it was.** Standing where the last
   // vehicle was seen from is what makes the two floors land on each other
   // while the tanks cross; sending it on to this vehicle's own framing
