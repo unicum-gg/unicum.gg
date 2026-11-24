@@ -1,0 +1,44 @@
+{
+  "font": "Choose your font",
+  "effect": "Choose your effect",
+  "color": "Choose your colour",
+  "first-color": "Choose your first colour",
+  "second-color": "Second colour",
+  "fonts": {
+    "default": "Default",
+    "stencil": "Stencil",
+    "pixel": "Pixel",
+    "future": "Future",
+    "marker": "Marker",
+    "rounded": "Rounded",
+    "typewriter": "Typewriter",
+    "horror": "Horror",
+    "armour": "Armour",
+    "comic": "Comic",
+    "script": "Script",
+    "glitch": "Glitch"
+  },
+  "effects": {
+    "solid": "Solid",
+    "gradient": "Gradient",
+    "neon": "Neon",
+    "toon": "Toon",
+    "pop": "Pop",
+    "gummy": "Gummy",
+    "prism": "Prism"
+  },
+  "colors": {
+    "brand": "Brand",
+    "red": "Red",
+    "orange": "Orange",
+    "yellow": "Yellow",
+    "gold": "Gold",
+    "bronze": "Bronze",
+    "olive": "Olive",
+    "green": "Green",
+    "steel": "Steel",
+    "sky": "Sky",
+    "purple": "Purple",
+    "silver": "Silver"
+  }
+}

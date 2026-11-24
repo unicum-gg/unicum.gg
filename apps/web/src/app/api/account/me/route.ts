@@ -23,6 +23,7 @@ import {
   setBattlesHidden,
 } from "@unicum.gg/core/battles/privacy";
 import { isRegion } from "@unicum.gg/wargaming";
+import { parseNameStyle } from "@unicum.gg/shared";
 import { revalidatePlayerProfile } from "@/services/players/revalidate";
 
 // Per-session account state; not cacheable.
@@ -64,6 +65,7 @@ export async function GET(): Promise<Response> {
       loadoutsHidden: false,
       battlesHidden: false,
       anonymous: false,
+      nameStyle: null,
       billing: null,
     });
   }
@@ -96,6 +98,14 @@ export async function GET(): Promise<Response> {
     loadoutsHidden,
     battlesHidden,
     anonymous: profile?.anonymous ?? false,
+    // How their nickname is drawn, kept whether or not the pledge runs: the
+    // settings open on it, and the public read is what checks the pledge.
+    nameStyle: parseNameStyle({
+      font: profile?.nameFont,
+      effect: profile?.nameEffect,
+      color: profile?.nameColor,
+      color2: profile?.nameColor2,
+    }),
     // Null when the site takes no money at all, so the dialog has no billing
     // section to draw rather than one promising a portal that cannot open.
     // `pledge` is the live monthly support, kept while it runs out its period

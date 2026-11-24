@@ -2068,7 +2068,7 @@ export interface paths {
         };
         /**
          * Supporter seniority
-         * @description Every public supporter with the start of their current monthly pledge. The supporter crest turns bronze after 3 months, silver after 6 and gold after 12; this is what it is read from. Anonymous supporters are not listed.
+         * @description Every public supporter with the start of their current monthly pledge. The supporter crest turns bronze after 3 months, silver after 6 and gold after 12; this is what it is read from, along with the style each one draws their nickname in. Anonymous supporters are not listed.
          */
         get: operations["get-support-tiers"];
         put?: never;
@@ -7547,6 +7547,17 @@ export interface components {
             results: components["schemas"]["StrongholdLeaderboardEntry"][];
             computed_at: string | null;
         };
+        /** @description How a supporter's nickname is drawn across the site. */
+        SupporterNameStyle: {
+            /** @description The typeface: default, stencil, pixel, pirate, future, marker, rounded, typewriter or horror. */
+            font: string;
+            /** @description What is done with the colours: solid, gradient, neon, toon, pop or prism. */
+            effect: string;
+            /** @description The main colour, a name from the fixed palette. */
+            color: string;
+            /** @description The second colour, read by the gradient and pop effects only. */
+            color2: string;
+        };
         /** @description One public supporter and how long they have held their monthly pledge. */
         SupporterSince: {
             /**
@@ -7561,6 +7572,8 @@ export interface components {
              * @description When the supporter's current monthly pledge began. Cancelling and coming back starts it again.
              */
             since: Date;
+            /** @description How their nickname is drawn. Null for a plain nickname. */
+            style: components["schemas"]["SupporterNameStyle"] | null;
         };
         /** @description Everyone who has contributed, ranked by the net total given since launch, highest first. Individual amounts are never exposed; anonymous supporters appear as "Anonymous". */
         SupportersPodium: {
@@ -7582,11 +7595,11 @@ export interface components {
             /** @description Total amount received from supporters since launch, net of refunds, in EUR cents (aggregate only, for the cumulative funding bar). Monthly charges and one-off donations alike. */
             receivedCents: number;
         };
-        /** @description Every public supporter with the start of their current monthly pledge, which is what the supporter crest's metal is read from: bronze after 3 months, silver after 6, gold after 12. Anonymous supporters are not listed. */
+        /** @description Every public supporter with the start of their current monthly pledge, which is what the supporter crest's metal is read from: bronze after 3 months, silver after 6, gold after 12. Each carries the style their nickname is drawn in, if they picked one. Anonymous supporters are not listed. */
         SupporterTiers: {
             supporters: components["schemas"]["SupporterSince"][];
         };
-        /** @description Every public supporter with the start of their current monthly pledge, which is what the supporter crest's metal is read from: bronze after 3 months, silver after 6, gold after 12. Anonymous supporters are not listed. */
+        /** @description Every public supporter with the start of their current monthly pledge, which is what the supporter crest's metal is read from: bronze after 3 months, silver after 6, gold after 12. Each carries the style their nickname is drawn in, if they picked one. Anonymous supporters are not listed. */
         SupporterTiersResponse: {
             supporters: components["schemas"]["SupporterSince"][];
         };

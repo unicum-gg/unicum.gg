@@ -88,6 +88,14 @@ export const supportProfile = pgTable(
     // having to clear this.
     clanRegion: text("clan_region"),
     clanId: bigint("clan_id", { mode: "number" }),
+    // How their nickname is drawn across the site (`NameStyle` in support):
+    // a font, an effect and one or two colours from the fixed palette. Null
+    // for a plain nickname. Kept after a pledge ends, so the style comes back
+    // with the supporter; the public read is what checks the pledge.
+    nameFont: text("name_font"),
+    nameEffect: text("name_effect"),
+    nameColor: text("name_color"),
+    nameColor2: text("name_color2"),
     createdAt: timestamp("created_at").defaultNow().notNull(),
     updatedAt: timestamp("updated_at")
       .defaultNow()

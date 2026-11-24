@@ -3,6 +3,7 @@ import type { Region } from "@unicum.gg/wargaming";
 import Link from "@/components/link";
 import { ClanTag } from "@/components/entity/clan-tag";
 import { PlayerBadges } from "@/components/entity/badges/player-badges";
+import { StyledNickname } from "@/components/entity/name-style";
 import type { PlayerIdentity } from "@/components/entity/player-identity";
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
@@ -53,9 +54,12 @@ export function PlayerName({
 }) {
   const body = (
     <>
-      <span className={cn("font-medium", nicknameClassName)}>
-        {player.nickname}
-      </span>
+      <StyledNickname
+        region={region}
+        nickname={player.nickname}
+        isSupporter={player.isSupporter}
+        className={cn("font-medium", nicknameClassName)}
+      />
       {player.clanTag ? (
         <>
           {" "}

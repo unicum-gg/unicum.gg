@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 
 /**
  * Supporter seniority
- * @description Every public supporter with the start of their current monthly pledge. The supporter crest turns bronze after 3 months, silver after 6 and gold after 12; this is what it is read from. Anonymous supporters are not listed.
+ * @description Every public supporter with the start of their current monthly pledge. The supporter crest turns bronze after 3 months, silver after 6 and gold after 12; this is what it is read from, along with the style each one draws their nickname in. Anonymous supporters are not listed.
  * @response SupporterTiersResponse
  * @tag System
  * @openapi

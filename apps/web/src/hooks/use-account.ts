@@ -1,5 +1,5 @@
 import useSWR, { preload } from "swr";
-import type { WgIdentity } from "@unicum.gg/shared";
+import type { NameStyle, WgIdentity } from "@unicum.gg/shared";
 import { fetcher } from "@/services/swr";
 
 /** The settings dialog's one read, shared by every section of it. */
@@ -22,6 +22,9 @@ export type AccountState = {
   battlesHidden: boolean;
   /** Hidden from the supporters board, name and badge alike. */
   anonymous: boolean;
+  /** How the nickname is drawn, null for a plain one. Absent from an answer
+   * served before the field existed. */
+  nameStyle?: NameStyle | null;
   /** Null when the site takes no payments at all. */
   billing: {
     /** Everything this account has given, one-off gifts included. */

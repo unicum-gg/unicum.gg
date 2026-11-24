@@ -19,5 +19,8 @@
   "you-already-have-a-monthly-pledge": "You already have a monthly pledge. Use the billing portal to change it.",
   "you-are-a-supporter-thank": "You are a supporter. Thank you for keeping {NAME} alive.",
   "you-have-given-so-far": "You have given {amount} so far. Thank you.",
-  "manage-connected-accounts": "Manage connected accounts"
+  "manage-connected-accounts": "Manage connected accounts",
+  "name-style-title": "Your nickname style",
+  "name-style-hint": "Pick a font, an effect and a colour for your nickname everywhere on {NAME}.",
+  "name-style-open": "Choose my style"
 }

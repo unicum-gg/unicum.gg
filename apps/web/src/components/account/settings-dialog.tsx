@@ -2,12 +2,14 @@
 
 import {
   CreditCardIcon,
+  IdentificationCardIcon,
   ShieldIcon,
   SignOutIcon,
   UserIcon,
   type Icon,
 } from "@phosphor-icons/react";
 import { useEffect, useRef, useState } from "react";
+import { Crest, CrestKind } from "@/components/entity/badges/crest";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -23,6 +25,7 @@ import { cn } from "@/lib/utils";
 import { Connections } from "./connections";
 import { consumeConnectionsFlag } from "./return-path";
 import { SettingsBilling } from "./settings-billing";
+import { SettingsNameStyle } from "./settings-name-style";
 import { SettingsPrivacy } from "./settings-privacy";
 import { SettingsRow } from "./settings-row";
 
@@ -30,6 +33,8 @@ import { SettingsRow } from "./settings-row";
 enum SettingsSection {
   /** Who you are here, and what you have connected to it. */
   Account = "account",
+  /** How the account looks to everybody else: its nickname style, for now. */
+  Profile = "profile",
   /** What the account publishes about itself. */
   Privacy = "privacy",
   /** What the account gives the site, and where to change it. */
@@ -38,6 +43,7 @@ enum SettingsSection {
 
 const SECTIONS: { section: SettingsSection; icon: Icon }[] = [
   { section: SettingsSection.Account, icon: UserIcon },
+  { section: SettingsSection.Profile, icon: IdentificationCardIcon },
   { section: SettingsSection.Privacy, icon: ShieldIcon },
   { section: SettingsSection.Billing, icon: CreditCardIcon },
 ];
@@ -181,8 +187,10 @@ export function SettingsDialog({
           take back: the rail runs to the edges and the right pane owns the
           scroll, so a long section cannot push the rail out of reach. The fixed
           height is what stops the dialog resizing under the reader as they move
-          between a three-row section and a one-row one. */}
-      <DialogContent className="grid max-h-[calc(100dvh-2rem)] grid-rows-[auto_minmax(0,1fr)] gap-0 overflow-hidden p-0 sm:h-[30rem] sm:max-w-3xl">
+          between a three-row section and a one-row one. It is sized for the
+          nickname style, the one section that draws a real profile header and
+          a leaderboard row. */}
+      <DialogContent className="grid max-h-[calc(100dvh-2rem)] grid-cols-[minmax(0,1fr)] grid-rows-[auto_minmax(0,1fr)] gap-0 overflow-hidden p-0 sm:h-[40rem] sm:max-w-5xl">
         <DialogHeader className="border-fd-border border-b px-5 py-4 pr-12">
           <DialogTitle>{t("title")}</DialogTitle>
           <DialogDescription className="sr-only">
@@ -210,6 +218,13 @@ export function SettingsDialog({
               >
                 <SectionIcon className="size-4 shrink-0" weight="bold" />
                 <span className="truncate">{t(`section-${key}`)}</span>
+                {/* A supporter's perk, marked as one in the rail the way
+                    Discord marks its Nitro sections. */}
+                {key === SettingsSection.Profile && (
+                  <span className="ml-auto inline-flex shrink-0">
+                    <Crest kind={CrestKind.Supporter} size={14} />
+                  </span>
+                )}
               </button>
             ))}
           </nav>
@@ -223,6 +238,8 @@ export function SettingsDialog({
             </p>
             {section === SettingsSection.Account ? (
               <AccountSection />
+            ) : section === SettingsSection.Profile ? (
+              <SettingsNameStyle />
             ) : section === SettingsSection.Privacy ? (
               <SettingsPrivacy />
             ) : (

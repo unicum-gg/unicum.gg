@@ -7,7 +7,9 @@ import {
   supportPayment,
   supportProfile,
   user,
+  parseNameStyle,
   wgIdentityFromAccountKey,
+  type NameStyle,
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 
@@ -256,6 +258,27 @@ export async function setAnonymous(userId: string, anonymous: boolean): Promise<
     .onConflictDoUpdate({ target: supportProfile.userId, set: { anonymous } });
 }
 
+/**
+ * How the user's nickname is drawn, or null to draw it plainly. Allowed before
+ * any money has moved, like the anonymity switch: the public read is what
+ * checks the pledge, so a style saved now shows the day it starts.
+ */
+export async function setNameStyle(
+  userId: string,
+  style: NameStyle | null,
+): Promise<void> {
+  const values = {
+    nameFont: style?.font ?? null,
+    nameEffect: style?.effect ?? null,
+    nameColor: style?.color ?? null,
+    nameColor2: style?.color2 ?? null,
+  };
+  await db
+    .insert(supportProfile)
+    .values({ userId, ...values })
+    .onConflictDoUpdate({ target: supportProfile.userId, set: values });
+}
+
 /** Total monthly pledge (in cents of `currency`, EUR) across active supporters,
  * for the funding bar's run-rate line. One-off donations are deliberately out:
  * this answers "what recurs every month", not "what came in". */
@@ -351,6 +374,8 @@ export type SupporterSince = {
   accountId: number;
   nickname: string;
   since: Date;
+  /** How their nickname is drawn, null for a plain one. */
+  style: NameStyle | null;
 };
 
 /**
@@ -366,6 +391,10 @@ export async function getPublicSupportersSince(): Promise<SupporterSince[]> {
       accountKey: account.accountId,
       nickname: user.name,
       since: sql<Date>`coalesce(${subscription.startedAt}, ${subscription.createdAt})`,
+      font: supportProfile.nameFont,
+      effect: supportProfile.nameEffect,
+      color: supportProfile.nameColor,
+      color2: supportProfile.nameColor2,
     })
     .from(subscription)
     .innerJoin(user, eq(user.id, subscription.userId))
@@ -378,7 +407,14 @@ export async function getPublicSupportersSince(): Promise<SupporterSince[]> {
   return rows.flatMap((r) => {
     const wg = wgIdentityFromAccountKey(r.accountKey);
     return wg
-      ? [{ ...wg, nickname: r.nickname, since: new Date(r.since) }]
+      ? [
+          {
+            ...wg,
+            nickname: r.nickname,
+            since: new Date(r.since),
+            style: parseNameStyle(r),
+          },
+        ]
       : [];
   });
 }

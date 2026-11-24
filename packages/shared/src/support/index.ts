@@ -79,3 +79,5 @@ export function supporterTier(months: number): SupporterTier {
   if (months >= SUPPORTER_TIER_MONTHS[SupporterTier.Bronze]) return SupporterTier.Bronze;
   return SupporterTier.Base;
 }
+
+export * from "./name-style";

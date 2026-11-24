@@ -1,6 +1,6 @@
 "use client";
 
-import { DiscordLogoIcon } from "@phosphor-icons/react/dist/ssr";
+import { DiscordLogoIcon, PaintBrushIcon } from "@phosphor-icons/react/dist/ssr";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { SupportMode } from "@unicum.gg/shared";
@@ -210,6 +210,29 @@ export function SupportBox() {
     />
   ) : null;
 
+  // The style itself is set in the account settings, where the other things
+  // a supporter can choose live; this only says it exists and opens it there.
+  const namePicker = (
+    <div className="flex items-center justify-between gap-3 border-t border-fd-border pt-4">
+      <div className="flex min-w-0 flex-col gap-0.5">
+        <span className="text-sm font-semibold">{t("name-style-title")}</span>
+        <span className="text-xs text-fd-muted-foreground">
+          {t("name-style-hint", { NAME: APP.NAME })}
+        </span>
+      </div>
+      <Button
+        size="sm"
+        variant="secondary"
+        onClick={() => {
+          window.location.hash = "#settings/profile";
+        }}
+      >
+        <PaintBrushIcon className="size-4" />
+        {t("name-style-open")}
+      </Button>
+    </div>
+  );
+
   if (me.isSupporter) {
     return (
       <div className="flex flex-col gap-4">
@@ -218,6 +241,7 @@ export function SupportBox() {
         </p>
         {anonymitySwitch}
         {clanSwitch}
+        {namePicker}
         {me.discordRoleEnabled && (
           <div className="flex flex-col gap-2">
             <Button
@@ -293,6 +317,7 @@ export function SupportBox() {
           {anonymitySwitch}
         </div>
       )}
+      {namePicker}
     </div>
   );
 }

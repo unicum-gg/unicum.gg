@@ -19,6 +19,7 @@ import { PlayerActionsMenu } from "@/components/players/detail/actions-menu";
 import { PlayerSettingsButton } from "@/components/players/detail/settings-button";
 import { SupporterBadgeState } from "@/components/entity/badges/supporter-badge";
 import { useSupporterTier } from "@/components/entity/badges/supporter-tier";
+import { StyledNickname } from "@/components/entity/name-style";
 import type { ClanStint } from "@unicum.gg/shared";
 import { Interpolate } from "@/components/interpolate";
 import { DateShape } from "@/lib/date-shapes";
@@ -120,7 +121,12 @@ export function PlayerHeader(
       <div className="flex min-w-0 flex-1 flex-col">
         <div className="flex min-w-0 flex-1 items-center gap-3 px-4 py-3">
           <h1 className="min-w-0 flex-1 font-heading text-2xl font-bold tracking-tight wrap-break-word sm:text-4xl">
-            {nickname}
+            <StyledNickname
+              region={region}
+              nickname={nickname}
+              isSupporter={supporterBadge === SupporterBadgeState.Active}
+              animated
+            />
             {badges.length > 0 && (
               <span className="ml-2 inline-flex items-center gap-1 align-middle">
                 <BadgeCluster badges={badges} size={24} />

@@ -362,3 +362,223 @@ html[data-hide-streams="1"] [data-streams-rail] {
 html[data-hide-streams="1"] [data-streams-slot] {
   display: block;
 }
+
+/* A supporter's nickname effects (components/entity/name-style), drawn the
+   way Discord draws its display name styles: the shades arrive as custom
+   properties opened out from one picked colour, and each effect is the same
+   construction as theirs (a white tube under a coloured stroke for Neon, a
+   shine sweeping down under a dark outline for Toon, a coloured copy bouncing
+   under a white face for Pop, a squish rippling letter by letter for Gummy, a
+   rainbow scrolling for Prism). They loop under `.ns-live`, where the nickname
+   is the subject of the page, and only under the pointer in a list; never for
+   a reader who asked for less motion. */
+.ns {
+  position: relative;
+  z-index: 0;
+}
+.ns-solid {
+  color: var(--ns-main);
+}
+.ns-gradient {
+  background-image: linear-gradient(to right bottom, var(--ns-main) 10%, var(--ns-second) 90%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.ns-prism {
+  --ns-prism-cycle: max(6ch, 38px);
+  background-image: linear-gradient(
+    90deg,
+    #fe9242 0%,
+    #35ed7e 20%,
+    #ffe047 40%,
+    #ff4cd2 60%,
+    #5865f2 80%,
+    #fe9242 100%
+  );
+  background-repeat: repeat;
+  background-size: var(--ns-prism-cycle) auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.ns-neon {
+  --ns-glow: calc(4px + 0.12em);
+  color: #fff;
+  paint-order: stroke;
+  -webkit-text-stroke: calc(0.04em + 1px) var(--ns-neon);
+  text-shadow: 0 0 var(--ns-glow) var(--ns-main);
+}
+.ns-toon {
+  --ns-stroke: calc(1.6px + 0.04em);
+  display: inline-block;
+  color: var(--ns-toon);
+  paint-order: stroke;
+  -webkit-text-stroke: var(--ns-stroke) var(--ns-toon);
+}
+.ns-toon::before {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+    #fff 0,
+    var(--ns-light-2) 8%,
+    var(--ns-light-1) 15%,
+    var(--ns-main) 25%,
+    var(--ns-light-2) 45%,
+    var(--ns-main) 55%,
+    #fff 75%,
+    var(--ns-light-2) 83%,
+    var(--ns-light-1) 90%,
+    var(--ns-main) 100%
+  );
+  background-size: 100% 400%;
+  background-position: 50% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 0 transparent;
+  white-space: nowrap;
+}
+.ns-pop {
+  --ns-stroke: calc(1.2px + 0.04em);
+  --ns-drop: 0.08em;
+  display: inline-block;
+  color: #fff;
+  paint-order: stroke;
+  -webkit-text-stroke: var(--ns-stroke) var(--ns-dark-2);
+  padding-bottom: var(--ns-drop);
+  margin-bottom: calc(var(--ns-drop) * -1);
+}
+.ns-pop::before {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: linear-gradient(
+    to left bottom,
+    var(--ns-light-1) 0,
+    var(--ns-light-1) 6%,
+    var(--ns-main) 20%,
+    var(--ns-main) 50%,
+    var(--ns-light-1) 56%,
+    var(--ns-main) 70%,
+    var(--ns-main) 100%
+  );
+  background-size: 200% 200%;
+  background-position: 100% 0;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: var(--ns-stroke) transparent;
+  transform: translate3d(0, var(--ns-drop), 0);
+  white-space: nowrap;
+}
+.ns-gummy {
+  font-kerning: none;
+  font-variant-ligatures: none;
+}
+.ns-letter {
+  display: inline-block;
+  white-space: pre;
+}
+.ns-live.ns-neon,
+.ns-neon:hover {
+  animation: ns-neon 4s cubic-bezier(0.24, 0.31, 0.36, 0.93) infinite;
+}
+.ns-live.ns-toon::before,
+.ns-toon:hover::before {
+  animation: ns-toon 4s cubic-bezier(0.44, 0.29, 0.48, 1) infinite;
+}
+.ns-live.ns-pop,
+.ns-pop:hover {
+  animation: ns-pop 4s cubic-bezier(0.44, 0.29, 0.48, 1) infinite;
+}
+.ns-live.ns-pop::before,
+.ns-pop:hover::before {
+  animation: ns-pop-shadow 4s cubic-bezier(0.44, 0.29, 0.48, 1) infinite;
+}
+.ns-live.ns-prism,
+.ns-prism:hover {
+  animation: ns-prism 2s linear infinite;
+}
+.ns-live .ns-letter,
+.ns-gummy:hover .ns-letter {
+  animation: ns-gummy 4s cubic-bezier(0.44, 0.29, 0.48, 1) infinite;
+  animation-delay: calc(var(--ns-letter, 0) * 50ms);
+}
+@keyframes ns-neon {
+  0%, 15%, 18%, 20%, 23%, 25%, 50%, 51%, 100% {
+    color: #fff;
+  }
+  16%, 22%, 28% {
+    color: hsl(from var(--ns-main) h calc(min(100, s * 1.1 + 10)) 85);
+  }
+}
+@keyframes ns-toon {
+  0%, 5% {
+    background-position: 50% 0;
+  }
+  55%, 100% {
+    background-position: 50% 100%;
+  }
+}
+@keyframes ns-pop {
+  0% {
+    transform: translateZ(0);
+  }
+  18% {
+    transform: translate3d(0, -0.05em, 0);
+  }
+  35% {
+    transform: translate3d(0, 0.08em, 0);
+  }
+  50%, 100% {
+    transform: translateZ(0);
+  }
+}
+@keyframes ns-pop-shadow {
+  0% {
+    background-position: 100% 0;
+    transform: translate3d(0, 0.08em, 0);
+  }
+  18% {
+    transform: translate3d(0, 0.13em, 0);
+  }
+  35% {
+    transform: translateZ(0);
+  }
+  50%, 100% {
+    background-position: 0 100%;
+    transform: translate3d(0, 0.08em, 0);
+  }
+}
+@keyframes ns-prism {
+  to {
+    background-position-x: calc(var(--ns-prism-cycle) * -1);
+  }
+}
+@keyframes ns-gummy {
+  0%, 35%, 100% {
+    transform: scale(1, 1);
+  }
+  7% {
+    transform: scale(1.28, 0.72);
+  }
+  14% {
+    transform: scale(0.82, 1.18);
+  }
+  21% {
+    transform: scale(1.1, 0.9);
+  }
+  28% {
+    transform: scale(0.96, 1.04);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ns,
+  .ns::before,
+  .ns-letter {
+    animation: none !important;
+  }
+}

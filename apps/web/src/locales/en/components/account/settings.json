@@ -27,5 +27,16 @@
   "billing-total": "Given so far",
   "billing-total-description": "Everything you have given, one-off gifts included. Thank you.",
   "anonymous": "Hide me on the supporters board",
-  "anonymous-description": "Your name and your supporter badge stay off the public board and your profile."
+  "anonymous-description": "Your name and your supporter badge stay off the public board and your profile.",
+  "name-style-surprise": "Surprise me",
+  "name-style-apply": "Apply",
+  "name-style-clear": "Back to a plain nickname",
+  "name-style-saved": "Your nickname style is saved",
+  "name-style-cleared": "Your nickname is plain again",
+  "name-style-locked": "Try any style on your own name. Supporters keep it.",
+  "name-style-unlock": "Become a supporter",
+  "section-profile": "Profile",
+  "section-profile-description": "How you appear to everybody else on unicum.gg.",
+  "name-style-title": "Nickname style",
+  "name-style-description": "How your nickname is drawn everywhere on the site: your profile, the leaderboards, clan lists and tournament rosters."
 }
