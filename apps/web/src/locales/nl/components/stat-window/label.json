@@ -2,5 +2,5 @@
   "day": "Laatst 24u",
   "days": "Laatste {count}d",
   "battle": "Laatste gevecht",
-  "battles": "Laatste {count} gevechten"
+  "battles": "{count} gevechten"
 }

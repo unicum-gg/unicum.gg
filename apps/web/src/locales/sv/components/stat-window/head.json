@@ -1,3 +1,3 @@
 {
-  "since": "Sedan {date}"
+  "since": "Vi har inget rekord äldre än {date}, så den här kolumnen täcker allt sedan dess."
 }

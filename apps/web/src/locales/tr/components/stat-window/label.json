@@ -2,5 +2,5 @@
   "day": "Son 24saat",
   "days": "Son {count} gün",
   "battle": "Son savaş",
-  "battles": "Son {count} savaş"
+  "battles": "{count} savaşlar"
 }

@@ -2,5 +2,5 @@
   "day": "지난 24시간",
   "days": "최근 {count}일",
   "battle": "최근 전투",
-  "battles": "최근 {count} 전투"
+  "battles": "{count} 전투"
 }

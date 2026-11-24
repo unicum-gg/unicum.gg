@@ -2,5 +2,5 @@
   "day": "Ultime 24h",
   "days": "Ultimi {count}g",
   "battle": "Ultima battaglia",
-  "battles": "Ultime {count} battaglie"
+  "battles": "{count} battaglie"
 }

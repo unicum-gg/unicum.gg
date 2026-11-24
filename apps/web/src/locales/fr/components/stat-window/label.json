@@ -2,5 +2,5 @@
   "day": "Dernières 24h",
   "days": "Derniers {count} j",
   "battle": "Dernière bataille",
-  "battles": "Dernières {count} batailles"
+  "battles": "{count} batailles"
 }

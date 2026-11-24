@@ -2,5 +2,5 @@
   "day": "Апошнія 24г",
   "days": "Апошнія {count} дні",
   "battle": "Апошні бой",
-  "battles": "Апошнія {count} баі"
+  "battles": "{count} баі"
 }

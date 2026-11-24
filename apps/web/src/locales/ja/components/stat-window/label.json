@@ -2,5 +2,5 @@
   "day": "過去24時間",
   "days": "過去{count}日",
   "battle": "前回の戦闘",
-  "battles": "過去{count}戦闘"
+  "battles": "{count}戦闘"
 }

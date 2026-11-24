@@ -2,5 +2,5 @@
   "day": "Pēdējās 24h",
   "days": "Pēdējās {count} d",
   "battle": "Pēdējā kauja",
-  "battles": "Pēdējās {count} kaujas"
+  "battles": "{count} kaujas"
 }

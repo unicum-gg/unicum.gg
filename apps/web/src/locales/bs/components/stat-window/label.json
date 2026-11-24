@@ -2,5 +2,5 @@
   "day": "Posljednjih 24h",
   "days": "Posljednjih {count} dana",
   "battle": "Posljednja bitka",
-  "battles": "Posljednjih {count} bitki"
+  "battles": "{count} bitke"
 }

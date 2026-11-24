@@ -2,5 +2,5 @@
   "day": "Последние 24ч",
   "days": "Последние {count} д",
   "battle": "Был в бою",
-  "battles": "Последние {count} боёв"
+  "battles": "{count, plural, one {# бой} few {# боя} many {# боёв} other {# боёв}}"
 }

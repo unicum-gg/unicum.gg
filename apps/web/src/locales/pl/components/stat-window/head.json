@@ -1,3 +1,3 @@
 {
-  "since": "Od {date}"
+  "since": "Nie mamy rekordu starszego niż {date}, więc ta kolumna obejmuje wszystko od tego czasu."
 }

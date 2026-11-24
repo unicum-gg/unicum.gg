@@ -2,5 +2,5 @@
   "day": "Останні 24 год",
   "days": "Останні {count} дб",
   "battle": "Був у бою",
-  "battles": "Останні {count} бої"
+  "battles": "{count} бої"
 }

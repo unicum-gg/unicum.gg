@@ -2,5 +2,5 @@
   "day": "Соңғы 24 сағ",
   "days": "Соңғы {count} күн",
   "battle": "Соңғы шайқас",
-  "battles": "Соңғы {count} ұрыс"
+  "battles": "{count} ұрыс"
 }

@@ -2,5 +2,5 @@
   "day": "Viimeiset 24h",
   "days": "Viimeiset {count} p",
   "battle": "Edellinen taistelu",
-  "battles": "Viimeiset {count} taistelut"
+  "battles": "Taistelut: {count}"
 }

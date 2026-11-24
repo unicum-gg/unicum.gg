@@ -2,5 +2,5 @@
   "day": "Paskutinės 24 val.",
   "days": "Paskutinės {count} d.",
   "battle": "Paskutinis mūšis",
-  "battles": "Paskutiniai {count} mūšiai"
+  "battles": "{count} mūšių"
 }

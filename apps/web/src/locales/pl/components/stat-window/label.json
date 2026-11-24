@@ -2,5 +2,5 @@
   "day": "Ostatnie 24h",
   "days": "Ostatnie {count} dn.",
   "battle": "Ostatnia bitwa",
-  "battles": "{count, plural, one {Ostatnia bitwa} few {Ostatnie # bitwy} many {Ostatnich # bitew} other {Ostatnich # bitew}}"
+  "battles": "{count} bitwy"
 }

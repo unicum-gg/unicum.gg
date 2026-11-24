@@ -1,3 +1,3 @@
 {
-  "since": "Od {date}"
+  "since": "Nemáme záznam starší ako {date}, takže tento stĺpec zajema všetko odvtedy."
 }
