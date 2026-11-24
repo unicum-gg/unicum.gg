@@ -96,11 +96,21 @@ export async function buildStage({
    */
   lit?: () => void;
 }): Promise<Built | null> {
-  const renderer = new THREE.WebGLRenderer({
-    canvas: surface,
-    antialias: true,
-    alpha: true,
-  });
+  // **A browser without WebGL is a vehicle with no model, not a failure.** The
+  // constructor throws there (hardware acceleration off, a sandboxed GPU), and
+  // thrown it left the band waiting forever on a tank that could never come.
+  // Answered as absent, the caller shows the render, which is what that reader
+  // can have.
+  let renderer: InstanceType<typeof THREE.WebGLRenderer>;
+  try {
+    renderer = new THREE.WebGLRenderer({
+      canvas: surface,
+      antialias: true,
+      alpha: true,
+    });
+  } catch {
+    return null;
+  }
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.NeutralToneMapping;
