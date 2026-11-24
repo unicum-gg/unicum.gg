@@ -19,9 +19,12 @@ import ROUTES from "@/constants/routes";
 import { useAccount, type AccountState } from "@/hooks/use-account";
 import { useTranslation } from "@/hooks/use-translation";
 import { useSession } from "@/lib/auth-client";
+import type { unicum } from "@/services/sdk";
 import { NameStyleChoices } from "./name-style/choices";
 import { NameStylePreview } from "./name-style/preview";
 import { SettingsSkeleton } from "./settings-skeleton";
+
+type SupporterTiers = Awaited<ReturnType<typeof unicum.support.tiers>>;
 
 function pick<T>(values: T[]): T {
   return values[Math.floor(Math.random() * values.length)];
@@ -83,9 +86,23 @@ export function SettingsNameStyle() {
         { revalidate: false },
       );
       setDraft(null);
-      // Every nickname on the site reads this entry; refreshing it now shows
-      // the new style without waiting out its five-minute cache.
-      void mutate("support-tiers");
+      // Every nickname on the site reads this entry. It is written in place
+      // rather than refetched: the endpoint is served with a five-minute
+      // max-age, so a refetch reads the browser's copy, the old style.
+      const key = nickname.toLowerCase();
+      void mutate(
+        "support-tiers",
+        (prev: SupporterTiers | undefined) =>
+          prev && {
+            ...prev,
+            supporters: prev.supporters.map((s) =>
+              s.region === region && s.nickname.toLowerCase() === key
+                ? { ...s, style: next }
+                : s,
+            ),
+          },
+        { revalidate: false },
+      );
       toast.success(next ? t("name-style-saved") : t("name-style-cleared"));
     } catch {
       toast.error(t("could-not-save"));
