@@ -158,6 +158,70 @@ export function standOff(
 }
 
 /**
+ * Where the vehicle stands in the frame, and the only thing that decides it.
+ *
+ * **Both halves of an arrival read it, which is the whole reason it is here.**
+ * The anchor is a shift of the frustum rather than a move of the camera, so it
+ * is part of the projection and not of the scene: a frame drawn without it is
+ * the same room from the same camera, 134 pixels to one side of itself at the
+ * width this page is usually read at. The room's first frame is drawn before
+ * the loop exists (see `standCamera`), and the loop is what used to own this,
+ * so that frame was anchored nowhere while the frame it was handed and every
+ * frame after it were anchored here. What a reader saw was the floor standing
+ * in the wrong place for as long as the vehicle took to arrive, then stepping
+ * sideways into it, which reads as the room being rebuilt under them.
+ *
+ * Done with a view offset rather than by moving the camera: the frustum shifts
+ * and the camera does not, so orbiting still turns about the vehicle rather
+ * than about a point beside it.
+ *
+ * **And it stays there until it is asked to move.** The offset is the hero's
+ * framing, not a seam to be undone: the vehicle sits off to the left in
+ * perspective because that is where the page wants it, and turning it around
+ * says nothing about wanting the page rearranged.
+ */
+export function anchorFrame(
+  camera: Three.PerspectiveCamera,
+  surface: HTMLElement,
+  /**
+   * The page's own column, where the picture is framed inside one.
+   *
+   * **The anchor is a fraction of the column, not of the canvas.** They were
+   * the same thing while the hero ended where the reading did. Now that it runs
+   * to the edges of the window they are not, and a vehicle left at a fraction
+   * of the canvas drifts away from the title it is supposed to stand beside,
+   * further on every wider screen. Null off the page, where what the picture is
+   * framed within is all there is of it.
+   */
+  column: DOMRect | null,
+  /** How far the frame has travelled from the hero's anchor to the middle. */
+  centring: number,
+): void {
+  const { clientWidth: w, clientHeight: h } = surface;
+  if (!w || !h) return;
+  // Both boxes are read the same way on purpose: `clientWidth` is in CSS pixels
+  // and a bounding rect is in the pixels actually on screen, and the two part
+  // company under any zoom or transform above this canvas. Mixed, the vehicle
+  // lands somewhere neither frame asked for.
+  const seen = surface.getBoundingClientRect();
+  const inset = column ? column.left - seen.left : 0;
+  const across = column?.width || seen.width;
+  const anchorX = seen.width
+    ? (inset + ANCHOR_X * across) / seen.width
+    : ANCHOR_X;
+  const away = 1 - centring;
+  camera.setViewOffset(
+    w,
+    h,
+    (0.5 - anchorX) * w * away,
+    (ANCHOR_Y - 0.5) * -h * away,
+    w,
+    h,
+  );
+  camera.updateProjectionMatrix();
+}
+
+/**
  * How high the camera looks when there is no vehicle to measure, in metres.
  *
  * The rig aims at the middle of the one it has, which runs from about a metre

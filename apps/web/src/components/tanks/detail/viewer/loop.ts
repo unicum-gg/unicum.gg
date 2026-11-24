@@ -6,10 +6,11 @@ import type { loadArmour } from "@/services/tank-viewer/armour";
 import type { loadVisual } from "@/services/tank-viewer";
 import type { Shot } from "@/services/tank-viewer/armour";
 import { aimAt, type Sweep } from "@/components/tanks/detail/viewer/aiming";
-import { ANCHOR_X, ANCHOR_Y } from "@/components/tanks/detail/viewer/framing";
-import { hold as holdRoom } from "@/components/tanks/detail/viewer/handover";
+import { anchorFrame } from "@/components/tanks/detail/viewer/framing";
+import { hold as holdRoom, holding } from "@/components/tanks/detail/viewer/handover";
 import type { Reading } from "@/components/tanks/detail/viewer/readout";
 import { Presentation } from "@/components/tanks/detail/viewer/presentation";
+import type { Room } from "@/components/tanks/detail/viewer/hangar";
 import type { Rig } from "@/components/tanks/detail/viewer/rig";
 import { View } from "@/components/tanks/detail/viewer/views";
 
@@ -28,6 +29,8 @@ export type Stage = {
   camera: Three.PerspectiveCamera;
   controls: OrbitControls;
   surface: HTMLCanvasElement;
+  /** The room the vehicle stands in, drawn apart from it. */
+  room: Room;
   rig: Rig;
   built: NonNullable<Awaited<ReturnType<typeof loadVisual>>>;
   armour: Awaited<ReturnType<typeof loadArmour>> | null;
@@ -94,6 +97,7 @@ export function runStage(
     camera,
     controls,
     surface,
+    room,
     rig,
     built,
     armour,
@@ -105,6 +109,12 @@ export function runStage(
     awake: awakeUntil,
   } = stage;
   let band = { left: 0, top: 0, width: 0, height: 0 };
+  // Off the page, there is no column to keep to: what the picture is framed
+  // within is all there is of it.
+  const columnBox = () =>
+    page.presentationRef.current === Presentation.Inline
+      ? (page.column?.current?.getBoundingClientRect() ?? null)
+      : null;
   const resize = () => {
     wake();
     // Kept while the canvas is still in the document, in page coordinates:
@@ -137,49 +147,10 @@ export function runStage(
     // tenth of a width off, which is small enough to read as a nudge and
     // large enough to see.
     //
-    // Done with a view offset rather than by moving the camera: the frustum
-    // shifts and the camera does not, so orbiting still turns about the
-    // vehicle rather than about a point beside it.
-    //
-    // **And it stays there until it is asked to move.** The offset is the
-    // hero's framing, not a seam to be undone: the vehicle sits off to the
-    // left in perspective because that is where the page wants it, and
-    // turning it around says nothing about wanting the page rearranged. The
-    // button below is what brings it to the middle, for reading a hull
-    // rather than looking at a hero.
-    //
-    // **The anchor is a fraction of the page.column, not of the canvas.** They
-    // were the same thing while the hero ended where the reading did. Now
-    // that it runs to the edges of the window they are not, and a vehicle
-    // left at a fraction of the canvas drifts away from the title it is
-    // supposed to stand beside, further on every wider screen.
-    //
-    // Both boxes are read the same way on purpose: `clientWidth` is in CSS
-    // pixels and a bounding rect is in the pixels actually on screen, and
-    // the two part company under any zoom or transform above this canvas.
-    // Mixed, the vehicle lands somewhere neither frame asked for.
-    const seen = surface.getBoundingClientRect();
-    // Off the page, there is no page.column to keep to: what the picture is
-    // framed within is all there is of it.
-    const box =
-      page.presentationRef.current === Presentation.Inline
-        ? page.column?.current?.getBoundingClientRect()
-        : undefined;
-    const inset = box ? box.left - seen.left : 0;
-    const across = box?.width || seen.width;
-    const anchorX = seen.width
-      ? (inset + ANCHOR_X * across) / seen.width
-      : ANCHOR_X;
-    const away = 1 - rig.centring;
-    camera.setViewOffset(
-      w,
-      h,
-      (0.5 - anchorX) * w * away,
-      (ANCHOR_Y - 0.5) * -h * away,
-      w,
-      h,
-    );
-    camera.updateProjectionMatrix();
+    // **Asked of the framing rather than worked out here**, because the room's
+    // first frame is drawn before this loop exists and has to be anchored the
+    // same way. See `anchorFrame`.
+    anchorFrame(camera, surface, columnBox(), rig.centring);
   };
   resize();
   const watching = new ResizeObserver(resize);
@@ -248,8 +219,28 @@ export function runStage(
   );
   if (page.held.current) watchingScreen.observe(page.held.current);
 
+  /**
+   * Whether the room is up, which it is not while one is held over it.
+   *
+   * Read off the sheet rather than timed against it: the dissolve is a CSS
+   * transition and this is a render loop, and the one thing that cannot happen
+   * is the two disagreeing, since what they are each drawing is the same floor.
+   * It also cannot leave the room out: a sheet that goes early, or was never
+   * there, answers nothing held and the floor comes up whole.
+   */
+  let roomUp = holding() === 0;
+  if (roomUp) room.fade(1);
+
   const draw = () => {
     frame = requestAnimationFrame(draw);
+    // The floor at the complement of what is still held above it, so the two
+    // come to exactly one grid rather than to two washes of the same colour.
+    // See `Room.fade`.
+    if (!roomUp) {
+      const over = holding();
+      room.fade(1 - over);
+      roomUp = over === 0;
+    }
     // **A track that never moves reads as a decal.** This is the idle crawl
     // a garage shows: slow enough to be a detail rather than a distraction,
     // and only for vehicles whose axles the mirror knows. The armour views
@@ -301,6 +292,7 @@ export function runStage(
     // a second with the camera stopped, the tracks stopped and nobody
     // touching anything.
     const busy =
+      !roomUp ||
       travelling ||
       gliding ||
       drifted ||
@@ -360,6 +352,12 @@ export function runStage(
     // and put back from the same camera it was taken from, the two floors
     // land on each other exactly and the only thing that crosses is the
     // vehicle, which is the point.
+    //
+    // **Whole also means a floor at full strength**, which it may not be at
+    // this instant: a reader who moves on during a crossing would otherwise
+    // hand the next vehicle a room half way up, and it would come up against
+    // that rather than against a finished picture.
+    room.fade(1);
     frameOnce();
     holdRoom(surface, band, {
       position: camera.position.toArray(),

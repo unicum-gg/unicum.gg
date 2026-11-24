@@ -142,6 +142,23 @@ export function inherited(): Held["from"] | null {
   return held.from;
 }
 
+/**
+ * How much of the held frame is still on screen, from 1 to 0.
+ *
+ * Read so the room arriving underneath can draw itself at the complement and
+ * the two never come to more than one floor. See `Room.fade`.
+ *
+ * **Computed rather than specified**: `style.opacity` answers the value that
+ * was asked for, which is 0 from the instant the dissolve is set going, so the
+ * room would come up whole on the first frame of a fade that has 320
+ * milliseconds left to run.
+ */
+export function holding(): number {
+  if (!sheet || !sheet.isConnected) return 0;
+  const over = Number.parseFloat(getComputedStyle(sheet).opacity);
+  return Number.isFinite(over) ? over : 0;
+}
+
 /** Let the sheet go, now that there is a vehicle underneath it. */
 export function release(): void {
   held = null;

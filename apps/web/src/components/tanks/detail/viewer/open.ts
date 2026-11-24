@@ -14,6 +14,7 @@ import { VIEW_DISSOLVE } from "@/components/tanks/detail/viewer/framing";
 import { inherited, release } from "@/components/tanks/detail/viewer/handover";
 import { runStage, type Page } from "@/components/tanks/detail/viewer/loop";
 import { mirror } from "@/components/tanks/detail/viewer/mirror";
+import { Presentation } from "@/components/tanks/detail/viewer/presentation";
 
 /**
  * How long the hero waits for the last of a vehicle's textures.
@@ -178,6 +179,17 @@ export async function openStage(
     // the same floor as the frame being handed over rather than correcting it
     // a few hundred milliseconds later.
     seen: previous,
+    // And where in the band it stands, which is the other half of the same
+    // sentence: the camera and the anchor together are where the floor lands.
+    framing: () => ({
+      column:
+        handles.presentationRef.current === Presentation.Inline
+          ? (from.column?.current?.getBoundingClientRect() ?? null)
+          : null,
+      // The framing the last vehicle was left in, which is what the frame
+      // being handed over was drawn with, and what the rig opens on.
+      centring: from.liked.centred ? 1 : 0,
+    }),
     nudge: handles.nudge,
     // **The room first, and the vehicle into it.** Measured on a throttled
     // connection, the studio is lit about a second and a half before the
@@ -203,6 +215,7 @@ export async function openStage(
     turret,
     gun,
     built,
+    room,
     armour,
     collision,
     first,
@@ -304,6 +317,7 @@ export async function openStage(
       camera,
       controls,
       surface,
+      room,
       rig,
       built,
       armour,

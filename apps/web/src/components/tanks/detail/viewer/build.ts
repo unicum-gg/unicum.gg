@@ -5,8 +5,8 @@ import type { OrbitControls as Controls } from "three/examples/jsm/controls/Orbi
 import type { loadArmour } from "@/services/tank-viewer/armour";
 import type { loadVisual, Mounted } from "@/services/tank-viewer";
 import type { Collision } from "@/services/tank-viewer/armour/plates";
-import { hangar } from "@/components/tanks/detail/viewer/hangar";
-import { standCamera } from "@/components/tanks/detail/viewer/framing";
+import { hangar, type Room } from "@/components/tanks/detail/viewer/hangar";
+import { anchorFrame, standCamera } from "@/components/tanks/detail/viewer/framing";
 import { SKIN_FOLDER } from "@/services/tank-viewer/styles";
 import { grab } from "@/services/tank-viewer/spare";
 
@@ -30,6 +30,8 @@ export type Built = {
   turret: Three.Group;
   gun: Three.Group;
   built: NonNullable<Awaited<ReturnType<typeof loadVisual>>>;
+  /** The room it stands in, which is drawn apart from it. */
+  room: Room;
   armour: Awaited<ReturnType<typeof loadArmour>> | null;
   collision: Collision | null;
   named: string[];
@@ -55,6 +57,7 @@ export async function buildStage({
   undressed,
   live,
   seen,
+  framing,
   nudge,
   lit,
 }: {
@@ -86,6 +89,16 @@ export async function buildStage({
    * `standCamera`.
    */
   seen?: { position: number[]; target: number[] } | null;
+  /**
+   * Where the hero wants the vehicle to stand in the frame.
+   *
+   * The other half of the sentence above: the camera says where the room is
+   * seen from and this says where in the picture it lands, and the frame being
+   * handed over was drawn with both. Asked as a function because it reads the
+   * page's column, which is laid out by the time the room is drawn and not by
+   * the time this is called. See `anchorFrame`.
+   */
+  framing?: () => { column: DOMRect | null; centring: number };
   nudge: RefObject<((ms?: number) => void) | null>;
   /**
    * The studio is lit and has been drawn once, so the canvas is worth showing.
@@ -247,7 +260,12 @@ export async function buildStage({
   // nobody can trace back to the palette.
   // Resolved on the canvas, so the floor takes the hero's own theme rather
   // than the page's: the hero is dark in both.
-  hangar(THREE, scene, surface);
+  const room = hangar(THREE, scene, surface);
+  // **Out of sight while the frame it is taking over from holds it.** The room
+  // on that frame is this one, to the pixel, so this one has nothing to add
+  // until the sheet above starts letting go. The loop brings it up at the
+  // complement of what is still held. See `Room.fade`.
+  room.fade(seen ? 0 : 1);
   const vehicle = new THREE.Group();
   // **The point the body tips about, which is not where it hangs.** The
   // client names it along the hull and it is a metre out on some vehicles;
@@ -310,6 +328,16 @@ export async function buildStage({
         // finally measures one is then a glide at the instant the tank
         // appears rather than the floor moving under an empty room.
         standCamera(camera, controls, seen);
+        // **And anchored in the band, which the loop cannot do from here.**
+        // The anchor is a shift of the frustum, so it is as much a part of
+        // where the floor lands as the camera is, and the loop that owns it
+        // does not exist until the vehicle has been raised. Left to it, this
+        // frame was the only one in the vehicle's life drawn without the
+        // anchor: the room stood a hundred and thirty pixels to one side of
+        // the frame it was taking over from, for as long as the model took to
+        // arrive, and then stepped into place.
+        const hero = framing?.();
+        if (hero) anchorFrame(camera, surface, hero.column, hero.centring);
         // **One frame, and then nothing until the vehicle arrives.** What is in
         // the scene at this moment is the floor, the grid and the lamps, and
         // none of it moves, so a loop here would redraw the same picture a
@@ -417,6 +445,7 @@ export async function buildStage({
     turret,
     gun,
     built,
+    room,
     armour,
     collision,
     named,

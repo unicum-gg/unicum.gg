@@ -9,12 +9,28 @@ import { readPalette } from "@/services/tank-viewer/palette";
 // one after the other stand in the same place. Its own file because none of it
 // depends on which tank is being drawn, which is the rest of the build.
 
+/** What the room answers once it is built: how much of it is drawn. */
+export type Room = {
+  /**
+   * How much of the floor to draw, where 1 is the whole of it.
+   *
+   * **Because the room is sometimes on screen twice.** A vehicle arriving from
+   * another one is drawn under a photograph of the room it is replacing, and
+   * the two floors now land on each other exactly, which is the point and also
+   * the problem: the grid is a 14% wash of the page's own rule colour, and two
+   * of them composite to 26%, so the floor darkened for as long as the frame
+   * was held and then lifted as it dissolved. Drawn at the complement of what
+   * is still held above it, the two always come to exactly one grid.
+   */
+  fade(at: number): void;
+};
+
 /** Build the hangar floor, in the colours the page is already using. */
 export function hangar(
   THREE: typeof import("three"),
   scene: THREE.Object3D,
   surface: HTMLElement,
-): void {
+): Room {
   const paint = readPalette({ rule: "--muted-foreground" }, surface) ?? {
     rule: 0x818181,
   };
@@ -48,11 +64,14 @@ export function hangar(
         rule: {
           value: new THREE.Color().setHex(paint.rule, THREE.SRGBColorSpace),
         },
+        // How much of the floor is this one's to draw. See `Room.fade`.
+        drawn: { value: 1 },
       },
       vertexShader:
         "varying vec2 vXy; void main() { vXy = position.xy; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }",
       fragmentShader: `
         uniform vec3 rule;
+        uniform float drawn;
         varying vec2 vXy;
 
         // How much of this pixel a line of \`weight\` metres covers, at
@@ -82,7 +101,7 @@ export function hangar(
           // mixing towards it from the page come out the same, and this way
           // there is no surface to keep in step with the page.
           float on = max(fine * 0.14, coarse * 0.3);
-          gl_FragColor = vec4(rule, lit * on);
+          gl_FragColor = vec4(rule, lit * on * drawn);
         }
       `,
     }),
@@ -92,4 +111,11 @@ export function hangar(
   // has an answer rather than a coin toss.
   ground.position.y = 0.003;
   floor.add(ground);
-  scene.add(floor);}
+  scene.add(floor);
+  const material = ground.material as THREE.ShaderMaterial;
+  return {
+    fade: (at) => {
+      material.uniforms.drawn.value = Math.min(1, Math.max(0, at));
+    },
+  };
+}

@@ -246,7 +246,15 @@ export function rigFor({
   // between the two is asked for, never inferred: turning the vehicle is not
   // a request to reframe the page around it. `centring` is where the frame
   // is, `settled` where it is going, and the draw loop closes the gap.
-  let centring = 0;
+  //
+  // **Seeded like `framed` above, from the same answer.** They are the state
+  // and the position of one thing, and read apart they contradicted each
+  // other: a reader who had brought a vehicle to the middle opened the next
+  // one with the button already pressed and the vehicle back at the hero's
+  // anchor. It is also what the room's first frame was drawn with, so left at
+  // zero the loop's first pass moved the floor out from under a frame that had
+  // just been handed over correctly.
+  let centring = centredAtFirst ? 1 : 0;
 
   // **A view that moves on its own has to be followed, not caught up with.**
   //
