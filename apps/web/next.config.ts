@@ -24,6 +24,18 @@ const nextConfig: NextConfig = {
   // bundle includes the transpiled `@unicum.gg/*` packages and hoisted deps.
   output: "standalone",
   outputFileTracingRoot: path.join(__dirname, "../../"),
+  // `tiktoken` is the WASM token counter behind the Markdown twin's
+  // `x-markdown-tokens` header. It has to stay OUT of the bundle: its loader
+  // reaches its 5.6 MB `tiktoken_bg.wasm` with an `fs.readFileSync` on a path
+  // it computes at runtime by walking up from `__dirname`, which no bundler
+  // can rewrite and which file tracing cannot follow either, reading static
+  // requires only.
+  //
+  // Being external is only half of it, and the other half is NOT here: the
+  // traced files land under `node_modules/.pnpm/...` with nothing linking them
+  // from `apps/web/node_modules`, so `scripts/copy-standalone-assets.ts` is
+  // what makes the package resolvable in the output. Keep the two lists equal.
+  serverExternalPackages: ["tiktoken"],
   // Allow a separate build output dir (e.g. running a prod `next start` on one
   // port while `next dev` uses the default `.next` on another). Defaults to
   // `.next`; override with NEXT_DIST_DIR for a side-by-side prod instance.

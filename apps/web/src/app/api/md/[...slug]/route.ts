@@ -1,4 +1,4 @@
-import { encodingForModel } from "js-tiktoken";
+import { encoding_for_model as encodingForModel } from "tiktoken";
 // Aliased: `HTMLElement` is also a DOM global, and the two are unrelated types.
 import { parse, type HTMLElement as ParsedNode } from "node-html-parser";
 import TurndownService from "turndown";
@@ -24,9 +24,21 @@ turndown.use(gfm);
 // them so their raw payloads don't leak into the Markdown.
 turndown.remove(["script", "style", "noscript"]);
 
-// Build the tiktoken encoder once (it loads a large BPE rank table) and reuse
-// it. Token counting is best-effort: the `x-markdown-tokens` header is
-// optional, so a failure here must never break the Markdown response.
+// Build the tiktoken encoder once and reuse it: the BPE table lives inside the
+// WASM binary, so a second instance loads all 5.6 MB of it again. The instance
+// is deliberately never `free()`d, since it serves every request for the life
+// of the process.
+//
+// WASM (`tiktoken`) rather than the pure-JS binding (`js-tiktoken`), measured
+// over 40 of the `.md` pages crawlers actually ask for: the two agree on every
+// single count, and the WASM one costs 4.1s of CPU against 14.0s and 23ms of
+// GC against 683ms. That is worth the binary because this route answers 31.6%
+// of the origin's requests, measured at the bridge over 942 of them against
+// ~3% two days earlier, and these workers are GC-bound (25% of their CPU,
+// allocating 110 MB/s each).
+//
+// Token counting is best-effort: the `x-markdown-tokens` header is optional,
+// so a failure here must never break the Markdown response.
 let encoder: ReturnType<typeof encodingForModel> | null = null;
 function countTokens(text: string): number | null {
   try {
