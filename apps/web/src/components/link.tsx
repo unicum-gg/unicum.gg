@@ -4,7 +4,10 @@ import { useLocale } from "@onruntime/translations/react";
 import NextLink from "next/link";
 import type { ComponentProps, FocusEvent, MouseEvent, TouchEvent } from "react";
 import { useState } from "react";
-import { isVehiclePage } from "@/components/tanks/detail/tabs";
+import {
+  mayScrollTo,
+  openingVehicle,
+} from "@/components/tanks/detail/arrival";
 import STORAGE from "@/constants/storage";
 import { usePathname } from "@/hooks/use-pathname";
 import { matchesAnyRoute } from "@/lib/route-match";
@@ -12,6 +15,7 @@ import { DEFAULT_LOCALE, isLocale, localizePath } from "@/lib/translations";
 import { UNLOCALIZED_PAGES } from "@/proxy-routes.generated";
 
 type NextPrefetch = ComponentProps<typeof NextLink>["prefetch"];
+type NextNavigate = NonNullable<ComponentProps<typeof NextLink>["onNavigate"]>;
 
 export type LinkProps = Omit<ComponentProps<typeof NextLink>, "locale" | "prefetch"> & {
   /** Point at another language's copy of the same page. Setting it also records
@@ -62,6 +66,7 @@ export default function Link({
   scroll,
   onMouseEnter,
   onFocus,
+  onNavigate,
   onTouchStart,
   ...props
 }: LinkProps) {
@@ -69,27 +74,14 @@ export default function Link({
   const target = isLocale(locale) ? locale : isLocale(current) ? current : DEFAULT_LOCALE;
 
   /**
-   * Whether Next may scroll on this navigation, which between two vehicles it
-   * must not.
-   *
-   * **What it scrolls to is the segment that changed, and on a vehicle's page
-   * that segment sits under the hangar.** Both pages share the detail layout,
-   * so the only thing React replaces is the tab's own content, which begins
-   * about 770 pixels down, below a 600 pixel picture. Next scrolls a changed
-   * segment into view whenever it is not already there, so on any window
-   * shorter than that the reader clicked a tank and the hangar they were
-   * looking at left through the top of the screen. Measured at 768 pixels of
-   * viewport: every click from one vehicle to another, and every tab, landed
-   * with the picture gone.
-   *
-   * Kept where it is rather than forced to the top, because the reader is
-   * looking at the hero and staying put is the one outcome with no movement in
-   * it. Arrivals from anywhere else are untouched, so the catalogue still opens
-   * a vehicle at the top of its page.
+   * Whether Next may scroll on this navigation, which into a vehicle's page it
+   * must not: that page owns where it opens, because the segment Next would
+   * scroll to sits under its hangar. See `@/components/tanks/detail/arrival`,
+   * which both this and `@/hooks/use-router` read.
    */
   const here = usePathname();
   const destination = typeof href === "string" ? href : (href.pathname ?? "");
-  const scrolls = scroll ?? (isVehiclePage(here) && isVehiclePage(destination) ? false : undefined);
+  const scrolls = scroll ?? mayScrollTo(destination);
 
   // One-way: a reader who has reached for this link once is not un-reached for,
   // and flipping back would throw away a prefetch that has already been paid
@@ -130,6 +122,26 @@ export default function Link({
     onClick?.(event);
   };
 
+  /**
+   * The arriving page told that this document is on its way there.
+   *
+   * **Not from `onClick`, which also runs for the clicks that leave this
+   * document where it is**: a modifier key, a new tab, a download. Next calls
+   * this one only for the navigation it is about to perform, which is the one
+   * thing worth telling a page that has not rendered yet. The caller's own
+   * handler keeps its say, so a navigation it calls off is not announced.
+   */
+  const handleNavigate: NextNavigate = (event) => {
+    let stopped = false;
+    onNavigate?.({
+      preventDefault: () => {
+        stopped = true;
+        event.preventDefault();
+      },
+    });
+    if (!stopped) openingVehicle(here, destination);
+  };
+
   if (typeof href === "string") {
     // Same-page (`#anchor`, `?tab=x`), external, or another scheme: not ours to
     // rewrite. A relative path resolves against the current URL, which already
@@ -144,6 +156,7 @@ export default function Link({
       <NextLink
         href={untouched ? href : localizePath(href, target)}
         onClick={handleClick}
+        onNavigate={handleNavigate}
         prefetch={resolvedPrefetch}
         scroll={scrolls}
         {...intent}
@@ -161,6 +174,7 @@ export default function Link({
           : href
       }
       onClick={handleClick}
+      onNavigate={handleNavigate}
       prefetch={resolvedPrefetch}
       scroll={scrolls}
       {...intent}

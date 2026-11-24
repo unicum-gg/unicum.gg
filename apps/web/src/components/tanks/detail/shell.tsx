@@ -6,6 +6,7 @@ import { toRoman } from "roman-numerals";
 import { NationFlag } from "@/components/tanks/nation-flag";
 import type { SearchHistoryItem } from "@/hooks/use-search-history";
 import { TankActionsMenu } from "@/components/tanks/detail/actions-menu";
+import { useVehicleArrival } from "@/components/tanks/detail/arrival";
 import { TankCost } from "@/components/tanks/detail/cost";
 import { TankDetailTabs } from "@/components/tanks/detail/tab-bar";
 import { TankDetailTab } from "@/components/tanks/detail/tabs";
@@ -127,6 +128,9 @@ export function TankShell({
   }[];
   children: React.ReactNode;
 }) {
+  // Where the page opens, for a reader who has just arrived at this vehicle
+  // rather than moved around inside it.
+  useVehicleArrival();
   const { t } = useTranslation("components/tanks/detail/shell");
   const { t: tShell } = useTranslation("components/tanks/detail/shell");
   const { t: tNations } = useTranslation("game/nations");
