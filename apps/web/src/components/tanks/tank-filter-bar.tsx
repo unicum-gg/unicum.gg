@@ -5,7 +5,7 @@ import { numberFormat } from "@/lib/format";
 
 import { statLabel } from "@/components/stat-label";
 
-import { StarIcon } from "@phosphor-icons/react";
+import { CalendarStarIcon, RobotIcon, StarIcon } from "@phosphor-icons/react";
 import { type ReactNode } from "react";
 import { toRoman } from "roman-numerals";
 import { NationFlag, nationLabel } from "@/components/tanks/nation-flag";
@@ -188,20 +188,32 @@ export function TankFilterBar<T>({
             </Tooltip>
           )}
           {filters.hasEvents && (
-            <Chip
-              active={filters.eventOnly}
-              onClick={() => filters.setEventOnly(!filters.eventOnly)}
-            >
-              {tOwn("event")}
-            </Chip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Chip
+                  active={filters.eventOnly}
+                  onClick={() => filters.setEventOnly(!filters.eventOnly)}
+                  aria-label={tOwn("event")}
+                >
+                  <CalendarStarIcon className="size-3.5 text-fd-muted-foreground" />
+                </Chip>
+              </TooltipTrigger>
+              <TooltipContent>{tOwn("event")}</TooltipContent>
+            </Tooltip>
           )}
           {filters.eventOnly && filters.hasBots && (
-            <Chip
-              active={filters.withBots}
-              onClick={() => filters.setWithBots(!filters.withBots)}
-            >
-              {tOwn("bots")}
-            </Chip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Chip
+                  active={filters.withBots}
+                  onClick={() => filters.setWithBots(!filters.withBots)}
+                  aria-label={tOwn("bots")}
+                >
+                  <RobotIcon className="size-3.5 text-fd-muted-foreground" />
+                </Chip>
+              </TooltipTrigger>
+              <TooltipContent>{tOwn("bots")}</TooltipContent>
+            </Tooltip>
           )}
         </TooltipProvider>
       </ChipRow>
