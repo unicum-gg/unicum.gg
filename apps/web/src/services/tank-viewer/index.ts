@@ -28,6 +28,7 @@ import { arrive } from "./dressing";
 import { layBelts } from "./belts";
 import { mechanism, type Animated } from "./mechanism";
 import { mendPositions } from "./mending";
+import { ghostMaterial, ghostOf } from "./ghosts";
 
 /** The groups the pieces hang off, shared with whatever else draws this vehicle
  * so a turret keeps pointing where it was when the view changes. */
@@ -274,6 +275,8 @@ export async function loadVisual({
   // **Placed off the vehicle itself**, like the chassis, since the copies are
   // published in its space. A clone shares the original's geometry and
   // materials, and a skinned leg needs its skeleton cloned with it.
+  const ghostly = ghostMaterial();
+  const ghosts: THREE.Object3D[] = [];
   for (const copy of model.copies ?? []) {
     const original = copies.get(copy.piece);
     if (!original) continue;
@@ -282,6 +285,12 @@ export async function loadVisual({
     scene.quaternion.fromArray(copy.rotation);
     mounts.scene.add(scene);
     parts.push(scene);
+    // Its stand-in for the armour views, which have no plate for it.
+    const ghost = ghostOf(original, ghostly);
+    ghost.position.copy(scene.position);
+    ghost.quaternion.copy(scene.quaternion);
+    mounts.scene.add(ghost);
+    ghosts.push(ghost);
   }
 
   const { belts, links, triangles: laid } = await layBelts({
@@ -314,6 +323,11 @@ export async function loadVisual({
     triangles,
     links,
     pieces,
+    /**
+     * Whether this vehicle walks on legs drawn per copy, the spider's case,
+     * rather than running on the tracks its chassis is built on.
+     */
+    legged: ghosts.length > 0,
     /**
      * Vertices the client shipped with no position, folded onto one that has
      * one. Zero on all but a handful of pieces, and worth reading when a
@@ -369,12 +383,16 @@ export async function loadVisual({
           }
         });
       }
+      for (const ghost of ghosts) ghost.parent?.remove(ghost);
+      ghostly.dispose();
       shop.dispose();
       room.dispose();
     },
-    /** Show or hide the whole thing, lighting included. */
+    /** Show or hide the whole thing, lighting included. Hidden, it leaves its
+     * ghosts behind, which is what the armour views want of it. */
     show(on: boolean) {
       for (const part of parts) part.visible = on;
+      for (const ghost of ghosts) ghost.visible = !on;
       lights.visible = on;
       lit(on);
     },

@@ -154,6 +154,23 @@ export function shotUniforms(): ShotUniforms {
 }
 
 /**
+ * The same shell without its chassis, for a vehicle that walks.
+ *
+ * The engine runs every vehicle on a tank's chassis, so the spider carries two
+ * track boxes under its hull that nothing in the game ever draws, while its
+ * legs have no collision at all. Drawn, they put a pair of tracks on a vehicle
+ * that has none, so the armour views leave them out and show the legs instead.
+ */
+export function withoutTracks(collision: Collision): Collision {
+  return {
+    ...collision,
+    parts: Object.fromEntries(
+      Object.entries(collision.parts).filter(([part]) => !part.startsWith("Chassis")),
+    ),
+  };
+}
+
+/**
  * The span of armour this vehicle carries, which the thickness scale is read
  * against.
  *

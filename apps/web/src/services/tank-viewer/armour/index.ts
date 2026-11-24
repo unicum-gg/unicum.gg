@@ -20,6 +20,7 @@ import {
   type ShotUniforms,
   buildPlates,
   shotUniforms,
+  withoutTracks,
 } from "./plates";
 import { type Impact, probe } from "./probe";
 import { COMPOSE, LAYER, SOLID_SHOT } from "./shaders";
@@ -68,6 +69,8 @@ export type LoadArmour = {
    * plates of a gun they are not holding.
    */
   shown?: string[];
+  /** Whether the vehicle walks rather than running on tracks: see `withoutTracks`. */
+  legged?: boolean;
 };
 
 export async function loadArmour({
@@ -77,10 +80,17 @@ export async function loadArmour({
   collision,
   parentFor,
   shown,
+  legged,
 }: LoadArmour) {
   const three = await import("three");
   const shot: ShotUniforms = shotUniforms();
-  const { meshes, hit, range } = buildPlates(three, collision, shot, parentFor, shown);
+  const { meshes, hit, range } = buildPlates(
+    three,
+    legged ? withoutTracks(collision) : collision,
+    shot,
+    parentFor,
+    shown,
+  );
   const raycaster = new three.Raycaster();
   raycaster.layers.enableAll();
   const pointer = new three.Vector2();

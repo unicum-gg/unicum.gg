@@ -389,6 +389,7 @@ export async function buildStage({
         camera,
         collision,
         shown: built?.pieces,
+        legged: built?.legged,
         parentFor: (part: string) =>
           part.startsWith("Chassis") || part.startsWith("Wheel")
             ? vehicle
