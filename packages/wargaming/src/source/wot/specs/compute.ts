@@ -30,6 +30,44 @@ function collectNumericLeaves(
   if (n != null) out[prefix] = n;
 }
 
+/**
+ * Sustained shots per minute of a gun that overheats, or null for any other gun.
+ *
+ * The Ares guns declare their whole ammunition as one clip fired every 0.3 s,
+ * so the clip formula below reads them as emptying 250 rounds in one go. What
+ * really limits them is heat: each shot adds `heatingPerShot`, the gun locks at
+ * the top thermal state and cools at `coolingPerSec x coolingPerSecFactor` once
+ * `coolingDelay` has passed. This is the client's own garage figure
+ * (`getTemperatureRateOfFire` in `items/params_utils.py`), term for term: one
+ * burst up to the limit, the delay, then the locked cool-down back to zero.
+ *
+ * The caller applies it under the client's own condition, an autoshoot gun
+ * whose clip is its entire ammunition (its `unlimitedClip` tag); both
+ * mechanics must be present, as the client requires.
+ */
+function overheatRateOfFire(G: XmlNode, clipRate: number): number | null {
+  const mech = isObject(G.mechanics) ? (G.mechanics as XmlNode) : null;
+  const temp = mech && isObject(mech.temperatureGun) ? (mech.temperatureGun as XmlNode) : null;
+  const overheat = mech && isObject(mech.overheatGun) ? (mech.overheatGun as XmlNode) : null;
+  if (!temp || !overheat || !isObject(G.autoShoot)) return null;
+  const heatingPerShot = num(temp.heatingPerShot);
+  const coolingPerSec = num(temp.coolingPerSec);
+  const coolingDelay = num(temp.coolingDelay) ?? 0;
+  const coolingFactor = num(overheat.coolingPerSecFactor) ?? 1;
+  // The limit is the highest thermal state, which the client sorts to the end.
+  const statesNode = isObject(temp.thermalStates) ? (temp.thermalStates as XmlNode).state : null;
+  const states = Array.isArray(statesNode) ? statesNode : statesNode ? [statesNode] : [];
+  const limits = states
+    .map((st) => (isObject(st) ? num((st as XmlNode).maxTemperature) : null))
+    .filter((t): t is number => t != null);
+  if (!heatingPerShot || !coolingPerSec || limits.length === 0) return null;
+  const limit = Math.max(...limits);
+  const burstTime = (limit * 60) / (heatingPerShot * clipRate);
+  const coolingTime = limit / (coolingPerSec * coolingFactor);
+  const shellsPerCycle = limit / heatingPerShot;
+  return (60 / (burstTime + coolingDelay + coolingTime)) * shellsPerCycle;
+}
+
 /** The full derived stat block from an already-resolved set of modules (one
  * per slot). Shared by the top-config `#derive` and the per-config
  * enumeration below, so both produce identical numbers. */
@@ -106,9 +144,15 @@ export function computeSpec(
     const rate = num(clip.rate) ?? 0; // intra-clip shots per minute
     if (count > 0 && rate > 0) {
       intraClipReload = 60 / rate;
-      const cycleTime = ((count - 1) / rate) * 60 + reload;
-      rof = (count / cycleTime) * 60;
-      dpm = (count * damage * 60) / cycleTime;
+      const heatRof = count === maxAmmo ? overheatRateOfFire(G, rate) : null;
+      if (heatRof != null) {
+        rof = heatRof;
+        dpm = heatRof * damage;
+      } else {
+        const cycleTime = ((count - 1) / rate) * 60 + reload;
+        rof = (count / cycleTime) * 60;
+        dpm = (count * damage * 60) / cycleTime;
+      }
     }
   } else if (reload != null && reload > 0 && damage != null) {
     rof = 60 / reload;

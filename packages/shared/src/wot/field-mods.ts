@@ -1,4 +1,5 @@
 import type { TankSpec } from "../db/schema";
+import { isHeatLimitedGun } from "./overheat-gun";
 
 /** A field-modification / skill-tree node effect on one raw wot-src attribute. */
 export interface AppliedFieldMod {
@@ -143,6 +144,7 @@ export function applyFieldMods(
   const reload0 = num(out.reload);
   const power0 = num(out.enginePower);
   const damage0 = num(out.damage);
+  const heatLimited = isHeatLimitedGun(spec);
 
   const shift = (field: keyof TankSpec, e: AppliedFieldMod) => {
     const cur = num(out[field]);
@@ -215,7 +217,11 @@ export function applyFieldMods(
   const damage1 = num(out.damage);
   const clip = num(out.clipSize);
   const intra1 = num(out.intraClipReload);
-  if (clip !== null && clip > 1 && reload1 !== null && damage1 !== null) {
+  if (heatLimited) {
+    // Heat sets the rate of fire, so only a damage change moves the DPM.
+    const rof = num(out.rof);
+    if (rof !== null && damage1 !== null) (out.dpm as number) = rof * damage1;
+  } else if (clip !== null && clip > 1 && reload1 !== null && damage1 !== null) {
     const cycle = reload1 + (clip - 1) * (intra1 ?? 0);
     if (cycle > 0) {
       (out.dpm as number) = (damage1 * clip * 60) / cycle;

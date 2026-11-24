@@ -1,4 +1,5 @@
 import type { TankSpec } from "../db/schema";
+import { isHeatLimitedGun } from "./overheat-gun";
 
 // wot-src crew-skill `paramName`s that map to a displayed characteristic, scaled
 // multiplicatively: the field becomes `field * (1 + value * points)`. The
@@ -154,7 +155,7 @@ export function applyCrewQualification(spec: TankSpec, level: number): TankSpec 
 
   // dpm/rof track reload.
   const reload1 = num(out.reload);
-  if (reload0 && reload1 && reload1 !== reload0) {
+  if (reload0 && reload1 && reload1 !== reload0 && !isHeatLimitedGun(out)) {
     const r = reload0 / reload1;
     const dpm = num(out.dpm);
     const rof = num(out.rof);
@@ -273,7 +274,7 @@ export function applyCrewLevel(spec: TankSpec, increase: number): TankSpec {
 
   // dpm/rof track reload.
   const reload1 = num(out.reload);
-  if (reload0 && reload1 && reload1 !== reload0) {
+  if (reload0 && reload1 && reload1 !== reload0 && !isHeatLimitedGun(out)) {
     const r = reload0 / reload1;
     const dpm = num(out.dpm);
     const rof = num(out.rof);

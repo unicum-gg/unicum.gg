@@ -1,5 +1,6 @@
 import type { EquipmentEffect } from "@unicum.gg/wargaming";
 import type { TankSpec } from "../db/schema";
+import { isHeatLimitedGun } from "./overheat-gun";
 
 /** An equipment mounted in a slot, with `bonus` set when the slot's category
  * matches the equipment (Equipment 2.0 category bonus). */
@@ -114,7 +115,7 @@ export function applyEquipment(
 
   // Rescale the fields we display but don't recompute from primitives.
   const reload1 = num(out.reload);
-  if (reload0 && reload1 && reload1 !== reload0) {
+  if (reload0 && reload1 && reload1 !== reload0 && !isHeatLimitedGun(out)) {
     const r = reload0 / reload1;
     const dpm = num(out.dpm);
     const rof = num(out.rof);
@@ -155,7 +156,7 @@ export function applyDirectives(
   }
 
   const reload1 = num(out.reload);
-  if (reload0 && reload1 && reload1 !== reload0) {
+  if (reload0 && reload1 && reload1 !== reload0 && !isHeatLimitedGun(out)) {
     const r = reload0 / reload1;
     const dpm = num(out.dpm);
     const rof = num(out.rof);

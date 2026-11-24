@@ -6,6 +6,7 @@ export * from "./maneuvers-rewards";
 export * from "./maneuvers-forecast";
 export * from "./equipment";
 export * from "./field-mods";
+export * from "./overheat-gun";
 export * from "./loadouts";
 export * from "./loadout-stats";
 export * from "./vehicle-modes";
