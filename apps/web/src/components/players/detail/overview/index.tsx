@@ -28,7 +28,7 @@ import {
 import { PlayerStatsTable } from "@/components/players/detail/overview/stats-table";
 import { PlayerPercentile } from "@/components/players/detail/overview/percentile";
 import { RatingMetricInlineSelect } from "@/components/rating-metric-inline-select";
-import { StatsPeriodSelect } from "@/components/stats-period-select";
+import { PlayerStatsPeriodSelect } from "@/components/players/detail/overview/stats-period-select";
 import { TanksLiftDrag } from "@/components/players/detail/overview/tanks-lift-drag";
 import { styles } from "@/lib/styles";
 import type {
@@ -139,11 +139,13 @@ export function OverallTab({
             {t("stats-title", { nickname })}
             {/* Phone-only: the table has room for the stat names and one
                 column of figures, and this is which one. */}
-            <StatsPeriodSelect />
+            <PlayerStatsPeriodSelect />
           </PanelTitle>
         </PanelHeader>
         <PanelContent className="p-0">
           <PlayerStatsTable
+            region={region}
+            nickname={nickname}
             current={current}
             periods={periods}
             derived={derived}

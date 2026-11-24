@@ -40,6 +40,10 @@ const STORAGE = {
     AUTH_REGION: AUTH_REGION_COOKIE,
     RATING: "unicum.rating",
     PERIOD: "unicum.period",
+    // The three period columns of the profile's stats table, as the reader set
+    // them (`7d,1000b,30d`). The reader's own choice rather than the page's,
+    // so it follows them from one profile to the next.
+    STAT_WINDOWS: "unicum.stat-windows",
     // Free-XP pricing prefs shared across the tank page + economics table: the
     // tier you free-XP from, and the XP-to-gold conversion rate (25 normally,
     // 40 during a promo, editable).

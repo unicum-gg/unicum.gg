@@ -559,6 +559,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/players/{nickname}/period": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Player stats over a custom window
+         * @description The profile's period column for any window: the last N days (1 to 365) or the player's last N battles (1 to 10000). Same counters, average tier, assistance and WN7/WN8/WNX as the 24h/7d/30d columns of the player detail, each one the difference between the player's vehicles now and as they stood when the window began. A battle window can only start where we took a snapshot, so it holds the nearest count at or beyond the one asked for. When the window reaches past our history of the account it covers everything since we first tracked it, and says so in `truncated`. Give exactly one of `days` or `battles`, else 400. 404 when the player is unknown.
+         */
+        get: operations["get-{region}-players-{nickname}-period"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/{region}/players/{nickname}/sessions": {
         parameters: {
             query?: never;
@@ -6611,6 +6631,63 @@ export interface components {
             globalRating: number;
             wtr: number | null;
         };
+        /** @description One period column of the profile's stats table, over a window the caller chose. */
+        PlayerStatWindow: {
+            accountId: number;
+            nickname: string;
+            window: {
+                /**
+                 * @description What the window counts: days from now, or the player's last battles.
+                 * @enum {string}
+                 */
+                unit: "days" | "battles";
+                value: number;
+            };
+            /** @description Null when no snapshot of the account is held at all. */
+            stats: components["schemas"]["PlayerPeriodStats"] | null;
+            derived: components["schemas"]["PlayerStatWindowDerived"];
+            /**
+             * Format: date-time
+             * @description The instant the window was read back from. A battle window starts at the latest snapshot that sat at least that many battles back, so it can hold a few more than asked: read `stats.battles` for the real count.
+             */
+            from: Date | null;
+            /** @description The window reaches further back than our history of the account, so it covers everything since the account was first tracked (`from`). */
+            truncated: boolean;
+        };
+        /** @description The figures computed from the per-vehicle breakdown over the window: average tier, assistance per battle, and the three WN ratings of those battles alone. */
+        PlayerStatWindowDerived: {
+            tier: number | null;
+            trackDamage: number | null;
+            spottingDamage: number | null;
+            assistingDamage: number | null;
+            combinedDamage: number | null;
+            wn7: number | null;
+            wn8: number | null;
+            wnx: number | null;
+        };
+        /** @description One period column of the profile's stats table, over a window the caller chose. */
+        PlayerStatWindowResponse: {
+            accountId: number;
+            nickname: string;
+            window: {
+                /**
+                 * @description What the window counts: days from now, or the player's last battles.
+                 * @enum {string}
+                 */
+                unit: "days" | "battles";
+                value: number;
+            };
+            /** @description Null when no snapshot of the account is held at all. */
+            stats: components["schemas"]["PlayerPeriodStats"] | null;
+            derived: components["schemas"]["PlayerStatWindowDerived"];
+            /**
+             * Format: date-time
+             * @description The instant the window was read back from. A battle window starts at the latest snapshot that sat at least that many battles back, so it can hold a few more than asked: read `stats.battles` for the real count.
+             */
+            from: Date | null;
+            /** @description The window reaches further back than our history of the account, so it covers everything since the account was first tracked (`from`). */
+            truncated: boolean;
+        };
         /** @description Player row (additional fields may be present). */
         PlayerSummary: {
             account_id: number;
@@ -10010,6 +10087,39 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["PlayerOnslaughtResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-players-{nickname}-period": {
+        parameters: {
+            query?: {
+                /** @description Read back this many days from now (1 to 365). Give this or `battles`. */
+                days?: number;
+                /** @description Read back over the player's last N battles (1 to 10000). Give this or `days`. */
+                battles?: number;
+            };
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Player nickname.
+                 * @example Animal
+                 */
+                nickname: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PlayerStatWindow"];
                 };
             };
         };

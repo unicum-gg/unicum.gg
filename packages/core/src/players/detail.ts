@@ -20,7 +20,6 @@ import {
   cwAbsoluteStatsFromSnapshot,
   cwChampionStatsFromSnapshot,
   cwMiddleStatsFromSnapshot,
-  diffStats,
   diffStrongholdStats,
   epicStatsFromSnapshot,
   falloutStatsFromSnapshot,
@@ -54,6 +53,7 @@ import {
   type TankSnapshotMap,
 } from "@unicum.gg/core/players/tanks";
 import { tankPeriod } from "@unicum.gg/core/players/tank-periods";
+import { accountPeriodDiff } from "@unicum.gg/core/players/stat-window";
 import {
   loadPlayerClanHistoryFromWG,
   storePlayerClanHistory,
@@ -179,17 +179,9 @@ export async function buildPlayerDetail(args: {
   }
 
   const current = statsFromSnapshot(latest);
-  // The account's own diff, kept for the two figures only the account carries
-  // (PR and WTR). An empty first fetch (battles === 0, the poisoned snapshot
-  // where WG's aggregate lagged) means the whole period is "everything since
-  // we started tracking", so its ratings are the lifetime ones: that baseline
-  // carried a non-zero wtr (e.g. 8313) even with battles 0, and a naive diff
-  // showed +1759 instead of the real +10072.
-  function accountDiff(baseline: PlayerSnapshot | null): typeof current | null {
-    if (!baseline) return null;
-    if (baseline.battles === 0) return current;
-    return diffStats(current, statsFromSnapshot(baseline));
-  }
+  // The account's own diff, kept for PR and WTR (see `accountPeriodDiff`).
+  const accountDiff = (baseline: PlayerSnapshot | null) =>
+    accountPeriodDiff(latest, baseline);
   // Every other counter of a period column, and the per-vehicle breakdown its
   // tier, damage and ratings are computed from, is one diff of the vehicles
   // (see `tankPeriod`): Wargaming refreshes the account only at logout, so the

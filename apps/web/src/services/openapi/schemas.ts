@@ -208,6 +208,20 @@ export const playerSessionsQuery = z.object({
 });
 
 /**
+ * The window of one custom stats column. Exactly one of the two is given; the
+ * bounds are `STAT_WINDOW_MAX`, written as literals because the generator
+ * cannot read an imported value.
+ */
+export const playerStatWindowQuery = z.object({
+  days: z.coerce.number().int().min(1).max(365).optional().meta({
+    description: "Read back this many days from now (1 to 365). Give this or `battles`.",
+  }),
+  battles: z.coerce.number().int().min(1).max(10000).optional().meta({
+    description: "Read back over the player's last N battles (1 to 10000). Give this or `days`.",
+  }),
+});
+
+/**
  * How far back a server population series reads. Named `range` rather than
  * `period`, which the leaderboards already own with a different value set: the
  * doc's defaults and examples are keyed by parameter name across the whole API,

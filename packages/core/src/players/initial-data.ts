@@ -74,7 +74,7 @@ type RawPlayer = {
   onslaught_seasons: number;
 };
 
-type RawPlayerSnapshot = {
+export type RawPlayerSnapshot = {
   id: number;
   player_id: number;
   taken_at: string;
@@ -196,7 +196,7 @@ type RawPlayerSnapshot = {
   cw_middle_xp?: number | string | null;
 };
 
-type RawTankSnapshot = {
+export type RawTankSnapshot = {
   player_id: number;
   tank_id: number;
   taken_at: string;
@@ -344,7 +344,7 @@ function playerFromRaw(r: RawPlayer): Player {
   };
 }
 
-function snapshotFromRaw(r: RawPlayerSnapshot): PlayerSnapshot {
+export function snapshotFromRaw(r: RawPlayerSnapshot): PlayerSnapshot {
   return {
     id: Number(r.id),
     playerId: Number(r.player_id),
@@ -472,7 +472,7 @@ function nullableNumber(v: number | string | null): number | null {
   return v == null ? null : Number(v);
 }
 
-function tankSnapshotFromRaw(r: RawTankSnapshot): TankSnapshot {
+export function tankSnapshotFromRaw(r: RawTankSnapshot): TankSnapshot {
   return {
     playerId: Number(r.player_id),
     tankId: Number(r.tank_id),
@@ -506,7 +506,7 @@ function tankSnapshotFromRaw(r: RawTankSnapshot): TankSnapshot {
   };
 }
 
-function tankSnapshotMapFromRaws(rows: RawTankSnapshot[] | null): TankSnapshotMap {
+export function tankSnapshotMapFromRaws(rows: RawTankSnapshot[] | null): TankSnapshotMap {
   const map: TankSnapshotMap = new Map();
   if (!rows) return map;
   for (const r of rows) map.set(Number(r.tank_id), tankSnapshotFromRaw(r));

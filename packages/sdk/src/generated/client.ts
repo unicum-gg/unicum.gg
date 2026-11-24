@@ -100,6 +100,15 @@ class PlayerClient {
     );
   }
 
+  /** Player stats over a custom window */
+  period(query?: QueryOf<"/{region}/players/{nickname}/period">) {
+    const path = { region: this.region, nickname: this.nickname };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/players/{nickname}/period", path, query),
+      () => this.api.GET("/{region}/players/{nickname}/period", { params: { path, query } }),
+    );
+  }
+
   /** Player sessions */
   sessions(granularity?: NonNullable<QueryOf<"/{region}/players/{nickname}/sessions">>["granularity"]) {
     const path = { region: this.region, nickname: this.nickname };

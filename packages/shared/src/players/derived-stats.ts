@@ -65,6 +65,44 @@ function tankAvg(
   return battles > 0 ? total / battles : null;
 }
 
+/** The derived figures of ONE column, keyed like `PlayerDerivedStats`. */
+export type PeriodDerivedValues = Record<keyof PlayerDerivedStats, number | null>;
+
+/**
+ * The derived figures of one column: the lifetime one (the account's totals
+ * and its whole garage) or a window (its counters and the per-vehicle diffs).
+ * Written once so a window the reader picked is computed exactly like the
+ * three the profile ships with.
+ */
+export function buildPeriodDerived(
+  stats: PlayerPeriodStats | null,
+  tanks: TankStats[] | null,
+  encyclopedia: Record<string, VehicleMeta>,
+  wn8Expected: Map<number, WN8Expected>,
+  wnxExpected: Map<number, WNXExpected>,
+  wn8Fallback = buildWN8Fallback(wn8Expected, encyclopedia),
+): PeriodDerivedValues {
+  const avgOf = (pick: (t: TankStats) => number) => tankAvg(tanks, pick);
+  const tier = tanks ? computeAvgTier(tanks, encyclopedia) : null;
+  return {
+    tier,
+    trackDamage: avgOf((t) => t.all.track_assisted_damage),
+    spottingDamage: avgOf((t) => t.all.radio_assisted_damage),
+    assistingDamage: avgOf(
+      (t) => t.all.radio_assisted_damage + t.all.track_assisted_damage,
+    ),
+    combinedDamage: avgOf(
+      (t) =>
+        t.all.damage_dealt +
+        t.all.radio_assisted_damage +
+        t.all.track_assisted_damage,
+    ),
+    wn7: stats ? computeWN7(stats, tier) : null,
+    wn8: tanks ? computeWN8(tanks, wn8Expected, encyclopedia, wn8Fallback) : null,
+    wnx: tanks ? computeWNX(tanks, wnxExpected) : null,
+  };
+}
+
 export function buildPlayerDerivedStats(
   current: Stats,
   periods: PeriodStats,
@@ -75,54 +113,28 @@ export function buildPlayerDerivedStats(
   wnxExpected: Map<number, WNXExpected>,
 ): PlayerDerivedStats {
   const wn8Fallback = buildWN8Fallback(wn8Expected, encyclopedia);
-
-  function perColumn(
-    fn: (t: TankStats[] | null) => number | null,
-  ): PeriodValues {
-    return {
-      total: fn(tanks),
-      h24: fn(periodTanks.h24),
-      d7: fn(periodTanks.d7),
-      d30: fn(periodTanks.d30),
-    };
-  }
-
-  const avgOf =
-    (pick: (t: TankStats) => number) =>
-    (t: TankStats[] | null): number | null =>
-      tankAvg(t, pick);
-
-  const tier = perColumn((t) => (t ? computeAvgTier(t, encyclopedia) : null));
-
-  function wn7For(stats: PlayerPeriodStats | null, periodTier: number | null): number | null {
-    if (!stats) return null;
-    return computeWN7(stats, periodTier);
-  }
-
+  const column = (stats: PlayerPeriodStats | null, t: TankStats[] | null) =>
+    buildPeriodDerived(stats, t, encyclopedia, wn8Expected, wnxExpected, wn8Fallback);
+  const columns = {
+    total: column(current, tanks),
+    h24: column(periods.h24, periodTanks.h24),
+    d7: column(periods.d7, periodTanks.d7),
+    d30: column(periods.d30, periodTanks.d30),
+  };
+  const row = (key: keyof PlayerDerivedStats): PeriodValues => ({
+    total: columns.total[key],
+    h24: columns.h24[key],
+    d7: columns.d7[key],
+    d30: columns.d30[key],
+  });
   return {
-    tier,
-    trackDamage: perColumn(avgOf((t) => t.all.track_assisted_damage)),
-    spottingDamage: perColumn(avgOf((t) => t.all.radio_assisted_damage)),
-    assistingDamage: perColumn(
-      avgOf((t) => t.all.radio_assisted_damage + t.all.track_assisted_damage),
-    ),
-    combinedDamage: perColumn(
-      avgOf(
-        (t) =>
-          t.all.damage_dealt +
-          t.all.radio_assisted_damage +
-          t.all.track_assisted_damage,
-      ),
-    ),
-    wn7: {
-      total: wn7For(current, tier.total),
-      h24: wn7For(periods.h24, tier.h24),
-      d7: wn7For(periods.d7, tier.d7),
-      d30: wn7For(periods.d30, tier.d30),
-    },
-    wn8: perColumn((t) =>
-      t ? computeWN8(t, wn8Expected, encyclopedia, wn8Fallback) : null,
-    ),
-    wnx: perColumn((t) => (t ? computeWNX(t, wnxExpected) : null)),
+    tier: row("tier"),
+    trackDamage: row("trackDamage"),
+    spottingDamage: row("spottingDamage"),
+    assistingDamage: row("assistingDamage"),
+    combinedDamage: row("combinedDamage"),
+    wn7: row("wn7"),
+    wn8: row("wn8"),
+    wnx: row("wnx"),
   };
 }

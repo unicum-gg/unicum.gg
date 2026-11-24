@@ -30,6 +30,7 @@ import {
 } from "@unicum.gg/shared/constants/stronghold";
 import { MarkWindow } from "@unicum.gg/shared/players/mark-progress";
 import { SessionGranularity } from "@unicum.gg/shared/players/sessions";
+import { StatWindowUnit } from "@unicum.gg/shared/players/stat-window";
 import {
   BattleCatalogSort,
   BattleResultFilter,
@@ -127,6 +128,7 @@ export const OPENAPI_ENUM_SOURCES = {
   RATING_BLOCK: Object.values(RatingBlock),
   REVIEW_OUTCOME: Object.values(ReviewOutcome),
   SESSION_GRANULARITY: Object.values(SessionGranularity),
+  STAT_WINDOW_UNIT: Object.values(StatWindowUnit),
   BATTLE_RESULT_FILTER: Object.values(BattleResultFilter),
   BATTLE_CATALOG_SORT: Object.values(BattleCatalogSort),
   BATTLE_COMMENT_STATUS: Object.values(BattleCommentStatus),

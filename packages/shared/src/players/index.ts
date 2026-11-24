@@ -13,6 +13,7 @@ export * from "./mark-progress";
 export * from "./rating-history";
 export * from "./sessions";
 export * from "./stats";
+export * from "./stat-window";
 export * from "./stronghold-stats";
 export * from "./tank-detail";
 export * from "./tank-modes";

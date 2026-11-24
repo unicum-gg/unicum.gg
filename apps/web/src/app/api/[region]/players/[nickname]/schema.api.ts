@@ -36,7 +36,7 @@ const playerStats = z
       "Random-battles totals from the account's latest snapshot.",
   });
 
-const playerPeriodStats = z
+export const playerPeriodStats = z
   .object({
     battles: z.number(),
     wins: z.number(),

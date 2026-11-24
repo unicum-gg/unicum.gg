@@ -1,7 +1,7 @@
 "use client";
 
-import type { NumberFormatter } from "@/lib/format";
-
+import type { ReactNode } from "react";
+import type { Region } from "@unicum.gg/wargaming";
 import { useFormat } from "@/hooks/use-format";
 import {
   Table,
@@ -14,249 +14,33 @@ import {
 import { GlossaryLabel } from "@/components/glossary/label";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useStatsPeriod } from "@/hooks/use-period";
+import { useStatWindows } from "@/hooks/use-stat-windows";
 import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
-import { StrongholdPeriod, type Stats, type PeriodStats, type PlayerPeriodStats, type PeriodValues, type PlayerDerivedStats, RATING_COLOR_CLASS, type RatingColor, RatingMetric, prColor, winrateColor, wn7Color, wn8Color, wnxColor, wtrColor } from "@unicum.gg/shared";
+import {
+  DEFAULT_STAT_WINDOWS,
+  RATING_COLOR_CLASS,
+  StrongholdPeriod,
+  type PeriodStats,
+  type PlayerDerivedStats,
+  type Stats,
+} from "@unicum.gg/shared";
 import { useTranslation } from "@/hooks/use-translation";
+import { ROWS, type Cell, type StatColumn } from "./stats-table-rows";
+import { StatWindowEditor } from "./stat-window-editor";
+import { useStatWindowLabel } from "./stat-window-label";
+import { derivedColumn, useStatWindowColumn } from "./use-stat-window-column";
 
-const INTEGER_FORMAT = { maximumFractionDigits: 0 } as const;
-const SIGNED_INTEGER_FORMAT = {
-  maximumFractionDigits: 0,
-  signDisplay: "exceptZero",
-} as const;
-const DECIMAL_FORMAT = {
-  minimumFractionDigits: 2,
-  maximumFractionDigits: 2,
-} as const;
-const PERCENT_FORMAT = {
-  style: "percent",
-  minimumFractionDigits: 2,
-  maximumFractionDigits: 2,
-} as const;
+const NAMESPACE = "components/players/detail/overview/stats-table";
 
-type Cell = { primary: string; secondary?: string; color?: RatingColor; className?: string };
-
-const EMPTY_CELL: Cell = { primary: "—" };
-
-type PeriodCellSet = { total: Cell; h24: Cell; d7: Cell; d30: Cell };
-
-type RowInput = {
-  current: Stats;
-  periods: PeriodStats;
-  derived: PlayerDerivedStats;
-};
-
-// One ordered row of the table. `cells` derives its four period cells from the
-// data. Defined once, so the real table and its loading skeleton share the exact
-// same rows (labels + order) — the skeleton can never drift from the real table.
-type RowDef = {
-  /** Key of the row's wording in `components/players/detail/overview/stats-table`. */
-  id: string;
-  /** The English name, which is also what the glossary is keyed by. Not what a
-   * reader sees: `t(rows.<id>)` is. */
-  label: string;
-  /** The term to look up, when the row's wording is not the term's own: this
-   * table's "Tier" is the average tier of the battles played, not a vehicle's. */
-  term?: string;
-  /** The metric this row is the value of, so the one the reader picked is
-   * set in bold (`html[data-rating-metric]` in `globals.css`). */
-  ratingRow?: RatingMetric;
-  /** Takes the reader's number formatting rather than reading a hook: a row
-   * definition is data at module scope. */
-  cells: (input: RowInput, num: NumberFormatter) => PeriodCellSet;
-};
-
-function pctOrDash(num: NumberFormatter, n: number, d: number): string {
-  return d <= 0 ? "—" : num(PERCENT_FORMAT).format(n / d);
-}
-
-function avgOrDash(num: NumberFormatter, n: number, d: number): string {
-  return d <= 0 ? "—" : num(DECIMAL_FORMAT).format(n / d);
-}
-
-// A count with its share or per-battle average beside it, or the empty cell
-// when the window cannot answer it.
-function countCell(
-  num: NumberFormatter,
-  n: number | null,
-  battles: number,
-  ratio: (num: NumberFormatter, n: number, d: number) => string,
-): Cell {
-  if (n === null) return EMPTY_CELL;
-  return { primary: num(INTEGER_FORMAT).format(n), secondary: ratio(num, n, battles) };
-}
-
-// Turns the server-computed numeric values into display cells, optionally
-// color-coding them with the matching rating scale.
-function cellsFrom(
-  num: NumberFormatter,
-  values: PeriodValues,
-  color?: (v: number) => RatingColor,
-): PeriodCellSet {
-  const cell = (value: number | null): Cell => {
-    if (value === null) return EMPTY_CELL;
-    return {
-      primary: num(DECIMAL_FORMAT).format(value),
-      color: color ? color(value) : undefined,
-    };
-  };
-  return {
-    total: cell(values.total),
-    h24: cell(values.h24),
-    d7: cell(values.d7),
-    d30: cell(values.d30),
-  };
-}
-
-// A row whose cells come from the counters (Total from the account's `current`,
-// the period columns from the vehicle diffs). A period counter can be null (see
-// `PlayerPeriodStats`), hence the wider type, which `Stats` satisfies.
-// `renderDelta` formats the period cells when it differs from the total
-// (signed values for ratings).
-function statRow(
-  id: string,
-  label: string,
-  render: (s: PlayerPeriodStats, num: NumberFormatter) => Cell,
-  renderDelta?: (s: PlayerPeriodStats, num: NumberFormatter) => Cell,
-  options: { ratingRow?: RatingMetric } = {},
-): RowDef {
-  return {
-    id,
-    label,
-    ratingRow: options.ratingRow,
-    cells: ({ current, periods }, num) => {
-      const delta = renderDelta ?? render;
-      return {
-        total: render(current, num),
-        h24: periods.h24 ? delta(periods.h24, num) : EMPTY_CELL,
-        d7: periods.d7 ? delta(periods.d7, num) : EMPTY_CELL,
-        d30: periods.d30 ? delta(periods.d30, num) : EMPTY_CELL,
-      };
-    },
-  };
-}
-
-// A row whose per-period values are pre-computed server-side (tank-breakdown
-// stats: tier, assistance damages, WN7/8/X).
-function derivedRow(
-  id: string,
-  label: string,
-  pick: (d: PlayerDerivedStats) => PeriodValues,
-  options: {
-    color?: (v: number) => RatingColor;
-    ratingRow?: RowDef["ratingRow"];
-    term?: string;
-  } = {},
-): RowDef {
-  return {
-    id,
-    label,
-    term: options.term,
-    ratingRow: options.ratingRow,
-    cells: ({ derived }, num) => cellsFrom(num, pick(derived), options.color),
-  };
-}
-
-// The single source of truth for the table's rows and their order (Tier after
-// Battles, the four damage-breakdown rows after Damages, ratings last).
-const ROWS: RowDef[] = [
-  statRow("battles", "Battles", (s, num) => ({ primary: num(INTEGER_FORMAT).format(s.battles) })),
-  derivedRow("tier", "Tier", (d) => d.tier, { term: "Average tier" }),
-  statRow("wins", "Wins", (s, num) => ({
-    primary: num(INTEGER_FORMAT).format(s.wins),
-    secondary: pctOrDash(num, s.wins, s.battles),
-    color: s.battles > 0 ? winrateColor(s.wins / s.battles) : undefined,
-  })),
-  statRow("losses", "Losses", (s, num) => countCell(num, s.losses, s.battles, pctOrDash)),
-  statRow("draws", "Draws", (s, num) => countCell(num, s.draws, s.battles, pctOrDash)),
-  statRow("survived", "Battles survived", (s, num) =>
-    countCell(num, s.survivedBattles, s.battles, pctOrDash),
-  ),
-  statRow("destroyed", "Tanks destroyed", (s, num) => ({
-    primary: num(INTEGER_FORMAT).format(s.frags),
-    secondary: avgOrDash(num, s.frags, s.battles),
-  })),
-  statRow("destruction-ratio", "Destruction ratio", (s, num) =>
-    s.survivedBattles === null
-      ? EMPTY_CELL
-      : { primary: avgOrDash(num, s.frags, s.battles - s.survivedBattles) },
-  ),
-  statRow("spotted", "Tanks spotted", (s, num) => ({
-    primary: num(INTEGER_FORMAT).format(s.spotted),
-    secondary: avgOrDash(num, s.spotted, s.battles),
-  })),
-  statRow("damages", "Damages", (s, num) => ({
-    primary: avgOrDash(num, s.damageDealt, s.battles),
-  })),
-  derivedRow("track-damages", "Track damages", (d) => d.trackDamage),
-  derivedRow("spotting-damages", "Spotting damages", (d) => d.spottingDamage),
-  derivedRow("assisting-damages", "Assisting damages", (d) => d.assistingDamage),
-  derivedRow("combined-damages", "Combined damages", (d) => d.combinedDamage),
-  statRow("base-capture", "Base capture", (s, num) =>
-    countCell(num, s.capturePoints, s.battles, avgOrDash),
-  ),
-  statRow("base-defense", "Base defense", (s, num) => ({
-    primary: num(INTEGER_FORMAT).format(s.droppedCapturePoints),
-    secondary: avgOrDash(num, s.droppedCapturePoints, s.battles),
-  })),
-  statRow("experience", "Experience", (s, num) => ({
-    primary: avgOrDash(num, s.xp, s.battles),
-  })),
-  statRow("hit-rate", "Hit rate", (s, num) =>
-    s.hits === null || s.shots === null
-      ? EMPTY_CELL
-      : { primary: pctOrDash(num, s.hits, s.shots) },
-  ),
-  statRow(
-    "personal-rating",
-    "Personal rating",
-    // Only the lifetime figure is coloured: the period columns are the change
-    // in a career figure, not a rating of those battles (see `RatingMetric`).
-    (s, num) =>
-      s.globalRating === null
-        ? EMPTY_CELL
-        : {
-            primary: num(INTEGER_FORMAT).format(s.globalRating),
-            color: prColor(s.globalRating),
-          },
-    (s, num) =>
-      s.globalRating === null
-        ? EMPTY_CELL
-        : {
-            primary: num(SIGNED_INTEGER_FORMAT).format(s.globalRating),
-            className:
-              s.globalRating > 0
-                ? "text-emerald-500"
-                : s.globalRating < 0
-                  ? "text-red-500"
-                  : undefined,
-          },
-    { ratingRow: RatingMetric.Pr },
-  ),
-  statRow(
-    "wtr",
-    "World of Tanks Rating",
-    (s, num) =>
-      s.wtr === null
-        ? EMPTY_CELL
-        : { primary: num(INTEGER_FORMAT).format(s.wtr), color: wtrColor(s.wtr) },
-    (s, num) => ({
-      primary: s.wtr === null ? "—" : num(SIGNED_INTEGER_FORMAT).format(s.wtr),
-      className:
-        s.wtr === null
-          ? undefined
-          : s.wtr > 0
-            ? "text-emerald-500"
-            : s.wtr < 0
-              ? "text-red-500"
-              : undefined,
-    }),
-    { ratingRow: RatingMetric.Wtr },
-  ),
-  derivedRow("wn7", "WN7", (d) => d.wn7, { color: wn7Color, ratingRow: RatingMetric.Wn7 }),
-  derivedRow("wn8", "WN8", (d) => d.wn8, { color: wn8Color, ratingRow: RatingMetric.Wn8 }),
-  derivedRow("wnx", "WNX", (d) => d.wnx, { color: wnxColor, ratingRow: RatingMetric.Wnx }),
-];
+/** The phone's window picker names the slots by the periods it shares with
+ * every other stats table; on this one each slot is a column the reader set. */
+const SLOT_PERIODS = [
+  StrongholdPeriod.Day,
+  StrongholdPeriod.Week,
+  StrongholdPeriod.Month,
+] as const;
+const SLOTS = [0, 1, 2] as const;
 
 function PeriodCells({
   cell,
@@ -316,22 +100,22 @@ function PeriodSkeleton({ hideOnMobile }: { hideOnMobile?: boolean }) {
   );
 }
 
+type HeaderDef = { period: StrongholdPeriod; content: ReactNode };
+
 /**
- * The random-battles stats table. Rows arrive pre-computed from the server (see
- * services/players/derived-stats); this only formats them. Pass `{ loading }` to
- * render the same table shell + row labels with placeholder cells — one row list,
- * so the skeleton can't drift from the real table.
+ * The table's frame: headings, the row labels, one cell per column. A column
+ * left null draws skeletons, so the loading table and a custom window on its
+ * way are the same shell.
  */
-export function PlayerStatsTable(
-  props:
-    | { loading: true }
-    | { current: Stats; periods: PeriodStats; derived: PlayerDerivedStats },
-) {
+function StatsTableShell({
+  headers,
+  columns,
+}: {
+  headers: HeaderDef[];
+  columns: (StatColumn | null)[];
+}) {
   const { num } = useFormat();
-  const { t } = useTranslation(
-    "components/players/detail/overview/stats-table",
-  );
-  const loading = "loading" in props;
+  const { t } = useTranslation(NAMESPACE);
   // Which of the four windows a phone shows. Read once here and passed down
   // rather than read per cell: the table is 23 rows of four periods, and each
   // read is a cookie subscription.
@@ -349,100 +133,157 @@ export function PlayerStatsTable(
           rather than being removed, see `styles.hiddenFixedColumn`. */}
       <colgroup>
         <col />
-        <col className={colClass(StrongholdPeriod.Overall)} />
-        <col className={colClass(StrongholdPeriod.Overall)} />
-        <col className={colClass(StrongholdPeriod.Day)} />
-        <col className={colClass(StrongholdPeriod.Day)} />
-        <col className={colClass(StrongholdPeriod.Week)} />
-        <col className={colClass(StrongholdPeriod.Week)} />
-        <col className={colClass(StrongholdPeriod.Month)} />
-        <col className={colClass(StrongholdPeriod.Month)} />
+        {headers.map((h) => (
+          <ColPair key={h.period} className={colClass(h.period)} />
+        ))}
       </colgroup>
       <TableHeader>
         <TableRow>
           <TableHead>{t("stat")}</TableHead>
-          <TableHead
-            className={cn(
-              "text-right",
-              off(StrongholdPeriod.Overall) && styles.hiddenFixedColumn,
-            )}
-            colSpan={2}
-          >
-            {t("periods.total")}
-          </TableHead>
-          <TableHead
-            className={cn(
-              "text-right",
-              off(StrongholdPeriod.Day) && styles.hiddenFixedColumn,
-            )}
-            colSpan={2}
-          >
-            {t("periods.day")}
-          </TableHead>
-          <TableHead
-            className={cn(
-              "text-right",
-              off(StrongholdPeriod.Week) && styles.hiddenFixedColumn,
-            )}
-            colSpan={2}
-          >
-            {t("periods.week")}
-          </TableHead>
-          <TableHead
-            className={cn(
-              "text-right",
-              off(StrongholdPeriod.Month) && styles.hiddenFixedColumn,
-            )}
-            colSpan={2}
-          >
-            {t("periods.month")}
-          </TableHead>
+          {headers.map((h) => (
+            <TableHead
+              key={h.period}
+              className={cn("text-right", off(h.period) && styles.hiddenFixedColumn)}
+              colSpan={2}
+            >
+              {h.content}
+            </TableHead>
+          ))}
         </TableRow>
       </TableHeader>
       <TableBody>
-        {ROWS.map((row) => {
-          const cells = loading ? null : row.cells(props, num);
-          return (
-            <TableRow
-              key={row.id}
-              data-rating-row={row.ratingRow}
-            >
-              <TableCell className="py-1.5! font-medium">
-                <GlossaryLabel label={row.term ?? row.label}>
-                  {t(`rows.${row.id}`)}
-                </GlossaryLabel>
-              </TableCell>
-              {cells ? (
-                <>
-                  <PeriodCells
-                    cell={cells.total}
-                    hideOnMobile={off(StrongholdPeriod.Overall)}
-                  />
-                  <PeriodCells
-                    cell={cells.h24}
-                    hideOnMobile={off(StrongholdPeriod.Day)}
-                  />
-                  <PeriodCells
-                    cell={cells.d7}
-                    hideOnMobile={off(StrongholdPeriod.Week)}
-                  />
-                  <PeriodCells
-                    cell={cells.d30}
-                    hideOnMobile={off(StrongholdPeriod.Month)}
-                  />
-                </>
+        {ROWS.map((row) => (
+          <TableRow key={row.id} data-rating-row={row.ratingRow}>
+            <TableCell className="py-1.5! font-medium">
+              <GlossaryLabel label={row.term ?? row.label}>
+                {t(`rows.${row.id}`)}
+              </GlossaryLabel>
+            </TableCell>
+            {columns.map((column, i) => {
+              const hide = off(headers[i].period);
+              return column ? (
+                <PeriodCells
+                  key={headers[i].period}
+                  cell={row.cell(column, num)}
+                  hideOnMobile={hide}
+                />
               ) : (
-                <>
-                  <PeriodSkeleton hideOnMobile={off(StrongholdPeriod.Overall)} />
-                  <PeriodSkeleton hideOnMobile={off(StrongholdPeriod.Day)} />
-                  <PeriodSkeleton hideOnMobile={off(StrongholdPeriod.Week)} />
-                  <PeriodSkeleton hideOnMobile={off(StrongholdPeriod.Month)} />
-                </>
-              )}
-            </TableRow>
-          );
-        })}
+                <PeriodSkeleton key={headers[i].period} hideOnMobile={hide} />
+              );
+            })}
+          </TableRow>
+        ))}
       </TableBody>
     </Table>
   );
+}
+
+function ColPair({ className }: { className: string }) {
+  return (
+    <>
+      <col className={className} />
+      <col className={className} />
+    </>
+  );
+}
+
+/** A window's heading: its name, a note when it reaches past our history,
+ * and the pencil that changes it. */
+function WindowHeading({
+  label,
+  editor,
+  since,
+}: {
+  label: string;
+  editor?: ReactNode;
+  since?: string | null;
+}) {
+  return (
+    <span className="inline-flex flex-col items-end">
+      <span className="inline-flex items-center gap-1">
+        {label}
+        {editor}
+      </span>
+      {since ? (
+        <span className="text-[11px] font-normal text-fd-muted-foreground">{since}</span>
+      ) : null}
+    </span>
+  );
+}
+
+type LoadedProps = {
+  region: Region;
+  nickname: string;
+  current: Stats;
+  periods: PeriodStats;
+  derived: PlayerDerivedStats;
+};
+
+function LoadedStatsTable({ region, nickname, current, periods, derived }: LoadedProps) {
+  const { t } = useTranslation(NAMESPACE);
+  const { date } = useFormat();
+  const windowLabel = useStatWindowLabel();
+  const [windows, setWindow] = useStatWindows();
+  // One call per slot, always three: hooks cannot follow a loop over data.
+  const slots = [
+    useStatWindowColumn({ region, nickname, window: windows[0], periods, derived }),
+    useStatWindowColumn({ region, nickname, window: windows[1], periods, derived }),
+    useStatWindowColumn({ region, nickname, window: windows[2], periods, derived }),
+  ];
+  const day = date("PP");
+
+  const headers: HeaderDef[] = [
+    { period: StrongholdPeriod.Overall, content: t("periods.total") },
+    ...SLOTS.map((i) => {
+      const label = windowLabel(windows[i]);
+      const { truncated, from } = slots[i];
+      return {
+        period: SLOT_PERIODS[i],
+        content: (
+          <WindowHeading
+            label={label}
+            since={truncated && from ? t("since", { date: day.format(from) }) : null}
+            editor={
+              <StatWindowEditor
+                window={windows[i]}
+                fallback={DEFAULT_STAT_WINDOWS[i]}
+                label={label}
+                onSave={(next) => setWindow(i, next)}
+              />
+            }
+          />
+        ),
+      };
+    }),
+  ];
+  const columns: (StatColumn | null)[] = [
+    { stats: current, derived: derivedColumn(derived, "total"), lifetime: true },
+    ...slots.map((s) => s.column),
+  ];
+  return <StatsTableShell headers={headers} columns={columns} />;
+}
+
+function LoadingStatsTable() {
+  const { t } = useTranslation(NAMESPACE);
+  const windowLabel = useStatWindowLabel();
+  const [windows] = useStatWindows();
+  const headers: HeaderDef[] = [
+    { period: StrongholdPeriod.Overall, content: t("periods.total") },
+    ...SLOTS.map((i) => ({
+      period: SLOT_PERIODS[i],
+      content: <WindowHeading label={windowLabel(windows[i])} />,
+    })),
+  ];
+  return <StatsTableShell headers={headers} columns={[null, null, null, null]} />;
+}
+
+/**
+ * The random-battles stats table. The career column and the three default
+ * windows arrive pre-computed with the profile; a window the reader set
+ * through a column's pencil is read from the period endpoint. Pass
+ * `{ loading }` to render the same shell and row labels with placeholder
+ * cells — one row list, so the skeleton can't drift from the real table.
+ */
+export function PlayerStatsTable(props: { loading: true } | LoadedProps) {
+  return "loading" in props ? <LoadingStatsTable /> : <LoadedStatsTable {...props} />;
 }

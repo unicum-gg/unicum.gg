@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslation } from "@/hooks/use-translation";
-import { STRONGHOLD_PERIOD_LABEL } from "@unicum.gg/shared";
+import { STRONGHOLD_PERIOD_LABEL, type StrongholdPeriod } from "@unicum.gg/shared";
 import { PeriodInlineSelect } from "@/components/period-inline-select";
 import { STATS_PERIODS, useStatsPeriod } from "@/hooks/use-period";
 
@@ -21,7 +21,12 @@ import { STATS_PERIODS, useStatsPeriod } from "@/hooks/use-period";
  * (The hiding is on this wrapper rather than on the trigger, whose `inline-flex`
  * is `!important` and would win over a plain `sm:hidden`.)
  */
-export function StatsPeriodSelect() {
+export function StatsPeriodSelect({
+  label,
+}: {
+  /** How a table whose columns are not the shared four names them. */
+  label?: (period: StrongholdPeriod) => string;
+} = {}) {
   const { t } = useTranslation("components/stats-period-select");
   // Wargaming's own words for the windows, from `game/vocabulary`: the
   // constant is the English source and the key side, like every other
@@ -35,6 +40,7 @@ export function StatsPeriodSelect() {
         period={period}
         periods={STATS_PERIODS}
         label={(p) => {
+          if (label) return label(p);
           const name = tGame(`stronghold-periods.${p}`);
           return name === `stronghold-periods.${p}` ? STRONGHOLD_PERIOD_LABEL[p] : name;
         }}
