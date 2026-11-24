@@ -55,6 +55,11 @@ COPY packages/core/package.json packages/core/
 COPY packages/shared/package.json packages/shared/
 COPY packages/wargaming/package.json packages/wargaming/
 COPY packages/sdk/package.json packages/sdk/
+# `pnpm.patchedDependencies` is read during the install, so the patches have to
+# be in this stage even though nothing else of the sources is. Without them the
+# install fails outright, which is the good failure: a build that silently
+# dropped the patch would serve an unpatched Next with no sign of it anywhere.
+COPY patches patches/
 RUN --mount=type=cache,id=pnpm-store,target=/pnpm/store \
     pnpm install --frozen-lockfile --ignore-scripts
 

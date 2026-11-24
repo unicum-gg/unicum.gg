@@ -1,0 +1,44 @@
+diff --git a/dist/server/lib/incremental-cache/index.js b/dist/server/lib/incremental-cache/index.js
+index a78ea6e..3308bde 100644
+--- a/dist/server/lib/incremental-cache/index.js
++++ b/dist/server/lib/incremental-cache/index.js
+@@ -528,18 +528,32 @@ class IncrementalCache {
+             handlerContext = responseContext;
+         }
+         // FetchCache has upper limit of 2MB per-entry currently
+-        const itemSize = JSON.stringify(data).length;
+-        if (ctx.fetchCache && itemSize > 2 * 1024 * 1024 && // We ignore the size limit when custom cache handler is being used, as it
++        //
++        // PATCHED (unicum.gg): `itemSize` was computed on EVERY `set`, and the
++        // only thing reading it also requires `!this.hasCustomCacheHandler`,
++        // which is false for us (the constructor sets it from `CurCacheHandler`
++        // and `next.config.ts` always names one), so the branch could never
++        // fire. It is not free work: on an APP_PAGE entry `data` holds the RSC
++        // payload as a Buffer, which `JSON.stringify` walks through
++        // `Buffer.toJSON` into one JS number per byte, measured at 12.8% of
++        // this server's allocations while its workers spend 25% of their CPU in
++        // GC. The three cheap flags are tested first, so the bytes are only
++        // counted for the fetch-cache entries the limit can actually reject.
++        // Pure reordering: none of the operands has a side effect.
++        if (ctx.fetchCache && // We ignore the size limit when custom cache handler is being used, as it
+         // might not have this limit
+         !this.hasCustomCacheHandler && // We also ignore the size limit when it's an implicit build-time-only
+         // caching that the user isn't even aware of.
+         !ctx.isImplicitBuildTimeCache) {
+-            const warningText = `Failed to set Next.js data cache for ${ctx.fetchUrl || pathname}, items over 2MB can not be cached (${itemSize} bytes)`;
+-            if (this.dev) {
+-                throw new Error(warningText);
++            const itemSize = JSON.stringify(data).length;
++            if (itemSize > 2 * 1024 * 1024) {
++                const warningText = `Failed to set Next.js data cache for ${ctx.fetchUrl || pathname}, items over 2MB can not be cached (${itemSize} bytes)`;
++                if (this.dev) {
++                    throw new Error(warningText);
++                }
++                console.warn(warningText);
++                return;
+             }
+-            console.warn(warningText);
+-            return;
+         }
+         try {
+             var _this_cacheHandler;
