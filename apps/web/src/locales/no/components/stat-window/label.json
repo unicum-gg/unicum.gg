@@ -1,0 +1,6 @@
+{
+  "day": "Siste 24t",
+  "days": "Siste {count} d",
+  "battle": "Forrige kamp",
+  "battles": "Siste {count} kamper"
+}

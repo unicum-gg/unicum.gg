@@ -24,8 +24,9 @@ import { STATS_PERIODS, useStatsPeriod } from "@/hooks/use-period";
 export function StatsPeriodSelect({
   label,
 }: {
-  /** How a table whose columns are not the shared four names them. */
-  label?: (period: StrongholdPeriod) => string;
+  /** How a table whose columns are not the shared four names them; null
+   * keeps the shared name (the career column). */
+  label?: (period: StrongholdPeriod) => string | null;
 } = {}) {
   const { t } = useTranslation("components/stats-period-select");
   // Wargaming's own words for the windows, from `game/vocabulary`: the
@@ -40,7 +41,8 @@ export function StatsPeriodSelect({
         period={period}
         periods={STATS_PERIODS}
         label={(p) => {
-          if (label) return label(p);
+          const own = label?.(p);
+          if (own) return own;
           const name = tGame(`stronghold-periods.${p}`);
           return name === `stronghold-periods.${p}` ? STRONGHOLD_PERIOD_LABEL[p] : name;
         }}

@@ -26,13 +26,6 @@
     "wnx": "WNX"
   },
   "periods": {
-    "total": "Celkom",
-    "day": "Posledných 24 hodín"
-  },
-  "windows": {
-    "days": "Posledných {count} dní",
-    "battle": "Posledná bitka",
-    "battles": "Posledných {count} bitiek"
-  },
-  "since": "Od {date}"
+    "total": "Celkom"
+  }
 }

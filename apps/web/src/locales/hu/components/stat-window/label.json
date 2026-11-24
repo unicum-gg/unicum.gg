@@ -1,0 +1,6 @@
+{
+  "day": "Utolsó 24 óra",
+  "days": "Utolsó {count}n",
+  "battle": "Utolsó csata",
+  "battles": "Utolsó {count} csaták"
+}

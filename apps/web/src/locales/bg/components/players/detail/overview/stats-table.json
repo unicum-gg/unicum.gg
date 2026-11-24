@@ -26,13 +26,6 @@
     "wnx": "WNX"
   },
   "periods": {
-    "total": "Общо",
-    "day": "Последни 24ч"
-  },
-  "windows": {
-    "days": "Последните {count} д.",
-    "battle": "Последна битка",
-    "battles": "Последните {count} битки"
-  },
-  "since": "От {date}"
+    "total": "Общо"
+  }
 }

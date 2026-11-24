@@ -1,0 +1,6 @@
+{
+  "day": "Poslednjih 24h",
+  "days": "Poslednjih {count}d",
+  "battle": "Poslednja bitka",
+  "battles": "Poslednje {count} bitke"
+}

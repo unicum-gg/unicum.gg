@@ -1,0 +1,6 @@
+{
+  "day": "Last 24h",
+  "days": "Last {count}d",
+  "battle": "Last battle",
+  "battles": "{count} battles"
+}

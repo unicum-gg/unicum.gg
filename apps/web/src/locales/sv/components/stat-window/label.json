@@ -1,0 +1,6 @@
+{
+  "day": "Senaste 24h",
+  "days": "Senaste {count} d",
+  "battle": "Senaste strid",
+  "battles": "Senaste {count} strider"
+}

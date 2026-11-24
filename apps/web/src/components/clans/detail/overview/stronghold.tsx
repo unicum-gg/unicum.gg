@@ -10,9 +10,15 @@ import {
 } from "@/components/panel";
 import { TaggedTitle } from "@/components/clans/detail/tagged-title";
 import { ClanStrongholdStatsTable } from "@/components/clans/detail/overview/stronghold-stats";
-import { StatsPeriodSelect } from "@/components/stats-period-select";
+import { StatWindowPeriodSelect } from "@/components/stat-window/period-select";
+import { StatWindowScope } from "@/hooks/use-stat-windows";
+import {
+  useClanWindowColumns,
+  windowedPeriods,
+} from "@/components/clans/detail/overview/use-clan-window-columns";
+import { clanWindowHeads } from "@/components/clans/detail/overview/clan-window-heads";
 import { styles } from "@/lib/styles";
-import type { ClanStrongholdView } from "@unicum.gg/shared";
+import { StrongholdPeriod, type ClanStrongholdView } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 
 /** The Overview section under the Stronghold mode: the per-mode stronghold stats
@@ -31,6 +37,14 @@ export function StrongholdTab({
   stronghold: ClanStrongholdView;
 }) {
   const { t } = useTranslation("components/clans/detail/overview/stronghold");
+  const columns = useClanWindowColumns(region, tag);
+  // The Skirmish Rating comes from the regional board, which is measured over
+  // the three default windows only: a column set to anything else dashes it.
+  const slotPeriods = [StrongholdPeriod.Day, StrongholdPeriod.Week, StrongholdPeriod.Month] as const;
+  const sr = { ...stronghold.sr };
+  columns.forEach((c, i) => {
+    if (c.custom) sr[slotPeriods[i]] = null;
+  });
   return (
     <>
       <PanelSeparator />
@@ -39,7 +53,7 @@ export function StrongholdTab({
           <PanelTitle>
             <TaggedTitle tag={tag} color={color}>
               {t("stronghold-stats")}</TaggedTitle>
-            {stronghold.latest && <StatsPeriodSelect />}
+            {stronghold.latest && <StatWindowPeriodSelect scope={StatWindowScope.Clan} />}
           </PanelTitle>
         </PanelHeader>
         <PanelContent className="p-0">
@@ -47,8 +61,9 @@ export function StrongholdTab({
             <ClanStrongholdStatsTable
               region={region}
               latest={stronghold.latest}
-              periods={stronghold.periods}
-              sr={stronghold.sr}
+              periods={windowedPeriods(columns, stronghold.periods, (w) => w.stronghold)}
+              periodHeads={clanWindowHeads(columns)}
+              sr={sr}
             />
           ) : (
             <div className={`p-4 ${styles.mutedDescription}`}>

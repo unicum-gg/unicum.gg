@@ -16,6 +16,8 @@ import {
   type WinrateColorFn,
 } from "@/components/players/detail/overview/stronghold-stats-table";
 import { StatsPeriodSelect } from "@/components/stats-period-select";
+import { StatWindowPeriodSelect } from "@/components/stat-window/period-select";
+import { ModeWindowTable } from "@/components/players/detail/overview/mode-window-table";
 import Link from "@/components/link";
 import { ArrowRightIcon } from "@phosphor-icons/react";
 import { styles } from "@/lib/styles";
@@ -23,7 +25,8 @@ import { tankModeName } from "@/components/game-name";
 import { withTankMode } from "@/hooks/use-tank-mode";
 import { cn } from "@/lib/utils";
 import type { ReactNode } from "react";
-import type { StrongholdStats, TankBattleMode } from "@unicum.gg/shared";
+import type { Region } from "@unicum.gg/wargaming";
+import type { StatWindowMode, StrongholdStats, TankBattleMode } from "@unicum.gg/shared";
 
 export type StrongholdData = {
   current: StrongholdStats | null;
@@ -34,6 +37,8 @@ export type StrongholdData = {
  * stronghold stats table, or a "no data yet" fallback. `trailingRows` appends
  * the mode-specific row (a mode's MR) after the shared set. */
 export function StrongholdTab({
+  region,
+  windowMode,
   nickname,
   label,
   data,
@@ -45,6 +50,10 @@ export function StrongholdTab({
   leadTitle,
   note,
 }: {
+  region: Region;
+  /** The mode's key for custom period columns, absent on an ended mode whose
+   * periods are empty by construction (and whose columns stay fixed). */
+  windowMode?: StatWindowMode;
   nickname: string;
   label: string;
   data: StrongholdData;
@@ -73,11 +82,24 @@ export function StrongholdTab({
             {t("title", { nickname, label })}
             {/* Only with a table under it: over the "no data yet" message it
                 offered a choice that changed nothing. */}
-            {data.current !== null && <StatsPeriodSelect />}
+            {data.current !== null &&
+              (windowMode ? <StatWindowPeriodSelect /> : <StatsPeriodSelect />)}
           </PanelTitle>
         </PanelHeader>
         <PanelContent className="p-0">
-          {data.current !== null ? (
+          {data.current !== null && windowMode ? (
+            <ModeWindowTable
+              region={region}
+              nickname={nickname}
+              mode={windowMode}
+              current={data.current}
+              periods={data.periods}
+              trailingRows={trailingRows}
+              winrateColorFn={winrateColorFn}
+              sections={sections}
+              leadTitle={leadTitle}
+            />
+          ) : data.current !== null ? (
             <StrongholdStatsTable
               current={data.current}
               periods={data.periods}

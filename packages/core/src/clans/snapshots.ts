@@ -193,90 +193,109 @@ export async function recordClanGlobalMapSnapshot(
   });
 }
 
-export async function getClanSnapshotPeriods(
+/**
+ * Baseline snapshot for a period diff: normally the newest snapshot at or
+ * before `now - windowMs`. When the clan has been tracked for less than that
+ * window, no such snapshot exists, so fall back to the oldest snapshot other
+ * than the current one, otherwise a recently-tracked clan shows a blank period
+ * column instead of the games it actually played. The current snapshot is
+ * excluded from that fallback so a clan with a single snapshot stays empty
+ * rather than diffing against itself.
+ *
+ * `attributable` says whether a NON-ZERO delta measured from this baseline can
+ * honestly be labelled with this window. The diff spans
+ * [baseline, latest], which is wider than [cutoff, latest] by however far the
+ * baseline predates the cutoff, so anything the clan did in that overhang gets
+ * counted into the wrong column. Sampling used to be sparse enough that this
+ * was the normal case, not the edge one: the "Last 24h" baseline was a median
+ * of NINE DAYS old, and "Last 7d" ten, which is why the two columns showed the
+ * same number for most clans.
+ *
+ * A zero delta needs no such guard, and that is not an approximation: battles
+ * and wins are monotonic counters, so baseline <= cutoff <= latest means
+ * 0 = latest - baseline >= latest - cutoff >= 0. The window being too wide
+ * cannot hide activity inside it. That is what keeps an idle clan reading a
+ * truthful "0" rather than an evasive dash.
+ */
+export async function getClanPeriodBaseline(
   region: Region,
   clanId: number,
-): Promise<ClanSnapshotPeriods> {
-  const snapshots = clanSnapshotsByRegion[region];
-  const now = Date.now();
-  const HOUR = 60 * 60 * 1000;
-  const windows = { h24: 24 * HOUR, d7: 7 * 24 * HOUR, d30: 30 * 24 * HOUR };
+  windowMs: number,
+  now = Date.now(),
+): Promise<ClanPeriodBaseline | null> {
+  const latestTakenAt = await latestSnapshotTakenAt(region, clanId);
+  return latestTakenAt
+    ? periodBaseline(region, clanId, latestTakenAt, windowMs, now)
+    : null;
+}
 
-  // The current snapshot's timestamp. We exclude it from the short-history
-  // fallback below so a clan with a single snapshot stays empty rather than
-  // diffing against itself.
+async function latestSnapshotTakenAt(
+  region: Region,
+  clanId: number,
+): Promise<Date | null> {
+  const snapshots = clanSnapshotsByRegion[region];
   const [latest] = await db
     .select({ takenAt: snapshots.takenAt })
     .from(snapshots)
     .where(eq(snapshots.clanId, clanId))
     .orderBy(desc(snapshots.takenAt))
     .limit(1);
-  const latestTakenAt = latest?.takenAt ?? null;
+  return latest?.takenAt ?? null;
+}
 
-  /**
-   * Baseline snapshot for a period diff: normally the newest snapshot at or
-   * before `cutoff`. When the clan has been tracked for less than that window,
-   * no such snapshot exists, so fall back to the oldest snapshot other than the
-   * current one, otherwise a recently-tracked clan shows a blank period column
-   * instead of the games it actually played.
-   *
-   * `attributable` says whether a NON-ZERO delta measured from this baseline can
-   * honestly be labelled with this window. The diff spans
-   * [baseline, latest], which is wider than [cutoff, latest] by however far the
-   * baseline predates the cutoff, so anything the clan did in that overhang gets
-   * counted into the wrong column. Sampling used to be sparse enough that this
-   * was the normal case, not the edge one: the "Last 24h" baseline was a median
-   * of NINE DAYS old, and "Last 7d" ten, which is why the two columns showed the
-   * same number for most clans.
-   *
-   * A zero delta needs no such guard, and that is not an approximation: battles
-   * and wins are monotonic counters, so baseline <= cutoff <= latest means
-   * 0 = latest - baseline >= latest - cutoff >= 0. The window being too wide
-   * cannot hide activity inside it. That is what keeps an idle clan reading a
-   * truthful "0" rather than an evasive dash.
-   */
-  async function periodBaseline(
-    windowMs: number,
-  ): Promise<ClanPeriodBaseline | null> {
-    if (!latestTakenAt) return null;
-    const cutoff = new Date(now - windowMs);
-    // A raw `sql` template can't bind a Date directly (the driver only accepts
-    // strings/buffers there), so hand it the ISO string cast to timestamptz.
-    const cutoffTs = sql`${cutoff.toISOString()}::timestamptz`;
-    const [row] = await db
-      .select()
-      .from(snapshots)
-      .where(
-        and(
-          eq(snapshots.clanId, clanId),
-          or(
-            lte(snapshots.takenAt, cutoff),
-            lt(snapshots.takenAt, latestTakenAt),
-          ),
+async function periodBaseline(
+  region: Region,
+  clanId: number,
+  latestTakenAt: Date,
+  windowMs: number,
+  now: number,
+): Promise<ClanPeriodBaseline | null> {
+  const snapshots = clanSnapshotsByRegion[region];
+  const cutoff = new Date(now - windowMs);
+  // A raw `sql` template can't bind a Date directly (the driver only accepts
+  // strings/buffers there), so hand it the ISO string cast to timestamptz.
+  const cutoffTs = sql`${cutoff.toISOString()}::timestamptz`;
+  const [row] = await db
+    .select()
+    .from(snapshots)
+    .where(
+      and(
+        eq(snapshots.clanId, clanId),
+        or(
+          lte(snapshots.takenAt, cutoff),
+          lt(snapshots.takenAt, latestTakenAt),
         ),
-      )
-      .orderBy(
-        sql`(${snapshots.takenAt} <= ${cutoffTs}) DESC`,
-        sql`CASE WHEN ${snapshots.takenAt} <= ${cutoffTs} THEN ${snapshots.takenAt} END DESC`,
-        asc(snapshots.takenAt),
-      )
-      .limit(1);
-    if (!row) return null;
-    // One window of slack: the measured span may reach twice the label before a
-    // non-zero delta stops being attributable. A baseline NEWER than the cutoff
-    // (the short-history fallback) passes trivially, it narrows the span rather
-    // than widening it, so it can only under-report, which is the whole point of
-    // that fallback.
-    const attributable = row.takenAt.getTime() >= now - 2 * windowMs;
-    return { snapshot: row, attributable };
-  }
+      ),
+    )
+    .orderBy(
+      sql`(${snapshots.takenAt} <= ${cutoffTs}) DESC`,
+      sql`CASE WHEN ${snapshots.takenAt} <= ${cutoffTs} THEN ${snapshots.takenAt} END DESC`,
+      asc(snapshots.takenAt),
+    )
+    .limit(1);
+  if (!row) return null;
+  // One window of slack: the measured span may reach twice the label before a
+  // non-zero delta stops being attributable. A baseline NEWER than the cutoff
+  // (the short-history fallback) passes trivially, it narrows the span rather
+  // than widening it, so it can only under-report, which is the whole point of
+  // that fallback.
+  const attributable = row.takenAt.getTime() >= now - 2 * windowMs;
+  return { snapshot: row, attributable };
+}
 
+export async function getClanSnapshotPeriods(
+  region: Region,
+  clanId: number,
+): Promise<ClanSnapshotPeriods> {
+  const now = Date.now();
+  const HOUR = 60 * 60 * 1000;
+  const latestTakenAt = await latestSnapshotTakenAt(region, clanId);
+  if (!latestTakenAt) return { h24: null, d7: null, d30: null };
   const [h24, d7, d30] = await Promise.all([
-    periodBaseline(windows.h24),
-    periodBaseline(windows.d7),
-    periodBaseline(windows.d30),
+    periodBaseline(region, clanId, latestTakenAt, 24 * HOUR, now),
+    periodBaseline(region, clanId, latestTakenAt, 7 * 24 * HOUR, now),
+    periodBaseline(region, clanId, latestTakenAt, 30 * 24 * HOUR, now),
   ]);
-
   return { h24, d7, d30 };
 }
 

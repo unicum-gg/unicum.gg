@@ -26,13 +26,6 @@
     "wnx": "WNX"
   },
   "periods": {
-    "total": "I alt",
-    "day": "Sidste 24 timer"
-  },
-  "windows": {
-    "days": "Sidste {count}d",
-    "battle": "Sidste kamp",
-    "battles": "Sidste {count} kampe"
-  },
-  "since": "Siden {date}"
+    "total": "I alt"
+  }
 }

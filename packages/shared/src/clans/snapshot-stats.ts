@@ -301,3 +301,37 @@ export function clanGlobalMapView(
     },
   };
 }
+
+/** One period column of the clan's two tables, over a window the reader chose. */
+export type ClanStatWindow = {
+  days: number;
+  stronghold: ClanStrongholdStats | null;
+  globalMap: ClanGlobalMapStats | null;
+  /** The snapshot the window was diffed from. */
+  from: Date | null;
+  /** We hold no snapshot that old, so the column covers everything since
+   * `from` rather than the whole window. */
+  truncated: boolean;
+};
+
+/**
+ * The diffs of one window, read through the very views that build the 24h,
+ * 7d and 30d columns (as their first slot), so a custom column cannot
+ * disagree with a default one on what "no data" or "not attributable" means.
+ */
+export function clanStatWindow(
+  latest: ClanSnapshot | null,
+  baseline: ClanPeriodBaseline | null,
+  days: number,
+  now = Date.now(),
+): ClanStatWindow {
+  const periods = { h24: baseline, d7: null, d30: null };
+  const from = baseline?.snapshot.takenAt ?? null;
+  return {
+    days,
+    stronghold: clanStrongholdView(latest, periods).periods.h24,
+    globalMap: clanGlobalMapView(latest, periods).periods.h24,
+    from,
+    truncated: from !== null && from.getTime() > now - days * 24 * 60 * 60 * 1000,
+  };
+}

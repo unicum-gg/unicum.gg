@@ -26,13 +26,6 @@
     "wnx": "WNX"
   },
   "periods": {
-    "total": "Totalt",
-    "day": "Siste 24t"
-  },
-  "windows": {
-    "days": "Siste {count} d",
-    "battle": "Forrige kamp",
-    "battles": "Siste {count} kamper"
-  },
-  "since": "Siden {date}"
+    "total": "Totalt"
+  }
 }

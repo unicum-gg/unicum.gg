@@ -26,13 +26,6 @@
     "wnx": "WNX"
   },
   "periods": {
-    "total": "Totalt",
-    "day": "Senaste 24h"
-  },
-  "windows": {
-    "days": "Senaste {count} d",
-    "battle": "Senaste strid",
-    "battles": "Senaste {count} strider"
-  },
-  "since": "Sedan {date}"
+    "total": "Totalt"
+  }
 }

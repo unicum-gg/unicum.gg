@@ -20,6 +20,7 @@ import {
   ServerStatsRange,
   BattleResultFilter,
   SessionGranularity,
+  StatWindowMode,
   SpawnDirection,
   TankClient,
   TankRatingAxis,
@@ -218,6 +219,28 @@ export const playerStatWindowQuery = z.object({
   }),
   battles: z.coerce.number().int().min(1).max(10000).optional().meta({
     description: "Read back over the player's last N battles (1 to 10000). Give this or `days`.",
+  }),
+});
+
+/** The window of one custom column on a mode tab, and the mode it reads. */
+export const playerModeStatWindowQuery = z.object({
+  mode: z.enum(StatWindowMode).meta({
+    description:
+      "The mode, by the player detail's own key under `strongholds`: skirmish, fortified (Advances), epic (Grand Battles), ranked, fallout (Rampage), cwAbsolute, cwChampion, cwMiddle (the three Clan Wars tiers).",
+    "x-enum-source": "STAT_WINDOW_MODE",
+  } as EnumMeta),
+  days: z.coerce.number().int().min(1).max(365).optional().meta({
+    description: "Read back this many days from now (1 to 365). Give this or `battles`.",
+  }),
+  battles: z.coerce.number().int().min(1).max(10000).optional().meta({
+    description: "Read back over the player's last N battles IN THIS MODE (1 to 10000). Give this or `days`.",
+  }),
+});
+
+/** The window of one custom column on the clan's stats tables. */
+export const clanStatWindowQuery = z.object({
+  days: z.coerce.number().int().min(1).max(365).meta({
+    description: "Read back this many days from now (1 to 365).",
   }),
 });
 

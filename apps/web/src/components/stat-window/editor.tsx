@@ -19,17 +19,19 @@ import {
 import { SegmentedControl } from "@/components/segmented-control";
 import { useTranslation } from "@/hooks/use-translation";
 
-const NAMESPACE = "components/players/detail/overview/stat-window-editor";
+const NAMESPACE = "components/stat-window/editor";
 
 /**
  * The pencil beside a period column's heading, opening the form that sets
- * what the column reads back over: N days, or the player's last N battles.
+ * what the column reads back over: N days, or (for a player) their last N
+ * battles.
  * The draft lives here until Save, so typing never fetches a column per key.
  */
 export function StatWindowEditor({
   window,
   fallback,
   label,
+  units,
   onSave,
 }: {
   window: StatWindow;
@@ -37,6 +39,9 @@ export function StatWindowEditor({
   fallback: StatWindow;
   /** The column's heading, for the trigger's accessible name. */
   label: string;
+  /** The units this column may be set in; the switch is drawn only when
+   * there is more than one to choose from. */
+  units: StatWindowUnit[];
   onSave: (next: StatWindow) => void;
 }) {
   const { t } = useTranslation(NAMESPACE);
@@ -80,15 +85,14 @@ export function StatWindowEditor({
             if (valid) save(draft);
           }}
         >
-          <SegmentedControl
-            segments={[
-              { id: StatWindowUnit.Battles, label: t("units.battles") },
-              { id: StatWindowUnit.Days, label: t("units.days") },
-            ]}
-            active={unit}
-            onSelect={setUnit}
-            className="w-full [&>*]:flex-1"
-          />
+          {units.length > 1 ? (
+            <SegmentedControl
+              segments={units.map((u) => ({ id: u, label: t(`units.${u}`) }))}
+              active={unit}
+              onSelect={setUnit}
+              className="w-full [&>*]:flex-1"
+            />
+          ) : null}
           <Input
             type="number"
             inputMode="numeric"

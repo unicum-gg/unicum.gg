@@ -26,13 +26,6 @@
     "wnx": "WNX"
   },
   "periods": {
-    "total": "Разом",
-    "day": "Останні 24 год"
-  },
-  "windows": {
-    "days": "Останні {count} дб",
-    "battle": "Був у бою",
-    "battles": "Останні {count} бої"
-  },
-  "since": "Від {date}"
+    "total": "Разом"
+  }
 }

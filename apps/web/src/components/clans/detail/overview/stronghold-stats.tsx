@@ -3,7 +3,7 @@
 import type { NumberFormatter } from "@/lib/format";
 
 import { useFormat } from "@/hooks/use-format";
-import { Fragment } from "react";
+import { Fragment, type ReactNode } from "react";
 import { CaretRightIcon } from "@phosphor-icons/react";
 import {
   Table,
@@ -263,7 +263,12 @@ export function ClanStrongholdStatsTable(
     | {
         region: Region;
         latest: ClanStrongholdStats;
-        periods: ClanStrongholdView["periods"];
+        /** A column left undefined is on its way and draws skeletons. */
+        periods: {
+          [K in keyof ClanStrongholdView["periods"]]: ClanStrongholdView["periods"][K] | undefined;
+        };
+        /** The three period headings, where the reader sets the windows. */
+        periodHeads?: readonly [ReactNode, ReactNode, ReactNode];
         sr: ClanStrongholdView["sr"];
       },
 ) {
@@ -287,6 +292,10 @@ export function ClanStrongholdStatsTable(
     cn(off(p) ? "max-sm:w-0!" : "max-sm:w-[44%]", "sm:w-[12%]");
   const headClass = (p: StrongholdPeriod) =>
     cn("text-right", off(p) && styles.hiddenFixedColumn);
+  const heads =
+    !loading && props.periodHeads
+      ? props.periodHeads
+      : ([t("periods.day"), t("periods.week"), t("periods.month")] as const);
 
   return (
     <Table className="my-0! table-fixed [&_td]:min-w-0 [&_tr>*+*]:border-l [&_tr>*:first-child]:pl-4! [&_tr>*]:border-border [&_th]:py-1! [&_td]:py-0.5!">
@@ -303,9 +312,9 @@ export function ClanStrongholdStatsTable(
         <TableRow>
           <TableHead>{t("stat")}</TableHead>
           <TableHead className={headClass(StrongholdPeriod.Overall)}>{t("periods.total")}</TableHead>
-          <TableHead className={headClass(StrongholdPeriod.Day)}>{t("periods.day")}</TableHead>
-          <TableHead className={headClass(StrongholdPeriod.Week)}>{t("periods.week")}</TableHead>
-          <TableHead className={headClass(StrongholdPeriod.Month)}>{t("periods.month")}</TableHead>
+          <TableHead className={headClass(StrongholdPeriod.Day)}>{heads[0]}</TableHead>
+          <TableHead className={headClass(StrongholdPeriod.Week)}>{heads[1]}</TableHead>
+          <TableHead className={headClass(StrongholdPeriod.Month)}>{heads[2]}</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -378,22 +387,21 @@ export function ClanStrongholdStatsTable(
                       cell={row.current(props.latest, num)}
                       hideOnMobile={off(StrongholdPeriod.Overall)}
                     />
-                    <PeriodCell
-                      cell={
-                        props.periods.h24 ? row.delta(props.periods.h24, num) : DASH
-                      }
-                      hideOnMobile={off(StrongholdPeriod.Day)}
-                    />
-                    <PeriodCell
-                      cell={props.periods.d7 ? row.delta(props.periods.d7, num) : DASH}
-                      hideOnMobile={off(StrongholdPeriod.Week)}
-                    />
-                    <PeriodCell
-                      cell={
-                        props.periods.d30 ? row.delta(props.periods.d30, num) : DASH
-                      }
-                      hideOnMobile={off(StrongholdPeriod.Month)}
-                    />
+                    {([
+                      [props.periods.h24, StrongholdPeriod.Day],
+                      [props.periods.d7, StrongholdPeriod.Week],
+                      [props.periods.d30, StrongholdPeriod.Month],
+                    ] as const).map(([stats, p]) =>
+                      stats === undefined ? (
+                        <PeriodSkeleton key={p} hideOnMobile={off(p)} />
+                      ) : (
+                        <PeriodCell
+                          key={p}
+                          cell={stats ? row.delta(stats, num) : DASH}
+                          hideOnMobile={off(p)}
+                        />
+                      ),
+                    )}
                   </>
                 )}
               </TableRow>

@@ -1,5 +1,6 @@
 import type { PeriodDerivedValues } from "./derived-stats";
 import type { PlayerPeriodStats } from "./stats";
+import type { StrongholdStats } from "./stronghold-stats";
 
 /**
  * What a period column of the profile's stats table reads back over: a number
@@ -80,5 +81,35 @@ export type PlayerStatWindow = {
   from: Date | null;
   /** The window asked for more than we hold, so the column covers everything
    * since we started tracking the account rather than the whole window. */
+  truncated: boolean;
+};
+
+/**
+ * The live modes whose profile tab carries period columns, keyed by the
+ * payload's own names (`PlayerStrongholdModes`). The five ended modes are not
+ * here: their totals are finished, so no window can hold anything.
+ */
+export enum StatWindowMode {
+  Skirmish = "skirmish",
+  Advances = "fortified",
+  GrandBattles = "epic",
+  Ranked = "ranked",
+  Rampage = "fallout",
+  ClanWarsX = "cwAbsolute",
+  ClanWarsVIII = "cwChampion",
+  ClanWarsVI = "cwMiddle",
+}
+
+export function isStatWindowMode(v: string): v is StatWindowMode {
+  return (Object.values(StatWindowMode) as string[]).includes(v);
+}
+
+/** One period column of a mode tab over a window the reader chose. */
+export type PlayerModeStatWindow = {
+  mode: StatWindowMode;
+  window: StatWindow;
+  /** Null when no snapshot old enough carries the mode's counters. */
+  stats: StrongholdStats | null;
+  from: Date | null;
   truncated: boolean;
 };

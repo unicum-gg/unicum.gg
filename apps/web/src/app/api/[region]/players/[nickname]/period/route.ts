@@ -1,26 +1,11 @@
 import { isRegion } from "@unicum.gg/wargaming";
-import {
-  StatWindowUnit,
-  isValidStatWindow,
-  type StatWindow,
-} from "@unicum.gg/shared";
 import { loadPlayerStatWindow } from "@unicum.gg/core/players/stat-window";
 import { jsonResponse } from "@/services/openapi/json-response";
+import { statWindowOf } from "@/services/players/stat-window";
 import { PlayerStatWindowResponse } from "./schema.api";
 import { measured } from "@/services/perf";
 
 export const dynamic = "force-dynamic";
-
-function windowOf(params: URLSearchParams): StatWindow | null {
-  const days = params.get("days");
-  const battles = params.get("battles");
-  if ((days === null) === (battles === null)) return null;
-  const w =
-    days !== null
-      ? { unit: StatWindowUnit.Days, value: Number(days) }
-      : { unit: StatWindowUnit.Battles, value: Number(battles) };
-  return isValidStatWindow(w) ? w : null;
-}
 
 /**
  * Player stats over a custom window
@@ -42,7 +27,7 @@ async function GET__perf(
   if (!isRegion(region)) {
     return Response.json({ error: "invalid_region" }, { status: 400 });
   }
-  const window = windowOf(new URL(req.url).searchParams);
+  const window = statWindowOf(new URL(req.url).searchParams);
   if (!window) {
     return Response.json({ error: "invalid_window" }, { status: 400 });
   }

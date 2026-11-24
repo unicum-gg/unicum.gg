@@ -26,13 +26,6 @@
     "wnx": "WNX"
   },
   "periods": {
-    "total": "Агульны",
-    "day": "Апошнія 24г"
-  },
-  "windows": {
-    "days": "Апошнія {count} дні",
-    "battle": "Апошні бой",
-    "battles": "Апошнія {count} баі"
-  },
-  "since": "Пачынаючы з {date}"
+    "total": "Агульны"
+  }
 }

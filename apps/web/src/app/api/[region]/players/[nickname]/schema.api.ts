@@ -269,7 +269,7 @@ const playerClanHistory = z
     description: "Current and past clan memberships.",
   });
 
-const strongholdStats = z
+export const strongholdStats = z
   .object({
     battles: z.number(),
     wins: z.number(),

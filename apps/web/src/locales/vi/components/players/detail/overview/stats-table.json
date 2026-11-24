@@ -26,13 +26,6 @@
     "wnx": "WNX"
   },
   "periods": {
-    "total": "Tổng",
-    "day": "24 giờ qua"
-  },
-  "windows": {
-    "days": "{count}ng gần nhất",
-    "battle": "Trận đánh Gần nhất",
-    "battles": "{count} trận đấu gần nhất"
-  },
-  "since": "Kể từ {date}"
+    "total": "Tổng"
+  }
 }

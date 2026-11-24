@@ -18,7 +18,6 @@ import { useStatWindows } from "@/hooks/use-stat-windows";
 import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 import {
-  DEFAULT_STAT_WINDOWS,
   RATING_COLOR_CLASS,
   StrongholdPeriod,
   type PeriodStats,
@@ -27,8 +26,7 @@ import {
 } from "@unicum.gg/shared";
 import { useTranslation } from "@/hooks/use-translation";
 import { ROWS, type Cell, type StatColumn } from "./stats-table-rows";
-import { StatWindowEditor } from "./stat-window-editor";
-import { useStatWindowLabel } from "./stat-window-label";
+import { StatWindowHead } from "@/components/stat-window/head";
 import { derivedColumn, useStatWindowColumn } from "./use-stat-window-column";
 
 const NAMESPACE = "components/players/detail/overview/stats-table";
@@ -187,30 +185,6 @@ function ColPair({ className }: { className: string }) {
   );
 }
 
-/** A window's heading: its name, a note when it reaches past our history,
- * and the pencil that changes it. */
-function WindowHeading({
-  label,
-  editor,
-  since,
-}: {
-  label: string;
-  editor?: ReactNode;
-  since?: string | null;
-}) {
-  return (
-    <span className="inline-flex flex-col items-end">
-      <span className="inline-flex items-center gap-1">
-        {label}
-        {editor}
-      </span>
-      {since ? (
-        <span className="text-[11px] font-normal text-fd-muted-foreground">{since}</span>
-      ) : null}
-    </span>
-  );
-}
-
 type LoadedProps = {
   region: Region;
   nickname: string;
@@ -221,40 +195,21 @@ type LoadedProps = {
 
 function LoadedStatsTable({ region, nickname, current, periods, derived }: LoadedProps) {
   const { t } = useTranslation(NAMESPACE);
-  const { date } = useFormat();
-  const windowLabel = useStatWindowLabel();
-  const [windows, setWindow] = useStatWindows();
+  const [windows] = useStatWindows();
   // One call per slot, always three: hooks cannot follow a loop over data.
   const slots = [
     useStatWindowColumn({ region, nickname, window: windows[0], periods, derived }),
     useStatWindowColumn({ region, nickname, window: windows[1], periods, derived }),
     useStatWindowColumn({ region, nickname, window: windows[2], periods, derived }),
   ];
-  const day = date("PP");
-
   const headers: HeaderDef[] = [
     { period: StrongholdPeriod.Overall, content: t("periods.total") },
-    ...SLOTS.map((i) => {
-      const label = windowLabel(windows[i]);
-      const { truncated, from } = slots[i];
-      return {
-        period: SLOT_PERIODS[i],
-        content: (
-          <WindowHeading
-            label={label}
-            since={truncated && from ? t("since", { date: day.format(from) }) : null}
-            editor={
-              <StatWindowEditor
-                window={windows[i]}
-                fallback={DEFAULT_STAT_WINDOWS[i]}
-                label={label}
-                onSave={(next) => setWindow(i, next)}
-              />
-            }
-          />
-        ),
-      };
-    }),
+    ...SLOTS.map((i) => ({
+      period: SLOT_PERIODS[i],
+      content: (
+        <StatWindowHead slot={i} truncated={slots[i].truncated} from={slots[i].from} />
+      ),
+    })),
   ];
   const columns: (StatColumn | null)[] = [
     { stats: current, derived: derivedColumn(derived, "total"), lifetime: true },
@@ -265,13 +220,11 @@ function LoadedStatsTable({ region, nickname, current, periods, derived }: Loade
 
 function LoadingStatsTable() {
   const { t } = useTranslation(NAMESPACE);
-  const windowLabel = useStatWindowLabel();
-  const [windows] = useStatWindows();
   const headers: HeaderDef[] = [
     { period: StrongholdPeriod.Overall, content: t("periods.total") },
     ...SLOTS.map((i) => ({
       period: SLOT_PERIODS[i],
-      content: <WindowHeading label={windowLabel(windows[i])} />,
+      content: <StatWindowHead slot={i} editable={false} />,
     })),
   ];
   return <StatsTableShell headers={headers} columns={[null, null, null, null]} />;

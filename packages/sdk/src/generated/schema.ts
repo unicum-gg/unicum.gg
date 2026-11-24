@@ -579,6 +579,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/players/{nickname}/period/mode": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Player mode stats over a custom window
+         * @description A mode tab's period column for any window: the last N days (1 to 365) or the player's last N battles in that mode (1 to 10000), for Skirmish, Advances, Grand Battles, Ranked, Rampage and the three Clan Wars tiers. Same counters as the 24h/7d/30d columns under `strongholds` in the player detail, each one the difference between the account now and as it stood when the window began. These modes are read off the account, which Wargaming refreshes at logout, so a battle window starts where a session did and holds the nearest count at or beyond the one asked for. When the window reaches past our history it covers everything since, and says so in `truncated`. Give exactly one of `days` or `battles`, else 400. 404 when the player is unknown.
+         */
+        get: operations["get-{region}-players-{nickname}-period-mode"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/{region}/players/{nickname}/sessions": {
         parameters: {
             query?: never;
@@ -911,6 +931,26 @@ export interface paths {
          * @description This clan's record in Maneuvers, the recurring Stronghold clan event: its place and Fame Points on the edition being played with the day's move, its climb through it, every edition it held a place on, and which of its players sit on the player board. The game keeps no history of its boards, so all of it comes from our own captures. 404 when the tag is unknown in this region.
          */
         get: operations["get-{region}-clans-{tag}-maneuvers"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/clans/{tag}/period": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Clan stats over a custom window
+         * @description The Stronghold and Clan Wars tables' period column for any number of days (1 to 365): the same figures as the 24h/7d/30d entries of `/stronghold` and `/clan-wars`, each one the difference between the clan's newest snapshot and the newest one at or before the window's start. A change that cannot honestly be attributed to the window (the snapshot before it is over twice as old) is null, while a figure that did not move reads 0. When we hold no snapshot that old the column covers everything since we started tracking the clan, and says so in `truncated`. Days only: a clan plays several tiers at once, so its last N battles name no single stretch of time. 400 on a missing or out-of-range `days`, 404 when the tag doesn't exist.
+         */
+        get: operations["get-{region}-clans-{tag}-period"];
         put?: never;
         post?: never;
         delete?: never;
@@ -3762,6 +3802,36 @@ export interface components {
         ClanSearchResponse: {
             results: components["schemas"]["ClanSummary"][];
         };
+        /** @description One period column of the clan's Stronghold and Clan Wars tables, over a window the caller chose. */
+        ClanStatWindow: {
+            days: number;
+            /** @description The change in the clan's Stronghold figures over the window, null when it has no Stronghold data or no snapshot to diff from. */
+            stronghold: components["schemas"]["ClanStrongholdStats"] | null;
+            /** @description The change in the clan's Global Map figures over the window, null when there is no snapshot to diff from. */
+            globalMap: components["schemas"]["ClanGlobalMapStats"] | null;
+            /**
+             * Format: date-time
+             * @description The snapshot the window was diffed from.
+             */
+            from: Date | null;
+            /** @description We hold no snapshot of the clan that old, so the column covers everything since `from` rather than the whole window. */
+            truncated: boolean;
+        };
+        /** @description One period column of the clan's Stronghold and Clan Wars tables, over a window the caller chose. */
+        ClanStatWindowResponse: {
+            days: number;
+            /** @description The change in the clan's Stronghold figures over the window, null when it has no Stronghold data or no snapshot to diff from. */
+            stronghold: components["schemas"]["ClanStrongholdStats"] | null;
+            /** @description The change in the clan's Global Map figures over the window, null when there is no snapshot to diff from. */
+            globalMap: components["schemas"]["ClanGlobalMapStats"] | null;
+            /**
+             * Format: date-time
+             * @description The snapshot the window was diffed from.
+             */
+            from: Date | null;
+            /** @description We hold no snapshot of the clan that old, so the column covers everything since `from` rather than the whole window. */
+            truncated: boolean;
+        };
         /** @description A period of membership in one clan. */
         ClanStint: {
             clan: {
@@ -6412,6 +6482,58 @@ export interface components {
             /** @description Share of those battles played with a premium account, 0..1. */
             premiumShare: number;
         };
+        /** @description One period column of a mode tab of the profile, over a window the caller chose. */
+        PlayerModeStatWindow: {
+            accountId: number;
+            /**
+             * @description The mode the column reads.
+             * @enum {string}
+             */
+            mode: "skirmish" | "fortified" | "epic" | "ranked" | "fallout" | "cwAbsolute" | "cwChampion" | "cwMiddle";
+            window: {
+                /**
+                 * @description What the window counts: days from now, or the player's last battles in the mode.
+                 * @enum {string}
+                 */
+                unit: "days" | "battles";
+                value: number;
+            };
+            /** @description Null when the player has no battle in the mode, or no snapshot carrying its counters. */
+            stats: components["schemas"]["StrongholdStats"] | null;
+            /**
+             * Format: date-time
+             * @description The instant the window was read back from. These modes are read off the account, which Wargaming refreshes when the player logs out, so a battle window starts on a session boundary and can hold more than asked: read `stats.battles` for the real count.
+             */
+            from: Date | null;
+            /** @description The window reaches further back than our history of the mode on this account, so it covers everything since `from`. */
+            truncated: boolean;
+        };
+        /** @description One period column of a mode tab of the profile, over a window the caller chose. */
+        PlayerModeStatWindowResponse: {
+            accountId: number;
+            /**
+             * @description The mode the column reads.
+             * @enum {string}
+             */
+            mode: "skirmish" | "fortified" | "epic" | "ranked" | "fallout" | "cwAbsolute" | "cwChampion" | "cwMiddle";
+            window: {
+                /**
+                 * @description What the window counts: days from now, or the player's last battles in the mode.
+                 * @enum {string}
+                 */
+                unit: "days" | "battles";
+                value: number;
+            };
+            /** @description Null when the player has no battle in the mode, or no snapshot carrying its counters. */
+            stats: components["schemas"]["StrongholdStats"] | null;
+            /**
+             * Format: date-time
+             * @description The instant the window was read back from. These modes are read off the account, which Wargaming refreshes when the player logs out, so a battle window starts on a session boundary and can hold more than asked: read `stats.battles` for the real count.
+             */
+            from: Date | null;
+            /** @description The window reaches further back than our history of the mode on this account, so it covers everything since `from`. */
+            truncated: boolean;
+        };
         /** @description A player's standing at one instant. */
         PlayerOnslaughtPoint: {
             /** @description Instant of the sample, unix seconds. */
@@ -7626,9 +7748,9 @@ export interface components {
         };
         /** @description How a supporter's nickname is drawn across the site. */
         SupporterNameStyle: {
-            /** @description The typeface: default, stencil, pixel, pirate, future, marker, rounded, typewriter or horror. */
+            /** @description The typeface, by name (default, stencil, pixel, armour, script, …). An unknown one is drawn as the site's own. */
             font: string;
-            /** @description What is done with the colours: solid, gradient, neon, toon, pop or prism. */
+            /** @description What is done with the colours: solid, gradient, neon, toon, pop, gummy or prism. */
             effect: string;
             /** @description The main colour, a name from the fixed palette. */
             color: string;
@@ -10124,6 +10246,41 @@ export interface operations {
             };
         };
     };
+    "get-{region}-players-{nickname}-period-mode": {
+        parameters: {
+            query: {
+                /** @description The mode, by the player detail's own key under `strongholds`: skirmish, fortified (Advances), epic (Grand Battles), ranked, fallout (Rampage), cwAbsolute, cwChampion, cwMiddle (the three Clan Wars tiers). */
+                mode: "skirmish" | "fortified" | "epic" | "ranked" | "fallout" | "cwAbsolute" | "cwChampion" | "cwMiddle";
+                /** @description Read back this many days from now (1 to 365). Give this or `battles`. */
+                days?: number;
+                /** @description Read back over the player's last N battles IN THIS MODE (1 to 10000). Give this or `days`. */
+                battles?: number;
+            };
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Player nickname.
+                 * @example Animal
+                 */
+                nickname: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PlayerModeStatWindow"];
+                };
+            };
+        };
+    };
     "get-{region}-players-{nickname}-sessions": {
         parameters: {
             query?: {
@@ -10625,6 +10782,37 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ClanManeuversResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-clans-{tag}-period": {
+        parameters: {
+            query: {
+                /** @description Read back this many days from now (1 to 365). */
+                days: number;
+            };
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Clan tag.
+                 * @example FAME
+                 */
+                tag: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ClanStatWindow"];
                 };
             };
         };

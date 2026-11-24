@@ -26,13 +26,6 @@
     "wnx": "WNX"
   },
   "periods": {
-    "total": "Viso",
-    "day": "Paskutinės 24 val."
-  },
-  "windows": {
-    "days": "Paskutinės {count} d.",
-    "battle": "Paskutinis mūšis",
-    "battles": "Paskutiniai {count} mūšiai"
-  },
-  "since": "Nuo {date}"
+    "total": "Viso"
+  }
 }

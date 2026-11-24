@@ -26,13 +26,6 @@
     "wnx": "WNX"
   },
   "periods": {
-    "total": "الإجمالي",
-    "day": "آخر 24 ساعة"
-  },
-  "windows": {
-    "days": "آخر {count} من الأيام",
-    "battle": "آخر معركة",
-    "battles": "آخر {count} من المعارك"
-  },
-  "since": "منذ {date}"
+    "total": "الإجمالي"
+  }
 }

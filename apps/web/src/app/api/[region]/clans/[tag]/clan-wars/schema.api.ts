@@ -3,7 +3,7 @@ import { z } from "zod";
 
 const n = () => z.number().nullable();
 
-const clanGlobalMapStats = z
+export const clanGlobalMapStats = z
   .object({
     gmEloT10: n(),
     gmBattlesT10: n(),

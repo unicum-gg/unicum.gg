@@ -26,13 +26,6 @@
     "wnx": "WNX"
   },
   "periods": {
-    "total": "Összesen",
-    "day": "Utolsó 24 óra"
-  },
-  "windows": {
-    "days": "Utolsó {count}n",
-    "battle": "Utolsó csata",
-    "battles": "Utolsó {count} csaták"
-  },
-  "since": "Ettől kezdve: {date}"
+    "total": "Összesen"
+  }
 }

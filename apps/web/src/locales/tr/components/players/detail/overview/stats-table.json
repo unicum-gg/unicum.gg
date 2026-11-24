@@ -26,13 +26,6 @@
     "wnx": "WNX"
   },
   "periods": {
-    "total": "Toplam",
-    "day": "Son 24saat"
-  },
-  "windows": {
-    "days": "Son {count} gün",
-    "battle": "Son savaş",
-    "battles": "Son {count} savaş"
-  },
-  "since": "{date} tarihinden beri"
+    "total": "Toplam"
+  }
 }

@@ -26,13 +26,6 @@
     "wnx": "WNX"
   },
   "periods": {
-    "total": "Kopā",
-    "day": "Pēdējās 24h"
-  },
-  "windows": {
-    "days": "Pēdējās {count} d",
-    "battle": "Pēdējā kauja",
-    "battles": "Pēdējās {count} kaujas"
-  },
-  "since": "Kopš {date}"
+    "total": "Kopā"
+  }
 }

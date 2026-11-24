@@ -40,9 +40,10 @@ const STORAGE = {
     AUTH_REGION: AUTH_REGION_COOKIE,
     RATING: "unicum.rating",
     PERIOD: "unicum.period",
-    // The three period columns of the profile's stats table, as the reader set
-    // them (`7d,1000b,30d`). The reader's own choice rather than the page's,
-    // so it follows them from one profile to the next.
+    // The three period columns of the player and clan stats tables, as the
+    // reader set them (`7d,1000b,30d`). The reader's own choice rather than
+    // the page's, so it follows them from one page to the next (see
+    // `StatWindowScope` for what a clan makes of a battle window).
     STAT_WINDOWS: "unicum.stat-windows",
     // Free-XP pricing prefs shared across the tank page + economics table: the
     // tier you free-XP from, and the XP-to-gold conversion rate (25 normally,

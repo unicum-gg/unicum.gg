@@ -26,13 +26,6 @@
     "wnx": "WNX"
   },
   "periods": {
-    "total": "Total",
-    "day": "Ultimele 24h"
-  },
-  "windows": {
-    "days": "Ultimele {count}z",
-    "battle": "Ultima bătălie",
-    "battles": "Ultimele {count} bătălii"
-  },
-  "since": "Începând cu {date}"
+    "total": "Total"
+  }
 }

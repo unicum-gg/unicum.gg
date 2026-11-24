@@ -26,13 +26,6 @@
     "wnx": "WNX"
   },
   "periods": {
-    "total": "总计",
-    "day": "过去24小时"
-  },
-  "windows": {
-    "days": "最近 {count} 天",
-    "battle": "最后战斗的时间",
-    "battles": "最近 {count} 战斗场次"
-  },
-  "since": "自 {date} 起"
+    "total": "总计"
+  }
 }

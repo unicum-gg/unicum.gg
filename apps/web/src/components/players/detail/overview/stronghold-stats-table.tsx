@@ -231,6 +231,10 @@ export type StrongholdPeriods = {
   d30: StrongholdStats | null;
 };
 
+type LoadingStrongholdPeriods = {
+  [K in keyof StrongholdPeriods]: StrongholdPeriods[K] | undefined;
+};
+
 /** A period-cell placeholder spanning the two sub-columns, right-aligned like the
  * real numbers. Shown when `loading`. */
 function PeriodSkeleton({ hideOnMobile }: { hideOnMobile?: boolean }) {
@@ -279,7 +283,11 @@ export function StrongholdStatsTable(
     | { loading: true; trailingRows?: RowDef[]; winrateColorFn?: WinrateColorFn }
     | {
         current: StrongholdStats;
-        periods: StrongholdPeriods;
+        /** A column left undefined is on its way and draws skeletons. */
+        periods: LoadingStrongholdPeriods;
+        /** The three period headings, where a table names its own windows
+         * (the profile's mode tabs, whose columns the reader sets). */
+        periodHeads?: readonly [ReactNode, ReactNode, ReactNode];
         trailingRows?: RowDef[];
         winrateColorFn?: WinrateColorFn;
         sections?: StrongholdTableSection[];
@@ -308,6 +316,10 @@ export function StrongholdStatsTable(
     cn(off(p) ? "max-sm:w-0!" : "max-sm:w-[22%]", "sm:w-[9%]");
   const headClass = (p: StrongholdPeriod) =>
     cn("text-right", off(p) && styles.hiddenFixedColumn);
+  const heads =
+    !loading && props.periodHeads
+      ? props.periodHeads
+      : ([t("last-24h"), t("last-7d"), t("last-30d")] as const);
 
   return (
     <Table className="my-0! table-fixed [&_td]:min-w-0 [&_tr>*+*]:border-l [&_tr>*:first-child]:pl-4! [&_tr>*]:border-border [&_th]:py-1! [&_td]:py-0.5!">
@@ -328,11 +340,11 @@ export function StrongholdStatsTable(
           <TableHead className={headClass(StrongholdPeriod.Overall)} colSpan={2}>
             {t("total")}</TableHead>
           <TableHead className={headClass(StrongholdPeriod.Day)} colSpan={2}>
-            {t("last-24h")}</TableHead>
+            {heads[0]}</TableHead>
           <TableHead className={headClass(StrongholdPeriod.Week)} colSpan={2}>
-            {t("last-7d")}</TableHead>
+            {heads[1]}</TableHead>
           <TableHead className={headClass(StrongholdPeriod.Month)} colSpan={2}>
-            {t("last-30d")}</TableHead>
+            {heads[2]}</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -340,13 +352,17 @@ export function StrongholdStatsTable(
           <SectionBand title={props.leadTitle} />
         ) : null}
         {rows.map((row) => {
+          // A column is a cell, a dash (no reading), or a skeleton (undefined,
+          // still on its way).
+          const periodCell = (stats: StrongholdStats | null | undefined) =>
+            stats === undefined ? undefined : stats ? row.render(stats, num) : EMPTY_CELL;
           const cells = loading
             ? null
             : {
                 total: row.render(props.current, num),
-                h24: props.periods.h24 ? row.render(props.periods.h24, num) : EMPTY_CELL,
-                d7: props.periods.d7 ? row.render(props.periods.d7, num) : EMPTY_CELL,
-                d30: props.periods.d30 ? row.render(props.periods.d30, num) : EMPTY_CELL,
+                h24: periodCell(props.periods.h24),
+                d7: periodCell(props.periods.d7),
+                d30: periodCell(props.periods.d30),
               };
           return (
             <TableRow key={row.label}>
@@ -361,18 +377,17 @@ export function StrongholdStatsTable(
                     cell={cells.total}
                     hideOnMobile={off(StrongholdPeriod.Overall)}
                   />
-                  <PeriodCells
-                    cell={cells.h24}
-                    hideOnMobile={off(StrongholdPeriod.Day)}
-                  />
-                  <PeriodCells
-                    cell={cells.d7}
-                    hideOnMobile={off(StrongholdPeriod.Week)}
-                  />
-                  <PeriodCells
-                    cell={cells.d30}
-                    hideOnMobile={off(StrongholdPeriod.Month)}
-                  />
+                  {([
+                    [cells.h24, StrongholdPeriod.Day],
+                    [cells.d7, StrongholdPeriod.Week],
+                    [cells.d30, StrongholdPeriod.Month],
+                  ] as const).map(([cell, period]) =>
+                    cell ? (
+                      <PeriodCells key={period} cell={cell} hideOnMobile={off(period)} />
+                    ) : (
+                      <PeriodSkeleton key={period} hideOnMobile={off(period)} />
+                    ),
+                  )}
                 </>
               ) : (
                 <>

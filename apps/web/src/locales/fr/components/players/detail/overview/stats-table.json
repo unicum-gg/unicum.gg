@@ -26,13 +26,6 @@
     "wnx": "WNX"
   },
   "periods": {
-    "total": "Total",
-    "day": "Dernières 24h"
-  },
-  "windows": {
-    "days": "Derniers {count} j",
-    "battle": "Dernière bataille",
-    "battles": "Dernières {count} batailles"
-  },
-  "since": "Depuis le {date}"
+    "total": "Total"
+  }
 }

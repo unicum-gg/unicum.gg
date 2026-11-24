@@ -26,13 +26,6 @@
     "wnx": "WNX"
   },
   "periods": {
-    "total": "Kaikkiaan",
-    "day": "Viimeiset 24h"
-  },
-  "windows": {
-    "days": "Viimeiset {count} p",
-    "battle": "Edellinen taistelu",
-    "battles": "Viimeiset {count} taistelut"
-  },
-  "since": "{date} lähtien"
+    "total": "Kaikkiaan"
+  }
 }

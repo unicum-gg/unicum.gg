@@ -26,13 +26,6 @@
     "wnx": "WNX"
   },
   "periods": {
-    "total": "計",
-    "day": "過去24時間"
-  },
-  "windows": {
-    "days": "過去{count}日",
-    "battle": "前回の戦闘",
-    "battles": "過去{count}戦闘"
-  },
-  "since": "{date}以降"
+    "total": "計"
+  }
 }

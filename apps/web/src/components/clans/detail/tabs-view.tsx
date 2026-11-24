@@ -366,7 +366,7 @@ export function ClanTabsView({
           data={maneuvers ?? null}
         />
       ) : (
-        <ClanWarsTab tag={tag} color={color} clanWars={clanWars} />
+        <ClanWarsTab region={region} tag={tag} color={color} clanWars={clanWars} />
       )}
     </>
   );

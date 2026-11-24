@@ -26,13 +26,6 @@
     "wnx": "WNX"
   },
   "periods": {
-    "total": "कुल",
-    "day": "अंतिम 24 घंटे"
-  },
-  "windows": {
-    "days": "पिछले {count} दिन",
-    "battle": "पिछली बैटल",
-    "battles": "पिछले {count} युद्ध"
-  },
-  "since": "{date} से"
+    "total": "कुल"
+  }
 }

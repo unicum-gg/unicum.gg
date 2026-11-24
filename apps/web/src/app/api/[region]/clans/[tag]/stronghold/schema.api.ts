@@ -3,7 +3,7 @@ import { z } from "zod";
 
 const n = () => z.number().nullable();
 
-const clanStrongholdStats = z
+export const clanStrongholdStats = z
   .object({
     eloT6: n(),
     skirmishBattlesT6: n(),

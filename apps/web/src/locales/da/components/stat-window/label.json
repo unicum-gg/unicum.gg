@@ -1,0 +1,6 @@
+{
+  "day": "Sidste 24 timer",
+  "days": "Sidste {count}d",
+  "battle": "Sidste kamp",
+  "battles": "Sidste {count} kampe"
+}

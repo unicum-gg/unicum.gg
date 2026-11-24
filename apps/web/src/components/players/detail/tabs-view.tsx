@@ -39,6 +39,7 @@ import {
   hasPlayedMode,
 } from "@/components/players/detail/overview/mode-tank-view";
 import { PLAYER_MODE_RATING } from "@/components/players/detail/overview/mode-rating";
+import { STAT_WINDOW_MODE } from "@/components/players/detail/overview/mode-window";
 import { AchievementsTab } from "@/components/players/detail/achievements";
 import { SessionsTab } from "@/components/players/detail/sessions";
 import { TanksTab } from "@/components/players/detail/tanks";
@@ -546,6 +547,8 @@ export function PlayerTabsView({
         />
       ) : (
         <StrongholdTab
+          region={region}
+          windowMode={STAT_WINDOW_MODE[mode]}
           nickname={nickname}
           label={STRONGHOLD_MODES.find((s) => s.id === mode)?.label ?? ""}
           data={strongholds[mode]}

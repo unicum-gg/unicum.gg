@@ -154,6 +154,15 @@ class PlayerClient {
     );
   }
 
+  /** Player mode stats over a custom window */
+  periodMode(query: QueryOf<"/{region}/players/{nickname}/period/mode">) {
+    const path = { region: this.region, nickname: this.nickname };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/players/{nickname}/period/mode", path, query),
+      () => this.api.GET("/{region}/players/{nickname}/period/mode", { params: { path, query } }),
+    );
+  }
+
   /** Player vehicle record */
   tank(slug: string, language?: NonNullable<QueryOf<"/{region}/players/{nickname}/tanks/{slug}">>["language"]) {
     const path = { region: this.region, nickname: this.nickname, slug };
@@ -247,6 +256,15 @@ class ClanClient {
     return handle(
       buildUrl(this.baseUrl, "/{region}/clans/{tag}/members", path),
       () => this.api.GET("/{region}/clans/{tag}/members", { params: { path } }),
+    );
+  }
+
+  /** Clan stats over a custom window */
+  period(days: NonNullable<QueryOf<"/{region}/clans/{tag}/period">>["days"]) {
+    const path = { region: this.region, tag: this.tag };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/clans/{tag}/period", path, { days }),
+      () => this.api.GET("/{region}/clans/{tag}/period", { params: { path, query: { days } } }),
     );
   }
 
