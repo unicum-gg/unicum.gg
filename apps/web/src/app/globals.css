@@ -375,6 +375,7 @@ html[data-hide-streams="1"] [data-streams-slot] {
 .ns {
   position: relative;
   z-index: 0;
+  text-decoration-color: var(--ns-main);
 }
 .ns-solid {
   color: var(--ns-main);

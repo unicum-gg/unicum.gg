@@ -58,7 +58,9 @@ export function PlayerName({
         region={region}
         nickname={player.nickname}
         isSupporter={player.isSupporter}
-        className={cn("font-medium", nicknameClassName)}
+        // A styled nickname can be an inline-block (Toon, Pop), which the
+        // link's own underline does not reach, so it carries its own.
+        className={cn("font-medium group-hover/player:underline", nicknameClassName)}
       />
       {player.clanTag ? (
         <>
@@ -77,7 +79,7 @@ export function PlayerName({
       {link ? (
         <Link
           href={href ?? ROUTES.PLAYER(region, player.nickname)}
-          className={cn("min-w-0 truncate hover:underline", linkClassName)}
+          className={cn("group/player min-w-0 truncate hover:underline", linkClassName)}
           // **A leaderboard is a list of links, not a link.** These point at
           // the heaviest pages on the site, and a board puts twenty-five of
           // them on one screen, so prefetching on sight bought a megabyte of
