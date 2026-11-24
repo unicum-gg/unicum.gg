@@ -1,0 +1,10 @@
+{
+  "edit": "Promijeni kolonu {column}",
+  "units": {
+    "battles": "Bitke",
+    "days": "Dani"
+  },
+  "range": "Od 1 do {max}.",
+  "reset": "Poništi",
+  "save": "Sačuvaj"
+}

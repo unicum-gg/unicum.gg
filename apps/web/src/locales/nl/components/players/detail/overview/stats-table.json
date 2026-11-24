@@ -27,8 +27,12 @@
   },
   "periods": {
     "total": "Totaal",
-    "day": "Laatst 24u",
-    "week": "Laatst 7d",
-    "month": "Laatst 30d"
-  }
+    "day": "Laatst 24u"
+  },
+  "windows": {
+    "days": "Laatste {count}d",
+    "battle": "Laatste gevecht",
+    "battles": "Laatste {count} gevechten"
+  },
+  "since": "Sinds {date}"
 }

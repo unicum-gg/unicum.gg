@@ -1,0 +1,10 @@
+{
+  "edit": "Keisti stulpelį „{column}“",
+  "units": {
+    "battles": "Mūšiai",
+    "days": "Dienos"
+  },
+  "range": "Iš 1 iki {max}.",
+  "reset": "Atkurti",
+  "save": "Išsaugoti"
+}

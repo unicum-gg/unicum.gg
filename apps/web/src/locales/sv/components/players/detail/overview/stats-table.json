@@ -27,8 +27,12 @@
   },
   "periods": {
     "total": "Totalt",
-    "day": "Senaste 24h",
-    "week": "Senaste 7d",
-    "month": "Senaste 30d"
-  }
+    "day": "Senaste 24h"
+  },
+  "windows": {
+    "days": "Senaste {count} d",
+    "battle": "Senaste strid",
+    "battles": "Senaste {count} strider"
+  },
+  "since": "Sedan {date}"
 }

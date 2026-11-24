@@ -27,8 +27,12 @@
   },
   "periods": {
     "total": "Total",
-    "day": "Ultimele 24h",
-    "week": "Ultimele 7d",
-    "month": "Ultimele 30d"
-  }
+    "day": "Ultimele 24h"
+  },
+  "windows": {
+    "days": "Ultimele {count}z",
+    "battle": "Ultima bătălie",
+    "battles": "Ultimele {count} bătălii"
+  },
+  "since": "Începând cu {date}"
 }

@@ -27,8 +27,12 @@
   },
   "periods": {
     "total": "Gesamt",
-    "day": "Letzte 24h",
-    "week": "Letzte 7d",
-    "month": "Letzte 30d"
-  }
+    "day": "Letzte 24h"
+  },
+  "windows": {
+    "days": "Letzte {count} T.",
+    "battle": "Letztes Gefecht",
+    "battles": "Letzte {count} Gefechte"
+  },
+  "since": "Seit {date}"
 }

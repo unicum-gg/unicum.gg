@@ -1,0 +1,10 @@
+{
+  "edit": "Cambiar la columna {column}",
+  "units": {
+    "battles": "Batallas",
+    "days": "Días"
+  },
+  "range": "Desde 1 hasta {max}.",
+  "reset": "Restablecer",
+  "save": "Guardar"
+}

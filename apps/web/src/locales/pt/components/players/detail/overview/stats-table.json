@@ -27,8 +27,12 @@
   },
   "periods": {
     "total": "Total",
-    "day": "Últimas 24h",
-    "week": "Últimos 7d",
-    "month": "Últimos 30d"
-  }
+    "day": "Últimas 24h"
+  },
+  "windows": {
+    "days": "Últimos {count}d",
+    "battle": "Última Batalha",
+    "battles": "Últimas {count} batalhas"
+  },
+  "since": "Desde {date}"
 }

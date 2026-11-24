@@ -1,0 +1,10 @@
+{
+  "edit": "Wijziging van kolom {column}",
+  "units": {
+    "battles": "Gevechten",
+    "days": "Dagen"
+  },
+  "range": "Van 1 tot {max}.",
+  "reset": "Resetten",
+  "save": "Opslaan"
+}

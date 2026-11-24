@@ -1,0 +1,10 @@
+{
+  "edit": "Promijeni stupac {column}",
+  "units": {
+    "battles": "Bitke",
+    "days": "Dana"
+  },
+  "range": "Od 1 do {max}.",
+  "reset": "Poništi",
+  "save": "Spremi"
+}

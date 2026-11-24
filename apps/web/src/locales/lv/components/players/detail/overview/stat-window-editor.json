@@ -1,0 +1,10 @@
+{
+  "edit": "Mainīt kolonnu {column}",
+  "units": {
+    "battles": "Kaujas",
+    "days": "Dienas"
+  },
+  "range": "No 1 līdz {max}.",
+  "reset": "Atiestatīt",
+  "save": "Saglabāt"
+}

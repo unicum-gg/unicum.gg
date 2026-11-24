@@ -27,8 +27,12 @@
   },
   "periods": {
     "total": "Kaikkiaan",
-    "day": "Viimeiset 24h",
-    "week": "Viimeiset 7pv",
-    "month": "Viimeiset 30pv"
-  }
+    "day": "Viimeiset 24h"
+  },
+  "windows": {
+    "days": "Viimeiset {count} p",
+    "battle": "Edellinen taistelu",
+    "battles": "Viimeiset {count} taistelut"
+  },
+  "since": "{date} lähtien"
 }

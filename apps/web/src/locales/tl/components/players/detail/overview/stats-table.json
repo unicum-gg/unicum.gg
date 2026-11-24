@@ -27,8 +27,12 @@
   },
   "periods": {
     "total": "Kabuuan",
-    "day": "Huling 24h",
-    "week": "Huling 7d",
-    "month": "Huling 30d"
-  }
+    "day": "Huling 24h"
+  },
+  "windows": {
+    "days": "Huling {count} mga araw",
+    "battle": "Huling labanan",
+    "battles": "Huling {count} mga laban"
+  },
+  "since": "Mula {date}"
 }

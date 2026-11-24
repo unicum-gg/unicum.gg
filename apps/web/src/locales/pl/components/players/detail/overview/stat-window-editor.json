@@ -1,0 +1,10 @@
+{
+  "edit": "Zmień kolumnę {column}",
+  "units": {
+    "battles": "Bitwy",
+    "days": "Dni"
+  },
+  "range": "Od 1 do {max}.",
+  "reset": "Resetuj",
+  "save": "Zapisz"
+}

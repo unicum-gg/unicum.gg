@@ -27,8 +27,12 @@
   },
   "periods": {
     "total": "Totalt",
-    "day": "Siste 24t",
-    "week": "Siste 7d",
-    "month": "Siste 30d"
-  }
+    "day": "Siste 24t"
+  },
+  "windows": {
+    "days": "Siste {count} d",
+    "battle": "Forrige kamp",
+    "battles": "Siste {count} kamper"
+  },
+  "since": "Siden {date}"
 }

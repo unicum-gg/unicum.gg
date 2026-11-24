@@ -27,8 +27,12 @@
   },
   "periods": {
     "total": "I alt",
-    "day": "Sidste 24 timer",
-    "week": "Sidste 7 dage",
-    "month": "Sidste 30 dage"
-  }
+    "day": "Sidste 24 timer"
+  },
+  "windows": {
+    "days": "Sidste {count}d",
+    "battle": "Sidste kamp",
+    "battles": "Sidste {count} kampe"
+  },
+  "since": "Siden {date}"
 }

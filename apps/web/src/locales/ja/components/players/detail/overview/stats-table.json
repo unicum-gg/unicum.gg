@@ -27,8 +27,12 @@
   },
   "periods": {
     "total": "計",
-    "day": "過去24時間",
-    "week": "過去7日",
-    "month": "過去30日"
-  }
+    "day": "過去24時間"
+  },
+  "windows": {
+    "days": "過去{count}日",
+    "battle": "前回の戦闘",
+    "battles": "過去{count}戦闘"
+  },
+  "since": "{date}以降"
 }

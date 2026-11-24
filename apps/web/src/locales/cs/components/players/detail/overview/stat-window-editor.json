@@ -1,0 +1,10 @@
+{
+  "edit": "Změnit sloupec {column}",
+  "units": {
+    "battles": "Bitvy",
+    "days": "Dny"
+  },
+  "range": "Od 1 do {max}.",
+  "reset": "Obnovit",
+  "save": "Uložit"
+}

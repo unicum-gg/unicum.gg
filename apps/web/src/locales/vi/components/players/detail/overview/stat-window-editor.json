@@ -1,0 +1,10 @@
+{
+  "edit": "Thay đổi cột {column}",
+  "units": {
+    "battles": "Số trận",
+    "days": "ngày"
+  },
+  "range": "Từ 1 đến {max}.",
+  "reset": "Đặt lại",
+  "save": "Lưu"
+}

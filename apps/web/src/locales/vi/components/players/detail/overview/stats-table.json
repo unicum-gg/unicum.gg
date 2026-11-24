@@ -27,8 +27,12 @@
   },
   "periods": {
     "total": "Tổng",
-    "day": "24 giờ qua",
-    "week": "7 ngày qua",
-    "month": "30 ngày qua"
-  }
+    "day": "24 giờ qua"
+  },
+  "windows": {
+    "days": "{count}ng gần nhất",
+    "battle": "Trận đánh Gần nhất",
+    "battles": "{count} trận đấu gần nhất"
+  },
+  "since": "Kể từ {date}"
 }

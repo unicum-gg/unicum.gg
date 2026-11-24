@@ -27,8 +27,12 @@
   },
   "periods": {
     "total": "Ukupno",
-    "day": "Poslednjih 24h",
-    "week": "Poslednjih 7d",
-    "month": "Poslednjih 30d"
-  }
+    "day": "Poslednjih 24h"
+  },
+  "windows": {
+    "days": "Poslednjih {count}d",
+    "battle": "Poslednja bitka",
+    "battles": "Poslednje {count} bitke"
+  },
+  "since": "Od {date}"
 }

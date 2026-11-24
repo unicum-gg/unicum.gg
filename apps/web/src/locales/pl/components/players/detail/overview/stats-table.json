@@ -27,8 +27,12 @@
   },
   "periods": {
     "total": "Suma",
-    "day": "Ostatnie 24h",
-    "week": "Ostatnie 7d",
-    "month": "Ostatnie 30d"
-  }
+    "day": "Ostatnie 24h"
+  },
+  "windows": {
+    "days": "Ostatnie {count} dn.",
+    "battle": "Ostatnia bitwa",
+    "battles": "{count, plural, one {Ostatnia bitwa} few {Ostatnie # bitwy} many {Ostatnich # bitew} other {Ostatnich # bitew}}"
+  },
+  "since": "Od {date}"
 }

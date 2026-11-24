@@ -1,0 +1,10 @@
+{
+  "edit": "Muutos: {column}-sarake",
+  "units": {
+    "battles": "Taisteluita",
+    "days": "Päivät"
+  },
+  "range": "Alkaen 1:stä {max}:een.",
+  "reset": "Palauta",
+  "save": "Tallenna"
+}

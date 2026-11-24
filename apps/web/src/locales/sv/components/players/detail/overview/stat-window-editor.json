@@ -1,0 +1,10 @@
+{
+  "edit": "Ändra kolumnen {column}",
+  "units": {
+    "battles": "Strider",
+    "days": "Dagar"
+  },
+  "range": "Från 1 till {max}.",
+  "reset": "Återställ",
+  "save": "Spara"
+}

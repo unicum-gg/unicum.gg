@@ -1,0 +1,10 @@
+{
+  "edit": "Schimbare a coloanei {column}",
+  "units": {
+    "battles": "Lupte",
+    "days": "Zile"
+  },
+  "range": "De la 1 la {max}.",
+  "reset": "Resetează",
+  "save": "Salvează"
+}

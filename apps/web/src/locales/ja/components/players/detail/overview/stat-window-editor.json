@@ -1,0 +1,10 @@
+{
+  "edit": "{column}列を変更",
+  "units": {
+    "battles": "戦闘数",
+    "days": "日"
+  },
+  "range": "1から{max}まで。",
+  "reset": "リセット",
+  "save": "保存"
+}

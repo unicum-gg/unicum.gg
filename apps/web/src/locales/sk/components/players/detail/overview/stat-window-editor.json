@@ -1,0 +1,10 @@
+{
+  "edit": "Zmena stĺpca {column}",
+  "units": {
+    "battles": "Bitky",
+    "days": "Dni"
+  },
+  "range": "Od 1 do {max}.",
+  "reset": "Obnoviť",
+  "save": "Shrani"
+}

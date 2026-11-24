@@ -1,0 +1,10 @@
+{
+  "edit": "Ændring af kolonnen {column}",
+  "units": {
+    "battles": "Kampe",
+    "days": "Dage"
+  },
+  "range": "Fra 1 til {max}.",
+  "reset": "Nulstil",
+  "save": "Gem"
+}

@@ -27,8 +27,12 @@
   },
   "periods": {
     "total": "Celkem",
-    "day": "Posledních 24h",
-    "week": "Posledních 7d",
-    "month": "Posledních 30d"
-  }
+    "day": "Posledních 24h"
+  },
+  "windows": {
+    "days": "Posledních {count} d",
+    "battle": "Poslední bitva",
+    "battles": "Posledních {count} bitev"
+  },
+  "since": "Od {date}"
 }

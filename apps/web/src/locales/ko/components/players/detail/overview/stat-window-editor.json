@@ -1,0 +1,10 @@
+{
+  "edit": "{column} 열 변경",
+  "units": {
+    "battles": "전투",
+    "days": "일"
+  },
+  "range": "1에서 {max}까지",
+  "reset": "초기화",
+  "save": "저장"
+}

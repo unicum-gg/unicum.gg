@@ -1,0 +1,10 @@
+{
+  "edit": "Promena колона {column}",
+  "units": {
+    "battles": "Borbi",
+    "days": "дана"
+  },
+  "range": "Od 1 do {max}.",
+  "reset": "Resetuj",
+  "save": "Sačuvaj"
+}

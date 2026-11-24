@@ -1,0 +1,10 @@
+{
+  "edit": "Pagbabago sa kolum na {column}",
+  "units": {
+    "battles": "Mga labanan",
+    "days": "Mga araw"
+  },
+  "range": "Mula 1 hanggang {max}.",
+  "reset": "I-reset",
+  "save": "I-save"
+}

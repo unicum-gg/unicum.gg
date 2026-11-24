@@ -1,0 +1,10 @@
+{
+  "edit": "Oszlop módosítása: {column}",
+  "units": {
+    "battles": "Csaták",
+    "days": "Nap"
+  },
+  "range": "Tól/Től: 1-től {max}-ig.",
+  "reset": "Visszaállítás",
+  "save": "Mentés"
+}

@@ -1,0 +1,10 @@
+{
+  "edit": "更改 {column}",
+  "units": {
+    "battles": "战斗场次",
+    "days": "天"
+  },
+  "range": "从 1 到 {max}。",
+  "reset": "重置",
+  "save": "保存"
+}

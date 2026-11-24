@@ -1,0 +1,10 @@
+{
+  "edit": "Änderung der Spalte {column}",
+  "units": {
+    "battles": "Gefechte",
+    "days": "Tage"
+  },
+  "range": "Von 1 bis {max}.",
+  "reset": "Zurücksetzen",
+  "save": "Speichern"
+}

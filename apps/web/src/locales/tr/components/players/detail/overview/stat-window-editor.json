@@ -1,0 +1,10 @@
+{
+  "edit": "Değiştir {column} sütununu",
+  "units": {
+    "battles": "Savaşlar",
+    "days": "Gün"
+  },
+  "range": "1’den {max}’e kadar.",
+  "reset": "Sıfırla",
+  "save": "Kaydet"
+}

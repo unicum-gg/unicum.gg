@@ -1,0 +1,10 @@
+{
+  "edit": "Endre kolonnen {column}",
+  "units": {
+    "battles": "Kamper",
+    "days": "Dager"
+  },
+  "range": "Fra 1 til {max}.",
+  "reset": "Tilbakestill",
+  "save": "Lagre"
+}
