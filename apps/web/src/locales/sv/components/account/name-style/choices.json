@@ -1,0 +1,44 @@
+{
+  "font": "Välj typsnitt",
+  "effect": "Välj effekt",
+  "color": "Välj färg",
+  "first-color": "Välj första färgen",
+  "second-color": "Andra färgen",
+  "fonts": {
+    "default": "Standard",
+    "stencil": "Schablon",
+    "pixel": "Pixel",
+    "future": "Framtid",
+    "marker": "Märkpenna",
+    "rounded": "Rundad",
+    "typewriter": "Skrivmaskin",
+    "horror": "Skräck",
+    "armour": "Pansar",
+    "comic": "Serietidning",
+    "script": "Handskrift",
+    "glitch": "Glitch"
+  },
+  "effects": {
+    "solid": "Enfärgad",
+    "gradient": "Gradient",
+    "neon": "Neon",
+    "toon": "Tecknad",
+    "pop": "Pop",
+    "gummy": "Gummi",
+    "prism": "Prism"
+  },
+  "colors": {
+    "brand": "Varumärke",
+    "red": "Röd",
+    "orange": "Orange",
+    "yellow": "Gul",
+    "gold": "Guld",
+    "bronze": "Brons",
+    "olive": "Oliv",
+    "green": "Grön",
+    "steel": "Stål",
+    "sky": "Himmelsblå",
+    "purple": "Lila",
+    "silver": "Silver"
+  }
+}

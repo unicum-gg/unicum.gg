@@ -1,0 +1,44 @@
+{
+  "font": "Vælg din skrifttype",
+  "effect": "Vælg din effekt",
+  "color": "Vælg din farve",
+  "first-color": "Vælg din første farve",
+  "second-color": "Anden farve",
+  "fonts": {
+    "default": "Standard",
+    "stencil": "Stencil",
+    "pixel": "Pixel",
+    "future": "Fremtid",
+    "marker": "Markør",
+    "rounded": "Afrundet",
+    "typewriter": "Skrivemaskine",
+    "horror": "Gyser",
+    "armour": "Panser",
+    "comic": "Tegneserie",
+    "script": "Skrift",
+    "glitch": "Glitch"
+  },
+  "effects": {
+    "solid": "Ensfarvet",
+    "gradient": "Farveforløb",
+    "neon": "Neon",
+    "toon": "Tegnefilm",
+    "pop": "Pop",
+    "gummy": "Gummiagtig",
+    "prism": "Prisme"
+  },
+  "colors": {
+    "brand": "Brand",
+    "red": "Rød",
+    "orange": "Orange",
+    "yellow": "Gul",
+    "gold": "Guld",
+    "bronze": "Bronze",
+    "olive": "Oliven",
+    "green": "Grøn",
+    "steel": "Stål",
+    "sky": "Himmel",
+    "purple": "Lilla",
+    "silver": "Sølv"
+  }
+}

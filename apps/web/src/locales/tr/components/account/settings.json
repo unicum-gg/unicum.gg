@@ -27,5 +27,16 @@
   "billing-total": "Şimdiye kadar verilen",
   "billing-total-description": "Verdiğiniz her şey, tek seferlik hediyeler dahil. Teşekkürler.",
   "anonymous": "Destekçiler tablosunda beni gizle",
-  "anonymous-description": "Adınız ve destekçi rozetiniz herkese açık tabloda ve profilinizde görünmez."
+  "anonymous-description": "Adınız ve destekçi rozetiniz herkese açık tabloda ve profilinizde görünmez.",
+  "name-style-surprise": "Beni şaşırt",
+  "name-style-apply": "Uygula",
+  "name-style-clear": "Düz takma ada geri dön",
+  "name-style-saved": "Takma ad stiliniz kaydedildi",
+  "name-style-cleared": "Takma adınız yeniden düz oldu",
+  "name-style-locked": "Kendi adınızda istediğiniz stili deneyin. Destekçiler bunu korur.",
+  "name-style-unlock": "Destekçi olun",
+  "section-profile": "Profil",
+  "section-profile-description": "unicum.gg’de diğer herkese nasıl göründüğünüz.",
+  "name-style-title": "Takma ad stili",
+  "name-style-description": "Takma adınızın sitede her yerde nasıl gösterildiği: profilinizde, liderlik tablolarında, klan listelerinde ve turnuva kadrolarında."
 }

@@ -19,5 +19,8 @@
   "you-already-have-a-monthly-pledge": "Du har redan ett månadsvis åtagande. Använd betalningsportalen för att förändra det.",
   "you-are-a-supporter-thank": "Du är Supporter. Tack för att du håller {NAME} vid liv.",
   "you-have-given-so-far": "Du har gett {amount} hittills. Tack.",
-  "manage-connected-accounts": "Hantera anslutna konton"
+  "manage-connected-accounts": "Hantera anslutna konton",
+  "name-style-title": "Din smeknamnsstil",
+  "name-style-hint": "Välj ett typsnitt, en effekt och en färg för ditt smeknamn överallt på {NAME}.",
+  "name-style-open": "Välj min stil"
 }

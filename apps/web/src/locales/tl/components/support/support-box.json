@@ -19,5 +19,8 @@
   "you-already-have-a-monthly-pledge": "Mayroon ka nang pangakong buwan-buwan. Gamitin ang billing portal para sa pagbabago nito.",
   "you-are-a-supporter-thank": "Isa kang tagasuporta. Salamat sa pagpapanatiling buhay kay {NAME}.",
   "you-have-given-so-far": "Sa ngayon, nakapagbigay ka na ng {amount}. Salamat.",
-  "manage-connected-accounts": "Pamahalaan ang mga nakakonektang account"
+  "manage-connected-accounts": "Pamahalaan ang mga nakakonektang account",
+  "name-style-title": "Ang istilo ng iyong palayaw",
+  "name-style-hint": "Pumili ng font, epekto at kulay para sa iyong palayaw kahit saan sa {NAME}.",
+  "name-style-open": "Pumili ng istilo ko"
 }

@@ -27,5 +27,16 @@
   "billing-total": "지금까지 후원한 금액",
   "billing-total-description": "지금까지 제공한 모든 금액이 포함됨, 일회성 선물도 포함됨입니다. 감사합니다.",
   "anonymous": "리더보드에서 나를 숨기기",
-  "anonymous-description": "이름과 후원자 배지는 공개 리더보드와 프로필에 계속 표시되지 않습니다."
+  "anonymous-description": "이름과 후원자 배지는 공개 리더보드와 프로필에 계속 표시되지 않습니다.",
+  "name-style-surprise": "무작위 선택",
+  "name-style-apply": "적용",
+  "name-style-clear": "기본 닉네임으로 되돌리기",
+  "name-style-saved": "닉네임 스타일 저장됨",
+  "name-style-cleared": "닉네임이 다시 기본 상태가 됨",
+  "name-style-locked": "내 닉네임에 어떤 스타일이든 적용해 보세요. 후원자는 스타일을 유지할 수 있습니다.",
+  "name-style-unlock": "후원자가 되기",
+  "section-profile": "프로필",
+  "section-profile-description": "unicum.gg에서 다른 사람에게 어떻게 표시되는지 설정합니다.",
+  "name-style-title": "닉네임 스타일",
+  "name-style-description": "프로필, 순위표, 클랜 목록, 토너먼트 명단 등 사이트 어디서나 닉네임이 표시되는 방식입니다."
 }

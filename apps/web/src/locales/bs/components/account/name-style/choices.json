@@ -1,0 +1,44 @@
+{
+  "font": "Odaberi font",
+  "effect": "Odaberi efekat",
+  "color": "Odaberi boju",
+  "first-color": "Odaberi prvu boju",
+  "second-color": "Druga boja",
+  "fonts": {
+    "default": "Podrazumijevano",
+    "stencil": "Šablon",
+    "pixel": "Piksel",
+    "future": "Budućnost",
+    "marker": "Marker",
+    "rounded": "Zaobljeno",
+    "typewriter": "Pisaća mašina",
+    "horror": "Horor",
+    "armour": "Oklop",
+    "comic": "Strip",
+    "script": "Rukopis",
+    "glitch": "Greška"
+  },
+  "effects": {
+    "solid": "Puno",
+    "gradient": "Gradijent",
+    "neon": "Neon",
+    "toon": "Crtani film",
+    "pop": "Pop",
+    "gummy": "Gumeni",
+    "prism": "Prizma"
+  },
+  "colors": {
+    "brand": "Brend",
+    "red": "Crvena",
+    "orange": "Narandžasta",
+    "yellow": "Žuta",
+    "gold": "Zlato",
+    "bronze": "Bronza",
+    "olive": "Maslinasta",
+    "green": "Zelena",
+    "steel": "Čelik",
+    "sky": "Nebeska",
+    "purple": "Ljubičasta",
+    "silver": "Srebro"
+  }
+}

@@ -27,5 +27,16 @@
   "billing-total": "Przekazano do tej pory",
   "billing-total-description": "Wszystko, co przekazałeś, w tym jednorazowe prezenty, zostało uwzględnione. Dziękujemy.",
   "anonymous": "Ukryj mnie w tabeli wspierających",
-  "anonymous-description": "Twoja nazwa i odznaka wspierającego pozostaną poza publiczną tabelą i Twoim profilem."
+  "anonymous-description": "Twoja nazwa i odznaka wspierającego pozostaną poza publiczną tabelą i Twoim profilem.",
+  "name-style-surprise": "Zaskocz mnie",
+  "name-style-apply": "Zastosuj",
+  "name-style-clear": "Wróć do zwykłego nicku",
+  "name-style-saved": "Styl Twojego nicku jest zapisany",
+  "name-style-cleared": "Twój nick znów jest zwykły",
+  "name-style-locked": "Wypróbuj dowolny styl na własnym nicku. Wspierający zachowają go.",
+  "name-style-unlock": "Zostań patronem",
+  "section-profile": "Profil",
+  "section-profile-description": "Jak pojawiasz się wszystkim innym na unicum.gg.",
+  "name-style-title": "Styl nicku",
+  "name-style-description": "Sposób wyświetlania Twojego nicku wszędzie w witrynie: w profilu, rankingach, na listach klanów i w składach turniejów."
 }

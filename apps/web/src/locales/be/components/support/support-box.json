@@ -19,5 +19,8 @@
   "you-already-have-a-monthly-pledge": "У вас ужо ёсць штомесячны ўнёсак. Каб змяніць яго, скарыстайцеся парталам для аплаты.",
   "you-are-a-supporter-thank": "Вы прыхільнік. Дзякуй, што падтрымліваеце {NAME}.",
   "you-have-given-so-far": "Да гэтага часу вы ўнеслі {amount}. Дзякуй.",
-  "manage-connected-accounts": "Кіраваць падключанымі ўліковымі запісамі"
+  "manage-connected-accounts": "Кіраваць падключанымі ўліковымі запісамі",
+  "name-style-title": "Стыль вашага ніку",
+  "name-style-hint": "Выбраць шрыфт, эфект і колер для вашага ніку ўсюды на {NAME}.",
+  "name-style-open": "Выбраць мой стыль"
 }

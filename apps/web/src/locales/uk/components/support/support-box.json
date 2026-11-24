@@ -19,5 +19,8 @@
   "you-already-have-a-monthly-pledge": "У вас вже є щомісячна підтримка. Скористайтеся платіжним порталом, щоб змінити її.",
   "you-are-a-supporter-thank": "Ви підтримувач. Дякуємо, що допомагаєте {NAME} працювати.",
   "you-have-given-so-far": "Наразі ви внесли {amount}. Дякуємо.",
-  "manage-connected-accounts": "Керувати підключеними акаунтами"
+  "manage-connected-accounts": "Керувати підключеними акаунтами",
+  "name-style-title": "Стиль вашого нікнейма",
+  "name-style-hint": "Обрати шрифт, ефект і колір для вашого нікнейма всюди на {NAME}.",
+  "name-style-open": "Вибрати мій стиль"
 }

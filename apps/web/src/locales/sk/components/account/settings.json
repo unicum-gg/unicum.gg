@@ -27,5 +27,16 @@
   "billing-total": "Doteraz poskytnuté",
   "billing-total-description": "Všetko, čo ste poskytli, jednorazové dary sú zahrnuté. Ďakujeme.",
   "anonymous": "Skry ma na lestvici podporovateľov",
-  "anonymous-description": "Vaše meno a značka podporovateľa zostanú mimo javno dostupnej lestvice a profilu."
+  "anonymous-description": "Vaše meno a značka podporovateľa zostanú mimo javno dostupnej lestvice a profilu.",
+  "name-style-surprise": "Prekvapte ma",
+  "name-style-apply": "Použiť",
+  "name-style-clear": "Späť na obyčajnú prezývku",
+  "name-style-saved": "Štýl vašej prezývky je uložené",
+  "name-style-cleared": "Vaša prezývka je opäť obyčajná",
+  "name-style-locked": "Vyskúšajte akýkoľvek štýl na svojej prezývke. Podporovatelia si ho obdržia.",
+  "name-style-unlock": "Postanite podpornik",
+  "section-profile": "Profil",
+  "section-profile-description": "Ako sa pojavijo všetkým ostatným na unicum.gg.",
+  "name-style-title": "Štýl prezývky",
+  "name-style-description": "Ako sa vaša prezývka zobrazuje povsod na stránke: vo vašom profile, rebríčkoch, zoznamoch klanov a zostavách turnajov."
 }

@@ -1,0 +1,44 @@
+{
+  "font": "フォントを選択",
+  "effect": "効果を選択",
+  "color": "色を選択",
+  "first-color": "最初の色を選択",
+  "second-color": "2つ目の色",
+  "fonts": {
+    "default": "デフォルト",
+    "stencil": "ステンシル",
+    "pixel": "ピクセル",
+    "future": "フューチャー",
+    "marker": "マーカー",
+    "rounded": "ラウンド",
+    "typewriter": "タイプライター",
+    "horror": "ホラー",
+    "armour": "装甲",
+    "comic": "コミック",
+    "script": "スクリプト",
+    "glitch": "グリッチ"
+  },
+  "effects": {
+    "solid": "ソリッド",
+    "gradient": "グラデーション",
+    "neon": "ネオン",
+    "toon": "トゥーン",
+    "pop": "ポップ",
+    "gummy": "グミ",
+    "prism": "プリズム"
+  },
+  "colors": {
+    "brand": "ブランド",
+    "red": "赤",
+    "orange": "オレンジ",
+    "yellow": "黄色",
+    "gold": "ゴールド",
+    "bronze": "ブロンズ",
+    "olive": "オリーブ",
+    "green": "緑",
+    "steel": "スチール",
+    "sky": "空色",
+    "purple": "紫",
+    "silver": "シルバー"
+  }
+}

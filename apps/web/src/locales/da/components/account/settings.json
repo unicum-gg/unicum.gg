@@ -27,5 +27,16 @@
   "billing-total": "Givet indtil videre",
   "billing-total-description": "Alt, hvad du har givet, inklusive engangsgaver. Tak.",
   "anonymous": "Skjul mig på ranglisten over bidragydere",
-  "anonymous-description": "Dit navn og dit mærke som bidragyder forbliver skjult på den offentlige rangliste og i din profil."
+  "anonymous-description": "Dit navn og dit mærke som bidragyder forbliver skjult på den offentlige rangliste og i din profil.",
+  "name-style-surprise": "Overrask mig",
+  "name-style-apply": "Anvend",
+  "name-style-clear": "Tilbage til et almindeligt kaldenavn",
+  "name-style-saved": "Din kaldenavnsstil er gemt",
+  "name-style-cleared": "Dit kaldenavn er almindeligt igen",
+  "name-style-locked": "Prøv en hvilken som helst stil på dit eget navn. Støtter beholder den.",
+  "name-style-unlock": "Bliv støttemedlem",
+  "section-profile": "Profil",
+  "section-profile-description": "Sådan vises du for alle andre på unicum.gg.",
+  "name-style-title": "Kaldenavnsstil",
+  "name-style-description": "Sådan vises dit kaldenavn overalt på webstedet: din profil, ranglisterne, klanlisterne og turneringernes holdopstillinger."
 }

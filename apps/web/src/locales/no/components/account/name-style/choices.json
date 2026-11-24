@@ -1,0 +1,44 @@
+{
+  "font": "Velg skrifttype",
+  "effect": "Velg effekt",
+  "color": "Velg farge",
+  "first-color": "Velg første farge",
+  "second-color": "Andre farge",
+  "fonts": {
+    "default": "Standard",
+    "stencil": "Sjablong",
+    "pixel": "Piksel",
+    "future": "Fremtid",
+    "marker": "Tusj",
+    "rounded": "Avrundet",
+    "typewriter": "Skrivemaskin",
+    "horror": "Skrekk",
+    "armour": "Pansring",
+    "comic": "Tegneserie",
+    "script": "Skrift",
+    "glitch": "Glitch"
+  },
+  "effects": {
+    "solid": "Ensfarget",
+    "gradient": "Gradient",
+    "neon": "Neon",
+    "toon": "Tegnefilm",
+    "pop": "Pop",
+    "gummy": "Gummiaktig",
+    "prism": "Prisme"
+  },
+  "colors": {
+    "brand": "Merkevare",
+    "red": "Rød",
+    "orange": "Oransje",
+    "yellow": "Gul",
+    "gold": "Gold",
+    "bronze": "Bronze",
+    "olive": "Oliven",
+    "green": "Grønn",
+    "steel": "Stål",
+    "sky": "Himmelblå",
+    "purple": "Lilla",
+    "silver": "Silver"
+  }
+}

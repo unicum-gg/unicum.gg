@@ -19,5 +19,8 @@
   "you-already-have-a-monthly-pledge": "Već imaš mjesečnu donaciju. Za promjenu upotrijebi portal za naplatu.",
   "you-are-a-supporter-thank": "Podržavatelj ste. Hvala što održavate {NAME} aktivnim.",
   "you-have-given-so-far": "Dosad si donirao {amount}. Hvala.",
-  "manage-connected-accounts": "Upravljanje povezanim računima"
+  "manage-connected-accounts": "Upravljanje povezanim računima",
+  "name-style-title": "Stil vašeg nadimka",
+  "name-style-hint": "Odaberi font, učinak i boju za svoj nadimak svugdje na web-mjestu {NAME}.",
+  "name-style-open": "Odaberi svoj stil"
 }

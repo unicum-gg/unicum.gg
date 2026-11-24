@@ -27,5 +27,16 @@
   "billing-total": "目前累计支持金额",
   "billing-total-description": "您付费的全部金额，包含一次性赠款。谢谢。",
   "anonymous": "在支持者榜单中隐藏我",
-  "anonymous-description": "您的名称和支持者徽章会留在公开榜单和个人资料之外。"
+  "anonymous-description": "您的名称和支持者徽章会留在公开榜单和个人资料之外。",
+  "name-style-surprise": "给我惊喜",
+  "name-style-apply": "应用",
+  "name-style-clear": "返回普通昵称",
+  "name-style-saved": "你的昵称风格已保存",
+  "name-style-cleared": "你的昵称已恢复为普通风格",
+  "name-style-locked": "在自己的昵称上尝试任意风格。支持者可以保留该风格。",
+  "name-style-unlock": "成为支持者",
+  "section-profile": "档案",
+  "section-profile-description": "你在 unicum.gg 上向其他人展示的样子。",
+  "name-style-title": "昵称风格",
+  "name-style-description": "您的昵称在网站所有地方的显示方式：您的个人资料、排行榜、军团列表和锦标赛名单。"
 }

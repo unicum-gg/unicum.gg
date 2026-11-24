@@ -1,0 +1,44 @@
+{
+  "font": "Vybrat písmo",
+  "effect": "Vybrat efekt",
+  "color": "Vybrat barvu",
+  "first-color": "Vybrat první barvu",
+  "second-color": "Druhá barva",
+  "fonts": {
+    "default": "Výchozí",
+    "stencil": "Šablona",
+    "pixel": "Pixelové",
+    "future": "Futuristické",
+    "marker": "Fix",
+    "rounded": "Zaoblené",
+    "typewriter": "Psací stroj",
+    "horror": "Hororové",
+    "armour": "Pancíř",
+    "comic": "Komiksové",
+    "script": "Psané",
+    "glitch": "Glitchové"
+  },
+  "effects": {
+    "solid": "Plná barva",
+    "gradient": "Přechod",
+    "neon": "Neon",
+    "toon": "Kreslené",
+    "pop": "Pop-art",
+    "gummy": "Gumové",
+    "prism": "Hranol"
+  },
+  "colors": {
+    "brand": "Značková",
+    "red": "Červená",
+    "orange": "Oranžová",
+    "yellow": "Žlutá",
+    "gold": "Zlaťáky",
+    "bronze": "Bronzový",
+    "olive": "Olivová",
+    "green": "Zelená",
+    "steel": "Ocelová",
+    "sky": "Nebeská",
+    "purple": "Fialová",
+    "silver": "Stříbrný"
+  }
+}

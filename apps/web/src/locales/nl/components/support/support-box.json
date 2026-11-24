@@ -19,5 +19,8 @@
   "you-already-have-a-monthly-pledge": "Je hebt al een maandelijkse toezegging. Gebruik het betalingsportaal om deze te wijzigen.",
   "you-are-a-supporter-thank": "Je bent Supporter. Bedankt dat je {NAME} in leven houdt.",
   "you-have-given-so-far": "Je hebt tot nu toe {amount} gegeven. Bedankt.",
-  "manage-connected-accounts": "Beheer gekoppelde accounts"
+  "manage-connected-accounts": "Beheer gekoppelde accounts",
+  "name-style-title": "Je bijnaamstijl",
+  "name-style-hint": "Kies een lettertype, een effect en een kleur voor je bijnaam overal op {NAME}.",
+  "name-style-open": "Mijn stijl kiezen"
 }

@@ -27,5 +27,16 @@
   "billing-total": "Tổng số đã đóng góp",
   "billing-total-description": "Tất cả những gì bạn đã đóng góp, bao gồm cả các khoản tặng một lần. Cảm ơn bạn.",
   "anonymous": "Ẩn tôi trên bảng xếp hạng người ủng hộ",
-  "anonymous-description": "Tên và huy hiệu người ủng hộ của bạn sẽ không xuất hiện trên bảng xếp hạng công khai và hồ sơ của bạn."
+  "anonymous-description": "Tên và huy hiệu người ủng hộ của bạn sẽ không xuất hiện trên bảng xếp hạng công khai và hồ sơ của bạn.",
+  "name-style-surprise": "Làm tôi bất ngờ",
+  "name-style-apply": "Áp dụng",
+  "name-style-clear": "Quay lại biệt danh không định dạng",
+  "name-style-saved": "Phong cách biệt danh của bạn đã được lưu",
+  "name-style-cleared": "Biệt danh của bạn lại ở dạng không định dạng",
+  "name-style-locked": "Hãy thử bất kỳ phong cách nào trên biệt danh của bạn. Người ủng hộ vẫn giữ được phong cách đó.",
+  "name-style-unlock": "Trở thành người ủng hộ",
+  "section-profile": "Hồ sơ",
+  "section-profile-description": "Cách bạn xuất hiện với mọi người khác trên unicum.gg.",
+  "name-style-title": "Phong cách biệt danh",
+  "name-style-description": "Cách biệt danh của bạn được hiển thị mọi nơi trên trang web: hồ sơ, bảng xếp hạng, danh sách Clan và danh sách giải đấu."
 }

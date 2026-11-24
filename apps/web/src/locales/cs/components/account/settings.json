@@ -27,5 +27,16 @@
   "billing-total": "Poskytnuto dosud",
   "billing-total-description": "Vše, co jste poskytli, včetně jednorázových darů, je zahrnuto. Děkujeme.",
   "anonymous": "Skrýt mě na žebříčku podporovatelů",
-  "anonymous-description": "Váš název a odznak podporovatele nebudou zobrazeny na veřejném žebříčku ani ve vašem profilu."
+  "anonymous-description": "Váš název a odznak podporovatele nebudou zobrazeny na veřejném žebříčku ani ve vašem profilu.",
+  "name-style-surprise": "Překvapte mě",
+  "name-style-apply": "Použít",
+  "name-style-clear": "Zpět k obyčejné přezdívce",
+  "name-style-saved": "Styl vaší přezdívky je uložen",
+  "name-style-cleared": "Vaše přezdívka je znovu obyčejná",
+  "name-style-locked": "Vyzkoušejte jakýkoli styl na vlastní přezdívce. Podporovatelé si ho ponechají.",
+  "name-style-unlock": "Staňte se podporovatelem",
+  "section-profile": "Profil",
+  "section-profile-description": "Jak se zobrazujete ostatním na webu unicum.gg.",
+  "name-style-title": "Styl přezdívky",
+  "name-style-description": "Jak se vaše přezdívka zobrazuje všude na webu: ve vašem profilu, žebříčcích, seznamech klanů a turnajových soupiskách."
 }

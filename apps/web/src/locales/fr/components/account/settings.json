@@ -27,5 +27,16 @@
   "billing-total": "Total versé jusqu’à présent",
   "billing-total-description": "Tout ce que vous avez donné, dons ponctuels inclus. Merci.",
   "anonymous": "Masquer mon nom du classement des supporters",
-  "anonymous-description": "Votre nom et votre badge de supporter restent absents du classement public et de votre profil."
+  "anonymous-description": "Votre nom et votre badge de supporter restent absents du classement public et de votre profil.",
+  "name-style-surprise": "Surprenez-moi",
+  "name-style-apply": "Appliquer",
+  "name-style-clear": "Retour à un pseudonyme sans style",
+  "name-style-saved": "Votre style de pseudonyme est enregistré",
+  "name-style-cleared": "Votre pseudonyme est à nouveau sans style",
+  "name-style-locked": "Essayez n’importe quel style sur votre propre nom. Les Supporters le conservent.",
+  "name-style-unlock": "Devenir supporter",
+  "section-profile": "Profil",
+  "section-profile-description": "La façon dont vous apparaissez pour les autres sur unicum.gg.",
+  "name-style-title": "Style du pseudonyme",
+  "name-style-description": "Comment votre pseudonyme est affiché partout sur le site : votre profil, les classements, les listes de clans et les effectifs des tournois."
 }

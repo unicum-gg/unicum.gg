@@ -19,5 +19,8 @@
   "you-already-have-a-monthly-pledge": "Masz już miesięczną deklarację. Użyj portalu rozliczeniowego, aby ją zmienić.",
   "you-are-a-supporter-thank": "Masz status Supporter. Dziękujemy, że pomagasz utrzymać {NAME} przy życiu.",
   "you-have-given-so-far": "Do tej pory wpłacono {amount}. Dziękujemy.",
-  "manage-connected-accounts": "Zarządzaj połączonymi kontami"
+  "manage-connected-accounts": "Zarządzaj połączonymi kontami",
+  "name-style-title": "Styl Twojego nicku",
+  "name-style-hint": "Wybierz czcionkę, efekt i kolor swojego nicku wszędzie w witrynie {NAME}.",
+  "name-style-open": "Wybierz mój styl"
 }

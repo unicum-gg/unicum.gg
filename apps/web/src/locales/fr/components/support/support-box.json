@@ -19,5 +19,8 @@
   "you-already-have-a-monthly-pledge": "Vous avez déjà un engagement mensuel. Utilisez le portail de facturation pour le modifier.",
   "you-are-a-supporter-thank": "Vous êtes supporter. Merci de faire vivre {NAME}.",
   "you-have-given-so-far": "Vous avez donné {amount} jusqu’à présent. Merci.",
-  "manage-connected-accounts": "Gérer les comptes connectés"
+  "manage-connected-accounts": "Gérer les comptes connectés",
+  "name-style-title": "Style de votre pseudonyme",
+  "name-style-hint": "Choisissez une police, un effet et une couleur pour votre pseudonyme partout sur {NAME}.",
+  "name-style-open": "Choisir mon style"
 }

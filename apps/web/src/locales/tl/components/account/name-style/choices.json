@@ -1,0 +1,44 @@
+{
+  "font": "Pumili ng font",
+  "effect": "Pumili ng epekto",
+  "color": "Pumili ng kulay",
+  "first-color": "Pumili ng unang kulay",
+  "second-color": "Ikalawang kulay",
+  "fonts": {
+    "default": "Default",
+    "stencil": "Stencil",
+    "pixel": "Pixel",
+    "future": "Hinaharap",
+    "marker": "Marker",
+    "rounded": "Bilog",
+    "typewriter": "Typewriter",
+    "horror": "Horror",
+    "armour": "Baluti",
+    "comic": "Komiks",
+    "script": "Sulat-kamay",
+    "glitch": "Glitch"
+  },
+  "effects": {
+    "solid": "Solid",
+    "gradient": "Gradient",
+    "neon": "Neon",
+    "toon": "Toon",
+    "pop": "Pop",
+    "gummy": "Gummy",
+    "prism": "Prisma"
+  },
+  "colors": {
+    "brand": "Brand",
+    "red": "Pula",
+    "orange": "Kahel",
+    "yellow": "Dilaw",
+    "gold": "Ginto",
+    "bronze": "Bronse",
+    "olive": "Oliba",
+    "green": "Berde",
+    "steel": "Asero",
+    "sky": "Langit",
+    "purple": "Lila",
+    "silver": "Pilak"
+  }
+}

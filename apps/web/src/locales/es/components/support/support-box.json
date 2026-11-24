@@ -19,5 +19,8 @@
   "you-already-have-a-monthly-pledge": "Ya tienes un compromiso mensual. Usa el portal de facturación para cambiarlo.",
   "you-are-a-supporter-thank": "Eres colaborador. Gracias por hacer posible que {NAME} siga funcionando.",
   "you-have-given-so-far": "Has donado {amount} hasta ahora. Gracias.",
-  "manage-connected-accounts": "Administrar cuentas conectadas"
+  "manage-connected-accounts": "Administrar cuentas conectadas",
+  "name-style-title": "Tu estilo de apodo",
+  "name-style-hint": "Elige una fuente, un efecto y un color para tu apodo en todas partes de {NAME}.",
+  "name-style-open": "Elegir mi estilo"
 }

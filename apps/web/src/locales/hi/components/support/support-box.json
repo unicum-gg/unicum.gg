@@ -19,5 +19,8 @@
   "you-already-have-a-monthly-pledge": "आपके पास पहले से मासिक योगदान है। इसे बदलने के लिए बिलिंग पोर्टल का उपयोग करें।",
   "you-are-a-supporter-thank": "आप समर्थक हैं। {NAME} को चलाए रखने के लिए धन्यवाद।",
   "you-have-given-so-far": "आपने अब तक {amount} दिए हैं। धन्यवाद।",
-  "manage-connected-accounts": "कनेक्टेड अकाउंट्स प्रबंधित करें"
+  "manage-connected-accounts": "कनेक्टेड अकाउंट्स प्रबंधित करें",
+  "name-style-title": "आपके उपनाम की शैली",
+  "name-style-hint": "{NAME} पर हर जगह अपने उपनाम के लिए फ़ॉन्ट, प्रभाव और रंग चुनें।",
+  "name-style-open": "मेरी शैली चुनें"
 }

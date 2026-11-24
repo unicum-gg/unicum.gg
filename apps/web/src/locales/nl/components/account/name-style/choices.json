@@ -1,0 +1,44 @@
+{
+  "font": "Kiezen: lettertype",
+  "effect": "Kiezen: effect",
+  "color": "Kiezen: kleur",
+  "first-color": "Kiezen: eerste kleur",
+  "second-color": "Tweede kleur",
+  "fonts": {
+    "default": "Standaard",
+    "stencil": "Sjabloon",
+    "pixel": "Pixel",
+    "future": "Futuristisch",
+    "marker": "Markeerstift",
+    "rounded": "Afgerond",
+    "typewriter": "Typemachine",
+    "horror": "Horror",
+    "armour": "Pantser",
+    "comic": "Strip",
+    "script": "Schrift",
+    "glitch": "Glitch"
+  },
+  "effects": {
+    "solid": "Effen",
+    "gradient": "Verloop",
+    "neon": "Neon",
+    "toon": "Cartoon",
+    "pop": "Pop",
+    "gummy": "Gummy",
+    "prism": "Prisma"
+  },
+  "colors": {
+    "brand": "Merk",
+    "red": "Rood",
+    "orange": "Oranje",
+    "yellow": "Geel",
+    "gold": "Goud",
+    "bronze": "Brons",
+    "olive": "Olijf",
+    "green": "Groen",
+    "steel": "Staal",
+    "sky": "Hemelsblauw",
+    "purple": "Paars",
+    "silver": "Zilver"
+  }
+}

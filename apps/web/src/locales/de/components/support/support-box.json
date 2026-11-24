@@ -19,5 +19,8 @@
   "you-already-have-a-monthly-pledge": "Du hast bereits eine monatliche Zusage. Ändere sie über das Abrechnungsportal.",
   "you-are-a-supporter-thank": "Du bist Unterstützer. Danke, dass du {NAME} am Leben hältst.",
   "you-have-given-so-far": "Du hast bisher {amount} gegeben. Vielen Dank.",
-  "manage-connected-accounts": "Verbundene Konten verwalten"
+  "manage-connected-accounts": "Verbundene Konten verwalten",
+  "name-style-title": "Stil deines Spitznamens",
+  "name-style-hint": "Wähle eine Schriftart, einen Effekt und eine Farbe für deinen Spitznamen überall auf {NAME}.",
+  "name-style-open": "Meinen Stil auswählen"
 }

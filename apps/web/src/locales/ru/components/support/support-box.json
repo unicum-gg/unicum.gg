@@ -19,5 +19,8 @@
   "you-already-have-a-monthly-pledge": "У вас уже есть ежемесячное пожертвование. Изменить его можно в платёжном портале.",
   "you-are-a-supporter-thank": "Вы спонсор. Спасибо, что помогаете сохранять {NAME}.",
   "you-have-given-so-far": "Вы пожертвовали {amount}. Спасибо.",
-  "manage-connected-accounts": "Управлять подключенными аккаунтами"
+  "manage-connected-accounts": "Управлять подключенными аккаунтами",
+  "name-style-title": "Стиль вашего никнейма",
+  "name-style-hint": "Выбрать шрифт, эффект и цвет для вашего никнейма везде на {NAME}.",
+  "name-style-open": "Выбрать мой стиль"
 }

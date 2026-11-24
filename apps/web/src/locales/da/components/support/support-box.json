@@ -19,5 +19,8 @@
   "you-already-have-a-monthly-pledge": "Du har allerede et månedligt bidrag. Brug betalingsportalen til at ændre det.",
   "you-are-a-supporter-thank": "Du er bidragyder. Tak, fordi du holder {NAME} i live.",
   "you-have-given-so-far": "Du har givet {amount} indtil videre. Tak.",
-  "manage-connected-accounts": "Administrer tilknyttede konti"
+  "manage-connected-accounts": "Administrer tilknyttede konti",
+  "name-style-title": "Din kaldenavnsstil",
+  "name-style-hint": "Vælg en skrifttype, en effekt og en farve til dit kaldenavn overalt på {NAME}.",
+  "name-style-open": "Vælg min stil"
 }

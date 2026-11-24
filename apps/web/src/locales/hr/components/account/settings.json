@@ -27,5 +27,16 @@
   "billing-total": "Ukupno dano",
   "billing-total-description": "Sve što ste dali, uključeno i jednokratno darivanje. Hvala.",
   "anonymous": "Sakrij me na ljestvici podržavatelja",
-  "anonymous-description": "Vaše ime i značka podržavatelja ostaju izvan javne ljestvice i vašeg profila."
+  "anonymous-description": "Vaše ime i značka podržavatelja ostaju izvan javne ljestvice i vašeg profila.",
+  "name-style-surprise": "Iznenadi me",
+  "name-style-apply": "Primijeni",
+  "name-style-clear": "Natrag na običan nadimak",
+  "name-style-saved": "Stil tvog nadimka je spremljen",
+  "name-style-cleared": "Tvoj je nadimak ponovno običan",
+  "name-style-locked": "Isprobaj bilo koji stil na vlastitom imenu. Podržavatelji ga zadržavaju.",
+  "name-style-unlock": "Postani podupiratelj",
+  "section-profile": "Profil",
+  "section-profile-description": "Kako se pojavljuješ svima ostalima na web-mjestu unicum.gg.",
+  "name-style-title": "Stil nadimka",
+  "name-style-description": "Kako se vaš nadimak prikazuje svugdje na web-mjestu: vaš profil, ljestvice, popisi klanova i turnirske postave."
 }

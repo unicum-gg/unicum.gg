@@ -1,0 +1,44 @@
+{
+  "font": "Schriftart auswählen",
+  "effect": "Effekt auswählen",
+  "color": "farbe auswählen",
+  "first-color": "Erste farbe auswählen",
+  "second-color": "Zweite farbe",
+  "fonts": {
+    "default": "Standard",
+    "stencil": "Schablone",
+    "pixel": "Pixel",
+    "future": "Zukunft",
+    "marker": "Marker",
+    "rounded": "Abgerundet",
+    "typewriter": "Schreibmaschine",
+    "horror": "Horror",
+    "armour": "Panzerung",
+    "comic": "Comic",
+    "script": "Schreibschrift",
+    "glitch": "Glitch"
+  },
+  "effects": {
+    "solid": "Vollton",
+    "gradient": "Farbverlauf",
+    "neon": "Neon",
+    "toon": "Toon",
+    "pop": "Pop",
+    "gummy": "Gummi",
+    "prism": "Prisma"
+  },
+  "colors": {
+    "brand": "Marke",
+    "red": "Rot",
+    "orange": "Orange",
+    "yellow": "Gelb",
+    "gold": "Gold",
+    "bronze": "Bronze",
+    "olive": "Oliv",
+    "green": "Grün",
+    "steel": "Stahl",
+    "sky": "Himmelblau",
+    "purple": "Lila",
+    "silver": "Silber"
+  }
+}

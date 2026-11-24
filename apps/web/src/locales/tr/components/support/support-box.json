@@ -19,5 +19,8 @@
   "you-already-have-a-monthly-pledge": "Zaten aylık bir taahhüdünüz var. Değiştirmek için faturalandırma portalını kullanın.",
   "you-are-a-supporter-thank": "Destekçisiniz. {NAME} projesini yaşattığınız için teşekkürler.",
   "you-have-given-so-far": "Şimdiye kadar {amount} verdiniz. Teşekkürler.",
-  "manage-connected-accounts": "Bağlı hesapları yönet"
+  "manage-connected-accounts": "Bağlı hesapları yönet",
+  "name-style-title": "Takma ad stiliniz",
+  "name-style-hint": "{NAME} sitesinin her yerinde takma adınız için bir yazı tipi, bir etki ve bir renk seçin.",
+  "name-style-open": "Stilimi seç"
 }

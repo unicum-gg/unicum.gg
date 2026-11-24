@@ -19,5 +19,8 @@
   "you-already-have-a-monthly-pledge": "Du har allerede en månedlig avtale. Bruk faktureringsportalen for å endre den.",
   "you-are-a-supporter-thank": "Du er støttespiller. Takk for at du holder {NAME} i live.",
   "you-have-given-so-far": "Du har gitt {amount} så langt. Takk.",
-  "manage-connected-accounts": "Administrer tilkoblede kontoer"
+  "manage-connected-accounts": "Administrer tilkoblede kontoer",
+  "name-style-title": "Stilen på kallenavnet ditt",
+  "name-style-hint": "Velg en skrifttype, en effekt og en farge for kallenavnet ditt overalt på {NAME}.",
+  "name-style-open": "Velg min stil"
 }

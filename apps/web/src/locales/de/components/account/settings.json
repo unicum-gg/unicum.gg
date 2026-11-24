@@ -27,5 +27,16 @@
   "billing-total": "Bisher gegeben",
   "billing-total-description": "Alles, was du gegeben hast, einschließlich einmaliger Geschenke. Danke.",
   "anonymous": "Mich auf der Unterstützer-Rangliste ausblenden",
-  "anonymous-description": "Dein Name und dein Unterstützer-Abzeichen bleiben von der öffentlichen Rangliste und deinem Profil fern."
+  "anonymous-description": "Dein Name und dein Unterstützer-Abzeichen bleiben von der öffentlichen Rangliste und deinem Profil fern.",
+  "name-style-surprise": "Überrasche mich",
+  "name-style-apply": "Anwenden",
+  "name-style-clear": "Zurück zu einem schlichten Spitznamen",
+  "name-style-saved": "Der stil Ihres Spitznamens ist gespeichert",
+  "name-style-cleared": "Ihr Spitzname ist wieder schlicht",
+  "name-style-locked": "Probieren Sie jeden stil mit Ihrem eigenen Namen aus. Unterstützer behalten ihn.",
+  "name-style-unlock": "Unterstützer werden",
+  "section-profile": "Profil",
+  "section-profile-description": "So erscheinen Sie für alle anderen auf der Website.",
+  "name-style-title": "Spitzname-stil",
+  "name-style-description": "Wie dein Spitzname überall auf der Website dargestellt wird: in deinem Profil, in den Bestenlisten, in Clan-Listen und in Turnieraufstellungen."
 }

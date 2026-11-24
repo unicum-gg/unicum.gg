@@ -917,7 +917,15 @@
     "pledge": "تعهّد",
     "runs": "جولات",
     "support": "دعم",
-    "yours": "خاصتك"
+    "yours": "خاصتك",
+    "Armour": "التدريع",
+    "Bronze": "برونزي",
+    "Choose": "اختر",
+    "Silver": "فضي",
+    "Supporters": "الداعمون",
+    "colour": "اللون",
+    "leaderboards": "لوحات المتصدرين",
+    "style": "النمط"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1838,7 +1846,15 @@
     "pledge": "ахвяраванне",
     "runs": "працуе",
     "support": "падтрымка",
-    "yours": "ваш"
+    "yours": "ваш",
+    "Armour": "Браня",
+    "Bronze": "Бронза",
+    "Choose": "Выбраць",
+    "Silver": "Срэбра",
+    "Supporters": "Падтрымальнікі",
+    "colour": "колер",
+    "leaderboards": "рэйтынгі",
+    "style": "стыль"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -2977,7 +2993,15 @@
     "pledge": "обещание",
     "runs": "пускания",
     "support": "подкрепа",
-    "yours": "вашите"
+    "yours": "вашите",
+    "Green": "Зелена",
+    "Red": "Червена",
+    "Armour": "Броня",
+    "Choose": "Избери",
+    "Supporters": "Поддръжници",
+    "colour": "цвят",
+    "leaderboards": "класации",
+    "style": "стил"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -3906,7 +3930,15 @@
     "pledge": "obećanje",
     "runs": "radi",
     "support": "podrška",
-    "yours": "vaše"
+    "yours": "vaše",
+    "Armour": "Oklop",
+    "Bronze": "Bronza",
+    "Choose": "Odaberi",
+    "Silver": "Srebro",
+    "Supporters": "Podržavaoci",
+    "colour": "boja",
+    "leaderboards": "rang-liste",
+    "style": "stil"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -5056,7 +5088,15 @@
     "pledge": "příspěvek",
     "runs": "provoz",
     "support": "podpora",
-    "yours": "vaše"
+    "yours": "vaše",
+    "Green": "Zelená",
+    "Red": "Červená",
+    "Armour": "Pancíř",
+    "Choose": "Vybrat",
+    "Supporters": "Podporovatelé",
+    "colour": "barva",
+    "leaderboards": "žebříčky",
+    "style": "styl"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -6212,7 +6252,15 @@
     "pledge": "bidrag",
     "runs": "kører",
     "support": "støtte",
-    "yours": "din"
+    "yours": "din",
+    "Green": "Grøn",
+    "Red": "Rød",
+    "Armour": "Panser",
+    "Choose": "Vælg",
+    "Supporters": "Støtter",
+    "colour": "farve",
+    "leaderboards": "ranglister",
+    "style": "stil"
   },
   "de": {
     "(optional)": "(optional)",
@@ -7361,7 +7409,15 @@
     "pledge": "Zusage",
     "runs": "Betrieb",
     "support": "Unterstützung",
-    "yours": "deine"
+    "yours": "deine",
+    "Green": "Grün",
+    "Red": "Rot",
+    "Armour": "Panzerung",
+    "Choose": "Auswählen",
+    "Supporters": "Unterstützer",
+    "colour": "farbe",
+    "leaderboards": "bestenlisten",
+    "style": "stil"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -8516,7 +8572,15 @@
     "pledge": "δέσμευση",
     "runs": "εκτελέσεις",
     "support": "υποστήριξη",
-    "yours": "δικό σας"
+    "yours": "δικό σας",
+    "Green": "Πράσινη",
+    "Red": "Κόκκινη",
+    "Armour": "Θωράκιση",
+    "Choose": "Επιλογή",
+    "Supporters": "Υποστηρικτές",
+    "colour": "χρώμα",
+    "leaderboards": "πίνακες κατάταξης",
+    "style": "στυλ"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -9652,7 +9716,15 @@
     "pledge": "compromiso",
     "runs": "partidas",
     "support": "apoyo",
-    "yours": "tuyos"
+    "yours": "tuyos",
+    "Green": "Verde",
+    "Red": "Roja",
+    "Armour": "Blindaje",
+    "Choose": "Elegir",
+    "Supporters": "Colaboradores",
+    "colour": "color",
+    "leaderboards": "clasificaciones",
+    "style": "estilo"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -10812,7 +10884,15 @@
     "pledge": "lupaus",
     "runs": "ajot",
     "support": "tuki",
-    "yours": "sinun"
+    "yours": "sinun",
+    "Green": "Vihreä",
+    "Red": "Punainen",
+    "Armour": "Panssari",
+    "Choose": "Valitse",
+    "Supporters": "Tukijat",
+    "colour": "väri",
+    "leaderboards": "tulostaulukot",
+    "style": "tyyli"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -11951,7 +12031,14 @@
     "pledge": "engagement",
     "runs": "parties",
     "support": "soutien",
-    "yours": "le vôtre"
+    "yours": "le vôtre",
+    "Green": "Vert",
+    "Red": "Rouge",
+    "Armour": "Blindage",
+    "Choose": "Choisir",
+    "colour": "couleur",
+    "leaderboards": "classements",
+    "style": "style"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -12873,7 +12960,15 @@
     "pledge": "योगदान",
     "runs": "रन",
     "support": "सहायता",
-    "yours": "आपका"
+    "yours": "आपका",
+    "Armour": "कवच",
+    "Bronze": "कांस्य",
+    "Choose": "चुनें",
+    "Silver": "रजत",
+    "Supporters": "समर्थक",
+    "colour": "रंग",
+    "leaderboards": "लीडरबोर्ड",
+    "style": "शैली"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -14026,7 +14121,15 @@
     "pledge": "donacija",
     "runs": "radi",
     "support": "podrška",
-    "yours": "vaše"
+    "yours": "vaše",
+    "Green": "Zelena",
+    "Red": "Crvena",
+    "Armour": "Oklop",
+    "Choose": "Odaberi",
+    "Supporters": "Podržavatelji",
+    "colour": "boja",
+    "leaderboards": "ljestvice",
+    "style": "stil"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -15181,7 +15284,15 @@
     "pledge": "felajánlás",
     "runs": "fut",
     "support": "támogatás",
-    "yours": "tiéd"
+    "yours": "tiéd",
+    "Green": "Zöld",
+    "Red": "Piros",
+    "Armour": "Páncélzat",
+    "Choose": "Válassz",
+    "Supporters": "Támogatók",
+    "colour": "szín",
+    "leaderboards": "ranglisták",
+    "style": "stílus"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -16332,7 +16443,15 @@
     "pledge": "contributo",
     "runs": "funziona",
     "support": "supporto",
-    "yours": "tuo"
+    "yours": "tuo",
+    "Green": "Verde",
+    "Red": "Rosso",
+    "Armour": "Corazza",
+    "Choose": "Scegli",
+    "Supporters": "Sostenitori",
+    "colour": "colore",
+    "leaderboards": "classifiche",
+    "style": "stile"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -17490,7 +17609,15 @@
     "pledge": "支援",
     "runs": "運営",
     "support": "支援",
-    "yours": "あなたの"
+    "yours": "あなたの",
+    "Green": "緑",
+    "Red": "赤",
+    "Armour": "装甲",
+    "Choose": "選択",
+    "Supporters": "支援者",
+    "colour": "色",
+    "leaderboards": "リーダーボード",
+    "style": "スタイル"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -18412,7 +18539,15 @@
     "pledge": "жарна",
     "runs": "ойындар",
     "support": "қолдау",
-    "yours": "сіздікі"
+    "yours": "сіздікі",
+    "Armour": "Броня",
+    "Bronze": "Қола",
+    "Choose": "Таңдау",
+    "Silver": "Күміс",
+    "Supporters": "Қолдаушылар",
+    "colour": "түс",
+    "leaderboards": "көшбасшылар тақталары",
+    "style": "стиль"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -19574,7 +19709,15 @@
     "pledge": "후원 약정",
     "runs": "운영",
     "support": "후원",
-    "yours": "여러분의"
+    "yours": "여러분의",
+    "Green": "녹색",
+    "Red": "적색",
+    "Armour": "장갑",
+    "Choose": "선택",
+    "Supporters": "후원자",
+    "colour": "색상",
+    "leaderboards": "순위표",
+    "style": "스타일"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -20732,7 +20875,15 @@
     "pledge": "įsipareigojimas",
     "runs": "veikia",
     "support": "parama",
-    "yours": "jūsų"
+    "yours": "jūsų",
+    "Green": "Žalia",
+    "Red": "Raudona",
+    "Armour": "Šarvai",
+    "Choose": "Pasirinkti",
+    "Supporters": "Rėmėjai",
+    "colour": "spalva",
+    "leaderboards": "lyderių lentelės",
+    "style": "stilius"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -21877,7 +22028,15 @@
     "pledge": "ziedojuma solījums",
     "runs": "darbojas",
     "support": "atbalsts",
-    "yours": "jūsu"
+    "yours": "jūsu",
+    "Green": "Zaļa",
+    "Red": "Sarkana",
+    "Armour": "Bruņas",
+    "Choose": "Izvēlēties",
+    "Supporters": "Atbalstītāji",
+    "colour": "krāsa",
+    "leaderboards": "līderu saraksti",
+    "style": "stils"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -23037,7 +23196,15 @@
     "pledge": "toezegging",
     "runs": "draait",
     "support": "steun",
-    "yours": "jouw"
+    "yours": "jouw",
+    "Green": "Groen",
+    "Red": "Rood",
+    "Armour": "Pantser",
+    "Choose": "Kiezen",
+    "Supporters": "Supporters",
+    "colour": "kleur",
+    "leaderboards": "klassementen",
+    "style": "stijl"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -24188,7 +24355,15 @@
     "pledge": "løfte",
     "runs": "kjøringer",
     "support": "støtte",
-    "yours": "dine"
+    "yours": "dine",
+    "Green": "Grønn",
+    "Red": "Rød",
+    "Armour": "Pansring",
+    "Choose": "Velg",
+    "Supporters": "Støttespillere",
+    "colour": "farge",
+    "leaderboards": "topplister",
+    "style": "stil"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -25336,7 +25511,15 @@
     "pledge": "zobowiązanie",
     "runs": "działa",
     "support": "wsparcie",
-    "yours": "twoje"
+    "yours": "twoje",
+    "Green": "Zielona",
+    "Red": "Czerwona",
+    "Armour": "Pancerz",
+    "Choose": "Wybierz",
+    "Supporters": "Wspierający",
+    "colour": "kolor",
+    "leaderboards": "rankingi",
+    "style": "styl"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -26477,7 +26660,15 @@
     "pledge": "compromisso",
     "runs": "funciona",
     "support": "apoio",
-    "yours": "seu"
+    "yours": "seu",
+    "Green": "Verde",
+    "Red": "Vermelho",
+    "Armour": "Blindagem",
+    "Choose": "Escolher",
+    "Supporters": "Apoiadores",
+    "colour": "cor",
+    "leaderboards": "classificações",
+    "style": "estilo"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -27619,7 +27810,15 @@
     "pledge": "angajament",
     "runs": "funcționează",
     "support": "susținere",
-    "yours": "ale tale"
+    "yours": "ale tale",
+    "Green": "Verde",
+    "Red": "Roșie",
+    "Armour": "Blindaj",
+    "Choose": "Alege",
+    "Supporters": "Susținători",
+    "colour": "culoare",
+    "leaderboards": "clasamente",
+    "style": "stil"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -28749,7 +28948,15 @@
     "pledge": "взнос",
     "runs": "запуски",
     "support": "поддержка",
-    "yours": "ваши"
+    "yours": "ваши",
+    "Green": "Зелёная",
+    "Red": "Красная",
+    "Armour": "Броня",
+    "Choose": "Выбрать",
+    "Supporters": "Спонсоры",
+    "colour": "цвет",
+    "leaderboards": "таблицы лидеров",
+    "style": "стиль"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -29674,7 +29881,15 @@
     "pledge": "obljuba",
     "runs": "deluje",
     "support": "podpora",
-    "yours": "tvoje"
+    "yours": "tvoje",
+    "Armour": "Brnenie",
+    "Bronze": "Bronz",
+    "Choose": "Vybrať",
+    "Silver": "Striebro",
+    "Supporters": "Podporovatelia",
+    "colour": "farba",
+    "leaderboards": "rebríčky",
+    "style": "štýl"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -30829,7 +31044,15 @@
     "pledge": "donacija",
     "runs": "radi",
     "support": "podrška",
-    "yours": "vaš"
+    "yours": "vaš",
+    "Green": "Zelena",
+    "Red": "Crvena",
+    "Armour": "Oklop",
+    "Choose": "Izaberi",
+    "Supporters": "Podržavaoci",
+    "colour": "boja",
+    "leaderboards": "rang-liste",
+    "style": "stil"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -31990,7 +32213,15 @@
     "pledge": "löfte",
     "runs": "körningar",
     "support": "stöd",
-    "yours": "dina"
+    "yours": "dina",
+    "Green": "Grön",
+    "Red": "Röd",
+    "Armour": "Pansar",
+    "Choose": "Välj",
+    "Supporters": "Stödjare",
+    "colour": "färg",
+    "leaderboards": "topplistor",
+    "style": "stil"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -33146,7 +33377,15 @@
     "pledge": "เงินสมทบ",
     "runs": "ดำเนินงาน",
     "support": "การสนับสนุน",
-    "yours": "ของคุณ"
+    "yours": "ของคุณ",
+    "Green": "เขียว",
+    "Red": "แดง",
+    "Armour": "เกราะ",
+    "Choose": "เลือก",
+    "Supporters": "ผู้สนับสนุน",
+    "colour": "สี",
+    "leaderboards": "กระดานจัดอันดับ",
+    "style": "สไตล์"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -34070,7 +34309,15 @@
     "pledge": "pangako",
     "runs": "takbo",
     "support": "suporta",
-    "yours": "iyo"
+    "yours": "iyo",
+    "Armour": "Baluti",
+    "Bronze": "Bronse",
+    "Choose": "Pumili",
+    "Silver": "Pilak",
+    "Supporters": "Mga tagasuporta",
+    "colour": "kulay",
+    "leaderboards": "mga leaderboard",
+    "style": "istilo"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -35223,7 +35470,15 @@
     "pledge": "taahhüt",
     "runs": "çalışır",
     "support": "destek",
-    "yours": "sizin"
+    "yours": "sizin",
+    "Green": "Yeşil",
+    "Red": "Kırmızı",
+    "Armour": "Zırh",
+    "Choose": "Seç",
+    "Supporters": "Destekçiler",
+    "colour": "renk",
+    "leaderboards": "liderlik tabloları",
+    "style": "stil"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -36368,7 +36623,15 @@
     "pledge": "внесок",
     "runs": "запуски",
     "support": "підтримка",
-    "yours": "ваші"
+    "yours": "ваші",
+    "Green": "Зелена",
+    "Red": "Червона",
+    "Armour": "Броня",
+    "Choose": "Вибрати",
+    "Supporters": "Підтримувачі",
+    "colour": "колір",
+    "leaderboards": "таблиці лідерів",
+    "style": "стиль"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -37502,7 +37765,15 @@
     "pledge": "cam kết",
     "runs": "lượt chạy",
     "support": "hỗ trợ",
-    "yours": "của bạn"
+    "yours": "của bạn",
+    "Green": "Xanh",
+    "Red": "Đỏ",
+    "Armour": "Giáp",
+    "Choose": "Chọn",
+    "Supporters": "Người ủng hộ",
+    "colour": "màu sắc",
+    "leaderboards": "bảng xếp hạng",
+    "style": "phong cách"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -38658,6 +38929,14 @@
     "pledge": "承诺",
     "runs": "运行",
     "support": "支持",
-    "yours": "你的"
+    "yours": "你的",
+    "Green": "绿色",
+    "Red": "红色",
+    "Armour": "装甲",
+    "Choose": "选择",
+    "Supporters": "支持者",
+    "colour": "颜色",
+    "leaderboards": "排行榜",
+    "style": "风格"
   }
 }

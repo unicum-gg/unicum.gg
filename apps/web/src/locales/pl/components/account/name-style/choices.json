@@ -1,0 +1,44 @@
+{
+  "font": "Wybierz czcionkę",
+  "effect": "Wybierz efekt",
+  "color": "Wybierz kolor",
+  "first-color": "Wybierz pierwszy kolor",
+  "second-color": "Drugi kolor",
+  "fonts": {
+    "default": "Domyślna",
+    "stencil": "Szablonowa",
+    "pixel": "Pikselowa",
+    "future": "Futurystyczna",
+    "marker": "Markerowa",
+    "rounded": "Zaokrąglona",
+    "typewriter": "Maszynowa",
+    "horror": "Horrorowa",
+    "armour": "Pancerz",
+    "comic": "Komiksowa",
+    "script": "Ozdobna",
+    "glitch": "Glitch"
+  },
+  "effects": {
+    "solid": "Jednolity",
+    "gradient": "Gradient",
+    "neon": "Neon",
+    "toon": "Kreskówkowy",
+    "pop": "Pop",
+    "gummy": "Gumowy",
+    "prism": "Pryzmat"
+  },
+  "colors": {
+    "brand": "Marka",
+    "red": "Czerwona",
+    "orange": "Pomarańczowa",
+    "yellow": "Żółta",
+    "gold": "Złoto",
+    "bronze": "Brąz",
+    "olive": "Oliwkowa",
+    "green": "Zielona",
+    "steel": "Stalowy",
+    "sky": "Błękitny",
+    "purple": "Fioletowa",
+    "silver": "Srebro"
+  }
+}

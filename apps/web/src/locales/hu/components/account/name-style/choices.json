@@ -1,0 +1,44 @@
+{
+  "font": "Válassz betűtípust",
+  "effect": "Válassz hatást",
+  "color": "Válassz színt",
+  "first-color": "Válaszd ki az első színt",
+  "second-color": "Második szín",
+  "fonts": {
+    "default": "Alapértelmezett",
+    "stencil": "Stencil",
+    "pixel": "Pixel",
+    "future": "Futurisztikus",
+    "marker": "Filctoll",
+    "rounded": "Lekerekített",
+    "typewriter": "Írógép",
+    "horror": "Horror",
+    "armour": "Páncélzat",
+    "comic": "Képregény",
+    "script": "Kézírás",
+    "glitch": "Glitch"
+  },
+  "effects": {
+    "solid": "Egyszínű",
+    "gradient": "Színátmenet",
+    "neon": "Neon",
+    "toon": "Rajzfilm",
+    "pop": "Pop",
+    "gummy": "Gumicukor",
+    "prism": "Prizma"
+  },
+  "colors": {
+    "brand": "Márka",
+    "red": "Piros",
+    "orange": "Narancssárga",
+    "yellow": "Sárga",
+    "gold": "Arany",
+    "bronze": "Bronz",
+    "olive": "Olívazöld",
+    "green": "Zöld",
+    "steel": "Acélszürke",
+    "sky": "Égkék",
+    "purple": "Lila",
+    "silver": "Ezüst"
+  }
+}

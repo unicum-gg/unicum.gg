@@ -27,5 +27,16 @@
   "billing-total": "Naibigay sa ngayon",
   "billing-total-description": "Lahat ng naibigay mo, kasama ang mga minsanang regalo. Salamat.",
   "anonymous": "Itago ako sa talahanayan ng ranggo ng mga tagasuporta",
-  "anonymous-description": "Mananatiling wala sa pampublikong talahanayan ng ranggo at profile mo ang iyong pangalan at insignia ng tagasuporta."
+  "anonymous-description": "Mananatiling wala sa pampublikong talahanayan ng ranggo at profile mo ang iyong pangalan at insignia ng tagasuporta.",
+  "name-style-surprise": "Surpresahin ako",
+  "name-style-apply": "Ilapat",
+  "name-style-clear": "Bumalik sa payak na palayaw",
+  "name-style-saved": "Na-save ang istilo ng iyong palayaw",
+  "name-style-cleared": "Payak na muli ang iyong palayaw",
+  "name-style-locked": "Subukan ang anumang istilo sa sarili mong pangalan. Pinananatili ito ng mga tagasuporta.",
+  "name-style-unlock": "Maging tagasuporta",
+  "section-profile": "Profile",
+  "section-profile-description": "Kung paano ka lumilitaw sa lahat ng iba pa sa unicum.gg.",
+  "name-style-title": "Istilo ng palayaw",
+  "name-style-description": "Kung paano ipinapakita ang iyong palayaw kahit saan sa website: sa iyong profile, mga leaderboard, listahan ng klano at mga talaan ng torneo."
 }

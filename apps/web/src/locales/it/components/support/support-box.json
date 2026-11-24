@@ -19,5 +19,8 @@
   "you-already-have-a-monthly-pledge": "Hai già un contributo mensile. Usa il portale di fatturazione per modificarlo.",
   "you-are-a-supporter-thank": "Sei tra i sostenitori. Grazie per mantenere in vita {NAME}.",
   "you-have-given-so-far": "Finora hai donato {amount}. Grazie.",
-  "manage-connected-accounts": "Gestisci gli account collegati"
+  "manage-connected-accounts": "Gestisci gli account collegati",
+  "name-style-title": "Stile del tuo nickname",
+  "name-style-hint": "Scegli un carattere, un effetto e un colore per il tuo nickname ovunque su {NAME}.",
+  "name-style-open": "Scegli il mio stile"
 }

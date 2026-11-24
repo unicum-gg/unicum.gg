@@ -1,0 +1,44 @@
+{
+  "font": "Chọn phông chữ",
+  "effect": "Chọn hiệu ứng",
+  "color": "Chọn màu sắc",
+  "first-color": "Chọn màu sắc đầu tiên",
+  "second-color": "Màu sắc thứ hai",
+  "fonts": {
+    "default": "Mặc định",
+    "stencil": "Stencil",
+    "pixel": "Pixel",
+    "future": "Tương lai",
+    "marker": "Bút dạ",
+    "rounded": "Bo tròn",
+    "typewriter": "Máy đánh chữ",
+    "horror": "Kinh dị",
+    "armour": "Giáp",
+    "comic": "Truyện tranh",
+    "script": "Chữ viết tay",
+    "glitch": "Lỗi"
+  },
+  "effects": {
+    "solid": "Đơn sắc",
+    "gradient": "Chuyển màu",
+    "neon": "Neon",
+    "toon": "Hoạt hình",
+    "pop": "Pop",
+    "gummy": "Kẹo dẻo",
+    "prism": "Lăng kính"
+  },
+  "colors": {
+    "brand": "Thương hiệu",
+    "red": "Đỏ",
+    "orange": "Cam",
+    "yellow": "Vàng",
+    "gold": "Gold",
+    "bronze": "Bronze",
+    "olive": "Ô liu",
+    "green": "Xanh",
+    "steel": "Thép",
+    "sky": "Xanh da trời",
+    "purple": "Tím",
+    "silver": "Silver"
+  }
+}

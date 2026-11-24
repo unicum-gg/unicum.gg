@@ -27,5 +27,16 @@
   "billing-total": "ما قُدّم حتى الآن",
   "billing-total-description": "كل ما قدمته، والهدايا لمرة واحدة مشمولة. شكرًا لك.",
   "anonymous": "إخفائي عن لوحة المتصدرين للداعمين",
-  "anonymous-description": "يبقى اسمك وشارة الداعم خارج لوحة المتصدرين العامة وملفك الشخصي."
+  "anonymous-description": "يبقى اسمك وشارة الداعم خارج لوحة المتصدرين العامة وملفك الشخصي.",
+  "name-style-surprise": "فاجئني",
+  "name-style-apply": "تطبيق",
+  "name-style-clear": "رجوع إلى اسم مستعار عادي",
+  "name-style-saved": "تم حفظ نمط اسمك المستعار",
+  "name-style-cleared": "عاد اسمك المستعار عاديًا",
+  "name-style-locked": "جرّب أي نمط على اسمك. يحتفظ الداعمون به.",
+  "name-style-unlock": "كن داعمًا",
+  "section-profile": "الملف الشخصي",
+  "section-profile-description": "كيف تظهر للآخرين على unicum.gg.",
+  "name-style-title": "نمط اسمك المستعار",
+  "name-style-description": "كيفية عرض اسمك المستعار في كل مكان على الموقع: ملفك الشخصي، لوحات المتصدرين، قوائم القبائل وتشكيلات البطولات."
 }

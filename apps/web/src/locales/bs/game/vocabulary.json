@@ -133,8 +133,8 @@
   },
   "onslaught-tiers": {
     "iron": "željezo",
-    "bronze": "bronza",
-    "silver": "srebro",
+    "bronze": "Bronza",
+    "silver": "Srebro",
     "gold": "Zlato",
     "champion": "Šampion",
     "legend": "Legenda",

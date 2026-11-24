@@ -27,5 +27,16 @@
   "billing-total": "Givet hittills",
   "billing-total-description": "Allt du har gett, med en engångsgåva inkluderad. Tack.",
   "anonymous": "Dölj mig på supporters topplista",
-  "anonymous-description": "Ditt namn och ditt supportersmärke stannar kvar utanför den offentliga topplistan och din profil."
+  "anonymous-description": "Ditt namn och ditt supportersmärke stannar kvar utanför den offentliga topplistan och din profil.",
+  "name-style-surprise": "Överraska mig",
+  "name-style-apply": "Tillämpa",
+  "name-style-clear": "Tillbaka till ett vanligt smeknamn",
+  "name-style-saved": "Din smeknamnsstil är sparad",
+  "name-style-cleared": "Ditt smeknamn är vanligt igen",
+  "name-style-locked": "Prova vilken stil som helst på ditt eget namn. Stödjare får behålla den.",
+  "name-style-unlock": "Bli supporter",
+  "section-profile": "Profil",
+  "section-profile-description": "Hur du visas för alla andra på unicum.gg.",
+  "name-style-title": "Smeknamnsstil",
+  "name-style-description": "Hur ditt smeknamn visas överallt på webbplatsen: i din profil, topplistorna, klanlistor och turneringars laguppställningar."
 }

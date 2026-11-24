@@ -27,5 +27,16 @@
   "billing-total": "Oferit până acum",
   "billing-total-description": "Tot ce ai oferit, inclusiv cadourile oferite o singură dată. Îți mulțumim.",
   "anonymous": "Ascunde-mă în clasamentul susținătorilor",
-  "anonymous-description": "Numele tău și insigna ta de susținător rămân în afara clasamentului public și a profilului tău."
+  "anonymous-description": "Numele tău și insigna ta de susținător rămân în afara clasamentului public și a profilului tău.",
+  "name-style-surprise": "Surprinde-mă",
+  "name-style-apply": "Aplică",
+  "name-style-clear": "Înapoi la o poreclă simplă",
+  "name-style-saved": "Stilul poreclei tale este salvat",
+  "name-style-cleared": "Porecla ta este din nou simplă",
+  "name-style-locked": "Încearcă orice stil pe propriul nume. Susținătorii îl păstrează.",
+  "name-style-unlock": "Devino susținător",
+  "section-profile": "Profil",
+  "section-profile-description": "Cum apari pentru toți ceilalți pe unicum.gg.",
+  "name-style-title": "Stilul poreclei",
+  "name-style-description": "Cum este afișată porecla ta peste tot pe site: în profilul tău, în clasamente, în listele clanurilor și în listele turneelor."
 }

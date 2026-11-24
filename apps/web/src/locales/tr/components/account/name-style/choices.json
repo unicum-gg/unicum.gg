@@ -1,0 +1,44 @@
+{
+  "font": "Yazı tipinizi seçin",
+  "effect": "Efektinizi seçin",
+  "color": "Renginizi seçin",
+  "first-color": "İlk renginizi seçin",
+  "second-color": "İkinci renk",
+  "fonts": {
+    "default": "Varsayılan",
+    "stencil": "Şablon",
+    "pixel": "Piksel",
+    "future": "Gelecek",
+    "marker": "Keçeli kalem",
+    "rounded": "Yuvarlak",
+    "typewriter": "Daktilo",
+    "horror": "Korku",
+    "armour": "Zırh",
+    "comic": "Çizgi roman",
+    "script": "El yazısı",
+    "glitch": "Hata"
+  },
+  "effects": {
+    "solid": "Düz",
+    "gradient": "Degrade",
+    "neon": "Neon",
+    "toon": "Karikatür",
+    "pop": "Pop",
+    "gummy": "Sakız",
+    "prism": "Prizma"
+  },
+  "colors": {
+    "brand": "Marka",
+    "red": "Kırmızı",
+    "orange": "Turuncu",
+    "yellow": "Sarı",
+    "gold": "Altın",
+    "bronze": "Bronz",
+    "olive": "Zeytin",
+    "green": "Yeşil",
+    "steel": "Çelik",
+    "sky": "Gökyüzü",
+    "purple": "Mor",
+    "silver": "Gümüş"
+  }
+}

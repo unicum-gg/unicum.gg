@@ -19,5 +19,8 @@
   "you-already-have-a-monthly-pledge": "Jūs jau esate įsipareigoję mokėti kas mėnesį. Naudokite atsiskaitymo portalą, kad pakeistumėte įsipareigojimą.",
   "you-are-a-supporter-thank": "Esate rėmėjas. Ačiū, kad padedate {NAME} gyvuoti.",
   "you-have-given-so-far": "Iki šiol paaukojote {amount}. Ačiū.",
-  "manage-connected-accounts": "Tvarkyti susietas paskyras"
+  "manage-connected-accounts": "Tvarkyti susietas paskyras",
+  "name-style-title": "Jūsų slapyvardžio stilius",
+  "name-style-hint": "Pasirinkite šriftą, efektą ir spalvą savo slapyvardžiui visur svetainėje {NAME}.",
+  "name-style-open": "Pasirinkti mano stilių"
 }

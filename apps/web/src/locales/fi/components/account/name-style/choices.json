@@ -1,0 +1,44 @@
+{
+  "font": "Valitse fontti",
+  "effect": "Valitse vaikutus",
+  "color": "Valitse väri",
+  "first-color": "Valitse ensimmäinen väri",
+  "second-color": "Toinen väri",
+  "fonts": {
+    "default": "Oletus",
+    "stencil": "Sabluuna",
+    "pixel": "Pikseli",
+    "future": "Tulevaisuus",
+    "marker": "Tussi",
+    "rounded": "Pyöristetty",
+    "typewriter": "Kirjoituskone",
+    "horror": "Kauhu",
+    "armour": "Panssari",
+    "comic": "Sarjakuva",
+    "script": "Kaunokirjoitus",
+    "glitch": "Häiriö"
+  },
+  "effects": {
+    "solid": "Yhtenäinen",
+    "gradient": "Liukuväri",
+    "neon": "Neon",
+    "toon": "Sarjakuva",
+    "pop": "Pop",
+    "gummy": "Kumimainen",
+    "prism": "Prisma"
+  },
+  "colors": {
+    "brand": "Brändi",
+    "red": "Punainen",
+    "orange": "Oranssi",
+    "yellow": "Keltainen",
+    "gold": "Kulta",
+    "bronze": "Pronssi",
+    "olive": "Oliivi",
+    "green": "Vihreä",
+    "steel": "Teräs",
+    "sky": "Taivas",
+    "purple": "Violetti",
+    "silver": "Hopea"
+  }
+}

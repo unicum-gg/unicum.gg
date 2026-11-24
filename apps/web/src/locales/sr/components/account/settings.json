@@ -27,5 +27,16 @@
   "billing-total": "До сада дато",
   "billing-total-description": "Све што сте дали, једнократни поклони укључено. Хвала вам.",
   "anonymous": "Сакриј ме на табели подржавалаца",
-  "anonymous-description": "Ваше име и ваша značka подржаваоца ostani ван јавне табеле и вашег профила."
+  "anonymous-description": "Ваше име и ваша značka подржаваоца ostani ван јавне табеле и вашег профила.",
+  "name-style-surprise": "Изненади ме",
+  "name-style-apply": "Примени",
+  "name-style-clear": "Nazad na обичан надимак",
+  "name-style-saved": "Sačuvano: stil надимка",
+  "name-style-cleared": "Ваш надимак је поново обичан",
+  "name-style-locked": "Испробај било који stil на свом имену. Podržavaoci га задржавају.",
+  "name-style-unlock": "Postani podržavalac",
+  "section-profile": "Profil",
+  "section-profile-description": "Како се појављујете свима осталима на уникум.gg.",
+  "name-style-title": "Stil надимка",
+  "name-style-description": "Kako se vaš надимак prikazuje svuda na sajtu: vaš профил, rang-liste, lista кланова i sastavi турнира."
 }

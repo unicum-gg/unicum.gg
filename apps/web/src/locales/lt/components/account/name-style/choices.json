@@ -1,0 +1,44 @@
+{
+  "font": "Pasirinkti šriftą",
+  "effect": "Pasirinkti efektą",
+  "color": "Pasirinkti spalvą",
+  "first-color": "Pasirinkti pirmą spalvą",
+  "second-color": "Antroji spalva",
+  "fonts": {
+    "default": "Numatytasis",
+    "stencil": "Trafaretas",
+    "pixel": "Pikselinis",
+    "future": "Ateitis",
+    "marker": "Žymeklis",
+    "rounded": "Apvalus",
+    "typewriter": "Rašomoji mašinėlė",
+    "horror": "Siaubas",
+    "armour": "Šarvai",
+    "comic": "Komiksas",
+    "script": "Raštas",
+    "glitch": "Trikdis"
+  },
+  "effects": {
+    "solid": "Vientisas",
+    "gradient": "Gradientas",
+    "neon": "Neonas",
+    "toon": "Animacinis",
+    "pop": "Popartas",
+    "gummy": "Guminukas",
+    "prism": "Prizmė"
+  },
+  "colors": {
+    "brand": "Firminė",
+    "red": "Raudona",
+    "orange": "Oranžinė",
+    "yellow": "Geltona",
+    "gold": "Auksas",
+    "bronze": "Bronza",
+    "olive": "Alyvuogių",
+    "green": "Žalia",
+    "steel": "Plieno",
+    "sky": "Dangaus",
+    "purple": "Violetinė",
+    "silver": "Sidabras"
+  }
+}

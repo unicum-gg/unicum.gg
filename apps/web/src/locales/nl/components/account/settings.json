@@ -27,5 +27,16 @@
   "billing-total": "Tot nu toe gegeven",
   "billing-total-description": "Alles wat je hebt gegeven, inclusief eenmalige giften. Bedankt.",
   "anonymous": "Verberg me op het supportersklassement",
-  "anonymous-description": "Je naam en je supporterbadge blijven buiten het openbare klassement en je profiel."
+  "anonymous-description": "Je naam en je supporterbadge blijven buiten het openbare klassement en je profiel.",
+  "name-style-surprise": "Verras me",
+  "name-style-apply": "Toepassen",
+  "name-style-clear": "Terug naar een gewone bijnaam",
+  "name-style-saved": "Je bijnaamstijl is opgeslagen",
+  "name-style-cleared": "Je bijnaam is weer gewoon",
+  "name-style-locked": "Probeer elke stijl uit op je eigen naam. Supporters behouden deze.",
+  "name-style-unlock": "Word supporter",
+  "section-profile": "Profiel",
+  "section-profile-description": "Hoe je voor alle overige gebruikers op unicum.gg verschijnt.",
+  "name-style-title": "Bijnaamstijl",
+  "name-style-description": "Hoe je bijnaam overal op de site wordt weergegeven: je profiel, de klassementen, clanlijsten en toernooiselecties."
 }

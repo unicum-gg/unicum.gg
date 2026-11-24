@@ -1,0 +1,44 @@
+{
+  "font": "Izvēlēties fontu",
+  "effect": "Izvēlēties efektu",
+  "color": "Izvēlēties krāsu",
+  "first-color": "Pirmā krāsa",
+  "second-color": "Otrā krāsa",
+  "fonts": {
+    "default": "Noklusējuma",
+    "stencil": "Trafarets",
+    "pixel": "Pikseļi",
+    "future": "Futūristisks",
+    "marker": "Marķieris",
+    "rounded": "Noapaļots",
+    "typewriter": "Rakstāmmašīna",
+    "horror": "Šausmas",
+    "armour": "Bruņas",
+    "comic": "Komikss",
+    "script": "Rokraksts",
+    "glitch": "Traucējumi"
+  },
+  "effects": {
+    "solid": "Vienkrāsains",
+    "gradient": "Gradients",
+    "neon": "Neons",
+    "toon": "Multiplikācijas",
+    "pop": "Pops",
+    "gummy": "Gumijots",
+    "prism": "Prizma"
+  },
+  "colors": {
+    "brand": "Zīmola",
+    "red": "Sarkana",
+    "orange": "Oranža",
+    "yellow": "Dzeltena",
+    "gold": "Zelts",
+    "bronze": "Bronza",
+    "olive": "Olīvzaļa",
+    "green": "Zaļa",
+    "steel": "Tērauda",
+    "sky": "Debeszila",
+    "purple": "Violeta",
+    "silver": "Sudrabs"
+  }
+}

@@ -27,5 +27,16 @@
   "billing-total": "Total oferecido até agora",
   "billing-total-description": "Tudo o que você ofereceu, com o valor dos presentes únicos incluído. Obrigado.",
   "anonymous": "Ocultar-me na classificação de apoiadores",
-  "anonymous-description": "O seu nome e o seu distintivo de apoiador ficam fora da classificação pública e do seu perfil."
+  "anonymous-description": "O seu nome e o seu distintivo de apoiador ficam fora da classificação pública e do seu perfil.",
+  "name-style-surprise": "Surpreenda-me",
+  "name-style-apply": "Aplicar",
+  "name-style-clear": "Voltar a um apelido simples",
+  "name-style-saved": "O estilo do seu apelido foi salvo",
+  "name-style-cleared": "Seu apelido voltou a ser simples",
+  "name-style-locked": "Experimente qualquer estilo no seu próprio nome. Apoiadores podem mantê-lo.",
+  "name-style-unlock": "Torne-se um apoiador",
+  "section-profile": "Perfil",
+  "section-profile-description": "Como você aparece para todos os outros no unicum.gg.",
+  "name-style-title": "Estilo do apelido",
+  "name-style-description": "Como seu apelido é exibido em todo lugar no site: seu perfil, as classificações, listas de clãs e listas de torneios."
 }

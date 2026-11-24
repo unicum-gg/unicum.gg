@@ -27,5 +27,16 @@
   "billing-total": "Paaukota iki šiol",
   "billing-total-description": "Visa, ką skyrėte, vienkartinės dovanos įtrauktos. Ačiū.",
   "anonymous": "Slėpti mane rėmėjų lentelėje",
-  "anonymous-description": "Jūsų vardas ir rėmėjo ženklelis liks nerodomi viešoje lentelėje ir jūsų profilyje."
+  "anonymous-description": "Jūsų vardas ir rėmėjo ženklelis liks nerodomi viešoje lentelėje ir jūsų profilyje.",
+  "name-style-surprise": "Nustebinkite mane",
+  "name-style-apply": "Taikyti",
+  "name-style-clear": "Atgal į paprastą slapyvardį",
+  "name-style-saved": "Jūsų slapyvardžio stilius išsaugotas",
+  "name-style-cleared": "Jūsų slapyvardis vėl paprastas",
+  "name-style-locked": "Išbandykite bet kurį stilių su savo vardu. Rėmėjai jį išlaiko.",
+  "name-style-unlock": "Tapti rėmėju",
+  "section-profile": "Profilis",
+  "section-profile-description": "Kaip pasirodote visiems kitiems svetainėje unicum.gg.",
+  "name-style-title": "Slapyvardžio stilius",
+  "name-style-description": "Kaip jūsų slapyvardis rodomas visur svetainėje: jūsų profilyje, lyderių lentelėse, klanų sąrašuose ir turnyrų sudėtyse."
 }

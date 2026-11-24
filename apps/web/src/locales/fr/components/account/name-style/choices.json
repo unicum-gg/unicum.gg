@@ -1,0 +1,44 @@
+{
+  "font": "Choisir votre police",
+  "effect": "Choisir votre effet",
+  "color": "Choisir votre couleur",
+  "first-color": "Choisir votre première couleur",
+  "second-color": "Deuxième couleur",
+  "fonts": {
+    "default": "Par défaut",
+    "stencil": "Pochoir",
+    "pixel": "Pixel",
+    "future": "Futuriste",
+    "marker": "Marqueur",
+    "rounded": "Arrondie",
+    "typewriter": "Machine à écrire",
+    "horror": "Horreur",
+    "armour": "Blindage",
+    "comic": "Bande dessinée",
+    "script": "Manuscrite",
+    "glitch": "Glitch"
+  },
+  "effects": {
+    "solid": "Uni",
+    "gradient": "Dégradé",
+    "neon": "Néon",
+    "toon": "Cartoon",
+    "pop": "Pop",
+    "gummy": "Gomme",
+    "prism": "Prisme"
+  },
+  "colors": {
+    "brand": "Marque",
+    "red": "Rouge",
+    "orange": "Orange",
+    "yellow": "Jaune",
+    "gold": "Pièces d’or",
+    "bronze": "Bronze",
+    "olive": "Olive",
+    "green": "Vert",
+    "steel": "Acier",
+    "sky": "Ciel",
+    "purple": "Violet",
+    "silver": "Argent"
+  }
+}

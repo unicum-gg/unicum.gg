@@ -27,5 +27,16 @@
   "billing-total": "Donato finora",
   "billing-total-description": "Tutto ciò che hai dato, inclusi i regali una tantum. Grazie.",
   "anonymous": "Nascondimi nella classifica dei sostenitori",
-  "anonymous-description": "Il tuo nome e il tuo distintivo da sostenitore rimangono fuori dalla classifica pubblica e dal tuo profilo."
+  "anonymous-description": "Il tuo nome e il tuo distintivo da sostenitore rimangono fuori dalla classifica pubblica e dal tuo profilo.",
+  "name-style-surprise": "Sorprendimi",
+  "name-style-apply": "Applica",
+  "name-style-clear": "Torna a un nickname semplice",
+  "name-style-saved": "Lo stile del tuo nickname è stato salvato",
+  "name-style-cleared": "Il tuo nickname è di nuovo semplice",
+  "name-style-locked": "Prova qualsiasi stile sul tuo nome. I sostenitori lo mantengono.",
+  "name-style-unlock": "Diventa un sostenitore",
+  "section-profile": "Profilo",
+  "section-profile-description": "Come puoi comparire a tutti gli altri su unicum.gg.",
+  "name-style-title": "Stile del nickname",
+  "name-style-description": "Come viene visualizzato il tuo nickname ovunque sul sito: profilo, classifiche, liste dei clan ed elenchi dei tornei."
 }

@@ -27,5 +27,16 @@
   "billing-total": "Aportado hasta ahora",
   "billing-total-description": "Todo lo que has aportado, incluido cualquier regalo puntual. Gracias.",
   "anonymous": "Ocultar mi nombre en la clasificación de colaboradores",
-  "anonymous-description": "Tu nombre y tu insignia de colaborador permanecerán fuera de la clasificación pública y de tu perfil."
+  "anonymous-description": "Tu nombre y tu insignia de colaborador permanecerán fuera de la clasificación pública y de tu perfil.",
+  "name-style-surprise": "Sorpréndeme",
+  "name-style-apply": "Aplicar",
+  "name-style-clear": "Volver a un apodo sin estilo",
+  "name-style-saved": "Tu estilo de apodo se ha guardado",
+  "name-style-cleared": "Tu apodo vuelve a ser sencillo",
+  "name-style-locked": "Prueba cualquier estilo en tu propio nombre. Los colaboradores lo conservan.",
+  "name-style-unlock": "Conviértete en colaborador",
+  "section-profile": "Perfil",
+  "section-profile-description": "Cómo apareces ante los demás en unicum.gg.",
+  "name-style-title": "Estilo de apodo",
+  "name-style-description": "Cómo se muestra tu apodo en todas partes del sitio: tu perfil, las clasificaciones, las listas de clan y las listas de torneos."
 }

@@ -27,5 +27,16 @@
   "billing-total": "Annettu tähän mennessä",
   "billing-total-description": "Kaikki antamasi, kertalahjoitukset sisällytetty. Kiitos.",
   "anonymous": "Piilota minut tukijoiden tulostaulukosta",
-  "anonymous-description": "Nimesi ja tukijan merkkisi pysyvät poissa julkisesta tulostaulukosta ja profiilistasi."
+  "anonymous-description": "Nimesi ja tukijan merkkisi pysyvät poissa julkisesta tulostaulukosta ja profiilistasi.",
+  "name-style-surprise": "Yllätä minut",
+  "name-style-apply": "Käytä",
+  "name-style-clear": "Takaisin tavalliseen nimimerkkiin",
+  "name-style-saved": "Nimimerkkisi tyyli on tallennettu",
+  "name-style-cleared": "Nimimerkkisi on jälleen tavallinen",
+  "name-style-locked": "Kokeile mitä tahansa tyyliä omassa nimimerkissäsi. Tukijat säilyttävät sen.",
+  "name-style-unlock": "Ryhdy tukijaksi",
+  "section-profile": "Profiili",
+  "section-profile-description": "Miltä näytät kaikille muille unicum.gg-sivustolla.",
+  "name-style-title": "Nimimerkin tyyli",
+  "name-style-description": "Miten nimimerkkisi näkyy kaikkialla sivustolla: profiilissasi, tulostaulukoissa, klaanilistoissa ja turnausten kokoonpanoissa."
 }

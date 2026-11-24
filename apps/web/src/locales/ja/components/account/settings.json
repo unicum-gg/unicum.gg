@@ -27,5 +27,16 @@
   "billing-total": "これまでの支援額",
   "billing-total-description": "一度きりのギフトも含む、これまでに提供したすべてです。ありがとうございます。",
   "anonymous": "支援者ランキングで自分を非表示にする",
-  "anonymous-description": "名前と支援者バッジは、公開ランキングとプロフィールに表示されないままになります。"
+  "anonymous-description": "名前と支援者バッジは、公開ランキングとプロフィールに表示されないままになります。",
+  "name-style-surprise": "おまかせ",
+  "name-style-apply": "適用",
+  "name-style-clear": "通常のニックネームに戻る",
+  "name-style-saved": "ニックネームのスタイルを保存しました",
+  "name-style-cleared": "ニックネームを通常の状態に戻しました",
+  "name-style-locked": "自分の名前で好きなスタイルを試せます。サポーターはそのスタイルを維持できます。",
+  "name-style-unlock": "サポーターになる",
+  "section-profile": "個人ファイル",
+  "section-profile-description": "unicum.ggで他のすべてのユーザーに表示される内容です。",
+  "name-style-title": "ニックネームのスタイル",
+  "name-style-description": "サイトのどこでも表示されるニックネームの表示方法: プロフィール、リーダーボード、クランリスト、トーナメントロスター。"
 }

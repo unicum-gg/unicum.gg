@@ -1,0 +1,44 @@
+{
+  "font": "Alege fontul",
+  "effect": "Alege efectul",
+  "color": "Alege culoarea",
+  "first-color": "Alege prima culoare",
+  "second-color": "A doua culoare",
+  "fonts": {
+    "default": "Implicit",
+    "stencil": "Șablon",
+    "pixel": "Pixel",
+    "future": "Viitor",
+    "marker": "Marker",
+    "rounded": "Rotunjit",
+    "typewriter": "Mașină de scris",
+    "horror": "Horror",
+    "armour": "Blindaj",
+    "comic": "Comic",
+    "script": "Caligrafic",
+    "glitch": "Glitch"
+  },
+  "effects": {
+    "solid": "Uniform",
+    "gradient": "Gradient",
+    "neon": "Neon",
+    "toon": "Desen animat",
+    "pop": "Pop",
+    "gummy": "Gumă",
+    "prism": "Prismă"
+  },
+  "colors": {
+    "brand": "Marcă",
+    "red": "Roșie",
+    "orange": "Portocalie",
+    "yellow": "Galbenă",
+    "gold": "Aur",
+    "bronze": "Bronz",
+    "olive": "Măsliniu",
+    "green": "Verde",
+    "steel": "Oțel",
+    "sky": "Cer",
+    "purple": "Mov",
+    "silver": "Argint"
+  }
+}

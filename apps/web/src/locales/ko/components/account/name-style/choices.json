@@ -1,0 +1,44 @@
+{
+  "font": "글꼴 선택",
+  "effect": "효과 선택",
+  "color": "색상 선택",
+  "first-color": "첫 번째 색상 선택",
+  "second-color": "두 번째 색상",
+  "fonts": {
+    "default": "기본",
+    "stencil": "스텐실",
+    "pixel": "픽셀",
+    "future": "미래풍",
+    "marker": "마커",
+    "rounded": "둥근 글꼴",
+    "typewriter": "타자기",
+    "horror": "공포",
+    "armour": "장갑",
+    "comic": "만화",
+    "script": "필기체",
+    "glitch": "글리치"
+  },
+  "effects": {
+    "solid": "단색",
+    "gradient": "그라데이션",
+    "neon": "네온",
+    "toon": "카툰",
+    "pop": "팝",
+    "gummy": "구미",
+    "prism": "프리즘"
+  },
+  "colors": {
+    "brand": "브랜드",
+    "red": "적색",
+    "orange": "주황색",
+    "yellow": "노란색",
+    "gold": "골드",
+    "bronze": "브론즈",
+    "olive": "올리브색",
+    "green": "녹색",
+    "steel": "강철색",
+    "sky": "하늘색",
+    "purple": "보라색",
+    "silver": "실버"
+  }
+}

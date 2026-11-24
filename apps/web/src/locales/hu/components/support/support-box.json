@@ -19,5 +19,8 @@
   "you-already-have-a-monthly-pledge": "Már van havi vállalásod. A számlázási portálon módosíthatod.",
   "you-are-a-supporter-thank": "Támogató vagy. Köszönjük, hogy életben tartod a(z) {NAME} oldalt.",
   "you-have-given-so-far": "Eddig {amount} összeggel támogattál. Köszönjük.",
-  "manage-connected-accounts": "Csatlakoztatott fiókok kezelése"
+  "manage-connected-accounts": "Csatlakoztatott fiókok kezelése",
+  "name-style-title": "A beceneved stílusa",
+  "name-style-hint": "Válassz egy betűtípust, egy hatást és egy színt a becenevedhez mindenhol {NAME} webhelyén.",
+  "name-style-open": "Válassz stílust"
 }

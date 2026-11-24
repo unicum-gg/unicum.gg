@@ -1,0 +1,44 @@
+{
+  "font": "选择字体",
+  "effect": "选择效果",
+  "color": "选择颜色",
+  "first-color": "选择第一种颜色",
+  "second-color": "第二种颜色",
+  "fonts": {
+    "default": "默认",
+    "stencil": "镂空",
+    "pixel": "像素",
+    "future": "未来",
+    "marker": "马克笔",
+    "rounded": "圆体",
+    "typewriter": "打字机",
+    "horror": "恐怖",
+    "armour": "装甲",
+    "comic": "漫画",
+    "script": "手写",
+    "glitch": "故障"
+  },
+  "effects": {
+    "solid": "实色",
+    "gradient": "渐变",
+    "neon": "霓虹",
+    "toon": "卡通",
+    "pop": "波普",
+    "gummy": "果冻",
+    "prism": "棱镜"
+  },
+  "colors": {
+    "brand": "品牌色",
+    "red": "红色",
+    "orange": "橙色",
+    "yellow": "黄色",
+    "gold": "黄金",
+    "bronze": "青铜",
+    "olive": "橄榄色",
+    "green": "绿色",
+    "steel": "钢铁",
+    "sky": "天空蓝",
+    "purple": "紫色",
+    "silver": "白银"
+  }
+}

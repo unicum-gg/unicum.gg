@@ -27,5 +27,16 @@
   "billing-total": "Eddig adott összeg",
   "billing-total-description": "Minden, amit eddig adtál, az egyszeri ajándékokat is tartalmazta. Köszönjük.",
   "anonymous": "Elrejtés a támogatói ranglistáról",
-  "anonymous-description": "A neved és a támogatói jelvényed a nyilvános ranglistán és a profilodon kívül marad."
+  "anonymous-description": "A neved és a támogatói jelvényed a nyilvános ranglistán és a profilodon kívül marad.",
+  "name-style-surprise": "Lepj meg",
+  "name-style-apply": "Alkalmazás",
+  "name-style-clear": "Vissza az egyszerű becenévhez",
+  "name-style-saved": "A beceneved stílusa mentve",
+  "name-style-cleared": "A beceneved ismét egyszerű",
+  "name-style-locked": "Próbálj ki bármilyen stílust a saját neveden. A Támogatók megtarthatják.",
+  "name-style-unlock": "Legyél támogató",
+  "section-profile": "Profil",
+  "section-profile-description": "Hogyan jelensz meg mindenki más számára az unicum.gg webhelyen.",
+  "name-style-title": "Becenévstílus",
+  "name-style-description": "A beceneved megjelenése a webhelyen mindenhol: a profilodban, a ranglistákon, a klánlistákon és a versenyek névsoraiban."
 }

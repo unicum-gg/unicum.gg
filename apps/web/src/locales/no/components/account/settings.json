@@ -27,5 +27,16 @@
   "billing-total": "Gitt så langt",
   "billing-total-description": "Alt du har gitt, inkludert engangsgaver. Takk.",
   "anonymous": "Skjul meg på tavlen for støttespillere",
-  "anonymous-description": "Navnet ditt og støttespillermerket ditt blir ikke vist på den offentlige tavlen eller profilen din."
+  "anonymous-description": "Navnet ditt og støttespillermerket ditt blir ikke vist på den offentlige tavlen eller profilen din.",
+  "name-style-surprise": "Overrask meg",
+  "name-style-apply": "Bruk",
+  "name-style-clear": "Tilbake til et vanlig kallenavn",
+  "name-style-saved": "Kallenavnstilen din er lagret",
+  "name-style-cleared": "Kallenavnet ditt er vanlig igjen",
+  "name-style-locked": "Prøv hvilken som helst stil på ditt eget kallenavn. Støttespillere får beholde den.",
+  "name-style-unlock": "Bli støttespiller",
+  "section-profile": "Profil",
+  "section-profile-description": "Slik vises du for alle andre på unicum.gg.",
+  "name-style-title": "Kallenavnstil",
+  "name-style-description": "Slik vises kallenavnet ditt overalt på nettstedet: i profilen din, på topplistene, i klanlistene og i lagoppstillingene for turneringer."
 }

@@ -19,5 +19,8 @@
   "you-already-have-a-monthly-pledge": "Вече имате месечен ангажимент. Използвайте портала за плащане, за да го промените.",
   "you-are-a-supporter-thank": "Ти си поддръжник. Благодарим ти, че поддържаш {NAME} жив.",
   "you-have-given-so-far": "Досега сте дали {amount}. Благодарим ви.",
-  "manage-connected-accounts": "Управление на свързани акаунти"
+  "manage-connected-accounts": "Управление на свързани акаунти",
+  "name-style-title": "Стил на вашия псевдоним",
+  "name-style-hint": "Избери шрифт, ефект и цвят за псевдонима си навсякъде в {NAME}.",
+  "name-style-open": "Избери моя стил"
 }

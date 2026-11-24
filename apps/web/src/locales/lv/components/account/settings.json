@@ -27,5 +27,16 @@
   "billing-total": "Līdz šim sniegts",
   "billing-total-description": "Viss, ko esat sniedzis, vienreizējie ziedojumi ir iekļauti. Paldies.",
   "anonymous": "Paslēpt mani atbalstītāju tabulā",
-  "anonymous-description": "Jūsu nosaukums un atbalstītāja nozīmīte paliks ārpus publiskās tabulas un jūsu profila."
+  "anonymous-description": "Jūsu nosaukums un atbalstītāja nozīmīte paliks ārpus publiskās tabulas un jūsu profila.",
+  "name-style-surprise": "Pārsteidziet mani",
+  "name-style-apply": "Lietot",
+  "name-style-clear": "Atpakaļ pie vienkārša segvārda",
+  "name-style-saved": "Jūsu segvārda stils ir saglabāts",
+  "name-style-cleared": "Jūsu segvārds atkal ir vienkāršs",
+  "name-style-locked": "Izmēģiniet jebkuru stilu uz sava segvārda. Atbalstītāji to saglabā.",
+  "name-style-unlock": "Kļūt par atbalstītāju",
+  "section-profile": "Profils",
+  "section-profile-description": "Kā jūs parādāties visiem citiem vietnē unicum.gg.",
+  "name-style-title": "Segvārda stils",
+  "name-style-description": "Kā jūsu segvārds tiek attēlots visur vietnē: jūsu profilā, līderu sarakstos, klanu sarakstos un turnīru sastāvos."
 }
