@@ -9,7 +9,7 @@
 // Only OUR server's members (`DISCORD_GUILD_ID`), never the bot's other
 // servers. Skips bots and the owner. A linked member is recognised by the
 // `Nickname [EU]` name the identity sync gave them and gets the linked shape.
-import { env, memberAccountFromNickname, welcomeMessage, WelcomeKind } from "@unicum.gg/shared";
+import { APP_IDENTITY, env, memberAccountFromNickname, welcomeMessage, WelcomeKind } from "@unicum.gg/shared";
 import { botFetch, sendDirectMessageBody } from "@unicum.gg/core/discord";
 
 /** Between two DMs, so a few dozen in a row do not read as spam to Discord. */
@@ -26,6 +26,13 @@ async function main(): Promise<void> {
   const only = process.argv.includes("--to") ? to : null;
   const guildId = env.DISCORD_GUILD_ID;
   if (!guildId) throw new Error("DISCORD_GUILD_ID must be set");
+  // The local .env.local points the app URL at a dev server, and every link in
+  // the message is built from it: a DM is not something to resend with fixed
+  // links, so refuse rather than tell anyone about 127.0.0.1. Run it with
+  // NEXT_PUBLIC_APP_URL=https://unicum.gg.
+  if (send && !APP_IDENTITY.URL.startsWith("https://")) {
+    throw new Error(`refusing to send links to ${APP_IDENTITY.URL}: set NEXT_PUBLIC_APP_URL=https://unicum.gg`);
+  }
 
   const guild = await botFetch<{ owner_id: string }>(`/guilds/${guildId}`);
   const members = await botFetch<Member[]>(`/guilds/${guildId}/members?limit=1000`);
