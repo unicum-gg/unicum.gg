@@ -30,6 +30,7 @@ export const PARTNERS: Partner[] = [
   { slug: "remi", region: "eu", nickname: "Remi_iD" },
   { slug: "ophacker", region: "na", nickname: "O_P_Hacker" },
   { slug: "orzanel", region: "eu", nickname: "Orzanel" },
+  { slug: "kajzoo", region: "eu", nickname: "_kajzoo_" },
 ];
 
 /** Keyed by the path itself, so the proxy's test is one map lookup on a string

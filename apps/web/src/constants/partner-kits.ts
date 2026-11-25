@@ -75,6 +75,7 @@ export const PARTNER_KITS: Record<string, PartnerKit> = {
   remi: { name: "Remi_iD", locale: "fr" },
   ophacker: { name: "O_P_Hacker", locale: "en" },
   orzanel: { name: "Orzanel", locale: "en" },
+  kajzoo: { name: "kajzoo", locale: "en" },
 };
 
 /**
