@@ -22,3 +22,4 @@ export * from "./wot";
 export * from "./finance";
 export * from "./support";
 export * from "./auth";
+export * from "./discord";

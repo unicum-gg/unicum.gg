@@ -31,6 +31,7 @@ import {
   isRatingReviewButton,
 } from "./plugins/wot/moderation/reviews.js";
 import { bindPresenceClient } from "./lib/presence.js";
+import { welcomeNewMember } from "./welcome.js";
 
 async function main(): Promise<void> {
   // dixt defaults to EVERY gateway intent, including the privileged ones the app
@@ -39,7 +40,11 @@ async function main(): Promise<void> {
   // dixt deep-merges config with lodash (arrays merge by index, so a shorter
   // `clientOptions.intents` in the config below can't override it), so we replace
   // the default at its source.
-  dixtDefaults.clientOptions = { intents: [GatewayIntentBits.Guilds] };
+  // `GuildMembers` (privileged, enabled in the Developer Portal) is for the
+  // welcome DM alone: it is what delivers a join on our own server.
+  dixtDefaults.clientOptions = {
+    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers],
+  };
 
   const bot = new dixt({
     application: {
@@ -84,6 +89,10 @@ async function main(): Promise<void> {
     if (interaction.isButton() && isRatingReviewButton(interaction.customId)) {
       void handleRatingReview(interaction);
     }
+  });
+
+  bot.client.on(Events.GuildMemberAdd, (member) => {
+    void welcomeNewMember(member);
   });
 
   await bot.start();

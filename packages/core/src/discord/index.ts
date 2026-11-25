@@ -334,6 +334,27 @@ export async function sendDirectMessage(
   return res !== null;
 }
 
+/**
+ * `sendDirectMessage` for a full message body (embeds AND link buttons), as the
+ * welcome and the one-off "what's new" build it. Same best-effort contract:
+ * false means "could not be told", which closed DMs make ordinary.
+ */
+export async function sendDirectMessageBody(
+  discordUserId: string,
+  body: { embeds: unknown[]; components?: unknown[] },
+): Promise<boolean> {
+  const channel = await botFetch<{ id: string }>("/users/@me/channels", {
+    method: "POST",
+    body: JSON.stringify({ recipient_id: discordUserId }),
+  });
+  if (!channel?.id) return false;
+  const res = await botFetch(`/channels/${channel.id}/messages`, {
+    method: "POST",
+    body: JSON.stringify(body),
+  });
+  return res !== null;
+}
+
 export type BoostNotification = {
   clanTag: string;
   clanUrl: string;

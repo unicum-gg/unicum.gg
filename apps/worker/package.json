@@ -39,7 +39,8 @@
     "repair-untagged-baselines": "tsx --env-file-if-exists=../web/.env.local src/scripts/repair-untagged-baselines.ts",
     "repair-gun-pitch": "tsx --env-file-if-exists=../web/.env.local src/scripts/repair-gun-pitch.ts",
     "sync-discord-identities": "tsx --env-file-if-exists=../web/.env.local src/scripts/sync-discord-identities.ts",
-    "join-linked-discord": "tsx --env-file-if-exists=../web/.env.local src/scripts/join-linked-discord.ts"
+    "join-linked-discord": "tsx --env-file-if-exists=../web/.env.local src/scripts/join-linked-discord.ts",
+    "announce-server-news": "tsx --env-file-if-exists=../web/.env.local src/scripts/announce-server-news.ts"
   },
   "dependencies": {
     "@unicum.gg/core": "workspace:*",
