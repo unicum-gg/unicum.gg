@@ -23,9 +23,11 @@
     "wtr": "World of Tanks -luokitus",
     "wn7": "WN7",
     "wn8": "WN8",
-    "wnx": "WNX"
+    "wnx": "WNX",
+    "vehicles": "Pelatut vaunut"
   },
   "periods": {
     "total": "Kaikkiaan"
-  }
+  },
+  "see-vehicles": "Avaa nämä ajoneuvot Panssarivaunut-välilehdellä"
 }

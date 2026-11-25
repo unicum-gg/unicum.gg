@@ -23,9 +23,11 @@
     "wtr": "World of Tanks Rejting",
     "wn7": "WN7",
     "wn8": "WN8",
-    "wnx": "WNX"
+    "wnx": "WNX",
+    "vehicles": "Odigrana vozila"
   },
   "periods": {
     "total": "Ukupno"
-  }
+  },
+  "see-vehicles": "Otvori ova vozila na kartici Oklopna vozila"
 }

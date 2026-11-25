@@ -23,9 +23,11 @@
     "wtr": "World of Tanks рейтингі",
     "wn7": "WN7",
     "wn8": "WN8",
-    "wnx": "WNX"
+    "wnx": "WNX",
+    "vehicles": "Ойналған көліктер"
   },
   "periods": {
     "total": "Жалпы"
-  }
+  },
+  "see-vehicles": "Осы техниканы «Танкылар» қойындысында ашу"
 }

@@ -23,9 +23,11 @@
     "wtr": "Hodnotenie World of Tanks",
     "wn7": "WN7",
     "wn8": "WN8",
-    "wnx": "WNX"
+    "wnx": "WNX",
+    "vehicles": "Odohrané vozidlá"
   },
   "periods": {
     "total": "Celkom"
-  }
+  },
+  "see-vehicles": "Odpri tieto vozidlá na karte Tanky"
 }

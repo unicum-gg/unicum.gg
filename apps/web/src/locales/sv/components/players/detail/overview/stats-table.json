@@ -23,9 +23,11 @@
     "wtr": "World of Tanks-betyg",
     "wn7": "WN7",
     "wn8": "WN8",
-    "wnx": "WNX"
+    "wnx": "WNX",
+    "vehicles": "Vagnar spelade"
   },
   "periods": {
     "total": "Totalt"
-  }
+  },
+  "see-vehicles": "Öppna dessa fordon i fliken Tanks"
 }

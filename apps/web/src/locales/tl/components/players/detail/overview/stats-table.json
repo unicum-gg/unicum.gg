@@ -23,9 +23,11 @@
     "wtr": "Rating ng World of Tanks",
     "wn7": "WN7",
     "wn8": "WN8",
-    "wnx": "WNX"
+    "wnx": "WNX",
+    "vehicles": "Mga sasakyan na nilaro"
   },
   "periods": {
     "total": "Kabuuan"
-  }
+  },
+  "see-vehicles": "Buksan ang mga sasakyang ito sa tab na MMga tangke"
 }

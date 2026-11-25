@@ -23,9 +23,11 @@
     "wtr": "월드 오브 탱크 레이팅",
     "wn7": "WN7",
     "wn8": "WN8",
-    "wnx": "WNX"
+    "wnx": "WNX",
+    "vehicles": "플레이한 전차"
   },
   "periods": {
     "total": "전체"
-  }
+  },
+  "see-vehicles": "탱크 탭에서 이 차량 열기"
 }

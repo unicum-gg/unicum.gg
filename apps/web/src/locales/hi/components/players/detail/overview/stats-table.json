@@ -23,9 +23,11 @@
     "wtr": "World of Tanks रेटिंग",
     "wn7": "WN7",
     "wn8": "WN8",
-    "wnx": "WNX"
+    "wnx": "WNX",
+    "vehicles": "खेले गए वाहन"
   },
   "periods": {
     "total": "कुल"
-  }
+  },
+  "see-vehicles": "टैंक टैब में इन वाहनों को खोलें"
 }

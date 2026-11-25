@@ -23,9 +23,11 @@
     "wtr": "การจัดอันดับ World of Tanks",
     "wn7": "WN7",
     "wn8": "WN8",
-    "wnx": "WNX"
+    "wnx": "WNX",
+    "vehicles": "พาหนะที่เล่นแล้ว"
   },
   "periods": {
     "total": "ทั้งหมด"
-  }
+  },
+  "see-vehicles": "เปิดยานพาหนะเหล่านี้ในแท็บรถถัง"
 }

@@ -23,9 +23,11 @@
     "wtr": "《坦克世界》评级",
     "wn7": "WN7",
     "wn8": "WN8",
-    "wnx": "WNX"
+    "wnx": "WNX",
+    "vehicles": "进行过的坦克"
   },
   "periods": {
     "total": "总计"
-  }
+  },
+  "see-vehicles": "在坦克标签页中打开这些车辆"
 }

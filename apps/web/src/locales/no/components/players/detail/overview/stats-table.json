@@ -23,9 +23,11 @@
     "wtr": "World of Tanks-vurdering",
     "wn7": "WN7",
     "wn8": "WN8",
-    "wnx": "WNX"
+    "wnx": "WNX",
+    "vehicles": "Kjøretøy spilt"
   },
   "periods": {
     "total": "Totalt"
-  }
+  },
+  "see-vehicles": "Åpne disse kjøretøyene i fanen «Kjøretøy»"
 }

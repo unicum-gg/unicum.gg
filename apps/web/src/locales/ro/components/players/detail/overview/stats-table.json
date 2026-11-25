@@ -23,9 +23,11 @@
     "wtr": "Rating World of Tanks",
     "wn7": "WN7",
     "wn8": "WN8",
-    "wnx": "WNX"
+    "wnx": "WNX",
+    "vehicles": "Vehicule jucate"
   },
   "periods": {
     "total": "Total"
-  }
+  },
+  "see-vehicles": "Deschide aceste vehicule în fila Tancuri"
 }

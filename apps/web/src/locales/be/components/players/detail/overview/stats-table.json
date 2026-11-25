@@ -23,9 +23,11 @@
     "wtr": "Рэйтынг World of Tanks",
     "wn7": "WN7",
     "wn8": "WN8",
-    "wnx": "WNX"
+    "wnx": "WNX",
+    "vehicles": "Згуляныя машыны"
   },
   "periods": {
     "total": "Агульны"
-  }
+  },
+  "see-vehicles": "Адкрыць гэтыя машыны на ўкладцы «Танкі»"
 }

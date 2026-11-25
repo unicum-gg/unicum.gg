@@ -23,9 +23,11 @@
     "wtr": "World of Tanks-beoordeling",
     "wn7": "WN7",
     "wn8": "WN8",
-    "wnx": "WNX"
+    "wnx": "WNX",
+    "vehicles": "Gespeelde voertuigen"
   },
   "periods": {
     "total": "Totaal"
-  }
+  },
+  "see-vehicles": "Open deze voertuigen in het tabblad Tanks"
 }

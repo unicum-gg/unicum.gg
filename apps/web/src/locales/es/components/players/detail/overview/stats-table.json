@@ -23,9 +23,11 @@
     "wtr": "Clasificación de World of Tanks",
     "wn7": "WN7",
     "wn8": "WN8",
-    "wnx": "WNX"
+    "wnx": "WNX",
+    "vehicles": "Jugadas con vehículos"
   },
   "periods": {
     "total": "Total"
-  }
+  },
+  "see-vehicles": "Abrir estos vehículos en la pestaña Tanques"
 }

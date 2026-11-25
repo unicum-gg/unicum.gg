@@ -23,9 +23,11 @@
     "wtr": "World of Tanks レーティング",
     "wn7": "WN7",
     "wn8": "WN8",
-    "wnx": "WNX"
+    "wnx": "WNX",
+    "vehicles": "プレイした車輌"
   },
   "periods": {
     "total": "計"
-  }
+  },
+  "see-vehicles": "これらの車輌を戦車タブで開く"
 }

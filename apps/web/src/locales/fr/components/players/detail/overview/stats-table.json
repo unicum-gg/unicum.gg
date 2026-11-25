@@ -23,9 +23,11 @@
     "wtr": "Cote World of Tanks",
     "wn7": "WN7",
     "wn8": "WN8",
-    "wnx": "WNX"
+    "wnx": "WNX",
+    "vehicles": "Véhicules joués"
   },
   "periods": {
     "total": "Total"
-  }
+  },
+  "see-vehicles": "Ouvrir ces véhicules dans l’onglet Chars"
 }

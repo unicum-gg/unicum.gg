@@ -23,9 +23,11 @@
     "wtr": "Valutazione di World of Tanks",
     "wn7": "WN7",
     "wn8": "WN8",
-    "wnx": "WNX"
+    "wnx": "WNX",
+    "vehicles": "Veicoli giocati"
   },
   "periods": {
     "total": "Totale"
-  }
+  },
+  "see-vehicles": "Apri questi veicoli nella scheda Carri"
 }

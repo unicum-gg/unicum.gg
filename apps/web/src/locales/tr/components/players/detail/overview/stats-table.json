@@ -23,9 +23,11 @@
     "wtr": "World of Tanks Reytingi",
     "wn7": "WN7",
     "wn8": "WN8",
-    "wnx": "WNX"
+    "wnx": "WNX",
+    "vehicles": "Oynanan araçlar"
   },
   "periods": {
     "total": "Toplam"
-  }
+  },
+  "see-vehicles": "Tanklar sekmesinde bu araçları Aç"
 }

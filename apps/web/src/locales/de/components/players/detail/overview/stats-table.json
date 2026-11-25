@@ -23,9 +23,11 @@
     "wtr": "World of Tanks-Wertung",
     "wn7": "WN7",
     "wn8": "WN8",
-    "wnx": "WNX"
+    "wnx": "WNX",
+    "vehicles": "Gespielte Fahrzeuge"
   },
   "periods": {
     "total": "Gesamt"
-  }
+  },
+  "see-vehicles": "Diese Fahrzeuge im Panzer-Tab öffnen"
 }

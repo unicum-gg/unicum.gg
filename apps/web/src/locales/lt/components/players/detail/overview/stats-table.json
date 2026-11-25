@@ -23,9 +23,11 @@
     "wtr": "World of Tanks reitingas",
     "wn7": "WN7",
     "wn8": "WN8",
-    "wnx": "WNX"
+    "wnx": "WNX",
+    "vehicles": "Sužaista technika"
   },
   "periods": {
     "total": "Viso"
-  }
+  },
+  "see-vehicles": "Atidaryti šias transporto priemones skirtuke „Tankai“"
 }
