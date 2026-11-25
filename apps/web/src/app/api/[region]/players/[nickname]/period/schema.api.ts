@@ -15,11 +15,12 @@ const playerStatWindowDerived = z
     wn7: z.number().nullable(),
     wn8: z.number().nullable(),
     wnx: z.number().nullable(),
+    vehicles: z.number().int().nullable().optional(),
   })
   .meta({
     id: "PlayerStatWindowDerived",
     description:
-      "The figures computed from the per-vehicle breakdown over the window: average tier, assistance per battle, and the three WN ratings of those battles alone.",
+      "The figures computed from the per-vehicle breakdown over the window: average tier, assistance per battle, the three WN ratings of those battles alone, and how many vehicles they were played in.",
   });
 
 /** Response of `GET /{region}/players/{nickname}/period`. */

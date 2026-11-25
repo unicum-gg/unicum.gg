@@ -60,6 +60,8 @@ export type RowDef = {
   /** The metric this row is the value of, so the one the reader picked is
    * set in bold (`html[data-rating-metric]` in `globals.css`). */
   ratingRow?: RatingMetric;
+  /** The row's figures lead to the garage table read over their column. */
+  linksToTanks?: boolean;
   /** Takes the reader's number formatting rather than reading a hook: a row
    * definition is data at module scope. */
   cell: (column: StatColumn, num: NumberFormatter) => Cell;
@@ -243,4 +245,15 @@ export const ROWS: RowDef[] = [
   derivedRow("wn7", "WN7", "wn7", { color: wn7Color, ratingRow: RatingMetric.Wn7 }),
   derivedRow("wn8", "WN8", "wn8", { color: wn8Color, ratingRow: RatingMetric.Wn8 }),
   derivedRow("wnx", "WNX", "wnx", { color: wnxColor, ratingRow: RatingMetric.Wnx }),
+  // Last, as the way out of the table: each count opens the garage table read
+  // over that same column, which is the question a window's figures raise.
+  {
+    id: "vehicles",
+    label: "Vehicles played",
+    linksToTanks: true,
+    cell: ({ derived }, num) =>
+      derived?.vehicles == null
+        ? EMPTY_CELL
+        : { primary: num(INTEGER_FORMAT).format(derived.vehicles) },
+  },
 ];

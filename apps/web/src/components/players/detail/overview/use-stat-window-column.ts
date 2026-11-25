@@ -34,6 +34,7 @@ export function derivedColumn(
     wn7: derived.wn7[key],
     wn8: derived.wn8[key],
     wnx: derived.wnx[key],
+    vehicles: derived.vehicles?.[key] ?? null,
   };
 }
 

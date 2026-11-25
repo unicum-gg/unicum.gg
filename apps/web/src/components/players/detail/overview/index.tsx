@@ -149,6 +149,7 @@ export function OverallTab({
             current={current}
             periods={periods}
             derived={derived}
+            tanksHref={tanksHref}
           />
         </PanelContent>
         {/* Under the numbers rather than beside them: it says nothing new about

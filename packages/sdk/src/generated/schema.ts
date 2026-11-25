@@ -6178,7 +6178,7 @@ export interface components {
             /** @description Clan display color as a hex string. */
             color: string;
         };
-        /** @description Per-tank-breakdown derivations: average tier, assistance damages and WN7/WN8/WNX per column. */
+        /** @description Per-tank-breakdown derivations: average tier, assistance damages, WN7/WN8/WNX and the vehicles played per column. */
         PlayerDerivedStats: {
             tier: components["schemas"]["PeriodValues"];
             trackDamage: components["schemas"]["PeriodValues"];
@@ -6188,6 +6188,7 @@ export interface components {
             wn7: components["schemas"]["PeriodValues"];
             wn8: components["schemas"]["PeriodValues"];
             wnx: components["schemas"]["PeriodValues"];
+            vehicles?: components["schemas"]["PeriodValues"];
         };
         PlayerDetailResponse: {
             player: {
@@ -6776,7 +6777,7 @@ export interface components {
             /** @description The window reaches further back than our history of the account, so it covers everything since the account was first tracked (`from`). */
             truncated: boolean;
         };
-        /** @description The figures computed from the per-vehicle breakdown over the window: average tier, assistance per battle, and the three WN ratings of those battles alone. */
+        /** @description The figures computed from the per-vehicle breakdown over the window: average tier, assistance per battle, the three WN ratings of those battles alone, and how many vehicles they were played in. */
         PlayerStatWindowDerived: {
             tier: number | null;
             trackDamage: number | null;
@@ -6786,6 +6787,7 @@ export interface components {
             wn7: number | null;
             wn8: number | null;
             wnx: number | null;
+            vehicles?: number | null;
         };
         /** @description One period column of the profile's stats table, over a window the caller chose. */
         PlayerStatWindowResponse: {

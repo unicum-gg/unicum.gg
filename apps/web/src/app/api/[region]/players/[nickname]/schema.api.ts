@@ -83,12 +83,13 @@ const playerDerivedStats = z
     wn7: periodValues,
     wn8: periodValues,
     wnx: periodValues,
+    vehicles: periodValues.optional(),
   })
   .loose()
   .meta({
     id: "PlayerDerivedStats",
     description:
-      "Per-tank-breakdown derivations: average tier, assistance damages and WN7/WN8/WNX per column.",
+      "Per-tank-breakdown derivations: average tier, assistance damages, WN7/WN8/WNX and the vehicles played per column.",
   });
 
 const liftDragRow = z

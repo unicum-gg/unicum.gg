@@ -49,6 +49,10 @@ export type PlayerDerivedStats = {
   wn7: PeriodValues;
   wn8: PeriodValues;
   wnx: PeriodValues;
+  /** How many vehicles were played in the column: the whole garage played for
+   * the lifetime one, the vehicles that moved for a window. Optional because a
+   * profile payload cached before it existed is still served for a while. */
+  vehicles?: PeriodValues;
 };
 
 function tankAvg(
@@ -100,6 +104,7 @@ export function buildPeriodDerived(
     wn7: stats ? computeWN7(stats, tier) : null,
     wn8: tanks ? computeWN8(tanks, wn8Expected, encyclopedia, wn8Fallback) : null,
     wnx: tanks ? computeWNX(tanks, wnxExpected) : null,
+    vehicles: tanks ? tanks.filter((t) => t.all.battles > 0).length : null,
   };
 }
 
@@ -136,5 +141,6 @@ export function buildPlayerDerivedStats(
     wn7: row("wn7"),
     wn8: row("wn8"),
     wnx: row("wnx"),
+    vehicles: row("vehicles"),
   };
 }
