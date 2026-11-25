@@ -1,3 +1,5 @@
+import type { PlayerCrestFields, PlayerCrests } from "@unicum.gg/shared";
+
 /**
  * Everything the site shows about a player inline: the name, the clan they wear
  * and the crests they have earned.
@@ -15,20 +17,7 @@ export type PlayerIdentity = {
   accountId?: number | null;
   clanTag?: string | null;
   clanColor?: string | null;
-  isVerified?: boolean;
-  isSupporter?: boolean;
-  /** Twitch login when the account is a streamer; the crest links to it. */
-  twitchLogin?: string | null;
-  tournamentWins?: number;
-  tournamentFeaturedWins?: number;
-  tournamentBestTitle?: string | null;
-  /** The best Onslaught place ever held: the tier picks the crest's tincture,
-   * the rank is what its tooltip names, and the season count separates one good
-   * run from a habit. Absent for almost every player. */
-  onslaughtBestTier?: string | null;
-  onslaughtBestRank?: number | null;
-  onslaughtSeasons?: number;
-};
+} & PlayerCrestFields;
 
 /**
  * Read a player identity off an API row.
@@ -57,11 +46,9 @@ export function identityFromRow(row: {
   onslaught_best_rank?: number | null;
   onslaught_seasons?: number;
 }): PlayerIdentity {
-  return {
-    nickname: row.nickname,
-    accountId: row.account_id,
-    clanTag: row.clan_tag,
-    clanColor: row.clan_color,
+  // Typed key by key so a crest added to `PlayerCrests` and not mapped here is
+  // a compile error, rather than a crest this row silently never wears.
+  const crests: { [K in keyof PlayerCrests]: PlayerCrests[K] | undefined } = {
     isVerified: row.is_verified,
     isSupporter: row.is_supporter,
     twitchLogin: row.twitch_login,
@@ -71,5 +58,12 @@ export function identityFromRow(row: {
     onslaughtBestTier: row.onslaught_best_tier,
     onslaughtBestRank: row.onslaught_best_rank,
     onslaughtSeasons: row.onslaught_seasons,
+  };
+  return {
+    nickname: row.nickname,
+    accountId: row.account_id,
+    clanTag: row.clan_tag,
+    clanColor: row.clan_color,
+    ...crests,
   };
 }

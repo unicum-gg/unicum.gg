@@ -20,4 +20,8 @@ export type PlayerBadgeFlags = {
   tournament_featured_wins?: number;
   /** The win worth naming in the crest's tooltip. */
   tournament_best_title?: string | null;
+  /** The best Onslaught place ever held, and over how many seasons. */
+  onslaught_best_tier?: string | null;
+  onslaught_best_rank?: number | null;
+  onslaught_seasons?: number;
 };

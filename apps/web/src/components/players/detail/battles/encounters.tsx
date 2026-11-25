@@ -18,6 +18,7 @@ import type {
   PlayerBattleEncounters,
 } from "@unicum.gg/core/battles/met";
 import type { BattleFilterState } from "./use-battle-filter";
+import { crestsOf } from "@unicum.gg/shared";
 
 const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 const DELTA_FORMAT = {
@@ -133,15 +134,7 @@ function EncounterPanel({
                 accountId: m.accountId,
                 clanTag: m.clanTag,
                 clanColor: m.clanColor,
-                isVerified: m.isVerified,
-                isSupporter: m.isSupporter,
-                twitchLogin: m.twitchLogin,
-                tournamentWins: m.tournamentWins,
-                tournamentFeaturedWins: m.tournamentFeaturedWins,
-                tournamentBestTitle: m.tournamentBestTitle,
-                onslaughtBestTier: m.onslaughtBestTier,
-                onslaughtBestRank: m.onslaughtBestRank,
-                onslaughtSeasons: m.onslaughtSeasons,
+                ...crestsOf(m),
               },
             }))}
           />

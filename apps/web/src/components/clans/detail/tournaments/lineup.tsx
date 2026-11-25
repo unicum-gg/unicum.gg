@@ -12,6 +12,7 @@ import {
 import { PlayerPanelList } from "@/components/entity/player-panel-list";
 import type { Region } from "@unicum.gg/wargaming";
 import type { ClanTournamentPlayer } from "./row";
+import { crestsOf } from "@unicum.gg/shared";
 
 const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 
@@ -71,12 +72,7 @@ export function ClanTournamentLineup({
               player: {
                 nickname: p.nickname,
                 accountId: p.accountId,
-                isVerified: p.isVerified,
-                isSupporter: p.isSupporter,
-                twitchLogin: p.twitchLogin,
-                tournamentWins: p.wins,
-                tournamentFeaturedWins: p.featuredWins,
-                tournamentBestTitle: p.tournamentBestTitle,
+                ...crestsOf(p),
               },
             }))}
           />

@@ -7,6 +7,7 @@ import {
   maneuversCutoffForecast,
   maneuversBonds,
   maneuversMultiplier,
+  crestsOf,
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import { TaggedTitle } from "@/components/clans/detail/tagged-title";
@@ -275,15 +276,7 @@ function ClanManeuversMembers({
                       player={{
                         nickname: m.nickname ?? String(m.accountId),
                         accountId: m.accountId,
-                        isVerified: m.isVerified,
-                        isSupporter: m.isSupporter,
-                        twitchLogin: m.twitchLogin,
-                        tournamentWins: m.tournamentWins,
-                        tournamentFeaturedWins: m.tournamentFeaturedWins,
-                        tournamentBestTitle: m.tournamentBestTitle,
-                        onslaughtBestTier: m.onslaughtBestTier,
-                        onslaughtBestRank: m.onslaughtBestRank,
-                        onslaughtSeasons: m.onslaughtSeasons,
+                        ...crestsOf(m),
                       }}
                     />
                   </TableCell>

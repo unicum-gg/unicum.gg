@@ -1,3 +1,4 @@
+import type { PlayerCrestFields } from "@unicum.gg/shared";
 import type {
   TournamentGameMode,
   TournamentStatus,
@@ -43,11 +44,7 @@ export type ClanTournamentPlayer = {
   wins: number;
   featuredWins: number;
   lastAt: Date;
-  isVerified?: boolean;
-  isSupporter?: boolean;
-  twitchLogin?: string | null;
-  tournamentBestTitle?: string | null;
-};
+} & PlayerCrestFields;
 
 export type ClanTournamentRecord = {
   clanId: number;

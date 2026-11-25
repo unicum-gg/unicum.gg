@@ -25,6 +25,7 @@ import {
   winrateColor,
   wn8Color,
   wnxColor,
+  crestsOf,
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import { Hint } from "@/components/hint";
@@ -154,12 +155,7 @@ export function TeamRosterTable({
                     accountId: p.accountId,
                     clanTag: p.clanTag,
                     clanColor: p.clanColor,
-                    isVerified: p.isVerified,
-                    isSupporter: p.isSupporter,
-                    twitchLogin: p.twitchLogin,
-                    tournamentWins: p.tournamentWins,
-                    tournamentFeaturedWins: p.tournamentFeaturedWins,
-                    tournamentBestTitle: p.tournamentBestTitle,
+                    ...crestsOf(p),
                   }}
                   trailing={
                     <>

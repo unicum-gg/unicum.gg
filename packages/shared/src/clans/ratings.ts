@@ -1,5 +1,6 @@
 import type { PortalClanMember } from "@unicum.gg/wargaming";
 import { type WeightedDataPoint, weightedAverage } from "../lib/stats";
+import type { PlayerCrestFields } from "../players/crests";
 
 /** Per-member account ratings: our WN7/WN8/WNX and Wargaming's PR/WTR, all
  * read off the member's player row. */
@@ -16,25 +17,15 @@ export type MemberRatings = {
 // path is the single source of truth). `wnx30d` + `battles30d` cover a
 // 30-day window (matches the player page "Last 30d" column); the clan
 // aggregate weights by `battles30d`.
+// The crests are attached at the API boundary and absent in the cron/cache
+// path, hence every one of them optional.
 export type ClanMemberStats = PortalClanMember &
-  MemberRatings & {
+  MemberRatings &
+  PlayerCrestFields & {
     wn730d: number | null;
     wn830d: number | null;
     wnx30d: number | null;
     battles30d: number | null;
-    // Public badges, attached at the API boundary (absent in the cron/cache
-    // path). The owner connected this account on the site, is an active
-    // non-anonymous supporter, and/or has a linked Twitch channel.
-    isVerified?: boolean;
-    isSupporter?: boolean;
-    twitchLogin?: string | null;
-    // The winner's crest, from the same resolver as the three above. It already
-    // returned these and the members endpoint dropped them, so a member who had
-    // won a tournament wore the crest on the leaderboards and nothing in their
-    // own clan's roster.
-    tournamentWins?: number;
-    tournamentFeaturedWins?: number;
-    tournamentBestTitle?: string | null;
   };
 
 // Boost detection. A member reads as a "boost account" (an account with very

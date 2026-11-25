@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/table";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
-import { type ClanMemberStats, RATING_COLOR_CLASS, type RatingColor, prColor, winrateColor, wn7Color, wn8Color, wnxColor, wtrColor } from "@unicum.gg/shared";
+import { crestsOf, type ClanMemberStats, RATING_COLOR_CLASS, type RatingColor, prColor, winrateColor, wn7Color, wn8Color, wnxColor, wtrColor } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import { clanRoleName } from "@/components/game-name";
 import { useTranslation } from "@/hooks/use-translation";
@@ -455,12 +455,7 @@ export function ClanMembersTable(
                   player={{
                     nickname: m.name,
                     accountId: m.accountId,
-                    isVerified: m.isVerified,
-                    isSupporter: m.isSupporter,
-                    twitchLogin: m.twitchLogin,
-                    tournamentWins: m.tournamentWins,
-                    tournamentFeaturedWins: m.tournamentFeaturedWins,
-                    tournamentBestTitle: m.tournamentBestTitle,
+                    ...crestsOf(m),
                   }}
                 />
               </TableCell>

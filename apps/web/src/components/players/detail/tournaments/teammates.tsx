@@ -12,6 +12,7 @@ import {
 import { PlayerPanelList } from "@/components/entity/player-panel-list";
 import type { Region } from "@unicum.gg/wargaming";
 import type { PlayerTournamentTeammate } from "./row";
+import { crestsOf } from "@unicum.gg/shared";
 
 const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 
@@ -70,12 +71,7 @@ export function TournamentTeammates({
                 accountId: m.accountId,
                 clanTag: m.clanTag,
                 clanColor: m.clanColor,
-                isVerified: m.isVerified,
-                isSupporter: m.isSupporter,
-                twitchLogin: m.twitchLogin,
-                tournamentWins: m.tournamentWins,
-                tournamentFeaturedWins: m.tournamentFeaturedWins,
-                tournamentBestTitle: m.tournamentBestTitle,
+                ...crestsOf(m),
               },
             }))}
           />

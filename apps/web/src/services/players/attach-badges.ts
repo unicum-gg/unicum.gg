@@ -1,4 +1,5 @@
 import { resolvePlayerBadges } from "@unicum.gg/core/players/badges";
+import type { PlayerCrests } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 
 /**
@@ -17,19 +18,6 @@ import type { Region } from "@unicum.gg/wargaming";
  * rather than being dropped; the snake_case half omits them, see
  * `PlayerCrestsSnake`.
  */
-
-/** The camelCase shape, for payloads built against our own types. */
-export type PlayerCrests = {
-  isVerified: boolean;
-  isSupporter: boolean;
-  twitchLogin: string | null;
-  tournamentWins: number;
-  tournamentFeaturedWins: number;
-  tournamentBestTitle: string | null;
-  onslaughtBestTier: string | null;
-  onslaughtBestRank: number | null;
-  onslaughtSeasons: number;
-};
 
 /**
  * The snake_case shape, for rows that go out on the public API as they are.

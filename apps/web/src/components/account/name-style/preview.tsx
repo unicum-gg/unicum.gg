@@ -10,6 +10,7 @@ import {
   winrateColor,
   type NameStyle,
   type PlayerDetailData,
+  crestsOf,
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import { SupporterBadgeState } from "@/components/entity/badges/supporter-badge";
@@ -161,15 +162,8 @@ export function NameStylePreview({
                           accountId: data.player.accountId,
                           clanTag: stint?.clan.tag ?? null,
                           clanColor: stint?.clan.color ?? null,
-                          isVerified: data.isVerified,
+                          ...crestsOf(data),
                           isSupporter: true,
-                          twitchLogin: data.twitchLogin,
-                          tournamentWins: data.tournamentWins,
-                          tournamentFeaturedWins: data.tournamentFeaturedWins,
-                          tournamentBestTitle: data.tournamentBestTitle,
-                          onslaughtBestTier: data.onslaughtBestTier,
-                          onslaughtBestRank: data.onslaughtBestRank,
-                          onslaughtSeasons: data.onslaughtSeasons,
                         }}
                       />
                     </TableCell>

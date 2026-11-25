@@ -33,7 +33,7 @@ import { useTranslation } from "@/hooks/use-translation";
 import { cn } from "@/lib/utils";
 import ROUTES from "@/constants/routes";
 import { FilterSubject } from "@/components/filter-subject";
-import { ManeuversBoardKind, ManeuversSort } from "@unicum.gg/shared";
+import { crestsOf, ManeuversBoardKind, ManeuversSort } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 
 const INT_FORMAT = { maximumFractionDigits: 0 } as const;
@@ -222,15 +222,7 @@ function PlayerRowView({
             accountId: row.accountId,
             clanTag: row.clanTag,
             clanColor: row.clanColor,
-            isVerified: row.isVerified,
-            isSupporter: row.isSupporter,
-            twitchLogin: row.twitchLogin,
-            tournamentWins: row.tournamentWins,
-            tournamentFeaturedWins: row.tournamentFeaturedWins,
-            tournamentBestTitle: row.tournamentBestTitle,
-            onslaughtBestTier: row.onslaughtBestTier,
-            onslaughtBestRank: row.onslaughtBestRank,
-            onslaughtSeasons: row.onslaughtSeasons,
+            ...crestsOf(row),
           }}
         />
       </TableCell>
