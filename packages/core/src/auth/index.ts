@@ -12,6 +12,7 @@ import { getTwitchUsersById, isTwitchEnabled } from "@unicum.gg/core/twitch";
 import { upsertStreamer } from "@unicum.gg/core/twitch/streamers";
 import { refreshTwitchToken } from "@unicum.gg/core/twitch/refresh";
 import { syncMemberIdentity } from "@unicum.gg/core/discord/member-identity";
+import { joinGuild } from "@unicum.gg/core/discord";
 import { wargaming } from "./wargaming";
 
 /**
@@ -85,10 +86,11 @@ export const auth = betterAuth({
         // `${region}-${accountId}`; the Twitch `sub` resolves to the login via
         // Helix. Non-WG users (no such id) are ignored.
         after: async (twitchAccount) => {
-          // A Discord link puts the player's Wargaming name and server on
-          // their membership of our server, if they are in it already.
+          // A Discord link puts the player on our server (the link page says
+          // so) under their Wargaming name and server. The token is read back
+          // through Better Auth because the row holds it encrypted.
           if (twitchAccount.providerId === "discord") {
-            await syncMemberIdentity(twitchAccount.accountId);
+            await joinLinkedDiscord(twitchAccount.userId, twitchAccount.accountId);
             return;
           }
           if (twitchAccount.providerId !== "twitch") return;
@@ -133,3 +135,30 @@ export const auth = betterAuth({
   // replaces its session rather than adding a second entry.
   plugins: [wargaming(), multiSession()],
 });
+
+/**
+ * Put a player who just linked Discord on our server, then dress them in their
+ * Wargaming identity there. Also the backfill's entry point
+ * (`join-linked-discord`), for the links made before the link joined anyone.
+ * Never throws: a Discord blip must not fail the link that triggered it.
+ */
+export async function joinLinkedDiscord(
+  userId: string,
+  discordUserId: string,
+): Promise<boolean> {
+  let joined = false;
+  try {
+    if (env.DISCORD_GUILD_ID) {
+      const token = await auth.api
+        .getAccessToken({ body: { providerId: "discord", userId } })
+        .catch(() => null);
+      if (token?.accessToken) {
+        joined = await joinGuild(env.DISCORD_GUILD_ID, discordUserId, token.accessToken);
+      }
+    }
+  } catch (err) {
+    console.warn("[discord] joining a linked member failed:", err);
+  }
+  await syncMemberIdentity(discordUserId);
+  return joined;
+}

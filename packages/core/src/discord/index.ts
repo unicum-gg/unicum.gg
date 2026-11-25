@@ -123,6 +123,22 @@ export async function botRequestOk(path: string, init: RequestInit): Promise<boo
   return Boolean(res?.ok);
 }
 
+/**
+ * Put a user on our server with their own OAuth token (the `guilds.join` scope
+ * the Discord link asks for). A no-op answer (204) when they are already in.
+ * Needs the bot on the server with Create Invite. Best-effort boolean.
+ */
+export async function joinGuild(
+  guildId: string,
+  discordUserId: string,
+  accessToken: string,
+): Promise<boolean> {
+  return botRequestOk(`/guilds/${guildId}/members/${discordUserId}`, {
+    method: "PUT",
+    body: JSON.stringify({ access_token: accessToken }),
+  });
+}
+
 /** Grant a role to a guild member as the bot. Idempotent (204 whether or not the
  * member already had it). Needs the bot to have Manage Roles and to sit above the
  * role in the hierarchy, else Discord answers 403. Best-effort boolean. */

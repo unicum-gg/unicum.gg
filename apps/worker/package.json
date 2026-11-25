@@ -38,7 +38,8 @@
     "recompute-rampage-ratings": "tsx --env-file-if-exists=../web/.env.local src/scripts/recompute-rampage-ratings.ts",
     "repair-untagged-baselines": "tsx --env-file-if-exists=../web/.env.local src/scripts/repair-untagged-baselines.ts",
     "repair-gun-pitch": "tsx --env-file-if-exists=../web/.env.local src/scripts/repair-gun-pitch.ts",
-    "sync-discord-identities": "tsx --env-file-if-exists=../web/.env.local src/scripts/sync-discord-identities.ts"
+    "sync-discord-identities": "tsx --env-file-if-exists=../web/.env.local src/scripts/sync-discord-identities.ts",
+    "join-linked-discord": "tsx --env-file-if-exists=../web/.env.local src/scripts/join-linked-discord.ts"
   },
   "dependencies": {
     "@unicum.gg/core": "workspace:*",

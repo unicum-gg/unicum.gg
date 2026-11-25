@@ -230,3 +230,13 @@ export async function syncAllMemberIdentities(): Promise<number> {
   }
   return rows.length;
 }
+
+/** Every Discord link, one row per (unicum.gg user, Discord account). */
+export function listDiscordLinks(): Promise<
+  { userId: string; discordUserId: string }[]
+> {
+  return db
+    .select({ userId: account.userId, discordUserId: account.accountId })
+    .from(account)
+    .where(eq(account.providerId, DISCORD_PROVIDER));
+}

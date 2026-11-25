@@ -15,6 +15,6 @@
   "wargaming-is-the-identity": "This is the account you sign in with, so it cannot be disconnected.",
   "twitch-purpose": "Get your channel listed when you go live, and let the game mod post in your chat.",
   "twitch-consequence": "Your channel stops being listed on the site and stops showing on your profile, and the game mod can no longer post in your chat. You can connect it again at any time.",
-  "discord-purpose": "Claim your supporter role, and hear back about the videos and reviews you send in.",
-  "discord-consequence": "You give up your supporter role on our server, and we can no longer tell you what became of a video or a review you sent in. You can connect it again at any time."
+  "discord-purpose": "Join our server under your Wargaming name, claim your supporter role, and hear back about the videos and reviews you send in.",
+  "discord-consequence": "You keep your place on our server, but your name there goes back to your own, you give up your supporter role, and we can no longer tell you what became of a video or a review you sent in. You can connect it again at any time."
 }
