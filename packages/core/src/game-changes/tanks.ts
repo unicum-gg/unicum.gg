@@ -49,8 +49,9 @@ const CARD_LINES = 6;
 
 /**
  * A field that changed on this many vehicles in one version is not a balance
- * pass, it is a change to how the field is read (2.4.1 recorded gun elevation
- * and depression swapped on all 1,236 vehicles). It is said once, as one line,
+ * pass, it is a change to how the field is read (2.4.1 once recorded gun
+ * elevation and depression swapped on all 1,236 vehicles, when our own reading
+ * of them was fixed; `repairGunPitch` took it out). It is said once, as one line,
  * rather than printed under every vehicle in the game.
  */
 const MASS_CHANGE_TANKS = 150;
