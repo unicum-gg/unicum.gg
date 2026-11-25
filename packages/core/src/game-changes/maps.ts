@@ -4,6 +4,7 @@ import {
   APP_IDENTITY,
   BATTLE_TYPE_LABEL,
   type BattleType,
+  COMMON_TEST_ANCHOR,
   displayMapValue,
   env,
   MAP_PRESENCE_FIELD,
@@ -11,6 +12,7 @@ import {
   mapChanges,
   resolveMapChangeField,
   splitVariantField,
+  updateAnchor,
 } from "@unicum.gg/shared";
 import { Region } from "@unicum.gg/wargaming";
 import { db } from "@unicum.gg/core/db";
@@ -136,8 +138,19 @@ function readMaps(maps: ChangedMap[]): {
   return { cards, variants };
 }
 
-const mapUrl = (map: ChangedMap) =>
-  `${APP_IDENTITY.URL}/${Region.EU}/maps/${map.slug}/history`;
+type CardKind =
+  | { live: true; version: string }
+  | { live: false; version: string | null; updated: boolean };
+
+/** The section a card is about, on the feed and on a map's History tab. */
+const anchorOf = (kind: CardKind) =>
+  kind.live ? updateAnchor(kind.version) : COMMON_TEST_ANCHOR;
+
+const mapUrl = (map: ChangedMap, kind: CardKind) =>
+  `${APP_IDENTITY.URL}/${Region.EU}/maps/${map.slug}/history#${anchorOf(kind)}`;
+
+const feedUrl = (kind: CardKind) =>
+  `${APP_IDENTITY.URL}/maps/changes#${anchorOf(kind)}`;
 
 function bullets(lines: string[], max = Infinity): string {
   const shown = lines.slice(0, max).map((l) => `• ${l}`);
@@ -146,13 +159,13 @@ function bullets(lines: string[], max = Infinity): string {
   return shown.join("\n");
 }
 
-function cardEmbed(card: MapCard, color: number): APIEmbed {
+function cardEmbed(card: MapCard, color: number, kind: CardKind): APIEmbed {
   const big = card.kind === "Reworked" || card.kind === "New map";
   return {
     color,
     author: { name: card.kind },
     title: clamp(card.map.name, DISCORD_LIMITS.title),
-    url: mapUrl(card.map),
+    url: mapUrl(card.map, kind),
     description: clamp(bullets(card.lines, CARD_LINES), 1000),
     ...(card.map.minimapUrl
       ? big
@@ -166,21 +179,18 @@ function variantEmbed(
   battleType: BattleType,
   maps: ChangedMap[],
   color: number,
+  kind: CardKind,
 ): APIEmbed {
   const n = maps.length;
   return {
     color,
     author: { name: "New versions" },
     title: `${BATTLE_TYPE_LABEL[battleType]} · ${n} ${n === 1 ? "map" : "maps"}`,
-    url: `${APP_IDENTITY.URL}/maps/changes`,
+    url: feedUrl(kind),
     description: clamp(maps.map((m) => m.name).join(", "), 1000),
     ...(maps[0]?.minimapUrl ? { thumbnail: { url: maps[0].minimapUrl } } : {}),
   };
 }
-
-type CardKind =
-  | { live: true; version: string }
-  | { live: false; version: string | null; updated: boolean };
 
 /** A version's (or the test's) maps as one announcement, or null when nothing
  * in it names a map a reader can open. */
@@ -193,8 +203,8 @@ export function renderMapAnnouncement(
 
   const color = kind.live ? AnnouncementColor.Maps : AnnouncementColor.CommonTest;
   const all: APIEmbed[] = [
-    ...cards.map((c) => cardEmbed(c, color)),
-    ...[...variants].map(([bt, ms]) => variantEmbed(bt, ms, color)),
+    ...cards.map((c) => cardEmbed(c, color, kind)),
+    ...[...variants].map(([bt, ms]) => variantEmbed(bt, ms, color, kind)),
   ];
 
   // Discord's two ceilings on one message: ten embeds, and 6000 characters
@@ -226,8 +236,8 @@ export function renderMapAnnouncement(
     content,
     embeds,
     buttons: [
-      { label: "All map changes", url: `${APP_IDENTITY.URL}/maps/changes` },
-      ...cards.slice(0, 2).map((c) => ({ label: c.map.name, url: mapUrl(c.map) })),
+      { label: "All map changes", url: feedUrl(kind) },
+      ...cards.slice(0, 2).map((c) => ({ label: c.map.name, url: mapUrl(c.map, kind) })),
     ],
     thread: cut
       ? {
@@ -236,7 +246,7 @@ export function renderMapAnnouncement(
             : "Common Test · every map",
           messages: packBlocks([
             ...cards.map(
-              (c) => `**[${c.map.name}](<${mapUrl(c.map)}>)** · ${c.kind}\n${bullets(c.lines)}`,
+              (c) => `**[${c.map.name}](<${mapUrl(c.map, kind)}>)** · ${c.kind}\n${bullets(c.lines)}`,
             ),
             ...[...variants].map(
               ([bt, ms]) =>

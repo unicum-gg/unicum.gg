@@ -9,6 +9,7 @@ import {
   PanelHeader,
   PanelTitle,
 } from "@/components/panel";
+import { COMMON_TEST_ANCHOR } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 
 /**
@@ -38,7 +39,11 @@ export async function PendingMapChanges({
   if (maps.length === 0) return null;
 
   return (
-    <Panel className="border border-brand/40" screenLines={false}>
+    <Panel
+      id={COMMON_TEST_ANCHOR}
+      className="scroll-mt-24 border border-brand/40"
+      screenLines={false}
+    >
       <PanelHeader className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
         <PanelTitle as="h2" className="text-base">
           <span className="text-brand">{tGame("features.common-test")}</span>

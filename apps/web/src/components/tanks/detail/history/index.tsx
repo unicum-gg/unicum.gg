@@ -13,7 +13,11 @@ import {
   type FormattedChange,
 } from "@/components/tanks/change-format";
 import { ChangeRow } from "@/components/tanks/change-row";
-import { TANK_HISTORY_TRACKING_START } from "@unicum.gg/shared";
+import {
+  COMMON_TEST_ANCHOR,
+  TANK_HISTORY_TRACKING_START,
+  updateAnchor,
+} from "@unicum.gg/shared";
 import type { TankHistoryVersions } from "@/app/[locale]/(site)/[region]/tanks/[slug]/detail";
 
 const DATE_PATTERN = "d MMM yyyy";
@@ -76,7 +80,11 @@ export async function TankChangesHistory({
       {/* Ahead of the shipped history, and visibly apart from it: these are the
           only changes on this page that have not happened yet. */}
       {pending.length > 0 ? (
-        <Panel className="border border-brand/40" screenLines={false}>
+        <Panel
+          id={COMMON_TEST_ANCHOR}
+          className="scroll-mt-24 border border-brand/40"
+          screenLines={false}
+        >
           <PanelHeader className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
             <PanelTitle>
               <span className="text-brand">{tGame("features.common-test")}</span>
@@ -126,7 +134,7 @@ export async function TankChangesHistory({
         return (
           <Fragment key={version.gameVersion}>
             {i > 0 ? <PanelSeparator /> : null}
-            <Panel>
+            <Panel id={updateAnchor(version.gameVersion)} className="scroll-mt-24">
               <PanelHeader className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
                 <PanelTitle>
                   {t("update", { version: version.gameVersion })}

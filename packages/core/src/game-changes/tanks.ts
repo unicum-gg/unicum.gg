@@ -3,11 +3,13 @@ import type { APIEmbedField } from "discord-api-types/v10";
 import {
   APP_IDENTITY,
   buildTankSlugIndex,
+  COMMON_TEST_ANCHOR,
   env,
   resolveTrackedField,
   tankChanges,
   tankStatsByRegion,
   tankTestChanges,
+  updateAnchor,
   type VehicleMeta,
 } from "@unicum.gg/shared";
 import { Region } from "@unicum.gg/wargaming";
@@ -201,8 +203,24 @@ function group(
   return { vehicles, mass };
 }
 
-const historyUrl = (slug: string) =>
-  `${APP_IDENTITY.URL}/${Region.EU}/tanks/${slug}/history`;
+type CardKind =
+  | { live: true; version: string }
+  | { live: false; version: string | null; updated: boolean };
+
+/** The section a card is about, on the feed and on a vehicle's History tab. */
+const anchorOf = (kind: CardKind) =>
+  kind.live ? updateAnchor(kind.version) : COMMON_TEST_ANCHOR;
+
+const historyUrl = (slug: string, kind: CardKind) =>
+  `${APP_IDENTITY.URL}/${Region.EU}/tanks/${slug}/history#${anchorOf(kind)}`;
+
+/** Where "every change" lives: the feed's section for a live version, and the
+ * catalogue filtered to the test for a Common Test, which the feed does not
+ * carry (it is on each vehicle's History tab instead). */
+const changesUrl = (kind: CardKind) =>
+  kind.live
+    ? `${APP_IDENTITY.URL}/tanks/changes#${updateAnchor(kind.version)}`
+    : `${APP_IDENTITY.URL}/tanks?test=1`;
 
 function verdictCounts(vehicles: ChangedVehicle[]): APIEmbedField[] {
   const count = (v: Verdict) =>
@@ -224,13 +242,9 @@ function vehicleField(v: ChangedVehicle): APIEmbedField {
   };
 }
 
-function threadBlock(v: ChangedVehicle): string {
-  return `**[${v.meta.shortName}](<${historyUrl(v.slug)}>)** · ${vehicleLine(v.meta)}\n${diffBlock(v.diff)}`;
+function threadBlock(v: ChangedVehicle, kind: CardKind): string {
+  return `**[${v.meta.shortName}](<${historyUrl(v.slug, kind)}>)** · ${vehicleLine(v.meta)}\n${diffBlock(v.diff)}`;
 }
-
-type CardKind =
-  | { live: true; version: string }
-  | { live: false; version: string | null; updated: boolean };
 
 /**
  * The card for one batch of changes, or null when nothing in it names a
@@ -266,11 +280,11 @@ export function renderTankAnnouncement(
   const buttons: LinkButton[] = [
     {
       label: kind.live ? `All changes in ${kind.version}` : "Common Test changes",
-      url: `${APP_IDENTITY.URL}/tanks/changes`,
+      url: changesUrl(kind),
     },
     ...vehicles
       .slice(0, 2)
-      .map((v) => ({ label: v.meta.shortName, url: historyUrl(v.slug) })),
+      .map((v) => ({ label: v.meta.shortName, url: historyUrl(v.slug, kind) })),
   ];
 
   return {
@@ -284,7 +298,7 @@ export function renderTankAnnouncement(
             : `${APP_IDENTITY.NAME} · Common Test · not live`,
         },
         title: clamp(title, DISCORD_LIMITS.title),
-        url: `${APP_IDENTITY.URL}/tanks/changes`,
+        url: changesUrl(kind),
         description,
         fields,
         footer: {
@@ -305,7 +319,7 @@ export function renderTankAnnouncement(
             name: kind.live
               ? `Update ${kind.version} · every vehicle`
               : `Common Test ${build} · every vehicle`,
-            messages: packBlocks(vehicles.map(threadBlock)),
+            messages: packBlocks(vehicles.map((v) => threadBlock(v, kind))),
           }
         : undefined,
   };

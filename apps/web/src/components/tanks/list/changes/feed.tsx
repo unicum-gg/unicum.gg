@@ -5,6 +5,7 @@ import { useFormat } from "@/hooks/use-format";
 import { useTranslation } from "@/hooks/use-translation";
 import { useStatLabels } from "@/hooks/use-stat-labels";
 import { useMemo } from "react";
+import { updateAnchor } from "@unicum.gg/shared";
 import Link from "@/components/link";
 import { toRoman } from "roman-numerals";
 import { NationFlag } from "@/components/tanks/nation-flag";
@@ -119,7 +120,10 @@ function VersionHeader({ version }: { version: FeedVersion }) {
   const { date } = useFormat();
   const { t } = useTranslation("components/tanks/list/changes/feed");
   return (
-    <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1 border-b border-fd-border bg-fd-secondary/20 px-4 py-2.5">
+    <div
+      id={updateAnchor(version.gameVersion)}
+      className="flex scroll-mt-24 flex-wrap items-baseline justify-between gap-x-3 gap-y-1 border-b border-fd-border bg-fd-secondary/20 px-4 py-2.5"
+    >
       <h2 className="font-heading text-sm font-semibold">
         {t("update", { version: version.gameVersion })}
         <span className="ml-2 text-xs font-normal text-fd-muted-foreground">

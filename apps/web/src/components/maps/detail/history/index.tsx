@@ -25,6 +25,8 @@ import {
   mapChangeArea,
   type MapChangeArea,
   type MapDetail,
+  COMMON_TEST_ANCHOR,
+  updateAnchor,
 } from "@unicum.gg/shared";
 
 const DATE_PATTERN = "d MMM yyyy";
@@ -226,7 +228,11 @@ export async function MapChangesHistory({
       <PanelSeparator />
 
       {pending.length > 0 ? (
-        <Panel className="border border-brand/40" screenLines={false}>
+        <Panel
+          id={COMMON_TEST_ANCHOR}
+          className="scroll-mt-24 border border-brand/40"
+          screenLines={false}
+        >
           <PanelHeader className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
             <PanelTitle as="h3" className="text-base">
               <span className="text-brand">{tGame("features.common-test")}</span>
@@ -257,7 +263,7 @@ export async function MapChangesHistory({
       {sections.map(({ version, changes }, i) => (
         <Fragment key={version.gameVersion}>
           {i > 0 ? <PanelSeparator /> : null}
-          <Panel>
+          <Panel id={updateAnchor(version.gameVersion)} className="scroll-mt-24">
             <PanelHeader className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
               <PanelTitle as="h3" className="text-base">
                 {t("update", { version: version.gameVersion })}

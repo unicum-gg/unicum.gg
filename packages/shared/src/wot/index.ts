@@ -38,6 +38,7 @@ export * from "./tank-modes";
 export * from "./tank-stats";
 export * from "./mirror-tracking";
 export * from "./tank-spec-fields";
+export * from "./change-anchors";
 export * from "./paint-lock";
 export * from "./tanks";
 export * from "./maps";
