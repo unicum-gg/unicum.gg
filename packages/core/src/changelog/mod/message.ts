@@ -29,12 +29,11 @@ import type { ModRelease } from "./releases";
  * notes exactly as written: 0.10.0 ran to about seventy lines, which as plain
  * text was two messages a reader scrolled past.
  *
- * The download button points at the hub rather than at the GitHub release, and
- * the release sits beside it: a release is installable from GitHub the moment
- * it is cut and reaches the hub only once Wargaming has reviewed it, which took
- * six days for 0.1.1. The footer says so, since a reader clicking the hub on
- * release day would otherwise find the previous version and think the card
- * wrong.
+ * The download button points at our own mod page rather than at the hub: the
+ * page serves the GitHub release the moment it is cut, while the hub carries
+ * it only once Wargaming has reviewed it, which took six days for 0.1.1, so a
+ * reader sent to the hub on release day found the previous version and thought
+ * the card wrong. The footer says where the hub stands.
  */
 
 /** Entries the card shows per section. The first section is what the release
@@ -163,15 +162,14 @@ export function renderModAnnouncement(release: ModRelease): Announcement | null 
           : undefined,
         fields: groupFields(groups),
         footer: {
-          text: "On GitHub now, on WGMods once Wargaming has reviewed it",
+          text: "On unicum.gg now, on WGMods once Wargaming has reviewed it",
         },
         timestamp: release.publishedAt.toISOString(),
       },
     ],
     buttons: [
-      { label: "Download (WGMods)", url: APP_IDENTITY.MOD_HUB_URL },
+      { label: "Download", url: `${APP_IDENTITY.URL}/mod` },
       { label: "GitHub release", url: release.url },
-      { label: "Mod page", url: `${APP_IDENTITY.URL}/mod` },
     ],
     thread: hasHiddenEntries(groups)
       ? {
