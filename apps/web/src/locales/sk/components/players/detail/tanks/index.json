@@ -1,4 +1,5 @@
 {
   "title": "Tanky {nickname}",
-  "title-count": "Tanky hráča {nickname} ({count})"
+  "title-count": "Tanky hráča {nickname} ({count})",
+  "window-since": "Nemáme záznam starší než {date} pre tento račun, takže tabuľka od tohto dátumu zajema vse."
 }

@@ -1,4 +1,5 @@
 {
   "title": "{nickname} Panssarivaunut",
-  "title-count": "Nimimerkin {nickname} panssarivaunut ({count})"
+  "title-count": "Nimimerkin {nickname} panssarivaunut ({count})",
+  "window-since": "Meillä ei ole tästä tilistä ennätystä ennen {date}, joten taulukko kattaa kaiken siitä lähtien."
 }

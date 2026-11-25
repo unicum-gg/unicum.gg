@@ -2,5 +2,6 @@
   "no-tanks-played-yet": "Noch keine Panzer gespielt.",
   "no-tanks-match-these-filters": "Keine Panzer entsprechen diesen Filtern.",
   "name": "Name",
-  "no-tanks-played-in-this-mode": "Keine Panzer in diesem Modus gespielt."
+  "no-tanks-played-in-this-mode": "Keine Panzer in diesem Modus gespielt.",
+  "no-tanks-played-in-this-window": "In diesem Fenster wurde kein Fahrzeug Gespielt."
 }

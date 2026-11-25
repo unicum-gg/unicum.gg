@@ -1,4 +1,5 @@
 {
   "title": "I carri di {nickname}",
-  "title-count": "Carri armati di {nickname} ({count})"
+  "title-count": "Carri armati di {nickname} ({count})",
+  "window-since": "Non abbiamo alcun record dell’account precedente al {date}, quindi la tabella copre tutto da allora."
 }

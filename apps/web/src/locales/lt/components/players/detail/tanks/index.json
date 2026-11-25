@@ -1,4 +1,5 @@
 {
   "title": "{nickname} tankai",
-  "title-count": "{nickname} tankai ({count})"
+  "title-count": "{nickname} tankai ({count})",
+  "window-since": "Neturime šios paskyros rekordo, senesnio nei {date}, todėl lentelė apima viską nuo tada."
 }

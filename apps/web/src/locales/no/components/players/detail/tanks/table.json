@@ -2,5 +2,6 @@
   "no-tanks-played-yet": "Ingen stridsvogner spilt ennå.",
   "no-tanks-match-these-filters": "Ingen stridsvogner samsvarer med disse filtrene.",
   "name": "Navn",
-  "no-tanks-played-in-this-mode": "Ingen stridsvogner er spilt i denne modusen."
+  "no-tanks-played-in-this-mode": "Ingen stridsvogner er spilt i denne modusen.",
+  "no-tanks-played-in-this-window": "Ingen kjøretøy ble spilt i dette vinduet."
 }

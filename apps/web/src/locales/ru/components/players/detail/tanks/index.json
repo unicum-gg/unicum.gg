@@ -1,4 +1,5 @@
 {
   "title": "Танки {nickname}",
-  "title-count": "Танки: {nickname} ({count})"
+  "title-count": "Танки: {nickname} ({count})",
+  "window-since": "У нас нет записи об этом аккаунте старше {date}, поэтому таблица охватывает всё с тех пор."
 }

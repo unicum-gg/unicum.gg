@@ -1,4 +1,5 @@
 {
   "title": "รถถังของ {nickname}",
-  "title-count": "รถถังของ {nickname} ({count})"
+  "title-count": "รถถังของ {nickname} ({count})",
+  "window-since": "เราไม่มีสถิติของบัญชีนี้ที่เก่ากว่า {date} ดังนั้นตารางจึงครอบคลุมทั้งหมดนับตั้งแต่นั้น"
 }

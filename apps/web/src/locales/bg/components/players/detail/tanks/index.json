@@ -1,4 +1,5 @@
 {
   "title": "Танкове на {nickname}",
-  "title-count": "Танкове на {nickname} ({count})"
+  "title-count": "Танкове на {nickname} ({count})",
+  "window-since": "Нямаме рекорд за този акаунт, по-стар от {date}, така че таблицата обхваща всичко оттогава."
 }

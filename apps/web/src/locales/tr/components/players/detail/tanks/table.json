@@ -2,5 +2,6 @@
   "no-tanks-played-yet": "Henüz tank oynanmadı.",
   "no-tanks-match-these-filters": "Bu filtrelerle eşleşen tank yok.",
   "name": "İsim",
-  "no-tanks-played-in-this-mode": "Bu modda oynanan tank yok."
+  "no-tanks-played-in-this-mode": "Bu modda oynanan tank yok.",
+  "no-tanks-played-in-this-window": "Bu pencere içinde oynanan araç yok."
 }

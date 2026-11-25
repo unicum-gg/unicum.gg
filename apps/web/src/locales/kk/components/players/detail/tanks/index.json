@@ -1,4 +1,5 @@
 {
   "title": "{nickname} үшін Танкылар",
-  "title-count": "{nickname} танктері ({count})"
+  "title-count": "{nickname} танктері ({count})",
+  "window-since": "Бұл аккаунт бойынша {date} күнінен бұрынғы рекорд бізде жоқ, сондықтан кесте содан бері барлығын қамтиды."
 }

@@ -1,4 +1,5 @@
 {
   "title": "{nickname}の戦車",
-  "title-count": "{nickname}の戦車（{count}）"
+  "title-count": "{nickname}の戦車（{count}）",
+  "window-since": "{date}より前のこのアカウントの記録はありません。そのため、表はそれ以降のすべてをカバーします。"
 }

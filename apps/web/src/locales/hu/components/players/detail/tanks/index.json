@@ -1,4 +1,5 @@
 {
   "title": "{nickname} tankjai",
-  "title-count": "{nickname} tankjai ({count})"
+  "title-count": "{nickname} tankjai ({count})",
+  "window-since": "Erről a fiókról {date} előtt nem rendelkezünk rekorddal, ezért a táblázat azóta mindent lefed."
 }

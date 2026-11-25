@@ -1,4 +1,5 @@
 {
   "title": "Czołgi {nickname}",
-  "title-count": "Czołgi gracza {nickname} ({count})"
+  "title-count": "Czołgi gracza {nickname} ({count})",
+  "window-since": "Nie mamy rekordu tego konta sprzed {date}, więc tabela obejmuje wszystko od tego czasu."
 }

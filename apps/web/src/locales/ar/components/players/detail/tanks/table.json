@@ -2,5 +2,6 @@
   "no-tanks-played-yet": "لم يتم لعب أي دبابات بعد.",
   "no-tanks-match-these-filters": "لا توجد دبابات تطابق هذه المرشحات.",
   "name": "الاسم",
-  "no-tanks-played-in-this-mode": "لم يتم لعب أي من الدبابات في هذا النمط."
+  "no-tanks-played-in-this-mode": "لم يتم لعب أي من الدبابات في هذا النمط.",
+  "no-tanks-played-in-this-window": "لم يتم لعب أي مركبة في هذه النافذة."
 }

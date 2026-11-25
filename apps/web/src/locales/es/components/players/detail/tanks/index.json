@@ -1,4 +1,5 @@
 {
   "title": "Tanques de {nickname}",
-  "title-count": "Tanques de {nickname} ({count})"
+  "title-count": "Tanques de {nickname} ({count})",
+  "window-since": "No tenemos un récord de esta cuenta anterior a {date}, por lo que la tabla cubre todo desde entonces."
 }

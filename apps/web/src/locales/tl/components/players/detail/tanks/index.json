@@ -1,4 +1,5 @@
 {
   "title": "MMga tangke ni {nickname}",
-  "title-count": "Mga tangke ni {nickname} ({count})"
+  "title-count": "Mga tangke ni {nickname} ({count})",
+  "window-since": "Wala kaming rekord ng account na ito na mas luma kaysa {date}, kaya sumasaklaw ang talahanayan sa lahat mula noon."
 }

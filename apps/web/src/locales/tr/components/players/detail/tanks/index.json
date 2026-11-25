@@ -1,4 +1,5 @@
 {
   "title": "{nickname}’nin tankları",
-  "title-count": "{nickname} tankları ({count})"
+  "title-count": "{nickname} tankları ({count})",
+  "window-since": "Bu hesap için {date} tarihinden daha eski bir rekorumuz yok, bu nedenle tablo o tarihten bu yana her şeyi kapsıyor."
 }

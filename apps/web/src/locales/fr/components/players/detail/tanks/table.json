@@ -2,5 +2,6 @@
   "no-tanks-played-yet": "Aucun char joué pour le moment.",
   "no-tanks-match-these-filters": "Aucun char ne correspond à ces filtres.",
   "name": "Nom",
-  "no-tanks-played-in-this-mode": "Aucun char n’a été joué dans ce mode."
+  "no-tanks-played-in-this-mode": "Aucun char n’a été joué dans ce mode.",
+  "no-tanks-played-in-this-window": "Aucun véhicule n’a été joué pendant cette fenêtre."
 }

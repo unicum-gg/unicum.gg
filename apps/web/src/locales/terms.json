@@ -925,7 +925,8 @@
     "Supporters": "الداعمون",
     "colour": "اللون",
     "leaderboards": "لوحات المتصدرين",
-    "style": "النمط"
+    "style": "النمط",
+    "everything": "كل شيء"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1854,7 +1855,8 @@
     "Supporters": "Падтрымальнікі",
     "colour": "колер",
     "leaderboards": "рэйтынгі",
-    "style": "стыль"
+    "style": "стыль",
+    "everything": "усё"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -3001,7 +3003,8 @@
     "Supporters": "Поддръжници",
     "colour": "цвят",
     "leaderboards": "класации",
-    "style": "стил"
+    "style": "стил",
+    "everything": "всичко"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -3938,7 +3941,8 @@
     "Supporters": "Podržavaoci",
     "colour": "boja",
     "leaderboards": "rang-liste",
-    "style": "stil"
+    "style": "stil",
+    "everything": "sve"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -5096,7 +5100,8 @@
     "Supporters": "Podporovatelé",
     "colour": "barva",
     "leaderboards": "žebříčky",
-    "style": "styl"
+    "style": "styl",
+    "everything": "vše"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -6260,7 +6265,8 @@
     "Supporters": "Støtter",
     "colour": "farve",
     "leaderboards": "ranglister",
-    "style": "stil"
+    "style": "stil",
+    "everything": "alt"
   },
   "de": {
     "(optional)": "(optional)",
@@ -7417,7 +7423,8 @@
     "Supporters": "Unterstützer",
     "colour": "farbe",
     "leaderboards": "bestenlisten",
-    "style": "stil"
+    "style": "stil",
+    "everything": "alles"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -8580,7 +8587,8 @@
     "Supporters": "Υποστηρικτές",
     "colour": "χρώμα",
     "leaderboards": "πίνακες κατάταξης",
-    "style": "στυλ"
+    "style": "στυλ",
+    "everything": "όλα"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -9724,7 +9732,8 @@
     "Supporters": "Colaboradores",
     "colour": "color",
     "leaderboards": "clasificaciones",
-    "style": "estilo"
+    "style": "estilo",
+    "everything": "todo"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -10892,7 +10901,8 @@
     "Supporters": "Tukijat",
     "colour": "väri",
     "leaderboards": "tulostaulukot",
-    "style": "tyyli"
+    "style": "tyyli",
+    "everything": "kaikki"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -12038,7 +12048,8 @@
     "Choose": "Choisir",
     "colour": "couleur",
     "leaderboards": "classements",
-    "style": "style"
+    "style": "style",
+    "everything": "tout"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -12968,7 +12979,8 @@
     "Supporters": "समर्थक",
     "colour": "रंग",
     "leaderboards": "लीडरबोर्ड",
-    "style": "शैली"
+    "style": "शैली",
+    "everything": "सब कुछ"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -14129,7 +14141,8 @@
     "Supporters": "Podržavatelji",
     "colour": "boja",
     "leaderboards": "ljestvice",
-    "style": "stil"
+    "style": "stil",
+    "everything": "sve"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -15292,7 +15305,8 @@
     "Supporters": "Támogatók",
     "colour": "szín",
     "leaderboards": "ranglisták",
-    "style": "stílus"
+    "style": "stílus",
+    "everything": "minden"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -16451,7 +16465,8 @@
     "Supporters": "Sostenitori",
     "colour": "colore",
     "leaderboards": "classifiche",
-    "style": "stile"
+    "style": "stile",
+    "everything": "tutto"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -17617,7 +17632,8 @@
     "Supporters": "支援者",
     "colour": "色",
     "leaderboards": "リーダーボード",
-    "style": "スタイル"
+    "style": "スタイル",
+    "everything": "すべて"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -18547,7 +18563,8 @@
     "Supporters": "Қолдаушылар",
     "colour": "түс",
     "leaderboards": "көшбасшылар тақталары",
-    "style": "стиль"
+    "style": "стиль",
+    "everything": "барлығы"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -19717,7 +19734,8 @@
     "Supporters": "후원자",
     "colour": "색상",
     "leaderboards": "순위표",
-    "style": "스타일"
+    "style": "스타일",
+    "everything": "전체"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -20883,7 +20901,8 @@
     "Supporters": "Rėmėjai",
     "colour": "spalva",
     "leaderboards": "lyderių lentelės",
-    "style": "stilius"
+    "style": "stilius",
+    "everything": "viskas"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -22036,7 +22055,8 @@
     "Supporters": "Atbalstītāji",
     "colour": "krāsa",
     "leaderboards": "līderu saraksti",
-    "style": "stils"
+    "style": "stils",
+    "everything": "viss"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -23204,7 +23224,8 @@
     "Supporters": "Supporters",
     "colour": "kleur",
     "leaderboards": "klassementen",
-    "style": "stijl"
+    "style": "stijl",
+    "everything": "alles"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -24363,7 +24384,8 @@
     "Supporters": "Støttespillere",
     "colour": "farge",
     "leaderboards": "topplister",
-    "style": "stil"
+    "style": "stil",
+    "everything": "alt"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -25519,7 +25541,8 @@
     "Supporters": "Wspierający",
     "colour": "kolor",
     "leaderboards": "rankingi",
-    "style": "styl"
+    "style": "styl",
+    "everything": "wszystko"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -26668,7 +26691,8 @@
     "Supporters": "Apoiadores",
     "colour": "cor",
     "leaderboards": "classificações",
-    "style": "estilo"
+    "style": "estilo",
+    "everything": "tudo"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -27818,7 +27842,8 @@
     "Supporters": "Susținători",
     "colour": "culoare",
     "leaderboards": "clasamente",
-    "style": "stil"
+    "style": "stil",
+    "everything": "totul"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -28956,7 +28981,8 @@
     "Supporters": "Спонсоры",
     "colour": "цвет",
     "leaderboards": "таблицы лидеров",
-    "style": "стиль"
+    "style": "стиль",
+    "everything": "всё"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -29889,7 +29915,8 @@
     "Supporters": "Podporovatelia",
     "colour": "farba",
     "leaderboards": "rebríčky",
-    "style": "štýl"
+    "style": "štýl",
+    "everything": "vse"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -31052,7 +31079,8 @@
     "Supporters": "Podržavaoci",
     "colour": "boja",
     "leaderboards": "rang-liste",
-    "style": "stil"
+    "style": "stil",
+    "everything": "све"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -32221,7 +32249,8 @@
     "Supporters": "Stödjare",
     "colour": "färg",
     "leaderboards": "topplistor",
-    "style": "stil"
+    "style": "stil",
+    "everything": "allt"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -33385,7 +33414,8 @@
     "Supporters": "ผู้สนับสนุน",
     "colour": "สี",
     "leaderboards": "กระดานจัดอันดับ",
-    "style": "สไตล์"
+    "style": "สไตล์",
+    "everything": "ทั้งหมด"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -34317,7 +34347,8 @@
     "Supporters": "Mga tagasuporta",
     "colour": "kulay",
     "leaderboards": "mga leaderboard",
-    "style": "istilo"
+    "style": "istilo",
+    "everything": "lahat"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -35478,7 +35509,8 @@
     "Supporters": "Destekçiler",
     "colour": "renk",
     "leaderboards": "liderlik tabloları",
-    "style": "stil"
+    "style": "stil",
+    "everything": "her şey"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -36631,7 +36663,8 @@
     "Supporters": "Підтримувачі",
     "colour": "колір",
     "leaderboards": "таблиці лідерів",
-    "style": "стиль"
+    "style": "стиль",
+    "everything": "усе"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -37773,7 +37806,8 @@
     "Supporters": "Người ủng hộ",
     "colour": "màu sắc",
     "leaderboards": "bảng xếp hạng",
-    "style": "phong cách"
+    "style": "phong cách",
+    "everything": "tất cả"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -38937,6 +38971,7 @@
     "Supporters": "支持者",
     "colour": "颜色",
     "leaderboards": "排行榜",
-    "style": "风格"
+    "style": "风格",
+    "everything": "全部"
   }
 }

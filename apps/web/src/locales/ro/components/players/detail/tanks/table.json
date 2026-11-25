@@ -2,5 +2,6 @@
   "no-tanks-played-yet": "Niciun tanc jucat încă.",
   "no-tanks-match-these-filters": "Niciun tanc nu corespunde acestor filtre.",
   "name": "Nume",
-  "no-tanks-played-in-this-mode": "Nu au fost jucate tancuri în acest mod."
+  "no-tanks-played-in-this-mode": "Nu au fost jucate tancuri în acest mod.",
+  "no-tanks-played-in-this-window": "Niciun vehicul nu a fost jucat în această fereastră."
 }

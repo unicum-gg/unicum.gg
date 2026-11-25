@@ -1,4 +1,5 @@
 {
   "title": "De tanks van {nickname}",
-  "title-count": "Tanks van {nickname} ({count})"
+  "title-count": "Tanks van {nickname} ({count})",
+  "window-since": "We hebben geen record van dit account dat ouder is dan {date}, dus de tabel dekt alles sinds die datum."
 }

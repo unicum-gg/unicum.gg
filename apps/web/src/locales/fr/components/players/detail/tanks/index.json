@@ -1,4 +1,5 @@
 {
   "title": "Les chars de {nickname}",
-  "title-count": "Chars de {nickname} ({count})"
+  "title-count": "Chars de {nickname} ({count})",
+  "window-since": "Nous n’avons aucun record de ce compte antérieur à {date}, le tableau couvre donc tout depuis cette date."
 }

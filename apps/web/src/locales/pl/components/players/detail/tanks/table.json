@@ -2,5 +2,6 @@
   "no-tanks-played-yet": "Nie rozegrano jeszcze żadnych bitew czołgami.",
   "no-tanks-match-these-filters": "Żadne czołgi nie pasują do tych filtrów.",
   "name": "Nazwa",
-  "no-tanks-played-in-this-mode": "Brak rozegranych czołgów w tym trybie."
+  "no-tanks-played-in-this-mode": "Brak rozegranych czołgów w tym trybie.",
+  "no-tanks-played-in-this-window": "W tym oknie nie rozegrano żadnych bitew żadnym pojazdem."
 }

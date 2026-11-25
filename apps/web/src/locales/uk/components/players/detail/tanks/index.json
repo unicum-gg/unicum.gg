@@ -1,4 +1,5 @@
 {
   "title": "Танки {nickname}",
-  "title-count": "Танки нікнейм {nickname} ({count})"
+  "title-count": "Танки нікнейм {nickname} ({count})",
+  "window-since": "У нас немає рекорду цього облікового запису, давнішого за {date}, тому таблиця охоплює усе відтоді."
 }

@@ -1,4 +1,5 @@
 {
   "title": "{nickname}的坦克",
-  "title-count": "{nickname}的坦克（{count}）"
+  "title-count": "{nickname}的坦克（{count}）",
+  "window-since": "我们没有这个账号早于 {date} 的纪录，因此表格覆盖从那时起的全部。"
 }

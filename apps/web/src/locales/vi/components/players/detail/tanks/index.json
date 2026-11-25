@@ -1,4 +1,5 @@
 {
   "title": "Xe tăng của {nickname}",
-  "title-count": "Xe tăng của {nickname} ({count})"
+  "title-count": "Xe tăng của {nickname} ({count})",
+  "window-since": "Chúng tôi không có kỷ lục về tài khoản này cũ hơn {date}, vì vậy bảng bao phủ tất cả kể từ thời điểm đó."
 }

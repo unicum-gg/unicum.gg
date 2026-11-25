@@ -2,5 +2,6 @@
   "no-tanks-played-yet": "Још нема одиграних тенкова.",
   "no-tanks-match-these-filters": "Ниједан тенк не одговара овим филтерима.",
   "name": "Naziv",
-  "no-tanks-played-in-this-mode": "Нема тенкова, ништа није одиграно у овом режиму."
+  "no-tanks-played-in-this-mode": "Нема тенкова, ништа није одиграно у овом режиму.",
+  "no-tanks-played-in-this-window": "U ovom prozoru nije одиграно nijedno возило."
 }

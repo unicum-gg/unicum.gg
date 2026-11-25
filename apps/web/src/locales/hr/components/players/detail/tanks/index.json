@@ -1,4 +1,5 @@
 {
   "title": "Tenki od {nickname}",
-  "title-count": "Tenkovi nadimka {nickname} ({count})"
+  "title-count": "Tenkovi nadimka {nickname} ({count})",
+  "window-since": "Nemamo rekord ovog računa stariji od {date}, stoga tablica pokriva sve od tada."
 }

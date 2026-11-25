@@ -2,5 +2,6 @@
   "no-tanks-played-yet": "Wala pang tank na nilaro.",
   "no-tanks-match-these-filters": "Walang tank na tumutugma sa mga filter na ito.",
   "name": "Pangalan",
-  "no-tanks-played-in-this-mode": "Walang mga tangke ang nilaro sa mode na ito."
+  "no-tanks-played-in-this-mode": "Walang mga tangke ang nilaro sa mode na ito.",
+  "no-tanks-played-in-this-window": "Walang sasakyan ang nilaro sa window na ito."
 }

@@ -2,5 +2,6 @@
   "no-tanks-played-yet": "Танков пока нет.",
   "no-tanks-match-these-filters": "Нет танков, соответствующих этим фильтрам.",
   "name": "Название",
-  "no-tanks-played-in-this-mode": "В этом режиме нет танков с сыгранными боями."
+  "no-tanks-played-in-this-mode": "В этом режиме нет танков с сыгранными боями.",
+  "no-tanks-played-in-this-window": "В этом окне не сыграно ни одного боя на технике."
 }

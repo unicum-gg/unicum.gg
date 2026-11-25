@@ -1,4 +1,5 @@
 {
   "title": "{nickname}의 탱크",
-  "title-count": "{nickname}의 전차 ({count})"
+  "title-count": "{nickname}의 전차 ({count})",
+  "window-since": "이 계정에 대해 {date}보다 오래된 기록이 없으므로, 표에는 그 이후의 전체 기록이 포함됩니다."
 }

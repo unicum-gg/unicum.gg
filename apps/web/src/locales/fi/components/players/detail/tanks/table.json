@@ -2,5 +2,6 @@
   "no-tanks-played-yet": "Panssarivaunuilla ei ole vielä pelattu.",
   "no-tanks-match-these-filters": "Yksikään panssarivaunu ei vastaa näitä suodattimia.",
   "name": "Nimi",
-  "no-tanks-played-in-this-mode": "Tässä pelimuodossa ei pelattu yhdelläkään panssarivaunulla."
+  "no-tanks-played-in-this-mode": "Tässä pelimuodossa ei pelattu yhdelläkään panssarivaunulla.",
+  "no-tanks-played-in-this-window": "Tässä ikkunassa ei pelattu yhtään ajoneuvoa."
 }

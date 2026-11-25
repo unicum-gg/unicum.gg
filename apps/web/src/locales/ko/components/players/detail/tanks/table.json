@@ -2,5 +2,6 @@
   "no-tanks-played-yet": "아직 플레이한 전차가 없습니다.",
   "no-tanks-match-these-filters": "이 필터와 일치하는 전차가 없습니다.",
   "name": "이름",
-  "no-tanks-played-in-this-mode": "이 모드에서 플레이함 전차가 없습니다."
+  "no-tanks-played-in-this-mode": "이 모드에서 플레이함 전차가 없습니다.",
+  "no-tanks-played-in-this-window": "이 창에서는 플레이한 차량이 없습니다."
 }

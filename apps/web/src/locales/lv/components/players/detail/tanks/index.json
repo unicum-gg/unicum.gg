@@ -1,4 +1,5 @@
 {
   "title": "{nickname} tvertne",
-  "title-count": "{nickname} tanki ({count})"
+  "title-count": "{nickname} tanki ({count})",
+  "window-since": "Mums nav neviena par {date} senāka rekorda par šo kontu, tāpēc tabula aptver visu kopš tā laika."
 }

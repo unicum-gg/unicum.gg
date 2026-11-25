@@ -1,4 +1,5 @@
 {
   "title": "Tancurile lui {nickname}",
-  "title-count": "Tancurile poreclei {nickname} ({count})"
+  "title-count": "Tancurile poreclei {nickname} ({count})",
+  "window-since": "Nu avem niciun record pentru acest cont anterior datei {date}, așa că tabelul acoperă totul de atunci."
 }

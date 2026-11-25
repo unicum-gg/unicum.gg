@@ -1,4 +1,5 @@
 {
   "title": "دبابات {nickname}",
-  "title-count": "دبابات {nickname} ({count})"
+  "title-count": "دبابات {nickname} ({count})",
+  "window-since": "لا نملك سجلًا لهذا الحساب يعود إلى ما قبل {date}، لذا يغطي الجدول كل شيء منذ ذلك الحين."
 }

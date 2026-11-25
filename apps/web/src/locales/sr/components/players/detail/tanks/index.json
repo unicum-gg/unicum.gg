@@ -1,4 +1,5 @@
 {
   "title": "Tenkovi {nickname}",
-  "title-count": "Тенкови налога {nickname} ({count})"
+  "title-count": "Тенкови налога {nickname} ({count})",
+  "window-since": "Nemamo rekord za ovaj nalog stariji od {date}, tako da табела покрива све od tada."
 }

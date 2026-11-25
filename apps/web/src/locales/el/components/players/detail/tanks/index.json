@@ -1,4 +1,5 @@
 {
   "title": "Τα τανκς του {nickname}",
-  "title-count": "Άρματα του {nickname} ({count})"
+  "title-count": "Άρματα του {nickname} ({count})",
+  "window-since": "Δεν έχουμε ρεκόρ για αυτόν τον λογαριασμό πριν από {date}, επομένως ο πίνακας καλύπτει όλα από τότε."
 }
