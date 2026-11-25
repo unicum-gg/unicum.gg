@@ -11,6 +11,8 @@
     "./subscription": "./src/subscription/index.ts",
     "./discord/supporter-role": "./src/discord/supporter-role.ts",
     "./discord/supporter-role-cron": "./src/discord/supporter-role-cron.ts",
+    "./discord/member-identity": "./src/discord/member-identity.ts",
+    "./discord/member-identity-cron": "./src/discord/member-identity-cron.ts",
     "./stripe": "./src/stripe/index.ts",
     "./db": "./src/db/index.ts",
     "./db/schema": "./src/db/schema/index.ts",

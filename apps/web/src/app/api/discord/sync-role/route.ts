@@ -7,6 +7,7 @@ import {
   getDiscordUserId,
   grantSupporterRole,
 } from "@unicum.gg/core/discord/supporter-role";
+import { syncMemberIdentity } from "@unicum.gg/core/discord/member-identity";
 import ROUTES from "@/constants/routes";
 import { addUserToGuild, discordConfig } from "@/services/discord";
 
@@ -52,6 +53,9 @@ export async function GET(): Promise<Response> {
     // No usable token (revoked / refresh failed) — rely on existing membership.
   }
 
+  // Now that they are certainly in, the name and server role the link's own
+  // hook could not set on a member who had not joined yet.
+  await syncMemberIdentity(discordUserId);
   const granted = await grantSupporterRole(discordUserId);
   return NextResponse.redirect(support(granted ? "ok" : "error"));
 }

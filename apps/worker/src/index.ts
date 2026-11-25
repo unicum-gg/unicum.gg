@@ -137,6 +137,11 @@ async function startCrons(): Promise<void> {
   );
   startGameChangesCron();
 
+  const { startMemberIdentityCron } = await import(
+    "@unicum.gg/core/discord/member-identity-cron"
+  );
+  startMemberIdentityCron();
+
   const { startTankWarmCron } = await import(
     "@unicum.gg/core/wargaming/wot/tanks/warm-cron"
   );

@@ -11,6 +11,7 @@ import {
 import { getTwitchUsersById, isTwitchEnabled } from "@unicum.gg/core/twitch";
 import { upsertStreamer } from "@unicum.gg/core/twitch/streamers";
 import { refreshTwitchToken } from "@unicum.gg/core/twitch/refresh";
+import { syncMemberIdentity } from "@unicum.gg/core/discord/member-identity";
 import { wargaming } from "./wargaming";
 
 /**
@@ -84,6 +85,12 @@ export const auth = betterAuth({
         // `${region}-${accountId}`; the Twitch `sub` resolves to the login via
         // Helix. Non-WG users (no such id) are ignored.
         after: async (twitchAccount) => {
+          // A Discord link puts the player's Wargaming name and server on
+          // their membership of our server, if they are in it already.
+          if (twitchAccount.providerId === "discord") {
+            await syncMemberIdentity(twitchAccount.accountId);
+            return;
+          }
           if (twitchAccount.providerId !== "twitch") return;
           // Better Auth mints its own opaque user id, so recover the WG identity
           // from this user's linked wargaming account row, whose accountId is

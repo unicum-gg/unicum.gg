@@ -10,6 +10,7 @@ import { db } from "@unicum.gg/core/db";
 import { auth } from "@unicum.gg/core/auth";
 import { getDiscordAccount } from "@unicum.gg/core/discord";
 import { revokeDiscordToken } from "@unicum.gg/core/discord/revoke";
+import { releaseMemberIdentity } from "@unicum.gg/core/discord/member-identity";
 import {
   getDiscordUserId,
   releaseSupporterRole,
@@ -201,9 +202,10 @@ async function disconnectTwitch(userId: string): Promise<DisconnectResult> {
 }
 
 /**
- * Hand a player's Discord authorization back and give the supporter role up.
+ * Hand a player's Discord authorization back, give the supporter role up, and
+ * take their Wargaming name and server off their membership of our server.
  *
- * The role has to go first, while the link is still readable: once the row is
+ * Both have to go first, while the link is still readable: once the row is
  * gone `reconcileSupporterRole` answers "never linked, nothing to reconcile"
  * for this user, so a role left granted here would never be revoked by
  * anything, on an account we no longer hold an id for.
@@ -213,6 +215,7 @@ async function disconnectDiscord(userId: string): Promise<DisconnectResult> {
   if (!discordUserId) return DisconnectResult.NotConnected;
 
   await releaseSupporterRole(userId, discordUserId);
+  await releaseMemberIdentity(userId, discordUserId);
   const accessToken = await auth.api
     .getAccessToken({
       body: { providerId: AuthProvider.Discord, userId },

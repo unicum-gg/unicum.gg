@@ -108,9 +108,9 @@ export async function listGuildChannels(
     .map((c) => ({ id: c.id, name: c.name, position: c.position }));
 }
 
-/** Bot-token request that only cares about success (role ops return 204, which
+/** Bot-token request that only cares about success (role and member ops return 204, which
  * `botFetch` can't distinguish from a failure since it parses JSON). */
-async function botRequestOk(path: string, init: RequestInit): Promise<boolean> {
+export async function botRequestOk(path: string, init: RequestInit): Promise<boolean> {
   if (!env.DISCORD_BOT_TOKEN) return false;
   const res = await fetch(`${API}${path}`, {
     ...init,

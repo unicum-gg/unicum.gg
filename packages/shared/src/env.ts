@@ -132,6 +132,12 @@ export const env = createEnv({
     DISCORD_SUPPORTER_BRONZE_ROLE_ID: z.string().optional(),
     DISCORD_SUPPORTER_SILVER_ROLE_ID: z.string().optional(),
     DISCORD_SUPPORTER_GOLD_ROLE_ID: z.string().optional(),
+    // The server roles a linked member wears beside their `Nickname [EU]`
+    // (`@unicum.gg/core/discord/member-identity`). All three or the feature is
+    // off. The bot needs Manage Nicknames and Manage Roles, above these roles.
+    DISCORD_EU_ROLE_ID: z.string().optional(),
+    DISCORD_NA_ROLE_ID: z.string().optional(),
+    DISCORD_ASIA_ROLE_ID: z.string().optional(),
     // Stripe (support subscriptions). Web-only. Optional so the worker/bot boot
     // without them and the feature degrades off when unset (subscribe button
     // hidden). PRODUCT_ID is the "unicum.gg Support" product the pay-what-you-want
@@ -204,6 +210,9 @@ export const env = createEnv({
     DISCORD_SUPPORTER_BRONZE_ROLE_ID: process.env.DISCORD_SUPPORTER_BRONZE_ROLE_ID,
     DISCORD_SUPPORTER_SILVER_ROLE_ID: process.env.DISCORD_SUPPORTER_SILVER_ROLE_ID,
     DISCORD_SUPPORTER_GOLD_ROLE_ID: process.env.DISCORD_SUPPORTER_GOLD_ROLE_ID,
+    DISCORD_EU_ROLE_ID: process.env.DISCORD_EU_ROLE_ID,
+    DISCORD_NA_ROLE_ID: process.env.DISCORD_NA_ROLE_ID,
+    DISCORD_ASIA_ROLE_ID: process.env.DISCORD_ASIA_ROLE_ID,
     STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
     STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
     STRIPE_PRODUCT_ID: process.env.STRIPE_PRODUCT_ID,
