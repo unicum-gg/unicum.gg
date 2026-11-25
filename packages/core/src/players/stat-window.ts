@@ -1,4 +1,4 @@
-import { sql } from "drizzle-orm";
+import { type SQL, sql } from "drizzle-orm";
 import {
   StatWindowUnit,
   buildPeriodDerived,
@@ -27,7 +27,7 @@ import {
   tankSnapshotMapFromRaws,
 } from "./initial-data";
 import { tankPeriod } from "./tank-periods";
-import { tankSnapshotsToTankStats } from "./tanks";
+import { type TankSnapshotMap, tankSnapshotsToTankStats } from "./tanks";
 
 /**
  * The account's own diff over a window, kept for the two figures only the
@@ -92,6 +92,87 @@ function windowStart(window: StatWindow) {
   )`;
 }
 
+/**
+ * The per-vehicle half of a window, as CTEs over one player: `tank_rows`
+ * (every stored row of the player's vehicles), `win` (the instant the window
+ * starts at) and `tank_scan` (each row ranked as the vehicle's newest and as
+ * its baseline). Shared by the profile's stats column and the garage table,
+ * so a vehicle's window cannot be read two ways.
+ *
+ * COALESCE because a null start (a battle window past our history) must read
+ * as "not a baseline" rather than as NULL, which sorts FIRST under DESC and
+ * would pick an arbitrary row.
+ */
+function tankWindowCtes(region: Region, playerId: SQL, window: StatWindow): SQL {
+  const tankSnapshots = tankSnapshotsByRegion[region];
+  const inBase = sql`COALESCE(
+      taken_at <= (SELECT at FROM win) OR taken_at <= first_at + interval '1 minute',
+      false
+    )`;
+  return sql`
+      tank_rows AS (
+        SELECT ${TANK_COLS}, min(taken_at) OVER () AS first_at
+        FROM ${tankSnapshots}
+        WHERE player_id = ${playerId}
+      ),
+      win AS (SELECT ${windowStart(window)} AS at),
+      tank_scan AS (
+        SELECT ${TANK_COLS}, first_at,
+          row_number() OVER (PARTITION BY tank_id ORDER BY taken_at DESC, battles DESC) AS rn_latest,
+          row_number() OVER (
+            PARTITION BY tank_id ORDER BY ${inBase} DESC, taken_at DESC, battles DESC
+          ) AS rn_base,
+          ${inBase} AS in_base
+        FROM tank_rows
+      )`;
+}
+
+/** The window reaches past our history when it has no start at all (more
+ * battles than we ever saw) or starts before the first fetch closed. */
+function windowBounds(
+  startRaw: string | null,
+  firstRaw: string | null,
+): { from: Date | null; truncated: boolean } {
+  const startAt = startRaw ? new Date(startRaw) : null;
+  const firstAt = firstRaw ? new Date(firstRaw) : null;
+  const truncated =
+    firstAt !== null &&
+    (startAt === null || startAt.getTime() <= firstAt.getTime() + 60_000);
+  return { from: truncated ? firstAt : startAt, truncated };
+}
+
+/**
+ * Each vehicle's baseline for a window, for the garage table read over one:
+ * the same rows `loadPlayerStatWindow` diffs its column against. An empty map
+ * means we hold nothing old enough to diff with.
+ */
+export async function loadTankWindowBaseline(
+  region: Region,
+  playerId: number,
+  window: StatWindow,
+): Promise<{ baseline: TankSnapshotMap; from: Date | null; truncated: boolean }> {
+  const rows = (await traced("db loadTankWindowBaseline", () =>
+    db.execute(sql`
+      WITH ${tankWindowCtes(region, sql`${playerId}`, window)}
+      SELECT
+        (SELECT at FROM win) AS start_at,
+        (SELECT min(first_at) FROM tank_rows) AS first_at,
+        (SELECT json_agg(row_to_json(t)) FROM (
+          SELECT ${TANK_COLS} FROM tank_scan WHERE rn_base = 1 AND in_base
+        ) t) AS baseline_tanks
+    `),
+  )) as unknown as {
+    start_at: string | null;
+    first_at: string | null;
+    baseline_tanks: RawTankSnapshot[] | null;
+  }[];
+  const row = rows[0];
+  return {
+    baseline: tankSnapshotMapFromRaws(row?.baseline_tanks ?? null),
+    ...windowBounds(row?.start_at ?? null, row?.first_at ?? null),
+  };
+}
+
 type Row = {
   account_id: number | null;
   nickname: string | null;
@@ -123,15 +204,6 @@ export async function loadPlayerStatWindow(
 ): Promise<(PlayerStatWindow & { accountId: number; nickname: string }) | null> {
   const players = playersByRegion[region];
   const playerSnapshots = playerSnapshotsByRegion[region];
-  const tankSnapshots = tankSnapshotsByRegion[region];
-
-  // COALESCE because a null start (a battle window past our history) must
-  // read as "not a baseline" rather than as NULL, which sorts FIRST under
-  // DESC and would pick an arbitrary row.
-  const inBase = sql`COALESCE(
-      taken_at <= (SELECT at FROM win) OR taken_at <= first_at + interval '1 minute',
-      false
-    )`;
 
   const rows = (await traced("db loadPlayerStatWindow", () =>
     db.execute(sql`
@@ -140,21 +212,7 @@ export async function loadPlayerStatWindow(
         WHERE LOWER(nickname) = LOWER(${nickname})
         LIMIT 1
       ),
-      tank_rows AS (
-        SELECT ${TANK_COLS}, min(taken_at) OVER () AS first_at
-        FROM ${tankSnapshots}
-        WHERE player_id = (SELECT id FROM p)
-      ),
-      win AS (SELECT ${windowStart(window)} AS at),
-      tank_scan AS (
-        SELECT ${TANK_COLS}, first_at,
-          row_number() OVER (PARTITION BY tank_id ORDER BY taken_at DESC, battles DESC) AS rn_latest,
-          row_number() OVER (
-            PARTITION BY tank_id ORDER BY ${inBase} DESC, taken_at DESC, battles DESC
-          ) AS rn_base,
-          ${inBase} AS in_base
-        FROM tank_rows
-      ),
+      ${tankWindowCtes(region, sql`(SELECT id FROM p)`, window)},
       latest_snap AS (
         SELECT * FROM ${playerSnapshots}
         WHERE player_id = (SELECT id FROM p)
@@ -204,13 +262,7 @@ export async function loadPlayerStatWindow(
     accountPeriodDiff(latest, baseline),
   );
 
-  const startAt = row.start_at ? new Date(row.start_at) : null;
-  const firstAt = row.first_at ? new Date(row.first_at) : null;
-  // The window reaches past our history when it has no start at all (more
-  // battles than we ever saw) or starts before the first fetch closed.
-  const truncated =
-    firstAt !== null &&
-    (startAt === null || startAt.getTime() <= firstAt.getTime() + 60_000);
+  const { from, truncated } = windowBounds(row.start_at, row.first_at);
 
   return {
     accountId: Number(row.account_id),
@@ -224,7 +276,7 @@ export async function loadPlayerStatWindow(
       wn8Expected,
       wnxExpected,
     ),
-    from: truncated ? firstAt : startAt,
+    from,
     truncated,
   };
 }

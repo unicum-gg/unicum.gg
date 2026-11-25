@@ -2,19 +2,8 @@
 
 import type { NumberFormatter } from "@/lib/format";
 
-import { statLabel } from "@/components/stat-label";
-
-import { useTranslation } from "@/hooks/use-translation";
-import { useStatLabels } from "@/hooks/use-stat-labels";
-import { SlidersHorizontalIcon } from "@phosphor-icons/react";
-import {
-  type ReactNode,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import type { useTranslation } from "@/hooks/use-translation";
+import type { ReactNode } from "react";
 import { MOE_COLORS, MoEIcon } from "@/components/tanks/moe-icon";
 import {
   MARK_TARGET_LABEL,
@@ -25,11 +14,9 @@ import {
 import { MoMIcon } from "@/components/tanks/mom-icon";
 import { Hint } from "@/components/hint";
 import { metricLabel } from "@/components/tanks/perf-columns";
-import { useCookie } from "@/hooks/use-cookie";
+import { withCareer } from "./career-delta";
 import { markBar, MarkWindow, RatingMetric, RATING_COLOR_CLASS, ratingColorClass as metricColorClass, winrateColor, wnRatingMetric, type PlayerTankRow } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
-
-const COLS_COOKIE = "unicum.player_vehicle_columns";
 
 /** The WN column's key, named here because two other things hide it: the table
  * drops it outside Random Battles, and so does the picker below. */
@@ -252,7 +239,16 @@ export const PLAYER_COLUMNS: PlayerColumn[] = [
     label: "Avg damage",
     align: "end",
     defaultVisible: true,
-    cell: (r, { num }) => ({ node: r.avgDamage != null ? num(INT_FORMAT).format(r.avgDamage) : DASH }),
+    cell: (r, ctx) => ({
+      node: withCareer(
+        r.avgDamage != null ? ctx.num(INT_FORMAT).format(r.avgDamage) : DASH,
+        r.avgDamage,
+        r.career?.avgDamage,
+        (v) => ctx.num(INT_FORMAT).format(v),
+        ctx,
+        { row: r },
+      ),
+    }),
     sortValue: (r) => r.avgDamage ?? -1,
     rangeValue: (r) => r.avgDamage,
   },
@@ -262,7 +258,9 @@ export const PLAYER_COLUMNS: PlayerColumn[] = [
     align: "end",
     defaultVisible: true,
     hideOnMobile: true,
-    cell: (r, { num }) => ({ node: r.avgXp != null ? num(INT_FORMAT).format(r.avgXp) : DASH }),
+    cell: (r, ctx) => ({
+      node: r.avgXp != null ? ctx.num(INT_FORMAT).format(r.avgXp) : DASH,
+    }),
     sortValue: (r) => r.avgXp ?? -1,
     rangeValue: (r) => r.avgXp,
   },
@@ -272,8 +270,15 @@ export const PLAYER_COLUMNS: PlayerColumn[] = [
     tip: "Overall (lifetime) win rate",
     align: "end",
     defaultVisible: true,
-    cell: (r, { num }) => ({
-      node: r.winrate != null ? `${num(PCT2_FORMAT).format(r.winrate * 100)}%` : DASH,
+    cell: (r, ctx) => ({
+      node: withCareer(
+        r.winrate != null ? `${ctx.num(PCT2_FORMAT).format(r.winrate * 100)}%` : DASH,
+        r.winrate != null ? r.winrate * 100 : null,
+        r.career?.winrate != null ? r.career.winrate * 100 : null,
+        (v) => ctx.num(PCT1_FORMAT).format(v),
+        ctx,
+        { row: r, onColor: r.winrate != null },
+      ),
       className:
         r.winrate != null ? RATING_COLOR_CLASS[winrateColor(r.winrate)] : undefined,
     }),
@@ -287,10 +292,19 @@ export const PLAYER_COLUMNS: PlayerColumn[] = [
     align: "end",
     defaultVisible: true,
     header: ({ metric }) => metricLabel(metric),
-    cell: (r, { metric, num }) => {
+    cell: (r, ctx) => {
+      const { metric, num } = ctx;
       const v = ratingForMetric(r, metric);
+      const career = r.career ? r.career[wnRatingMetric(metric)] : null;
       return {
-        node: v != null ? num(DEC2_FORMAT).format(v) : DASH,
+        node: withCareer(
+          v != null ? num(DEC2_FORMAT).format(v) : DASH,
+          v,
+          career,
+          (value) => num(INT_FORMAT).format(value),
+          ctx,
+          { row: r, onColor: v != null },
+        ),
         className: v != null ? ratingColorClass(v, metric) : undefined,
       };
     },
@@ -310,7 +324,7 @@ export const PLAYER_RANGE_COLUMNS = PLAYER_COLUMNS.filter(
 
 export const PLAYER_COLUMN_BY_KEY: Record<string, PlayerColumn> =
   Object.fromEntries(PLAYER_COLUMNS.map((c) => [c.key, c]));
-const DEFAULT_KEYS = PLAYER_COLUMNS.filter((c) => c.defaultVisible).map(
+export const DEFAULT_KEYS = PLAYER_COLUMNS.filter((c) => c.defaultVisible).map(
   (c) => c.key,
 );
 
@@ -332,91 +346,3 @@ export const COMPACT_COLUMN_KEYS = new Set([
   "winrate",
   "rating",
 ]);
-
-// Cookie-backed set of visible column keys, shared between the selector (in the
-// filter bar) and the table via useCookie's broadcast.
-export function usePlayerColumns(): [Set<string>, (key: string) => void] {
-  const [raw, setRaw] = useCookie(COLS_COOKIE, DEFAULT_KEYS.join(","));
-  const selected = useMemo(() => {
-    const set = new Set(raw.split(",").filter((k) => PLAYER_COLUMN_BY_KEY[k]));
-    return set.size > 0 ? set : new Set(DEFAULT_KEYS);
-  }, [raw]);
-  const toggle = useCallback(
-    (key: string) => {
-      const next = new Set(selected);
-      if (next.has(key)) next.delete(key);
-      else next.add(key);
-      setRaw(
-        PLAYER_COLUMNS.filter((c) => next.has(c.key))
-          .map((c) => c.key)
-          .join(","),
-      );
-    },
-    [selected, setRaw],
-  );
-  return [selected, toggle];
-}
-
-export function PlayerColumnSelector({
-  /** Outside Random Battles the WN column holds nothing and the table drops it,
-   * so offering it here would be a switch that does nothing. See
-   * `TANK_MODES_RATED`. */
-  rated = true,
-}: {
-  rated?: boolean;
-} = {}) {
-  const { t: tStats } = useStatLabels();
-  const { t } = useTranslation(
-    "components/players/detail/tanks/vehicle-columns",
-  );
-  const [selected, onToggle] = usePlayerColumns();
-  const offered = useMemo(
-    () => PLAYER_COLUMNS.filter((c) => rated || c.key !== RATING_COLUMN_KEY),
-    [rated],
-  );
-  const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!open) return;
-    const onDown = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
-    };
-    document.addEventListener("mousedown", onDown);
-    return () => document.removeEventListener("mousedown", onDown);
-  }, [open]);
-
-  return (
-    <div ref={ref} className="relative">
-      <button
-        type="button"
-        onClick={() => setOpen((o) => !o)}
-        className="flex h-7 cursor-pointer items-center gap-1.5 rounded-md border border-fd-border px-3 text-xs font-medium transition-colors hover:bg-fd-secondary/40"
-      >
-        <SlidersHorizontalIcon weight="bold" className="size-3.5" />
-        {t("columns")}
-        <span className="text-fd-muted-foreground">
-          {offered.filter((c) => selected.has(c.key)).length}/{offered.length}
-        </span>
-      </button>
-      {open && (
-        <div className="absolute left-0 z-20 mt-1 max-h-96 w-56 overflow-y-auto rounded-lg border border-fd-border bg-fd-popover p-2 shadow-lg">
-          {offered.map((c) => (
-            <label
-              key={c.key}
-              className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1 text-xs hover:bg-fd-secondary/40"
-            >
-              <input
-                type="checkbox"
-                checked={selected.has(c.key)}
-                onChange={() => onToggle(c.key)}
-                className="size-3.5 accent-brand"
-              />
-              <span>{statLabel(c.label, tStats)}</span>
-            </label>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}

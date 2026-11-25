@@ -5,10 +5,10 @@ import {
   type ColumnsOf,
 } from "../lib/columns";
 import type { TankMarkReach } from "./mark-progress";
-import type { PlayerTankRow, PlayerTanksPayload } from "./tanks";
+import type { PlayerTankCareer, PlayerTankRow, PlayerTanksPayload } from "./tanks";
 
-/** The vehicle row less its one nested field, which is transposed on its own. */
-type FlatPlayerTankRow = Omit<PlayerTankRow, "markReach">;
+/** The vehicle row less its nested fields, which are transposed on their own. */
+type FlatPlayerTankRow = Omit<PlayerTankRow, "markReach" | "career">;
 
 /**
  * A player's garage as it crosses the wire: one array per field.
@@ -27,6 +27,9 @@ export type PlayerTankColumns = ColumnsOf<FlatPlayerTankRow> & {
   /** The marks comparison, transposed like the rows around it. Null when no
    * vehicle in the garage has one, which is the usual case below tier V. */
   markReach: ColumnsOf<TankMarkReach> | null;
+  /** The career figures of a windowed list, transposed the same way. Null on
+   * a list that is not windowed. */
+  career: ColumnsOf<PlayerTankCareer> | null;
 };
 
 /** The garage list as the endpoint answers it. */
@@ -104,6 +107,26 @@ const EMPTY_COLUMNS: ColumnsOf<FlatPlayerTankRow> = {
   researchXp: null,
 };
 
+/** The career figures are rounded like the row figures they sit beside. */
+const CAREER_DECIMALS: ColumnDecimals<PlayerTankCareer> = {
+  avgDamage: 0,
+  avgXp: 0,
+  winrate: 4,
+  wn7: 2,
+  wn8: 2,
+  wnx: 2,
+};
+
+const EMPTY_CAREER: ColumnsOf<PlayerTankCareer> = {
+  battles: null,
+  avgDamage: null,
+  avgXp: null,
+  winrate: null,
+  wn7: null,
+  wn8: null,
+  wnx: null,
+};
+
 /** Same for the nested comparison, which is published whole or not at all. */
 const EMPTY_REACH: ColumnsOf<TankMarkReach> = {
   mark1: null,
@@ -117,13 +140,17 @@ const EMPTY_REACH: ColumnsOf<TankMarkReach> = {
 export function playerTankColumns(
   rows: readonly PlayerTankRow[],
 ): PlayerTankColumns {
-  const flat = rows.map(({ markReach: _reach, ...rest }) => rest);
+  const flat = rows.map(({ markReach: _reach, career: _career, ...rest }) => rest);
   const reaches = rows.map((row) => row.markReach);
+  const careers = rows.map((row) => row.career ?? null);
   return {
     ...EMPTY_COLUMNS,
     ...toColumns(flat, TANK_DECIMALS),
     markReach: reaches.some((reach) => reach != null)
       ? { ...EMPTY_REACH, ...toColumns(reaches) }
+      : null,
+    career: careers.some((c) => c != null)
+      ? { ...EMPTY_CAREER, ...toColumns(careers, CAREER_DECIMALS) }
       : null,
   };
 }
@@ -141,13 +168,21 @@ export function playerTankColumns(
  * the comparison was made at all.
  */
 export function playerTankRows(columns: PlayerTankColumns): PlayerTankRow[] {
-  const { markReach, ...flat } = columns;
+  const { markReach, career, ...flat } = columns;
   const length = columns.tankId?.length ?? 0;
   const rows = fromColumns(flat as ColumnsOf<FlatPlayerTankRow>, length);
   const reaches = markReach ? fromColumns(markReach, length) : [];
+  // Read as present where `battles` is, the one career figure every vehicle
+  // with a record has.
+  const careers = career ? fromColumns(career, length) : [];
   return rows.map((row, i) => {
     const reach = reaches[i];
-    return { ...row, markReach: reach?.window != null ? reach : null };
+    const c = careers[i];
+    return {
+      ...row,
+      markReach: reach?.window != null ? reach : null,
+      career: c?.battles != null ? (c as PlayerTankCareer) : null,
+    };
   });
 }
 

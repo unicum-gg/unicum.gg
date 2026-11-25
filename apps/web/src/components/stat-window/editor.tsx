@@ -35,8 +35,8 @@ export function StatWindowEditor({
   onSave,
 }: {
   window: StatWindow;
-  /** The slot's own default, offered back as a reset. */
-  fallback: StatWindow;
+  /** The slot's own default, offered back as a reset. None, no reset. */
+  fallback?: StatWindow;
   /** The column's heading, for the trigger's accessible name. */
   label: string;
   /** The units this column may be set in; the switch is drawn only when
@@ -109,7 +109,7 @@ export function StatWindowEditor({
             {t("range", { max: STAT_WINDOW_MAX[unit] })}
           </p>
           <div className="flex gap-2">
-            {sameStatWindow(window, fallback) ? null : (
+            {!fallback || sameStatWindow(window, fallback) ? null : (
               <Button
                 type="button"
                 variant="ghost"

@@ -13,13 +13,15 @@ import { Table, TableBody } from "@/components/ui/table";
 import {
   PLAYER_COLUMNS,
   PLAYER_RANGE_COLUMNS,
-  PlayerColumnSelector,
   type PlayerCellCtx,
   type PlayerSortCtx,
   COMPACT_COLUMN_KEYS,
   RATING_COLUMN_KEY,
-  usePlayerColumns,
 } from "@/components/players/detail/tanks/vehicle-columns";
+import {
+  PlayerColumnSelector,
+  usePlayerColumns,
+} from "@/components/players/detail/tanks/column-selector";
 import {
   MarkTargetSelect,
   useMarkTarget,
@@ -46,6 +48,7 @@ export function PlayerTanksTable({
   vehicles,
   selectedSlug,
   mode = DEFAULT_TANK_BATTLE_MODE,
+  windowed = false,
 }: {
   region: Region;
   nickname: string;
@@ -59,6 +62,9 @@ export function PlayerTanksTable({
    * outside Random (`TANK_MODES_RATED`), and every row carries it onto the
    * record it opens so the panel lands on the same mode. */
   mode?: TankBattleMode;
+  /** The rows are read over a window rather than the careers, so an empty
+   * list means nothing was played inside it. */
+  windowed?: boolean;
 }) {
   const { num } = useFormat();
   const { t } = useTranslation("components/players/detail/tanks/table");
@@ -228,7 +234,13 @@ export function PlayerTanksTable({
   if (vehicles.length === 0) {
     return (
       <p className="p-4 text-sm text-muted-foreground">
-        {t(filteredByMode ? "no-tanks-played-in-this-mode" : "no-tanks-played-yet")}
+        {t(
+          windowed
+            ? "no-tanks-played-in-this-window"
+            : filteredByMode
+              ? "no-tanks-played-in-this-mode"
+              : "no-tanks-played-yet",
+        )}
       </p>
     );
   }

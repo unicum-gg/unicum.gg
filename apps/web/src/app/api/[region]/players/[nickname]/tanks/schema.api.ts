@@ -1,7 +1,7 @@
 // Co-located response schema (`.api.ts` so next-openapi-gen scans it). Client-
 // safe (only zod): the player page parses the response with it.
 import { z } from "zod";
-import { MarkWindow, TankBattleMode } from "@unicum.gg/shared";
+import { MarkWindow, StatWindowUnit, TankBattleMode } from "@unicum.gg/shared";
 import type { EnumMeta } from "@/services/openapi/schemas";
 
 // --- Player tanks (GET /api/{region}/players/{nickname}/tanks) ---
@@ -30,6 +30,14 @@ const battleMode = z.enum(TankBattleMode).meta({
  */
 export const playerTanksQuery = z.object({
   mode: battleMode.optional(),
+  days: z.coerce.number().int().min(1).max(365).optional().meta({
+    description:
+      "Read every row over the last N days (1 to 365) instead of the vehicle's career. Give at most one of this or `battles`. Random Battles only: ignored under any other `mode`.",
+  }),
+  battles: z.coerce.number().int().min(1).max(10000).optional().meta({
+    description:
+      "Read every row over the player's last N battles (1 to 10000) instead of the vehicle's career. Give at most one of this or `days`. Random Battles only: ignored under any other `mode`.",
+  }),
 });
 
 /** One mode this player has a record in, for the table's own selector. */
@@ -74,6 +82,24 @@ const markReachColumns = z
     id: "TankMarkReachColumns",
     description:
       "Where the account's own combined damage sits against the region's three Marks of Excellence bars on each vehicle: `combined` over `markN` is how much of that mark's bar the player's average covers, and 1 or more means it already clears it. A vehicle's entry is absent (null in every column) where no honest reading exists: below tier 5 (the game awards no marks there), under 25 battles on the vehicle, or when the region has no usable bars for it. This is an average against a published bar, never the game's own rolling-window progress, which is `moePercent`. The whole object is null when no vehicle in the garage has a comparison.",
+  });
+
+/** A windowed list's career figures per vehicle, transposed like the rows. */
+const careerColumns = z
+  .object({
+    battles: z.array(z.number().nullable()).nullable(),
+    avgDamage: z.array(z.number().nullable()).nullable(),
+    avgXp: z.array(z.number().nullable()).nullable(),
+    winrate: z.array(z.number().nullable()).nullable(),
+    wn7: z.array(z.number().nullable()).nullable(),
+    wn8: z.array(z.number().nullable()).nullable(),
+    wnx: z.array(z.number().nullable()).nullable(),
+  })
+  .nullable()
+  .meta({
+    id: "TankCareerColumns",
+    description:
+      "On a windowed list (`days` or `battles`), each vehicle's whole record, aligned with the rows: what the window's figures are read against. Null on the career list.",
   });
 
 /**
@@ -130,6 +156,7 @@ const playerVehicleColumns = z
     buyCredits: z.array(z.number().nullable()).nullable(),
     researchXp: z.array(z.number().nullable()).nullable(),
     markReach: markReachColumns,
+    career: careerColumns,
   })
   .meta({
     id: "PlayerVehicleColumns",
@@ -149,6 +176,29 @@ export const PlayerTanksResponse = z.object({
     description:
       "The mode the rows describe, or null for the vehicle's whole record.",
   }),
+  window: z
+    .object({
+      window: z.object({
+        unit: z.enum(StatWindowUnit).meta({
+          description: "What the window counts: days from now, or the player's last battles.",
+          "x-enum-source": "STAT_WINDOW_UNIT",
+        } as EnumMeta),
+        value: z.number().int(),
+      }),
+      from: z.coerce.date().nullable().meta({
+        description:
+          "The instant the window was read back from. A battle window starts at the latest snapshot that sat at least that many battles back, so it can hold a few more than asked.",
+      }),
+      truncated: z.boolean().meta({
+        description:
+          "The window reaches further back than our history of the account, so it covers everything since the account was first tracked (`from`).",
+      }),
+    })
+    .nullable()
+    .meta({
+      description:
+        "The window the rows were read over, or null for the vehicles' whole records. Set, each row holds only what was played inside it and only the vehicles played inside it are listed.",
+    }),
   modes: z.array(playerTankModeOption).meta({
     description:
       "Every mode this player has a record in, in mode order. Empty for a player whose vehicles predate the breakdown being collected, which fills in on their next refresh: Wargaming reports lifetime totals, so there is nothing historical to backfill.",

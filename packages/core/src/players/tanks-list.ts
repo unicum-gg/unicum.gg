@@ -1,11 +1,16 @@
 import {
+  DEFAULT_TANK_BATTLE_MODE,
   EMPTY_TANK_OVERALL,
   availableTankModes,
   buildPlayerTankRows,
   isRatedTankMode,
   tankModeBlockMap,
   withTankMarkReach,
+  type PlayerTankCareer,
+  type PlayerTankRow,
   type PlayerTanksPayload,
+  type PlayerTanksWindow,
+  type StatWindow,
   type TankBattleMode,
   type TankEconomics,
   type TankStats,
@@ -23,6 +28,8 @@ import {
   getWN8ExpectedValues,
   getWNXExpectedValues,
 } from "@unicum.gg/core/wargaming/wot/wn-expected";
+import { loadTankWindowBaseline } from "./stat-window";
+import { tankPeriod } from "./tank-periods";
 import {
   getPlayerModeRows,
   groupModeRowsByTank,
@@ -40,11 +47,18 @@ import {
  * column it already has and answers a different question. The marks stay as they
  * are: a Mark of Excellence is on the gun, not on a format, so it is carried
  * from the snapshot rather than blanked or recomputed.
+ *
+ * `window` reads every row over that window instead of the vehicle's career,
+ * lists only the vehicles played inside it, and carries each one's career
+ * beside it. Random Battles only (or the mode-less list, whose window is the
+ * same battles): the per-mode breakdown is current state with no history to
+ * diff, so a window under any other mode is ignored and `window` answers null.
  */
 export async function loadPlayerTanks(
   region: Region,
   nickname: string,
   mode: TankBattleMode | null = null,
+  window: StatWindow | null = null,
 ): Promise<PlayerTanksPayload | null> {
   const initial = await loadPlayerInitialData(region, { nickname });
   if (!initial.player) return null;
@@ -121,6 +135,24 @@ export async function loadPlayerTanks(
   );
   const modes = availableTankModes(blocksByTank);
 
+  const windowed =
+    window !== null && (mode === null || mode === DEFAULT_TANK_BATTLE_MODE);
+  if (windowed) {
+    return {
+      ...(await loadWindowedTanks(region, playerId, window, overall, {
+        encyclopedia,
+        wn8Expected,
+        wnxExpected,
+        economics,
+        garage: garage?.tankIds ?? null,
+        moeThresholds,
+        recent: recentTankStats(overall, initial.periodTankSnapshots.d30),
+      })),
+      mode,
+      modes,
+    };
+  }
+
   // A vehicle the player never took into the chosen mode drops out of the list
   // entirely, which is the point: the table answers "what did I play HERE".
   const tanks =
@@ -156,5 +188,75 @@ export async function loadPlayerTanks(
     ),
     mode,
     modes,
+    window: null,
+  };
+}
+
+type RowContext = {
+  encyclopedia: Awaited<ReturnType<typeof getVehicleEncyclopedia>>;
+  wn8Expected: Awaited<ReturnType<typeof getWN8ExpectedValues>>;
+  wnxExpected: Awaited<ReturnType<typeof getWNXExpectedValues>>;
+  economics: Map<number, TankEconomics>;
+  garage: ReadonlySet<number> | null;
+  moeThresholds: Awaited<ReturnType<typeof getTankMoeByRegion>>;
+  recent: ReturnType<typeof recentTankStats>;
+};
+
+function careerOf(row: PlayerTankRow): PlayerTankCareer {
+  return {
+    battles: row.battles,
+    avgDamage: row.avgDamage,
+    avgXp: row.avgXp,
+    winrate: row.winrate,
+    wn7: row.wn7,
+    wn8: row.wn8,
+    wnx: row.wnx,
+  };
+}
+
+/**
+ * The garage over a window: each vehicle's counters diffed against its
+ * baseline with the same `tankPeriod` the profile's period columns use, rated
+ * the same way the career rows are, and paired with its career row.
+ *
+ * Only what was played inside the window is listed, so a verified garage's
+ * never-driven vehicles stay out. The marks stay the gun's (they are not a
+ * figure of a window), and so does the mark comparison, which reads the
+ * career and the last 30 days exactly as on the career list.
+ */
+async function loadWindowedTanks(
+  region: Region,
+  playerId: number,
+  window: StatWindow,
+  overall: TankStats[],
+  ctx: RowContext,
+): Promise<Pick<PlayerTanksPayload, "tanks" | "window">> {
+  const { baseline, from, truncated } = await loadTankWindowBaseline(
+    region,
+    playerId,
+    window,
+  );
+  const meta: PlayerTanksWindow = { window, from, truncated };
+  const period = tankPeriod(overall, baseline, null);
+  if (!period) return { tanks: [], window: meta };
+
+  const byId = new Map(overall.map((t) => [t.tank_id, t]));
+  const played = period.tanks.map((p) => ({ ...byId.get(p.tank_id)!, all: p.all }));
+  const rows = (tanks: TankStats[]) =>
+    buildPlayerTankRows(
+      tanks,
+      ctx.encyclopedia,
+      ctx.wn8Expected,
+      ctx.wnxExpected,
+      ctx.economics,
+      ctx.garage,
+    ).filter((r) => r.battles > 0);
+  const careers = new Map(
+    rows(played.map((p) => byId.get(p.tank_id)!)).map((r) => [r.tankId, careerOf(r)]),
+  );
+  const windowRows = withTankMarkReach(rows(played), overall, ctx.recent, ctx.moeThresholds);
+  return {
+    tanks: windowRows.map((r) => ({ ...r, career: careers.get(r.tankId) ?? null })),
+    window: meta,
   };
 }

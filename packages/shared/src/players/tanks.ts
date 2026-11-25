@@ -12,6 +12,7 @@ import type { TankModeAvailability } from "./tank-modes";
 import type { TankStats } from "../wot/tank-stats";
 import type { VehicleMeta } from "../wot/tanks/meta";
 import type { TankMarkReach } from "./mark-progress";
+import type { StatWindow } from "./stat-window";
 
 // One computed row per tank a player has battles in: vehicle metadata joined
 // from the encyclopedia plus derived per-battle stats and all three ratings.
@@ -86,6 +87,24 @@ export type PlayerTankRow = {
   buyGold: number | null;
   buyCredits: number | null;
   researchXp: number | null;
+  /**
+   * The vehicle's whole record, set only when the rows describe a window (see
+   * `PlayerTanksPayload.window`): what each figure of the row is read against,
+   * so the table can say whether the player is doing better or worse on the
+   * vehicle lately than over its career.
+   */
+  career?: PlayerTankCareer | null;
+};
+
+/** The career figures a windowed row is compared with, as the row spells them. */
+export type PlayerTankCareer = {
+  battles: number;
+  avgDamage: number | null;
+  avgXp: number | null;
+  winrate: number | null;
+  wn7: number | null;
+  wn8: number | null;
+  wnx: number | null;
 };
 
 /** Per-tank economics the vehicle rows carry for the account-value estimate. */
@@ -257,4 +276,18 @@ export type PlayerTanksPayload = {
    * means by its stats. */
   mode: TankBattleMode | null;
   modes: TankModeAvailability[];
+  /**
+   * The window the rows were read over, or null for the vehicles' whole
+   * records. Set, each row holds only what was played inside it, only vehicles
+   * played inside it are listed, and each carries its `career`.
+   */
+  window: PlayerTanksWindow | null;
+};
+
+export type PlayerTanksWindow = {
+  window: StatWindow;
+  /** The instant the window was read back from, which is the account's first
+   * snapshot when the window reaches further back than our history. */
+  from: Date | null;
+  truncated: boolean;
 };

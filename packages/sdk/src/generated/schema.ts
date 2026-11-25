@@ -648,7 +648,7 @@ export interface paths {
         };
         /**
          * Player tanks
-         * @description Per-tank rows for a player: the tank-by-tank breakdown with per-battle averages and WN7/WN8/WNX ratings. This is the heavy list on the player page, so it lives on its own endpoint and is loaded on demand (a deep link to `?section=tanks` server-renders it; otherwise the client fetches it when the Tanks section is first opened). Pass `mode` to get the same rows for one battle mode instead of the vehicle's whole record, narrowed to the vehicles the player actually took into it. 404 when the player is unknown.
+         * @description Per-tank rows for a player: the tank-by-tank breakdown with per-battle averages and WN7/WN8/WNX ratings. This is the heavy list on the player page, so it lives on its own endpoint and is loaded on demand (a deep link to `?section=tanks` server-renders it; otherwise the client fetches it when the Tanks section is first opened). Pass `mode` to get the same rows for one battle mode instead of the vehicle's whole record, narrowed to the vehicles the player actually took into it. Pass `days` or `battles` to read every Random Battles row over that window instead of the career: only the vehicles played inside it are listed, each with its career figures beside it under `tanks.career`. A window cannot be combined with another mode (there is no per-mode history to diff) and is then ignored; giving both, or an out-of-range value, is a 400. 404 when the player is unknown.
          */
         get: operations["get-{region}-players-{nickname}-tanks"];
         put?: never;
@@ -7027,6 +7027,24 @@ export interface components {
             tanks: components["schemas"]["PlayerVehicleColumns"];
             /** @description The mode the rows describe, or null for the vehicle's whole record. */
             mode: components["schemas"]["battleMode"] | null;
+            /** @description The window the rows were read over, or null for the vehicles' whole records. Set, each row holds only what was played inside it and only the vehicles played inside it are listed. */
+            window: {
+                window: {
+                    /**
+                     * @description What the window counts: days from now, or the player's last battles.
+                     * @enum {string}
+                     */
+                    unit: "days" | "battles";
+                    value: number;
+                };
+                /**
+                 * Format: date-time
+                 * @description The instant the window was read back from. A battle window starts at the latest snapshot that sat at least that many battles back, so it can hold a few more than asked.
+                 */
+                from: Date | null;
+                /** @description The window reaches further back than our history of the account, so it covers everything since the account was first tracked (`from`). */
+                truncated: boolean;
+            } | null;
             /** @description Every mode this player has a record in, in mode order. Empty for a player whose vehicles predate the breakdown being collected, which fills in on their next refresh: Wargaming reports lifetime totals, so there is nothing historical to backfill. */
             modes: components["schemas"]["PlayerTankModeOption"][];
         };
@@ -7119,6 +7137,7 @@ export interface components {
             buyCredits: (number | null)[] | null;
             researchXp: (number | null)[] | null;
             markReach: components["schemas"]["TankMarkReachColumns"];
+            career: components["schemas"]["TankCareerColumns"];
         };
         /** @description One clan on the clans board, ranked by what its current members have given in total and counted for it. The amount is never exposed. */
         PodiumClan: {
@@ -7826,6 +7845,16 @@ export interface components {
          * @enum {string}
          */
         tankAxisField: "firepower" | "gun-handling" | "mobility" | "survivability" | "concealment" | "playstyle";
+        /** @description On a windowed list (`days` or `battles`), each vehicle's whole record, aligned with the rows: what the window's figures are read against. Null on the career list. */
+        TankCareerColumns: {
+            battles: (number | null)[] | null;
+            avgDamage: (number | null)[] | null;
+            avgXp: (number | null)[] | null;
+            winrate: (number | null)[] | null;
+            wn7: (number | null)[] | null;
+            wn8: (number | null)[] | null;
+            wnx: (number | null)[] | null;
+        } | null;
         TankChangesResponse: {
             versions: components["schemas"]["TankChangesVersion"][];
         };
@@ -10344,6 +10373,10 @@ export interface operations {
         parameters: {
             query?: {
                 mode?: components["schemas"]["battleMode"];
+                /** @description Read every row over the last N days (1 to 365) instead of the vehicle's career. Give at most one of this or `battles`. Random Battles only: ignored under any other `mode`. */
+                days?: number;
+                /** @description Read every row over the player's last N battles (1 to 10000) instead of the vehicle's career. Give at most one of this or `days`. Random Battles only: ignored under any other `mode`. */
+                battles?: number;
             };
             header?: never;
             path: {

@@ -15,8 +15,11 @@ import { RateYourTanksPrompt } from "@/components/players/detail/tanks/rate-prom
 import { TableSkeleton } from "@/components/table-skeleton";
 import { TankModeSelect } from "@/components/players/detail/tanks/mode-select";
 import { TANKS_SKELETON_COLUMNS } from "@/components/players/detail/tanks/skeleton-columns";
+import { TankWindowSelect } from "@/components/players/detail/tanks/window-select";
 import { DEFAULT_TANK_BATTLE_MODE } from "@unicum.gg/shared";
 import type {
+  PlayerTanksWindow,
+  StatWindow,
   PlayerTankRecord,
   PlayerTankRow,
   TankBattleMode,
@@ -41,6 +44,9 @@ export function TanksTab({
   mode = DEFAULT_TANK_BATTLE_MODE,
   rowsMode = DEFAULT_TANK_BATTLE_MODE,
   onSelectMode,
+  window = null,
+  rowsWindow = null,
+  onSelectWindow,
 }: {
   region: Region;
   nickname: string;
@@ -65,8 +71,14 @@ export function TanksTab({
    * Everything that labels the rows reads this one. */
   rowsMode?: TankBattleMode;
   onSelectMode?: (next: TankBattleMode) => void;
+  /** The window the SELECT shows, or null for the careers. Like `mode`, it
+   * follows the click at once while the rows catch up. */
+  window?: StatWindow | null;
+  /** The window the ROWS were read over, as the payload says. */
+  rowsWindow?: PlayerTanksWindow | null;
+  onSelectWindow?: (next: StatWindow | null) => void;
 }) {
-  const { num } = useFormat();
+  const { num, date } = useFormat();
   const { t } = useTranslation("components/players/detail/tanks/index");
   return (
     <>
@@ -117,16 +129,28 @@ export function TanksTab({
             </PanelTitle>
             {/* Across from the count, which is the number it changes: picking a
                 mode narrows the list to the vehicles the player took into it. */}
-            {onSelectMode ? (
-              <TankModeSelect
-                options={modes}
-                active={mode}
-                onSelect={onSelectMode}
-                className="shrink-0"
-              />
-            ) : null}
+            <div className="flex shrink-0 flex-wrap items-center gap-2">
+              {/* The window narrows the list the same way the mode does, so
+                  the two sit together across from the count. Random only: the
+                  per-mode records have no history to read a window of. */}
+              {onSelectWindow ? (
+                <TankWindowSelect
+                  window={window}
+                  onSelect={onSelectWindow}
+                  disabled={mode !== DEFAULT_TANK_BATTLE_MODE}
+                />
+              ) : null}
+              {onSelectMode ? (
+                <TankModeSelect options={modes} active={mode} onSelect={onSelectMode} />
+              ) : null}
+            </div>
           </PanelHeader>
           <PanelContent className="p-0">
+            {!loading && rowsWindow?.truncated && rowsWindow.from ? (
+              <p className="border-b border-fd-border px-4 py-2 text-xs text-fd-muted-foreground">
+                {t("window-since", { date: date("PP").format(rowsWindow.from) })}
+              </p>
+            ) : null}
             {/* Only ever drawn on the reader's own garage, and only for tanks
               they have the battles for and have not judged yet. It renders
               nothing otherwise, so it costs a signed-out visitor a null. */}
@@ -146,6 +170,7 @@ export function TanksTab({
                 vehicles={vehicles}
                 selectedSlug={tankDetail?.slug ?? null}
                 mode={rowsMode}
+                windowed={rowsWindow != null}
               />
             )}
           </PanelContent>

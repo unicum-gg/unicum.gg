@@ -2,5 +2,6 @@
   "no-tanks-played-yet": "No tanks played yet.",
   "no-tanks-match-these-filters": "No tanks match these filters.",
   "name": "Name",
-  "no-tanks-played-in-this-mode": "No tanks played in this mode."
+  "no-tanks-played-in-this-mode": "No tanks played in this mode.",
+  "no-tanks-played-in-this-window": "No vehicle was played in this window."
 }

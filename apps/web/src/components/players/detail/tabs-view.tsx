@@ -44,6 +44,7 @@ import { AchievementsTab } from "@/components/players/detail/achievements";
 import { SessionsTab } from "@/components/players/detail/sessions";
 import { TanksTab } from "@/components/players/detail/tanks";
 import { useTankMode } from "@/hooks/use-tank-mode";
+import { useTankWindow } from "@/hooks/use-tank-window";
 import {
   OnslaughtTab,
   type PlayerOnslaughtData,
@@ -59,6 +60,8 @@ import { ValueTab } from "@/components/players/detail/value";
 import { unicum } from "@/services/sdk";
 import {
   DEFAULT_TANK_BATTLE_MODE,
+  StatWindowUnit,
+  formatStatWindow,
   SessionGranularity,
   modeWinrateColor,
   playerTankRows,
@@ -210,8 +213,23 @@ export function PlayerTabsView({
   // costs the two sections the one request they used to share, which is a
   // second fetch only for a reader who opens both.
   const tanksMode = section === PlayerSection.Value ? undefined : tankMode;
+  // The window applies to Random only (see `TankWindowSelect`), and Value
+  // prices the whole garage, so neither asks for one.
+  const [tankWindow, setTankWindow] = useTankWindow();
+  const tanksWindow =
+    tanksMode === DEFAULT_TANK_BATTLE_MODE ? tankWindow : null;
   const tanksReq = () =>
-    unicum.region(region).players(nickname).tanks(tanksMode);
+    unicum
+      .region(region)
+      .players(nickname)
+      .tanks({
+        mode: tanksMode,
+        ...(tanksWindow?.unit === StatWindowUnit.Days
+          ? { days: tanksWindow.value }
+          : tanksWindow
+            ? { battles: tanksWindow.value }
+            : {}),
+      });
   const seededTanks = initialTanks != null;
   const needsTanks =
     section === PlayerSection.Tanks || section === PlayerSection.Value;
@@ -226,10 +244,11 @@ export function PlayerTabsView({
       // reader who arrives with `?mode=` already set gets a fetch rather than a
       // brief flash of another mode's rows under this one's name.
       fallbackData:
-        tanksMode === DEFAULT_TANK_BATTLE_MODE
+        tanksMode === DEFAULT_TANK_BATTLE_MODE && !tanksWindow
           ? (initialTanks ?? undefined)
           : undefined,
-      revalidateOnMount: !seededTanks || tanksMode !== DEFAULT_TANK_BATTLE_MODE,
+      revalidateOnMount:
+        !seededTanks || tanksMode !== DEFAULT_TANK_BATTLE_MODE || tanksWindow != null,
       // The option list is a property of the garage, not of the chosen mode, so
       // it must not blink away between two fetches.
       keepPreviousData: true,
@@ -250,7 +269,14 @@ export function PlayerTabsView({
   // mode's name, the WN column vanishes over rows that still carry ratings, and
   // every row link stamps a mode its vehicle may have no record in.
   const rowsMode = tanksData?.mode ?? DEFAULT_TANK_BATTLE_MODE;
-  const switchingMode = tanksMode !== undefined && rowsMode !== tanksMode;
+  const rowsWindow = tanksData?.window ?? null;
+  // Same lag as the mode: the previous window's rows stay up while the next
+  // ones load, so the payload's own window says which ones are on screen.
+  const switchingMode =
+    tanksMode !== undefined &&
+    (rowsMode !== tanksMode ||
+      (rowsWindow?.window ? formatStatWindow(rowsWindow.window) : null) !==
+        (tanksWindow ? formatStatWindow(tanksWindow) : null));
   // The modes the garage has anything in. Taken from whichever payload is in
   // hand: every one of them carries the same list.
   const tankModes = tanksData?.modes ?? initialTanks?.modes ?? [];
@@ -528,6 +554,9 @@ export function PlayerTabsView({
           mode={tankMode}
           rowsMode={rowsMode}
           onSelectMode={setTankMode}
+          window={tankWindow}
+          rowsWindow={rowsWindow}
+          onSelectWindow={setTankWindow}
         />
       ) : mode === PlayerMode.Overall ? (
         <OverallTab region={region} nickname={nickname} {...overall} />
