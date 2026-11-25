@@ -20,6 +20,7 @@ import {
   listTankVersions,
   loadTankContext,
   readTankTestRows,
+  readTankVersionArrivals,
   readTankVersionRows,
   renderTankAnnouncement,
   type TankContext,
@@ -112,10 +113,12 @@ async function liveItems(
 
 async function planTanks(marker: string | null, dryRun: boolean, context: () => Promise<TankContext>): Promise<Plan> {
   return liveItems(await listTankVersions(), marker, dryRun, async (version) =>
-    renderTankAnnouncement(await readTankVersionRows(version), await context(), {
-      live: true,
-      version,
-    }),
+    renderTankAnnouncement(
+      await readTankVersionRows(version),
+      await context(),
+      { live: true, version },
+      await readTankVersionArrivals(version),
+    ),
   );
 }
 

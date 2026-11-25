@@ -167,8 +167,11 @@ export async function getRecentSpecChanges(
       tanks.push({ identity: { ...meta, tankId, slug }, changes });
     }
     if (tanks.length === 0) continue;
-    // Heaviest-hit tanks first within a version.
-    tanks.sort((a, b) => b.changes.length - a.changes.length);
+    // Highest tier first, as the Discord card reads, then the heaviest-hit.
+    tanks.sort(
+      (a, b) =>
+        b.identity.tier - a.identity.tier || b.changes.length - a.changes.length,
+    );
     feed.push({ gameVersion: version, capturedAt: group.capturedAt, tanks });
   }
   return feed;

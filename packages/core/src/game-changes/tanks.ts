@@ -7,6 +7,7 @@ import {
   env,
   resolveTrackedField,
   tankChanges,
+  tankSpecSnapshots,
   tankStatsByRegion,
   tankTestChanges,
   updateAnchor,
@@ -130,6 +131,21 @@ export async function readTankVersionRows(
   return rows.map((r) => ({ ...r, tankId: Number(r.tankId) }));
 }
 
+/**
+ * The vehicles a version brought into the game: those whose first snapshot was
+ * taken under it. `tank_changes` cannot say this, since a vehicle that did not
+ * exist has nothing to diff against, so until this read the card announced
+ * every buff of a patch and none of its new tanks (2.4.1 brought 29).
+ */
+export async function readTankVersionArrivals(version: string): Promise<number[]> {
+  const rows = (await db.execute(sql`
+    select ${tankSpecSnapshots.tankId} as tank_id from ${tankSpecSnapshots}
+    group by ${tankSpecSnapshots.tankId}
+    having (array_agg(${tankSpecSnapshots.gameVersion} order by ${tankSpecSnapshots.capturedAt}))[1] = ${version}
+  `)) as unknown as { tank_id: string | number }[];
+  return rows.map((r) => Number(r.tank_id));
+}
+
 /** The running test's rows and its build, or null rows when no test runs. */
 export async function readTankTestRows(): Promise<{
   version: string | null;
@@ -193,7 +209,7 @@ function group(
       popularity: context.popularity.get(tankId) ?? 0,
     });
   }
-  vehicles.sort((a, b) => b.popularity - a.popularity);
+  vehicles.sort(byTierThenPlay);
 
   const mass = [...massFields].map((field) => {
     const label = resolveTrackedField(field)?.label ?? field;
@@ -201,6 +217,15 @@ function group(
     return `${label} changed on ${n.toLocaleString("en-US")} vehicles at once`;
   });
   return { vehicles, mass };
+}
+
+/** Highest tier first, since that is where the game is played and where a
+ * change is read for; within a tier, the vehicles EU plays most. */
+function byTierThenPlay(
+  a: { meta: VehicleMeta; popularity: number },
+  b: { meta: VehicleMeta; popularity: number },
+): number {
+  return b.meta.tier - a.meta.tier || b.popularity - a.popularity;
 }
 
 type CardKind =
@@ -242,6 +267,27 @@ function vehicleField(v: ChangedVehicle): APIEmbedField {
   };
 }
 
+/** A new vehicle as one line, linking to its page. */
+function arrivalLine(v: Vehicle): string {
+  return `**[${v.meta.shortName}](<${APP_IDENTITY.URL}/${Region.EU}/tanks/${v.slug}>)** · ${vehicleLine(v.meta)}`;
+}
+
+/** The new vehicles that fit one field, the rest counted on a last line. */
+function arrivalsField(arrivals: Vehicle[]): APIEmbedField {
+  const lines: string[] = [];
+  let length = 0;
+  for (const v of arrivals) {
+    const line = arrivalLine(v);
+    // Room kept for the count line under the field's 1024 characters.
+    if (length + line.length + 1 > DISCORD_LIMITS.fieldValue - 40) break;
+    lines.push(line);
+    length += line.length + 1;
+  }
+  const rest = arrivals.length - lines.length;
+  if (rest > 0) lines.push(`+${rest} more in the thread`);
+  return { name: `🆕 New vehicles (${arrivals.length})`, value: lines.join("\n") };
+}
+
 function threadBlock(v: ChangedVehicle, kind: CardKind): string {
   return `**[${v.meta.shortName}](<${historyUrl(v.slug, kind)}>)** · ${vehicleLine(v.meta)}\n${diffBlock(v.diff)}`;
 }
@@ -254,21 +300,39 @@ export function renderTankAnnouncement(
   rows: (SpecChangeRow & { tankId: number })[],
   context: TankContext,
   kind: CardKind,
+  /** The vehicles this version brought in (`readTankVersionArrivals`), led
+   * with on the card since a new tank is what a patch is read for first. */
+  arrivalIds: number[] = [],
 ): Announcement | null {
   const { vehicles, mass } = group(rows, context);
-  if (vehicles.length === 0 && mass.length === 0) return null;
+  const arrivals = arrivalIds
+    .map((id) => context.vehicles.get(id))
+    // A vehicle a player can actually get: an event mode's copies, its bots and
+    // the parallel IGR catalogue arrive in batches every event and would bury
+    // the one new tank a patch is read for (2.4.1's 29 held 11 Story Mode and
+    // Halloween copies).
+    .filter((v): v is Vehicle => v !== undefined && v.meta.variant === null && v.meta.eventRole === null)
+    .map((v) => ({ ...v, popularity: context.popularity.get(v.tankId) ?? 0 }))
+    .sort(byTierThenPlay);
+  if (vehicles.length === 0 && mass.length === 0 && arrivals.length === 0) return null;
 
   const n = vehicles.length;
-  const changed = `${n} ${n === 1 ? "vehicle" : "vehicles"} changed`;
+  const changed = [
+    ...(arrivals.length > 0
+      ? [`${arrivals.length} new ${arrivals.length === 1 ? "vehicle" : "vehicles"}`]
+      : []),
+    ...(n > 0 || arrivals.length === 0 ? [`${n} ${n === 1 ? "vehicle" : "vehicles"} changed`] : []),
+  ].join(", ");
   const build = kind.version ?? "test client";
   const title = kind.live
     ? `Update ${kind.version} · ${changed}`
     : `Common Test ${build}${kind.updated ? " (updated)" : ""} · ${changed}`;
   const description = kind.live
-    ? "Most played first."
+    ? "Highest tier first."
     : "What Wargaming is testing right now, against the live client. It can still change, or never ship.";
 
   const fields: APIEmbedField[] = [
+    ...(arrivals.length > 0 ? [arrivalsField(arrivals)] : []),
     ...(n > 0 ? verdictCounts(vehicles) : []),
     ...vehicles.slice(0, CARD_TANKS).map(vehicleField),
     ...(mass.length > 0
@@ -313,13 +377,21 @@ export function renderTankAnnouncement(
     buttons,
     // The thread carries every vehicle, the card's included, with every line:
     // the card cuts each block at six lines.
+    // New vehicles lead it too, all of them, when the card had to cut the list.
     thread:
-      n > 0 && (hidden > 0 || vehicles.some((v) => v.diff.lines.length > CARD_LINES))
+      hidden > 0 ||
+      vehicles.some((v) => v.diff.lines.length > CARD_LINES) ||
+      arrivalsField(arrivals).value.includes("more in the thread")
         ? {
             name: kind.live
               ? `Update ${kind.version} · every vehicle`
               : `Common Test ${build} · every vehicle`,
-            messages: packBlocks(vehicles.map((v) => threadBlock(v, kind))),
+            messages: packBlocks([
+              ...(arrivals.length > 0
+                ? [`**🆕 New vehicles (${arrivals.length})**\n${arrivals.map(arrivalLine).join("\n")}`]
+                : []),
+              ...vehicles.map((v) => threadBlock(v, kind)),
+            ]),
           }
         : undefined,
   };
