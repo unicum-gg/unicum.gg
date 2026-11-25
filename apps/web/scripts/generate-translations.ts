@@ -1301,8 +1301,12 @@ ${JSON.stringify(Object.entries(entries).map(([key, value]) => ({ key, value }))
     // and parsed once more before anything is given up on.
     const text = (error as { text?: string }).text;
     if (!text) throw error;
-    // Two shapes, both correct answers the parser refuses: wrapped in a
-    // markdown fence, and returned as a bare array rather than under `items`.
+    // Three shapes, all correct answers the parser refuses: wrapped in a
+    // markdown fence, returned as a bare array rather than under `items`, and
+    // returned as a plain key-to-value object. The last one failed a whole run
+    // on a single-key batch, Arabic answering
+    // {"app/battles/page:title": "..."} with nothing else wrong, so it is read
+    // for the keys that were asked and nothing more.
     const body = text.match(/```(?:json)?\s*([\s\S]*?)```/)?.[1] ?? text;
     const pair = z.object({ key: z.string(), value: z.string() });
     let parsed;
@@ -1310,13 +1314,22 @@ ${JSON.stringify(Object.entries(entries).map(([key, value]) => ({ key, value }))
       parsed = z
         .object({ items: z.array(pair) })
         .or(z.array(pair))
+        .or(z.record(z.string(), z.string()))
         .safeParse(JSON.parse(body.trim()));
     } catch {
       throw error;
     }
     if (!parsed.success) throw error;
-    const items = Array.isArray(parsed.data) ? parsed.data : parsed.data.items;
-    return Object.fromEntries(items.map((item) => [item.key, item.value]));
+    const data = parsed.data;
+    if (Array.isArray(data) || Array.isArray(data.items)) {
+      const items = (Array.isArray(data) ? data : data.items) as z.infer<typeof pair>[];
+      return Object.fromEntries(items.map((item) => [item.key, item.value]));
+    }
+    const asked = Object.entries(data as Record<string, string>).filter(
+      ([key]) => entries[key] !== undefined,
+    );
+    if (asked.length === 0) throw error;
+    return Object.fromEntries(asked);
   }
 }
 
