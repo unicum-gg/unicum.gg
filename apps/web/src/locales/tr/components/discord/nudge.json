@@ -7,7 +7,7 @@
     "video": "Önerinizle ilgili karar, sizinle aynı sunucuyu paylaştığımız sürece size Discord mesajı olarak gelir."
   },
   "unlinked": {
-    "review": "Kimse incelemenizin ne olduğunu size söylemeyecek. Discord’unuzu bağlayın ve sunucuya katılın, karar mesaj olarak gelir.",
-    "video": "Kimse önerinizin ne olduğunu size söylemeyecek. Discord’unuzu bağlayın ve sunucuya katılın, karar mesaj olarak gelir."
+    "review": "Kimse incelemenizin sonucunu size söylemez. Discord’unuzu bağlayın, bu işlem sizi sunucumuza da ekler ve karar mesaj olarak gelir.",
+    "video": "Kimse önerinizin sonucunu size söylemez. Discord’unuzu bağlayın, bu işlem sizi sunucumuza da ekler ve karar mesaj olarak gelir."
   }
 }

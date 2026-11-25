@@ -7,7 +7,7 @@
     "video": "Omdömet om ditt förslag kommer till dig som ett Discord-meddelande, så länge vi delar en server med dig."
   },
   "unlinked": {
-    "review": "Ingen kommer att berätta för dig vad som händer med din recension. Länka din Discord och gå med i servern, så kommer omdömet i ett meddelande.",
-    "video": "Ingen kommer att berätta för dig vad som händer med ditt förslag. Länka din Discord och gå med i servern, så kommer omdömet i ett meddelande."
+    "review": "Ingen kommer att berätta vad som händer med din recension. Länka din Discord, vilket också lägger till dig på vår server, så kommer omdömet i ett meddelande.",
+    "video": "Ingen kommer att berätta vad som händer med ditt förslag. Länka din Discord, vilket också lägger till dig på vår server, så kommer omdömet i ett meddelande."
   }
 }

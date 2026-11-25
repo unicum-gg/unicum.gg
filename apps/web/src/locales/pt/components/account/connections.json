@@ -15,6 +15,6 @@
   "wargaming-is-the-identity": "Esta é a conta com a qual você entra, portanto não pode ser desconectada.",
   "twitch-purpose": "Tenha seu canal listado quando estiver ao vivo e permita que o mod do jogo publique no seu chat.",
   "twitch-consequence": "Seu canal deixa de ser listado no site e de ser mostrado no seu perfil, e o mod do jogo não poderá mais publicar no seu chat. Você pode conectá-lo novamente a qualquer momento.",
-  "discord-purpose": "Reivindique sua função de apoiador e saiba mais sobre os vídeos e avaliações que você enviar.",
-  "discord-consequence": "Você abre mão da sua função de apoiador no nosso servidor e não poderemos mais informar o que aconteceu com um vídeo ou uma avaliação que você enviou. Você pode conectá-la novamente a qualquer momento."
+  "discord-purpose": "Entrar no nosso servidor com seu nome da Wargaming, reivindicar sua função de apoiador e receber uma resposta sobre os vídeos e avaliações que você enviar.",
+  "discord-consequence": "Você mantém seu lugar no nosso servidor, mas seu nome lá volta a ser o seu, você perde sua função de apoiador e não podemos mais informar o que aconteceu com um vídeo ou uma avaliação enviados por você. Você pode vinculá-lo novamente a qualquer tempo."
 }

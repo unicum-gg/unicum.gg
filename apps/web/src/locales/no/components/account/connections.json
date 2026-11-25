@@ -15,6 +15,6 @@
   "wargaming-is-the-identity": "Dette er kontoen du logger inn med, så den kan ikke kobles fra.",
   "twitch-purpose": "Få kanalen din oppført når du går direkte, og la spillmodden legge ut innlegg i chatten din.",
   "twitch-consequence": "Kanalen din slutter å være oppført på nettstedet og slutter å vises på profilen din, og spillmodden kan ikke lenger legge ut innlegg i chatten din. Du kan koble den til igjen når som helst.",
-  "discord-purpose": "Få støttespillerrollen din, og få svar om videoene og anmeldelsene du sender inn.",
-  "discord-consequence": "Du gir fra deg støttespillerrollen din på serveren vår, og vi kan ikke lenger fortelle deg hva som skjedde med en video eller en anmeldelse du sendte inn. Du kan koble den til igjen når som helst."
+  "discord-purpose": "Bli med på serveren vår med Wargaming-navnet ditt, få rollen som støttespiller, og få tilbakemelding på videoene og anmeldelsene du sender inn.",
+  "discord-consequence": "Du beholder plassen din på serveren, men navnet ditt der går tilbake til ditt eget, du gir avkall på rollen som støttespiller, og vi kan ikke lengre fortelle deg hva det ble av en video eller en anmeldelse du sendte inn. Du kan koble den til igjen når som helst."
 }
