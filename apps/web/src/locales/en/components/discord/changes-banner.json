@@ -1,0 +1,9 @@
+{
+  "body": "Every update and every Common Test, posted to {channel} the day it ships. Take the {role} role to be pinged.",
+  "follow": "Run a clan server? Follow {channel} to get it there too.",
+  "join": "Join the Discord",
+  "title": {
+    "maps": "Get every map change in Discord",
+    "tanks": "Get every buff and nerf in Discord"
+  }
+}

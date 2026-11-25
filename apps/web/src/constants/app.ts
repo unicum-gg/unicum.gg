@@ -14,6 +14,12 @@ const APP = {
   },
   EXTERNAL: {
     DISCORD: "https://discord.gg/Hqbfb8YPbU",
+    // The two announcement channels, opened in the client. Only a member sees
+    // them, and a member is who can press Follow on one.
+    DISCORD_TANK_CHANGES:
+      "https://discord.com/channels/1512415714982625420/1574685257821847553",
+    DISCORD_MAP_CHANGES:
+      "https://discord.com/channels/1512415714982625420/1574685261865029652",
     GITHUB: `https://github.com/${APP_IDENTITY.REPO}`,
     STATUS: "https://status.unicum.gg/",
     // The mod's page on Wargaming's mod hub, where the player downloads it.

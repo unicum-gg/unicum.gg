@@ -1,4 +1,8 @@
 import { Interpolate } from "@/components/interpolate";
+import {
+  ChangesDiscordBanner,
+  ChangesFeed,
+} from "@/components/discord/changes-banner";
 import { getTranslation } from "@/lib/translations.server";
 import {
   MapChangesFeed,
@@ -76,6 +80,10 @@ export async function MapChangesView({
         </PanelContent>
       </Panel>
 
+      <PanelSeparator />
+      <Panel>
+        <ChangesDiscordBanner feed={ChangesFeed.Maps} locale={locale} />
+      </Panel>
       <PanelSeparator />
 
       {testMaps.length > 0 ? (

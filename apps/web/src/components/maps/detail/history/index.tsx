@@ -1,6 +1,10 @@
 import { dateFormat } from "@/lib/format";
 import { getTranslation } from "@/lib/translations.server";
 import { Fragment } from "react";
+import {
+  ChangesDiscordBanner,
+  ChangesFeed,
+} from "@/components/discord/changes-banner";
 import { GlossaryLabel } from "@/components/glossary/label";
 import {
   Panel,
@@ -324,6 +328,10 @@ export async function MapChangesHistory({
             ) : null}
           </ul>
         </PanelContent>
+      </Panel>
+      <PanelSeparator />
+      <Panel>
+        <ChangesDiscordBanner feed={ChangesFeed.Maps} locale={locale} />
       </Panel>
     </>
   );

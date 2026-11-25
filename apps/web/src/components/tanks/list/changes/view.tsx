@@ -1,4 +1,8 @@
 import { Interpolate } from "@/components/interpolate";
+import {
+  ChangesDiscordBanner,
+  ChangesFeed,
+} from "@/components/discord/changes-banner";
 import { getTranslation } from "@/lib/translations.server";
 import {
   TankChangesFeed,
@@ -69,6 +73,10 @@ export async function TankChangesView({
         </PanelContent>
       </Panel>
 
+      <PanelSeparator />
+      <Panel>
+        <ChangesDiscordBanner feed={ChangesFeed.Tanks} locale={locale} />
+      </Panel>
       <PanelSeparator />
 
       <TankChangesFeed region={region} versions={versions} page={page} />
