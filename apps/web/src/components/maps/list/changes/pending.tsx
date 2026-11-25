@@ -62,7 +62,13 @@ export async function PendingMapChanges({
           {t("not-released-wargaming-can-still")}</p>
         <div className="divide-y divide-fd-border border-t border-fd-border">
           {maps.map((map) => (
-            <MapBlock key={map.arenaId} region={region} map={map} pending />
+            <MapBlock
+              key={map.arenaId}
+              region={region}
+              map={map}
+              anchor={COMMON_TEST_ANCHOR}
+              pending
+            />
           ))}
         </div>
       </PanelContent>

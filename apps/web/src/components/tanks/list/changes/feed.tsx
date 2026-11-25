@@ -105,7 +105,11 @@ export function TankChangesFeed({
             return (
               <div key={`${entry.version.gameVersion}:${entry.tank.identity.tankId}`}>
                 {newVersion ? <VersionHeader version={entry.version} /> : null}
-                <TankBlock region={region} tank={entry.tank} />
+                <TankBlock
+                  region={region}
+                  tank={entry.tank}
+                  version={entry.version.gameVersion}
+                />
               </div>
             );
           })}
@@ -139,7 +143,17 @@ function VersionHeader({ version }: { version: FeedVersion }) {
   );
 }
 
-function TankBlock({ region, tank }: { region: Region; tank: FeedTank }) {
+function TankBlock({
+  region,
+  tank,
+  version,
+}: {
+  region: Region;
+  tank: FeedTank;
+  /** The update this block is under, whose section on the tank's History tab
+   * the link lands on. */
+  version: string;
+}) {
   const { locale } = useLocale();
   const { t } = useTranslation("components/tanks/list/changes/feed");
   const { t: tStats } = useStatLabels();
@@ -155,10 +169,10 @@ function TankBlock({ region, tank }: { region: Region; tank: FeedTank }) {
   return (
     <div className="flex flex-col sm:flex-row">
       <Link
-        href={tankDetailTabHref(
+        href={`${tankDetailTabHref(
           ROUTES.TANK(region, identity.slug),
           TankDetailTab.History,
-        )}
+        )}#${updateAnchor(version)}`}
         className="group flex shrink-0 items-start gap-2 px-4 py-3 sm:w-52"
       >
         <TankIcon

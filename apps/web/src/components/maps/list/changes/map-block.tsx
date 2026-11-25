@@ -7,6 +7,7 @@ import { MapCommonTestBadge } from "@/components/maps/common-test-badge";
 import { MinimapImage } from "@/components/maps/minimap-image";
 import { formatMapChange } from "@/components/maps/change-format";
 import ROUTES from "@/constants/routes";
+import { MapDetailTab, mapDetailTabHref } from "@/components/maps/detail/tabs";
 import { mapName } from "@/components/game-name";
 import { useTranslation } from "@/hooks/use-translation";
 import type { Region } from "@unicum.gg/wargaming";
@@ -41,10 +42,14 @@ export type FeedMap = {
 export function MapBlock({
   region,
   map,
+  anchor,
   pending = false,
 }: {
   region: Region;
   map: FeedMap;
+  /** The section of the map's History tab this block is about, where its link
+   * lands: the update it is listed under, or the Common Test. */
+  anchor: string;
   /** Whether the block sits in the Common Test panel, where a presence row must
    * not claim the map reached the game. */
   pending?: boolean;
@@ -64,7 +69,7 @@ export function MapBlock({
   return (
     <div className="flex flex-col sm:flex-row">
       <Link
-        href={ROUTES.MAP(region, map.slug)}
+        href={`${mapDetailTabHref(ROUTES.MAP(region, map.slug), MapDetailTab.History)}#${anchor}`}
         className="group flex shrink-0 items-start gap-3 px-4 py-3 sm:w-52"
       >
         <span className="relative size-12 shrink-0 overflow-hidden rounded border border-fd-border">

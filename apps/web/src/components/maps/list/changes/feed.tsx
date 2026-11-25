@@ -73,7 +73,11 @@ export function MapChangesFeed({
             return (
               <div key={`${entry.version.gameVersion}:${entry.map.arenaId}`}>
                 {newVersion ? <VersionHeader version={entry.version} /> : null}
-                <MapBlock region={region} map={entry.map} />
+                <MapBlock
+                  region={region}
+                  map={entry.map}
+                  anchor={updateAnchor(entry.version.gameVersion)}
+                />
               </div>
             );
           })}
