@@ -1,7 +1,7 @@
 {
   "edit": "Змена слупка {column}",
   "units": {
-    "battles": "Бoі",
+    "battles": "Бої",
     "days": "дні"
   },
   "range": "З 1 да {max}.",
