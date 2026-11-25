@@ -11,7 +11,11 @@ import {
 } from "@unicum.gg/core/changelog/state";
 import { getRecentMapChanges } from "@unicum.gg/core/wargaming/wot/maps/history-read";
 import { getPendingMapChanges } from "@unicum.gg/core/wargaming/wot/maps/pending-read";
-import { listMapVersions, renderMapAnnouncement } from "./maps";
+import {
+  listMapVersions,
+  loadVariantMinimaps,
+  renderMapAnnouncement,
+} from "./maps";
 import {
   listTankVersions,
   loadTankContext,
@@ -141,7 +145,7 @@ async function planMaps(marker: string | null, dryRun: boolean): Promise<Plan> {
     // arena no page lists is left out exactly as on `/maps/changes`.
     const feed = await getRecentMapChanges(Region.EU, { versionLimit: 24 });
     const maps = feed.find((v) => v.gameVersion === version)?.maps ?? [];
-    return renderMapAnnouncement(maps, { live: true, version });
+    return renderMapAnnouncement(maps, { live: true, version }, await loadVariantMinimaps());
   });
 }
 
@@ -158,11 +162,11 @@ async function planMapTest(marker: string | null): Promise<Plan> {
       {
         ref,
         label: `Common Test ${pending.version ?? "(not live yet)"}`,
-        announcement: renderMapAnnouncement(pending.maps, {
-          live: false,
-          version: pending.version,
-          updated: sameBuild(marker, ref),
-        }),
+        announcement: renderMapAnnouncement(
+          pending.maps,
+          { live: false, version: pending.version, updated: sameBuild(marker, ref) },
+          await loadVariantMinimaps(),
+        ),
       },
     ],
   };

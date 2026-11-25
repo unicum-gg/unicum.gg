@@ -24,6 +24,7 @@ import {
   packBlocks,
   type Announcement,
 } from "@unicum.gg/core/discord/announce";
+import { listMapSummaries } from "@unicum.gg/core/wargaming/wot/maps";
 import type {
   ChangedMap,
   MapChangeEntryRow,
@@ -43,8 +44,7 @@ import type { RecordedVersion } from "./versions";
  * moved".
  */
 
-/** A map with this many changes is a rework, and gets its minimap full width
- * rather than as a thumbnail. */
+/** A map with this many changes is a rework rather than an adjustment. */
 const REWORK_LINES = 4;
 /** Lines per map on the card; the thread carries the rest. */
 const CARD_LINES = 6;
@@ -159,19 +159,33 @@ function bullets(lines: string[], max = Infinity): string {
   return shown.join("\n");
 }
 
+/**
+ * The minimap of each map's variants, by base arena then battle type, so a
+ * group of new versions is pictured by the version itself.
+ */
+export type VariantMinimaps = Map<string, Map<BattleType, string>>;
+
+export async function loadVariantMinimaps(): Promise<VariantMinimaps> {
+  const summaries = await listMapSummaries(Region.EU);
+  return new Map(
+    summaries.map((s) => [
+      s.arenaId,
+      new Map(s.variants.map((v) => [v.battleType, v.minimapUrl])),
+    ]),
+  );
+}
+
+// Every minimap is a thumbnail, whatever the kind: ten embeds with a full-width
+// image each made a message several screens long, and mixing the two sizes made
+// the column ragged.
 function cardEmbed(card: MapCard, color: number, kind: CardKind): APIEmbed {
-  const big = card.kind === "Reworked" || card.kind === "New map";
   return {
     color,
     author: { name: card.kind },
     title: clamp(card.map.name, DISCORD_LIMITS.title),
     url: mapUrl(card.map, kind),
     description: clamp(bullets(card.lines, CARD_LINES), 1000),
-    ...(card.map.minimapUrl
-      ? big
-        ? { image: { url: card.map.minimapUrl } }
-        : { thumbnail: { url: card.map.minimapUrl } }
-      : {}),
+    ...(card.map.minimapUrl ? { thumbnail: { url: card.map.minimapUrl } } : {}),
   };
 }
 
@@ -180,15 +194,22 @@ function variantEmbed(
   maps: ChangedMap[],
   color: number,
   kind: CardKind,
+  minimaps: VariantMinimaps,
 ): APIEmbed {
   const n = maps.length;
+  // The variant's own layout, never the base map's: that one is usually on a
+  // card of its own in the same message, and Discord leaves a repeated image
+  // blank.
+  const thumbnail = maps
+    .map((m) => minimaps.get(m.arenaId)?.get(battleType))
+    .find(Boolean);
   return {
     color,
     author: { name: "New versions" },
     title: `${BATTLE_TYPE_LABEL[battleType]} · ${n} ${n === 1 ? "map" : "maps"}`,
     url: feedUrl(kind),
     description: clamp(maps.map((m) => m.name).join(", "), 1000),
-    ...(maps[0]?.minimapUrl ? { thumbnail: { url: maps[0].minimapUrl } } : {}),
+    ...(thumbnail ? { thumbnail: { url: thumbnail } } : {}),
   };
 }
 
@@ -197,6 +218,7 @@ function variantEmbed(
 export function renderMapAnnouncement(
   maps: ChangedMap[],
   kind: CardKind,
+  minimaps: VariantMinimaps,
 ): Announcement | null {
   const { cards, variants } = readMaps(maps);
   if (cards.length === 0 && variants.size === 0) return null;
@@ -204,7 +226,7 @@ export function renderMapAnnouncement(
   const color = kind.live ? AnnouncementColor.Maps : AnnouncementColor.CommonTest;
   const all: APIEmbed[] = [
     ...cards.map((c) => cardEmbed(c, color, kind)),
-    ...[...variants].map(([bt, ms]) => variantEmbed(bt, ms, color, kind)),
+    ...[...variants].map(([bt, ms]) => variantEmbed(bt, ms, color, kind, minimaps)),
   ];
 
   // Discord's two ceilings on one message: ten embeds, and 6000 characters
