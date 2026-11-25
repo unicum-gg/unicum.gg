@@ -615,28 +615,44 @@ function stringsOf(locale: Locale, namespace: string): Record<string, string> {
  * and how to earn it", and left the preposition of "Top {tank} players {by}
  * {metric}" in the template in five languages.
  *
- * Judged against what the OTHER key currently says in this language, which is
- * what the reader will see beside it. Only `isStale` can ask: by the time a
- * batch reaches `translate` its namespace is the KIND rather than the path, so
- * the pair cannot be looked up there. A string that fails is therefore asked
- * about again rather than refused on the spot, and one that passes is left
- * alone, so a hand correction settles it for good.
+ * Judged against what the OTHER key says in this language, which is what the
+ * reader will see beside it: the answer in hand when the same batch carries it
+ * (`pending`, keyed by address), the file otherwise. `isStale` asks it of the
+ * tree and `translate` of every answer, through the address each batched key
+ * carries. Only asking it in `isStale` re-asked the string on every run and
+ * accepted whatever came back, so Arabic answered "{battles} وإعادات المعارك"
+ * beside a `{battles}` holding "المعارك" on eight runs in a row: the model was
+ * never told what the hole holds, and nothing refused its answer.
  */
 function echoedFillIn(
   namespace: string,
   key: string,
   current: string,
   locale: Locale,
+  pending: Record<string, string> = {},
 ): { hole: string; word: string } | undefined {
   const fills = assembledSentences().get(`${namespace}:${key}`);
   if (!fills) return undefined;
   return echoedFill(
     current,
     fills.flatMap((fill) => {
-      const word = stringsOf(locale, fill.ns)[fill.key];
+      const word =
+        pending[`${fill.ns}:${fill.key}`] ?? stringsOf(locale, fill.ns)[fill.key];
       return word === undefined ? [] : [{ hole: fill.hole, word }];
     }),
   );
+}
+
+/** `echoedFillIn` for a batched answer, whose key is a `namespace:key` address. */
+function echoedFillAt(
+  address: string,
+  value: string,
+  locale: Locale,
+  pending: Record<string, string>,
+): { hole: string; word: string } | undefined {
+  if (!address.includes(":")) return undefined;
+  const [namespace, key] = splitAddress(address);
+  return echoedFillIn(namespace, key, value, locale, pending);
 }
 
 /** Which placeholders the components fill from the catalogue, read once. */
@@ -1449,6 +1465,7 @@ async function translate(
     if (shouts(value, source)) return false;
     if (missingGameNameIn(source, value, namespace, locale)) return false;
     if (duplicatedGameNameIn(source, value, namespace, locale)) return false;
+    if (echoedFillAt(key, value, locale, answer)) return false;
     const want = [...markers(source)].sort().join(",");
     return want === [...markers(value)].sort().join(",");
   };
@@ -1521,6 +1538,21 @@ async function translate(
         : ` A placeholder already holds the name it is called after, and is filled in before a reader sees the string, so writing that name beside it prints it twice. ${[...doubled]
             .map(([hole, own]) => `${hole} is already "${own}"`)
             .join(", ")}: build the sentence around the placeholder and do not write the name again.`;
+    // The same failure with the hole filled from another key rather than from
+    // the catalogue, and the same correction: say what the hole holds.
+    const echoed = new Map<string, string>();
+    for (const key of broken) {
+      const value = answer[key];
+      if (value === undefined) continue;
+      const fill = echoedFillAt(key, value, locale, answer);
+      if (fill) echoed.set(`{${fill.hole}}`, fill.word);
+    }
+    const echoRule =
+      echoed.size === 0
+        ? ""
+        : ` A placeholder is filled with a word of its own before a reader sees the string, so writing that word beside it prints it twice. ${[...echoed]
+            .map(([hole, word]) => `${hole} is already "${word}"`)
+            .join(", ")}: build the sentence around the placeholder, and if the word your language would use elsewhere in the sentence is that same word, rephrase rather than repeat it.`;
     const nameRule =
       wanted.size === 0
         ? ""
@@ -1551,7 +1583,7 @@ async function translate(
       retryEntries,
       locale,
       namespace,
-      `\n\n${opening}${caseRule}${nameRule}${doubleRule}`,
+      `\n\n${opening}${caseRule}${nameRule}${doubleRule}${echoRule}`,
       model,
     );
     for (const key of broken) {
@@ -1561,6 +1593,7 @@ async function translate(
       if (shouts(value, source)) continue;
       if (missingGameNameIn(source, value, namespace, locale)) continue;
       if (duplicatedGameNameIn(source, value, namespace, locale)) continue;
+      if (echoedFillAt(key, value, locale, { ...answer, ...retry })) continue;
       const want = [...markers(source)].sort().join(",");
       if ([...markers(value)].sort().join(",") === want) answer[key] = value;
     }
@@ -1584,10 +1617,17 @@ async function translate(
       value === undefined
         ? undefined
         : duplicatedGameNameIn(source, value, namespace, locale);
+    const echo =
+      value === undefined
+        ? undefined
+        : echoedFillAt(key, value, locale, answer);
     // A name the model would not use is the one failure here that is KEPT. The
     // others leave a string a reader cannot use, so English is an improvement
     // on them; this one leaves a perfectly good sentence that reached for a
     // synonym, and dropping it would answer a wrong word with no word at all.
+    // A word said twice is kept for the same reason: the sentence still reads,
+    // where the English fallback would wrap the English around a hole filled
+    // in the reader's language.
     //
     // The cost is named rather than hidden: this is the only rule in `isStale`
     // whose failure is not self-clearing, so a key the model will not write
@@ -1598,7 +1638,7 @@ async function translate(
     // person has to settle, in the tree or in the catalogue.
     const kept =
       value !== undefined &&
-      (missing !== undefined || repeated !== undefined) &&
+      (missing !== undefined || repeated !== undefined || echo !== undefined) &&
       !shouts(value, source) &&
       [...markers(source)].sort().join(",") ===
         [...markers(value)].sort().join(",");
@@ -1611,7 +1651,9 @@ async function translate(
             ? `kept: says ${JSON.stringify(value)} rather than the game's own ${JSON.stringify(missing.own)} for ${JSON.stringify(missing.english)}`
             : repeated
               ? `kept: writes ${JSON.stringify(repeated.own)} beside the placeholder that already holds it`
-              : "lost a placeholder or a tag";
+              : echo
+                ? `kept: writes ${JSON.stringify(echo.word)} beside {${echo.hole}}, which already holds it`
+                : "lost a placeholder or a tag";
     console.warn(
       `[translate] ${locale}/${namespace}: ${kept ? "questioned" : "dropped"} ${key} (${reason})${value === undefined || kept ? "" : ` -> ${JSON.stringify(value)}`}`,
     );
