@@ -111,6 +111,11 @@ export async function register() {
     );
     startStreamerReconcileCron();
 
+    const { startSupporterRoleCron } = await import(
+      "@unicum.gg/core/discord/supporter-role-cron"
+    );
+    startSupporterRoleCron();
+
     const { startCommunityRatingsCron } = await import(
       "@unicum.gg/core/community/ratings-cron"
     );

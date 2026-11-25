@@ -104,6 +104,11 @@ async function startCrons(): Promise<void> {
   );
   startStreamerReconcileCron();
 
+  const { startSupporterRoleCron } = await import(
+    "@unicum.gg/core/discord/supporter-role-cron"
+  );
+  startSupporterRoleCron();
+
   const { startGarageSyncCron } = await import(
     "@unicum.gg/core/players/garage-cron"
   );

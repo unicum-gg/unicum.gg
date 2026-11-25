@@ -121,10 +121,17 @@ export const env = createEnv({
     // to post". Unset = the default below.
     MOD_CHANGELOG_CRON: z.string().optional(),
     // Role id granted to active supporters who claim it (via the bot) in our
-    // guild. Web-only. Optional so the app/worker boot without it; the claim
+    // guild. Web and worker. Optional so the app/worker boot without it; the claim
     // button hides and the routes 404 when unset. The bot must have Manage Roles
     // and sit above this role in the hierarchy.
     DISCORD_SUPPORTER_ROLE_ID: z.string().optional(),
+    // The metal worn on top of it once the pledge has lasted 3, 6 and 12
+    // months, the crest's own tiers. Web and worker (the daily pass moves a
+    // supporter up). Each is optional on its own: an unset one is just not
+    // worn, the base role still is. Same hierarchy rule as above.
+    DISCORD_SUPPORTER_BRONZE_ROLE_ID: z.string().optional(),
+    DISCORD_SUPPORTER_SILVER_ROLE_ID: z.string().optional(),
+    DISCORD_SUPPORTER_GOLD_ROLE_ID: z.string().optional(),
     // Stripe (support subscriptions). Web-only. Optional so the worker/bot boot
     // without them and the feature degrades off when unset (subscribe button
     // hidden). PRODUCT_ID is the "unicum.gg Support" product the pay-what-you-want
@@ -194,6 +201,9 @@ export const env = createEnv({
     CHANGELOG_CRON: process.env.CHANGELOG_CRON,
     MOD_CHANGELOG_CRON: process.env.MOD_CHANGELOG_CRON,
     DISCORD_SUPPORTER_ROLE_ID: process.env.DISCORD_SUPPORTER_ROLE_ID,
+    DISCORD_SUPPORTER_BRONZE_ROLE_ID: process.env.DISCORD_SUPPORTER_BRONZE_ROLE_ID,
+    DISCORD_SUPPORTER_SILVER_ROLE_ID: process.env.DISCORD_SUPPORTER_SILVER_ROLE_ID,
+    DISCORD_SUPPORTER_GOLD_ROLE_ID: process.env.DISCORD_SUPPORTER_GOLD_ROLE_ID,
     STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
     STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
     STRIPE_PRODUCT_ID: process.env.STRIPE_PRODUCT_ID,

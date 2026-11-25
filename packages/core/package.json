@@ -10,6 +10,7 @@
     "./auth/wargaming-token": "./src/auth/wargaming-token.ts",
     "./subscription": "./src/subscription/index.ts",
     "./discord/supporter-role": "./src/discord/supporter-role.ts",
+    "./discord/supporter-role-cron": "./src/discord/supporter-role-cron.ts",
     "./stripe": "./src/stripe/index.ts",
     "./db": "./src/db/index.ts",
     "./db/schema": "./src/db/schema/index.ts",
