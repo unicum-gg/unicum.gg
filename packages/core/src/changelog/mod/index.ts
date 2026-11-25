@@ -1,7 +1,11 @@
 import { ChangelogProduct, env } from "@unicum.gg/shared";
-import { discordBotEnabled, postChannelMessage } from "@unicum.gg/core/discord";
+import { discordBotEnabled } from "@unicum.gg/core/discord";
+import {
+  type Announcement,
+  postAnnouncement,
+} from "@unicum.gg/core/discord/announce";
 import { readChangelogState, writeLastPublished } from "../state";
-import { renderModChangelogMessage } from "./message";
+import { renderModAnnouncement } from "./message";
 import { listPublishedReleases, releasesAfter } from "./releases";
 import type { ModRelease } from "./releases";
 
@@ -36,9 +40,8 @@ export type ModChangelogResult = {
   outcome: ModChangelogOutcome;
   /** Versions announced, in the order they went out. */
   versions: string[];
-  /** The rendered messages, whenever there were any: every part of every
-   * release this run had to announce. */
-  messages?: string[];
+  /** The rendered announcements, one per release this run had to announce. */
+  announcements?: Announcement[];
 };
 
 export function modChangelogEnabled(): boolean {
@@ -50,34 +53,33 @@ export function modChangelogEnabled(): boolean {
  *
  * The marker moves per release rather than once at the end of the run, because
  * a run can carry more than one (a release and the hotfix behind it) and a
- * failure on the second must not replay the first. Same rule as the site's
- * digest within a single release: a part that fails after the first one has
- * posted consumes the release anyway, since reposting it would duplicate what
- * the channel has already read.
+ * failure on the second must not replay the first. The release counts as
+ * announced once its card is posted: its thread is best-effort, and reposting
+ * the card because the thread failed would tell the channel the same thing
+ * twice.
  */
 async function announce(release: ModRelease): Promise<boolean> {
-  const messages = renderModChangelogMessage(release);
-
-  for (const [i, message] of messages.entries()) {
-    const posted = await postChannelMessage(
-      env.DISCORD_MOD_CHANGELOG_CHANNEL_ID!,
-      message,
-    );
-    if (posted) continue;
-    if (i === 0) {
-      console.error(
-        `[mod-changelog] ${release.version} did not post, the marker stays put`,
-      );
-      return false;
-    }
+  const announcement = renderModAnnouncement(release);
+  if (!announcement) return true;
+  const posted = await postAnnouncement(
+    env.DISCORD_MOD_CHANGELOG_CHANNEL_ID!,
+    announcement,
+  );
+  if (!posted) {
     console.error(
-      `[mod-changelog] ${release.version} part ${i + 1}/${messages.length} did not post, the announcement is published short`,
+      `[mod-changelog] ${release.version} did not post, the marker stays put`,
     );
-    break;
+    return false;
   }
-
   await writeLastPublished(ChangelogProduct.Mod, release.tag);
   return true;
+}
+
+/** The announcements a list of releases renders to, skipping the note-less. */
+function render(releases: ModRelease[]): Announcement[] {
+  return releases
+    .map(renderModAnnouncement)
+    .filter((a): a is Announcement => a !== null);
 }
 
 export async function publishModChangelog(
@@ -112,7 +114,7 @@ export async function publishModChangelog(
       return {
         outcome: ModChangelogOutcome.DryRun,
         versions: [newest.version],
-        messages: renderModChangelogMessage(newest),
+        announcements: render([newest]),
       };
     }
     console.log(
@@ -127,7 +129,7 @@ export async function publishModChangelog(
   // CHANGELOG has no section, which is a sentence for whoever cut the release
   // and not an update for a channel.
   const announceable = pending.filter(
-    (release) => renderModChangelogMessage(release).length > 0,
+    (release) => renderModAnnouncement(release) !== null,
   );
 
   if (announceable.length === 0) {
@@ -140,7 +142,7 @@ export async function publishModChangelog(
         ? ModChangelogOutcome.DryRun
         : ModChangelogOutcome.UpToDate,
       versions: [],
-      messages: options.dryRun ? renderModChangelogMessage(newest) : undefined,
+      announcements: options.dryRun ? render([newest]) : undefined,
     };
   }
 
@@ -148,7 +150,7 @@ export async function publishModChangelog(
     return {
       outcome: ModChangelogOutcome.DryRun,
       versions: announceable.map((release) => release.version),
-      messages: announceable.flatMap(renderModChangelogMessage),
+      announcements: render(announceable),
     };
   }
 
@@ -170,6 +172,6 @@ export async function publishModChangelog(
   return {
     outcome: ModChangelogOutcome.Posted,
     versions: announced,
-    messages: announceable.flatMap(renderModChangelogMessage),
+    announcements: render(announceable),
   };
 }

@@ -33,6 +33,8 @@
     "./changelog/cron": "./src/changelog/cron.ts",
     "./changelog/mod": "./src/changelog/mod/index.ts",
     "./changelog/mod/cron": "./src/changelog/mod/cron.ts",
+    "./game-changes": "./src/game-changes/index.ts",
+    "./game-changes/cron": "./src/game-changes/cron.ts",
     "./twitch": "./src/twitch/index.ts",
     "./tournaments": "./src/tournaments/index.ts",
     "./tournaments/cron": "./src/tournaments/cron.ts",

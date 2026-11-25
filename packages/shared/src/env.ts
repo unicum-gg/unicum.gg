@@ -72,6 +72,19 @@ export const env = createEnv({
     // one without following the other. Worker-only, optional for the same
     // reason: unset means the cron doesn't schedule.
     DISCORD_MOD_CHANGELOG_CHANNEL_ID: z.string().optional(),
+    // The two game-change feeds: vehicle balance and map changes, live and on
+    // the Common Test, each in a channel of its own because a reader follows
+    // one without the other. Worker-only, optional: unset means that half of
+    // the cron has nowhere to post and is skipped.
+    DISCORD_TANK_CHANGES_CHANNEL_ID: z.string().optional(),
+    DISCORD_MAP_CHANGES_CHANNEL_ID: z.string().optional(),
+    // The roles each announcement pings, one per channel, so a member opts into
+    // the updates they want rather than every post pinging the whole server.
+    // Optional: unset posts without a ping, never with `@here`.
+    DISCORD_WEBSITE_UPDATES_ROLE_ID: z.string().optional(),
+    DISCORD_MOD_UPDATES_ROLE_ID: z.string().optional(),
+    DISCORD_TANK_CHANGES_ROLE_ID: z.string().optional(),
+    DISCORD_MAP_CHANGES_ROLE_ID: z.string().optional(),
     // Private channel the suggested tank videos queue up in, for moderation.
     // Read by the web (which posts the card) and the bot (which handles the
     // buttons). Optional: unset turns submissions off entirely rather than
@@ -166,6 +179,13 @@ export const env = createEnv({
     DISCORD_CHANGELOG_CHANNEL_ID: process.env.DISCORD_CHANGELOG_CHANNEL_ID,
     DISCORD_MOD_CHANGELOG_CHANNEL_ID:
       process.env.DISCORD_MOD_CHANGELOG_CHANNEL_ID,
+    DISCORD_TANK_CHANGES_CHANNEL_ID: process.env.DISCORD_TANK_CHANGES_CHANNEL_ID,
+    DISCORD_MAP_CHANGES_CHANNEL_ID: process.env.DISCORD_MAP_CHANGES_CHANNEL_ID,
+    DISCORD_WEBSITE_UPDATES_ROLE_ID:
+      process.env.DISCORD_WEBSITE_UPDATES_ROLE_ID,
+    DISCORD_MOD_UPDATES_ROLE_ID: process.env.DISCORD_MOD_UPDATES_ROLE_ID,
+    DISCORD_TANK_CHANGES_ROLE_ID: process.env.DISCORD_TANK_CHANGES_ROLE_ID,
+    DISCORD_MAP_CHANGES_ROLE_ID: process.env.DISCORD_MAP_CHANGES_ROLE_ID,
     DISCORD_ALERTS_CHANNEL_ID: process.env.DISCORD_ALERTS_CHANNEL_ID,
     DISCORD_VIDEO_CHANNEL_ID: process.env.DISCORD_VIDEO_CHANNEL_ID,
     DISCORD_REVIEW_CHANNEL_ID: process.env.DISCORD_REVIEW_CHANNEL_ID,

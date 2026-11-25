@@ -13,6 +13,16 @@ export enum ChangelogProduct {
   Web = "web",
   /** The client mod, taken from its published releases as written. */
   Mod = "mod",
+  /** Vehicle balance changes that shipped, keyed by the last game version
+   * announced. */
+  TankChanges = "tank-changes",
+  /** What the running Common Test changes about vehicles, keyed by the build
+   * and a hash of its rows, since a test is rebalanced under the same build. */
+  TankTestChanges = "tank-test-changes",
+  /** Map changes that shipped, keyed like the vehicles' by game version. */
+  MapChanges = "map-changes",
+  /** What the test client changes about maps, keyed like the vehicles' test. */
+  MapTestChanges = "map-test-changes",
 }
 
 /**

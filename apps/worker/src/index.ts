@@ -127,6 +127,11 @@ async function startCrons(): Promise<void> {
   );
   startModChangelogCron();
 
+  const { startGameChangesCron } = await import(
+    "@unicum.gg/core/game-changes/cron"
+  );
+  startGameChangesCron();
+
   const { startTankWarmCron } = await import(
     "@unicum.gg/core/wargaming/wot/tanks/warm-cron"
   );

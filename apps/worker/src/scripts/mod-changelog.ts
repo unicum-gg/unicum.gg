@@ -16,6 +16,7 @@ import {
   ModChangelogOutcome,
   publishModChangelog,
 } from "@unicum.gg/core/changelog/mod";
+import { describeAnnouncement } from "@unicum.gg/core/discord/announce";
 
 async function main(): Promise<void> {
   const dryRun = process.argv.includes("--dry");
@@ -24,13 +25,10 @@ async function main(): Promise<void> {
   const versions =
     result.versions.length > 0 ? ` (${result.versions.join(", ")})` : "";
   console.log(`\noutcome: ${result.outcome}${versions}\n`);
-  // One message per release most of the time, several when a release's notes
-  // run past what Discord accepts in one, so the preview shows where the split
-  // falls.
-  result.messages?.forEach((message, i, all) => {
-    if (all.length > 1) console.log(`--- part ${i + 1}/${all.length} ---`);
-    console.log(message);
-  });
+  // Each release's card and its thread as text.
+  for (const announcement of result.announcements ?? []) {
+    console.log(describeAnnouncement(announcement));
+  }
   // A run that did not publish must not read as one that did: this is called
   // from a shell, and `&&` after it should not carry on as if the announcement
   // went out.

@@ -1,31 +1,51 @@
-import { APP_IDENTITY } from "@unicum.gg/shared";
+import { APP_IDENTITY, env } from "@unicum.gg/shared";
+import {
+  AnnouncementColor,
+  clamp,
+  DISCORD_LIMITS,
+  type Announcement,
+} from "@unicum.gg/core/discord/announce";
+import {
+  type EntryGroup,
+  groupEmoji,
+  groupFields,
+  hasHiddenEntries,
+} from "../card";
 import { packMessages } from "../parts";
 import type { ModRelease } from "./releases";
 
 /**
- * The mod's Discord message.
+ * The mod's Discord announcement.
  *
  * It keeps the release notes' own structure instead of folding them onto the
- * site digest's three markers (`+` added, `~` changed, `-` removed). The mod
- * writes four headings, Added, Improved, Changed and Fixed, and the difference
- * between the last three is the whole information a reader is after: "the
- * contacts list no longer draws flags over the name" and "the mod no longer
- * lists a folder nine times a second" are a fix and a saving, and a single `~`
- * on both says neither. The site's markers exist because a model is asked for
- * three buckets; here the author already sorted them.
+ * site digest's groups. The mod writes four headings, Added, Improved, Changed
+ * and Fixed, and the difference between the last three is the whole
+ * information a reader is after: "the contacts list no longer draws flags over
+ * the name" and "the mod no longer lists a folder nine times a second" are a
+ * fix and a saving, and one marker on both says neither. The site's groups
+ * exist because a model is asked for them; here the author already sorted.
  *
- * Only the download link is ours to add, and it points at the mod page rather
- * than at the GitHub release: a release is installable from GitHub the moment
+ * The card shows the first entries of each section and the thread carries the
+ * notes exactly as written: 0.10.0 ran to about seventy lines, which as plain
+ * text was two messages a reader scrolled past.
+ *
+ * The download button points at the hub rather than at the GitHub release, and
+ * the release sits beside it: a release is installable from GitHub the moment
  * it is cut and reaches the hub only once Wargaming has reviewed it, which took
- * six days for 0.1.1. The mod page is the one place that names both versions
- * and both ways to get it, so it stays right during that gap, where a link to
- * either one alone is briefly misleading.
+ * six days for 0.1.1. The footer says so, since a reader clicking the hub on
+ * release day would otherwise find the previous version and think the card
+ * wrong.
  */
 
-const FOOTER = ["", `→ <${APP_IDENTITY.URL}/mod>`];
+/** Entries the card shows per section. The first section is what the release
+ * is about (Added, nearly always), so it gets the most room. */
+const SHOW_FIRST = 4;
+const SHOW_OTHERS = 3;
 
-function header(release: ModRelease): string[] {
-  return [`> **Mod Update** · **${release.version}** (@here)`, ""];
+/** A version heading, in any of the shapes a CHANGELOG writes it
+ * (`## 0.4.1`, `## [0.4.1]`, `## v0.4.1`). */
+function isVersionHeading(title: string, release: ModRelease): boolean {
+  return title.replace(/[[\]v]/g, "") === release.version;
 }
 
 /**
@@ -55,9 +75,7 @@ function toLines(release: ModRelease): string[] {
 
     if (heading) {
       const title = heading[1].trim();
-      // The version heading, in any of the shapes a CHANGELOG writes it
-      // (`## 0.4.1`, `## [0.4.1]`, `## v0.4.1`).
-      if (title.replace(/[[\]v]/g, "") === release.version) continue;
+      if (isVersionHeading(title, release)) continue;
       // One blank line above a section, and only one: the source already ends
       // the previous section with a blank, so pushing a separator on top of it
       // is what printed two.
@@ -84,18 +102,82 @@ function toLines(release: ModRelease): string[] {
 }
 
 /**
- * Renders a release as the messages to post, in order.
- *
- * A list, because the limit is Discord's and the notes are not ours to shorten:
- * 0.4.0's ran to about 1,500 characters and a release that adds a feature with
- * its own paragraph will pass 2,000. The packing is `../parts`, shared with the
- * site's digest, so neither can learn to trim entries away on its own.
- *
- * Empty for a release with no notes, which the caller answers before here: a
- * header and a link with nothing between them announces nothing.
+ * The notes read as sections: the text above the first heading (an intro, when
+ * the author wrote one) and each heading's entries.
  */
-export function renderModChangelogMessage(release: ModRelease): string[] {
+export function readSections(release: ModRelease): {
+  intro: string;
+  sections: { title: string; entries: string[] }[];
+} {
+  const intro: string[] = [];
+  const sections: { title: string; entries: string[] }[] = [];
+  for (const raw of release.notes.split("\n")) {
+    const line = raw.trim();
+    if (line === "") continue;
+    const heading = /^#{1,6}\s+(.*)$/.exec(line);
+    if (heading) {
+      const title = heading[1].trim();
+      if (!isVersionHeading(title, release)) sections.push({ title, entries: [] });
+      continue;
+    }
+    const entry = line.replace(/^[-*]\s+/, "");
+    if (sections.length === 0) intro.push(entry);
+    else sections.at(-1)!.entries.push(entry);
+  }
+  return {
+    intro: intro.join(" "),
+    sections: sections.filter((s) => s.entries.length > 0),
+  };
+}
+
+/**
+ * A release as one announcement, or null for a release with no notes, which
+ * the caller answers before here: a card with nothing on it announces nothing.
+ */
+export function renderModAnnouncement(release: ModRelease): Announcement | null {
   const lines = toLines(release);
-  if (lines.length === 0) return [];
-  return packMessages(lines, header(release), FOOTER);
+  if (lines.length === 0) return null;
+
+  const { intro, sections } = readSections(release);
+  const groups: EntryGroup[] = sections.map((section, i) => ({
+    title: section.title,
+    emoji: groupEmoji(section.title),
+    entries: section.entries,
+    show: i === 0 ? SHOW_FIRST : SHOW_OTHERS,
+  }));
+  // Notes with no headings at all are a paragraph or a bare list: the card
+  // carries them as its description and the thread is not needed.
+  const description =
+    groups.length === 0 ? lines.join("\n") : intro || undefined;
+
+  return {
+    pingRoleId: env.DISCORD_MOD_UPDATES_ROLE_ID ?? null,
+    embeds: [
+      {
+        color: AnnouncementColor.Mod,
+        author: { name: `${APP_IDENTITY.NAME} mod · release` },
+        title: `Version ${release.version}`,
+        url: release.url,
+        description: description
+          ? clamp(description, DISCORD_LIMITS.description)
+          : undefined,
+        fields: groupFields(groups),
+        footer: {
+          text: "On GitHub now, on WGMods once Wargaming has reviewed it",
+        },
+        timestamp: release.publishedAt.toISOString(),
+      },
+    ],
+    buttons: [
+      { label: "Download (WGMods)", url: APP_IDENTITY.MOD_HUB_URL },
+      { label: "GitHub release", url: release.url },
+      { label: "Mod page", url: `${APP_IDENTITY.URL}/mod` },
+    ],
+    thread: hasHiddenEntries(groups)
+      ? {
+          name: `${release.version} release notes`,
+          messages: packMessages(lines, [], []),
+        }
+      : undefined,
+  };
 }

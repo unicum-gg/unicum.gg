@@ -37,7 +37,9 @@ export function discordLinkEnabled(): boolean {
   return Boolean(env.DISCORD_APP_ID && env.DISCORD_CLIENT_SECRET);
 }
 
-async function botFetch<T>(
+/** One bot-token REST call, null on any failure. Exported for `./announce`,
+ * which builds the channel announcements on top of it. */
+export async function botFetch<T>(
   path: string,
   init?: RequestInit,
 ): Promise<T | null> {

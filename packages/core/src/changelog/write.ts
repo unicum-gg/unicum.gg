@@ -11,7 +11,7 @@ import type { Commit } from "./commits";
  * the build's own assets"), and no amount of parsing makes that sentence mean
  * something to someone who plays World of Tanks. So the model does the one job
  * a mapping table can't: decide what was actually visible, say it in their
- * words, and drop the rest. It never invents the shape of the message, only its
+ * words, sort it by what matters, and drop the rest. It never invents the shape of the message, only its
  * sentences: the schema below is the contract, `message.ts` does the rendering.
  */
 
@@ -27,16 +27,22 @@ const MODEL = "gpt-5.6";
  * week of commit subjects takes. */
 const TIMEOUT_MS = 120_000;
 
-const draftSchema = z.object({
-  added: z
+const entries = (what: string) =>
+  z
     .array(z.string())
-    .describe("New things a visitor can now see or do."),
-  changed: z
-    .array(z.string())
-    .describe("Fixes and improvements to things that already existed."),
-  removed: z.array(z.string()).describe("Things that are gone."),
-});
+    .describe(`${what} Most significant first: the card shows the top few.`);
 
+const draftSchema = z.object({
+  headline: z
+    .string()
+    .describe(
+      "One plain sentence naming the week's most significant user-visible change. Empty when every list is empty.",
+    ),
+  added: entries("New things a visitor can now see or do."),
+  improved: entries("Things that already existed and now work better."),
+  fixed: entries("Things that were broken and now work."),
+  removed: entries("Things that are gone."),
+});
 export type ChangelogDraft = z.infer<typeof draftSchema>;
 
 const INSTRUCTIONS = `You write the public changelog for ${APP_IDENTITY.NAME}, a free World of Tanks stats site (player, clan and tank statistics, ratings like WN8, leaderboards, a public API and a Discord bot). It is posted in the community's Discord.
@@ -47,12 +53,15 @@ Rules:
 - Write for players, not developers. Never mention code, files, components, caches, endpoints, migrations, refactors, dependencies or infrastructure.
 - Drop anything a visitor cannot see. Internal work is most of the log and belongs in none of the lists.
 - One entry per user-visible change. Merge the commits that make up a single change into one entry, and split a commit that shipped two unrelated things.
-- Start every entry with a past-tense verb: "Added ...", "Fixed ...", "Improved ...", "Removed ...".
+- Put each entry in exactly one list: added (new), improved (better), fixed (was broken), removed (gone).
+- Do not start an entry with the list's own verb ("Added", "Fixed", "Improved", "Removed"): each list is shown under its own heading, so write the thing itself. A new entry names what arrived ("A replay catalogue and battle pages"), an improvement says what got better ("Faster player pages and leaderboards"), a fix names what was wrong ("Projected Maneuvers cutoffs being too low during rising races").
+- Order every list by how much it matters to a player, most significant first. Only the first few of each list are shown on the card, the rest in a thread under it.
 - Keep an entry to one line, no final period.
+- The headline is one sentence about the single change a player would most want to hear about this week, in the same plain voice. Not a summary of the lists.
 - Name pages by their path in backticks (\`/eu/tanks\`, \`/docs\`) when the change is about a specific page.
 - Never invent a change that is not in the commits, and never pad the lists to make the update look bigger.
 - Plain English. No marketing tone, no emoji, no exclamation marks.
-- If nothing in the batch is user-visible, return three empty lists.`;
+- If nothing in the batch is user-visible, return four empty lists and an empty headline.`;
 
 /** The subjects, one per line: everything the model needs, nothing else. */
 function promptFrom(commits: Commit[]): string {
@@ -90,6 +99,10 @@ export async function writeChangelog(
 
 export function isEmptyDraft(draft: ChangelogDraft): boolean {
   return (
-    draft.added.length + draft.changed.length + draft.removed.length === 0
+    draft.added.length +
+      draft.improved.length +
+      draft.fixed.length +
+      draft.removed.length ===
+    0
   );
 }

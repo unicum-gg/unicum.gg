@@ -10,6 +10,8 @@
     "changelog:dry": "pnpm changelog --dry",
     "mod-changelog": "NEXT_PUBLIC_APP_URL=https://unicum.gg tsx --env-file-if-exists=../web/.env.local src/scripts/mod-changelog.ts",
     "mod-changelog:dry": "pnpm mod-changelog --dry",
+    "game-changes": "NEXT_PUBLIC_APP_URL=https://unicum.gg tsx --env-file-if-exists=../web/.env.local src/scripts/game-changes.ts",
+    "game-changes:dry": "pnpm game-changes --dry",
     "coverage-trends": "tsx --env-file-if-exists=../web/.env.local src/scripts/coverage-trends.ts",
     "reconcile-streamers": "tsx --env-file-if-exists=../web/.env.local src/scripts/reconcile-streamers.ts",
     "partner-hits": "tsx --env-file-if-exists=../web/.env.local src/scripts/partner-hits.ts",

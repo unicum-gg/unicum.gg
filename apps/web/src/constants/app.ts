@@ -17,7 +17,7 @@ const APP = {
     GITHUB: `https://github.com/${APP_IDENTITY.REPO}`,
     STATUS: "https://status.unicum.gg/",
     // The mod's page on Wargaming's mod hub, where the player downloads it.
-    MOD_DOWNLOAD: "https://wgmods.net/7928",
+    MOD_DOWNLOAD: APP_IDENTITY.MOD_HUB_URL,
     MOD_SOURCE: "https://github.com/unicum-gg/unicum.gg-mod",
     // The same build, from the repository that publishes it first. Wargaming
     // reviews every submission before it appears on the hub (0.1.1 took six

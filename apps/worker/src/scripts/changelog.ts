@@ -11,6 +11,7 @@
 // over `--env-file`), because the message's closing link comes from it: run from
 // a dev machine it would otherwise send a community channel to localhost.
 import { ChangelogOutcome, publishChangelog } from "@unicum.gg/core/changelog";
+import { describeAnnouncement } from "@unicum.gg/core/discord/announce";
 
 async function main(): Promise<void> {
   const dryRun = process.argv.includes("--dry");
@@ -21,12 +22,10 @@ async function main(): Promise<void> {
   const result = await publishChangelog({ dryRun, model });
 
   console.log(`\noutcome: ${result.outcome} (${result.commits} commits)\n`);
-  // One message most weeks, several when the digest runs past what Discord
-  // accepts in one, so the preview shows where the split falls.
-  result.messages?.forEach((message, i, all) => {
-    if (all.length > 1) console.log(`--- part ${i + 1}/${all.length} ---`);
-    console.log(message);
-  });
+  // The card and its thread as text, so the cut between the two can be read.
+  if (result.announcement) {
+    console.log(describeAnnouncement(result.announcement));
+  }
   // A run that did not publish must not read as one that did: this is called
   // from a shell, and `&&` after it should not carry on as if the update went
   // out.

@@ -1,7 +1,11 @@
 import { ChangelogProduct, env } from "@unicum.gg/shared";
-import { discordBotEnabled, postChannelMessage } from "@unicum.gg/core/discord";
+import { discordBotEnabled } from "@unicum.gg/core/discord";
+import {
+  type Announcement,
+  postAnnouncement,
+} from "@unicum.gg/core/discord/announce";
 import { listNewCommits } from "./commits";
-import { renderChangelogMessage } from "./message";
+import { renderChangelogAnnouncement } from "./message";
 import { readChangelogState, touchLastRun, writeLastPublished } from "./state";
 import { changelogWriterEnabled, isEmptyDraft, writeChangelog } from "./write";
 
@@ -39,9 +43,8 @@ export enum ChangelogOutcome {
 export type ChangelogResult = {
   outcome: ChangelogOutcome;
   commits: number;
-  /** The rendered messages, whenever there were any. A week's digest can run
-   * past what Discord accepts in one, so this is a list. */
-  messages?: string[];
+  /** The rendered announcement, whenever there was one. */
+  announcement?: Announcement;
 };
 
 export function changelogEnabled(): boolean {
@@ -99,37 +102,29 @@ export async function publishChangelog(
     return { outcome: ChangelogOutcome.NothingToSay, commits: commits.length };
   }
 
-  const messages = renderChangelogMessage(draft);
+  const announcement = renderChangelogAnnouncement(draft);
   if (options.dryRun) {
     return {
       outcome: ChangelogOutcome.DryRun,
       commits: commits.length,
-      messages,
+      announcement,
     };
   }
 
-  for (const [i, message] of messages.entries()) {
-    const posted = await postChannelMessage(
-      env.DISCORD_CHANGELOG_CHANNEL_ID!,
-      message,
-    );
-    if (posted) continue;
-    // Nothing reached the channel: leave the batch for the next run rather than
-    // swallow an update nobody ever saw.
-    if (i === 0) {
-      return {
-        outcome: ChangelogOutcome.Failed,
-        commits: commits.length,
-        messages,
-      };
-    }
-    // The update is already partly published, so the batch is consumed anyway:
-    // resending it next week would repost what the channel has read, which is
-    // worse than an update missing its last few lines.
-    console.error(
-      `[changelog] part ${i + 1}/${messages.length} did not post, the update is published short`,
-    );
-    break;
+  // Posted once the card is: its thread is best-effort, and a thread that
+  // failed is not a reason to tell the channel the same week twice.
+  const posted = await postAnnouncement(
+    env.DISCORD_CHANGELOG_CHANNEL_ID!,
+    announcement,
+  );
+  if (!posted) {
+    // Nothing reached the channel: leave the batch for the next run rather
+    // than swallow an update nobody ever saw.
+    return {
+      outcome: ChangelogOutcome.Failed,
+      commits: commits.length,
+      announcement,
+    };
   }
 
   // Only after Discord took it.
@@ -137,6 +132,6 @@ export async function publishChangelog(
   return {
     outcome: ChangelogOutcome.Posted,
     commits: commits.length,
-    messages,
+    announcement,
   };
 }

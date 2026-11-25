@@ -23,6 +23,10 @@ export const APP_IDENTITY = {
    * read from that repository's releases, and a slug written down twice is two
    * answers waiting to disagree the day the repo moves. */
   MOD_REPO: "unicum-gg/unicum.gg-mod",
+  /** The mod's page on Wargaming's mod hub, where players download it. Here for
+   * the same reason as `MOD_REPO`: the web's download button and the worker's
+   * release announcement both link to it. */
+  MOD_HUB_URL: "https://wgmods.net/7928",
 };
 
 export default APP_IDENTITY;
