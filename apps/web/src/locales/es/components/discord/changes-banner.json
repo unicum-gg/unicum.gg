@@ -1,0 +1,9 @@
+{
+  "body": "Cada actualización y cada Prueba común, publicadas en {channel} el día de su lanzamiento. Obtén el rol {role} para recibir notificaciones.",
+  "follow": "¿Gestionas un servidor de clan? Sigue {channel} para recibir las actualizaciones allí también.",
+  "join": "Únete a Discord",
+  "title": {
+    "maps": "Recibe todos los cambios de mapas en Discord",
+    "tanks": "Recibe todas las mejoras y debilitaciones en Discord"
+  }
+}

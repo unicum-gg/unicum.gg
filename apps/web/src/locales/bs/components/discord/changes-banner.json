@@ -1,0 +1,9 @@
+{
+  "body": "Svako ažuriranje i svaki Zajednički test objavljeni su na {channel} istog dana kada brodovi isplove. Preuzmi ulogu {role} da bi te označili.",
+  "follow": "Vodiš klanski server? Prati {channel} da bi objave stizale i tamo.",
+  "join": "Pridruži se Discordu",
+  "title": {
+    "maps": "Saznaj za svaku promjenu mape na Discordu",
+    "tanks": "Saznaj za svako poboljšanje i svako oslabljivanje na Discordu"
+  }
+}

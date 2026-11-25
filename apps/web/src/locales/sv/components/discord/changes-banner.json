@@ -1,0 +1,9 @@
+{
+  "body": "Varje uppdatering och varje Vanlig Test publiceras i {channel} samma dag som den släpps. Välj {role} för att få aviseringar.",
+  "follow": "Kör du en klanserver? Följ {channel} så får du det där också.",
+  "join": "Gå med i Discord",
+  "title": {
+    "maps": "Få varje kartförändring i Discord",
+    "tanks": "Få alla buffar och nerfar i Discord"
+  }
+}

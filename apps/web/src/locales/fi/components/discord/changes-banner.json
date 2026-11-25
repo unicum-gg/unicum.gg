@@ -1,0 +1,9 @@
+{
+  "body": "Jokainen päivitys ja Yhteinen testi julkaistaan kanavalle {channel} julkaisupäivänä. Ota {role}, niin saat ilmoituksia.",
+  "follow": "Ylläpidätkö klaanin palvelinta? Seuraa kanavaa {channel}, niin päivitykset tulevat sinnekin.",
+  "join": "Liity Discordiin",
+  "title": {
+    "maps": "Saat kaikki karttamuutokset Discordissa",
+    "tanks": "Saat kaikki parannukset ja heikennykset Discordissa"
+  }
+}

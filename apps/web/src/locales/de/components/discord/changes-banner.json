@@ -1,0 +1,9 @@
+{
+  "body": "In {channel} findest du jede Aktualisierung und jeden Gemeinsamen Test am Tag ihrer Veröffentlichung. Nimm {role} an, um Benachrichtigungen zu erhalten.",
+  "follow": "Betreibst du einen Clan-Server? Folge {channel}, damit sie auch dort erscheinen.",
+  "join": "Discord beitreten",
+  "title": {
+    "maps": "Erhalte jede Kartenänderung in Discord",
+    "tanks": "Erhalte jede Verbesserung und Verschlechterung in Discord"
+  }
+}

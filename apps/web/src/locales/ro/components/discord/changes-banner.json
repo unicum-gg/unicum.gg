@@ -1,0 +1,9 @@
+{
+  "body": "Fiecare actualizare și fiecare Test Comun apar în {channel} în ziua lansării. Alege {role} ca rol pentru a primi notificări.",
+  "follow": "Ai un server de clan? Urmărește {channel} pentru a primi actualizările și acolo.",
+  "join": "Alătură-te pe Discord",
+  "title": {
+    "maps": "Primește fiecare schimbare de hartă pe Discord",
+    "tanks": "Primește fiecare buff și nerf pe Discord"
+  }
+}

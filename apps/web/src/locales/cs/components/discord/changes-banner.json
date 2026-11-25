@@ -1,0 +1,9 @@
+{
+  "body": "Každá aktualizace a každý Společný test jsou zveřejněny v {channel} v den vydání. Přijměte roli {role}, abyste dostali upozornění.",
+  "follow": "Provozujete klanový server? Sledujte {channel}, aby se aktualizace zveřejňovaly i tam.",
+  "join": "Připojit se k Discordu",
+  "title": {
+    "maps": "Sledujte všechny změny map na Discordu",
+    "tanks": "Sledujte všechna posílení a oslabení na Discordu"
+  }
+}

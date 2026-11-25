@@ -1,0 +1,9 @@
+{
+  "body": "Cada atualização e cada Teste Comum são publicados em {channel} no dia do lançamento. Assuma {role} para receber uma menção.",
+  "follow": "Você administra um servidor de clã? Siga {channel} para que as atualizações também sejam publicadas lá.",
+  "join": "Entrar no Discord",
+  "title": {
+    "maps": "Receba todas as alterações de mapas no Discord",
+    "tanks": "Receba todas as melhorias e reduções no Discord"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "body": "每次更新和每次公共测试都会在发布当天发送到{channel}。领取{role}即可获得提醒。",
+  "follow": "管理军团服务器？关注{channel}，也能在那里收到更新。",
+  "join": "加入 Discord",
+  "title": {
+    "maps": "在 Discord 获取所有地图变更",
+    "tanks": "在 Discord 获取所有增强和削弱"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "body": "Hver oppdatering og hver Vanlig test publiseres i {channel} samme dag som den lanseres. Ta rollen {role} for å bli varslet.",
+  "follow": "Driver du en server for en klan? Følg {channel} for å få dem der også.",
+  "join": "Bli med på Discord",
+  "title": {
+    "maps": "Få alle kartendringer i Discord",
+    "tanks": "Få alle forbedringer og svekkinger i Discord"
+  }
+}

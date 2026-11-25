@@ -926,7 +926,8 @@
     "colour": "اللون",
     "leaderboards": "لوحات المتصدرين",
     "style": "النمط",
-    "everything": "كل شيء"
+    "everything": "كل شيء",
+    "Join": "انضم"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1856,7 +1857,8 @@
     "colour": "колер",
     "leaderboards": "рэйтынгі",
     "style": "стыль",
-    "everything": "усё"
+    "everything": "усё",
+    "Join": "Далучыцца"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -3004,7 +3006,8 @@
     "colour": "цвят",
     "leaderboards": "класации",
     "style": "стил",
-    "everything": "всичко"
+    "everything": "всичко",
+    "Join": "Присъедини се"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -3942,7 +3945,8 @@
     "colour": "boja",
     "leaderboards": "rang-liste",
     "style": "stil",
-    "everything": "sve"
+    "everything": "sve",
+    "Join": "Pridruži se"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -5101,7 +5105,8 @@
     "colour": "barva",
     "leaderboards": "žebříčky",
     "style": "styl",
-    "everything": "vše"
+    "everything": "vše",
+    "Join": "Připojit se"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -6266,7 +6271,8 @@
     "colour": "farve",
     "leaderboards": "ranglister",
     "style": "stil",
-    "everything": "alt"
+    "everything": "alt",
+    "Join": "Deltag"
   },
   "de": {
     "(optional)": "(optional)",
@@ -7424,7 +7430,8 @@
     "colour": "farbe",
     "leaderboards": "bestenlisten",
     "style": "stil",
-    "everything": "alles"
+    "everything": "alles",
+    "Join": "Beitreten"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -8588,7 +8595,8 @@
     "colour": "χρώμα",
     "leaderboards": "πίνακες κατάταξης",
     "style": "στυλ",
-    "everything": "όλα"
+    "everything": "όλα",
+    "Join": "Συμμετοχή"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -9733,7 +9741,8 @@
     "colour": "color",
     "leaderboards": "clasificaciones",
     "style": "estilo",
-    "everything": "todo"
+    "everything": "todo",
+    "Join": "Únete"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -10902,7 +10911,8 @@
     "colour": "väri",
     "leaderboards": "tulostaulukot",
     "style": "tyyli",
-    "everything": "kaikki"
+    "everything": "kaikki",
+    "Join": "Liity"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -12049,7 +12059,8 @@
     "colour": "couleur",
     "leaderboards": "classements",
     "style": "style",
-    "everything": "tout"
+    "everything": "tout",
+    "Join": "Rejoindre"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -12980,7 +12991,8 @@
     "colour": "रंग",
     "leaderboards": "लीडरबोर्ड",
     "style": "शैली",
-    "everything": "सब कुछ"
+    "everything": "सब कुछ",
+    "Join": "जुड़ें"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -14142,7 +14154,8 @@
     "colour": "boja",
     "leaderboards": "ljestvice",
     "style": "stil",
-    "everything": "sve"
+    "everything": "sve",
+    "Join": "Pridruži se"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -15306,7 +15319,8 @@
     "colour": "szín",
     "leaderboards": "ranglisták",
     "style": "stílus",
-    "everything": "minden"
+    "everything": "minden",
+    "Join": "Csatlakozás"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -16466,7 +16480,8 @@
     "colour": "colore",
     "leaderboards": "classifiche",
     "style": "stile",
-    "everything": "tutto"
+    "everything": "tutto",
+    "Join": "Unisciti"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -17633,7 +17648,8 @@
     "colour": "色",
     "leaderboards": "リーダーボード",
     "style": "スタイル",
-    "everything": "すべて"
+    "everything": "すべて",
+    "Join": "参加"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -18564,7 +18580,8 @@
     "colour": "түс",
     "leaderboards": "көшбасшылар тақталары",
     "style": "стиль",
-    "everything": "барлығы"
+    "everything": "барлығы",
+    "Join": "Қосылу"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -19735,7 +19752,8 @@
     "colour": "색상",
     "leaderboards": "순위표",
     "style": "스타일",
-    "everything": "전체"
+    "everything": "전체",
+    "Join": "가입"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -20902,7 +20920,8 @@
     "colour": "spalva",
     "leaderboards": "lyderių lentelės",
     "style": "stilius",
-    "everything": "viskas"
+    "everything": "viskas",
+    "Join": "Prisijungti"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -22056,7 +22075,8 @@
     "colour": "krāsa",
     "leaderboards": "līderu saraksti",
     "style": "stils",
-    "everything": "viss"
+    "everything": "viss",
+    "Join": "Pievienoties"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -23225,7 +23245,8 @@
     "colour": "kleur",
     "leaderboards": "klassementen",
     "style": "stijl",
-    "everything": "alles"
+    "everything": "alles",
+    "Join": "Word lid"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -24385,7 +24406,8 @@
     "colour": "farge",
     "leaderboards": "topplister",
     "style": "stil",
-    "everything": "alt"
+    "everything": "alt",
+    "Join": "Bli med"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -25542,7 +25564,8 @@
     "colour": "kolor",
     "leaderboards": "rankingi",
     "style": "styl",
-    "everything": "wszystko"
+    "everything": "wszystko",
+    "Join": "Dołącz"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -26692,7 +26715,8 @@
     "colour": "cor",
     "leaderboards": "classificações",
     "style": "estilo",
-    "everything": "tudo"
+    "everything": "tudo",
+    "Join": "Entrar"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -27843,7 +27867,8 @@
     "colour": "culoare",
     "leaderboards": "clasamente",
     "style": "stil",
-    "everything": "totul"
+    "everything": "totul",
+    "Join": "Alătură-te"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -28982,7 +29007,8 @@
     "colour": "цвет",
     "leaderboards": "таблицы лидеров",
     "style": "стиль",
-    "everything": "всё"
+    "everything": "всё",
+    "Join": "Присоединиться"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -29916,7 +29942,8 @@
     "colour": "farba",
     "leaderboards": "rebríčky",
     "style": "štýl",
-    "everything": "vse"
+    "everything": "vse",
+    "Join": "Pridruži se"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -31080,7 +31107,8 @@
     "colour": "boja",
     "leaderboards": "rang-liste",
     "style": "stil",
-    "everything": "све"
+    "everything": "све",
+    "Join": "Pridruži se"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -32250,7 +32278,8 @@
     "colour": "färg",
     "leaderboards": "topplistor",
     "style": "stil",
-    "everything": "allt"
+    "everything": "allt",
+    "Join": "Gå med"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -33415,7 +33444,8 @@
     "colour": "สี",
     "leaderboards": "กระดานจัดอันดับ",
     "style": "สไตล์",
-    "everything": "ทั้งหมด"
+    "everything": "ทั้งหมด",
+    "Join": "เข้าร่วม"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -34348,7 +34378,8 @@
     "colour": "kulay",
     "leaderboards": "mga leaderboard",
     "style": "istilo",
-    "everything": "lahat"
+    "everything": "lahat",
+    "Join": "Sumali"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -35510,7 +35541,8 @@
     "colour": "renk",
     "leaderboards": "liderlik tabloları",
     "style": "stil",
-    "everything": "her şey"
+    "everything": "her şey",
+    "Join": "Katıl"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -36664,7 +36696,8 @@
     "colour": "колір",
     "leaderboards": "таблиці лідерів",
     "style": "стиль",
-    "everything": "усе"
+    "everything": "усе",
+    "Join": "Приєднатися"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -37807,7 +37840,8 @@
     "colour": "màu sắc",
     "leaderboards": "bảng xếp hạng",
     "style": "phong cách",
-    "everything": "tất cả"
+    "everything": "tất cả",
+    "Join": "Tham gia"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -38972,6 +39006,7 @@
     "colour": "颜色",
     "leaderboards": "排行榜",
     "style": "风格",
-    "everything": "全部"
+    "everything": "全部",
+    "Join": "加入"
   }
 }

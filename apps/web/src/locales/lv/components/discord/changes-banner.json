@@ -1,0 +1,9 @@
+{
+  "body": "Katrs atjauninājums un katrs Kopējais tests tiek publicēts {channel} izlaišanas dienā. Izvēlies {role}, lai saņemtu paziņojumus.",
+  "follow": "Vai pārvaldi klana serveri? Seko {channel}, lai saņemtu to arī tur.",
+  "join": "Pievienoties Discord",
+  "title": {
+    "maps": "Saņem visas karšu izmaiņas Discord",
+    "tanks": "Saņem visus uzlabojumus un vājinājumus Discord"
+  }
+}

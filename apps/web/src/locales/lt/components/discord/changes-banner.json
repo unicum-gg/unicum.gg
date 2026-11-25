@@ -1,0 +1,9 @@
+{
+  "body": "Visi atnaujinimai ir kiekvienas Bendras testas skelbiami kanale {channel} tą pačią dieną, kai pasirodo. Priskirkite sau vaidmenį {role}, kad gautumėte pranešimus.",
+  "follow": "Administruojate klano serverį? Sekite kanalą {channel}, kad atnaujinimai būtų skelbiami ir jame.",
+  "join": "Prisijungti prie Discord",
+  "title": {
+    "maps": "Gaukite visus žemėlapių pakeitimus Discord",
+    "tanks": "Gaukite visus sustiprinimus ir susilpninimus Discord"
+  }
+}

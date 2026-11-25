@@ -1,0 +1,9 @@
+{
+  "body": "Vsaka aktualizacija in vsak Všeobecný test sta objavljena v {channel} na dan izida. Prevzemi vlogo {role}, da boš prejel obvestilo.",
+  "follow": "Upravljaš klanski strežnik? Sledi {channel}, da bo vse objavljeno tudi tam.",
+  "join": "Pridruži se Discordu",
+  "title": {
+    "maps": "Prejemaj vsako zmeno zemljevida v Discordu",
+    "tanks": "Prejemaj vsako izboljšavo in oslabitev v Discordu"
+  }
+}

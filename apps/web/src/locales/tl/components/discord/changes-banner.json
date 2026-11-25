@@ -1,0 +1,9 @@
+{
+  "body": "Bawat update at bawat Karaniwang Pagsubok ay ipinapadala sa {channel} sa araw ng paglabas nito. Kunin ang {role} para maabisuhan.",
+  "follow": "May pinapatakbo ka bang server ng klano? Sundan ang {channel} para matanggap din doon.",
+  "join": "Sumali sa Discord",
+  "title": {
+    "maps": "Makatanggap ng bawat pagbabago sa mapa sa Discord",
+    "tanks": "Makatanggap ng bawat buff at nerf sa Discord"
+  }
+}

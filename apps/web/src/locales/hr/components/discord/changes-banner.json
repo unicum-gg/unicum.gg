@@ -1,0 +1,9 @@
+{
+  "body": "Svako ažuriranje i svako Zajedničko testiranje objavljuju se na {channel} istog dana kad budu dostupni. Preuzmi ulogu {role} kako bi dobio obavijest.",
+  "follow": "Vodiš li poslužitelj klana? Prati {channel} kako bi ih dobio i tamo.",
+  "join": "Pridruži se na Discord",
+  "title": {
+    "maps": "Sve promjene karata stižu na Discord",
+    "tanks": "Saznaj na Discord sve o poboljšanjima i oslabljivanjima"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "body": "Minden frissítés és minden Közönséges Teszt a megjelenés napján megjelenik a {channel} csatornáján. A pingeléshez vedd fel ezt a szerepet: {role}.",
+  "follow": "Klánszervert futtatsz? Kövesd ezt a csatornát: {channel}, hogy oda is eljusson.",
+  "join": "Csatlakozás a Discordhoz",
+  "title": {
+    "maps": "Minden térképváltozás a Discordon",
+    "tanks": "Minden erősítés és gyengítés a Discordon"
+  }
+}

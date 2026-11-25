@@ -1,0 +1,9 @@
+{
+  "body": "Mọi bản cập nhật và mọi Kiểm tra chung đều được đăng tại {channel} vào ngày phát hành. Chọn {role} để nhận thông báo.",
+  "follow": "Bạn vận hành máy chủ Clan? Theo dõi {channel} để nhận thông tin ở đó nữa.",
+  "join": "Tham gia Discord",
+  "title": {
+    "maps": "Nhận mọi thay đổi bản đồ trên Discord",
+    "tanks": "Nhận mọi buff và nerf trên Discord"
+  }
+}

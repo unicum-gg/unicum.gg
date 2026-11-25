@@ -1,0 +1,9 @@
+{
+  "body": "Elke update en elke Algemene Test worden op de dag dat ze verschijnen in {channel} geplaatst. Neem {role} aan om een melding te krijgen.",
+  "follow": "Beheer je een clanserver? Volg {channel} om ze daar ook te ontvangen.",
+  "join": "Word lid van Discord",
+  "title": {
+    "maps": "Ontvang elke kaartwijziging in Discord",
+    "tanks": "Ontvang elke buff en nerf in Discord"
+  }
+}
