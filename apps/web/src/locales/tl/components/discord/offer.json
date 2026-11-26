@@ -1,0 +1,23 @@
+{
+  "add-bot": "Idagdag ang bot sa iyong server",
+  "example": "Halimbawa",
+  "join": "Sumali sa Discord",
+  "link": "I-link ang Discord ko",
+  "own-profile": {
+    "description": "I-link ang Discord mo at idaragdag ka namin sa aming server gamit ang pangalan mo sa laro, kasama ang role ng iyong server. Sumasagot din doon ang /player at /clan.",
+    "heading": "Maging {name} sa aming Discord"
+  },
+  "player": {
+    "description": "Sinasagot ng /player at /clan ang mga utos sa Discord mismo, at lahat ng buff at nerf ng bawat update ay nai-post doon sa araw na ipinapadala ito.",
+    "heading": "Hanapin ang sinumang manlalaro mula sa Discord"
+  },
+  "preview": {
+    "invocation": "Ginamit ni Koala ang /player",
+    "tank-description": "Pinakamataas na tier muna.",
+    "tank-title": "Update 2.4.2 · May mga pagbabago sa 50 sasakyan"
+  },
+  "tank": {
+    "description": "Ang bawat update at bawat Karaniwang Pagsubok ay nai-post sa #tank-changes sa araw na ipinapadala ang mga ito, kasama ang {tank}. Kunin ang role ng mga pagbabago sa Tangke para maabisuhan ka.",
+    "heading": "Alamin sa Discord ang susunod na buff o nerf ng {tank}"
+  }
+}

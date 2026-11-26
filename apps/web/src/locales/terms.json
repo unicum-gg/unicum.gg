@@ -928,7 +928,14 @@
     "style": "النمط",
     "everything": "كل شيء",
     "Join": "انضم",
-    "Period": "الفترة"
+    "Period": "الفترة",
+    "Example": "مثال",
+    "Join the Discord": "انضم إلى Discord",
+    "Link": "ربط",
+    "Link my Discord": "اربط Discord الخاص بي",
+    "answer": "إجابة",
+    "posted": "تم النشر",
+    "used": "مستخدم"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1860,7 +1867,14 @@
     "style": "стыль",
     "everything": "усё",
     "Join": "Далучыцца",
-    "Period": "Перыяд"
+    "Period": "Перыяд",
+    "Example": "Прыклад",
+    "Join the Discord": "Далучыцца да Discord",
+    "Link": "Спасылка",
+    "Link my Discord": "Прывязаць мой Discord",
+    "answer": "адказ",
+    "posted": "апублікавана",
+    "used": "выкарыстана"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -3010,7 +3024,14 @@
     "style": "стил",
     "everything": "всичко",
     "Join": "Присъедини се",
-    "Period": "Период"
+    "Period": "Период",
+    "Example": "Пример",
+    "Join the Discord": "Присъедини се към Discord",
+    "Link": "Връзка",
+    "Link my Discord": "Свържи моя Discord",
+    "answer": "отговор",
+    "posted": "публикуван",
+    "used": "използван"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -3950,7 +3971,14 @@
     "style": "stil",
     "everything": "sve",
     "Join": "Pridruži se",
-    "Period": "Period"
+    "Period": "Period",
+    "Example": "Primjer",
+    "Join the Discord": "Pridruži se Discordu",
+    "Link": "Poveži",
+    "Link my Discord": "Poveži moj Discord",
+    "answer": "odgovor",
+    "posted": "objavljeno",
+    "used": "korišteno"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -5111,7 +5139,14 @@
     "style": "styl",
     "everything": "vše",
     "Join": "Připojit se",
-    "Period": "Období"
+    "Period": "Období",
+    "Example": "Příklad",
+    "Join the Discord": "Připojit se k Discordu",
+    "Link": "Odkaz",
+    "Link my Discord": "Propojit můj Discord",
+    "answer": "odpověď",
+    "posted": "zveřejněno",
+    "used": "použito"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -6278,7 +6313,14 @@
     "style": "stil",
     "everything": "alt",
     "Join": "Deltag",
-    "Period": "Periode"
+    "Period": "Periode",
+    "Example": "Eksempel",
+    "Join the Discord": "Bliv medlem af Discord",
+    "Link": "Link",
+    "Link my Discord": "Forbind min Discord",
+    "answer": "svar",
+    "posted": "opslået",
+    "used": "brugt"
   },
   "de": {
     "(optional)": "(optional)",
@@ -7438,7 +7480,14 @@
     "style": "stil",
     "everything": "alles",
     "Join": "Beitreten",
-    "Period": "Zeitraum"
+    "Period": "Zeitraum",
+    "Example": "Beispiel",
+    "Join the Discord": "Discord beitreten",
+    "Link": "Verknüpfen",
+    "Link my Discord": "Mein Discord verknüpfen",
+    "answer": "Antwort",
+    "posted": "veröffentlicht",
+    "used": "verwendet"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -8604,7 +8653,14 @@
     "style": "στυλ",
     "everything": "όλα",
     "Join": "Συμμετοχή",
-    "Period": "Περίοδος"
+    "Period": "Περίοδος",
+    "Example": "Παράδειγμα",
+    "Join the Discord": "Μπείτε στο Discord",
+    "Link": "Σύνδεσμος",
+    "Link my Discord": "Σύνδεσε το Discord μου",
+    "answer": "απάντηση",
+    "posted": "δημοσιεύτηκε",
+    "used": "χρησιμοποιείται"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -9751,7 +9807,14 @@
     "style": "estilo",
     "everything": "todo",
     "Join": "Únete",
-    "Period": "Periodo"
+    "Period": "Periodo",
+    "Example": "Ejemplo",
+    "Join the Discord": "Únete a Discord",
+    "Link": "Vincular",
+    "Link my Discord": "Vincular mi Discord",
+    "answer": "respuesta",
+    "posted": "publicado",
+    "used": "usado"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -10922,7 +10985,14 @@
     "style": "tyyli",
     "everything": "kaikki",
     "Join": "Liity",
-    "Period": "Ajanjakso"
+    "Period": "Ajanjakso",
+    "Example": "Esimerkki",
+    "Join the Discord": "Liity Discordiin",
+    "Link": "Linkitä",
+    "Link my Discord": "Linkitä Discordini",
+    "answer": "vastaus",
+    "posted": "julkaistu",
+    "used": "käytetty"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -12071,7 +12141,14 @@
     "style": "style",
     "everything": "tout",
     "Join": "Rejoindre",
-    "Period": "Période"
+    "Period": "Période",
+    "Example": "Exemple",
+    "Join the Discord": "Rejoindre le Discord",
+    "Link": "Lier",
+    "Link my Discord": "Lier mon Discord",
+    "answer": "réponse",
+    "posted": "publié",
+    "used": "utilisé"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -13004,7 +13081,14 @@
     "style": "शैली",
     "everything": "सब कुछ",
     "Join": "जुड़ें",
-    "Period": "अवधि"
+    "Period": "अवधि",
+    "Example": "उदाहरण",
+    "Join the Discord": "Discord से जुड़ें",
+    "Link": "लिंक",
+    "Link my Discord": "मेरा Discord लिंक करें",
+    "answer": "उत्तर",
+    "posted": "पोस्ट किया गया",
+    "used": "इस्तेमाल किया गया"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -14168,7 +14252,14 @@
     "style": "stil",
     "everything": "sve",
     "Join": "Pridruži se",
-    "Period": "Razdoblje"
+    "Period": "Razdoblje",
+    "Example": "Primjer",
+    "Join the Discord": "Pridruži se Discordu",
+    "Link": "Poveži",
+    "Link my Discord": "Poveži moj Discord",
+    "answer": "odgovor",
+    "posted": "objavljeno",
+    "used": "korišteno"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -15334,7 +15425,14 @@
     "style": "stílus",
     "everything": "minden",
     "Join": "Csatlakozás",
-    "Period": "Időszak"
+    "Period": "Időszak",
+    "Example": "Példa",
+    "Join the Discord": "Csatlakozz a Discordhoz",
+    "Link": "Hivatkozás",
+    "Link my Discord": "Discordom összekapcsolása",
+    "answer": "válasz",
+    "posted": "közzétéve",
+    "used": "használt"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -16496,7 +16594,14 @@
     "style": "stile",
     "everything": "tutto",
     "Join": "Unisciti",
-    "Period": "Periodo"
+    "Period": "Periodo",
+    "Example": "Esempio",
+    "Join the Discord": "Unisciti a Discord",
+    "Link": "Collega",
+    "Link my Discord": "Collega il mio Discord",
+    "answer": "risposta",
+    "posted": "pubblicato",
+    "used": "utilizzato"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -17665,7 +17770,14 @@
     "style": "スタイル",
     "everything": "すべて",
     "Join": "参加",
-    "Period": "期間"
+    "Period": "期間",
+    "Example": "例",
+    "Join the Discord": "Discordに参加",
+    "Link": "リンク",
+    "Link my Discord": "Discordを連携",
+    "answer": "回答",
+    "posted": "投稿済み",
+    "used": "使用"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -18598,7 +18710,14 @@
     "style": "стиль",
     "everything": "барлығы",
     "Join": "Қосылу",
-    "Period": "Кезең"
+    "Period": "Кезең",
+    "Example": "Мысал",
+    "Join the Discord": "Discord-қа қосылу",
+    "Link": "Сілтеме",
+    "Link my Discord": "Discord-ымды байланыстыру",
+    "answer": "жауап",
+    "posted": "жарияланған",
+    "used": "пайдаланылған"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -19771,7 +19890,14 @@
     "style": "스타일",
     "everything": "전체",
     "Join": "가입",
-    "Period": "기간"
+    "Period": "기간",
+    "Example": "예시",
+    "Join the Discord": "Discord 참여하기",
+    "Link": "연결",
+    "Link my Discord": "내 Discord 연결하기",
+    "answer": "답변",
+    "posted": "게시됨",
+    "used": "사용됨"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -20940,7 +21066,14 @@
     "style": "stilius",
     "everything": "viskas",
     "Join": "Prisijungti",
-    "Period": "Laikotarpis"
+    "Period": "Laikotarpis",
+    "Example": "Pavyzdys",
+    "Join the Discord": "Prisijungti prie „Discord“",
+    "Link": "Susieti",
+    "Link my Discord": "Susieti mano „Discord“",
+    "answer": "atsakymas",
+    "posted": "paskelbta",
+    "used": "naudojama"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -22096,7 +22229,14 @@
     "style": "stils",
     "everything": "viss",
     "Join": "Pievienoties",
-    "Period": "Periods"
+    "Period": "Periods",
+    "Example": "Piemērs",
+    "Join the Discord": "Pievienoties Discord",
+    "Link": "Saite",
+    "Link my Discord": "Saistīt manu Discord",
+    "answer": "atbilde",
+    "posted": "publicēts",
+    "used": "izmantots"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -23267,7 +23407,14 @@
     "style": "stijl",
     "everything": "alles",
     "Join": "Word lid",
-    "Period": "Periode"
+    "Period": "Periode",
+    "Example": "Voorbeeld",
+    "Join the Discord": "Word lid van Discord",
+    "Link": "Koppelen",
+    "Link my Discord": "Mijn Discord koppelen",
+    "answer": "antwoord",
+    "posted": "geplaatst",
+    "used": "gebruikt"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -24429,7 +24576,14 @@
     "style": "stil",
     "everything": "alt",
     "Join": "Bli med",
-    "Period": "Periode"
+    "Period": "Periode",
+    "Example": "Eksempel",
+    "Join the Discord": "Bli med på Discord",
+    "Link": "Lenke",
+    "Link my Discord": "Koble til Discord-kontoen min",
+    "answer": "svar",
+    "posted": "lagt ut",
+    "used": "brukt"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -25588,7 +25742,14 @@
     "style": "styl",
     "everything": "wszystko",
     "Join": "Dołącz",
-    "Period": "Okres"
+    "Period": "Okres",
+    "Example": "Przykład",
+    "Join the Discord": "Dołącz do Discorda",
+    "Link": "Link",
+    "Link my Discord": "Połącz z Discordem",
+    "answer": "odpowiedź",
+    "posted": "opublikowano",
+    "used": "używany"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -26740,7 +26901,14 @@
     "style": "estilo",
     "everything": "tudo",
     "Join": "Entrar",
-    "Period": "Período"
+    "Period": "Período",
+    "Example": "Exemplo",
+    "Join the Discord": "Entrar no Discord",
+    "Link": "Vincular",
+    "Link my Discord": "Vincular meu Discord",
+    "answer": "resposta",
+    "posted": "publicado",
+    "used": "usado"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -27893,7 +28061,14 @@
     "style": "stil",
     "everything": "totul",
     "Join": "Alătură-te",
-    "Period": "Perioadă"
+    "Period": "Perioadă",
+    "Example": "Exemplu",
+    "Join the Discord": "Intră pe Discord",
+    "Link": "Link",
+    "Link my Discord": "Conectează-mi Discordul",
+    "answer": "răspuns",
+    "posted": "postat",
+    "used": "folosit"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -29034,7 +29209,14 @@
     "style": "стиль",
     "everything": "всё",
     "Join": "Присоединиться",
-    "Period": "Период"
+    "Period": "Период",
+    "Example": "Пример",
+    "Join the Discord": "Присоединиться к Discord",
+    "Link": "Ссылка",
+    "Link my Discord": "Привязать мой Discord",
+    "answer": "ответ",
+    "posted": "опубликовано",
+    "used": "использовано"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -29970,7 +30152,14 @@
     "style": "štýl",
     "everything": "vse",
     "Join": "Pridruži se",
-    "Period": "Obdobje"
+    "Period": "Obdobje",
+    "Example": "Príklad",
+    "Join the Discord": "Pripojiť sa na Discord",
+    "Link": "Odkaz",
+    "Link my Discord": "Prepojiť môj Discord",
+    "answer": "odpoveď",
+    "posted": "zverejnené",
+    "used": "použité"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -31136,7 +31325,14 @@
     "style": "stil",
     "everything": "све",
     "Join": "Pridruži se",
-    "Period": "Period"
+    "Period": "Period",
+    "Example": "Primer",
+    "Join the Discord": "Pridruži se Discordu",
+    "Link": "Poveži",
+    "Link my Discord": "Poveži moj Discord",
+    "answer": "odgovor",
+    "posted": "objavljeno",
+    "used": "korišćeno"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -32308,7 +32504,14 @@
     "style": "stil",
     "everything": "allt",
     "Join": "Gå med",
-    "Period": "Period"
+    "Period": "Period",
+    "Example": "Exempel",
+    "Join the Discord": "Gå med i Discord",
+    "Link": "Länk",
+    "Link my Discord": "Koppla min Discord",
+    "answer": "svar",
+    "posted": "publicerat",
+    "used": "används"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -33475,7 +33678,14 @@
     "style": "สไตล์",
     "everything": "ทั้งหมด",
     "Join": "เข้าร่วม",
-    "Period": "ช่วงเวลา"
+    "Period": "ช่วงเวลา",
+    "Example": "ตัวอย่าง",
+    "Join the Discord": "เข้าร่วม Discord",
+    "Link": "ลิงก์",
+    "Link my Discord": "ลิงก์ Discord ของฉัน",
+    "answer": "คำตอบ",
+    "posted": "โพสต์แล้ว",
+    "used": "ใช้แล้ว"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -34410,7 +34620,14 @@
     "style": "istilo",
     "everything": "lahat",
     "Join": "Sumali",
-    "Period": "Panahon"
+    "Period": "Panahon",
+    "Example": "Halimbawa",
+    "Join the Discord": "Sumali sa Discord",
+    "Link": "I-link",
+    "Link my Discord": "I-link ang Discord ko",
+    "answer": "sagot",
+    "posted": "nai-post",
+    "used": "ginamit"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -35574,7 +35791,14 @@
     "style": "stil",
     "everything": "her şey",
     "Join": "Katıl",
-    "Period": "Dönem"
+    "Period": "Dönem",
+    "Example": "Örnek",
+    "Join the Discord": "Discord'a katıl",
+    "Link": "Bağla",
+    "Link my Discord": "Discord'umu bağla",
+    "answer": "cevap",
+    "posted": "paylaşıldı",
+    "used": "kullanıldı"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -36730,7 +36954,14 @@
     "style": "стиль",
     "everything": "усе",
     "Join": "Приєднатися",
-    "Period": "Період"
+    "Period": "Період",
+    "Example": "Приклад",
+    "Join the Discord": "Приєднатися до Discord",
+    "Link": "Посилання",
+    "Link my Discord": "Прив’язати мій Discord",
+    "answer": "відповідь",
+    "posted": "опубліковано",
+    "used": "використано"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -37875,7 +38106,14 @@
     "style": "phong cách",
     "everything": "tất cả",
     "Join": "Tham gia",
-    "Period": "Khoảng thời gian"
+    "Period": "Khoảng thời gian",
+    "Example": "Ví dụ",
+    "Join the Discord": "Tham gia Discord",
+    "Link": "Liên kết",
+    "Link my Discord": "Liên kết Discord của tôi",
+    "answer": "câu trả lời",
+    "posted": "đã đăng",
+    "used": "đã sử dụng"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -39042,6 +39280,13 @@
     "style": "风格",
     "everything": "全部",
     "Join": "加入",
-    "Period": "时间段"
+    "Period": "时间段",
+    "Example": "示例",
+    "Join the Discord": "加入 Discord",
+    "Link": "链接",
+    "Link my Discord": "关联我的 Discord",
+    "answer": "回答",
+    "posted": "发布于",
+    "used": "已使用"
   }
 }

@@ -1,7 +1,7 @@
 {
   "body": "Her güncelleme ve her Ortak Test, yayınlandığı gün {channel} kanalında paylaşılır. Etiketlenmek için {role} rolünü alın.",
   "follow": "Bir klan sunucusu mu yönetiyorsunuz? {channel} kanalını takip ederek orada da görünmesini sağlayın.",
-  "join": "Discord’a Katıl",
+  "join": "Discord’a katıl",
   "title": {
     "maps": "Discord’da her harita değişikliğinden haberdar olun",
     "tanks": "Discord’da her güçlendirme ve zayıflatmadan haberdar olun"

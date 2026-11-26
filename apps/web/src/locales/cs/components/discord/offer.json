@@ -1,0 +1,23 @@
+{
+  "add-bot": "Přidat bota na svůj server",
+  "example": "Příklad",
+  "join": "Připojit se k Discordu",
+  "link": "Propojit můj Discord",
+  "own-profile": {
+    "description": "Propojte svůj Discord a přidáme vás na náš server pod jménem ve hře s rolí vašeho serveru. Odpověď na /player a /clan získáte i tam.",
+    "heading": "Buďte na našem Discordu jako {name}"
+  },
+  "player": {
+    "description": "/player a /clan odpovídají přímo na Discordu a každé posílení a oslabení z každé aktualizace je tam zveřejněno v den vydání.",
+    "heading": "Vyhledejte libovolného hráče z Discordu"
+  },
+  "preview": {
+    "invocation": "Koala použilo /player",
+    "tank-description": "Nejvyšší úroveň jako první.",
+    "tank-title": "Aktualizovat 2.4.2 · změněno 50 vozidel"
+  },
+  "tank": {
+    "description": "Každá aktualizace a každý Společný test jsou zveřejněny v kanálu #tank-changes v den vydání, přičemž je zahrnuto i {tank}. Přijměte roli změn tanků, abyste dostávali upozornění.",
+    "heading": "Zjistěte na Discordu o dalším vylepšení nebo oslabení tanku {tank}"
+  }
+}

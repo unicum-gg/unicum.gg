@@ -1,7 +1,7 @@
 {
   "body": "Chaque mise à jour et chaque Test commun sont publiés dans {channel} le jour de leur sortie. Prenez le rôle {role} pour être mentionné.",
   "follow": "Vous gérez un serveur de clan ? Suivez {channel} pour les y recevoir aussi.",
-  "join": "Rejoindre Discord",
+  "join": "Rejoindre le Discord",
   "title": {
     "maps": "Recevez toutes les modifications de carte dans Discord",
     "tanks": "Recevez toutes les améliorations et tous les affaiblissements dans Discord"

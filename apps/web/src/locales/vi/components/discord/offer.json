@@ -1,0 +1,23 @@
+{
+  "add-bot": "Thêm bot vào máy chủ của bạn",
+  "example": "Ví dụ",
+  "join": "Tham gia Discord",
+  "link": "Liên kết Discord của tôi",
+  "own-profile": {
+    "description": "Liên kết Discord của bạn và chúng tôi sẽ thêm bạn vào máy chủ của chúng tôi dưới tên trong trò chơi của bạn, với vai trò trên máy chủ của bạn. /player và /clan cũng có câu trả lời ở đó.",
+    "heading": "Là {name} trên Discord của chúng tôi"
+  },
+  "player": {
+    "description": "/player và /clan có câu trả lời ngay trong Discord, và mọi buff và nerf của mỗi lần cập nhật đều đã đăng ở đó vào ngày phát hành.",
+    "heading": "Tra cứu bất kỳ người chơi nào từ Discord"
+  },
+  "preview": {
+    "invocation": "Koala đã sử dụng /player",
+    "tank-description": "Cấp cao nhất trước.",
+    "tank-title": "Cập nhật 2.4.2 · 50 xe tăng đã thay đổi"
+  },
+  "tank": {
+    "description": "Mọi cập nhật và mọi Kiểm tra chung đều đã đăng lên #tank-changes vào ngày phát hành, bao gồm cả {tank}. Chọn vai trò thay đổi Xe tăng để được ping.",
+    "heading": "Nhận thông tin về lần buff hoặc nerf tiếp theo của {tank} trên Discord"
+  }
+}

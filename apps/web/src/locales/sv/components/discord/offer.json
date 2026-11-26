@@ -1,0 +1,23 @@
+{
+  "add-bot": "Lägg till boten på din server",
+  "example": "Exempel",
+  "join": "Gå med i Discord",
+  "link": "Koppla min Discord",
+  "own-profile": {
+    "description": "Koppla din Discord så lägger vi till dig på vår server under ditt namn i spelet, med din servers roll. /player och /clan svarar där också.",
+    "heading": "Var {name} på vår Discord"
+  },
+  "player": {
+    "description": "/player och /clan svarar direkt i Discord, och varje buff och nerf i varje uppdatering publiceras där samma dag som den släpps.",
+    "heading": "Slå upp valfri spelare från Discord"
+  },
+  "preview": {
+    "invocation": "Koala använde /player",
+    "tank-description": "Högsta nivå först.",
+    "tank-title": "Uppdatering 2.4.2 · 50 fordon förändrade"
+  },
+  "tank": {
+    "description": "Varje uppdatering och varje Vanlig Test publiceras i #tank-changes samma dag som den släpps, inklusive {tank}. Ta rollen Tank changes för att bli pingad.",
+    "heading": "Få reda på nästa buff eller nerf för {tank} i Discord"
+  }
+}

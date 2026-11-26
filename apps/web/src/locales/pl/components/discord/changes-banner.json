@@ -1,7 +1,7 @@
 {
   "body": "Każda aktualizacja i każdy Test ogólny publikowane są na {channel} w dniu publikacji. Wybierz rolę {role}, aby otrzymywać powiadomienia.",
   "follow": "Prowadzisz serwer klanu? Obserwuj {channel}, aby otrzymywać je również tam.",
-  "join": "Dołącz na Discord",
+  "join": "Dołącz do Discorda",
   "title": {
     "maps": "Otrzymuj na Discordzie informacje o każdej zmianie map",
     "tanks": "Otrzymuj na Discordzie informacje o każdym wzmocnieniu i osłabieniu"

@@ -1,0 +1,23 @@
+{
+  "add-bot": "将机器人添加到你的服务器",
+  "example": "示例",
+  "join": "加入 Discord",
+  "link": "关联我的 Discord",
+  "own-profile": {
+    "description": "关联你的 Discord，我们会使用你的游戏内名称和你在服务器上的角色将你添加到我们的服务器。/player 和 /clan 也会在那里回答。",
+    "heading": "在我们的 Discord 上以 {name} 的身份加入"
+  },
+  "player": {
+    "description": "/player 和 /clan 会直接在 Discord 中回答，每次更新的每项增强和削弱也会在发布当天发布在那里。",
+    "heading": "在 Discord 中查找任何玩家"
+  },
+  "preview": {
+    "invocation": "Koala 已使用 /player",
+    "tank-description": "最高等级优先。",
+    "tank-title": "更新 2.4.2 · 50 辆车辆发生变更"
+  },
+  "tank": {
+    "description": "每次更新和每次公共测试都会在发布当天发布到 #tank-changes，包含 {tank}。选择坦克变更角色即可接收提醒。",
+    "heading": "在 Discord 中了解 {tank} 的下一次增强或削弱"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "add-bot": "Dodaj bota na svoj poslužitelj",
+  "example": "Primjer",
+  "join": "Pridruži se Discordu",
+  "link": "Poveži moj Discord",
+  "own-profile": {
+    "description": "Poveži svoj Discord i dodat ćemo te na naš poslužitelj pod tvojim imenom u igri, s ulogom tvog poslužitelja. /player i /clan tamo daju odgovor.",
+    "heading": "Budi {name} na našem Discordu"
+  },
+  "player": {
+    "description": "/player i /clan daju odgovor izravno na Discordu, a svako pojačanje i oslabljivanje svakog ažuriranja tamo je objavljeno na dan kada brodovi isplove.",
+    "heading": "Potraži bilo kojeg igrača iz Discorda"
+  },
+  "preview": {
+    "invocation": "Koala je koristilo /player",
+    "tank-description": "Najviša razina prva.",
+    "tank-title": "Obnovi 2.4.2 · promijenjeno 50 vozila"
+  },
+  "tank": {
+    "description": "Svako ažuriranje i svako Zajedničko testiranje objavljeno je na #tank-changes na dan kada brodovi isplove, uključujući {tank}. Preuzmi ulogu promjena Teneka kako bi primio obavijest.",
+    "heading": "Saznaj o sljedećem pojačanju ili oslabljivanju za {tank} na Discordu"
+  }
+}

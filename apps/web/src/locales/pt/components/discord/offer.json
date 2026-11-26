@@ -1,0 +1,23 @@
+{
+  "add-bot": "Adicionar o bot ao seu servidor",
+  "example": "Exemplo",
+  "join": "Entrar no Discord",
+  "link": "Vincular meu Discord",
+  "own-profile": {
+    "description": "Vincule seu Discord e nós adicionaremos você ao nosso servidor com seu nome no jogo e a função do seu servidor. /player e /clan também dão resposta lá.",
+    "heading": "Seja {name} no nosso Discord"
+  },
+  "player": {
+    "description": "/player e /clan dão resposta diretamente no Discord, e cada buff e nerf de cada atualização é publicado lá no dia em que chega.",
+    "heading": "Consultar qualquer jogador pelo Discord"
+  },
+  "preview": {
+    "invocation": "Koala usou /player",
+    "tank-description": "Nível mais alto primeiro.",
+    "tank-title": "Actualizar 2.4.2 · 50 veículos alterados"
+  },
+  "tank": {
+    "description": "Cada atualização e cada Teste Comum são publicadas em #tank-changes no dia em que chegam, com {tank} incluído. Assuma a função de alterações de Tanque para receber notificações.",
+    "heading": "Saiba do próximo buff ou nerf de {tank} no Discord"
+  }
+}

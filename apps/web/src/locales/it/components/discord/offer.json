@@ -1,0 +1,23 @@
+{
+  "add-bot": "Aggiungi il bot al tuo server",
+  "example": "Esempio",
+  "join": "Unisciti a Discord",
+  "link": "Collega il mio Discord",
+  "own-profile": {
+    "description": "Collega il tuo Discord e ti aggiungeremo al nostro server con il ruolo del tuo server, usando il tuo nome di gioco. /player e /clan rispondono anche lì.",
+    "heading": "Sii {name} sul nostro Discord"
+  },
+  "player": {
+    "description": "/player e /clan rispondono direttamente su Discord, e ogni potenziamento e indebolimento di ogni aggiornamento viene pubblicato lì il giorno stesso in cui viene rilasciato.",
+    "heading": "Cerca qualsiasi giocatore tramite Discord"
+  },
+  "preview": {
+    "invocation": "Koala ha utilizzato /player",
+    "tank-description": "Prima i livelli più alti.",
+    "tank-title": "Aggiornamento 2.4.2 · 50 veicoli modificati"
+  },
+  "tank": {
+    "description": "Ogni aggiornamento e ogni Test comune vengono pubblicati su #tank-changes il giorno stesso in cui vengono rilasciati, incluso {tank}. Scegli il ruolo Modifiche dei carri per ricevere una notifica.",
+    "heading": "Scopri su Discord il prossimo potenziamento o indebolimento di {tank}"
+  }
+}

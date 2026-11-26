@@ -1,0 +1,23 @@
+{
+  "add-bot": "Adaugă botul pe serverul tău",
+  "example": "Exemplu",
+  "join": "Intră pe Discord",
+  "link": "Conectează-mi Discordul",
+  "own-profile": {
+    "description": "Conectează-ți Discordul, iar noi te adăugăm pe serverul nostru sub numele tău din joc, cu rolul serverului tău. /player și /clan răspund și acolo.",
+    "heading": "Fii {name} pe Discordul nostru"
+  },
+  "player": {
+    "description": "/player și /clan răspund direct pe Discord, iar fiecare îmbunătățire și slăbire din fiecare actualizare este postată acolo în ziua lansării.",
+    "heading": "Caută orice jucător de pe Discord"
+  },
+  "preview": {
+    "invocation": "Koala a folosit /player",
+    "tank-description": "Mai întâi, nivelul cel mai mare.",
+    "tank-title": "Actualizează 2.4.2 · 50 de vehicule schimbate"
+  },
+  "tank": {
+    "description": "Fiecare actualizare și fiecare Test Comun este postat pe #tank-changes în ziua lansării, inclusiv {tank}. Ia rolul „Schimbări pentru tancuri” pentru a primi notificări.",
+    "heading": "Află pe Discord despre următorul buff sau nerf pentru {tank}"
+  }
+}

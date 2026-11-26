@@ -1,0 +1,23 @@
+{
+  "add-bot": "Dodaj bota do swojego serwera",
+  "example": "Przykład",
+  "join": "Dołącz do Discorda",
+  "link": "Połącz z Discordem",
+  "own-profile": {
+    "description": "Połącz z Discordem, a dodamy Cię do naszego serwera pod Twoją nazwą w grze i z rolą serwera. Polecenia /player i /clan również udzielają tam odpowiedzi.",
+    "heading": "Bądź {name} na naszym Discordzie"
+  },
+  "player": {
+    "description": "Polecenia /player i /clan odpowiadają bezpośrednio na Discordzie, a każde wzmocnienie i osłabienie z każdej aktualizacji jest tam publikowane w dniu jej wydania.",
+    "heading": "Wyszukaj dowolnego gracza na Discordzie"
+  },
+  "preview": {
+    "invocation": "Koala użył /player",
+    "tank-description": "Najpierw najwyższy poziom.",
+    "tank-title": "Odśwież 2.4.2 · Zmieniono 50 pojazdów"
+  },
+  "tank": {
+    "description": "Każda aktualizacja i każdy Test ogólny są publikowane na kanale #tank-changes w dniu ich wydania, w tym uwzględniono również {tank}. Wybierz rolę zmian czołgów, aby otrzymywać powiadomienia.",
+    "heading": "Dowiedz się na Discordzie o następnym wzmocnieniu lub osłabieniu pojazdu {tank}"
+  }
+}

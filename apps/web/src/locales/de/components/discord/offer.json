@@ -1,0 +1,23 @@
+{
+  "add-bot": "Bot zu deinem Server hinzufügen",
+  "example": "Beispiel",
+  "join": "Discord beitreten",
+  "link": "Mein Discord verknüpfen",
+  "own-profile": {
+    "description": "Verknüpfe dein Discord, und wir fügen dich unter deinem Namen im Spiel mit der Rolle deines Servers unserem Server hinzu. /player und /clan geben dort ebenfalls Antwort.",
+    "heading": "Sei auf unserem Discord unter dem Namen {name}"
+  },
+  "player": {
+    "description": "/player und /clan geben direkt in Discord Antwort, und jede Verbesserung und Verschlechterung jeder Aktualisierung wird dort am Tag ihrer Veröffentlichung veröffentlicht.",
+    "heading": "Jeden Spieler über Discord nachschlagen"
+  },
+  "preview": {
+    "invocation": "Koala verwendet /player",
+    "tank-description": "Höchste Stufe zuerst.",
+    "tank-title": "Aktualisieren 2.4.2 · 50 Fahrzeuge geändert"
+  },
+  "tank": {
+    "description": "Jede Aktualisierung und jeder Gemeinsame Test wird am Tag seiner Veröffentlichung in #tank-changes veröffentlicht, einschließlich {tank}. Nimm die Rolle „Panzeränderungen“ an, um erwähnt zu werden.",
+    "heading": "Erfahre auf Discord von der nächsten Verbesserung oder Verschlechterung für {tank}"
+  }
+}

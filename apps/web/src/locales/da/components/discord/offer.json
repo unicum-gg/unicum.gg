@@ -1,0 +1,23 @@
+{
+  "add-bot": "Føj botten til din server",
+  "example": "Eksempel",
+  "join": "Bliv medlem af Discord",
+  "link": "Forbind min Discord",
+  "own-profile": {
+    "description": "Forbind din Discord, så føjer vi dig til vores server under dit navn i spillet, med din rolle på serveren. /player og /clan giver også svar der.",
+    "heading": "Vær {name} på vores Discord"
+  },
+  "player": {
+    "description": "/player og /clan giver svar direkte i Discord, og hver buff og nerf i hver opdatering opslås der den dag, den udgives.",
+    "heading": "Slå enhver spiller op via Discord"
+  },
+  "preview": {
+    "invocation": "Koala brugte /player",
+    "tank-description": "Højeste niveau først.",
+    "tank-title": "Opdatering 2.4.2 · 50 køretøjer ændret"
+  },
+  "tank": {
+    "description": "Hver opdatering og hver Offentlig Test opslås i #tank-changes den dag, den udgives, med {tank} inkluderet. Tag rollen Tank changes for at blive pinget.",
+    "heading": "Hør om den næste buff eller nerf til {tank} på Discord"
+  }
+}

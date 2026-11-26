@@ -1,0 +1,23 @@
+{
+  "add-bot": "Lisää botti palvelimellesi",
+  "example": "Esimerkki",
+  "join": "Liity Discordiin",
+  "link": "Linkitä Discordini",
+  "own-profile": {
+    "description": "Linkitä Discordisi, niin lisäämme sinut palvelimellemme pelinimelläsi ja palvelimesi roolilla. /player ja /clan vastaavat sielläkin.",
+    "heading": "Ole Discordissamme nimellä {name}"
+  },
+  "player": {
+    "description": "/player ja /clan vastaavat suoraan Discordissa, ja jokainen päivityksen vahvistus ja heikennys julkaistaan siellä sinä päivänä, kun päivitys julkaistaan.",
+    "heading": "Hae kuka tahansa pelaaja Discordista"
+  },
+  "preview": {
+    "invocation": "Koala käytti komentoa /player",
+    "tank-description": "Korkein taso ensin.",
+    "tank-title": "Päivitys 2.4.2 · 50 ajoneuvoa muutettu"
+  },
+  "tank": {
+    "description": "Jokainen päivitys ja jokainen Yhteinen testi julkaistaan #tank-changes-kanavalla julkaisupäivänä, myös {tank}. Ota Panssarihyökkäyksen muutokset -rooli saadaksesi ilmoituksia.",
+    "heading": "Kuule Discordissa seuraavasta vahvistuksesta tai heikennyksestä, joka koskee panssarivaunua {tank}"
+  }
+}

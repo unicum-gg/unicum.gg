@@ -1,0 +1,23 @@
+{
+  "add-bot": "Pridėti botą prie savo serverio",
+  "example": "Pavyzdys",
+  "join": "Prisijungti prie „Discord“",
+  "link": "Susieti mano „Discord“",
+  "own-profile": {
+    "description": "Susiekite savo „Discord“ ir mes įtrauksime jus į savo serverį jūsų žaidimo vardu, su jūsų serverio vaidmeniu. Ten taip pat veikia /player ir /clan atsakymas.",
+    "heading": "Būkite {name} mūsų „Discord“"
+  },
+  "player": {
+    "description": "/player ir /clan atsakymas tiesiai „Discord“, o kiekvienas atnaujinimo sustiprinimas ir susilpninimas paskelbiamas ten tą dieną, kai išleidžiamas atnaujinimas.",
+    "heading": "Ieškokite bet kurio žaidėjo naudodami „Discord“"
+  },
+  "preview": {
+    "invocation": "Koala naudojama /player",
+    "tank-description": "Pirmiausia rodomas aukščiausias lygis.",
+    "tank-title": "Atnaujinti 2.4.2 · pakeistos 50 transporto priemonių"
+  },
+  "tank": {
+    "description": "Kiekvienas atnaujinimas ir kiekvienas Bendras testas paskelbiami kanale #tank-changes tą dieną, kai išleidžiamas atnaujinimas, įtrauktas ir {tank}. Pasiimkite Tanko pakeitimų vaidmenį, kad gautumėte pranešimus.",
+    "heading": "Sužinokite „Discord“ apie kitą {tank} sustiprinimą arba susilpninimą"
+  }
+}

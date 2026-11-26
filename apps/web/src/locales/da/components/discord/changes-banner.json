@@ -1,7 +1,7 @@
 {
   "body": "Hver opdatering og hver Offentlig Test slås op på {channel} samme dag, som den udgives. Tag rollen {role} for at få en notifikation.",
   "follow": "Driver du en klanserver? Følg {channel} for også at få dem der.",
-  "join": "Deltag på Discord",
+  "join": "Bliv medlem af Discord",
   "title": {
     "maps": "Få alle ændringer af kort på Discord",
     "tanks": "Få alle forbedringer og svækkelser på Discord"

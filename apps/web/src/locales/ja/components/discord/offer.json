@@ -1,0 +1,23 @@
+{
+  "add-bot": "ボットをサーバーに追加",
+  "example": "例",
+  "join": "Discordに参加",
+  "link": "Discordを連携",
+  "own-profile": {
+    "description": "Discordを連携すると、ゲーム内の名前とサーバーの役割で私たちのサーバーに追加されます。/playerと/clanにもそこで回答します。",
+    "heading": "Discordで{name}として参加"
+  },
+  "player": {
+    "description": "/playerと/clanはDiscord内ですぐに回答し、各更新のすべての強化と弱体化は、リリース当日にそこへ投稿されます。",
+    "heading": "Discordから任意のプレイヤーを検索"
+  },
+  "preview": {
+    "invocation": "Koalaが/playerを使用",
+    "tank-description": "最高Tierから表示。",
+    "tank-title": "更新 2.4.2 · 50車両の変更"
+  },
+  "tank": {
+    "description": "各更新と各共通テストは、リリース当日に#tank-changesへ投稿されます。{tank}も含まれます。通知を受け取るには、戦車変更の役割を取得してください。",
+    "heading": "Discordで次の{tank}の強化または弱体化を知る"
+  }
+}

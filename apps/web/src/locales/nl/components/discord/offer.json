@@ -1,0 +1,23 @@
+{
+  "add-bot": "Bot aan je server toevoegen",
+  "example": "Voorbeeld",
+  "join": "Word lid van Discord",
+  "link": "Mijn Discord koppelen",
+  "own-profile": {
+    "description": "Koppel je Discord en we voegen je toe aan onze server onder je in-game naam, met de rol van je server. /player en /clan geven daar ook antwoord.",
+    "heading": "Word {name} op onze Discord"
+  },
+  "player": {
+    "description": "/player en /clan geven direct antwoord in Discord, en elke verbetering en verslechtering van elke update wordt daar geplaatst op de dag dat deze uitkomt.",
+    "heading": "Zoek elke speler op vanuit Discord"
+  },
+  "preview": {
+    "invocation": "Koala gebruikte /player",
+    "tank-description": "Hoogste niveau eerst.",
+    "tank-title": "Update 2.4.2 · 50 voertuigen gewijzigd"
+  },
+  "tank": {
+    "description": "Elke update en elke Algemene Test wordt op de dag dat deze uitkomt op #tank-changes geplaatst, inclusief {tank}. Neem de rol voor tankwijzigingen aan om een melding te krijgen.",
+    "heading": "Hoor in Discord over de volgende verbetering of verslechtering van {tank}"
+  }
+}

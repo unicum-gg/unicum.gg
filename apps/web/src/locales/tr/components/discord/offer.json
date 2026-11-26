@@ -1,0 +1,23 @@
+{
+  "add-bot": "Botu sunucunuza ekleyin",
+  "example": "Örnek",
+  "join": "Discord’a katıl",
+  "link": "Discord’umu bağla",
+  "own-profile": {
+    "description": "Discord’unuzu bağlayın, sizi oyun içi adınızla ve sunucunuzdaki rolünüzle sunucumuza ekleyelim. /player ve /clan komutları orada da cevap verir.",
+    "heading": "Discord’umuzda {name} olun"
+  },
+  "player": {
+    "description": "/player ve /clan komutları doğrudan Discord’da cevap verir, her güncellemenin tüm güçlendirme ve zayıflatmaları da yayınlandığı gün orada paylaşılır.",
+    "heading": "Discord’dan herhangi bir oyuncuyu arayın"
+  },
+  "preview": {
+    "invocation": "Koala /player komutunu kullandı",
+    "tank-description": "Önce en yüksek seviye.",
+    "tank-title": "Güncelle 2.4.2 · 50 araçta değişiklik yapıldı"
+  },
+  "tank": {
+    "description": "Her güncelleme ve her Ortak Test, yayınlandığı gün #tank-changes kanalında paylaşıldı, {tank} da dahil. Bildirim almak için Tank değişiklikleri rolünü alın.",
+    "heading": "Discord’da {tank} için yapılacak sonraki güçlendirme veya zayıflatmayı öğrenin"
+  }
+}

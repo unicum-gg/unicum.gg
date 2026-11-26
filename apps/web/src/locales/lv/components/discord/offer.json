@@ -1,0 +1,23 @@
+{
+  "add-bot": "Pievienot botu savam serverim",
+  "example": "Piemērs",
+  "join": "Pievienoties Discord",
+  "link": "Saistīt manu Discord",
+  "own-profile": {
+    "description": "Saisti savu Discord, un mēs pievienosim tevi mūsu serverim, izmantojot tavu spēles nosaukumu un tava servera lomu. /player un /clan arī tur sniedz atbildi.",
+    "heading": "Esi mūsu Discord lietotājs ar vārdu {name}"
+  },
+  "player": {
+    "description": "/player un /clan sniedz atbildi tieši Discord, un katrs uzlabojums un vājinājums katrā atjauninājumā tiek publicēts tur tajā pašā dienā, kad atjauninājums iznāk.",
+    "heading": "Meklē jebkuru spēlētāju Discord"
+  },
+  "preview": {
+    "invocation": "Koala izmantoja /player",
+    "tank-description": "Vispirms augstākais līmenis.",
+    "tank-title": "Atjaunināt 2.4.2 · izmaiņas 50 transportlīdzekļiem"
+  },
+  "tank": {
+    "description": "Katrs atjauninājums un katrs Kopējais tests tiek publicēts kanālā #tank-changes tajā pašā dienā, kad tas iznāk, tostarp izmaiņas {tank}. Izvēlies lomu „Tanks izmaiņas”, lai saņemtu paziņojumus.",
+    "heading": "Uzzini Discord par nākamo uzlabojumu vai vājināšanu, kas skars {tank}"
+  }
+}

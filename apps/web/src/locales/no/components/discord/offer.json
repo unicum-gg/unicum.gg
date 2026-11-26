@@ -1,0 +1,23 @@
+{
+  "add-bot": "Legg boten til på serveren din",
+  "example": "Eksempel",
+  "join": "Bli med på Discord",
+  "link": "Koble til Discord-kontoen min",
+  "own-profile": {
+    "description": "Koble til Discord-kontoen din, så legger vi deg til på serveren vår under navnet ditt i spillet, med rollen din på serveren. /player og /clan svarer der også.",
+    "heading": "Vær {name} på Discord-serveren vår"
+  },
+  "player": {
+    "description": "/player og /clan svarer direkte i Discord, og alle forbedringer og svekkelser i hver oppdatering legges ut der samme dag som den sendes ut.",
+    "heading": "Finn en spiller fra Discord"
+  },
+  "preview": {
+    "invocation": "Koala brukte /player",
+    "tank-description": "Høyeste nivå først.",
+    "tank-title": "Oppdatér 2.4.2 · 50 kjøretøy endret"
+  },
+  "tank": {
+    "description": "Hver oppdatering og hver Vanlig test legges ut i #tank-changes samme dag som den sendes ut, inkludert {tank}. Ta rollen Kampvognendringer for å få varsler.",
+    "heading": "Få høre om neste forbedring eller svekkelse av {tank} på Discord"
+  }
+}

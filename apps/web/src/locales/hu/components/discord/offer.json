@@ -1,0 +1,23 @@
+{
+  "add-bot": "A bot hozzáadása a szerveredhez",
+  "example": "Példa",
+  "join": "Csatlakozz a Discordhoz",
+  "link": "Discordom összekapcsolása",
+  "own-profile": {
+    "description": "Kapcsold össze a Discordodat, és játékbeli neveddel, szervered szerepével hozzáadunk a szerverünkhöz. A /player és a /clan parancsokra ott is válasz érkezik.",
+    "heading": "Legyél {name} a Discordunkon"
+  },
+  "player": {
+    "description": "A /player és a /clan parancsokra közvetlenül a Discordon érkezik válasz, és minden frissítés minden erősítése és gyengítése közzétéve ott a megjelenés napján.",
+    "heading": "Keress rá bármely játékosra a Discordról"
+  },
+  "preview": {
+    "invocation": "A Koala a /player parancsot használta",
+    "tank-description": "A legmagasabb szint elöl.",
+    "tank-title": "Frissítés 2.4.2 · 50 jármű változott"
+  },
+  "tank": {
+    "description": "Minden frissítés és minden Közönséges Teszt a megjelenés napján közzétéve a #tank-changes csatornán, a {tank} nevét is tartalmazva. Vedd fel a Tank-változások szerepet, hogy pinget kapj.",
+    "heading": "Értesülj a Discordon a következő, {tank} járművet érintő erősítésről vagy gyengítésről"
+  }
+}
