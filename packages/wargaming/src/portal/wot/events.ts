@@ -1,6 +1,8 @@
 import { Region, REGION_WOT_HOST } from "../../region";
 import type { Transport } from "../../client/transport";
 import { RateLimit } from "../../client/rate-limiter";
+import { WargamingHttpError } from "../../client/transport";
+import { monthlyArticlePath, parseMonthlyCalendar, type PortalMonthlyEvent } from "./monthly";
 
 /**
  * One entry of the portal home page's events widget ("This week's highlights"),
@@ -142,5 +144,34 @@ export class PortalEventsResource {
     const tag = /<meta[^>]+property="og:image(?::url)?"[^>]*>/i.exec(html);
     const content = tag && /content="([^"]+)"/i.exec(tag[0]);
     return content ? absolute(content[1]) : null;
+  }
+
+  /**
+   * A month's calendar from its "WoT Monthly" article (`month` is 1-12). Null
+   * when the month has no article (not published yet, or never: a few months
+   * were published under another address), an empty list when the article
+   * predates the widget (before March 2025).
+   */
+  async monthly({
+    year,
+    month,
+    language = "en",
+  }: {
+    year: number;
+    month: number;
+    language?: string;
+  }): Promise<PortalMonthlyEvent[] | null> {
+    const origin = `https://${REGION_WOT_HOST[this.region]}`;
+    const url = new URL(`${origin}/${language}${monthlyArticlePath(year, month)}`);
+    try {
+      const html = await this.t.getText(url, {
+        region: this.region,
+        limit: RateLimit.Portal,
+      });
+      return parseMonthlyCalendar(html, origin);
+    } catch (err) {
+      if (err instanceof WargamingHttpError && err.status === 404) return null;
+      throw err;
+    }
   }
 }

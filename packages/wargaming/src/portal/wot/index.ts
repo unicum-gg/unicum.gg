@@ -2,3 +2,4 @@ export * from "./clan-enums";
 export * from "./clans";
 export * from "./profile";
 export * from "./events";
+export * from "./monthly";
