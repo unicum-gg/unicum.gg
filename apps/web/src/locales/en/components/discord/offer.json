@@ -1,0 +1,23 @@
+{
+  "add-bot": "Add the bot to your server",
+  "example": "Example",
+  "join": "Join the Discord",
+  "link": "Link my Discord",
+  "own-profile": {
+    "description": "Link your Discord and we add you to our server under your in-game name, with your server's role. /player and /clan answer there too.",
+    "heading": "Be {name} on our Discord"
+  },
+  "player": {
+    "description": "/player and /clan answer right in Discord, and every buff and nerf of each update is posted there the day it ships.",
+    "heading": "Look up any player from Discord"
+  },
+  "preview": {
+    "invocation": "Koala used /player",
+    "tank-description": "Highest tier first.",
+    "tank-title": "Update 2.4.2 · 50 vehicles changed"
+  },
+  "tank": {
+    "description": "Every update and every Common Test is posted to #tank-changes the day it ships, {tank} included. Take the Tank changes role to be pinged.",
+    "heading": "Hear about the next {tank} buff or nerf in Discord"
+  }
+}

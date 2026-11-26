@@ -11,6 +11,8 @@ import { SupportNudge } from "@/components/players/detail/support-nudge";
 import { SupporterBadgeState } from "@/components/entity/badges/supporter-badge";
 import { PlayerMode, PlayerSection } from "@/components/players/detail/tabs";
 import { PlayerTabsView } from "@/components/players/detail/tabs-view";
+import { DiscordOffer } from "@/components/discord/offer";
+import { DiscordOfferKind } from "@/components/discord/offer-kind";
 import type { PlayerTournamentRecord } from "@/components/players/detail/tournaments/row";
 import type { PlayerOnslaughtData } from "@/components/players/detail/onslaught";
 import type { PlayerManeuversData } from "@/components/players/detail/maneuvers";
@@ -146,6 +148,7 @@ export function PlayerProfile({
     isSupporter: boolean;
     anonymous: boolean;
     contributedCents: number;
+    discordLinked: boolean;
   } | null>(null);
   useEffect(() => {
     if (!isOwnProfile) return;
@@ -232,6 +235,18 @@ export function PlayerProfile({
         isOwnProfile={isOwnProfile}
         initialEconomy={initialEconomy}
       />
+      {!(isOwnProfile && me?.discordLinked !== false) && (
+        <>
+          <PanelSeparator />
+          <Panel>
+            <DiscordOffer
+              kind={isOwnProfile ? DiscordOfferKind.OwnProfile : DiscordOfferKind.Player}
+              name={nickname}
+              region={region}
+            />
+          </Panel>
+        </>
+      )}
     </>
   );
 }

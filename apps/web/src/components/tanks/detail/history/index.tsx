@@ -2,10 +2,6 @@ import { dateFormat } from "@/lib/format";
 import { getStatLabels, getTranslation } from "@/lib/translations.server";
 import { Fragment } from "react";
 import {
-  ChangesDiscordBanner,
-  ChangesFeed,
-} from "@/components/discord/changes-banner";
-import {
   Panel,
   PanelContent,
   PanelHeader,
@@ -214,10 +210,6 @@ export async function TankChangesHistory({
           </PanelContent>
         </Panel>
       </>
-      <PanelSeparator />
-      <Panel>
-        <ChangesDiscordBanner feed={ChangesFeed.Tanks} locale={locale} />
-      </Panel>
     </>
   );
 }

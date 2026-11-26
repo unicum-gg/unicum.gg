@@ -15,6 +15,9 @@ import {
 import { VehicleFirstPaint } from "@/components/tanks/detail/viewer/first-paint";
 import { heroShells } from "@/components/tanks/detail/viewer/shell-rules";
 import { Dictionaries } from "@/components/dictionaries";
+import { Panel, PanelSeparator } from "@/components/panel";
+import { DiscordOffer } from "@/components/discord/offer";
+import { DiscordOfferKind } from "@/components/discord/offer-kind";
 
 /**
  * What every tab of a tank page shares: the hero, the tab bar, and the video
@@ -126,6 +129,13 @@ export default async function TankLayout({
           shells={heroShells(detail)}
         >
           {children}
+          {/* On every tab rather than on History alone, where it first went:
+              the vehicle page is where readers are, and a balance change to a
+              tank is exactly what they would want to hear about. */}
+          <PanelSeparator />
+          <Panel>
+            <DiscordOffer kind={DiscordOfferKind.Tank} name={meta.shortName} region={region} />
+          </Panel>
         </TankShell>
       </>
     </Dictionaries>
