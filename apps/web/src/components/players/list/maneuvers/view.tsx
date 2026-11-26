@@ -14,6 +14,7 @@ import { getTranslation } from "@/lib/translations.server";
 import { buildSafe, unicum } from "@/services/sdk";
 import { ManeuversBoardKind } from "@unicum.gg/shared";
 import { Region, REGION_EMOJI, REGION_LABEL } from "@unicum.gg/wargaming";
+import { CalendarCrossLink } from "@/components/calendar/cross-link";
 
 // Shared body for /players/maneuvers (EU default) and
 // /<region>/players/maneuvers: the player half of the Maneuvers edition, ranked
@@ -96,6 +97,9 @@ export async function ManeuversPlayersView({
         <ManeuversRace kind={ManeuversBoardKind.Players} />
         <ManeuversRewards kind={ManeuversBoardKind.Players} />
         <ManeuversScale kind={ManeuversBoardKind.Players} />
+
+        <PanelSeparator />
+        <CalendarCrossLink region={region} locale={locale} />
       </div>
     </ManeuversEditionProvider>
   );

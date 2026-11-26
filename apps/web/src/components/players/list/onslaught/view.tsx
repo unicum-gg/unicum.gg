@@ -15,6 +15,7 @@ import { battleTypeName } from "@/components/game-name";
 import { Interpolate } from "@/components/interpolate";
 import { BattleType, onslaughtAggregates } from "@unicum.gg/shared";
 import { seasonName } from "@/components/game-name";
+import { CalendarCrossLink } from "@/components/calendar/cross-link";
 
 // One page of the standings, and the page this route names.
 //
@@ -186,6 +187,9 @@ export async function OnslaughtView({
         initialHistory={history}
         page={page}
       />
+
+      <PanelSeparator />
+      <CalendarCrossLink region={region} locale={locale} />
     </div>
   );
 }

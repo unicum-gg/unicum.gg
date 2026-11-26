@@ -21,6 +21,7 @@ import { constructMetadata } from "@/lib/metadata";
 import { getTranslation } from "@/lib/translations.server";
 import { buildSafe, unicum } from "@/services/sdk";
 import { withDictionaries } from "@/components/dictionaries";
+import { CalendarCrossLink } from "@/components/calendar/cross-link";
 
 // ISR like the other catalogue pages: the list moves only as tournaments open
 // and settle, and a navigation should serve prerendered HTML rather than pay a
@@ -131,6 +132,9 @@ export async function renderTournaments(region: Region, locale: string) {
       <PanelSeparator />
 
       <TournamentsBoard region={region} rows={rows} />
+
+      <PanelSeparator />
+      <CalendarCrossLink region={region} locale={locale} />
     </div>
   );
 }

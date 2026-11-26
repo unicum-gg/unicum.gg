@@ -12,6 +12,7 @@ import { getTranslation } from "@/lib/translations.server";
 import { buildSafe, unicum } from "@/services/sdk";
 import { ManeuversBoardKind } from "@unicum.gg/shared";
 import { Region, REGION_EMOJI, REGION_LABEL } from "@unicum.gg/wargaming";
+import { CalendarCrossLink } from "@/components/calendar/cross-link";
 
 // Shared body for /clans/maneuvers (EU default) and /<region>/clans/maneuvers:
 // the clan half of the Maneuvers edition, ranked by Fame Points. A standalone
@@ -83,6 +84,9 @@ export async function ManeuversClansView({
         <ManeuversRace kind={ManeuversBoardKind.Clans} />
         <ManeuversRewards kind={ManeuversBoardKind.Clans} />
         <ManeuversScale kind={ManeuversBoardKind.Clans} />
+
+        <PanelSeparator />
+        <CalendarCrossLink region={region} locale={locale} />
       </div>
     </ManeuversEditionProvider>
   );

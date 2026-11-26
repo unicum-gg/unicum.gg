@@ -15,6 +15,7 @@ import { PaginationRelLinks } from "@/components/pagination-rel-links";
 import { Panel, PanelContent, PanelSeparator } from "@/components/panel";
 import { buildSafe, unicum } from "@/services/sdk";
 import { Region, REGION_EMOJI, REGION_LABEL } from "@unicum.gg/wargaming";
+import { CalendarCrossLink } from "@/components/calendar/cross-link";
 
 // Shared body for /tanks/changes (EU default) and /<region>/tanks/changes: the
 // global tank-rebalance feed, built forward from the moment tracking started
@@ -80,6 +81,9 @@ export async function TankChangesView({
       <PanelSeparator />
 
       <TankChangesFeed region={region} versions={versions} page={page} />
+
+      <PanelSeparator />
+      <CalendarCrossLink region={region} locale={locale} />
     </div>
   );
 }
