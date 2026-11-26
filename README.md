@@ -12,6 +12,7 @@ Live at [unicum.gg](https://unicum.gg).
 - [Tank stats](https://unicum.gg/tanks): specifications, a 3D viewer with armour, loadouts players actually run, community ratings, buffs and nerfs across updates
 - [Battles](https://unicum.gg/battles): recorded battles and replays, uploaded by the mod
 - [Tournaments](https://unicum.gg/tournaments): brackets, rosters and placements, linked to the players and clans who played them
+- [Events calendar](https://unicum.gg/calendar): every official event, tournament, livestream, sale and update, kept once Wargaming takes it down, and announced in the Discord's `#events`
 - [Maps](https://unicum.gg/maps), [server population](https://unicum.gg/servers) and a [glossary](https://unicum.gg/glossary)
 - [Public API](https://unicum.gg/docs): the same data the site reads, documented with OpenAPI
 - [Discord bot](https://unicum.gg/bot): `/player` and `/clan`
