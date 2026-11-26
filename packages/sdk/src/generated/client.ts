@@ -1147,6 +1147,14 @@ class RegionClient {
     return ns;
   }
 
+  /** Official calendar */
+  calendar() {
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/calendar", { region: this.region }),
+      () => this.api.GET("/{region}/calendar", { params: { path: { region: this.region } } }),
+    );
+  }
+
   /** Maneuvers event boards */
   maneuvers(query?: QueryOf<"/{region}/maneuvers">) {
     return handle(

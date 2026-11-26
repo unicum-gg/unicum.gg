@@ -2279,6 +2279,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/calendar": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Official calendar
+         * @description Every entry of the region's official World of Tanks calendar (the "This week's highlights" widget of the portal home page): events, Battle Pass seasons, updates, specials. Wargaming shows the current week only and keeps nothing, so this is our own record of it, captured hourly, going back to `recordedSince`. Dates are ISO 8601 strings.
+         */
+        get: operations["get-{region}-calendar"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/{region}/maps": {
         parameters: {
             query?: never;
@@ -3635,6 +3655,52 @@ export interface components {
             fun: number | null;
             /** @description Mean battles these voters have on the tank, which is what makes the slice credible or not. */
             avgBattles: number | null;
+        };
+        /** @description One entry of the official calendar. */
+        CalendarEntry: {
+            /** @description Stable identifier: the article path and the start. */
+            id: string;
+            /** @description The English title. */
+            title: string;
+            /** @description Every title read, keyed by the portal's own language code (`en`, `fr`, `pt-br`, `zh-tw`...). Only the languages the region's portal publishes the calendar in. */
+            titles: {
+                [key: string]: string;
+            };
+            /** @description The English category label, e.g. Specials, Battle Pass, Update, Event. */
+            category: string;
+            /** @description The portal widget's own colour token. */
+            color: string;
+            /** @description The portal widget's own icon token. */
+            icon: string;
+            /** Format: date-time */
+            start: Date;
+            /**
+             * Format: date-time
+             * @description An update is published as a one-minute entry marking the moment it goes live.
+             */
+            end: Date;
+            /** @description The official news article, in English. */
+            link: string;
+            /** @description The article's full-size banner, when it has one. */
+            banner: string | null;
+            /** @description The calendar widget's own small image. */
+            thumbnail: string | null;
+            /** @description The scheduled event this entry is published as on the unicum.gg community server, when it is. */
+            discordEventId: string | null;
+        };
+        CalendarResponse: {
+            /**
+             * @description Game server region.
+             * @enum {string}
+             */
+            region: "eu" | "na" | "asia";
+            /**
+             * Format: date-time
+             * @description When this region's calendar was first recorded. Wargaming keeps only the current week, so nothing earlier can be known.
+             */
+            recordedSince: Date | null;
+            /** @description Oldest first. */
+            entries: components["schemas"]["CalendarEntry"][];
         };
         /** @description A map and the changes a game version made to it. */
         ChangedMap: {
@@ -12763,6 +12829,29 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["MapSearchChunk"];
+                };
+            };
+        };
+    };
+    "get-{region}-calendar": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CalendarResponse"];
                 };
             };
         };
