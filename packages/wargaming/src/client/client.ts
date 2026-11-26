@@ -13,6 +13,7 @@ import { ApiStrongholdResource } from "../api/wot/stronghold";
 import { WgnClansResource } from "../api/wgn/clans";
 import { PortalClansResource } from "../portal/wot/clans";
 import { PortalProfileResource } from "../portal/wot/profile";
+import { PortalEventsResource } from "../portal/wot/events";
 import { StrongholdResource } from "../stronghold/wot";
 import { TournamentsResource } from "../tournaments/wot/resource";
 import { SourceVehiclesResource } from "../source/wot/vehicles";
@@ -72,14 +73,16 @@ class ApiSurface {
 }
 
 /** The portal surface (clan portal on `<region>.wargaming.net`, plus the player
- * profile SPA on `worldoftanks.<tld>`). */
+ * profile SPA and the home page's events calendar on `worldoftanks.<tld>`). */
 class PortalSurface {
   readonly clans: PortalClansResource;
   readonly profile: PortalProfileResource;
+  readonly events: PortalEventsResource;
 
   constructor(transport: Transport, region: Region) {
     this.clans = new PortalClansResource(transport, region);
     this.profile = new PortalProfileResource(transport, region);
+    this.events = new PortalEventsResource(transport, region);
   }
 }
 
