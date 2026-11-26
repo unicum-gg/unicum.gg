@@ -43,6 +43,12 @@ const ROUTES = {
     region === Region.EU
       ? "/coverage"
       : pathcat("/:region/coverage", { region }),
+  // The usage tab is the same figures on every server (the site, the mod and
+  // the bot are each one product), so its canonical is the region-less one.
+  COVERAGE_USAGE: (region: Region) =>
+    region === Region.EU
+      ? "/coverage/usage"
+      : pathcat("/:region/coverage/usage", { region }),
 
   // - Support (region-less)
   SUPPORT: "/support",

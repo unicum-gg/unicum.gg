@@ -155,6 +155,9 @@ const GLOBALS: Global[] = [
   // the only shape a comparison can take.
   { name: "servers" },
   { name: "support" },
+  // The site's, the mod's and the bot's own usage, region-less: each is one
+  // product used on every server.
+  { name: "usage" },
   // Replays sent from the site rather than the mod, region-less because the
   // region is the signed-in account's own, never a parameter to pick.
   { name: "replays" },

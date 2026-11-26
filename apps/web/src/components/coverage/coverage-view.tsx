@@ -13,7 +13,6 @@ import {
 } from "@/components/panel";
 import { RelativeTime } from "@/components/relative-time";
 import APP from "@/constants/app";
-import { cn } from "@/lib/utils";
 import { buildSafe, unicum } from "@/services/sdk";
 import {
   formatCadence,
@@ -22,6 +21,8 @@ import { Region, REGION_EMOJI, REGION_LABEL } from "@unicum.gg/wargaming";
 import { ChartMode } from "./chart-mode";
 import { CoverageAreaChart } from "./coverage-charts-lazy";
 import { CostBreakdown } from "./cost-breakdown";
+import { CoverageTabs, CoverageTab } from "./coverage-tabs";
+import { StatCell } from "./stat-cell";
 
 const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 const DEC_FORMAT = {
@@ -137,7 +138,9 @@ export async function CoverageView({ region, locale }: { region: Region; locale:
         </PanelContent>
       </Panel>
 
-      <PanelSeparator />
+      {/* Under the hero, as on a map or a vehicle page: the hero says what the
+          page is about, the bar which side of it you are reading. */}
+      <CoverageTabs region={region} locale={locale} active={CoverageTab.Data} />
 
       <Panel>
         <PanelHeader>
@@ -364,36 +367,16 @@ export async function CoverageView({ region, locale }: { region: Region; locale:
         <PanelHeader>
           <PanelTitle>{tr("fun-facts")}</PanelTitle>
         </PanelHeader>
-        <PanelContent className="grid grid-cols-1 gap-4 p-4 md:grid-cols-2 lg:grid-cols-4">
+        {/* The mod and the bot used to sit here too. They moved to the Usage
+            tab, which holds them with their history. */}
+        <PanelContent className="grid grid-cols-1 gap-4 p-4 md:grid-cols-2">
           <StatCell
             label={tr("tracking-since")}
             value={formatYear(stats.funFacts.oldestPlayerSnapshotAt, locale)}
           />
           <StatCell
-            label={tr("mod-users")}
-            value={
-              <span>
-                {numberFormat(locale, INT_FORMAT).format(stats.funFacts.modUsers ?? 0)}
-                {" · "}
-                {tr("n-battles", {
-                  count: numberFormat(locale, INT_FORMAT).format(
-                    stats.funFacts.modBattles ?? 0,
-                  ),
-                })}
-              </span>
-            }
-          />
-          <StatCell
             label={tr("battles-tracked")}
             value={numberFormat(locale, INT_FORMAT).format(stats.funFacts.totalBattlesTracked)}
-          />
-          <StatCell
-            label={tr("discord-servers")}
-            value={
-              stats.funFacts.discordServers === null
-                ? "n/a"
-                : numberFormat(locale, INT_FORMAT).format(stats.funFacts.discordServers)
-            }
           />
         </PanelContent>
       </Panel>
@@ -437,25 +420,6 @@ export async function CoverageView({ region, locale }: { region: Region; locale:
           </p>
         </PanelContent>
       </Panel>
-    </div>
-  );
-}
-
-function StatCell({
-  label,
-  value,
-  className,
-}: {
-  label: string;
-  value: React.ReactNode;
-  className?: string;
-}) {
-  return (
-    <div className={cn("flex flex-col gap-1", className)}>
-      <div className="text-xs uppercase tracking-wide text-fd-muted-foreground">
-        {label}
-      </div>
-      <div className="text-xl font-semibold tabular-nums">{value}</div>
     </div>
   );
 }

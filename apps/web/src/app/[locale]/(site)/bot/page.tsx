@@ -12,6 +12,8 @@ import {
 } from "@phosphor-icons/react/dist/ssr";
 import { buttonVariants } from "fumadocs-ui/components/ui/button";
 import { JsonLd } from "@/components/json-ld";
+import { withDictionaries } from "@/components/dictionaries";
+import { BotUsagePanel } from "@/components/usage/bot-usage-panel";
 import { type Directory, ListedOn } from "@/components/listed-on";
 import {
   Panel,
@@ -181,7 +183,7 @@ const DIRECTORIES: Directory[] = [
   { name: "Discord Bot List", href: "https://discordbotlist.com/bots/unicumgg" },
 ];
 
-export default async function BotPage({
+async function BotPage({
   params,
   searchParams,
 }: {
@@ -315,6 +317,8 @@ export default async function BotPage({
         </PanelContent>
       </Panel>
 
+      <BotUsagePanel locale={locale} />
+
       <PanelSeparator />
 
       {/* Example output — the exact reply the bot posts */}
@@ -380,3 +384,11 @@ export default async function BotPage({
     </div>
   );
 }
+
+// Prerendered and refreshed in the background: the usage panel reads live
+// figures through the SDK, and without a window the page would hold the ones
+// from the build until the next deploy.
+export const dynamic = "force-static";
+export const revalidate = 3600;
+
+export default withDictionaries("[locale]/(site)/bot", BotPage);

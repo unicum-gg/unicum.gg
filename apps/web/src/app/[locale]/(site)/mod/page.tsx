@@ -12,6 +12,8 @@ import {
 } from "@phosphor-icons/react/dist/ssr";
 import { buttonVariants } from "fumadocs-ui/components/ui/button";
 import { JsonLd } from "@/components/json-ld";
+import { withDictionaries } from "@/components/dictionaries";
+import { ModUsagePanel } from "@/components/usage/mod-usage-panel";
 import {
   Panel,
   PanelContent,
@@ -91,7 +93,7 @@ const SETTINGS_MOD = { name: "modsSettingsApi", url: APP.EXTERNAL.MODS_SETTINGS_
 
 const DATA = ["data-ratings", "data-linking", "data-loadouts", "data-twitch"];
 
-export default async function ModPage({
+async function ModPage({
   params,
 }: {
   params: Promise<{ locale: string }>;
@@ -192,6 +194,8 @@ export default async function ModPage({
         </PanelContent>
       </Panel>
 
+      <ModUsagePanel locale={locale} />
+
       <PanelSeparator />
 
       <Panel>
@@ -283,3 +287,11 @@ export default async function ModPage({
     </div>
   );
 }
+
+// Prerendered and refreshed in the background: the usage panel reads live
+// figures through the SDK, and without a window the page would hold the ones
+// from the build until the next deploy.
+export const dynamic = "force-static";
+export const revalidate = 3600;
+
+export default withDictionaries("[locale]/(site)/mod", ModPage);

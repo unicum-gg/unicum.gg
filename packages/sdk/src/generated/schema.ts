@@ -2139,6 +2139,66 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/usage/bot": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Bot usage
+         * @description How much the unicum.gg Discord bot is used: the servers it is in, sampled hourly since Discord keeps no history, and the slash commands it answered.
+         */
+        get: operations["get-usage-bot"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/usage/mod": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Mod usage
+         * @description How many players run the unicum.gg mod and how many battles it has sent, in total, over the last 30 days and server by server.
+         */
+        get: operations["get-usage-mod"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/usage/site": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Site usage
+         * @description How many people use unicum.gg, read from our own records rather than from an analytics tool: accounts created, signed-in readers seen today, this week and this month, linked services and active supporters. Only signed-in readers can be counted, so anonymous traffic is not in these figures.
+         */
+        get: operations["get-usage-site"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/mcp": {
         parameters: {
             query?: never;
@@ -3519,6 +3579,55 @@ export interface components {
         BattleViewResponse: {
             ok: boolean;
         };
+        /** @description How much the unicum.gg Discord bot is used: the servers it is in and the commands it answers. */
+        BotUsage: {
+            /** @description Discord servers the bot is in, at the latest reading. Null when it has never been read. */
+            guilds: number | null;
+            /** @description The server count on each of the last 30 UTC days, from the first day it was recorded. Discord only ever answers the present, so the history is what we sampled. */
+            guildsDaily: components["schemas"]["botUsageDay"][];
+            /** @description Slash commands answered on each of the last 30 UTC days, from the first day they were counted. */
+            commandsDaily: components["schemas"]["botUsageDay"][];
+            /** @description Slash commands answered over the last 30 days. */
+            commandsMonth: number;
+            /** @description Slash commands answered since they started being counted. */
+            commandsAllTime: number;
+            /** @description Each command's share of the last 30 days, most used first. */
+            commands: {
+                /**
+                 * @description The command's name, without the slash.
+                 * @example player
+                 */
+                command: string;
+                count: number;
+            }[];
+        };
+        botUsageDay: {
+            /** @description UTC day, YYYY-MM-DD. */
+            day: string;
+            count: number;
+        };
+        /** @description How much the unicum.gg Discord bot is used: the servers it is in and the commands it answers. */
+        BotUsageResponse: {
+            /** @description Discord servers the bot is in, at the latest reading. Null when it has never been read. */
+            guilds: number | null;
+            /** @description The server count on each of the last 30 UTC days, from the first day it was recorded. Discord only ever answers the present, so the history is what we sampled. */
+            guildsDaily: components["schemas"]["botUsageDay"][];
+            /** @description Slash commands answered on each of the last 30 UTC days, from the first day they were counted. */
+            commandsDaily: components["schemas"]["botUsageDay"][];
+            /** @description Slash commands answered over the last 30 days. */
+            commandsMonth: number;
+            /** @description Slash commands answered since they started being counted. */
+            commandsAllTime: number;
+            /** @description Each command's share of the last 30 days, most used first. */
+            commands: {
+                /**
+                 * @description The command's name, without the slash.
+                 * @example player
+                 */
+                command: string;
+                count: number;
+            }[];
+        };
         bracketVerdict: {
             bracket: components["schemas"]["voterBracketField"];
             votes: number;
@@ -4039,12 +4148,21 @@ export interface components {
             funFacts: {
                 /** Format: date-time */
                 oldestPlayerSnapshotAt: Date | null;
-                /** @description Accounts on this region that have run the unicum.gg mod: every account that sent a battle or a garage loadout. */
+                /**
+                 * @deprecated
+                 * @description Accounts on this region that have run the unicum.gg mod: every account that sent a battle or a garage loadout. Deprecated: read `GET /usage/mod`, which carries the same figure per region with its history.
+                 */
                 modUsers: number;
-                /** @description Battles the mod has sent on this region. */
+                /**
+                 * @deprecated
+                 * @description Battles the mod has sent on this region. Deprecated: read `GET /usage/mod`.
+                 */
                 modBattles: number;
                 totalBattlesTracked: number;
-                /** @description Discord servers our bot is in. Global, not per region. Null when Discord could not be reached. */
+                /**
+                 * @deprecated
+                 * @description Discord servers our bot is in. Global, not per region. Null when Discord could not be reached. Deprecated: read `GET /usage/bot`, which also keeps the daily history.
+                 */
                 discordServers: number | null;
             };
             trends: {
@@ -4109,12 +4227,21 @@ export interface components {
             funFacts: {
                 /** Format: date-time */
                 oldestPlayerSnapshotAt: Date | null;
-                /** @description Accounts on this region that have run the unicum.gg mod: every account that sent a battle or a garage loadout. */
+                /**
+                 * @deprecated
+                 * @description Accounts on this region that have run the unicum.gg mod: every account that sent a battle or a garage loadout. Deprecated: read `GET /usage/mod`, which carries the same figure per region with its history.
+                 */
                 modUsers: number;
-                /** @description Battles the mod has sent on this region. */
+                /**
+                 * @deprecated
+                 * @description Battles the mod has sent on this region. Deprecated: read `GET /usage/mod`.
+                 */
                 modBattles: number;
                 totalBattlesTracked: number;
-                /** @description Discord servers our bot is in. Global, not per region. Null when Discord could not be reached. */
+                /**
+                 * @deprecated
+                 * @description Discord servers our bot is in. Global, not per region. Null when Discord could not be reached. Deprecated: read `GET /usage/bot`, which also keeps the daily history.
+                 */
                 discordServers: number | null;
             };
             trends: {
@@ -5657,6 +5784,57 @@ export interface components {
             tier: number;
             type: string;
             tag: string;
+        };
+        /** @description How many players run the unicum.gg mod and how much it sends, across the three servers. */
+        ModUsage: {
+            /** @description Accounts that have ever run the mod: every account that sent a battle or a garage. Both uploads are proven by the game client's own token. */
+            users: number;
+            /** @description Battles the mod has sent, each counted once however many players reported it. */
+            battles: number;
+            /** @description Distinct accounts that sent a battle over the last 7 days. */
+            activeWeek: number;
+            /** @description Distinct accounts that sent a battle over the last 30 days. */
+            activeMonth: number;
+            /** @description Battles played on each of the last 30 UTC days, as the mod reported them. */
+            battlesDaily: components["schemas"]["modUsageDay"][];
+            /** @description Distinct accounts that reported a battle played on each of the last 30 UTC days. */
+            uploadersDaily: components["schemas"]["modUsageDay"][];
+            /** @description The same figures, server by server. */
+            regions: {
+                /** @enum {string} */
+                region: "eu" | "na" | "asia";
+                users: number;
+                battles: number;
+                activeMonth: number;
+            }[];
+        };
+        modUsageDay: {
+            /** @description UTC day, YYYY-MM-DD. */
+            day: string;
+            count: number;
+        };
+        /** @description How many players run the unicum.gg mod and how much it sends, across the three servers. */
+        ModUsageResponse: {
+            /** @description Accounts that have ever run the mod: every account that sent a battle or a garage. Both uploads are proven by the game client's own token. */
+            users: number;
+            /** @description Battles the mod has sent, each counted once however many players reported it. */
+            battles: number;
+            /** @description Distinct accounts that sent a battle over the last 7 days. */
+            activeWeek: number;
+            /** @description Distinct accounts that sent a battle over the last 30 days. */
+            activeMonth: number;
+            /** @description Battles played on each of the last 30 UTC days, as the mod reported them. */
+            battlesDaily: components["schemas"]["modUsageDay"][];
+            /** @description Distinct accounts that reported a battle played on each of the last 30 UTC days. */
+            uploadersDaily: components["schemas"]["modUsageDay"][];
+            /** @description The same figures, server by server. */
+            regions: {
+                /** @enum {string} */
+                region: "eu" | "na" | "asia";
+                users: number;
+                battles: number;
+                activeMonth: number;
+            }[];
         };
         MyVideosResponse: {
             videos: components["schemas"]["videoBattleWithTank"][];
@@ -7665,6 +7843,65 @@ export interface components {
         /** @description The vehicles that play most like this one, best match first. Empty when the vehicle is too little known to be placed. */
         SimilarTanks: {
             results: components["schemas"]["SimilarTank"][];
+        };
+        /** @description How many people use unicum.gg: signups, returning signed-in readers and linked services. Counted from our own records rather than from an analytics tool, and published because the project is open source. */
+        SiteUsage: {
+            /** @description Accounts ever created, which is everyone who has signed in with Wargaming at least once. */
+            accounts: number;
+            /** @description Accounts created on each of the last 30 UTC days, today last. */
+            signupsDaily: components["schemas"]["siteUsageDay"][];
+            /** @description Distinct readers, never a sum of days: someone who came every day of the week counts once in `week`. */
+            active: {
+                /** @description Signed-in readers seen today (UTC). */
+                day: number;
+                /** @description Distinct signed-in readers seen over the last 7 days, today included. */
+                week: number;
+                /** @description Distinct signed-in readers seen over the last 30 days, today included. */
+                month: number;
+            };
+            /** @description Distinct signed-in readers seen on each of the last 30 UTC days. Only signed-in readers are counted: anonymous traffic has no identity to count by. */
+            activeDaily: components["schemas"]["siteUsageDay"][];
+            /** @description UTC day (YYYY-MM-DD) from which activity is recorded as it happens. Days before it were rebuilt from the sessions still on record and are a floor rather than a count. */
+            activeRecordedSince: string;
+            /** @description Accounts that have linked each service. */
+            linked: {
+                discord: number;
+                twitch: number;
+            };
+            /** @description Subscriptions currently active, which is what keeps the site running. */
+            supporters: number;
+        };
+        siteUsageDay: {
+            /** @description UTC day, YYYY-MM-DD. */
+            day: string;
+            count: number;
+        };
+        /** @description How many people use unicum.gg: signups, returning signed-in readers and linked services. Counted from our own records rather than from an analytics tool, and published because the project is open source. */
+        SiteUsageResponse: {
+            /** @description Accounts ever created, which is everyone who has signed in with Wargaming at least once. */
+            accounts: number;
+            /** @description Accounts created on each of the last 30 UTC days, today last. */
+            signupsDaily: components["schemas"]["siteUsageDay"][];
+            /** @description Distinct readers, never a sum of days: someone who came every day of the week counts once in `week`. */
+            active: {
+                /** @description Signed-in readers seen today (UTC). */
+                day: number;
+                /** @description Distinct signed-in readers seen over the last 7 days, today included. */
+                week: number;
+                /** @description Distinct signed-in readers seen over the last 30 days, today included. */
+                month: number;
+            };
+            /** @description Distinct signed-in readers seen on each of the last 30 UTC days. Only signed-in readers are counted: anonymous traffic has no identity to count by. */
+            activeDaily: components["schemas"]["siteUsageDay"][];
+            /** @description UTC day (YYYY-MM-DD) from which activity is recorded as it happens. Days before it were rebuilt from the sessions still on record and are a floor rather than a count. */
+            activeRecordedSince: string;
+            /** @description Accounts that have linked each service. */
+            linked: {
+                discord: number;
+                twitch: number;
+            };
+            /** @description Subscriptions currently active, which is what keeps the site running. */
+            supporters: number;
         };
         skillNode: {
             id: number;
@@ -12361,6 +12598,66 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["SupporterTiers"];
+                };
+            };
+        };
+    };
+    "get-usage-bot": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BotUsage"];
+                };
+            };
+        };
+    };
+    "get-usage-mod": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ModUsage"];
+                };
+            };
+        };
+    };
+    "get-usage-site": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SiteUsage"];
                 };
             };
         };

@@ -167,6 +167,9 @@ async function startCrons(): Promise<void> {
   );
   startServerOnlineWatchdogCron();
 
+  const { startUsageSampleCron } = await import("@unicum.gg/core/usage/cron");
+  startUsageSampleCron();
+
   const { startPlayerDistributionCron } = await import(
     "@unicum.gg/core/players/distribution"
   );

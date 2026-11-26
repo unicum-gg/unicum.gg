@@ -1,0 +1,13 @@
+{
+  "title": "In numbers",
+  "players": "Players",
+  "battles": "Battles sent",
+  "active-week": "Sending this week",
+  "active-month": "Sending this month",
+  "battles-sent": "Battles sent",
+  "battles-sent-last-30-days": "Battles sent per day, last 30 days",
+  "players-sending": "Players sending",
+  "players-sending-last-30-days": "Players sending battles per day, last 30 days",
+  "region-line": "{players} players, {battles} battles",
+  "note": "A player counts once they have sent a battle or their garage. Each battle counts once, however many of the players in it run the mod."
+}

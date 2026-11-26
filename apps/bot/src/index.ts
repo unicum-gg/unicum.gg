@@ -31,6 +31,7 @@ import {
   isRatingReviewButton,
 } from "./plugins/wot/moderation/reviews.js";
 import { bindPresenceClient } from "./lib/presence.js";
+import { reportCommand } from "./usage.js";
 import { welcomeNewMember } from "./welcome.js";
 
 async function main(): Promise<void> {
@@ -65,6 +66,8 @@ async function main(): Promise<void> {
   // client. The listener is additive (dixt keeps its own) and each branch
   // ignores anything that is not its own `custom_id`.
   bot.client.on(Events.InteractionCreate, (interaction) => {
+    // Counted for the bot page's usage panel. dixt answers the command itself.
+    reportCommand(interaction);
     if (interaction.isModalSubmit() && isFeedbackModal(interaction.customId)) {
       void handleFeedbackModalSubmit(interaction);
       return;

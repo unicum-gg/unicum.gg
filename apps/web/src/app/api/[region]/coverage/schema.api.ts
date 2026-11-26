@@ -90,15 +90,19 @@ export const CoverageResponse = z
       oldestPlayerSnapshotAt: z.coerce.date().nullable(),
       modUsers: z.number().meta({
         description:
-          "Accounts on this region that have run the unicum.gg mod: every account that sent a battle or a garage loadout.",
+          "Accounts on this region that have run the unicum.gg mod: every account that sent a battle or a garage loadout. Deprecated: read `GET /usage/mod`, which carries the same figure per region with its history.",
+        deprecated: true,
       }),
       modBattles: z.number().meta({
-        description: "Battles the mod has sent on this region.",
+        description:
+          "Battles the mod has sent on this region. Deprecated: read `GET /usage/mod`.",
+        deprecated: true,
       }),
       totalBattlesTracked: z.number(),
       discordServers: z.number().nullable().meta({
         description:
-          "Discord servers our bot is in. Global, not per region. Null when Discord could not be reached.",
+          "Discord servers our bot is in. Global, not per region. Null when Discord could not be reached. Deprecated: read `GET /usage/bot`, which also keeps the daily history.",
+        deprecated: true,
       }),
     }),
     trends: z.object({

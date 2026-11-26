@@ -1425,6 +1425,15 @@ type SupportNamespace = {
   tiers(): RequestHandle<Data<"/support/tiers">>;
 };
 
+type UsageNamespace = {
+  /** Bot usage */
+  bot(): RequestHandle<Data<"/usage/bot">>;
+  /** Mod usage */
+  mod(): RequestHandle<Data<"/usage/mod">>;
+  /** Site usage */
+  site(): RequestHandle<Data<"/usage/site">>;
+};
+
 type ReplaysNamespace = {
   /** Upload a replay */
   upload(body: BodyOf<"/replays/upload">): RequestHandle<PostData<"/replays/upload">>;
@@ -1565,6 +1574,24 @@ export class Unicum {
     ns.tiers = () =>
       handle(buildUrl(this.baseUrl, "/support/tiers"), () =>
         this.api.GET("/support/tiers", {}),
+      );
+    return ns;
+  }
+
+  /** Global (not region-scoped) usage. */
+  get usage(): UsageNamespace {
+    const ns = {} as UsageNamespace;
+    ns.bot = () =>
+      handle(buildUrl(this.baseUrl, "/usage/bot"), () =>
+        this.api.GET("/usage/bot", {}),
+      );
+    ns.mod = () =>
+      handle(buildUrl(this.baseUrl, "/usage/mod"), () =>
+        this.api.GET("/usage/mod", {}),
+      );
+    ns.site = () =>
+      handle(buildUrl(this.baseUrl, "/usage/site"), () =>
+        this.api.GET("/usage/site", {}),
       );
     return ns;
   }

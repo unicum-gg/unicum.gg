@@ -1,5 +1,6 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { createAuthMiddleware } from "better-auth/api";
 import { multiSession } from "better-auth/plugins";
 import { and, eq } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
@@ -13,6 +14,7 @@ import { upsertStreamer } from "@unicum.gg/core/twitch/streamers";
 import { refreshTwitchToken } from "@unicum.gg/core/twitch/refresh";
 import { syncMemberIdentity } from "@unicum.gg/core/discord/member-identity";
 import { joinGuild } from "@unicum.gg/core/discord";
+import { recordUserActivity } from "@unicum.gg/core/usage/record";
 import { wargaming } from "./wargaming";
 
 /**
@@ -125,6 +127,21 @@ export const auth = betterAuth({
         },
       },
     },
+  },
+  // Every page a signed-in reader opens asks for their session (the top bar's
+  // account widget does, on mount), so this is where "who used the site today"
+  // is observable at all: Better Auth's own tables keep no history of it. Fire
+  // and forget, and deduplicated in memory, so the session read never waits.
+  hooks: {
+    after: createAuthMiddleware(async (ctx) => {
+      if (ctx.path !== "/get-session") return;
+      const returned = ctx.context.returned as
+        | { user?: { id?: unknown } }
+        | null
+        | undefined;
+      const userId = returned?.user?.id;
+      if (typeof userId === "string") recordUserActivity(userId);
+    }),
   },
   // Several WG accounts signed in on one browser at once, switched from the
   // top bar's account menu. The plugin records every session minted here (the
