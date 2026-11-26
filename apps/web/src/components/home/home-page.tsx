@@ -24,6 +24,8 @@ import { LatestReplays } from "@/components/home/latest-replays";
 import type { BattlesCatalogPayload } from "@/components/battles/list/catalog";
 import { TopPlayers } from "@/components/home/top-players";
 import { TopPlayersOverallPanel } from "@/components/home/top-players-overall-panel";
+import { CalendarNow } from "@/components/calendar/now";
+import { featuredCalendarEntries } from "@/components/calendar/featured";
 import {
   TankSpotlight,
   type SpotlightTankRow,
@@ -166,6 +168,7 @@ export async function HomePage({
     liveStreamers,
     spotlight,
     latestReplays,
+    calendar,
   ] = await Promise.all([
     // The default metric only. PR and WTR have no value over a window (see
     // `RatingMetric`), so a recent board ranks the accounts active inside it by
@@ -190,7 +193,16 @@ export async function HomePage({
       [] as SpotlightTankRow[],
     ),
     latestReplaysByRegions(locale),
+    // The region being read, EU on the region-less home: unlike a vehicle, an
+    // event is dated per server (an update reaches NA a day before EU).
+    optional(() => unicum.region(spotlightRegion).calendar(), {
+      region: spotlightRegion,
+      recordedSince: null,
+      entries: [],
+    }),
   ]);
+  const renderedAt = new Date();
+  const happening = featuredCalendarEntries(calendar.entries, renderedAt, 4);
 
   return (
     <div className="mx-auto w-full max-w-7xl">
@@ -262,6 +274,16 @@ export async function HomePage({
           </PanelContent>
         </Panel>
       </div>
+
+      {/* Under the leaderboards too, and above the vehicles: what is on in
+          the game this week is what a returning reader has not seen yet.
+          Draws nothing on a week with nothing to show, separator included. */}
+      {happening.length > 0 ? (
+        <>
+          <PanelSeparator />
+          <CalendarNow region={spotlightRegion} entries={happening} renderedAt={renderedAt} />
+        </>
+      ) : null}
 
       {/* Under the leaderboards, which are what the page is for. Draws nothing
           when there is nothing new, separator included. */}
