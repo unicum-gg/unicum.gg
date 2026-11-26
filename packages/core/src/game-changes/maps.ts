@@ -93,6 +93,14 @@ type MapCard = {
   lines: string[];
 };
 
+/** The order cards lead in, most newsworthy first. */
+const CARD_ORDER: Record<MapCard["kind"], number> = {
+  "New map": 0,
+  Reworked: 1,
+  Adjusted: 2,
+  Removed: 3,
+};
+
 /**
  * Read a version's maps into cards, and the variant arrivals into groups by
  * battle type: three maps gaining a Waffenträger version is one piece of news.
@@ -133,8 +141,13 @@ function readMaps(maps: ChangedMap[]): {
       lines,
     });
   }
-  // The reworks lead, the small adjustments follow.
-  cards.sort((a, b) => b.lines.length - a.lines.length);
+  // A new map leads, as a new vehicle does on the tank card: it is one line
+  // ("Added to the game"), so sorting on the lines alone put it last. Then the
+  // reworks, the small adjustments, and a map leaving the game.
+  cards.sort(
+    (a, b) =>
+      CARD_ORDER[a.kind] - CARD_ORDER[b.kind] || b.lines.length - a.lines.length,
+  );
   return { cards, variants };
 }
 

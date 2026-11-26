@@ -219,6 +219,15 @@ function group(
   return { vehicles, mass };
 }
 
+/**
+ * A mode's own copy of a vehicle that already exists: the Onslaught 7x7 issue
+ * (`_7x7`, "IS-4 7x7") and the Frontline one (`_FR`, which the client names
+ * "BS"). The client marks neither as an event vehicle, so only the tag says
+ * it; 2.4 brought eleven of them as "new vehicles". The real Renault BS is
+ * `F20_RenaultBS` and is not caught.
+ */
+const MODE_COPY_TAG = /_(7x7|FR)$/;
+
 /** Highest tier first, since that is where the game is played and where a
  * change is read for; within a tier, the vehicles EU plays most. */
 function byTierThenPlay(
@@ -309,9 +318,14 @@ export function renderTankAnnouncement(
     .map((id) => context.vehicles.get(id))
     // A vehicle a player can actually get: an event mode's copies, its bots and
     // the parallel IGR catalogue arrive in batches every event and would bury
-    // the one new tank a patch is read for (2.4.1's 29 held 11 Story Mode and
-    // Halloween copies).
-    .filter((v): v is Vehicle => v !== undefined && v.meta.variant === null && v.meta.eventRole === null)
+    // the one new tank a patch is read for (2.4.1's 29 held 28 of them).
+    .filter(
+      (v): v is Vehicle =>
+        v !== undefined &&
+        v.meta.variant === null &&
+        v.meta.eventRole === null &&
+        !MODE_COPY_TAG.test(v.meta.tag),
+    )
     .map((v) => ({ ...v, popularity: context.popularity.get(v.tankId) ?? 0 }))
     .sort(byTierThenPlay);
   if (vehicles.length === 0 && mass.length === 0 && arrivals.length === 0) return null;
