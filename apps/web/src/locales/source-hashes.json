@@ -1086,6 +1086,7 @@
   "components/footer:columns.leaderboards": "2ceea212f7ac",
   "components/footer:columns.tanks": "ffdb1d2f5ced",
   "components/footer:columns.maps": "80071cd75107",
+  "components/footer:columns.game": "e3e82846c325",
   "components/footer:columns.integrations": "a7881cac6e64",
   "components/footer:columns.project": "f6f4da8d93e8",
   "components/footer:links.top-tanks": "72ebac1510f5",

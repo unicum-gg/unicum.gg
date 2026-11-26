@@ -53,8 +53,8 @@
   },
   "name-with-mode": "{name} ({mode})",
   "image": {
-    "before": "Vorher",
-    "after": "Nachher"
+    "before": "Vor",
+    "after": "Nach"
   },
   "object": {
     "buildings": "{count, plural, one {# Gebäude} other {# Gebäude}}",
