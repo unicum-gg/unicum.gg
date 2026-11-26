@@ -12,7 +12,7 @@
     "heading": "Zoek elke speler op vanuit Discord"
   },
   "preview": {
-    "invocation": "Koala gebruikte /player",
+    "invocation": "Iemand heeft /player {name} gebruikt",
     "tank-description": "Hoogste niveau eerst.",
     "tank-title": "Update 2.4.2 · 50 voertuigen gewijzigd"
   },

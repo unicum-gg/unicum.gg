@@ -12,7 +12,7 @@
     "heading": "Знайдіть будь-якого гравця через Discord"
   },
   "preview": {
-    "invocation": "Koala, /player використано",
+    "invocation": "Хтось використав /player {name}",
     "tank-description": "Спочатку найвищий рівень.",
     "tank-title": "Оновити 2.4.2 · змінено 50 одиниць техніки"
   },

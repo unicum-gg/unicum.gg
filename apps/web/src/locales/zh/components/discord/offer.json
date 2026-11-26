@@ -12,7 +12,7 @@
     "heading": "在 Discord 中查找任何玩家"
   },
   "preview": {
-    "invocation": "Koala 已使用 /player",
+    "invocation": "有人已使用 /player {name}",
     "tank-description": "最高等级优先。",
     "tank-title": "更新 2.4.2 · 50 辆车辆发生变更"
   },

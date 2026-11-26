@@ -12,7 +12,7 @@
     "heading": "Vyhľadajte ľubovoľného hráča z Discordu"
   },
   "preview": {
-    "invocation": "Koala použil /player",
+    "invocation": "Niekto použil /player {name}",
     "tank-description": "Najvyššia úroveň ako prvá.",
     "tank-title": "Posodobitev 2.4.2 · 50 vozidlá zmeny"
   },

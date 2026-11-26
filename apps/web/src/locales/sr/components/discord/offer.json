@@ -12,7 +12,7 @@
     "heading": "Potraži bilo kog igrača na Discordu"
   },
   "preview": {
-    "invocation": "Koala je koristio /player",
+    "invocation": "Korišćeno je /player {name}",
     "tank-description": "Najviši nivo prvi.",
     "tank-title": "Osveži 2.4.2 · 50 vozila promenjeno"
   },

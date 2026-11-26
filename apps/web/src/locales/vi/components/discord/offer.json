@@ -12,7 +12,7 @@
     "heading": "Tra cứu bất kỳ người chơi nào từ Discord"
   },
   "preview": {
-    "invocation": "Koala đã sử dụng /player",
+    "invocation": "Ai đó đã sử dụng /player {name}",
     "tank-description": "Cấp cao nhất trước.",
     "tank-title": "Cập nhật 2.4.2 · 50 xe tăng đã thay đổi"
   },

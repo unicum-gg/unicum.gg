@@ -12,7 +12,7 @@
     "heading": "Ищите любого игрока в Discord"
   },
   "preview": {
-    "invocation": "Koala использовал /player",
+    "invocation": "Кем-то использовано /player {name}",
     "tank-description": "Сначала техника самого высокого уровня.",
     "tank-title": "Обновление 2.4.2 · изменения 50 единиц техники"
   },

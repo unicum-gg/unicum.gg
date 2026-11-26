@@ -12,7 +12,7 @@
     "heading": "Discord से किसी भी खिलाड़ी को खोजें"
   },
   "preview": {
-    "invocation": "Koala ने /player इस्तेमाल किया",
+    "invocation": "किसी द्वारा /player {name} का इस्तेमाल किया गया",
     "tank-description": "सबसे ऊँचा टियर पहले।",
     "tank-title": "अपडेट 2.4.2 · 50 वाहनों में बदलाव"
   },

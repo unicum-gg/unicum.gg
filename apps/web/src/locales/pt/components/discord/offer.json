@@ -12,7 +12,7 @@
     "heading": "Consultar qualquer jogador pelo Discord"
   },
   "preview": {
-    "invocation": "Koala usou /player",
+    "invocation": "Alguém usou /player {name}",
     "tank-description": "Nível mais alto primeiro.",
     "tank-title": "Actualizar 2.4.2 · 50 veículos alterados"
   },

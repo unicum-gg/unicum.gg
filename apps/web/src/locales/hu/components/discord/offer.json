@@ -12,7 +12,7 @@
     "heading": "Keress rá bármely játékosra a Discordról"
   },
   "preview": {
-    "invocation": "A Koala a /player parancsot használta",
+    "invocation": "Valaki a /player {name} parancsot használt",
     "tank-description": "A legmagasabb szint elöl.",
     "tank-title": "Frissítés 2.4.2 · 50 jármű változott"
   },

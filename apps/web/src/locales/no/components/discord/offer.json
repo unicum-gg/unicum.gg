@@ -12,7 +12,7 @@
     "heading": "Finn en spiller fra Discord"
   },
   "preview": {
-    "invocation": "Koala brukte /player",
+    "invocation": "Noen har brukt /player {name}",
     "tank-description": "Høyeste nivå først.",
     "tank-title": "Oppdatér 2.4.2 · 50 kjøretøy endret"
   },

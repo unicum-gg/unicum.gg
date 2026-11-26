@@ -12,7 +12,7 @@
     "heading": "ابحث عن أي لاعب من Discord"
   },
   "preview": {
-    "invocation": "Koala مستخدم للأمر /player",
+    "invocation": "مستخدم ما استخدم /player {name}",
     "tank-description": "المستوى الأعلى أولًا.",
     "tank-title": "التحديث 2.4.2 · تم تغيير 50 مركبة"
   },

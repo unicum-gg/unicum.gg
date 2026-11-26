@@ -12,7 +12,7 @@
     "heading": "ค้นหาผู้เล่นคนใดก็ได้จาก Discord"
   },
   "preview": {
-    "invocation": "Koala ใช้แล้ว /player",
+    "invocation": "มีคนใช้แล้ว /player {name}",
     "tank-description": "ระดับสูงสุดก่อน",
     "tank-title": "ปรับ 2.4.2 · ยานพาหนะ 50 คันมีการเปลี่ยนแปลง"
   },

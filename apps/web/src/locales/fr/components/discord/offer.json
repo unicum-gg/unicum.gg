@@ -12,7 +12,7 @@
     "heading": "Recherchez n’importe quel joueur depuis Discord"
   },
   "preview": {
-    "invocation": "Koala a utilisé /player",
+    "invocation": "Quelqu’un a utilisé /player {name}",
     "tank-description": "Rang le plus élevé en premier.",
     "tank-title": "Mise à jour 2.4.2 · 50 véhicules modifiés"
   },

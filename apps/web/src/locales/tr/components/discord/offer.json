@@ -12,7 +12,7 @@
     "heading": "Discord’dan herhangi bir oyuncuyu arayın"
   },
   "preview": {
-    "invocation": "Koala /player komutunu kullandı",
+    "invocation": "Birisi tarafından /player {name} kullanıldı",
     "tank-description": "Önce en yüksek seviye.",
     "tank-title": "Güncelle 2.4.2 · 50 araçta değişiklik yapıldı"
   },

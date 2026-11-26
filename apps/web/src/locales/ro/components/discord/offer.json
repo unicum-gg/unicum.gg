@@ -12,7 +12,7 @@
     "heading": "Caută orice jucător de pe Discord"
   },
   "preview": {
-    "invocation": "Koala a folosit /player",
+    "invocation": "Cineva a folosit /player {name}",
     "tank-description": "Mai întâi, nivelul cel mai mare.",
     "tank-title": "Actualizează 2.4.2 · 50 de vehicule schimbate"
   },

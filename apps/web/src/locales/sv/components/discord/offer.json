@@ -12,7 +12,7 @@
     "heading": "Slå upp valfri spelare från Discord"
   },
   "preview": {
-    "invocation": "Koala använde /player",
+    "invocation": "Någon använder /player {name}",
     "tank-description": "Högsta nivå först.",
     "tank-title": "Uppdatering 2.4.2 · 50 fordon förändrade"
   },

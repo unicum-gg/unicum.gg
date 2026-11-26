@@ -12,7 +12,7 @@
     "heading": "Discord에서 어떤 플레이어든 조회하기"
   },
   "preview": {
-    "invocation": "Koala가 /player를 사용함",
+    "invocation": "누군가가 /player {name} 명령어를 사용했습니다",
     "tank-description": "높은 단계부터",
     "tank-title": "업데이트 2.4.2 · 차량 50대 변경됨"
   },

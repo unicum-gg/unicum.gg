@@ -12,7 +12,7 @@
     "heading": "Ieškokite bet kurio žaidėjo naudodami „Discord“"
   },
   "preview": {
-    "invocation": "Koala naudojama /player",
+    "invocation": "Kažkas panaudojo /player {name}",
     "tank-description": "Pirmiausia rodomas aukščiausias lygis.",
     "tank-title": "Atnaujinti 2.4.2 · pakeistos 50 transporto priemonių"
   },

@@ -12,7 +12,7 @@
     "heading": "Потърси всеки играч в Discord"
   },
   "preview": {
-    "invocation": "Коала използва /player",
+    "invocation": "Някой е използвал /player {name}",
     "tank-description": "Първо най-високото ниво.",
     "tank-title": "Обнови 2.4.2 · 50 бойни машини променени"
   },

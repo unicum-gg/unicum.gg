@@ -12,7 +12,7 @@
     "heading": "Discordから任意のプレイヤーを検索"
   },
   "preview": {
-    "invocation": "Koalaが/playerを使用",
+    "invocation": "誰かが /player {name} を使用しました",
     "tank-description": "最高Tierから表示。",
     "tank-title": "更新 2.4.2 · 50車両の変更"
   },

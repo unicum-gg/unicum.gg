@@ -12,7 +12,7 @@
     "heading": "Slå enhver spiller op via Discord"
   },
   "preview": {
-    "invocation": "Koala brugte /player",
+    "invocation": "Nogen brugte /player {name}",
     "tank-description": "Højeste niveau først.",
     "tank-title": "Opdatering 2.4.2 · 50 køretøjer ændret"
   },

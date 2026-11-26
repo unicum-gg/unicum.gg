@@ -12,7 +12,7 @@
     "heading": "Hae kuka tahansa pelaaja Discordista"
   },
   "preview": {
-    "invocation": "Koala käytti komentoa /player",
+    "invocation": "Joku käytti komentoa /player {name}",
     "tank-description": "Korkein taso ensin.",
     "tank-title": "Päivitys 2.4.2 · 50 ajoneuvoa muutettu"
   },

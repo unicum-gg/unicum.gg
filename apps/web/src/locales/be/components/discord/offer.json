@@ -12,7 +12,7 @@
     "heading": "Знаходзьце любога гульца праз Discord"
   },
   "preview": {
-    "invocation": "Koala выкарыстана /player",
+    "invocation": "Кімсьці выкарыстана каманда /player {name}",
     "tank-description": "Спачатку найвышэйшы ўзровень.",
     "tank-title": "Абнаўленне 2.4.2 · зменена 50 машын"
   },

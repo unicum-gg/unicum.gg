@@ -12,7 +12,7 @@
     "heading": "Hanapin ang sinumang manlalaro mula sa Discord"
   },
   "preview": {
-    "invocation": "Ginamit ni Koala ang /player",
+    "invocation": "May gumamit ng /player {name}",
     "tank-description": "Pinakamataas na tier muna.",
     "tank-title": "Update 2.4.2 · May mga pagbabago sa 50 sasakyan"
   },

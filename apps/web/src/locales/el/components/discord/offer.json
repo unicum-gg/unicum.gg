@@ -12,7 +12,7 @@
     "heading": "Βρες οποιονδήποτε παίκτη από το Discord"
   },
   "preview": {
-    "invocation": "Το Koala χρησιμοποιείται /player",
+    "invocation": "Το /player {name} χρησιμοποιείται από κάποιον",
     "tank-description": "Πρώτα το υψηλότερο επίπεδο.",
     "tank-title": "Ενημέρωση 2.4.2 · άλλαξαν 50 οχήματα"
   },

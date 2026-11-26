@@ -12,7 +12,7 @@
     "heading": "Discord арқылы кез келген ойыншыны іздеңіз"
   },
   "preview": {
-    "invocation": "Koala /player пайдаланды",
+    "invocation": "Біреу /player {name} пәрменін пайдаланған",
     "tank-description": "Алдымен ең жоғары деңгей көрсетіледі.",
     "tank-title": "2.4.2 жаңартуы · 50 техника өзгертілді"
   },

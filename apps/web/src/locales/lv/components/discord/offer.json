@@ -12,7 +12,7 @@
     "heading": "Meklē jebkuru spēlētāju Discord"
   },
   "preview": {
-    "invocation": "Koala izmantoja /player",
+    "invocation": "Kāds izmantoja /player {name}",
     "tank-description": "Vispirms augstākais līmenis.",
     "tank-title": "Atjaunināt 2.4.2 · izmaiņas 50 transportlīdzekļiem"
   },

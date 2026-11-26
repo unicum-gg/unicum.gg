@@ -12,7 +12,7 @@
     "heading": "Wyszukaj dowolnego gracza na Discordzie"
   },
   "preview": {
-    "invocation": "Koala użył /player",
+    "invocation": "Ktoś użył /player {name}",
     "tank-description": "Najpierw najwyższy poziom.",
     "tank-title": "Odśwież 2.4.2 · Zmieniono 50 pojazdów"
   },
