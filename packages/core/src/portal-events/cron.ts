@@ -35,6 +35,8 @@ export async function captureAllPortalEvents(): Promise<Record<string, number>> 
       } catch (err) {
         counts[region] = 0;
         if (err instanceof PortalCalendarMissingError) {
+          // The alert is said once; the log says what the page was every time.
+          console.warn(`[portal-events-cron] ${err.message}`);
           await missingWidget.announce(
             region,
             `⚠️ The ${region.toUpperCase()} portal home page no longer carries its events widget, so its calendar is not being recorded.`,

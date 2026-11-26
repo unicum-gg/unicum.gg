@@ -90,10 +90,18 @@ function parseEvent(raw: RawCalendarEvent): PortalCalendarEvent | null {
   };
 }
 
-/** Thrown when the home page answered but no events widget could be read from it. */
+/**
+ * Thrown when the home page answered but no events widget could be read from
+ * it. Carries what the page was instead (its title and size), since a page
+ * without the widget is either Wargaming redesigning the portal or a challenge
+ * served to the caller's address, and the two are fixed in different places.
+ */
 export class PortalCalendarMissingError extends Error {
-  constructor(region: Region) {
-    super(`No events widget on the ${region} portal home page`);
+  constructor(region: Region, html: string) {
+    const title = /<title[^>]*>([^<]*)<\/title>/i.exec(html)?.[1]?.trim() ?? "no title";
+    super(
+      `No events widget on the ${region} portal home page (got "${title.slice(0, 120)}", ${html.length} chars)`,
+    );
     this.name = "PortalCalendarMissingError";
   }
 }
@@ -127,7 +135,7 @@ export class PortalEventsResource {
     const literal = marker
       ? readArrayLiteral(html, marker.index + marker[0].length - 1)
       : null;
-    if (!literal) throw new PortalCalendarMissingError(this.region);
+    if (!literal) throw new PortalCalendarMissingError(this.region, html);
     const raw = JSON.parse(literal) as RawCalendarEvent[];
     return raw.flatMap((entry) => parseEvent(entry) ?? []);
   }
