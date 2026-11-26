@@ -4,3 +4,4 @@ export * from "./group";
 export * from "./discord";
 export * from "./publish";
 export * from "./read";
+export * from "./monthly";

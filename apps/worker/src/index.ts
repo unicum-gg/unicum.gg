@@ -162,8 +162,11 @@ async function startCrons(): Promise<void> {
   );
   startServerOnlineCron();
 
-  const { startPortalEventsCron } = await import("@unicum.gg/core/portal-events/cron");
+  const { startPortalEventsCron, startPortalMonthlyCron } = await import(
+    "@unicum.gg/core/portal-events/cron"
+  );
   startPortalEventsCron();
+  startPortalMonthlyCron();
 
   const { startServerOnlineWatchdogCron } = await import(
     "@unicum.gg/core/wargaming/wot/server/watchdog"

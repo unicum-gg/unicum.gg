@@ -17,6 +17,7 @@
     "partner-hits": "tsx --env-file-if-exists=../web/.env.local src/scripts/partner-hits.ts",
     "sample-servers": "tsx --env-file-if-exists=../web/.env.local src/scripts/sample-servers.ts",
     "capture-portal-events": "tsx --env-file-if-exists=../web/.env.local src/scripts/capture-portal-events.ts",
+    "capture-portal-monthly": "tsx --env-file-if-exists=../web/.env.local src/scripts/capture-portal-monthly.ts",
     "publish-portal-events": "tsx --env-file-if-exists=../web/.env.local src/scripts/publish-portal-events.ts",
     "top-by-tank": "tsx --env-file-if-exists=../web/.env.local src/scripts/top-by-tank.ts",
     "refresh-map-history": "tsx --env-file-if-exists=../web/.env.local src/scripts/refresh-map-history.ts",

@@ -2,6 +2,7 @@ import { PortalCalendarMissingError, REGIONS } from "@unicum.gg/wargaming";
 import { scheduleCron } from "@unicum.gg/core/cron/scheduler";
 import { createStallAlert } from "@unicum.gg/core/cron/stall-alert";
 import { capturePortalEvents } from "./capture";
+import { captureMonthlyEvents, monthsAround } from "./monthly";
 import { portalEventsPublishingEnabled, publishPortalEvents } from "./publish";
 
 /**
@@ -70,5 +71,41 @@ export function startPortalEventsCron(): void {
     console.log(
       `[portal-events-cron] scheduled (${SCHEDULE}), ${publishing ? "publishing to Discord" : "capture only"}`,
     );
+  }
+}
+
+/**
+ * The monthly articles change far less often than the widget (a month is
+ * published once and gains an entry or two), so every six hours, off the hour
+ * the widget capture holds.
+ */
+const MONTHLY_SCHEDULE = "37 */6 * * *";
+
+/** Re-read the months around today for every region. */
+export async function captureRecentMonthlyEvents(): Promise<Record<string, number>> {
+  const counts: Record<string, number> = {};
+  const months = monthsAround(new Date());
+  await Promise.all(
+    REGIONS.map(async (region) => {
+      counts[region] = 0;
+      for (const { year, month } of months) {
+        try {
+          counts[region] += (await captureMonthlyEvents(region, year, month)) ?? 0;
+        } catch (err) {
+          console.error(`[portal-monthly-cron] ${region} ${year}-${month} failed:`, err);
+        }
+      }
+    }),
+  );
+  return counts;
+}
+
+export function startPortalMonthlyCron(): void {
+  if (
+    scheduleCron("portal-monthly-cron", MONTHLY_SCHEDULE, async () => {
+      console.log("[portal-monthly-cron] captured", await captureRecentMonthlyEvents());
+    })
+  ) {
+    console.log(`[portal-monthly-cron] scheduled (${MONTHLY_SCHEDULE})`);
   }
 }
