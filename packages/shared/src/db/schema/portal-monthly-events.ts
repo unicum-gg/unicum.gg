@@ -59,6 +59,11 @@ export function makePortalMonthlyEventsTable(region: string) {
         .notNull()
         .defaultNow(),
       removedAt: timestamp("removed_at", { withTimezone: true }),
+      /** The Discord scheduled event the entry is published as, shared by the
+       * rows of one entry (its other regions, its repeats in later months). */
+      discordEventId: text("discord_event_id"),
+      /** The state the event was last written from (see `*_portal_events`). */
+      discordSyncedHash: text("discord_synced_hash"),
     },
     (t) => [
       primaryKey({ columns: [t.period, t.startDate, t.title] }),
