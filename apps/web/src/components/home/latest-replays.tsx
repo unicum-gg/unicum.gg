@@ -1,9 +1,8 @@
 "use client";
 
-import { ArrowRightIcon } from "@phosphor-icons/react";
 import { isRegion, Region } from "@unicum.gg/wargaming";
-import Link from "@/components/link";
 import { Panel, PanelContent, PanelHeader, PanelTitle } from "@/components/panel";
+import { PanelHeaderLink } from "@/components/panel-header-link";
 import { PlayerBattlesTable } from "@/components/players/detail/overview/battles-table";
 import type { BattlesCatalogPayload } from "@/components/battles/list/catalog";
 import { topBattleRows } from "@/components/tanks/detail/loadouts/build-views";
@@ -44,13 +43,7 @@ export function LatestReplays({
     <Panel>
       <PanelHeader className="flex flex-wrap items-center justify-between gap-2">
         <PanelTitle>{t("title")}</PanelTitle>
-        <Link
-          href={ROUTES.BATTLES(region)}
-          className="text-fd-muted-foreground hover:text-fd-foreground inline-flex items-center gap-1 text-sm transition-colors"
-        >
-          {t("all")}
-          <ArrowRightIcon className="size-3.5" />
-        </Link>
+        <PanelHeaderLink href={ROUTES.BATTLES(region)}>{t("all")}</PanelHeaderLink>
       </PanelHeader>
       <PanelContent className="p-0">
         <PlayerBattlesTable
