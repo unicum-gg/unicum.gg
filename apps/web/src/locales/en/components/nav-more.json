@@ -13,6 +13,10 @@
       "label": "Servers",
       "description": "Players online, now and over time"
     },
+    "badges": {
+      "label": "Badges",
+      "description": "Every crest a player or clan can earn, and how"
+    },
     "bot": {
       "label": "Discord bot",
       "description": "Player, clan and tank stats as slash commands"

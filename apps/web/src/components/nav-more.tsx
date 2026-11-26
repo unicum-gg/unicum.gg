@@ -10,6 +10,7 @@ import {
   PuzzlePieceIcon,
   RankingIcon,
   RobotIcon,
+  SealCheckIcon,
 } from "@phosphor-icons/react/dist/ssr";
 import { NavMoreMenu } from "@/components/nav-more-menu";
 import ROUTES from "@/constants/routes";
@@ -18,9 +19,10 @@ import { useTranslation } from "@/hooks/use-translation";
 
 /**
  * The navbar's "More" dropdown: everything that is not one of the four
- * catalogue sections, as two families of four, a row each: the tools that take
- * unicum.gg out of the site, then the pages about the game. As one grid of nine
- * in three columns they fell on the rows in no order a reader could see.
+ * catalogue sections, as two families, a row each: the four tools that take
+ * unicum.gg out of the site, then the five pages about the game. As one grid of
+ * nine in three columns they fell on the rows in no order a reader could see,
+ * so each row is its own width (`rows`) rather than the grid deciding.
  *
  * A Client Component because one of its destinations is regional. The list used
  * to be built inline in `layout.shared.tsx`, which is fine while every URL is
@@ -44,8 +46,8 @@ export function NavMore() {
     <NavMoreMenu
       id="more"
       text={t("label")}
-      // Eight cards, so four across (see NavMoreMenu): each family is one
-      // row, the same cards as every other menu, ordered rather than titled.
+      // Each family is one row, the same cards as every other menu, ordered
+      // rather than titled.
       items={[
         // What takes unicum.gg out of the site: into the game, Discord, an AI
         // assistant or someone's code. First, since the mod is here.
@@ -58,13 +60,13 @@ export function NavMore() {
         item("tournaments", ROUTES.TOURNAMENTS(region), <RankingIcon />),
         item("calendar", ROUTES.CALENDAR(region), <CalendarDotsIcon />),
         item("servers", ROUTES.SERVERS(region), <PulseIcon />),
+        item("badges", ROUTES.BADGES, <SealCheckIcon />),
         item("glossary", ROUTES.GLOSSARY, <BookOpenIcon />),
-        // Badges gave its card to the calendar: the row is the pages about the
-        // game, and the badges are the site's own. The footer still links it.
         // Not "Support us": the top strip shows it on every page, in the brand
-        // colour, and the footer links it too. A ninth card also left a row
-        // with one card on it.
+        // colour, and the footer links it too.
       ]}
+      // The tools, then the five pages about the game, each family a row.
+      rows={[4, 5]}
     />
   );
 }

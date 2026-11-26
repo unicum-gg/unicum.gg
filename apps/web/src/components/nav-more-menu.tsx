@@ -47,6 +47,16 @@ export type MoreMenuItem = {
   icon: ReactNode;
 };
 
+/** The width of the row the `i`th card falls in. */
+function rowOf(rows: readonly (4 | 5)[], i: number): 4 | 5 {
+  let seen = 0;
+  for (const size of rows) {
+    seen += size;
+    if (i < seen) return size;
+  }
+  return rows[rows.length - 1] ?? 4;
+}
+
 /**
  * A nav dropdown: an icon + title + description card per destination, matching
  * what fumadocs renders for a `menu` link. Shared by the "More" menu and, via
@@ -72,12 +82,20 @@ export function NavMoreMenu({
   id,
   text,
   items,
+  rows,
   active = false,
 }: {
   /** Stable key for the one-open-at-a-time rule on a phone. */
   id: string;
   text: string;
   items: MoreMenuItem[];
+  /**
+   * How many cards each row holds, when the rows are not all one width: the
+   * More menu is a family of four over a family of five, each row filling the
+   * width. Only 4 and 5 are laid out (a 20-column grid, a card spanning 5 or
+   * 4 of them); omitted, the menu is full rows of four or three as before.
+   */
+  rows?: readonly (4 | 5)[];
   /** Highlights the trigger for the section the reader is on, like the plain
    * section link did. Always false for the "More" menu, which is no section. */
   active?: boolean;
@@ -92,11 +110,19 @@ export function NavMoreMenu({
           {text}
         </NavbarMenuTrigger>
         {/* Full rows in every menu: eight cards are two rows of four (Tanks,
-            Maps, More), three are one row of three (Players, Clans). The
-            fumadocs default of three columns left eight as 3 + 3 + 2. */}
-        <NavbarMenuContent className={items.length >= 4 ? "lg:grid-cols-4" : "lg:grid-cols-3"}>
-          {items.map((item) => (
-            <NavbarMenuLink key={item.url} href={item.url} aria-label={item.text}>
+            Maps), three are one row of three (Players, Clans), and More is a
+            row of four over a row of five. The fumadocs default of three
+            columns left eight as 3 + 3 + 2. */}
+        <NavbarMenuContent
+          className={rows ? "lg:grid-cols-20" : items.length >= 4 ? "lg:grid-cols-4" : "lg:grid-cols-3"}
+        >
+          {items.map((item, i) => (
+            <NavbarMenuLink
+              key={item.url}
+              href={item.url}
+              aria-label={item.text}
+              className={rows ? (rowOf(rows, i) === 5 ? "lg:col-span-4" : "lg:col-span-5") : undefined}
+            >
               <div className="w-fit rounded-md border bg-fd-muted p-1 [&_svg]:size-4">
                 {item.icon}
               </div>
