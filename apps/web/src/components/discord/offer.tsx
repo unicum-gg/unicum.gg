@@ -20,9 +20,11 @@ import { DiscordOfferKind } from "./offer-kind";
  * readers actually land on, shaped like the mod's battles offer: a faded
  * picture of what the server posts, and the card asking them in on top of it.
  *
- * The picture is an example and says so, drawn only once hydrated, so its
- * invented numbers never reach the HTML a crawler or the `.md` twin reads as
- * this vehicle's or this player's.
+ * The picture is drawn only once hydrated, so it never reaches the HTML a
+ * crawler or the `.md` twin reads. On a vehicle it is an example and says so:
+ * its numbers are invented, so it is never captioned as this vehicle's
+ * changes. On a player it is the real answer, the `/player` reply for the
+ * player being read, built from the figures the page already shows.
  *
  * Three asks. On a vehicle: hear about its next buff or nerf. On someone
  * else's profile: the same lookups, in Discord. On the reader's own profile
@@ -32,15 +34,45 @@ import { DiscordOfferKind } from "./offer-kind";
  * an offer that vanishes a second later.
  */
 
+/** The player's own figures, for the `/player` reply in the preview. */
+export type DiscordOfferFigures = {
+  /** The rating the reader picked (its WN fallback), as the bot would show. */
+  ratingLabel: string;
+  total: { battles: number; winRate: number | null; rating: number | null };
+  d30: { battles: number; winRate: number | null; rating: number | null } | null;
+};
+
+const int = (n: number | null) =>
+  n === null ? "-" : Math.round(n).toLocaleString("en-US");
+const pct = (n: number | null) => (n === null ? "-" : `${(n * 100).toFixed(1)}%`);
+
+/** The bot's own table shape: a label column, then Total and 30d. */
+function figureLines(f: DiscordOfferFigures): { text: string }[] {
+  const rows: [string, string, string][] = [
+    ["", "Total", "30d"],
+    ["Battles", int(f.total.battles), f.d30 ? int(f.d30.battles) : "-"],
+    ["Win rate", pct(f.total.winRate), f.d30 ? pct(f.d30.winRate) : "-"],
+    [f.ratingLabel, int(f.total.rating), f.d30 ? int(f.d30.rating) : "-"],
+  ];
+  const w = [10, 9, 8];
+  return rows.map(([a, b, c]) => ({
+    text: `${a.padEnd(w[0]!)}${b.padStart(w[1]!)}${c.padStart(w[2]!)}`,
+  }));
+}
+
 export function DiscordOffer({
   kind,
   name,
   region,
+  figures,
 }: {
   kind: DiscordOfferKind;
   /** The vehicle's name, or the player's nickname. */
   name: string;
   region: Region;
+  /** On a player page: their real figures, so the preview answers for the
+   * player being read rather than for an invented one. */
+  figures?: DiscordOfferFigures;
 }) {
   const { t, locale } = useTranslation("components/discord/offer");
   const hydrated = useHydrated();
@@ -62,15 +94,14 @@ export function DiscordOffer({
       />
     ) : (
       <DiscordMessagePreview
-        invocation={t("preview.invocation")}
+        invocation={t("preview.invocation", { name })}
         color="#f25322"
-        title={kind === DiscordOfferKind.OwnProfile ? tag : "Koala [EU]"}
-        block={[
-          { text: "              Total    30d" },
-          { text: "Battles      41,203    612" },
-          { text: "Win rate     56.4%   58.1%" },
-          { text: "WN8           2,412  2,780" },
-        ]}
+        title={tag}
+        block={
+          figures
+            ? figureLines(figures)
+            : [{ text: "Battles · Win rate · Rating" }]
+        }
       />
     );
 
@@ -86,9 +117,11 @@ export function DiscordOffer({
             {preview}
           </div>
         ) : null}
-        <span className="bg-fd-background/90 text-fd-muted-foreground absolute top-4 right-4 rounded-md px-2 py-0.5 text-xs font-medium sm:right-8">
-          {t("example")}
-        </span>
+        {kind === DiscordOfferKind.Tank ? (
+          <span className="bg-fd-background/90 text-fd-muted-foreground absolute top-4 right-4 rounded-md px-2 py-0.5 text-xs font-medium sm:right-8">
+            {t("example")}
+          </span>
+        ) : null}
       </div>
       <div className="relative -mt-14 px-4 pb-4">
         <CtaCard

@@ -11,7 +11,7 @@ import { SupportNudge } from "@/components/players/detail/support-nudge";
 import { SupporterBadgeState } from "@/components/entity/badges/supporter-badge";
 import { PlayerMode, PlayerSection } from "@/components/players/detail/tabs";
 import { PlayerTabsView } from "@/components/players/detail/tabs-view";
-import { DiscordOffer } from "@/components/discord/offer";
+import { DiscordOffer, type DiscordOfferFigures } from "@/components/discord/offer";
 import { DiscordOfferKind } from "@/components/discord/offer-kind";
 import type { PlayerTournamentRecord } from "@/components/players/detail/tournaments/row";
 import type { PlayerOnslaughtData } from "@/components/players/detail/onslaught";
@@ -26,6 +26,7 @@ import { unicum } from "@/services/sdk";
 import {
   DEFAULT_RATING_METRIC,
   RATING_METRIC_LABEL,
+  wnRatingMetric,
   isRatingMetric,
   type PlayerAchievements,
   type PlayerDetailData,
@@ -177,6 +178,28 @@ export function PlayerProfile({
     [region, nickname],
   );
 
+  // The preview's `/player` reply, from the figures this page already shows,
+  // in the rating the reader picked (its WN fallback for PR and WTR, which
+  // have no 30-day figure).
+  const ratingMetric = wnRatingMetric(metric);
+  const d30 = detail.periods.d30;
+  const offerFigures: DiscordOfferFigures = {
+    ratingLabel: RATING_METRIC_LABEL[ratingMetric],
+    total: {
+      battles: detail.current.battles,
+      winRate: detail.current.battles ? detail.current.wins / detail.current.battles : null,
+      rating: detail.derived[ratingMetric].total,
+    },
+    d30:
+      d30 && d30.battles > 0
+        ? {
+            battles: d30.battles,
+            winRate: d30.wins / d30.battles,
+            rating: detail.derived[ratingMetric].d30,
+          }
+        : null,
+  };
+
   return (
     <>
       <LiveSync
@@ -243,6 +266,7 @@ export function PlayerProfile({
               kind={isOwnProfile ? DiscordOfferKind.OwnProfile : DiscordOfferKind.Player}
               name={nickname}
               region={region}
+              figures={offerFigures}
             />
           </Panel>
         </>
