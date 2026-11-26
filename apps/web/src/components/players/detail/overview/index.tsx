@@ -168,6 +168,18 @@ export function OverallTab({
               [RatingMetric.Pr]: current.globalRating,
               [RatingMetric.Wtr]: current.wtr,
             }}
+            recent={{
+              battles: periods.d30?.battles ?? 0,
+              winrate:
+                periods.d30 && periods.d30.battles > 0
+                  ? periods.d30.wins / periods.d30.battles
+                  : null,
+              ratings: {
+                [RatingMetric.Wn7]: derived.wn7.d30,
+                [RatingMetric.Wn8]: derived.wn8.d30,
+                [RatingMetric.Wnx]: derived.wnx.d30,
+              },
+            }}
           />
         </PanelContent>
       </Panel>

@@ -2,6 +2,7 @@ import { bigint, integer, jsonb, pgTable, smallint, timestamp } from "drizzle-or
 import { Region } from "@unicum.gg/wargaming";
 import type {
   DistributionBucket,
+  RecentDistribution,
   TierShare,
   TypeShare,
 } from "../../wot/player-distribution";
@@ -42,6 +43,9 @@ export function makePlayerDistributionTable(region: string) {
     // every pass since writes both.
     pr: jsonb("pr").$type<DistributionBucket[]>(),
     wtr: jsonb("wtr").$type<DistributionBucket[]>(),
+    // The 30-day histograms, one blob since they are written and read as one
+    // answer. Nullable for the same reason as the two above (migration 0155).
+    recent: jsonb("recent").$type<RecentDistribution>(),
     byTier: jsonb("by_tier").$type<TierShare[]>().notNull(),
     byType: jsonb("by_type").$type<TypeShare[]>().notNull(),
     computedAt: timestamp("computed_at", { withTimezone: true })

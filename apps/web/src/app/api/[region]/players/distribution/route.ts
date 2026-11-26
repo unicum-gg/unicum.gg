@@ -6,7 +6,7 @@ import { PlayerDistributionResponse } from "./schema.api";
 
 /**
  * Player distribution
- * @description How the region's tracked players are spread across win rate and WNX, as histograms, and how its battles are spread across tiers and vehicle classes. Materialised hourly rather than read live: the histograms are a full scan of the region's players. 404 until the first run. Dates are ISO 8601 strings.
+ * @description How the region's tracked players are spread across win rate and each rating, as histograms, over their careers and over the last 30 days, and how its battles are spread across tiers and vehicle classes. Materialised hourly rather than read live: the histograms are a full scan of the region's players. 404 until the first run. Dates are ISO 8601 strings.
  * @pathParams regionParams
  * @response PlayerDistributionResponse
  * @openapi

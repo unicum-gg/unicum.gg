@@ -1,5 +1,5 @@
 import type { Region, VehicleType } from "@unicum.gg/wargaming";
-import { RatingMetric } from "../constants/rating";
+import { RatingMetric, type WnRatingMetric } from "../constants/rating";
 import {
   RATING_COLOR_CLASS,
   type RatingColor,
@@ -29,6 +29,19 @@ import { prColor, wtrColor } from "./account-ratings";
  * genuinely played.
  */
 export const DISTRIBUTION_MIN_BATTLES = 100;
+
+/**
+ * Battles inside the last 30 days an account needs before it counts towards the
+ * recent histograms.
+ *
+ * The career floor above, applied to a month. Measured on Asia (2026-11-26):
+ * 25,648 accounts played between one and twenty battles in the window, and the
+ * 99th percentile of their win rate is 100%, so a lower floor would rank a lucky
+ * week above every regular. At a hundred, 19,606 accounts remain once the
+ * ones idle for 30 days are dropped, which is plenty to measure a percentile
+ * against.
+ */
+export const RECENT_DISTRIBUTION_MIN_BATTLES = 100;
 
 /** Win-rate histogram: one-point steps across the range every real player sits
  * in, with everything outside collected in the two edge buckets. */
@@ -129,6 +142,29 @@ export type RatingDistributions = Record<RatingMetric, DistributionBucket[]>;
 export type TierShare = BattleShare & { tier: number };
 export type TypeShare = BattleShare & { type: VehicleType };
 
+/**
+ * The same histograms over the last 30 days, measured against the accounts that
+ * played at least `RECENT_DISTRIBUTION_MIN_BATTLES` in that window.
+ *
+ * A different population on purpose, not a narrower view of the career one: a
+ * career figure lags years behind how someone plays now, and a recent figure is
+ * only comparable to the people still playing. Those are better than the
+ * average account (the Asia median win rate is 48.2% over careers and 49.2% over
+ * the month's actives), so the same value ranks lower here, and the page says
+ * what it is measured against.
+ *
+ * WN ratings only: PR and WTR are account figures Wargaming publishes finished,
+ * and there is no rating of the battles between two readings of them (see
+ * `RatingMetric`). All tiers, because it situates the 30-day figures the
+ * profile's own stats table prints, and those count every tier.
+ */
+export type RecentDistribution = {
+  minBattles: number;
+  players: number;
+  winrate: DistributionBucket[];
+  ratings: Record<WnRatingMetric, DistributionBucket[]>;
+};
+
 export type PlayerDistribution = {
   region: Region;
   /** The threshold the histograms were built with, so the page can say what
@@ -138,6 +174,8 @@ export type PlayerDistribution = {
   players: number;
   winrate: DistributionBucket[];
   ratings: RatingDistributions;
+  /** Null until the first pass that computes it. */
+  recent: RecentDistribution | null;
   byTier: TierShare[];
   byType: TypeShare[];
   /** When the aggregate was last recomputed, null before the first run. */

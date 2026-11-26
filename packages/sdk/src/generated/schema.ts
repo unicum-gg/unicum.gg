@@ -108,7 +108,7 @@ export interface paths {
         };
         /**
          * Player distribution
-         * @description How the region's tracked players are spread across win rate and WNX, as histograms, and how its battles are spread across tiers and vehicle classes. Materialised hourly rather than read live: the histograms are a full scan of the region's players. 404 until the first run. Dates are ISO 8601 strings.
+         * @description How the region's tracked players are spread across win rate and each rating, as histograms, over their careers and over the last 30 days, and how its battles are spread across tiers and vehicle classes. Materialised hourly rather than read live: the histograms are a full scan of the region's players. 404 until the first run. Dates are ISO 8601 strings.
          */
         get: operations["get-{region}-players-distribution"];
         put?: never;
@@ -6297,6 +6297,8 @@ export interface components {
                 pr: components["schemas"]["DistributionBucket"][];
                 wtr: components["schemas"]["DistributionBucket"][];
             };
+            /** @description Null until the first pass that computes it. */
+            recent: components["schemas"]["RecentDistribution"] | null;
             byTier: components["schemas"]["TierShare"][];
             byType: components["schemas"]["TypeShare"][];
             /**
@@ -6325,6 +6327,8 @@ export interface components {
                 pr: components["schemas"]["DistributionBucket"][];
                 wtr: components["schemas"]["DistributionBucket"][];
             };
+            /** @description Null until the first pass that computes it. */
+            recent: components["schemas"]["RecentDistribution"] | null;
             byTier: components["schemas"]["TierShare"][];
             byType: components["schemas"]["TypeShare"][];
             /**
@@ -7286,6 +7290,20 @@ export interface components {
             units: number;
             gold: number;
             amount: number;
+        };
+        /** @description The same histograms over the last 30 days, against the accounts that played at least `minBattles` battles in that window. A different population from the career one: the players still active, who are better than the average account, so the same value ranks lower here. All tiers. */
+        RecentDistribution: {
+            /** @description Battles inside the last 30 days an account needs before it counts. */
+            minBattles: number;
+            /** @description Accounts that met the threshold. */
+            players: number;
+            winrate: components["schemas"]["DistributionBucket"][];
+            /** @description One histogram per WN rating over the last 30 days. PR and WTR are account figures with no 30-day value, so they have none. */
+            ratings: {
+                wn7: components["schemas"]["DistributionBucket"][];
+                wn8: components["schemas"]["DistributionBucket"][];
+                wnx: components["schemas"]["DistributionBucket"][];
+            };
         };
         refreshPolicyBucket: {
             /** @enum {string} */

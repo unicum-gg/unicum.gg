@@ -1,8 +1,6 @@
 import { sql } from "drizzle-orm";
 import {
-  bucketEdges,
   DISTRIBUTION_MIN_BATTLES,
-  type DistributionBucket,
   type PlayerDistribution,
   playerDistributionByRegion,
   playersByRegion,
@@ -23,6 +21,11 @@ import { db } from "@unicum.gg/core/db";
 import { scheduleCron } from "@unicum.gg/core/cron/scheduler";
 import { recomputeModeEconomy } from "@unicum.gg/core/battles/mode-economy";
 import { recordPlayerActivity } from "./activity";
+import { type BucketRow, toBuckets } from "./distribution-buckets";
+import {
+  readRecentHistograms,
+  toRecentDistribution,
+} from "./recent-distribution";
 
 /**
  * How the region's players are spread across win rate and WNX, and how its
@@ -60,39 +63,7 @@ const PERCENT = 100;
  */
 const inFlight = new Map<Region, Promise<void>>();
 
-type BucketRow = { metric: string; bucket: number; n: number };
 type ShareRow = { key: string; tanks: number; battles: number; winrate: number };
-
-/**
- * Fill a bucket series from the rows `width_bucket` produced.
- *
- * `width_bucket` answers 0 for a value below the range and `steps + 1` for one
- * above, which is exactly the two overflow buckets `bucketEdges` describes, so
- * the index it returns is the index into that array.
- */
-function toBuckets(
-  rows: BucketRow[],
-  metric: string,
-  range: { min: number; max: number; steps: number },
-  domain: { min: number; max: number },
-): DistributionBucket[] {
-  const edges = bucketEdges(range, domain);
-  const counts = new Map(
-    rows.filter((r) => r.metric === metric).map((r) => [r.bucket, r.n]),
-  );
-  const filled = edges.map((edge, i) => ({ ...edge, count: counts.get(i) ?? 0 }));
-
-  // Trim an overflow bucket that caught nothing, at either end, once. Win rate
-  // has players under 30% and ratings have players above 3000, so those
-  // buckets earn their column; nobody is below a rating of zero, and drawing
-  // "below 0" as an empty column would invent a region of the scale. Only the
-  // two ends are considered, so an empty bucket inside the range keeps its slot
-  // and the axis stays evenly spaced. Trimmed after the counts are placed, so
-  // the index stays aligned with `width_bucket` while it matters.
-  if (filled.length > 0 && filled[0].count === 0) filled.shift();
-  if (filled.length > 0 && filled[filled.length - 1].count === 0) filled.pop();
-  return filled;
-}
 
 /**
  * Every histogram in one pass over one population.
@@ -146,6 +117,7 @@ async function readHistograms(region: Region): Promise<BucketRow[]> {
   );
 }
 
+
 /**
  * Battles and battle-weighted win rate per tier or per vehicle type.
  *
@@ -187,8 +159,9 @@ export function recomputePlayerDistribution(region: Region): Promise<void> {
 }
 
 async function recomputeNow(region: Region): Promise<void> {
-  const [histograms, tiers, types] = await Promise.all([
+  const [histograms, recentRows, tiers, types] = await Promise.all([
     readHistograms(region),
+    readRecentHistograms(region),
     readShares(region, "tier"),
     readShares(region, "type"),
   ]);
@@ -206,6 +179,7 @@ async function recomputeNow(region: Region): Promise<void> {
     ]),
   ) as RatingDistributions;
   const players = winrate.reduce((sum, b) => sum + b.count, 0);
+  const recent = toRecentDistribution(recentRows);
 
   const byTier: TierShare[] = tiers
     .map((r) => ({
@@ -236,6 +210,7 @@ async function recomputeNow(region: Region): Promise<void> {
       wnx: ratings[RatingMetric.Wnx],
       pr: ratings[RatingMetric.Pr],
       wtr: ratings[RatingMetric.Wtr],
+      recent,
       byTier,
       byType,
     });
@@ -263,6 +238,7 @@ export async function loadPlayerDistribution(
       [RatingMetric.Pr]: row.pr ?? [],
       [RatingMetric.Wtr]: row.wtr ?? [],
     },
+    recent: row.recent ?? null,
     byTier: row.byTier,
     byType: row.byType,
     computedAt: row.computedAt,

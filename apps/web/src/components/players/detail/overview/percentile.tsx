@@ -5,15 +5,20 @@ import { numberFormat } from "@/lib/format";
 
 import useSWR from "swr";
 import {
+  type DistributionBucket,
   type PlayerDistribution,
   percentileOf,
   RATING_COLOR_HEX,
   RATING_COLOR_OF,
   RATING_METRIC_LABEL,
   RatingMetric,
+  type WnRatingMetric,
   winrateColor,
 } from "@unicum.gg/shared";
 import { REGION_LABEL, type Region } from "@unicum.gg/wargaming";
+import { Interpolate } from "@/components/interpolate";
+import { PeriodInlineSelect } from "@/components/period-inline-select";
+import { Period, usePeriod } from "@/hooks/use-period";
 import { useRatingMetric } from "@/hooks/use-rating-metric";
 import { useTranslation } from "@/hooks/use-translation";
 import { unicum } from "@/services/sdk";
@@ -26,11 +31,24 @@ import { unicum } from "@/services/sdk";
  * than a query of its own. Fetched client-side and rendered only once it lands:
  * the page's own data does not depend on it, and a player's stats must not wait
  * on an aggregate about everybody else.
+ *
+ * A select inside the footnote switches to the last 30 days, situated against
+ * the players still active, because a career figure lags years behind how
+ * someone plays now: a player who has improved reads as average, one who has
+ * slipped reads as a top player they no longer feel like. In the sentence that
+ * already names the population, as the home boards put their metric picker,
+ * so the switch costs the panel no height. Only offered once the window clears
+ * the aggregate's own battle floor, so a lucky week of ten games is never
+ * ranked. It reads and writes the leaderboards' period cookie, so the window a
+ * reader picked on the home boards is the one players are situated on.
  */
+const STANDING_PERIODS = [Period.Overall, Period.Month];
+
 export function PlayerPercentile({
   region,
   winrate,
   ratings,
+  recent,
 }: {
   region: Region;
   /** Lifetime win rate, 0..1. */
@@ -38,13 +56,24 @@ export function PlayerPercentile({
   /** The account's lifetime value for each rating metric, so the panel can
    * follow the one the reader picked rather than naming one for them. */
   ratings: Record<RatingMetric, number | null>;
+  /** The profile's 30-day column, as its stats table prints it. */
+  recent: {
+    battles: number;
+    /** 0..1, null with no battles in the window. */
+    winrate: number | null;
+    ratings: Record<WnRatingMetric, number | null>;
+  };
 }) {
   const { locale } = useLocale();
   const { t } = useTranslation(
     "components/players/detail/overview/percentile",
   );
   // The same cookie the navbar selector writes.
-  const { metric } = useRatingMetric();
+  const { metric, wnMetric } = useRatingMetric();
+  // The leaderboards' Overall / last-30-days cookie: a reader who ranks the home
+  // boards on the month reads players on the month too, and switching here
+  // switches there.
+  const [period, setPeriod] = usePeriod();
   const rating = ratings[metric] ?? null;
   const { data } = useSWR(
     `player-distribution:${region}`,
@@ -64,28 +93,36 @@ export function PlayerPercentile({
 
   if (!data) return null;
 
-  const entries = [
-    winrate == null
-      ? null
-      : {
-          label: t("win-rate"),
-          percentile: percentileOf(data.winrate, winrate),
-          color: RATING_COLOR_HEX[winrateColor(winrate)],
-        },
-    rating == null
-      ? null
-      : {
-          label: RATING_METRIC_LABEL[metric],
-          percentile: percentileOf(data.ratings[metric] ?? [], rating),
-          color: RATING_COLOR_HEX[RATING_COLOR_OF[metric](rating)],
-        },
-  ].filter((e) => e !== null && e.percentile !== null) as {
-    label: string;
-    percentile: number;
-    color: string;
-  }[];
+  const career = standings(data.winrate, data.ratings[metric] ?? [], {
+    winrateLabel: t("win-rate"),
+    winrate,
+    metric,
+    rating,
+  });
+  // A window is a different population with its own floor, and PR or WTR have
+  // no 30-day value at all, so it shows the WN rating the reader falls back to
+  // there, exactly as the stats table's 30-day column does.
+  const recentRows =
+    data.recent && recent.battles >= data.recent.minBattles
+      ? standings(data.recent.winrate, data.recent.ratings[wnMetric] ?? [], {
+          winrate: recent.winrate,
+          metric: wnMetric,
+          rating: recent.ratings[wnMetric] ?? null,
+          winrateLabel: t("win-rate"),
+        })
+      : [];
 
-  if (entries.length === 0) return null;
+  if (career.length === 0) return null;
+
+  const offerRecent = recentRows.length > 0 && data.recent !== null;
+  const showRecent = offerRecent && period === Period.Month;
+  const entries = showRecent ? recentRows : career;
+  const population = showRecent && data.recent ? data.recent : data;
+  const footnoteValues = {
+    players: numberFormat(locale).format(population.players),
+    region: REGION_LABEL[region],
+    battles: population.minBattles,
+  };
 
   return (
     // The separating rule belongs to this component rather than to the wrapper
@@ -95,7 +132,7 @@ export function PlayerPercentile({
     <div className="space-y-3 border-t border-fd-border p-4">
       <div className="grid gap-4 sm:grid-cols-2">
         {entries.map((entry) => (
-          <div key={entry.label} className="flex flex-col gap-1">
+          <div key={entry.kind} className="flex flex-col gap-1">
             <div className="text-xs uppercase tracking-wide text-fd-muted-foreground">
               {t("versus", { metric: entry.label, region: REGION_LABEL[region] })}
             </div>
@@ -115,14 +152,77 @@ export function PlayerPercentile({
         ))}
       </div>
       <p className="text-xs text-fd-muted-foreground">
-        {t("against", {
-          players: numberFormat(locale).format(data.players),
-          region: REGION_LABEL[region],
-          battles: data.minBattles,
-        })}
+        {offerRecent ? (
+          <Interpolate
+            template={t(
+              showRecent ? "against-recent" : "against-career",
+              footnoteValues,
+            )}
+            values={{
+              window: (
+                <PeriodInlineSelect
+                  period={period}
+                  periods={STANDING_PERIODS}
+                  label={(p) => t(p === Period.Overall ? "career" : "recent")}
+                  onChange={setPeriod}
+                  ariaLabel={t("window")}
+                  className="my-0 h-6! gap-1 px-1.5! text-xs! font-normal [&_svg]:size-3"
+                />
+              ),
+            }}
+          />
+        ) : (
+          t("against", footnoteValues)
+        )}
       </p>
     </div>
   );
+}
+
+enum StandingKind {
+  Winrate = "winrate",
+  Rating = "rating",
+}
+
+type Standing = {
+  kind: StandingKind;
+  label: string;
+  percentile: number;
+  color: string;
+};
+
+/** The win rate and the rating situated against one population's histograms,
+ * leaving out whatever the player has no value for. */
+function standings(
+  winrateBuckets: DistributionBucket[],
+  ratingBuckets: DistributionBucket[],
+  player: {
+    winrateLabel: string;
+    winrate: number | null;
+    metric: RatingMetric;
+    rating: number | null;
+  },
+): Standing[] {
+  const winrate = player.winrate;
+  const rating = player.rating;
+  return [
+    winrate == null
+      ? null
+      : {
+          kind: StandingKind.Winrate,
+          label: player.winrateLabel,
+          percentile: percentileOf(winrateBuckets, winrate),
+          color: RATING_COLOR_HEX[winrateColor(winrate)],
+        },
+    rating == null
+      ? null
+      : {
+          kind: StandingKind.Rating,
+          label: RATING_METRIC_LABEL[player.metric],
+          percentile: percentileOf(ratingBuckets, rating),
+          color: RATING_COLOR_HEX[RATING_COLOR_OF[player.metric](rating)],
+        },
+  ].filter((e) => e !== null && e.percentile !== null) as Standing[];
 }
 
 /**

@@ -47,6 +47,32 @@ const typeShare = z
     description: "What one vehicle class accounts for across the region.",
   });
 
+const recentDistribution = z
+  .object({
+    minBattles: z.number().meta({
+      description:
+        "Battles inside the last 30 days an account needs before it counts.",
+    }),
+    players: z.number().meta({ description: "Accounts that met the threshold." }),
+    winrate: z.array(bucket),
+    ratings: z
+      .object({
+        wn7: z.array(bucket),
+        wn8: z.array(bucket),
+        wnx: z.array(bucket),
+      })
+      .meta({
+        id: "RecentRatingDistributions",
+        description:
+          "One histogram per WN rating over the last 30 days. PR and WTR are account figures with no 30-day value, so they have none.",
+      }),
+  })
+  .meta({
+    id: "RecentDistribution",
+    description:
+      "The same histograms over the last 30 days, against the accounts that played at least `minBattles` battles in that window. A different population from the career one: the players still active, who are better than the average account, so the same value ranks lower here. All tiers.",
+  });
+
 /** Response of `GET /{region}/players/distribution`: how the region's tracked
  * players are spread across win rate and WNX, and how its battles are spread
  * across tiers and vehicle classes. */
@@ -72,6 +98,9 @@ export const PlayerDistributionResponse = z
         description:
           "One histogram per rating metric, so a reader's chosen metric is served rather than one being picked for them.",
       }),
+    recent: recentDistribution.nullable().meta({
+      description: "Null until the first pass that computes it.",
+    }),
     byTier: z.array(tierShare),
     byType: z.array(typeShare),
     computedAt: z.coerce.date().nullable().meta({
