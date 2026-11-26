@@ -78,6 +78,10 @@ export const env = createEnv({
     // the cron has nowhere to post and is skipped.
     DISCORD_TANK_CHANGES_CHANNEL_ID: z.string().optional(),
     DISCORD_MAP_CHANGES_CHANNEL_ID: z.string().optional(),
+    // Where the portal's calendar entries are announced, one card per new
+    // entry. Worker-only, optional: unset still publishes them as the server's
+    // scheduled events, and only the cards are skipped.
+    DISCORD_EVENTS_CHANNEL_ID: z.string().optional(),
     // The roles each announcement pings, one per channel, so a member opts into
     // the updates they want rather than every post pinging the whole server.
     // Optional: unset posts without a ping, never with `@here`.
@@ -85,6 +89,7 @@ export const env = createEnv({
     DISCORD_MOD_UPDATES_ROLE_ID: z.string().optional(),
     DISCORD_TANK_CHANGES_ROLE_ID: z.string().optional(),
     DISCORD_MAP_CHANGES_ROLE_ID: z.string().optional(),
+    DISCORD_EVENTS_ROLE_ID: z.string().optional(),
     // Private channel the suggested tank videos queue up in, for moderation.
     // Read by the web (which posts the card) and the bot (which handles the
     // buttons). Optional: unset turns submissions off entirely rather than
@@ -194,11 +199,13 @@ export const env = createEnv({
       process.env.DISCORD_MOD_CHANGELOG_CHANNEL_ID,
     DISCORD_TANK_CHANGES_CHANNEL_ID: process.env.DISCORD_TANK_CHANGES_CHANNEL_ID,
     DISCORD_MAP_CHANGES_CHANNEL_ID: process.env.DISCORD_MAP_CHANGES_CHANNEL_ID,
+    DISCORD_EVENTS_CHANNEL_ID: process.env.DISCORD_EVENTS_CHANNEL_ID,
     DISCORD_WEBSITE_UPDATES_ROLE_ID:
       process.env.DISCORD_WEBSITE_UPDATES_ROLE_ID,
     DISCORD_MOD_UPDATES_ROLE_ID: process.env.DISCORD_MOD_UPDATES_ROLE_ID,
     DISCORD_TANK_CHANGES_ROLE_ID: process.env.DISCORD_TANK_CHANGES_ROLE_ID,
     DISCORD_MAP_CHANGES_ROLE_ID: process.env.DISCORD_MAP_CHANGES_ROLE_ID,
+    DISCORD_EVENTS_ROLE_ID: process.env.DISCORD_EVENTS_ROLE_ID,
     DISCORD_ALERTS_CHANNEL_ID: process.env.DISCORD_ALERTS_CHANNEL_ID,
     DISCORD_VIDEO_CHANNEL_ID: process.env.DISCORD_VIDEO_CHANNEL_ID,
     DISCORD_REVIEW_CHANNEL_ID: process.env.DISCORD_REVIEW_CHANNEL_ID,
