@@ -234,6 +234,10 @@ const ROUTES = {
   //   the region rather than of the game, so it is regional all the way down.
   SERVERS: (region: Region) =>
     region === Region.EU ? "/servers" : pathcat("/:region/servers", { region }),
+  // - Calendar. The official calendar each portal publishes, which differs by
+  //   region (an update reaches NA a day before EU), so regional too.
+  CALENDAR: (region: Region) =>
+    region === Region.EU ? "/calendar" : pathcat("/:region/calendar", { region }),
 
   // - Tournaments. The landing shortens for EU like every other catalogue's
   //   does, Servers included, so the section has a URL without a region in it.

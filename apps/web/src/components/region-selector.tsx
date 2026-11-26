@@ -75,6 +75,9 @@ const MAPS_COMMUNITY_PATTERN = new RegExp(
 const SERVERS_PATTERN = new RegExp(
   `^/(?:(?:${REGIONS.join("|")})/)?servers(?:/|$)`,
 );
+const CALENDAR_PATTERN = new RegExp(
+  `^/(?:(?:${REGIONS.join("|")})/)?calendar(?:/|$)`,
+);
 const TOURNAMENTS_PATTERN = new RegExp(
   `^/(?:(?:${REGIONS.join("|")})/)?tournaments(?:/|$)`,
 );
@@ -125,6 +128,7 @@ function targetForRegion(
     return `${mapsTabHref(ROUTES.MAPS(region), tab)}${search}`;
   }
   if (SERVERS_PATTERN.test(pathname)) return ROUTES.SERVERS(region);
+  if (CALENDAR_PATTERN.test(pathname)) return ROUTES.CALENDAR(region);
   if (TOURNAMENTS_PATTERN.test(pathname)) return ROUTES.TOURNAMENTS(region);
   if (BATTLES_PATTERN.test(pathname)) return ROUTES.BATTLES(region);
   return ROUTES.HOME(region);

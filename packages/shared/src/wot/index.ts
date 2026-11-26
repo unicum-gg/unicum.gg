@@ -51,3 +51,4 @@ export * from "./onslaught-aggregates";
 export * from "./onslaught-series";
 export * from "./maneuvers-editions";
 export * from "./battle-medals.generated";
+export * from "./portal-calendar";

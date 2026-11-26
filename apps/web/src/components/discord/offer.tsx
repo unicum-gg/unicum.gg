@@ -12,6 +12,7 @@ import { useHydrated } from "@/hooks/use-hydrated";
 import { usePathname } from "@/hooks/use-pathname";
 import { useTranslation } from "@/hooks/use-translation";
 import { localizePath } from "@/lib/translations";
+import { formatRelative, formatWhen } from "@/components/calendar/format";
 import { DiscordMessagePreview } from "./message-preview";
 import { DiscordOfferKind } from "./offer-kind";
 
@@ -25,6 +26,10 @@ import { DiscordOfferKind } from "./offer-kind";
  * its numbers are invented, so it is never captioned as this vehicle's
  * changes. On a player it is the real answer, the `/player` reply for the
  * player being read, built from the figures the page already shows.
+ *
+ * On the calendar, the picture is the card the events channel would post for
+ * the entry most worth knowing about (what is on now, or else what is next),
+ * so the reader sees the real announcement rather than a description of one.
  *
  * Three asks. On a vehicle: hear about its next buff or nerf. On someone
  * else's profile: the same lookups, in Discord. On the reader's own profile
@@ -40,6 +45,25 @@ export type DiscordOfferFigures = {
   ratingLabel: string;
   total: { battles: number; winRate: number | null; rating: number | null };
   d30: { battles: number; winRate: number | null; rating: number | null } | null;
+};
+
+/** The calendar entry the events preview is drawn from. */
+export type DiscordOfferEvent = {
+  title: string;
+  category: string;
+  /** The widget's colour token, which is the card's side colour. */
+  color: string;
+  start: Date;
+  end: Date;
+  banner: string | null;
+};
+
+/** The same accents the bot gives its event cards. */
+const EVENT_COLOR: Record<string, string> = {
+  green: "#22c55e",
+  azure: "#0ea5e9",
+  yellow: "#f5b82e",
+  red: "#ef4444",
 };
 
 const int = (n: number | null) =>
@@ -65,6 +89,7 @@ export function DiscordOffer({
   name,
   region,
   figures,
+  event,
 }: {
   kind: DiscordOfferKind;
   /** The vehicle's name, or the player's nickname. */
@@ -73,14 +98,37 @@ export function DiscordOffer({
   /** On a player page: their real figures, so the preview answers for the
    * player being read rather than for an invented one. */
   figures?: DiscordOfferFigures;
+  /** On the calendar: the entry the preview announces. */
+  event?: DiscordOfferEvent | null;
 }) {
   const { t, locale } = useTranslation("components/discord/offer");
   const hydrated = useHydrated();
   const back = localizePath(usePathname(), locale);
   const tag = `${name} [${region.toUpperCase()}]`;
 
+  const now = new Date();
   const preview =
-    kind === DiscordOfferKind.Tank ? (
+    kind === DiscordOfferKind.Events ? (
+      event ? (
+        <DiscordMessagePreview
+          invocation="@Events"
+          color={EVENT_COLOR[event.color] ?? EVENT_COLOR.yellow}
+          title={event.title}
+          description={`${event.category.toUpperCase()} · ${region.toUpperCase()}`}
+          fields={[
+            {
+              name: t("preview.starts"),
+              value: `${formatWhen(event.start, "local", locale)} (${formatRelative(event.start.getTime() - now.getTime(), locale)})`,
+            },
+            {
+              name: t("preview.ends"),
+              value: `${formatWhen(event.end, "local", locale)} (${formatRelative(event.end.getTime() - now.getTime(), locale)})`,
+            },
+          ]}
+          image={event.banner}
+        />
+      ) : null
+    ) : kind === DiscordOfferKind.Tank ? (
       <DiscordMessagePreview
         color="#22c55e"
         title={t("preview.tank-title")}
@@ -150,9 +198,13 @@ export function DiscordOffer({
               {t("join")}
             </a>
           )}
-          <Link href={ROUTES.BOT} className={buttonVariants({ color: "secondary" })}>
-            {t("add-bot")}
-          </Link>
+          {/* The bot answers lookups; it has nothing to do with the calendar,
+              which reaches other servers by following the channel. */}
+          {kind === DiscordOfferKind.Events ? null : (
+            <Link href={ROUTES.BOT} className={buttonVariants({ color: "secondary" })}>
+              {t("add-bot")}
+            </Link>
+          )}
         </CtaCard>
       </div>
     </PanelContent>

@@ -14,6 +14,8 @@ export function DiscordMessagePreview({
   description,
   blockTitle,
   block,
+  fields,
+  image,
   footer,
 }: {
   /** "Koala used /player", above the reply, for a slash command. */
@@ -25,7 +27,11 @@ export function DiscordMessagePreview({
   /** A field name above the block, as a vehicle heads its changes. */
   blockTitle?: ReactNode;
   /** A `diff` or table code block, already laid out line by line. */
-  block: { sign?: "+" | "-" | " "; text: string }[];
+  block?: { sign?: "+" | "-" | " "; text: string }[];
+  /** Inline embed fields, side by side, as an event card shows its dates. */
+  fields?: { name: ReactNode; value: ReactNode }[];
+  /** The embed's image, under everything else. */
+  image?: string | null;
   footer?: ReactNode;
 }) {
   return (
@@ -55,23 +61,39 @@ export function DiscordMessagePreview({
             {blockTitle ? (
               <p className="mt-2 text-sm font-semibold">{blockTitle}</p>
             ) : null}
-            <pre className="mt-1 overflow-hidden rounded border border-fd-border bg-fd-background px-2 py-1.5 font-mono text-[13px] leading-snug whitespace-pre">
-              {block.map((line, i) => (
-                <span
-                  key={i}
-                  className={
-                    line.sign === "+"
-                      ? "block text-green-600 dark:text-green-400"
-                      : line.sign === "-"
-                        ? "block text-red-600 dark:text-red-400"
-                        : "block"
-                  }
-                >
-                  {line.sign ? `${line.sign} ` : ""}
-                  {line.text}
-                </span>
-              ))}
-            </pre>
+            {fields ? (
+              <div className="mt-2 flex flex-wrap gap-x-8 gap-y-2 text-sm">
+                {fields.map((field, i) => (
+                  <div key={i}>
+                    <p className="font-semibold">{field.name}</p>
+                    <p className="text-fd-muted-foreground">{field.value}</p>
+                  </div>
+                ))}
+              </div>
+            ) : null}
+            {block ? (
+              <pre className="mt-1 overflow-hidden rounded border border-fd-border bg-fd-background px-2 py-1.5 font-mono text-[13px] leading-snug whitespace-pre">
+                {block.map((line, i) => (
+                  <span
+                    key={i}
+                    className={
+                      line.sign === "+"
+                        ? "block text-green-600 dark:text-green-400"
+                        : line.sign === "-"
+                          ? "block text-red-600 dark:text-red-400"
+                          : "block"
+                    }
+                  >
+                    {line.sign ? `${line.sign} ` : ""}
+                    {line.text}
+                  </span>
+                ))}
+              </pre>
+            ) : null}
+            {image ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={image} alt="" className="mt-3 w-full max-w-md rounded" />
+            ) : null}
             {footer ? <p className="mt-2 text-xs text-fd-muted-foreground">{footer}</p> : null}
           </div>
         </div>

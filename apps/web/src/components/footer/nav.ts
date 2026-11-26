@@ -62,6 +62,7 @@ export function footerColumns(
         ...clans.links.slice(1), // Stronghold, Advances
         ...players.links.slice(1), // 3 Marks, Onslaught, Rampage
         ...singlePage, // Server population, Tournaments
+        { label: t("links.calendar"), href: ROUTES.CALENDAR(region) },
       ],
     },
     { title: t("columns.tanks"), links: tanks.links },

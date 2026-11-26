@@ -7,4 +7,5 @@ export enum DiscordOfferKind {
   Tank = "tank",
   Player = "player",
   OwnProfile = "own-profile",
+  Events = "events",
 }

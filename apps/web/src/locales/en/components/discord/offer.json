@@ -14,10 +14,16 @@
   "preview": {
     "invocation": "Someone used /player {name}",
     "tank-description": "Highest tier first.",
-    "tank-title": "Update 2.4.2 · 50 vehicles changed"
+    "tank-title": "Update 2.4.2 · 50 vehicles changed",
+    "starts": "Starts",
+    "ends": "Ends"
   },
   "tank": {
     "description": "Every update and every Common Test is posted to #tank-changes the day it ships, {tank} included. Take the Tank changes role to be pinged.",
     "heading": "Hear about the next {tank} buff or nerf in Discord"
+  },
+  "events": {
+    "heading": "Get every event in Discord",
+    "description": "Every official event, sale and update is posted to #events and added to the server’s Events tab, so Discord reminds you when it starts. Take the Events role to be pinged."
   }
 }

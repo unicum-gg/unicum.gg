@@ -3,6 +3,7 @@ import type {
   BreadcrumbList,
   DefinedTerm,
   DefinedTermSet,
+  Event,
   FAQPage,
   ItemList,
   Organization,
@@ -407,5 +408,45 @@ export function tankVideoSchema(args: {
       startOffset: clip.startSeconds,
       url: clip.url,
     })),
+  };
+}
+
+/**
+ * One entry of the official calendar as an online `Event`.
+ *
+ * Only for the entries that are events: Google's guidelines forbid event markup
+ * on sales and promotions, and the penalty is a manual action that disables
+ * every structured data type across the site, so the calendar's Specials (sales),
+ * Updates (a version shipping) and Battle Pass seasons (a product) are never
+ * passed here. The caller decides that from the entry's kind.
+ *
+ * Wargaming runs it, in the game, so the location is the official article as a
+ * `VirtualLocation` and the organizer is Wargaming rather than us.
+ */
+export function calendarEventSchema(args: {
+  name: string;
+  start: Date;
+  end: Date;
+  link: string;
+  image: string | null;
+  description: string;
+}): WithContext<Event> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    name: args.name,
+    description: args.description,
+    startDate: args.start.toISOString(),
+    endDate: args.end.toISOString(),
+    eventStatus: "https://schema.org/EventScheduled",
+    eventAttendanceMode: "https://schema.org/OnlineEventAttendanceMode",
+    location: { "@type": "VirtualLocation", url: args.link },
+    ...(args.image ? { image: [args.image] } : {}),
+    url: args.link,
+    organizer: {
+      "@type": "Organization",
+      name: "Wargaming",
+      url: "https://wargaming.com",
+    },
   };
 }

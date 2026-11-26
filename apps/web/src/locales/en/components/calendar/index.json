@@ -1,0 +1,7 @@
+{
+  "title": "World of Tanks {calendar}",
+  "calendar": "events calendar",
+  "intro": "Every official {label} event, sale, Battle Pass season and update, in your own timezone. Wargaming only shows the current week, so we keep a record of every entry once it is gone.",
+  "recorded-since": "Recorded every hour since {date}.",
+  "event-description": "An official World of Tanks {label} event, played in the game."
+}
