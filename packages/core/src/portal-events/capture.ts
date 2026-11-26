@@ -4,6 +4,7 @@ import { and, eq, gt, inArray, isNull, lt, ne, sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
 import { wg } from "@unicum.gg/core/wargaming/client";
 import { PORTAL_EVENTS_LANGUAGE, PORTAL_EVENTS_LANGUAGES } from "./languages";
+import { paced, readPastChallenge } from "./paced";
 
 /**
  * The article a widget entry points at, without its language segment, so the
@@ -22,7 +23,8 @@ const entryKey = (path: string, start: Date) => `${path}@${start.getTime()}`;
  * The widget's titles in every other language the region publishes, keyed like
  * the English entries. A language that fails is skipped for this tick rather
  * than failing the capture: the English entry is what the calendar needs, the
- * translations fill in on the next hour.
+ * translations fill in on the next hour. Read one at a time, a few seconds
+ * apart, which makes the capture take about a minute a region.
  */
 async function readTranslations(
   region: Region,
@@ -31,21 +33,24 @@ async function readTranslations(
   const languages = PORTAL_EVENTS_LANGUAGES[region].filter(
     (language) => language !== PORTAL_EVENTS_LANGUAGE,
   );
-  await Promise.all(
-    languages.map(async (language) => {
-      let entries: PortalCalendarEvent[];
-      try {
-        entries = await wg.region(region).portal.events.calendar({ language });
-      } catch (err) {
-        console.warn(`[portal-events] ${region}/${language} unreadable:`, err);
-        return;
-      }
-      for (const entry of entries) {
-        const key = entryKey(articlePath(entry.link, language), entry.start);
-        titles.set(key, { ...titles.get(key), [language]: entry.title });
-      }
-    }),
-  );
+  // One at a time, spaced: a burst of every language at once is what the
+  // portal's bot shield answers with its interstitial (see `./paced`).
+  for (const language of languages) {
+    await paced();
+    let entries: PortalCalendarEvent[];
+    try {
+      entries = await readPastChallenge(() =>
+        wg.region(region).portal.events.calendar({ language }),
+      );
+    } catch (err) {
+      console.warn(`[portal-events] ${region}/${language} unreadable: ${String(err)}`);
+      continue;
+    }
+    for (const entry of entries) {
+      const key = entryKey(articlePath(entry.link, language), entry.start);
+      titles.set(key, { ...titles.get(key), [language]: entry.title });
+    }
+  }
   return titles;
 }
 
@@ -61,9 +66,10 @@ async function fillBanners(region: Region, paths: string[]): Promise<void> {
     .where(and(inArray(table.path, paths), isNull(table.banner)));
   for (const row of missing) {
     try {
-      const banner = await wg
-        .region(region)
-        .portal.events.articleImage({ link: row.link });
+      await paced();
+      const banner = await readPastChallenge(() =>
+        wg.region(region).portal.events.articleImage({ link: row.link }),
+      );
       await db
         .update(table)
         .set({ banner: banner ?? "" })
@@ -84,9 +90,9 @@ async function fillBanners(region: Region, paths: string[]): Promise<void> {
 export async function capturePortalEvents(region: Region): Promise<number> {
   const table = portalEventsByRegion[region];
   const seenAt = new Date();
-  const entries = await wg
-    .region(region)
-    .portal.events.calendar({ language: PORTAL_EVENTS_LANGUAGE });
+  const entries = await readPastChallenge(() =>
+    wg.region(region).portal.events.calendar({ language: PORTAL_EVENTS_LANGUAGE }),
+  );
   if (entries.length === 0) return 0;
   const translations = await readTranslations(region);
 

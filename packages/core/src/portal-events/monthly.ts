@@ -4,6 +4,7 @@ import { and, eq, isNull, lt, sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
 import { wg } from "@unicum.gg/core/wargaming/client";
 import { PORTAL_EVENTS_LANGUAGE, PORTAL_EVENTS_LANGUAGES } from "./languages";
+import { paced, readPastChallenge } from "./paced";
 
 /** The first month published with the calendar widget. */
 export const FIRST_MONTHLY_PERIOD = { year: 2025, month: 3 } as const;
@@ -46,23 +47,25 @@ async function readMonthlyTranslations(
   const languages = PORTAL_EVENTS_LANGUAGES[region].filter(
     (language) => language !== PORTAL_EVENTS_LANGUAGE,
   );
-  await Promise.all(
-    languages.map(async (language) => {
-      let entries: PortalMonthlyEvent[] | null;
-      try {
-        entries = await wg.region(region).portal.events.monthly({ year, month, language });
-      } catch (err) {
-        console.warn(`[portal-monthly] ${region}/${language} ${period(year, month)}:`, err);
-        return;
-      }
-      for (const entry of entries ?? []) {
-        const en = english[entry.position];
-        if (!en || en.startDate !== entry.startDate || en.endDate !== entry.endDate) continue;
-        out[entry.position]!.titles[language] = entry.title;
-        if (entry.description) out[entry.position]!.descriptions[language] = entry.description;
-      }
-    }),
-  );
+  // One at a time, spaced, for the reason `./paced` gives.
+  for (const language of languages) {
+    await paced();
+    let entries: PortalMonthlyEvent[] | null;
+    try {
+      entries = await readPastChallenge(() =>
+        wg.region(region).portal.events.monthly({ year, month, language }),
+      );
+    } catch (err) {
+      console.warn(`[portal-monthly] ${region}/${language} ${period(year, month)}: ${String(err)}`);
+      continue;
+    }
+    for (const entry of entries ?? []) {
+      const en = english[entry.position];
+      if (!en || en.startDate !== entry.startDate || en.endDate !== entry.endDate) continue;
+      out[entry.position]!.titles[language] = entry.title;
+      if (entry.description) out[entry.position]!.descriptions[language] = entry.description;
+    }
+  }
   return out;
 }
 
@@ -77,9 +80,9 @@ export async function captureMonthlyEvents(
 ): Promise<number | null> {
   const table = portalMonthlyEventsByRegion[region];
   const seenAt = new Date();
-  const english = await wg
-    .region(region)
-    .portal.events.monthly({ year, month, language: PORTAL_EVENTS_LANGUAGE });
+  const english = await readPastChallenge(() =>
+    wg.region(region).portal.events.monthly({ year, month, language: PORTAL_EVENTS_LANGUAGE }),
+  );
   if (english === null) return null;
   if (english.length === 0) return 0;
   const translations = await readMonthlyTranslations(region, year, month, english);

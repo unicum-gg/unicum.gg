@@ -91,6 +91,28 @@ function parseEvent(raw: RawCalendarEvent): PortalCalendarEvent | null {
 }
 
 /**
+ * The portal's bot shield: a ~27 KB "Loading site please wait..." interstitial
+ * that runs a script check before handing over the page, served intermittently
+ * to requests it is unsure of (a burst of them from one address, measured from
+ * the worker on 2026-11-26: the same tick read some languages and was handed
+ * this for others). Not a change to the page, so it is its own error: the
+ * caller waits and asks again rather than reporting the widget gone.
+ */
+export class PortalChallengeError extends Error {
+  constructor(region: Region, url: URL) {
+    super(`The ${region} portal answered ${url.pathname} with its bot check`);
+    this.name = "PortalChallengeError";
+  }
+}
+
+const CHALLENGE = /<title[^>]*>\s*Loading site please wait/i;
+
+/** Throws when the page is the bot shield rather than the page asked for. */
+function assertNotChallenge(html: string, region: Region, url: URL): void {
+  if (CHALLENGE.test(html)) throw new PortalChallengeError(region, url);
+}
+
+/**
  * Thrown when the home page answered but no events widget could be read from
  * it. Carries what the page was instead (its title and size), since a page
  * without the widget is either Wargaming redesigning the portal or a challenge
@@ -131,6 +153,7 @@ export class PortalEventsResource {
       region: this.region,
       limit: RateLimit.Portal,
     });
+    assertNotChallenge(html, this.region, url);
     const marker = /\bevents:\s*\[/.exec(html);
     const literal = marker
       ? readArrayLiteral(html, marker.index + marker[0].length - 1)
@@ -145,10 +168,12 @@ export class PortalEventsResource {
    * the articles measured), where the widget only carries a 200x88 thumbnail.
    */
   async articleImage({ link }: { link: string }): Promise<string | null> {
-    const html = await this.t.getText(new URL(link), {
+    const url = new URL(link);
+    const html = await this.t.getText(url, {
       region: this.region,
       limit: RateLimit.Portal,
     });
+    assertNotChallenge(html, this.region, url);
     const tag = /<meta[^>]+property="og:image(?::url)?"[^>]*>/i.exec(html);
     const content = tag && /content="([^"]+)"/i.exec(tag[0]);
     return content ? absolute(content[1]) : null;
@@ -158,7 +183,8 @@ export class PortalEventsResource {
    * A month's calendar from its "WoT Monthly" article (`month` is 1-12). Null
    * when the month has no article (not published yet, or never: a few months
    * were published under another address), an empty list when the article
-   * predates the widget (before March 2025).
+   * predates the widget (before March 2025). Throws {@link PortalChallengeError}
+   * when handed the bot shield instead, which is not an empty month.
    */
   async monthly({
     year,
@@ -176,6 +202,7 @@ export class PortalEventsResource {
         region: this.region,
         limit: RateLimit.Portal,
       });
+      assertNotChallenge(html, this.region, url);
       return parseMonthlyCalendar(html, origin);
     } catch (err) {
       if (err instanceof WargamingHttpError && err.status === 404) return null;

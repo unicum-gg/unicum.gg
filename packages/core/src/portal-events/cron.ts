@@ -1,4 +1,4 @@
-import { PortalCalendarMissingError, REGIONS } from "@unicum.gg/wargaming";
+import { PortalCalendarMissingError, PortalChallengeError, REGIONS } from "@unicum.gg/wargaming";
 import { scheduleCron } from "@unicum.gg/core/cron/scheduler";
 import { createStallAlert } from "@unicum.gg/core/cron/stall-alert";
 import { capturePortalEvents } from "./capture";
@@ -35,6 +35,12 @@ export async function captureAllPortalEvents(): Promise<Record<string, number>> 
         );
       } catch (err) {
         counts[region] = 0;
+        // The bot shield twice in a row: a tick lost, not a page changed, so
+        // it is logged and never announced as the widget going away.
+        if (err instanceof PortalChallengeError) {
+          console.warn(`[portal-events-cron] ${err.message}, skipped this tick`);
+          return;
+        }
         if (err instanceof PortalCalendarMissingError) {
           // The alert is said once; the log says what the page was every time.
           console.warn(`[portal-events-cron] ${err.message}`);
