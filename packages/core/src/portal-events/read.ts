@@ -6,6 +6,7 @@ import {
 import type { Region } from "@unicum.gg/wargaming";
 import { asc, isNull, min } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
+import { articleSlug } from "./article-slug";
 
 export enum PortalCalendarSource {
   /** The home page widget, dated to the minute. */
@@ -47,20 +48,6 @@ export type PortalCalendar = {
 const DAY_MS = 86_400_000;
 const utcDay = (date: string) => new Date(`${date}T00:00:00Z`);
 
-/** A portal path's language segment: `/en/`, `/pt-br/`, `/zh-tw/`. */
-const LANGUAGE_SEGMENT = /^\/[a-z]{2}(?:-[a-z]{2})?(?=\/)/;
-
-/** The article path a monthly entry leads to, without its language segment
- * (monthly links are written with and without one), to match the widget's. */
-function monthlyPath(row: PortalMonthlyEventRow): string | null {
-  if (!row.link) return null;
-  try {
-    return new URL(row.link).pathname.replace(LANGUAGE_SEGMENT, "");
-  } catch {
-    return null;
-  }
-}
-
 /**
  * An entry the editors dated so far before its own month that it can only be
  * a typo ("Random Events" in November 2025, dated 24 November 2022). Kept in
@@ -91,7 +78,7 @@ function distinctMonthly(rows: PortalMonthlyEventRow[]): PortalMonthlyEventRow[]
  * Every entry the region's calendar has held, both sources, oldest first.
  * Whole rather than windowed: both publish a handful of entries a week.
  *
- * An entry both sources carry (same article, overlapping dates) is drawn once:
+ * An entry both sources carry (same article slug, overlapping dates) is drawn once:
  * the widget's, which knows the time of day, with the monthly article's text.
  */
 export async function readPortalCalendar(region: Region): Promise<PortalCalendar> {
@@ -129,12 +116,12 @@ export async function readPortalCalendar(region: Region): Promise<PortalCalendar
   for (const row of distinctMonthly(monthlyRows)) {
     const start = utcDay(row.startDate);
     const end = new Date(utcDay(row.endDate).getTime() + DAY_MS);
-    const path = monthlyPath(row);
-    const twin = path
+    const slug = articleSlug(row.link);
+    const twin = slug
       ? entries.find(
           (e) =>
             e.source === PortalCalendarSource.Widget &&
-            e.id.startsWith(`${path}@`) &&
+            articleSlug(e.link) === slug &&
             e.start < end &&
             e.end > start,
         )

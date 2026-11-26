@@ -19,6 +19,7 @@ import {
   LATE_START_MS,
 } from "./discord";
 import { bannerImage, EVENT_ACTIVE } from "./publish";
+import { articleSlug } from "./article-slug";
 
 /**
  * The monthly articles' entries as Discord scheduled events, all-day.
@@ -41,6 +42,10 @@ const PUBLISHED = new Set([
 const DAY_MS = 86_400_000;
 const utcDay = (date: string) => new Date(`${date}T00:00:00Z`);
 
+/** A monthly entry the widget turned out to carry too, whose event was made
+ * before the widget's copy appeared: removed, the widget's event stays. */
+type Twin = { region: Region; row: PortalMonthlyEventRow };
+
 type MonthlyGroup = {
   /** Start, end and title: what makes two regions' rows one entry. */
   key: string;
@@ -50,28 +55,19 @@ type MonthlyGroup = {
   rows: { region: Region; row: PortalMonthlyEventRow }[];
 };
 
-/** An article path without its language segment, to match the widget's. */
-const articlePath = (link: string | null) => {
-  if (!link) return null;
-  try {
-    return new URL(link).pathname.replace(/^\/[a-z]{2}(?:-[a-z]{2})?(?=\/)/, "");
-  } catch {
-    return null;
-  }
-};
-
 /** The entries to publish: open, of a published kind, not already a widget
  * entry, one per entry across regions and months. */
-async function readMonthlyGroups(now: Date): Promise<MonthlyGroup[]> {
+async function readMonthlyGroups(now: Date): Promise<{ groups: MonthlyGroup[]; twins: Twin[] }> {
   const today = now.toISOString().slice(0, 10);
   const groups = new Map<string, MonthlyGroup>();
+  const twins: Twin[] = [];
   for (const region of REGIONS) {
     const table = portalMonthlyEventsByRegion[region];
     const widget = portalEventsByRegion[region];
     const [rows, widgetRows] = await Promise.all([
       db.select().from(table).where(and(isNull(table.removedAt), gte(table.endDate, today))),
       db
-        .select({ path: widget.path, startAt: widget.startAt, endAt: widget.endAt })
+        .select({ link: widget.link, startAt: widget.startAt, endAt: widget.endAt })
         .from(widget)
         .where(isNull(widget.supersededAt)),
     ]);
@@ -79,9 +75,13 @@ async function readMonthlyGroups(now: Date): Promise<MonthlyGroup[]> {
       if (!PUBLISHED.has(calendarKind(row.icon))) continue;
       const start = utcDay(row.startDate);
       const end = new Date(utcDay(row.endDate).getTime() + DAY_MS);
-      const path = articlePath(row.link);
+      const slug = articleSlug(row.link);
       // The widget publishes this one already, with its times.
-      if (path && widgetRows.some((w) => w.path === path && w.startAt < end && w.endAt > start)) {
+      if (
+        slug &&
+        widgetRows.some((w) => articleSlug(w.link) === slug && w.startAt < end && w.endAt > start)
+      ) {
+        if (row.discordEventId) twins.push({ region, row });
         continue;
       }
       const key = `${row.startDate}|${row.title}`;
@@ -96,7 +96,7 @@ async function readMonthlyGroups(now: Date): Promise<MonthlyGroup[]> {
       if (row.period > group.lead.period) group.lead = row;
     }
   }
-  return [...groups.values()];
+  return { groups: [...groups.values()], twins };
 }
 
 const regionsLabel = (regions: Region[]) => regions.map((r) => r.toUpperCase()).join(" · ");
@@ -176,7 +176,33 @@ export async function publishMonthlyEvents({ dry = false }: { dry?: boolean } = 
   const log: string[] = [];
   const guild = env.DISCORD_GUILD_ID;
   const now = new Date();
-  for (const group of await readMonthlyGroups(now)) {
+  const { groups, twins } = await readMonthlyGroups(now);
+  for (const id of new Set(twins.map((t) => t.row.discordEventId!))) {
+    if (dry) {
+      log.push(`delete monthly event ${id}: the widget carries it`);
+      continue;
+    }
+    // A 404 means it is already gone, which is the same outcome.
+    await botFetch(`/guilds/${guild}/scheduled-events/${id}`, { method: "DELETE" });
+    // Every row that pointed at it lets go, the twins' and those of regions
+    // whose widget does not carry the entry (they get an event of their own).
+    for (const region of REGIONS) {
+      const table = portalMonthlyEventsByRegion[region];
+      await db
+        .update(table)
+        .set({ discordEventId: null, discordSyncedHash: null })
+        .where(eq(table.discordEventId, id));
+    }
+    log.push(`deleted monthly event ${id}: the widget carries it`);
+  }
+  const deleted = new Set(twins.map((t) => t.row.discordEventId!));
+  for (const group of groups) {
+    for (const { row } of group.rows) {
+      if (row.discordEventId && deleted.has(row.discordEventId)) {
+        row.discordEventId = null;
+        row.discordSyncedHash = null;
+      }
+    }
     try {
       const existing = group.rows.find(({ row }) => row.discordEventId)?.row.discordEventId ?? null;
       const hash = eventHash(group, now);
