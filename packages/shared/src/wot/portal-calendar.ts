@@ -1,18 +1,29 @@
 /**
- * What a calendar entry is, read from the portal widget's icon token rather
- * than its category label: the label is localized (and was captured in English
- * only), while the icon is the one field Wargaming writes the same everywhere.
+ * What a calendar entry is, read from its icon token rather than its category
+ * label: the label is localized, and the monthly articles word it loosely
+ * ("Livestream", "Live Stream", "Stream"), while the icon is the one field
+ * Wargaming writes the same everywhere.
  */
 export enum CalendarKind {
   Event = "event",
   BattlePass = "battle-pass",
   Specials = "specials",
   Update = "update",
+  /** Tournaments and clan events (Maneuvers, Onslaught Legends), from the
+   * monthly articles. */
+  Competitive = "competitive",
+  /** Broadcasts (the WCI finals, Clan Showdown), from the monthly articles. */
+  Livestream = "livestream",
   Other = "other",
 }
 
 const KIND_BY_ICON: Record<string, CalendarKind> = {
+  // The home widget draws an event as `calendar-days`, the monthly articles
+  // as `calendar`.
   "calendar-days": CalendarKind.Event,
+  calendar: CalendarKind.Event,
+  swords: CalendarKind.Competitive,
+  "signal-stream": CalendarKind.Livestream,
   "battle-pass": CalendarKind.BattlePass,
   star: CalendarKind.Specials,
   "arrow-down-to-line": CalendarKind.Update,
@@ -39,8 +50,8 @@ const PORTAL_ALIASES: Record<string, readonly string[]> = {
   zh: ["zh-sg", "zh-cn", "zh-tw"],
 };
 
-/** The entry's title in the reader's language, English when the portal did
- * not publish it in theirs. */
+/** The entry's title (or text) in the reader's language, English when the
+ * portal did not publish it in theirs. */
 export function calendarTitle(
   titles: Record<string, string>,
   locale: string,
@@ -49,5 +60,5 @@ export function calendarTitle(
   for (const code of PORTAL_ALIASES[locale] ?? [locale]) {
     if (titles[code]) return titles[code];
   }
-  return fallback;
+  return titles.en ?? fallback;
 }

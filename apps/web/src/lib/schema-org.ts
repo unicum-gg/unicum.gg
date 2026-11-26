@@ -414,9 +414,10 @@ export function tankVideoSchema(args: {
 /**
  * One entry of the official calendar as an online `Event`.
  *
- * Only for the entries that are events: Google's guidelines forbid event markup
- * on sales and promotions, and the penalty is a manual action that disables
- * every structured data type across the site, so the calendar's Specials (sales),
+ * Only for the entries that are events (in-game events, tournaments,
+ * broadcasts): Google's guidelines forbid event markup on sales and
+ * promotions, and the penalty is a manual action that disables every
+ * structured data type across the site, so the calendar's Specials (sales),
  * Updates (a version shipping) and Battle Pass seasons (a product) are never
  * passed here. The caller decides that from the entry's kind.
  *
@@ -426,7 +427,10 @@ export function tankVideoSchema(args: {
 export function calendarEventSchema(args: {
   name: string;
   start: Date;
+  /** Exclusive, like the calendar's own entries. */
   end: Date;
+  /** Dated by the day: published as dates, the last day inclusive. */
+  allDay: boolean;
   link: string;
   image: string | null;
   description: string;
@@ -436,8 +440,10 @@ export function calendarEventSchema(args: {
     "@type": "Event",
     name: args.name,
     description: args.description,
-    startDate: args.start.toISOString(),
-    endDate: args.end.toISOString(),
+    startDate: args.allDay ? args.start.toISOString().slice(0, 10) : args.start.toISOString(),
+    endDate: args.allDay
+      ? new Date(args.end.getTime() - 1).toISOString().slice(0, 10)
+      : args.end.toISOString(),
     eventStatus: "https://schema.org/EventScheduled",
     eventAttendanceMode: "https://schema.org/OnlineEventAttendanceMode",
     location: { "@type": "VirtualLocation", url: args.link },

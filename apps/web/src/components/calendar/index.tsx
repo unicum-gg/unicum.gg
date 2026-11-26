@@ -20,6 +20,14 @@ import { CalendarBoard } from "./board";
 
 type Calendar = z.infer<typeof CalendarResponse>;
 
+/** The kinds that are events in Google's sense: something one attends, here
+ * by playing or watching. A Specials entry is a sale and never qualifies. */
+const MARKED_UP = new Set([
+  CalendarKind.Event,
+  CalendarKind.Competitive,
+  CalendarKind.Livestream,
+]);
+
 /**
  * The entry the Discord offer's preview announces: what is on now and ends
  * first, else the next to start, else the latest. Updates are moments, so they
@@ -64,12 +72,13 @@ export async function CalendarView({ region, locale }: { region: Region; locale:
   })) as Calendar;
   const label = REGION_LABEL[region];
   const renderedAt = new Date();
-  // Marked up: the in-game events still to come or running. Never the sales,
-  // updates or Battle Pass seasons, which Google does not accept as events
-  // (see `calendarEventSchema`), and never the past, which no search result
-  // would show.
+  // Marked up: the events, tournaments and broadcasts still to come or
+  // running, with a page to send the reader to. Never the sales, updates or
+  // Battle Pass seasons, which Google does not accept as events (see
+  // `calendarEventSchema`), and never the past, which no search result shows.
   const events = calendar.entries.filter(
-    (entry) => calendarKind(entry.icon) === CalendarKind.Event && entry.end > renderedAt,
+    (entry): entry is typeof entry & { link: string } =>
+      MARKED_UP.has(calendarKind(entry.icon)) && entry.end > renderedAt && entry.link !== null,
   );
 
   return (
@@ -81,6 +90,7 @@ export async function CalendarView({ region, locale }: { region: Region; locale:
             name: calendarTitle(entry.titles, locale, entry.title),
             start: entry.start,
             end: entry.end,
+            allDay: entry.allDay,
             link: entry.link,
             image: entry.banner ?? entry.thumbnail,
             description: t("event-description", { label }),

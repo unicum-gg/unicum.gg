@@ -1,6 +1,8 @@
 {
   "kind": {
     "event": "Event",
+    "competitive": "Competitive",
+    "livestream": "Livestream",
     "battle-pass": "Battle Pass",
     "specials": "Specials",
     "update": "Update",
@@ -14,6 +16,6 @@
     "lands": "Lands {when}",
     "landed": "Landed {when}"
   },
-  "read-the-news": "Read the news",
+  "read-the-news": "Learn more",
   "remind-me": "Get a reminder on Discord"
 }

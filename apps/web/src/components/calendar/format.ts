@@ -32,6 +32,11 @@ export const formatWhen = (at: Date, zone: DisplayZone, locale: string) =>
     minute: "2-digit",
   }).format(at);
 
+/** "Mon, 23 Nov", a day with no clock time. Always UTC: an all-day entry is
+ * a calendar date, which moving into the reader's zone would shift by a day. */
+export const formatDay = (at: Date, locale: string) =>
+  formatter(locale, "UTC", { weekday: "short", day: "numeric", month: "short" }).format(at);
+
 /** "November 2026", a month heading. */
 export const formatMonth = (at: Date, zone: DisplayZone, locale: string) =>
   formatter(locale, zone, { month: "long", year: "numeric" }).format(at);

@@ -47,6 +47,14 @@ function gridDays(
  * spans otherwise (the end is exclusive, so a 10:00 end is not a day of its own
  * unless it falls after midnight). */
 function coversDay(entry: CalendarEntry, key: string, zone: DisplayZone): boolean {
+  // An all-day entry is a calendar date, so it is read in UTC whatever zone
+  // the grid is in, or a reader west of Greenwich would see it a day early.
+  if (entry.allDay) {
+    return (
+      key >= dayKey(entry.start, "UTC") &&
+      key <= dayKey(new Date(entry.end.getTime() - 1), "UTC")
+    );
+  }
   const first = dayKey(entry.start, zone);
   if (isCalendarMoment(entry.start, entry.end)) return key === first;
   const last = dayKey(new Date(entry.end.getTime() - 1), zone);
@@ -122,21 +130,33 @@ export function CalendarMonth({
                   {day}
                 </div>
                 <div className="flex flex-col gap-0.5">
-                  {onDay.map((entry) => (
-                    <a
-                      key={entry.id}
-                      href={entry.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      title={calendarTitle(entry.titles, locale, entry.title)}
-                      className="flex items-center gap-1 truncate rounded bg-fd-secondary/50 px-1 py-0.5 text-[0.6875rem] leading-tight hover:bg-fd-secondary"
-                    >
-                      <span className={cn("size-1.5 shrink-0 rounded-full", entryAccent(entry.color))} />
-                      <span className="truncate">
-                        {calendarTitle(entry.titles, locale, entry.title)}
+                  {onDay.map((entry) => {
+                    const title = calendarTitle(entry.titles, locale, entry.title);
+                    const inner = (
+                      <>
+                        <span className={cn("size-1.5 shrink-0 rounded-full", entryAccent(entry.color))} />
+                        <span className="truncate">{title}</span>
+                      </>
+                    );
+                    const className =
+                      "flex items-center gap-1 truncate rounded bg-fd-secondary/50 px-1 py-0.5 text-[0.6875rem] leading-tight";
+                    return entry.link ? (
+                      <a
+                        key={entry.id}
+                        href={entry.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title={title}
+                        className={cn(className, "hover:bg-fd-secondary")}
+                      >
+                        {inner}
+                      </a>
+                    ) : (
+                      <span key={entry.id} title={title} className={className}>
+                        {inner}
                       </span>
-                    </a>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
             );

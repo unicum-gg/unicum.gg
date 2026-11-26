@@ -22,6 +22,8 @@ type KindFilter = CalendarKind | typeof ALL;
  * left to "All": it is whatever Wargaming adds next, and has no name yet. */
 const KINDS = [
   CalendarKind.Event,
+  CalendarKind.Competitive,
+  CalendarKind.Livestream,
   CalendarKind.Specials,
   CalendarKind.Update,
   CalendarKind.BattlePass,

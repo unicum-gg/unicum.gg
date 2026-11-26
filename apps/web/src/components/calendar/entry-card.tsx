@@ -9,7 +9,7 @@ import { useFormat } from "@/hooks/use-format";
 import { useTranslation } from "@/hooks/use-translation";
 import { useDisplayZone } from "@/components/servers/use-display-zone";
 import { cn } from "@/lib/utils";
-import { formatRelative, formatWhen } from "./format";
+import { formatDay, formatRelative, formatWhen } from "./format";
 
 export type CalendarEntry = z.infer<typeof CalendarResponse>["entries"][number];
 
@@ -19,6 +19,8 @@ export const ENTRY_ACCENT: Record<string, string> = {
   azure: "bg-sky-500",
   yellow: "bg-amber-400",
   red: "bg-red-500",
+  orange: "bg-orange-500",
+  purple: "bg-violet-500",
 };
 export const entryAccent = (color: string) => ENTRY_ACCENT[color] ?? "bg-fd-muted-foreground";
 
@@ -56,7 +58,18 @@ export function CalendarEntryCard({
   const live = !moment && entry.start <= now && entry.end > now;
   const over = entry.end <= now;
   const title = calendarTitle(entry.titles, locale, entry.title);
+  const description = calendarTitle(entry.descriptions, locale, "");
   const image = entry.banner ?? entry.thumbnail;
+  // The end is exclusive, so an all-day entry's last day is the one before.
+  const lastDay = new Date(entry.end.getTime() - 1);
+  const when = entry.allDay
+    ? lastDay.toISOString().slice(0, 10) === entry.start.toISOString().slice(0, 10)
+      ? formatDay(entry.start, locale)
+      : `${formatDay(entry.start, locale)} → ${formatDay(lastDay, locale)}`
+    : moment
+      ? `${formatWhen(entry.start, zone, locale)}${zone === "UTC" ? " UTC" : ""}`
+      : `${formatWhen(entry.start, zone, locale)} → ${formatWhen(entry.end, zone, locale)}${zone === "UTC" ? " UTC" : ""}`;
+  const external = { target: "_blank", rel: "noopener noreferrer" } as const;
 
   return (
     <article
@@ -66,14 +79,9 @@ export function CalendarEntryCard({
       )}
     >
       {image ? (
-        <a
-          href={entry.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="relative block aspect-[1022/360] shrink-0 overflow-hidden bg-fd-secondary sm:w-72"
-        >
+        <div className="relative block aspect-[1022/360] shrink-0 overflow-hidden bg-fd-secondary sm:w-72">
           <Image src={image} alt="" fill sizes="(min-width: 640px) 18rem, 100vw" className="object-cover" />
-        </a>
+        </div>
       ) : null}
       <div className="flex min-w-0 flex-1 flex-col gap-2 p-4">
         <div className="flex flex-wrap items-center gap-2 text-xs">
@@ -89,26 +97,31 @@ export function CalendarEntryCard({
           <span className="text-fd-muted-foreground">{status}</span>
         </div>
         <h3 className="font-heading text-lg font-semibold leading-snug">
-          <a href={entry.link} target="_blank" rel="noopener noreferrer" className="hover:underline">
-            {title}
-          </a>
+          {entry.link ? (
+            <a href={entry.link} {...external} className="hover:underline">
+              {title}
+            </a>
+          ) : (
+            title
+          )}
         </h3>
-        <p className="text-sm text-fd-muted-foreground">
-          {moment
-            ? formatWhen(entry.start, zone, locale)
-            : `${formatWhen(entry.start, zone, locale)} → ${formatWhen(entry.end, zone, locale)}`}
-          {zone === "UTC" ? " UTC" : null}
-        </p>
+        <p className="text-sm text-fd-muted-foreground">{when}</p>
+        {description ? (
+          <p className="line-clamp-2 text-sm text-fd-muted-foreground">
+            {description.split("\n\n")[0]}
+          </p>
+        ) : null}
         <div className="mt-auto flex flex-wrap gap-x-4 gap-y-1 pt-1 text-sm">
-          <a
-            href={entry.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-fd-muted-foreground hover:text-fd-foreground"
-          >
-            <ArrowSquareOutIcon className="size-4" />
-            {t("read-the-news")}
-          </a>
+          {entry.link ? (
+            <a
+              href={entry.link}
+              {...external}
+              className="inline-flex items-center gap-1 text-fd-muted-foreground hover:text-fd-foreground"
+            >
+              <ArrowSquareOutIcon className="size-4" />
+              {t("read-the-news")}
+            </a>
+          ) : null}
           {entry.discordEventId && !over ? (
             <a
               href={discordEventUrl(entry.discordEventId)}

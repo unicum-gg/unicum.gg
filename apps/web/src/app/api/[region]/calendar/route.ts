@@ -6,7 +6,7 @@ import { CalendarResponse } from "./schema.api";
 
 /**
  * Official calendar
- * @description Every entry of the region's official World of Tanks calendar (the "This week's highlights" widget of the portal home page): events, Battle Pass seasons, updates, specials. Wargaming shows the current week only and keeps nothing, so this is our own record of it, captured hourly, going back to `recordedSince`. Dates are ISO 8601 strings.
+ * @description Every entry of the region's official World of Tanks calendar: events, tournaments, livestreams, Battle Pass seasons, updates and specials, from the portal home page's calendar (captured hourly, since Wargaming shows the current week only) and the monthly "WoT Monthly" articles (since March 2025). An entry both carry is returned once. Dates are ISO 8601 strings.
  * @pathParams regionParams
  * @response CalendarResponse
  * @openapi

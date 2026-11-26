@@ -2288,7 +2288,7 @@ export interface paths {
         };
         /**
          * Official calendar
-         * @description Every entry of the region's official World of Tanks calendar (the "This week's highlights" widget of the portal home page): events, Battle Pass seasons, updates, specials. Wargaming shows the current week only and keeps nothing, so this is our own record of it, captured hourly, going back to `recordedSince`. Dates are ISO 8601 strings.
+         * @description Every entry of the region's official World of Tanks calendar: events, tournaments, livestreams, Battle Pass seasons, updates and specials, from the portal home page's calendar (captured hourly, since Wargaming shows the current week only) and the monthly "WoT Monthly" articles (since March 2025). An entry both carry is returned once. Dates are ISO 8601 strings.
          */
         get: operations["get-{region}-calendar"];
         put?: never;
@@ -3660,10 +3660,19 @@ export interface components {
         CalendarEntry: {
             /** @description Stable identifier: the article path and the start. */
             id: string;
+            /**
+             * @description Where the entry was read: `widget` is the portal home page's calendar (dated to the minute), `monthly` the month's "WoT Monthly" article (dated by the day). An entry both carry is returned once, as `widget`, with the monthly article's text.
+             * @enum {string}
+             */
+            source: "widget" | "monthly";
             /** @description The English title. */
             title: string;
             /** @description Every title read, keyed by the portal's own language code (`en`, `fr`, `pt-br`, `zh-tw`...). Only the languages the region's portal publishes the calendar in. */
             titles: {
+                [key: string]: string;
+            };
+            /** @description The entry's text, keyed like `titles`. Empty when the entry has none (the home page widget carries no text). */
+            descriptions: {
                 [key: string]: string;
             };
             /** @description The English category label, e.g. Specials, Battle Pass, Update, Event. */
@@ -3676,11 +3685,13 @@ export interface components {
             start: Date;
             /**
              * Format: date-time
-             * @description An update is published as a one-minute entry marking the moment it goes live.
+             * @description Exclusive. An update is published as a one-minute entry marking the moment it goes live; an all-day entry ends at midnight UTC after its last day.
              */
             end: Date;
-            /** @description The official news article, in English. */
-            link: string;
+            /** @description Dated by the day rather than the minute (`monthly` entries). */
+            allDay: boolean;
+            /** @description The official page the entry leads to, when it has one. */
+            link: string | null;
             /** @description The article's full-size banner, when it has one. */
             banner: string | null;
             /** @description The calendar widget's own small image. */
@@ -3696,7 +3707,7 @@ export interface components {
             region: "eu" | "na" | "asia";
             /**
              * Format: date-time
-             * @description When this region's calendar was first recorded. Wargaming keeps only the current week, so nothing earlier can be known.
+             * @description The earliest date this region's calendar is known from: the first monthly article with a calendar (March 2025), or the first capture of the home page widget if earlier.
              */
             recordedSince: Date | null;
             /** @description Oldest first. */
