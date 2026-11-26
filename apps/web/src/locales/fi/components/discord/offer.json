@@ -14,10 +14,16 @@
   "preview": {
     "invocation": "Joku käytti komentoa /player {name}",
     "tank-description": "Korkein taso ensin.",
-    "tank-title": "Päivitys 2.4.2 · 50 ajoneuvoa muutettu"
+    "tank-title": "Päivitys 2.4.2 · 50 ajoneuvoa muutettu",
+    "starts": "Alkaa",
+    "ends": "Päättyy"
   },
   "tank": {
     "description": "Jokainen päivitys ja jokainen Yhteinen testi julkaistaan #tank-changes-kanavalla julkaisupäivänä, myös {tank}. Ota Panssarihyökkäyksen muutokset -rooli saadaksesi ilmoituksia.",
     "heading": "Kuule Discordissa seuraavasta vahvistuksesta tai heikennyksestä, joka koskee panssarivaunua {tank}"
+  },
+  "events": {
+    "heading": "Hanki kaikki tapahtumat Discordissa",
+    "description": "Jokainen virallinen tapahtuma, tarjous ja päivitys julkaistaan kanavalla #events ja lisätään palvelimen Tapahtumat-välilehdelle, jotta Discord muistuttaa sinua sen alkaessa. Ota Tapahtumat-rooli saadaksesi ilmoituksen."
   }
 }

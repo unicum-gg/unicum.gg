@@ -1,0 +1,19 @@
+{
+  "kind": {
+    "event": "Wydarzenie",
+    "battle-pass": "Przepustka bitewna",
+    "specials": "Promocje",
+    "update": "Aktualizacja",
+    "other": "Inne"
+  },
+  "live": "Na żywo",
+  "status": {
+    "starts": "Rozpoczyna się {when}",
+    "ends": "Kończy się {when}",
+    "ended": "Zakończone {when}",
+    "lands": "Trafia {when}",
+    "landed": "Trafiło {when}"
+  },
+  "read-the-news": "Czytaj wiadomości",
+  "remind-me": "Otrzymaj przypomnienie na Discordzie"
+}

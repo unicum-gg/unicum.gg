@@ -1,0 +1,19 @@
+{
+  "kind": {
+    "event": "イベント",
+    "battle-pass": "戦闘パス",
+    "specials": "スペシャル",
+    "update": "更新",
+    "other": "その他"
+  },
+  "live": "ライブ",
+  "status": {
+    "starts": "{when}に開始",
+    "ends": "{when}に終了",
+    "ended": "{when}に終了済み",
+    "lands": "{when}に到達",
+    "landed": "{when}に到達済み"
+  },
+  "read-the-news": "ニュースを読む",
+  "remind-me": "Discordでリマインダーを受け取る"
+}

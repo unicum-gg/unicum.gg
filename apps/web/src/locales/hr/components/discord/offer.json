@@ -14,10 +14,16 @@
   "preview": {
     "invocation": "Netko je koristio /player {name}",
     "tank-description": "Najviša razina prva.",
-    "tank-title": "Obnovi 2.4.2 · promijenjeno 50 vozila"
+    "tank-title": "Obnovi 2.4.2 · promijenjeno 50 vozila",
+    "starts": "Počinje",
+    "ends": "Završava"
   },
   "tank": {
     "description": "Svako ažuriranje i svako Zajedničko testiranje objavljeno je na #tank-changes na dan kada brodovi isplove, uključujući {tank}. Preuzmi ulogu promjena Teneka kako bi primio obavijest.",
     "heading": "Saznaj o sljedećem pojačanju ili oslabljivanju za {tank} na Discordu"
+  },
+  "events": {
+    "heading": "Primaj svaki događaj na Discordu",
+    "description": "Svaki službeni događaj, rasprodaja i ažuriranje objavljuju se u kanalu #events i dodaju na karticu Događaji poslužitelja, pa će te Discord podsjetiti kad počnu. Preuzmi ulogu Događaji da bi te označili."
   }
 }

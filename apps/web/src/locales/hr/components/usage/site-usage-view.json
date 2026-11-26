@@ -19,6 +19,6 @@
   "mod-and-bot": "Mod i Discord bot",
   "mod-users": "Mod",
   "mod-line": "{users} igrača, {battles} bitki",
-  "bot-servers": "Serveri Discord bota",
+  "bot-servers": "Discord bot",
   "bot-line": "{servers} serveri, {commands} naredbe ovaj mjesec"
 }

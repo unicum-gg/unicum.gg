@@ -1,0 +1,19 @@
+{
+  "kind": {
+    "event": "Kaganapan",
+    "battle-pass": "Labanan Pass",
+    "specials": "Mga espesyal na alok",
+    "update": "Update",
+    "other": "Iba pa"
+  },
+  "live": "Live",
+  "status": {
+    "starts": "Magsisimula {when}",
+    "ends": "Nagtatapos {when}",
+    "ended": "Natapos {when}",
+    "lands": "Dumarating {when}",
+    "landed": "Dumating {when}"
+  },
+  "read-the-news": "Basahin ang balita",
+  "remind-me": "Magpaalala sa Discord"
+}

@@ -1,0 +1,19 @@
+{
+  "kind": {
+    "event": "Etkinlik",
+    "battle-pass": "Savaş Bileti",
+    "specials": "Fırsatlar",
+    "update": "Güncelleme",
+    "other": "Diğer"
+  },
+  "live": "Canlı",
+  "status": {
+    "starts": "Başlangıç: {when}",
+    "ends": "Bitiş: {when}",
+    "ended": "{when} sona erdi",
+    "lands": "{when} ulaşır",
+    "landed": "{when} ulaştı"
+  },
+  "read-the-news": "Haberleri oku",
+  "remind-me": "Discord’da hatırlatıcı al"
+}

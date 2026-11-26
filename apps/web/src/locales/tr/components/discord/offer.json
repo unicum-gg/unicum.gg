@@ -14,10 +14,16 @@
   "preview": {
     "invocation": "Birisi tarafından /player {name} kullanıldı",
     "tank-description": "Önce en yüksek seviye.",
-    "tank-title": "Güncelle 2.4.2 · 50 araçta değişiklik yapıldı"
+    "tank-title": "Güncelle 2.4.2 · 50 araçta değişiklik yapıldı",
+    "starts": "başlangıç",
+    "ends": "bitiş"
   },
   "tank": {
     "description": "Her güncelleme ve her Ortak Test, yayınlandığı gün #tank-changes kanalında paylaşıldı, {tank} da dahil. Bildirim almak için Tank değişiklikleri rolünü alın.",
     "heading": "Discord’da {tank} için yapılacak sonraki güçlendirme veya zayıflatmayı öğrenin"
+  },
+  "events": {
+    "heading": "Her etkinliği Discord’da al",
+    "description": "Her resmi etkinlik, indirim ve güncelleme #events kanalında paylaşılır ve sunucunun Etkinlikler sekmesine eklenir, böylece Discord başlangıç zamanını size hatırlatır. Bildirim almak için Etkinlikler rolünü alın."
   }
 }

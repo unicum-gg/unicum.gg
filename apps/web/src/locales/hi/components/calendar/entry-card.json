@@ -1,0 +1,19 @@
+{
+  "kind": {
+    "event": "इवेंट",
+    "battle-pass": "बैटल पास",
+    "specials": "विशेष ऑफ़र",
+    "update": "अपडेट",
+    "other": "अन्य"
+  },
+  "live": "सीधा",
+  "status": {
+    "starts": "शुरुआत {when}",
+    "ends": "समाप्ति {when}",
+    "ended": "समाप्त {when}",
+    "lands": "उतरता है {when}",
+    "landed": "उतर चुका है {when}"
+  },
+  "read-the-news": "समाचार पढ़ें",
+  "remind-me": "Discord पर रिमाइंडर पाएँ"
+}

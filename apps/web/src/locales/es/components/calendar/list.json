@@ -1,0 +1,7 @@
+{
+  "live": "En directo",
+  "upcoming": "Próximamente",
+  "past": "Últimos {days} días",
+  "nothing-live": "Nada está en ejecución ahora mismo.",
+  "nothing-upcoming": "Nada anunciado todavía. Wargaming añade habitualmente una entrada unos días antes de que comience."
+}

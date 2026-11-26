@@ -1,0 +1,19 @@
+{
+  "kind": {
+    "event": "Событие",
+    "battle-pass": "Боевой пропуск",
+    "specials": "Акции",
+    "update": "Обновление",
+    "other": "Другие"
+  },
+  "live": "В эфире",
+  "status": {
+    "starts": "Начинается {when}",
+    "ends": "Окончание {when}",
+    "ended": "Завершено {when}",
+    "lands": "Оказывается {when}",
+    "landed": "Оказалось {when}"
+  },
+  "read-the-news": "Читать новости",
+  "remind-me": "Получить напоминание в Discord"
+}

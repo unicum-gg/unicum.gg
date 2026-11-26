@@ -1,0 +1,7 @@
+{
+  "title": "{calendar} في World of Tanks",
+  "calendar": "تقويم الفعاليات",
+  "intro": "كل حدث رسمي من نوع {label}، وكل تخفيضات وموسم من بطاقة المعركة وتحديث، حسب منطقتك الزمنية. يعرض Wargaming الأسبوع الحالي فقط، لذلك نحتفظ بسجل لكل عنصر بعد اختفائه.",
+  "recorded-since": "مسجل كل ساعة منذ {date}.",
+  "event-description": "حدث {label} رسمي في World of Tanks، تم لعبه في اللعبة."
+}

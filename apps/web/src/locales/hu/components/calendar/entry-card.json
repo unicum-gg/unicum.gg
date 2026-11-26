@@ -1,0 +1,19 @@
+{
+  "kind": {
+    "event": "Esemény",
+    "battle-pass": "Csata Bérlet",
+    "specials": "Akciók",
+    "update": "Frissítés",
+    "other": "Egyéb"
+  },
+  "live": "Élő",
+  "status": {
+    "starts": "Kezdődik: {when}",
+    "ends": "Véget ér: {when}",
+    "ended": "Véget ért: {when}",
+    "lands": "Érkezik: {when}",
+    "landed": "Megérkezett: {when}"
+  },
+  "read-the-news": "Olvasd el a hírt",
+  "remind-me": "Kapj emlékeztetőt Discordon"
+}

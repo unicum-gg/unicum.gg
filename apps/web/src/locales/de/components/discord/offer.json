@@ -14,10 +14,16 @@
   "preview": {
     "invocation": "Jemand hat /player {name} verwendet",
     "tank-description": "Höchste Stufe zuerst.",
-    "tank-title": "Aktualisieren 2.4.2 · 50 Fahrzeuge geändert"
+    "tank-title": "Aktualisieren 2.4.2 · 50 Fahrzeuge geändert",
+    "starts": "Beginnt",
+    "ends": "Endet"
   },
   "tank": {
     "description": "Jede Aktualisierung und jeder Gemeinsame Test wird am Tag seiner Veröffentlichung in #tank-changes veröffentlicht, einschließlich {tank}. Nimm die Rolle „Panzeränderungen“ an, um erwähnt zu werden.",
     "heading": "Erfahre auf Discord von der nächsten Verbesserung oder Verschlechterung für {tank}"
+  },
+  "events": {
+    "heading": "Alle Ereignisse auf Discord erhalten",
+    "description": "Jedes offizielle Ereignis, jedes Angebot und jede Aktualisierung wird in #events veröffentlicht und dem Events-Tab des Servers hinzugefügt, damit Discord dich erinnert, wenn es beginnt. Übernimm die Events-Rolle, um benachrichtigt zu werden."
   }
 }

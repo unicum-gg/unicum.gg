@@ -14,10 +14,16 @@
   "preview": {
     "invocation": "Någon använder /player {name}",
     "tank-description": "Högsta nivå först.",
-    "tank-title": "Uppdatering 2.4.2 · 50 fordon förändrade"
+    "tank-title": "Uppdatering 2.4.2 · 50 fordon förändrade",
+    "starts": "Starter",
+    "ends": "Slutar"
   },
   "tank": {
     "description": "Varje uppdatering och varje Vanlig Test publiceras i #tank-changes samma dag som den släpps, inklusive {tank}. Ta rollen Tank changes för att bli pingad.",
     "heading": "Få reda på nästa buff eller nerf för {tank} i Discord"
+  },
+  "events": {
+    "heading": "Få alla evenemang på Discord",
+    "description": "Alla officiella evenemang, reor och uppdateringar publiceras i #events och läggs till på serverns Evenemangsflik, så att Discord påminner dig när de startar. Ta rollen för Evenemang för att bli pingad."
   }
 }

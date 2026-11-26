@@ -1,0 +1,7 @@
+{
+  "title": "{calendar} igre World of Tanks",
+  "calendar": "kalendar događaja",
+  "intro": "Svaki službeni događaj za {label}, rasprodaja, sezona Propusnice za bitku i ažuriranje, u tvojoj vremenskoj zoni. Wargaming prikazuje samo trenutni tjedan, pa zadržavamo zapis svake stavke nakon što nestane.",
+  "recorded-since": "Zabilježeno svakog sata od {date}.",
+  "event-description": "Službeni događaj igre World of Tanks za {label}, koji se igra u igri."
+}

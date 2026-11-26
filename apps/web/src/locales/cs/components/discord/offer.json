@@ -14,10 +14,16 @@
   "preview": {
     "invocation": "Někdo použil /player {name}",
     "tank-description": "Nejvyšší úroveň jako první.",
-    "tank-title": "Aktualizovat 2.4.2 · změněno 50 vozidel"
+    "tank-title": "Aktualizovat 2.4.2 · změněno 50 vozidel",
+    "starts": "Začíná",
+    "ends": "Končí"
   },
   "tank": {
     "description": "Každá aktualizace a každý Společný test jsou zveřejněny v kanálu #tank-changes v den vydání, přičemž je zahrnuto i {tank}. Přijměte roli změn tanků, abyste dostávali upozornění.",
     "heading": "Zjistěte na Discordu o dalším vylepšení nebo oslabení tanku {tank}"
+  },
+  "events": {
+    "heading": "Získejte každou událost na Discordu",
+    "description": "Každá oficiální událost, nabídka a aktualizace je zveřejněna v kanálu #events a přidána na kartu Události serveru, takže vám Discord připomene, kdy začíná. Získejte roli Události, aby vás bylo možné označit."
   }
 }

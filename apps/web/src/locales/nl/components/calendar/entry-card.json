@@ -1,0 +1,19 @@
+{
+  "kind": {
+    "event": "Evenement",
+    "battle-pass": "Gevechtspas",
+    "specials": "Acties",
+    "update": "Updaten",
+    "other": "Overig"
+  },
+  "live": "Live",
+  "status": {
+    "starts": "Begint {when}",
+    "ends": "Eindigt {when}",
+    "ended": "Eindigde {when}",
+    "lands": "Verschijnt {when}",
+    "landed": "Verscheen {when}"
+  },
+  "read-the-news": "Lees het nieuws",
+  "remind-me": "Ontvang een herinnering op Discord"
+}

@@ -1,0 +1,19 @@
+{
+  "kind": {
+    "event": "Събитие",
+    "battle-pass": "Боен пропуск",
+    "specials": "Акции",
+    "update": "Актуализация",
+    "other": "Други"
+  },
+  "live": "На живо",
+  "status": {
+    "starts": "Започва {when}",
+    "ends": "Край: {when}",
+    "ended": "Приключил: {when}",
+    "lands": "Попада {when}",
+    "landed": "Попадна {when}"
+  },
+  "read-the-news": "Прочети новината",
+  "remind-me": "Получи напомняне в Discord"
+}

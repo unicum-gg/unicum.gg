@@ -1,0 +1,7 @@
+{
+  "title": "{calendar} World of Tanks",
+  "calendar": "calendarul evenimentelor",
+  "intro": "Fiecare eveniment oficial {label}, ofertă, sezon Bătălie Pass și actualizare, în fusul tău orar. Wargaming afișează doar săptămâna curentă, așa că păstrăm un record al fiecărei intrări după ce dispare.",
+  "recorded-since": "Înregistrat în fiecare oră din {date}.",
+  "event-description": "Un eveniment oficial World of Tanks {label}, jucat în joc."
+}

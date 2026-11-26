@@ -14,10 +14,16 @@
   "preview": {
     "invocation": "Qualcuno ha utilizzato /player {name}",
     "tank-description": "Prima i livelli più alti.",
-    "tank-title": "Aggiornamento 2.4.2 · 50 veicoli modificati"
+    "tank-title": "Aggiornamento 2.4.2 · 50 veicoli modificati",
+    "starts": "Inizia",
+    "ends": "Termina"
   },
   "tank": {
     "description": "Ogni aggiornamento e ogni Test comune vengono pubblicati su #tank-changes il giorno stesso in cui vengono rilasciati, incluso {tank}. Scegli il ruolo Modifiche dei carri per ricevere una notifica.",
     "heading": "Scopri su Discord il prossimo potenziamento o indebolimento di {tank}"
+  },
+  "events": {
+    "heading": "Ricevi ogni evento su Discord",
+    "description": "Ogni evento ufficiale, vendita e aggiornamento viene pubblicato su #events e aggiunto alla scheda Eventi del server, così Discord ti ricorda quando inizia. Assumi il ruolo Eventi per ricevere una notifica."
   }
 }

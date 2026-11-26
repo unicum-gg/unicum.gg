@@ -1,0 +1,7 @@
+{
+  "title": "World of Tanks {calendar}",
+  "calendar": "活动日历",
+  "intro": "每项官方 {label} 活动、特卖、战斗通行证赛季和更新都会按您的时区显示。默认只显示当前周，因此每条目被移除后，我们都会保留记录。",
+  "recorded-since": "自 {date} 起每小时记录。",
+  "event-description": "一项官方 World of Tanks {label} 活动，在游戏中进行。"
+}

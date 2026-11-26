@@ -1,0 +1,19 @@
+{
+  "kind": {
+    "event": "Догађај",
+    "battle-pass": "Bitka Пропусница",
+    "specials": "Specijali",
+    "update": "Osveži",
+    "other": "Drugo"
+  },
+  "live": "Uživo",
+  "status": {
+    "starts": "Почиње {when}",
+    "ends": "Истиче {when}",
+    "ended": "Завршено {when}",
+    "lands": "Слеће {when}",
+    "landed": "Слетело {when}"
+  },
+  "read-the-news": "Pročitaj вести",
+  "remind-me": "Добијте подсетник на Discord-у"
+}

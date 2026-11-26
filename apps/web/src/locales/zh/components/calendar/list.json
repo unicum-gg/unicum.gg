@@ -1,0 +1,7 @@
+{
+  "live": "当前进行中",
+  "upcoming": "即将开始",
+  "past": "最近 {days} 天",
+  "nothing-live": "当前没有正在运行的内容。",
+  "nothing-upcoming": "尚未宣布任何内容。默认通常会在活动开始前几天添加条目。"
+}

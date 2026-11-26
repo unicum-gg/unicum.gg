@@ -1,0 +1,19 @@
+{
+  "kind": {
+    "event": "Událost",
+    "battle-pass": "Battle Pass",
+    "specials": "Speciály",
+    "update": "Aktualizace",
+    "other": "Jiný"
+  },
+  "live": "Živě",
+  "status": {
+    "starts": "Začíná {when}",
+    "ends": "Končí {when}",
+    "ended": "Skončeno {when}",
+    "lands": "Přistane {when}",
+    "landed": "Přistálo {when}"
+  },
+  "read-the-news": "Přečíst novinky",
+  "remind-me": "Získat připomenutí na Discordu"
+}

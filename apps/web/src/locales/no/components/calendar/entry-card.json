@@ -1,0 +1,19 @@
+{
+  "kind": {
+    "event": "Hendelse",
+    "battle-pass": "Kamp Pass",
+    "specials": "Spesialer",
+    "update": "Oppdatering",
+    "other": "Annet"
+  },
+  "live": "Live",
+  "status": {
+    "starts": "Starter {when}",
+    "ends": "Slutter {when}",
+    "ended": "Avsluttet {when}",
+    "lands": "Lander {when}",
+    "landed": "Landet {when}"
+  },
+  "read-the-news": "Les nyhetene",
+  "remind-me": "Få en påminnelse på Discord"
+}

@@ -1,0 +1,7 @@
+{
+  "live": "Uživo",
+  "upcoming": "Nadolazeće",
+  "past": "Posljednjih {days} dana",
+  "nothing-live": "Ništa trenutačno nije u tijeku.",
+  "nothing-upcoming": "Još ništa nije najavljeno. Wargaming obično dodaje stavku nekoliko dana prije početka."
+}

@@ -1,0 +1,19 @@
+{
+  "kind": {
+    "event": "이벤트",
+    "battle-pass": "전투 패스",
+    "specials": "이벤트",
+    "update": "업데이트",
+    "other": "기타"
+  },
+  "live": "실시간",
+  "status": {
+    "starts": "{when}에 시작",
+    "ends": "{when}에 종료",
+    "ended": "{when}에 종료됨",
+    "lands": "{when}에 도착합니다",
+    "landed": "{when}에 도착했습니다"
+  },
+  "read-the-news": "뉴스 읽기",
+  "remind-me": "Discord에서 알림 받기"
+}

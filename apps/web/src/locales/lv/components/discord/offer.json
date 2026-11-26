@@ -14,10 +14,16 @@
   "preview": {
     "invocation": "Kāds izmantoja /player {name}",
     "tank-description": "Vispirms augstākais līmenis.",
-    "tank-title": "Atjaunināt 2.4.2 · izmaiņas 50 transportlīdzekļiem"
+    "tank-title": "Atjaunināt 2.4.2 · izmaiņas 50 transportlīdzekļiem",
+    "starts": "Sākas",
+    "ends": "Beidzas"
   },
   "tank": {
     "description": "Katrs atjauninājums un katrs Kopējais tests tiek publicēts kanālā #tank-changes tajā pašā dienā, kad tas iznāk, tostarp izmaiņas {tank}. Izvēlies lomu „Tanks izmaiņas”, lai saņemtu paziņojumus.",
     "heading": "Uzzini Discord par nākamo uzlabojumu vai vājināšanu, kas skars {tank}"
+  },
+  "events": {
+    "heading": "Saņemiet visus notikumus Discord",
+    "description": "Katrs oficiāls notikums, izpārdošana un atjauninājums tiek publicēts kanālā #events un pievienots servera Notikumu cilnei, lai Discord atgādinātu, kad tas sākas. Izvēlieties Notikumu lomu, lai saņemtu paziņojumu."
   }
 }

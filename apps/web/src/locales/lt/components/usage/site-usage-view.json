@@ -19,6 +19,6 @@
   "mod-and-bot": "Mod ir Discord botas",
   "mod-users": "Mod",
   "mod-line": "{users} žaidėjų, {battles} mūšių",
-  "bot-servers": "Discord botas",
+  "bot-servers": "Discord bot",
   "bot-line": "{servers} serverių, {commands} komandų šį mėnesį"
 }

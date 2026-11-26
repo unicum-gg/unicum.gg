@@ -1,0 +1,19 @@
+{
+  "kind": {
+    "event": "活动",
+    "battle-pass": "战斗通行证",
+    "specials": "特惠",
+    "update": "更新",
+    "other": "其他"
+  },
+  "live": "实时",
+  "status": {
+    "starts": "将于 {when} 开始",
+    "ends": "将于 {when} 结束",
+    "ended": "已于 {when} 结束",
+    "lands": "将于 {when} 落地",
+    "landed": "已于 {when} 落地"
+  },
+  "read-the-news": "阅读新闻",
+  "remind-me": "在 Discord 上获取提醒"
+}

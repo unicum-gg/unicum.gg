@@ -1,0 +1,7 @@
+{
+  "live": "現在開催中",
+  "upcoming": "今後の予定",
+  "past": "過去{days}日間",
+  "nothing-live": "現在、実行中のものはありません。",
+  "nothing-upcoming": "まだ発表されたものはありません。Wargamingは通常、開始の数日前に項目を追加します。"
+}

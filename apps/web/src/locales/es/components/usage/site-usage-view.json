@@ -19,6 +19,6 @@
   "mod-and-bot": "Mod y bot de Discord",
   "mod-users": "Mod",
   "mod-line": "{users} jugadores, {battles} batallas",
-  "bot-servers": "Bot de Discord",
+  "bot-servers": "bot de Discord",
   "bot-line": "{servers} servidores, {commands} comandos este mes"
 }

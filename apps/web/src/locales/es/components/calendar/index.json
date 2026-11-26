@@ -1,0 +1,7 @@
+{
+  "title": "{calendar} de World of Tanks",
+  "calendar": "calendario de eventos",
+  "intro": "Cada evento oficial de {label}, oferta, temporada del Pase de batalla y actualización, en tu propia zona horaria. Wargaming solo muestra la semana actual, por eso mantenemos un récord de cada entrada una vez que desaparece.",
+  "recorded-since": "Registrado cada hora desde {date}.",
+  "event-description": "Un evento oficial de World of Tanks {label}, jugado en el juego."
+}

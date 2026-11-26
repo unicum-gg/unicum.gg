@@ -1,0 +1,7 @@
+{
+  "title": "World of Tanks: {calendar}",
+  "calendar": "Kalendarz wydarzeń",
+  "intro": "Każde oficjalne wydarzenie {label}, wyprzedaż, sezon Przepustki bitewnej i aktualizacja, w Twojej strefie czasowej. Wargaming pokazuje tylko obecny tydzień, więc zachowujemy wpis o każdym wydarzeniu, gdy już zniknie.",
+  "recorded-since": "Zarejestrowane co godzinę od {date}.",
+  "event-description": "Oficjalne wydarzenie World of Tanks {label}, rozegrane w grze."
+}

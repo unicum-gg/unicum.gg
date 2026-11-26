@@ -14,10 +14,16 @@
   "preview": {
     "invocation": "Cineva a folosit /player {name}",
     "tank-description": "Mai întâi, nivelul cel mai mare.",
-    "tank-title": "Actualizează 2.4.2 · 50 de vehicule schimbate"
+    "tank-title": "Actualizează 2.4.2 · 50 de vehicule schimbate",
+    "starts": "Începe",
+    "ends": "Se încheie"
   },
   "tank": {
     "description": "Fiecare actualizare și fiecare Test Comun este postat pe #tank-changes în ziua lansării, inclusiv {tank}. Ia rolul „Schimbări pentru tancuri” pentru a primi notificări.",
     "heading": "Află pe Discord despre următorul buff sau nerf pentru {tank}"
+  },
+  "events": {
+    "heading": "Primește fiecare eveniment pe Discord",
+    "description": "Fiecare eveniment oficial, ofertă și actualizare este postată în #events și adăugată în fila Events a serverului, astfel încât Discord să îți amintească atunci când începe. Alege rolul Events pentru a primi o mențiune."
   }
 }

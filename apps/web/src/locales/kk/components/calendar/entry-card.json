@@ -1,0 +1,19 @@
+{
+  "kind": {
+    "event": "Оқиға",
+    "battle-pass": "Шайқас билеті",
+    "specials": "Арнайы ұсыныстар",
+    "update": "Жаңарту",
+    "other": "Басқа"
+  },
+  "live": "Тікелей эфир",
+  "status": {
+    "starts": "{when} басталады",
+    "ends": "{when} аяқталады",
+    "ended": "{when} аяқталды",
+    "lands": "{when} қонады",
+    "landed": "{when} қонды"
+  },
+  "read-the-news": "Жаңалықты оқу",
+  "remind-me": "Discord-та еске салғыш алу"
+}

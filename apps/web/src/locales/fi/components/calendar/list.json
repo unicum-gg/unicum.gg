@@ -1,0 +1,7 @@
+{
+  "live": "Käynnissä nyt",
+  "upcoming": "Tulossa",
+  "past": "Viimeiset {days} päivät",
+  "nothing-live": "Mikään ei ole käynnissä juuri nyt.",
+  "nothing-upcoming": "Ei mitään ole vielä ilmoitettu. Wargaming lisää tavallisesti merkinnän muutamaa päivää ennen aloitusta."
+}

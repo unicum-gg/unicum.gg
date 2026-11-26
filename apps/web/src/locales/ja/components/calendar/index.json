@@ -1,0 +1,7 @@
+{
+  "title": "World of Tanks {calendar}",
+  "calendar": "イベントカレンダー",
+  "intro": "自分のタイムゾーンで、公式{label}イベント、セール、戦闘パスのシーズン、更新をすべて確認できます。Wargamingは通常、現在の週だけを表示するため、項目が表示されなくなった後もすべての記録を維持します。",
+  "recorded-since": "{date}以降、1時間ごとに記録しています。",
+  "event-description": "ゲーム内でプレイされる、World of Tanksの公式{label}イベントです。"
+}

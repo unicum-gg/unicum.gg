@@ -14,10 +14,16 @@
   "preview": {
     "invocation": "누군가가 /player {name} 명령어를 사용했습니다",
     "tank-description": "높은 단계부터",
-    "tank-title": "업데이트 2.4.2 · 차량 50대 변경됨"
+    "tank-title": "업데이트 2.4.2 · 차량 50대 변경됨",
+    "starts": "시작",
+    "ends": "종료"
   },
   "tank": {
     "description": "모든 업데이트와 모든 공통 테스트는 출시되는 날 #tank-changes에 게시되며, {tank}도 포함됩니다. 알림을 받으려면 탱크 변경 사항 역할을 선택하세요.",
     "heading": "Discord에서 {tank}의 다음 버프 또는 너프 소식 받기"
+  },
+  "events": {
+    "heading": "Discord에서 모든 이벤트 받기",
+    "description": "모든 공식 이벤트, 할인 및 업데이트는 #events에 게시되고 서버의 이벤트 탭에 추가됨으로써 Discord가 시작 시간을 알려줍니다. 알림을 받으려면 이벤트 역할을 받으세요."
   }
 }

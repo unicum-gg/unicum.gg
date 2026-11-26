@@ -1,0 +1,19 @@
+{
+  "kind": {
+    "event": "Événement",
+    "battle-pass": "Passe de combat",
+    "specials": "Offres spéciales",
+    "update": "Mise à jour",
+    "other": "Autre"
+  },
+  "live": "En direct",
+  "status": {
+    "starts": "Début : {when}",
+    "ends": "Fin : {when}",
+    "ended": "Terminé {when}",
+    "lands": "Arrive {when}",
+    "landed": "Arrivé {when}"
+  },
+  "read-the-news": "Lire la nouvelle",
+  "remind-me": "Recevoir un rappel sur Discord"
+}

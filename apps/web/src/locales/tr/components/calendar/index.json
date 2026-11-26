@@ -1,0 +1,7 @@
+{
+  "title": "World of Tanks {calendar}",
+  "calendar": "etkinlik takvimi",
+  "intro": "Her resmi {label} etkinliği, indirimi, Savaş Bileti sezonu ve güncellemesi, kendi zaman diliminizde. Wargaming yalnızca mevcut haftayı gösterir, bu nedenle her kayıt kaldırıldıktan sonra da kaydını tutuyoruz.",
+  "recorded-since": "{date} tarihinden beri her saat kaydedilen kayıtlar.",
+  "event-description": "Oyunda oynanan resmi bir World of Tanks {label} etkinliği."
+}

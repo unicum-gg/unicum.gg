@@ -1,0 +1,19 @@
+{
+  "kind": {
+    "event": "Tapahtuma",
+    "battle-pass": "Taistelu Passi",
+    "specials": "Erikoistarjoukset",
+    "update": "Päivitys",
+    "other": "Muut"
+  },
+  "live": "Lähetä",
+  "status": {
+    "starts": "Alkaa {when}",
+    "ends": "Päättyy {when}",
+    "ended": "Päättyi {when}",
+    "lands": "Osuu {when}",
+    "landed": "Osui {when}"
+  },
+  "read-the-news": "Lue uutiset",
+  "remind-me": "Hanki muistutus Discordissa"
+}

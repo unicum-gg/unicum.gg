@@ -14,10 +14,16 @@
   "preview": {
     "invocation": "May gumamit ng /player {name}",
     "tank-description": "Pinakamataas na tier muna.",
-    "tank-title": "Update 2.4.2 · May mga pagbabago sa 50 sasakyan"
+    "tank-title": "Update 2.4.2 · May mga pagbabago sa 50 sasakyan",
+    "starts": "Magsisimula",
+    "ends": "Nagtatapos"
   },
   "tank": {
     "description": "Ang bawat update at bawat Karaniwang Pagsubok ay nai-post sa #tank-changes sa araw na ipinapadala ang mga ito, kasama ang {tank}. Kunin ang role ng mga pagbabago sa Tangke para maabisuhan ka.",
     "heading": "Alamin sa Discord ang susunod na buff o nerf ng {tank}"
+  },
+  "events": {
+    "heading": "Kunin ang bawat kaganapan sa Discord",
+    "description": "Ang bawat opisyal na kaganapan, sale at update ay nai-post sa #events at idinadagdag sa tab na Events ng server, kaya ipinapaalala sa iyo ng Discord kung kailan ito magsisimula. Kunin ang role na Mga kaganapan para ma-ping ka."
   }
 }

@@ -14,10 +14,16 @@
   "preview": {
     "invocation": "誰かが /player {name} を使用しました",
     "tank-description": "最高Tierから表示。",
-    "tank-title": "更新 2.4.2 · 50車両の変更"
+    "tank-title": "更新 2.4.2 · 50車両の変更",
+    "starts": "開始",
+    "ends": "終了日"
   },
   "tank": {
     "description": "各更新と各共通テストは、リリース当日に#tank-changesへ投稿されます。{tank}も含まれます。通知を受け取るには、戦車変更の役割を取得してください。",
     "heading": "Discordで次の{tank}の強化または弱体化を知る"
+  },
+  "events": {
+    "heading": "Discordですべてのイベントを受け取る",
+    "description": "すべての公式イベント、セール、更新は#eventsに投稿済みで、サーバーのイベントタブにも追加されます。そのため、開始時にDiscordからリマインダーを受け取れます。通知を受け取るにはイベントの役割を取得してください。"
   }
 }

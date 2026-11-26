@@ -1,0 +1,19 @@
+{
+  "kind": {
+    "event": "Подія",
+    "battle-pass": "Бойова перепустка",
+    "specials": "Акції",
+    "update": "Оновлення",
+    "other": "Інше"
+  },
+  "live": "Наживо",
+  "status": {
+    "starts": "Початок {when}",
+    "ends": "Завершення {when}",
+    "ended": "Завершено {when}",
+    "lands": "Посідає {when}",
+    "landed": "Посіло {when}"
+  },
+  "read-the-news": "Читати новини",
+  "remind-me": "Отримати нагадування в Discord"
+}

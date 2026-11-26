@@ -1,0 +1,19 @@
+{
+  "kind": {
+    "event": "Udalosť",
+    "battle-pass": "Bitka Prepustnica",
+    "specials": "Posebne ponudbe",
+    "update": "Posodobitev",
+    "other": "Iné"
+  },
+  "live": "Živé",
+  "status": {
+    "starts": "Začne se {when}",
+    "ends": "Konča se {when}",
+    "ended": "Končano {when}",
+    "lands": "Prispe {when}",
+    "landed": "Prispelo {when}"
+  },
+  "read-the-news": "Preberite novice",
+  "remind-me": "Prejmi opomnik na Discordu"
+}

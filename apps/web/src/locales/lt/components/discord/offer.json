@@ -14,10 +14,16 @@
   "preview": {
     "invocation": "Kažkas panaudojo /player {name}",
     "tank-description": "Pirmiausia rodomas aukščiausias lygis.",
-    "tank-title": "Atnaujinti 2.4.2 · pakeistos 50 transporto priemonių"
+    "tank-title": "Atnaujinti 2.4.2 · pakeistos 50 transporto priemonių",
+    "starts": "Pradžia",
+    "ends": "Baigiasi"
   },
   "tank": {
     "description": "Kiekvienas atnaujinimas ir kiekvienas Bendras testas paskelbiami kanale #tank-changes tą dieną, kai išleidžiamas atnaujinimas, įtrauktas ir {tank}. Pasiimkite Tanko pakeitimų vaidmenį, kad gautumėte pranešimus.",
     "heading": "Sužinokite „Discord“ apie kitą {tank} sustiprinimą arba susilpninimą"
+  },
+  "events": {
+    "heading": "Gaukite kiekvieną įvykį Discord",
+    "description": "Kiekvienas oficialus įvykis, išpardavimas ir atnaujinimas paskelbiamas kanale #events ir pridedamas prie serverio Renginių skirtuko, todėl Discord primena, kada jis prasideda. Pasirinkite Renginių vaidmenį, kad gautumėte paminėjimą."
   }
 }

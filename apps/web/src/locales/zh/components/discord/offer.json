@@ -14,10 +14,16 @@
   "preview": {
     "invocation": "有人已使用 /player {name}",
     "tank-description": "最高等级优先。",
-    "tank-title": "更新 2.4.2 · 50 辆车辆发生变更"
+    "tank-title": "更新 2.4.2 · 50 辆车辆发生变更",
+    "starts": "开始",
+    "ends": "结束"
   },
   "tank": {
     "description": "每次更新和每次公共测试都会在发布当天发布到 #tank-changes，包含 {tank}。选择坦克变更角色即可接收提醒。",
     "heading": "在 Discord 中了解 {tank} 的下一次增强或削弱"
+  },
+  "events": {
+    "heading": "在 Discord 获取所有活动",
+    "description": "每项官方活动、特卖和更新都会发布到 #events，并添加到服务器的活动标签页中，因此 Discord 会在活动开始时提醒您。领取活动角色即可收到提醒。"
   }
 }

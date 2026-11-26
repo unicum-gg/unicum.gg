@@ -1,0 +1,19 @@
+{
+  "kind": {
+    "event": "Događaj",
+    "battle-pass": "Bitka Propusnica",
+    "specials": "Posebne ponude",
+    "update": "Ažuriranje",
+    "other": "Drugo"
+  },
+  "live": "Uživo",
+  "status": {
+    "starts": "Počinje {when}",
+    "ends": "Završava {when}",
+    "ended": "Završeno {when}",
+    "lands": "Slijeće {when}",
+    "landed": "Sletjelo {when}"
+  },
+  "read-the-news": "Pročitaj vijesti",
+  "remind-me": "Primaj podsjetnik na Discordu"
+}

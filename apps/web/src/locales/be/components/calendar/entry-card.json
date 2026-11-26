@@ -1,0 +1,19 @@
+{
+  "kind": {
+    "event": "Падзея",
+    "battle-pass": "Баявы пропуск",
+    "specials": "Спецпрапановы",
+    "update": "Абнаўленне",
+    "other": "Іншае"
+  },
+  "live": "Жывы",
+  "status": {
+    "starts": "Пачынаецца {when}",
+    "ends": "Завяршаецца {when}",
+    "ended": "Завершана {when}",
+    "lands": "Трапляе {when}",
+    "landed": "Трапіла {when}"
+  },
+  "read-the-news": "Чытаць навіны",
+  "remind-me": "Атрымліваць напамін у Discord"
+}

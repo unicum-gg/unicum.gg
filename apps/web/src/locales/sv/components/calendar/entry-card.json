@@ -1,0 +1,19 @@
+{
+  "kind": {
+    "event": "Evenemang",
+    "battle-pass": "Stridspass",
+    "specials": "Evenemang",
+    "update": "Uppdatering",
+    "other": "Övrigt"
+  },
+  "live": "Live",
+  "status": {
+    "starts": "Starter {when}",
+    "ends": "Slutar {when}",
+    "ended": "Avslutad {when}",
+    "lands": "Landar {when}",
+    "landed": "Landade {when}"
+  },
+  "read-the-news": "Läs nyheten",
+  "remind-me": "Få en påminnelse på Discord"
+}

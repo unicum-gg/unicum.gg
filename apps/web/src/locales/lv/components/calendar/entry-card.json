@@ -1,0 +1,19 @@
+{
+  "kind": {
+    "event": "Notikums",
+    "battle-pass": "Kaujas pase",
+    "specials": "Akcijas",
+    "update": "Atjauninājums",
+    "other": "Cits"
+  },
+  "live": "Tiešraidē",
+  "status": {
+    "starts": "Sākas {when}",
+    "ends": "Beidzas {when}",
+    "ended": "Beidzās {when}",
+    "lands": "Trāpa {when}",
+    "landed": "Trāpīja {when}"
+  },
+  "read-the-news": "Lasīt jaunumus",
+  "remind-me": "Saņemt atgādinājumu Discord"
+}

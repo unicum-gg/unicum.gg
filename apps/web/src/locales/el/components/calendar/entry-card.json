@@ -1,0 +1,19 @@
+{
+  "kind": {
+    "event": "Εκδήλωση",
+    "battle-pass": "Πάσο Μάχης",
+    "specials": "Προσφορές",
+    "update": "Ενημέρωση",
+    "other": "Άλλα"
+  },
+  "live": "Ζωντανά",
+  "status": {
+    "starts": "Ξεκινά {when}",
+    "ends": "Λήξη {when}",
+    "ended": "Ολοκληρώθηκε {when}",
+    "lands": "Καταλήγει {when}",
+    "landed": "Κατέληξε {when}"
+  },
+  "read-the-news": "Διαβάστε τα νέα",
+  "remind-me": "Λάβετε υπενθύμιση στο Discord"
+}

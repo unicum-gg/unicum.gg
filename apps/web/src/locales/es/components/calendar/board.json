@@ -1,0 +1,7 @@
+{
+  "all": "Todo",
+  "view": {
+    "list": "Lista",
+    "month": "Mes"
+  }
+}

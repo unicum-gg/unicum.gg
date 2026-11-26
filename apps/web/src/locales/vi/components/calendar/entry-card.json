@@ -1,0 +1,19 @@
+{
+  "kind": {
+    "event": "Sự kiện",
+    "battle-pass": "Trận đấu Pass",
+    "specials": "Sự kiện đặc biệt",
+    "update": "Cập nhật",
+    "other": "Khác"
+  },
+  "live": "Trực tiếp",
+  "status": {
+    "starts": "Bắt đầu {when}",
+    "ends": "Kết thúc {when}",
+    "ended": "Đã kết thúc {when}",
+    "lands": "Đổ bộ {when}",
+    "landed": "Đã đổ bộ {when}"
+  },
+  "read-the-news": "Đọc tin tức",
+  "remind-me": "Nhận lời nhắc trên Discord"
+}

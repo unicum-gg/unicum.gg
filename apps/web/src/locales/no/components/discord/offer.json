@@ -14,10 +14,16 @@
   "preview": {
     "invocation": "Noen har brukt /player {name}",
     "tank-description": "Høyeste nivå først.",
-    "tank-title": "Oppdatér 2.4.2 · 50 kjøretøy endret"
+    "tank-title": "Oppdatér 2.4.2 · 50 kjøretøy endret",
+    "starts": "Starter",
+    "ends": "Slutter"
   },
   "tank": {
     "description": "Hver oppdatering og hver Vanlig test legges ut i #tank-changes samme dag som den sendes ut, inkludert {tank}. Ta rollen Kampvognendringer for å få varsler.",
     "heading": "Få høre om neste forbedring eller svekkelse av {tank} på Discord"
+  },
+  "events": {
+    "heading": "Få alle hendelser på Discord",
+    "description": "Alle offisielle hendelser, salg og oppdateringer legges ut i #events og blir lagt til i serverens Arrangementer-fane, slik at Discord minner deg på når de starter. Ta Arrangementer-rollen for å bli pinget."
   }
 }

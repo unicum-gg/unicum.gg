@@ -14,10 +14,16 @@
   "preview": {
     "invocation": "Ktoś użył /player {name}",
     "tank-description": "Najpierw najwyższy poziom.",
-    "tank-title": "Odśwież 2.4.2 · Zmieniono 50 pojazdów"
+    "tank-title": "Odśwież 2.4.2 · Zmieniono 50 pojazdów",
+    "starts": "Rozpoczyna się",
+    "ends": "Kończy się"
   },
   "tank": {
     "description": "Każda aktualizacja i każdy Test ogólny są publikowane na kanale #tank-changes w dniu ich wydania, w tym uwzględniono również {tank}. Wybierz rolę zmian czołgów, aby otrzymywać powiadomienia.",
     "heading": "Dowiedz się na Discordzie o następnym wzmocnieniu lub osłabieniu pojazdu {tank}"
+  },
+  "events": {
+    "heading": "Otrzymuj każde wydarzenie na Discordzie",
+    "description": "Każde oficjalne wydarzenie, wyprzedaż i aktualizacja jest publikowane na kanale #events oraz dodawane do karty Wydarzenia na serwerze, dzięki czemu Discord przypomni Ci o jego rozpoczęciu. Wybierz rolę Wydarzenia, aby otrzymywać oznaczenia."
   }
 }

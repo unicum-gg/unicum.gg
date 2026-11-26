@@ -1,0 +1,19 @@
+{
+  "kind": {
+    "event": "حدث",
+    "battle-pass": "بطاقة المعركة",
+    "specials": "العروض الخاصة",
+    "update": "تحديث",
+    "other": "آخر"
+  },
+  "live": "مباشر",
+  "status": {
+    "starts": "يبدأ {when}",
+    "ends": "ينتهي {when}",
+    "ended": "انتهى {when}",
+    "lands": "يصل {when}",
+    "landed": "وصل {when}"
+  },
+  "read-the-news": "اقرأ الأخبار",
+  "remind-me": "احصل على تذكير في Discord"
+}

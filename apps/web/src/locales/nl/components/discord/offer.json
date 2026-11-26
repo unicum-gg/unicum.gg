@@ -14,10 +14,16 @@
   "preview": {
     "invocation": "Iemand heeft /player {name} gebruikt",
     "tank-description": "Hoogste niveau eerst.",
-    "tank-title": "Update 2.4.2 · 50 voertuigen gewijzigd"
+    "tank-title": "Update 2.4.2 · 50 voertuigen gewijzigd",
+    "starts": "Begint",
+    "ends": "Eindigt"
   },
   "tank": {
     "description": "Elke update en elke Algemene Test wordt op de dag dat deze uitkomt op #tank-changes geplaatst, inclusief {tank}. Neem de rol voor tankwijzigingen aan om een melding te krijgen.",
     "heading": "Hoor in Discord over de volgende verbetering of verslechtering van {tank}"
+  },
+  "events": {
+    "heading": "Ontvang elk evenement op Discord",
+    "description": "Elk officieel evenement, elke aanbieding en elke update wordt in #events geplaatst en toegevoegd aan het tabblad Evenementen van de server, zodat Discord je eraan herinnert wanneer het begint. Neem de rol Evenementen aan om een melding te krijgen."
   }
 }

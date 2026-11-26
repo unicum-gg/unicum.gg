@@ -14,10 +14,16 @@
   "preview": {
     "invocation": "Valaki a /player {name} parancsot használt",
     "tank-description": "A legmagasabb szint elöl.",
-    "tank-title": "Frissítés 2.4.2 · 50 jármű változott"
+    "tank-title": "Frissítés 2.4.2 · 50 jármű változott",
+    "starts": "Kezdődik",
+    "ends": "Véget ér"
   },
   "tank": {
     "description": "Minden frissítés és minden Közönséges Teszt a megjelenés napján közzétéve a #tank-changes csatornán, a {tank} nevét is tartalmazva. Vedd fel a Tank-változások szerepet, hogy pinget kapj.",
     "heading": "Értesülj a Discordon a következő, {tank} járművet érintő erősítésről vagy gyengítésről"
+  },
+  "events": {
+    "heading": "Kapj meg minden eseményt Discordon",
+    "description": "Minden hivatalos eseményt, akciót és frissítést közzéteszünk a #events csatornán, és hozzáadjuk a szerver Események lapjához, így a Discord emlékeztet, amikor elkezdődik. Vedd fel az Események szerepet, hogy pinget kapj."
   }
 }

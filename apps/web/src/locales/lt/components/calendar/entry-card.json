@@ -1,0 +1,19 @@
+{
+  "kind": {
+    "event": "Įvykis",
+    "battle-pass": "Mūšio leidimas",
+    "specials": "Akcijos",
+    "update": "Atnaujinti",
+    "other": "Kitas"
+  },
+  "live": "Tiesiogiai",
+  "status": {
+    "starts": "Pradžia {when}",
+    "ends": "Baigiasi {when}",
+    "ended": "Baigėsi {when}",
+    "lands": "Patenka {when}",
+    "landed": "Pateko {when}"
+  },
+  "read-the-news": "Skaityti naujienas",
+  "remind-me": "Gauti priminimą Discord"
+}

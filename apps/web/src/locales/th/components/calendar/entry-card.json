@@ -1,0 +1,19 @@
+{
+  "kind": {
+    "event": "กิจกรรม",
+    "battle-pass": "บัตรผ่านการรบ",
+    "specials": "ช่วงพิเศษ",
+    "update": "อัปเดต",
+    "other": "อื่นๆ"
+  },
+  "live": "สด",
+  "status": {
+    "starts": "เริ่ม {when}",
+    "ends": "สิ้นสุด {when}",
+    "ended": "สิ้นสุดแล้ว {when}",
+    "lands": "ลง {when}",
+    "landed": "ลงแล้ว {when}"
+  },
+  "read-the-news": "อ่านข่าว",
+  "remind-me": "รับการแจ้งเตือนบน Discord"
+}

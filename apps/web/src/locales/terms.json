@@ -941,7 +941,15 @@
     "In numbers": "بالأرقام",
     "Usage": "الاستخدام",
     "come": "يأتي",
-    "records": "السجلات"
+    "records": "السجلات",
+    "Coming up": "القادمة",
+    "Events": "الفعاليات",
+    "Events calendar": "تقويم الفعاليات",
+    "Pass": "بطاقة المعركة",
+    "Today": "اليوم",
+    "calendar": "التقويم",
+    "entry": "عنصر",
+    "official": "رسمي"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1886,7 +1894,15 @@
     "In numbers": "У лічбах",
     "Usage": "Выкарыстанне",
     "come": "прыходзьце",
-    "records": "рэкорды"
+    "records": "рэкорды",
+    "Coming up": "Наперадзе",
+    "Events": "Падзеі",
+    "Events calendar": "Каляндар падзей",
+    "Pass": "Пропуск",
+    "Today": "Сёння",
+    "calendar": "каляндар",
+    "entry": "запіс",
+    "official": "афіцыйны"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -3049,7 +3065,14 @@
     "In numbers": "В числа",
     "Usage": "Използване",
     "come": "Ела",
-    "records": "Рекорди"
+    "records": "Рекорди",
+    "Specials": "Акции",
+    "Coming up": "Предстоящи",
+    "Events calendar": "Календар на събитията",
+    "Pass": "Боен пропуск",
+    "calendar": "календар",
+    "entry": "запис",
+    "official": "официален"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -4002,7 +4025,15 @@
     "In numbers": "U brojkama",
     "Usage": "Upotreba",
     "come": "dođite",
-    "records": "rekordi"
+    "records": "rekordi",
+    "Coming up": "Uskoro",
+    "Events": "Događaji",
+    "Events calendar": "Kalendar događaja",
+    "Pass": "Propusnica",
+    "Today": "Danas",
+    "calendar": "kalendar",
+    "entry": "stavka",
+    "official": "zvanično"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -5176,7 +5207,15 @@
     "In numbers": "V číslech",
     "Usage": "Využití",
     "come": "přijít",
-    "records": "rekordy"
+    "records": "rekordy",
+    "Specials": "Speciály",
+    "Coming up": "Nadcházející",
+    "Events": "Události",
+    "Events calendar": "Kalendář událostí",
+    "Pass": "Battle Pass",
+    "calendar": "kalendář",
+    "entry": "položka",
+    "official": "oficiální"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -6356,7 +6395,15 @@
     "In numbers": "I tal",
     "Usage": "Brug",
     "come": "kom",
-    "records": "rekorder"
+    "records": "rekorder",
+    "Specials": "Særtilbud",
+    "Coming up": "Kommende",
+    "Events": "Begivenheder",
+    "Events calendar": "Begivenhedskalender",
+    "Pass": "Pas",
+    "calendar": "kalender",
+    "entry": "indlæg",
+    "official": "officiel"
   },
   "de": {
     "(optional)": "(optional)",
@@ -7529,7 +7576,15 @@
     "In numbers": "In Zahlen",
     "Usage": "Nutzung",
     "come": "kommen",
-    "records": "Rekorde"
+    "records": "Rekorde",
+    "Specials": "Specials",
+    "Coming up": "Demnächst",
+    "Events": "Events",
+    "Events calendar": "Eventkalender",
+    "Pass": "Pass",
+    "calendar": "Kalender",
+    "entry": "Eintrag",
+    "official": "offiziell"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -8708,7 +8763,15 @@
     "In numbers": "Σε αριθμούς",
     "Usage": "Χρήση",
     "come": "έλα",
-    "records": "ρεκόρ"
+    "records": "ρεκόρ",
+    "Specials": "Προσφορές",
+    "Coming up": "Προσεχώς",
+    "Events": "Εκδηλώσεις",
+    "Events calendar": "Ημερολόγιο εκδηλώσεων",
+    "Pass": "Πάσο",
+    "calendar": "ημερολόγιο",
+    "entry": "καταχώριση",
+    "official": "επίσημο"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -9868,7 +9931,15 @@
     "In numbers": "En números",
     "Usage": "Uso",
     "come": "venir",
-    "records": "récords"
+    "records": "récords",
+    "Specials": "Ofertas especiales",
+    "Coming up": "Próximamente",
+    "Events": "Eventos",
+    "Events calendar": "Calendario de eventos",
+    "Pass": "Pase",
+    "calendar": "calendario",
+    "entry": "entrada",
+    "official": "oficial"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -11052,7 +11123,15 @@
     "In numbers": "Numeroina",
     "Usage": "Käyttö",
     "come": "tule",
-    "records": "ennätykset"
+    "records": "ennätykset",
+    "Specials": "Erikoistarjoukset",
+    "Coming up": "Tulossa",
+    "Events": "Tapahtumat",
+    "Events calendar": "Tapahtumakalenteri",
+    "Pass": "Passi",
+    "calendar": "kalenteri",
+    "entry": "merkintä",
+    "official": "virallinen"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -12214,7 +12293,15 @@
     "In numbers": "En chiffres",
     "Usage": "Utilisation",
     "come": "venir",
-    "records": "records"
+    "records": "records",
+    "Specials": "Offres spéciales",
+    "Coming up": "À venir",
+    "Events": "Événements",
+    "Events calendar": "Calendrier des événements",
+    "Pass": "Passe",
+    "calendar": "calendrier",
+    "entry": "entrée",
+    "official": "officiel"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -13160,7 +13247,15 @@
     "In numbers": "आंकड़ों में",
     "Usage": "उपयोग",
     "come": "आएँ",
-    "records": "रिकॉर्ड"
+    "records": "रिकॉर्ड",
+    "Coming up": "आने वाले",
+    "Events": "इवेंट्स",
+    "Events calendar": "इवेंट कैलेंडर",
+    "Pass": "पास",
+    "Today": "आज",
+    "calendar": "कैलेंडर",
+    "entry": "प्रविष्टि",
+    "official": "आधिकारिक"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -14337,7 +14432,15 @@
     "In numbers": "U brojkama",
     "Usage": "Upotreba",
     "come": "dođi",
-    "records": "Rekordi"
+    "records": "Rekordi",
+    "Specials": "Akcije",
+    "Coming up": "Nadolazeće",
+    "Events": "Događaji",
+    "Events calendar": "Kalendar događaja",
+    "Pass": "Propusnica",
+    "calendar": "kalendar",
+    "entry": "stavka",
+    "official": "službeni"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -15516,7 +15619,15 @@
     "In numbers": "Számokban",
     "Usage": "Használat",
     "come": "gyere",
-    "records": "Rekordok"
+    "records": "Rekordok",
+    "Specials": "Akciók",
+    "Coming up": "Közelgő",
+    "Events": "Események",
+    "Events calendar": "Eseménynaptár",
+    "Pass": "Bérlet",
+    "calendar": "naptár",
+    "entry": "bejegyzés",
+    "official": "hivatalos"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -16691,7 +16802,15 @@
     "In numbers": "Nei numeri",
     "Usage": "Utilizzo",
     "come": "come",
-    "records": "record"
+    "records": "record",
+    "Specials": "Speciali",
+    "Coming up": "In arrivo",
+    "Events": "Eventi",
+    "Events calendar": "Calendario degli eventi",
+    "Pass": "Pass",
+    "calendar": "calendario",
+    "entry": "voce",
+    "official": "ufficiale"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -17873,7 +17992,15 @@
     "In numbers": "数字で見る",
     "Usage": "使用率",
     "come": "来る",
-    "records": "記録"
+    "records": "記録",
+    "Specials": "スペシャル",
+    "Coming up": "今後の予定",
+    "Events": "イベント",
+    "Events calendar": "イベントカレンダー",
+    "Pass": "パス",
+    "calendar": "カレンダー",
+    "entry": "項目",
+    "official": "公式"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -18819,7 +18946,15 @@
     "In numbers": "Сандарда",
     "Usage": "Қолданылуы",
     "come": "келу",
-    "records": "рекордтар"
+    "records": "рекордтар",
+    "Coming up": "Алда",
+    "Events": "Оқиғалар",
+    "Events calendar": "Оқиғалар күнтізбесі",
+    "Pass": "Билет",
+    "Today": "Бүгін",
+    "calendar": "күнтізбе",
+    "entry": "жазба",
+    "official": "ресми"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -20005,7 +20140,15 @@
     "In numbers": "숫자로",
     "Usage": "사용량",
     "come": "오세요",
-    "records": "기록"
+    "records": "기록",
+    "Specials": "이벤트",
+    "Coming up": "예정",
+    "Events": "이벤트",
+    "Events calendar": "이벤트 캘린더",
+    "Pass": "패스",
+    "calendar": "캘린더",
+    "entry": "항목",
+    "official": "공식"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -21187,7 +21330,15 @@
     "In numbers": "Skaičiais",
     "Usage": "Naudojimas",
     "come": "ateikite",
-    "records": "rekordai"
+    "records": "rekordai",
+    "Specials": "Akcijos",
+    "Coming up": "Artėjantys",
+    "Events": "Renginiai",
+    "Events calendar": "Renginių kalendorius",
+    "Pass": "Mūšio leidimas",
+    "calendar": "kalendorius",
+    "entry": "įrašas",
+    "official": "oficialus"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -22356,7 +22507,15 @@
     "In numbers": "Skaitļos",
     "Usage": "Lietojums",
     "come": "nākt",
-    "records": "rekordi"
+    "records": "rekordi",
+    "Specials": "Akcijas",
+    "Coming up": "Tuvākie",
+    "Events": "Notikumi",
+    "Events calendar": "Notikumu kalendārs",
+    "Pass": "Pase",
+    "calendar": "kalendārs",
+    "entry": "ieraksts",
+    "official": "oficiāls"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -23540,7 +23699,15 @@
     "In numbers": "In cijfers",
     "Usage": "Gebruik",
     "come": "komen",
-    "records": "records"
+    "records": "records",
+    "Specials": "Acties",
+    "Coming up": "Binnenkort",
+    "Events": "Evenementen",
+    "Events calendar": "Evenementenkalender",
+    "Pass": "Pas",
+    "calendar": "kalender",
+    "entry": "item",
+    "official": "officieel"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -24715,7 +24882,15 @@
     "In numbers": "I tall",
     "Usage": "Bruk",
     "come": "komme",
-    "records": "rekorder"
+    "records": "rekorder",
+    "Specials": "Spesialer",
+    "Coming up": "Kommende",
+    "Events": "Arrangementer",
+    "Events calendar": "Arrangementskalender",
+    "Pass": "Pass",
+    "calendar": "kalender",
+    "entry": "oppføring",
+    "official": "offisiell"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -25887,7 +26062,15 @@
     "In numbers": "W liczbach",
     "Usage": "Użycie",
     "come": "przyjdź",
-    "records": "rekordy"
+    "records": "rekordy",
+    "Specials": "Promocje",
+    "Coming up": "Nadchodzące",
+    "Events": "Wydarzenia",
+    "Events calendar": "Kalendarz wydarzeń",
+    "Pass": "Przepustka",
+    "calendar": "kalendarz",
+    "entry": "wpis",
+    "official": "oficjalne"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -27052,7 +27235,15 @@
     "In numbers": "Em números",
     "Usage": "Utilização",
     "come": "venha",
-    "records": "registos"
+    "records": "registos",
+    "Specials": "Especiais",
+    "Coming up": "Próximos",
+    "Events": "Eventos",
+    "Events calendar": "Calendário de eventos",
+    "Pass": "Passe",
+    "calendar": "calendário",
+    "entry": "entrada",
+    "official": "oficial"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -28218,7 +28409,15 @@
     "In numbers": "În cifre",
     "Usage": "Utilizare",
     "come": "vin",
-    "records": "recorduri"
+    "records": "recorduri",
+    "Specials": "Speciale",
+    "Coming up": "În curând",
+    "Events": "Evenimente",
+    "Events calendar": "Calendarul evenimentelor",
+    "Pass": "Pass",
+    "calendar": "calendar",
+    "entry": "intrare",
+    "official": "oficial"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -29372,7 +29571,15 @@
     "In numbers": "В цифрах",
     "Usage": "Использование",
     "come": "приходить",
-    "records": "рекорды"
+    "records": "рекорды",
+    "Specials": "Акции",
+    "Coming up": "Предстоящие",
+    "Events": "События",
+    "Events calendar": "Календарь событий",
+    "Pass": "Боевой пропуск",
+    "calendar": "календарь",
+    "entry": "событие",
+    "official": "официальный"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -30321,7 +30528,15 @@
     "In numbers": "V številkah",
     "Usage": "Uporaba",
     "come": "pridi",
-    "records": "rekordi"
+    "records": "rekordi",
+    "Coming up": "Prihajajoče",
+    "Events": "Dogodki",
+    "Events calendar": "Koledar dogodkov",
+    "Pass": "Prepustnica",
+    "Today": "Danes",
+    "calendar": "koledar",
+    "entry": "vnos",
+    "official": "uradni"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -31500,7 +31715,15 @@
     "In numbers": "У бројкама",
     "Usage": "Употреба",
     "come": "дођите",
-    "records": "рекорди"
+    "records": "рекорди",
+    "Specials": "Specijali",
+    "Coming up": "Предстојеће",
+    "Events": "Догађаји",
+    "Events calendar": "Календар догађаја",
+    "Pass": "Пропусница",
+    "calendar": "календар",
+    "entry": "ставка",
+    "official": "званично"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -32685,7 +32908,15 @@
     "In numbers": "I siffror",
     "Usage": "Användning",
     "come": "kom",
-    "records": "rekord"
+    "records": "rekord",
+    "Specials": "Evenemang",
+    "Coming up": "Kommande",
+    "Events": "Evenemang",
+    "Events calendar": "Evenemangskalender",
+    "Pass": "Stridspass",
+    "calendar": "kalender",
+    "entry": "post",
+    "official": "officiell"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -33865,7 +34096,15 @@
     "In numbers": "ในรูปตัวเลข",
     "Usage": "การใช้งาน",
     "come": "มา",
-    "records": "สถิติ"
+    "records": "สถิติ",
+    "Specials": "ช่วงพิเศษ",
+    "Coming up": "เร็ว ๆ นี้",
+    "Events": "กิจกรรม",
+    "Events calendar": "ปฏิทินกิจกรรม",
+    "Pass": "บัตรผ่าน",
+    "calendar": "ปฏิทิน",
+    "entry": "รายการ",
+    "official": "ทางการ"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -34813,7 +35052,15 @@
     "In numbers": "Sa mga numero",
     "Usage": "Paggamit",
     "come": "dumating",
-    "records": "mga rekord"
+    "records": "mga rekord",
+    "Coming up": "Mga paparating",
+    "Events": "Mga kaganapan",
+    "Events calendar": "Kalendaryo ng mga kaganapan",
+    "Pass": "Pass",
+    "Today": "Ngayon",
+    "calendar": "kalendaryo",
+    "entry": "tala",
+    "official": "opisyal"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -35990,7 +36237,15 @@
     "In numbers": "Sayılarla",
     "Usage": "Kullanım",
     "come": "gel",
-    "records": "Kayıtlar"
+    "records": "Kayıtlar",
+    "Specials": "Fırsatlar",
+    "Coming up": "Yaklaşan",
+    "Events": "Etkinlikler",
+    "Events calendar": "Etkinlik takvimi",
+    "Pass": "Savaş Bileti",
+    "calendar": "takvim",
+    "entry": "kayıt",
+    "official": "resmi"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -37159,7 +37414,15 @@
     "In numbers": "У цифрах",
     "Usage": "Використання",
     "come": "приходьте",
-    "records": "рекорди"
+    "records": "рекорди",
+    "Specials": "Акції",
+    "Coming up": "Найближчі події",
+    "Events": "Події",
+    "Events calendar": "Календар подій",
+    "Pass": "Бойовий пропуск",
+    "calendar": "календар",
+    "entry": "подія",
+    "official": "офіційний"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -38317,7 +38580,15 @@
     "In numbers": "Theo số liệu",
     "Usage": "Sử dụng",
     "come": "đến",
-    "records": "thành tích"
+    "records": "thành tích",
+    "Specials": "Sự kiện đặc biệt",
+    "Coming up": "Sắp diễn ra",
+    "Events": "Sự kiện",
+    "Events calendar": "Lịch sự kiện",
+    "Pass": "Pass",
+    "calendar": "lịch",
+    "entry": "mục",
+    "official": "chính thức"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -39497,6 +39768,14 @@
     "In numbers": "数据统计",
     "Usage": "使用情况",
     "come": "来",
-    "records": "记录"
+    "records": "记录",
+    "Specials": "特惠",
+    "Coming up": "即将开始",
+    "Events": "活动",
+    "Events calendar": "活动日历",
+    "Pass": "通行证",
+    "calendar": "日历",
+    "entry": "条目",
+    "official": "官方"
   }
 }

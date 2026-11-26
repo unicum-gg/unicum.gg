@@ -14,10 +14,16 @@
   "preview": {
     "invocation": "Ai đó đã sử dụng /player {name}",
     "tank-description": "Cấp cao nhất trước.",
-    "tank-title": "Cập nhật 2.4.2 · 50 xe tăng đã thay đổi"
+    "tank-title": "Cập nhật 2.4.2 · 50 xe tăng đã thay đổi",
+    "starts": "Bắt đầu",
+    "ends": "Kết thúc"
   },
   "tank": {
     "description": "Mọi cập nhật và mọi Kiểm tra chung đều đã đăng lên #tank-changes vào ngày phát hành, bao gồm cả {tank}. Chọn vai trò thay đổi Xe tăng để được ping.",
     "heading": "Nhận thông tin về lần buff hoặc nerf tiếp theo của {tank} trên Discord"
+  },
+  "events": {
+    "heading": "Nhận mọi sự kiện trên Discord",
+    "description": "Mọi sự kiện, đợt giảm giá và bản cập nhật chính thức đều được đăng lên #events và thêm vào thẻ Sự kiện của máy chủ, để Discord nhắc bạn khi chúng bắt đầu. Nhận vai trò Sự kiện để được nhắc tên."
   }
 }

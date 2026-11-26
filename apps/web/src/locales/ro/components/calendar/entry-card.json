@@ -1,0 +1,19 @@
+{
+  "kind": {
+    "event": "Eveniment",
+    "battle-pass": "Bătălie Pass",
+    "specials": "Speciale",
+    "update": "Actualizare",
+    "other": "Altele"
+  },
+  "live": "Live",
+  "status": {
+    "starts": "Începe {when}",
+    "ends": "Se încheie {when}",
+    "ended": "S-a încheiat {when}",
+    "lands": "Devine disponibil {when}",
+    "landed": "A devenit disponibil {when}"
+  },
+  "read-the-news": "Citește știrea",
+  "remind-me": "Primește un memento pe Discord"
+}
