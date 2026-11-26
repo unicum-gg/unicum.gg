@@ -10,7 +10,7 @@ const HOUR_MS = 60 * MINUTE_MS;
 const DAY_MS = 24 * HOUR_MS;
 
 /** Discord's limits on a scheduled event. */
-const EVENT_LIMITS = { name: 100, description: 1000, location: 100 } as const;
+export const EVENT_LIMITS = { name: 100, description: 1000, location: 100 } as const;
 
 /**
  * An update is published as a one-minute entry (07:30 to 07:31) marking the
@@ -35,7 +35,7 @@ const LONG_EVENT_MS = 7 * DAY_MS;
  * Those open a couple of minutes after they are created, and say when they
  * really began.
  */
-const LATE_START_MS = 2 * MINUTE_MS;
+export const LATE_START_MS = 2 * MINUTE_MS;
 
 /** The widget's style tokens, as card accents and emoji. */
 const COLOR: Record<string, number> = {
@@ -48,9 +48,12 @@ const ICON: Record<string, string> = {
   "battle-pass": "🎖️",
   star: "⭐",
   "calendar-days": "📅",
+  calendar: "📅",
+  swords: "⚔️",
+  "signal-stream": "📺",
   "arrow-down-to-line": "🛠️",
 };
-const emoji = (icon: string) => ICON[icon] ?? "📅";
+export const emoji = (icon: string) => ICON[icon] ?? "📅";
 
 /** When the event runs, which is not always when the entry does. */
 export function eventWindow(group: PortalEventGroup): { start: Date; end: Date } {
@@ -95,7 +98,12 @@ const utc = (at: Date) =>
  * card links back to it, which is the point of announcing on our server.
  */
 export function calendarPageUrl(group: PortalEventGroup): string {
-  const only = group.regions.length === 1 ? group.regions[0] : null;
+  return calendarUrlForRegions(group.regions);
+}
+
+/** The same, from the regions alone (the monthly entries have no widget group). */
+export function calendarUrlForRegions(regions: Region[]): string {
+  const only = regions.length === 1 ? regions[0] : null;
   const path = only && only !== Region.EU ? `/${only}/calendar` : "/calendar";
   return `${APP_IDENTITY.URL}${path}`;
 }

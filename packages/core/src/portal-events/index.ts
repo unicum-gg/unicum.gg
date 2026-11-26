@@ -5,3 +5,4 @@ export * from "./discord";
 export * from "./publish";
 export * from "./read";
 export * from "./monthly";
+export * from "./publish-monthly";

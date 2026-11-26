@@ -15,7 +15,7 @@ import {
 import { readOpenPortalEventGroups, type PortalEventGroup } from "./group";
 
 /** Discord's scheduled event status for one already running. */
-const EVENT_ACTIVE = 2;
+export const EVENT_ACTIVE = 2;
 
 /**
  * A card for an entry that began longer ago than this is not posted: that is
@@ -68,7 +68,7 @@ async function updateRows(
 }
 
 /** The banner as a data URI, which is the only way Discord takes an event cover. */
-async function bannerImage(url: string | null): Promise<string | null> {
+export async function bannerImage(url: string | null): Promise<string | null> {
   if (!url) return null;
   try {
     const res = await fetch(url, { signal: AbortSignal.timeout(15_000) });

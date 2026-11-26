@@ -4,6 +4,7 @@ import { createStallAlert } from "@unicum.gg/core/cron/stall-alert";
 import { capturePortalEvents } from "./capture";
 import { captureMonthlyEvents, monthsAround } from "./monthly";
 import { portalEventsPublishingEnabled, publishPortalEvents } from "./publish";
+import { publishMonthlyEvents } from "./publish-monthly";
 
 /**
  * Hourly, at twelve past: the widget changes a few times a week, and an entry
@@ -65,7 +66,9 @@ export function startPortalEventsCron(): void {
       const counts = await captureAllPortalEvents();
       console.log("[portal-events-cron] captured", counts);
       if (!publishing) return;
-      for (const line of await publishPortalEvents()) {
+      // The widget first: an entry both sources carry is the widget's, and
+      // the monthly pass skips whatever the widget already published.
+      for (const line of [...(await publishPortalEvents()), ...(await publishMonthlyEvents())]) {
         console.log(`[portal-events-cron] ${line}`);
       }
     })
