@@ -3,5 +3,10 @@
   "versus": "{metric} наспрам региона {region}",
   "top": "Najbolji {percent}%",
   "ahead-of": "Испред {percent}%",
-  "against": "У поређењу са {players} праћених налога региона {region} са најмање {battles} bitke."
+  "against": "У поређењу са {players} праћених налога региона {region} са најмање {battles} bitke.",
+  "against-recent": "Током {window}, protiv {players} {region} nalozi који су одиграно најмање {battles} bitke у том прозору.",
+  "against-career": "Током {window}, protiv {players} праћено {region} naloga са најмање {battles} bitke.",
+  "career": "цео ток каријере",
+  "recent": "последњих 30 dana",
+  "window": "Period"
 }

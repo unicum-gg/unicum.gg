@@ -3,5 +3,10 @@
   "versus": "Porovnanie {metric} s regiónom {region}",
   "top": "Najlepšie {percent}%",
   "ahead-of": "Lepší ako {percent} %",
-  "against": "V porovnaní s {players} sledovanými účtami v regióne {region}, ktoré odohrali aspoň {battles} bitiek."
+  "against": "V porovnaní s {players} sledovanými účtami v regióne {region}, ktoré odohrali aspoň {battles} bitiek.",
+  "against-recent": "Počas {window} proti {players} účtom v regióne {region}, ktoré odohrali v tomto okne aspoň {battles} bitiek.",
+  "against-career": "Počas {window} proti {players} sledovaným účtom v regióne {region}, ktoré majú aspoň {battles} bitiek.",
+  "career": "celý priebeh kariéry",
+  "recent": "posledných 30 dni",
+  "window": "Obdobie"
 }

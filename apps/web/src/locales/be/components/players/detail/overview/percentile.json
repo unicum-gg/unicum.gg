@@ -3,5 +3,10 @@
   "versus": "{metric} супраць {region}",
   "top": "Топ {percent}%",
   "ahead-of": "Наперадзе за {percent}%",
-  "against": "Супраць {players} адсочваных уліковых запісаў рэгіёна {region} з не менш чым {battles} баямі."
+  "against": "Супраць {players} адсочваных уліковых запісаў рэгіёна {region} з не менш чым {battles} баямі.",
+  "against-recent": "За {window}, супраць {players} уліковых запісаў з рэгіёна {region}, якія маюць не менш за {battles} згуляных баёў у гэтым акне.",
+  "against-career": "За {window}, супраць {players} адсочаных у рэгіёне {region} уліковых запісаў, у якіх не менш за {battles} баёў.",
+  "career": "увесь кар’ерны шлях",
+  "recent": "апошнія 30 дзён",
+  "window": "Перыяд"
 }

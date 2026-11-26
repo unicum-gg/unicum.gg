@@ -3,5 +3,10 @@
   "versus": "{metric} par rapport à {region}",
   "top": "Top {percent}%",
   "ahead-of": "Devance {percent} % des joueurs",
-  "against": "Par rapport à {players} comptes {region} suivis ayant disputé au moins {battles} batailles."
+  "against": "Par rapport à {players} comptes {region} suivis ayant disputé au moins {battles} batailles.",
+  "against-recent": "Sur {window}, contre les {players} comptes de la {region} ayant joué au moins {battles} batailles pendant cette période.",
+  "against-career": "Sur {window}, contre {players} comptes de la {region} suivis ayant au moins {battles} batailles.",
+  "career": "toute la carrière",
+  "recent": "les 30 derniers jours",
+  "window": "Période"
 }

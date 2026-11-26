@@ -3,5 +3,10 @@
   "versus": "{metric} және {region}",
   "top": "Жоғары {percent}%",
   "ahead-of": "{percent}% ойыншыдан алда",
-  "against": "Кемінде {battles} шайқасы бар, {region} аймағынан бақылаудағы {players} аккаунтқа қарсы."
+  "against": "Кемінде {battles} шайқасы бар, {region} аймағынан бақылаудағы {players} аккаунтқа қарсы.",
+  "against-recent": "{window} ішінде кемінде {battles} ұрыс ойнаған {players} {region} аккаунттарға қарсы.",
+  "against-career": "{window} ішінде кемінде {battles} ұрысы бар бақыланатын {players} {region} аккаунттарға қарсы.",
+  "career": "бүкіл мансап",
+  "recent": "соңғы 30 күн",
+  "window": "Кезең"
 }

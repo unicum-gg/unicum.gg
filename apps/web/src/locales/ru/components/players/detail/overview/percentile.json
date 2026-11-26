@@ -3,5 +3,10 @@
   "versus": "{metric} против региона {region}",
   "top": "Топ {percent}%",
   "ahead-of": "Выше, чем у {percent}%",
-  "against": "Против {players} отслеживаемых аккаунтов региона {region} минимум с {battles} боями."
+  "against": "Против {players} отслеживаемых аккаунтов региона {region} минимум с {battles} боями.",
+  "against-recent": "За {window}, против {players} аккаунтов региона {region}, сыгравших за это окно как минимум {battles} боёв.",
+  "against-career": "За {window}, против {players} отслеживаемых аккаунтов региона {region}, сыгравших как минимум {battles} боёв.",
+  "career": "вся карьера",
+  "recent": "последние 30 дней",
+  "window": "Период"
 }

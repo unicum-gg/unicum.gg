@@ -3,5 +3,10 @@
   "versus": "{metric} mot {region}",
   "top": "Topp {percent}%",
   "ahead-of": "Foran {percent} %",
-  "against": "Mot {players} registrerte {region}-kontoer med minst {battles} kamper."
+  "against": "Mot {players} registrerte {region}-kontoer med minst {battles} kamper.",
+  "against-recent": "I løpet av {window}, mot {players} kontoer i {region} som har spilt minst {battles} kamper i {window}.",
+  "against-career": "I løpet av {window}, mot {players} kontoer i {region} som er sporet og har minst {battles} kamper.",
+  "career": "hele karrieren",
+  "recent": "de siste 30 dager",
+  "window": "Periode"
 }

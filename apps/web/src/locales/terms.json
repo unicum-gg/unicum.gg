@@ -927,7 +927,8 @@
     "leaderboards": "لوحات المتصدرين",
     "style": "النمط",
     "everything": "كل شيء",
-    "Join": "انضم"
+    "Join": "انضم",
+    "Period": "الفترة"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1858,7 +1859,8 @@
     "leaderboards": "рэйтынгі",
     "style": "стыль",
     "everything": "усё",
-    "Join": "Далучыцца"
+    "Join": "Далучыцца",
+    "Period": "Перыяд"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -3007,7 +3009,8 @@
     "leaderboards": "класации",
     "style": "стил",
     "everything": "всичко",
-    "Join": "Присъедини се"
+    "Join": "Присъедини се",
+    "Period": "Период"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -3946,7 +3949,8 @@
     "leaderboards": "rang-liste",
     "style": "stil",
     "everything": "sve",
-    "Join": "Pridruži se"
+    "Join": "Pridruži se",
+    "Period": "Period"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -5106,7 +5110,8 @@
     "leaderboards": "žebříčky",
     "style": "styl",
     "everything": "vše",
-    "Join": "Připojit se"
+    "Join": "Připojit se",
+    "Period": "Období"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -6272,7 +6277,8 @@
     "leaderboards": "ranglister",
     "style": "stil",
     "everything": "alt",
-    "Join": "Deltag"
+    "Join": "Deltag",
+    "Period": "Periode"
   },
   "de": {
     "(optional)": "(optional)",
@@ -7431,7 +7437,8 @@
     "leaderboards": "bestenlisten",
     "style": "stil",
     "everything": "alles",
-    "Join": "Beitreten"
+    "Join": "Beitreten",
+    "Period": "Zeitraum"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -8596,7 +8603,8 @@
     "leaderboards": "πίνακες κατάταξης",
     "style": "στυλ",
     "everything": "όλα",
-    "Join": "Συμμετοχή"
+    "Join": "Συμμετοχή",
+    "Period": "Περίοδος"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -9742,7 +9750,8 @@
     "leaderboards": "clasificaciones",
     "style": "estilo",
     "everything": "todo",
-    "Join": "Únete"
+    "Join": "Únete",
+    "Period": "Periodo"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -10912,7 +10921,8 @@
     "leaderboards": "tulostaulukot",
     "style": "tyyli",
     "everything": "kaikki",
-    "Join": "Liity"
+    "Join": "Liity",
+    "Period": "Ajanjakso"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -12060,7 +12070,8 @@
     "leaderboards": "classements",
     "style": "style",
     "everything": "tout",
-    "Join": "Rejoindre"
+    "Join": "Rejoindre",
+    "Period": "Période"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -12992,7 +13003,8 @@
     "leaderboards": "लीडरबोर्ड",
     "style": "शैली",
     "everything": "सब कुछ",
-    "Join": "जुड़ें"
+    "Join": "जुड़ें",
+    "Period": "अवधि"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -14155,7 +14167,8 @@
     "leaderboards": "ljestvice",
     "style": "stil",
     "everything": "sve",
-    "Join": "Pridruži se"
+    "Join": "Pridruži se",
+    "Period": "Razdoblje"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -15320,7 +15333,8 @@
     "leaderboards": "ranglisták",
     "style": "stílus",
     "everything": "minden",
-    "Join": "Csatlakozás"
+    "Join": "Csatlakozás",
+    "Period": "Időszak"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -16481,7 +16495,8 @@
     "leaderboards": "classifiche",
     "style": "stile",
     "everything": "tutto",
-    "Join": "Unisciti"
+    "Join": "Unisciti",
+    "Period": "Periodo"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -17649,7 +17664,8 @@
     "leaderboards": "リーダーボード",
     "style": "スタイル",
     "everything": "すべて",
-    "Join": "参加"
+    "Join": "参加",
+    "Period": "期間"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -18581,7 +18597,8 @@
     "leaderboards": "көшбасшылар тақталары",
     "style": "стиль",
     "everything": "барлығы",
-    "Join": "Қосылу"
+    "Join": "Қосылу",
+    "Period": "Кезең"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -19753,7 +19770,8 @@
     "leaderboards": "순위표",
     "style": "스타일",
     "everything": "전체",
-    "Join": "가입"
+    "Join": "가입",
+    "Period": "기간"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -20921,7 +20939,8 @@
     "leaderboards": "lyderių lentelės",
     "style": "stilius",
     "everything": "viskas",
-    "Join": "Prisijungti"
+    "Join": "Prisijungti",
+    "Period": "Laikotarpis"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -22076,7 +22095,8 @@
     "leaderboards": "līderu saraksti",
     "style": "stils",
     "everything": "viss",
-    "Join": "Pievienoties"
+    "Join": "Pievienoties",
+    "Period": "Periods"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -23246,7 +23266,8 @@
     "leaderboards": "klassementen",
     "style": "stijl",
     "everything": "alles",
-    "Join": "Word lid"
+    "Join": "Word lid",
+    "Period": "Periode"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -24407,7 +24428,8 @@
     "leaderboards": "topplister",
     "style": "stil",
     "everything": "alt",
-    "Join": "Bli med"
+    "Join": "Bli med",
+    "Period": "Periode"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -25565,7 +25587,8 @@
     "leaderboards": "rankingi",
     "style": "styl",
     "everything": "wszystko",
-    "Join": "Dołącz"
+    "Join": "Dołącz",
+    "Period": "Okres"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -26716,7 +26739,8 @@
     "leaderboards": "classificações",
     "style": "estilo",
     "everything": "tudo",
-    "Join": "Entrar"
+    "Join": "Entrar",
+    "Period": "Período"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -27868,7 +27892,8 @@
     "leaderboards": "clasamente",
     "style": "stil",
     "everything": "totul",
-    "Join": "Alătură-te"
+    "Join": "Alătură-te",
+    "Period": "Perioadă"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -29008,7 +29033,8 @@
     "leaderboards": "таблицы лидеров",
     "style": "стиль",
     "everything": "всё",
-    "Join": "Присоединиться"
+    "Join": "Присоединиться",
+    "Period": "Период"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -29943,7 +29969,8 @@
     "leaderboards": "rebríčky",
     "style": "štýl",
     "everything": "vse",
-    "Join": "Pridruži se"
+    "Join": "Pridruži se",
+    "Period": "Obdobje"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -31108,7 +31135,8 @@
     "leaderboards": "rang-liste",
     "style": "stil",
     "everything": "све",
-    "Join": "Pridruži se"
+    "Join": "Pridruži se",
+    "Period": "Period"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -32279,7 +32307,8 @@
     "leaderboards": "topplistor",
     "style": "stil",
     "everything": "allt",
-    "Join": "Gå med"
+    "Join": "Gå med",
+    "Period": "Period"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -33445,7 +33474,8 @@
     "leaderboards": "กระดานจัดอันดับ",
     "style": "สไตล์",
     "everything": "ทั้งหมด",
-    "Join": "เข้าร่วม"
+    "Join": "เข้าร่วม",
+    "Period": "ช่วงเวลา"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -34379,7 +34409,8 @@
     "leaderboards": "mga leaderboard",
     "style": "istilo",
     "everything": "lahat",
-    "Join": "Sumali"
+    "Join": "Sumali",
+    "Period": "Panahon"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -35542,7 +35573,8 @@
     "leaderboards": "liderlik tabloları",
     "style": "stil",
     "everything": "her şey",
-    "Join": "Katıl"
+    "Join": "Katıl",
+    "Period": "Dönem"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -36697,7 +36729,8 @@
     "leaderboards": "таблиці лідерів",
     "style": "стиль",
     "everything": "усе",
-    "Join": "Приєднатися"
+    "Join": "Приєднатися",
+    "Period": "Період"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -37841,7 +37874,8 @@
     "leaderboards": "bảng xếp hạng",
     "style": "phong cách",
     "everything": "tất cả",
-    "Join": "Tham gia"
+    "Join": "Tham gia",
+    "Period": "Khoảng thời gian"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -39007,6 +39041,7 @@
     "leaderboards": "排行榜",
     "style": "风格",
     "everything": "全部",
-    "Join": "加入"
+    "Join": "加入",
+    "Period": "时间段"
   }
 }

@@ -3,5 +3,10 @@
   "versus": "{metric} prieš {region}",
   "top": "Viršuje {percent}%",
   "ahead-of": "Lenkia {percent}%",
-  "against": "Prieš {players} stebimas {region} paskyras, turinčias bent {battles} mūšių."
+  "against": "Prieš {players} stebimas {region} paskyras, turinčias bent {battles} mūšių.",
+  "against-recent": "Per {window}, prieš {players} {region} paskyras, kuriose per tą langą buvo žaista bent {battles} mūšių.",
+  "against-career": "Per {window}, prieš {players} stebimas {region} paskyras, kuriose buvo bent {battles} mūšių.",
+  "career": "visas karjeros laikotarpis",
+  "recent": "paskutinės 30 dienų",
+  "window": "Laikotarpis"
 }

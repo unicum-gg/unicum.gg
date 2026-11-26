@@ -3,5 +3,10 @@
   "versus": "{metric} 对比 {region}",
   "top": "顶级 {percent}%",
   "ahead-of": "领先{percent}%",
-  "against": "在已追踪的{region}地区账号中，与至少进行过{battles}战斗场次的{players}玩家对抗。"
+  "against": "在已追踪的{region}地区账号中，与至少进行过{battles}战斗场次的{players}玩家对抗。",
+  "against-recent": "在{window}内，对抗{region}地区的{players}个账号，这些账号在该窗口内至少进行过{battles}场战斗。",
+  "against-career": "在{window}内，对抗{region}地区至少进行过{battles}场战斗的{players}个已追踪账号。",
+  "career": "整个生涯",
+  "recent": "最近30天",
+  "window": "时间段"
 }

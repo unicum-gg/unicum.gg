@@ -3,5 +3,10 @@
   "versus": "{metric} versus {region}",
   "top": "Top {percent}%",
   "ahead-of": "Beter dan {percent}%",
-  "against": "Vergeleken met {players} bijgehouden accounts in {region} met minstens {battles} gevechten."
+  "against": "Vergeleken met {players} bijgehouden accounts in {region} met minstens {battles} gevechten.",
+  "against-recent": "Over {window}, tegen de {players} {region}-accounts die in dat venster minstens {battles} gevechten hebben gespeeld.",
+  "against-career": "Over {window}, tegen {players} gevolgde {region}-accounts met minstens {battles} gevechten.",
+  "career": "de gehele carrière",
+  "recent": "de laatste 30 dagen",
+  "window": "Periode"
 }

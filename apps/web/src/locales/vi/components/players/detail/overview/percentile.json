@@ -3,5 +3,10 @@
   "versus": "{metric} so với {region}",
   "top": "Hàng đầu {percent}",
   "ahead-of": "Vượt trước {percent}%",
-  "against": "Đối đầu với {players} tài khoản {region} được theo dõi, có ít nhất {battles} trận đấu."
+  "against": "Đối đầu với {players} tài khoản {region} được theo dõi, có ít nhất {battles} trận đấu.",
+  "against-recent": "Trong {window}, đối đầu với {players} tài khoản tại {region} đã chơi ít nhất {battles} trận đấu trong cửa sổ đó.",
+  "against-career": "Trong {window}, đối đầu với {players} tài khoản {region} được theo dõi có ít nhất {battles} trận đấu.",
+  "career": "toàn bộ sự nghiệp",
+  "recent": "30 ngày gần nhất",
+  "window": "Khoảng thời gian"
 }

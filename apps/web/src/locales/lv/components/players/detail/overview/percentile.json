@@ -3,5 +3,10 @@
   "versus": "{metric} pret {region}",
   "top": "Top {percent}%",
   "ahead-of": "Priekšā {percent}%",
-  "against": "Pret {players} izsekotiem {region} kontiem ar vismaz {battles} kaujām."
+  "against": "Pret {players} izsekotiem {region} kontiem ar vismaz {battles} kaujām.",
+  "against-recent": "Laika posmā {window}, pret {players} {region} kontiem, kuros šajā logā tika spēlēts vismaz {battles} kaujas.",
+  "against-career": "Laika posmā {window}, pret {players} izsekotajiem {region} kontiem ar vismaz {battles} kaujām.",
+  "career": "visa karjera",
+  "recent": "pēdējās 30 dienas",
+  "window": "Periods"
 }

@@ -3,5 +3,10 @@
   "versus": "{metric} बनाम {region}",
   "top": "शीर्ष {percent}%",
   "ahead-of": "{percent}% से आगे",
-  "against": "कम से कम {battles} युद्ध वाले ट्रैक किए गए {region} खातों में {players} के विरुद्ध।"
+  "against": "कम से कम {battles} युद्ध वाले ट्रैक किए गए {region} खातों में {players} के विरुद्ध।",
+  "against-recent": "{window} के दौरान, उस विंडो में कम से कम {battles} युद्ध खेले गए {region} के {players} खातों के विरुद्ध।",
+  "against-career": "{window} के दौरान, कम से कम {battles} युद्ध वाले {region} क्षेत्र के ट्रैक किए गए {players} खातों के विरुद्ध।",
+  "career": "पूरा करियर",
+  "recent": "पिछले 30 दिन",
+  "window": "अवधि"
 }

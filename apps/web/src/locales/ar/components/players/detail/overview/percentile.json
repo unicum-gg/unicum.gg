@@ -3,5 +3,10 @@
   "versus": "{metric} مقابل {region}",
   "top": "الأعلى {percent}%",
   "ahead-of": "متقدم على {percent}%",
-  "against": "مقارنةً بـ {players} حسابًا في {region} تتم متابعتها، وتضم  {battles} معركة على الأقل."
+  "against": "مقارنةً بـ {players} حسابًا في {region} تتم متابعتها، وتضم  {battles} معركة على الأقل.",
+  "against-recent": "خلال {window}، ضد {players} من حسابات {region} التي تم لعب {battles} من المعارك فيها على الأقل خلال تلك النافذة.",
+  "against-career": "خلال {window}، ضد {players} من حسابات {region} المتتبعة التي تم لعب {battles} من المعارك فيها على الأقل.",
+  "career": "المسيرة بالكامل",
+  "recent": "آخر 30 يومًا",
+  "window": "الفترة"
 }

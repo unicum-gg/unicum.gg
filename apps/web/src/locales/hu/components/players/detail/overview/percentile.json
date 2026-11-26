@@ -3,5 +3,10 @@
   "versus": "{metric} a(z) {region} ellen",
   "top": "Legjobb {percent}%",
   "ahead-of": "A(z) {percent}%-nál előrébb",
-  "against": "{players} nyomon követett, legalább {battles} csatával rendelkező {region} régiós fiók ellen."
+  "against": "{players} nyomon követett, legalább {battles} csatával rendelkező {region} régiós fiók ellen.",
+  "against-recent": "{window} időablakában, a legalább {battles} csatát játszott {players} játékos {region} régióbeli fiókjai ellen.",
+  "against-career": "{window} időablakában, a legalább {battles} csatát játszott {players} követett játékos {region} régióbeli fiókjai ellen.",
+  "career": "az egész pályafutás",
+  "recent": "az elmúlt 30 nap",
+  "window": "Időszak"
 }

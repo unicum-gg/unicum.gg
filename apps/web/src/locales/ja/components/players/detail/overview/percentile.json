@@ -3,5 +3,10 @@
   "versus": "{metric} 対 {region}",
   "top": "トップ {percent}%",
   "ahead-of": "{percent}%を上回る",
-  "against": "{battles}戦闘以上をプレイした、追跡対象の{region}アカウント{players}件との比較。"
+  "against": "{battles}戦闘以上をプレイした、追跡対象の{region}アカウント{players}件との比較。",
+  "against-recent": "{window}における、その期間に少なくとも{battles}戦闘をプレイ済みの{region}の{players}アカウントに対する比較。",
+  "against-career": "{window}の期間に、{battles}戦闘以上を行った{region}の追跡済みアカウントである{players}プレイヤーと比較。",
+  "career": "キャリア全体",
+  "recent": "直近30 日間",
+  "window": "期間"
 }

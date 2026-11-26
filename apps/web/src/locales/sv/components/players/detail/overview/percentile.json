@@ -3,5 +3,10 @@
   "versus": "{metric} jämfört med {region}",
   "top": "Topp {percent}%",
   "ahead-of": "Bättre än {percent} %",
-  "against": "Jämfört med {players} spårade konton i regionen {region} med minst {battles} strider."
+  "against": "Jämfört med {players} spårade konton i regionen {region} med minst {battles} strider.",
+  "against-recent": "Under {window}, mot {players} konton i {region} som spelade minst {battles} strider under det fönstret.",
+  "against-career": "Under {window}, mot {players} spårade konton i {region} med minst {battles} strider.",
+  "career": "hela karriären",
+  "recent": "de 30 dagar som gått",
+  "window": "Period"
 }

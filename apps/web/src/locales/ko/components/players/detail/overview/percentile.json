@@ -3,5 +3,10 @@
   "versus": "{metric} 대 {region}",
   "top": "상위 {percent}%",
   "ahead-of": "상위 {percent}%",
-  "against": "최소 {battles}전투를 치른 추적 대상 {region} 계정 {players}개와 비교합니다."
+  "against": "최소 {battles}전투를 치른 추적 대상 {region} 계정 {players}개와 비교합니다.",
+  "against-recent": "{window} 동안, 해당 기간에 최소 {battles} 전투 플레이함 기록이 있는 {players} {region} 계정을 상대합니다.",
+  "against-career": "{window} 동안, 최소 {battles} 전투 플레이함 기록이 있는 추적됨 상태의 {players} {region} 계정을 상대합니다.",
+  "career": "전체 경력",
+  "recent": "최근 30일",
+  "window": "기간"
 }

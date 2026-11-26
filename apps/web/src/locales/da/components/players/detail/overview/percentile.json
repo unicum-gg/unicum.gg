@@ -3,5 +3,10 @@
   "versus": "{metric} mod {region}",
   "top": "Top {percent}%",
   "ahead-of": "Foran {percent} %",
-  "against": "Mod {players} fulgte {region}-konti med mindst {battles} kampe."
+  "against": "Mod {players} fulgte {region}-konti med mindst {battles} kampe.",
+  "against-recent": "I løbet af {window}, mod de {players} konti fra {region}, der har spillet mindst {battles} kampe i det vindue.",
+  "against-career": "I løbet af {window}, mod {players} konti fra {region}, der er sporet, og som har mindst {battles} kampe.",
+  "career": "hele karrieren",
+  "recent": "de seneste 30 dage",
+  "window": "Periode"
 }

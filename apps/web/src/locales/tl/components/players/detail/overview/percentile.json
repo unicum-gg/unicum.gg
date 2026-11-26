@@ -3,5 +3,10 @@
   "versus": "{metric} laban sa {region}",
   "top": "Ituktok {percent}%",
   "ahead-of": "Nangunguna sa {percent}%",
-  "against": "Laban sa {players} sinusubaybayang account sa {region} na may hindi bababa sa {battles} mga laban."
+  "against": "Laban sa {players} sinusubaybayang account sa {region} na may hindi bababa sa {battles} mga laban.",
+  "against-recent": "Sa loob ng {window}, laban sa {players} mga account sa {region} na may hindi bababa sa {battles} mga laban na nilaro sa panahong iyon.",
+  "against-career": "Sa loob ng {window}, laban sa {players} mga account sa {region} na sinusubaybayan at may hindi bababa sa {battles} mga laban.",
+  "career": "ang buong career",
+  "recent": "ang huling 30 araw",
+  "window": "Panahon"
 }

@@ -3,5 +3,10 @@
   "versus": "{metric} vastaan {region}",
   "top": "Ykkönen {percent}%",
   "ahead-of": "Edellä: {percent} %",
-  "against": "Verrattuna vähintään {battles} taistelua pelanneisiin seurattuihin alueen {region} tileihin, joita on {players}."
+  "against": "Verrattuna vähintään {battles} taistelua pelanneisiin seurattuihin alueen {region} tileihin, joita on {players}.",
+  "against-recent": "Tarkastelussa {window}, vastaan {players} {region}-tiliä, joilla on pelattu kyseisenä aikana vähintään {battles} taistelua.",
+  "against-career": "Tarkastelussa {window}, vastaan {players} seurattuja {region}-tilejä, joilla on pelattu vähintään {battles} taistelua.",
+  "career": "koko ura",
+  "recent": "viimeiset 30 päivää",
+  "window": "Ajanjakso"
 }
