@@ -1,0 +1,13 @@
+{
+  "title": "V številkah",
+  "players": "Igralci",
+  "battles": "Poslane bitke",
+  "active-week": "Pošiljanje ta teden",
+  "active-month": "Pošiljanje ta mesec",
+  "battles-sent": "Poslane bitke",
+  "battles-sent-last-30-days": "Poslane bitke na dan, zadnjih 30 dni",
+  "players-sending": "Igralci, ki pošiljajo",
+  "players-sending-last-30-days": "Igralci, ki pošiljajo bitke na dan, zadnjih 30 dni",
+  "region-line": "{players} igralcev, {battles} bitk",
+  "note": "Igralec se šteje, ko pošlje bitko ali svojo garáž. Vsaka bitka se šteje enkrat, ne glede na to, koliko igralcev v njej uporablja mod."
+}

@@ -1,0 +1,10 @@
+{
+  "title": "Számokban",
+  "servers": "Szerverek",
+  "servers-last-30-days": "A bot által használt szerverek az elmúlt 30 napban",
+  "commands": "Parancsok",
+  "commands-last-30-days": "Naponta megválaszolt parancsok az elmúlt 30 napban",
+  "commands-month": "Ebben a hónapban kiadott parancsok",
+  "commands-all-time": "A számbavétel kezdete óta kiadott parancsok",
+  "note": "A Discord egyik adatról sem vezet előzményeket, ezért mindkettőt mi rögzítjük, és a rögzítés kezdetétől számítjuk."
+}

@@ -1,0 +1,10 @@
+{
+  "title": "数据统计",
+  "servers": "服务器",
+  "servers-last-30-days": "机器人所在的服务器，最近30天",
+  "commands": "命令",
+  "commands-last-30-days": "每日回答的命令，最近30天",
+  "commands-month": "本月命令",
+  "commands-all-time": "开始统计以来的命令",
+  "note": "Discord 不保留任一数值的历史记录，因此两项均由我们记录，并从开始记录时起算。"
+}

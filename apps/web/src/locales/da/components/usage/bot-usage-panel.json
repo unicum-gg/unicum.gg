@@ -1,0 +1,10 @@
+{
+  "title": "I tal",
+  "servers": "Servere",
+  "servers-last-30-days": "Servere, som botten er på, de seneste 30 dage",
+  "commands": "Kommandoer",
+  "commands-last-30-days": "Besvarede kommandoer pr. dag, de seneste 30 dage",
+  "commands-month": "Kommandoer denne måned",
+  "commands-all-time": "Kommandoer siden optællingen begyndte",
+  "note": "Discord beholder ingen historik over nogen af tallene, så begge registreres af os og begynder, da optagelsen begyndte."
+}

@@ -1,0 +1,13 @@
+{
+  "title": "数据统计",
+  "players": "玩家",
+  "battles": "已发送战斗场次",
+  "active-week": "本周发送中",
+  "active-month": "本月发送中",
+  "battles-sent": "已发送战斗场次",
+  "battles-sent-last-30-days": "每日发送的战斗场次，最近30天",
+  "players-sending": "正在发送的玩家",
+  "players-sending-last-30-days": "每日发送战斗的玩家，最近30天",
+  "region-line": "{players} 玩家，{battles} 战斗场次",
+  "note": "玩家发送过一场战斗或其车库后才会计入。每场战斗只计一次，无论其中有多少玩家运行该模组。"
+}

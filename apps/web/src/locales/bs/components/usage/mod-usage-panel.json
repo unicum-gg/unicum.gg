@@ -1,0 +1,13 @@
+{
+  "title": "U brojkama",
+  "players": "Igrači",
+  "battles": "Poslane bitke",
+  "active-week": "Slanje ove sedmice",
+  "active-month": "Slanje ovog mjeseca",
+  "battles-sent": "Poslane bitke",
+  "battles-sent-last-30-days": "Poslane bitke dnevno, posljednjih 30 dana",
+  "players-sending": "Igrači koji šalju",
+  "players-sending-last-30-days": "Igrači koji šalju bitke dnevno, posljednjih 30 dana",
+  "region-line": "{players} igrača, {battles} bitki",
+  "note": "Igrač se broji jednom kada pošalje bitku ili svoju garažu. Svaka bitka se broji jednom, bez obzira na to koliko igrača u njoj koristi mod."
+}

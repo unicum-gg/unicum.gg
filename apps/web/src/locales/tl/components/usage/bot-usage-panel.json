@@ -1,0 +1,10 @@
+{
+  "title": "Sa mga numero",
+  "servers": "Mga server",
+  "servers-last-30-days": "Mga server na kinabibilangan ng bot, sa nakalipas na 30 araw",
+  "commands": "Mga command",
+  "commands-last-30-days": "Mga command na sinagutan bawat araw, sa nakalipas na 30 araw",
+  "commands-month": "Mga command ngayong buwan",
+  "commands-all-time": "Mga command mula nang magsimula ang pagbibilang",
+  "note": "Walang pinapanatiling kasaysayan ang Discord para sa alinman sa dalawang bilang, kaya kami ang nagtatala ng mga ito at nagsimula ang mga ito nang magsimula ang rekording."
+}

@@ -1,0 +1,10 @@
+{
+  "title": "숫자로",
+  "servers": "서버들",
+  "servers-last-30-days": "최근 30일 동안 봇이 들어가 있는 서버",
+  "commands": "명령어",
+  "commands-last-30-days": "최근 30일 동안 하루에 답변한 명령어",
+  "commands-month": "이번 달 명령어",
+  "commands-all-time": "집계를 시작한 이후의 명령어",
+  "note": "Discord에는 어느 수치의 기록도 남지 않으므로, 두 수치 모두 저희가 기록하며 기록을 시작한 시점부터 집계됩니다."
+}

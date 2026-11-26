@@ -1,0 +1,10 @@
+{
+  "title": "W liczbach",
+  "servers": "Serwery",
+  "servers-last-30-days": "Serwery, na których jest bot, ostatnie 30 dni",
+  "commands": "Komendy",
+  "commands-last-30-days": "Komendy, na które udzielono odpowiedzi dziennie, ostatnie 30 dni",
+  "commands-month": "Komendy w tym miesiącu",
+  "commands-all-time": "Komendy od początku zliczania",
+  "note": "Discord nie posiada historii żadnej z tych liczb, więc obie są rejestrowane przez nas i zaczynają się od rozpoczęcia nagrywania."
+}

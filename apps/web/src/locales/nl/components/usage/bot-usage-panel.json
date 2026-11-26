@@ -1,0 +1,10 @@
+{
+  "title": "In cijfers",
+  "servers": "Servers",
+  "servers-last-30-days": "Servers waarin de bot zich bevindt, laatste 30 dagen",
+  "commands": "Opdrachten",
+  "commands-last-30-days": "Dagelijks beantwoorde opdrachten, laatste 30 dagen",
+  "commands-month": "Opdrachten deze maand",
+  "commands-all-time": "Opdrachten sinds het tellen begon",
+  "note": "Discord behoudt geen geschiedenis van beide cijfers, dus beide worden door ons vastgelegd en beginnen wanneer het vastleggen begon."
+}

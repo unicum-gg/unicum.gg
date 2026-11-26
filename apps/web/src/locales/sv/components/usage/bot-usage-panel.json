@@ -1,0 +1,10 @@
+{
+  "title": "I siffror",
+  "servers": "Servrar",
+  "servers-last-30-days": "Servrar som boten finns i, senaste 30 dagar",
+  "commands": "Kommandon",
+  "commands-last-30-days": "Besvarade kommandon per dag, senaste 30 dagar",
+  "commands-month": "Kommandon den här månaden",
+  "commands-all-time": "Kommandon sedan räkningen började",
+  "note": "Discord behåller ingen historik för någon av siffrorna, så båda registreras av oss och börjar när inspelningen började."
+}

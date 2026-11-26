@@ -1,0 +1,13 @@
+{
+  "title": "Skaičiais",
+  "players": "Žaidėjai",
+  "battles": "Išsiųsti mūšiai",
+  "active-week": "Siunčiama šią savaitę",
+  "active-month": "Siunčiama šį mėnesį",
+  "battles-sent": "Išsiųsti mūšiai",
+  "battles-sent-last-30-days": "Per dieną išsiųsti mūšiai per pastarąsias 30 dienų",
+  "players-sending": "Mūšius siunčiantys žaidėjai",
+  "players-sending-last-30-days": "Mūšius per dieną siunčiantys žaidėjai per pastarąsias 30 dienų",
+  "region-line": "{players} žaidėjų, {battles} mūšių",
+  "note": "Žaidėjas įskaičiuojamas, kai išsiunčia mūšį arba savo garažą. Kiekvienas mūšis įskaičiuojamas vieną kartą, nesvarbu, kiek jame esančių žaidėjų naudoja mod."
+}

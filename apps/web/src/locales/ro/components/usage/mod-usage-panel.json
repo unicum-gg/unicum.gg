@@ -1,0 +1,13 @@
+{
+  "title": "În cifre",
+  "players": "Jucători",
+  "battles": "Bătălii trimise",
+  "active-week": "Trimit în această săptămână",
+  "active-month": "Trimit în această lună",
+  "battles-sent": "Bătălii trimise",
+  "battles-sent-last-30-days": "Bătălii trimise pe zi, în ultimele 30 de zile",
+  "players-sending": "Jucători care trimit",
+  "players-sending-last-30-days": "Jucători care trimit bătălii pe zi, în ultimele 30 de zile",
+  "region-line": "{players} jucători, {battles} bătălii",
+  "note": "Un jucător este contabilizat după ce a trimis o bătălie sau garajul său. Fiecare bătălie este contabilizată o singură dată, indiferent câți dintre jucătorii din ea folosesc mod-ul."
+}

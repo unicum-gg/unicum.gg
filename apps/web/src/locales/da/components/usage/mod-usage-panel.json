@@ -1,0 +1,13 @@
+{
+  "title": "I tal",
+  "players": "Spillere",
+  "battles": "Sendte kampe",
+  "active-week": "Sender denne uge",
+  "active-month": "Sender denne måned",
+  "battles-sent": "Sendte kampe",
+  "battles-sent-last-30-days": "Sendte kampe pr. dag, de seneste 30 dage",
+  "players-sending": "Spillere, der sender",
+  "players-sending-last-30-days": "Spillere, der sender kampe pr. dag, de seneste 30 dage",
+  "region-line": "{players} spillere, {battles} kampe",
+  "note": "En spiller tæller, når vedkommende har sendt en kamp eller sin garage. Hver kamp tæller én gang, uanset hvor mange af spillerne i den der kører moddet."
+}

@@ -935,7 +935,13 @@
     "Link my Discord": "اربط Discord الخاص بي",
     "answer": "إجابة",
     "posted": "تم النشر",
-    "used": "مستخدم"
+    "used": "مستخدم",
+    "Code on GitHub": "الكود على GitHub",
+    "Commands": "الأوامر",
+    "In numbers": "بالأرقام",
+    "Usage": "الاستخدام",
+    "come": "يأتي",
+    "records": "السجلات"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1874,7 +1880,13 @@
     "Link my Discord": "Прывязаць мой Discord",
     "answer": "адказ",
     "posted": "апублікавана",
-    "used": "выкарыстана"
+    "used": "выкарыстана",
+    "Code on GitHub": "Код на GitHub",
+    "Commands": "Каманды",
+    "In numbers": "У лічбах",
+    "Usage": "Выкарыстанне",
+    "come": "прыходзьце",
+    "records": "рэкорды"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -3031,7 +3043,13 @@
     "Link my Discord": "Свържи моя Discord",
     "answer": "отговор",
     "posted": "публикуван",
-    "used": "използван"
+    "used": "използван",
+    "Code on GitHub": "Код в GitHub",
+    "Commands": "Команди",
+    "In numbers": "В числа",
+    "Usage": "Използване",
+    "come": "Ела",
+    "records": "Рекорди"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -3978,7 +3996,13 @@
     "Link my Discord": "Poveži moj Discord",
     "answer": "odgovor",
     "posted": "objavljeno",
-    "used": "korišteno"
+    "used": "korišteno",
+    "Code on GitHub": "Kod na GitHubu",
+    "Commands": "Komande",
+    "In numbers": "U brojkama",
+    "Usage": "Upotreba",
+    "come": "dođite",
+    "records": "rekordi"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -5146,7 +5170,13 @@
     "Link my Discord": "Propojit můj Discord",
     "answer": "odpověď",
     "posted": "zveřejněno",
-    "used": "použito"
+    "used": "použito",
+    "Code on GitHub": "Kód na GitHubu",
+    "Commands": "Příkazy",
+    "In numbers": "V číslech",
+    "Usage": "Využití",
+    "come": "přijít",
+    "records": "rekordy"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -6320,7 +6350,13 @@
     "Link my Discord": "Forbind min Discord",
     "answer": "svar",
     "posted": "opslået",
-    "used": "brugt"
+    "used": "brugt",
+    "Code on GitHub": "Kode på GitHub",
+    "Commands": "Kommandoer",
+    "In numbers": "I tal",
+    "Usage": "Brug",
+    "come": "kom",
+    "records": "rekorder"
   },
   "de": {
     "(optional)": "(optional)",
@@ -7487,7 +7523,13 @@
     "Link my Discord": "Mein Discord verknüpfen",
     "answer": "Antwort",
     "posted": "veröffentlicht",
-    "used": "verwendet"
+    "used": "verwendet",
+    "Code on GitHub": "Code auf GitHub",
+    "Commands": "Befehle",
+    "In numbers": "In Zahlen",
+    "Usage": "Nutzung",
+    "come": "kommen",
+    "records": "Rekorde"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -8660,7 +8702,13 @@
     "Link my Discord": "Σύνδεσε το Discord μου",
     "answer": "απάντηση",
     "posted": "δημοσιεύτηκε",
-    "used": "χρησιμοποιείται"
+    "used": "χρησιμοποιείται",
+    "Code on GitHub": "Κώδικας στο GitHub",
+    "Commands": "Εντολές",
+    "In numbers": "Σε αριθμούς",
+    "Usage": "Χρήση",
+    "come": "έλα",
+    "records": "ρεκόρ"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -9814,7 +9862,13 @@
     "Link my Discord": "Vincular mi Discord",
     "answer": "respuesta",
     "posted": "publicado",
-    "used": "usado"
+    "used": "usado",
+    "Code on GitHub": "Código en GitHub",
+    "Commands": "Comandos",
+    "In numbers": "En números",
+    "Usage": "Uso",
+    "come": "venir",
+    "records": "récords"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -10992,7 +11046,13 @@
     "Link my Discord": "Linkitä Discordini",
     "answer": "vastaus",
     "posted": "julkaistu",
-    "used": "käytetty"
+    "used": "käytetty",
+    "Code on GitHub": "Koodi GitHubissa",
+    "Commands": "Komennot",
+    "In numbers": "Numeroina",
+    "Usage": "Käyttö",
+    "come": "tule",
+    "records": "ennätykset"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -12148,7 +12208,13 @@
     "Link my Discord": "Lier mon Discord",
     "answer": "réponse",
     "posted": "publié",
-    "used": "utilisé"
+    "used": "utilisé",
+    "Code on GitHub": "Code sur GitHub",
+    "Commands": "Commandes",
+    "In numbers": "En chiffres",
+    "Usage": "Utilisation",
+    "come": "venir",
+    "records": "records"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -13088,7 +13154,13 @@
     "Link my Discord": "मेरा Discord लिंक करें",
     "answer": "उत्तर",
     "posted": "पोस्ट किया गया",
-    "used": "इस्तेमाल किया गया"
+    "used": "इस्तेमाल किया गया",
+    "Code on GitHub": "GitHub पर कोड",
+    "Commands": "कमांड",
+    "In numbers": "आंकड़ों में",
+    "Usage": "उपयोग",
+    "come": "आएँ",
+    "records": "रिकॉर्ड"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -14259,7 +14331,13 @@
     "Link my Discord": "Poveži moj Discord",
     "answer": "odgovor",
     "posted": "objavljeno",
-    "used": "korišteno"
+    "used": "korišteno",
+    "Code on GitHub": "Kod na GitHubu",
+    "Commands": "Naredbe",
+    "In numbers": "U brojkama",
+    "Usage": "Upotreba",
+    "come": "dođi",
+    "records": "Rekordi"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -15432,7 +15510,13 @@
     "Link my Discord": "Discordom összekapcsolása",
     "answer": "válasz",
     "posted": "közzétéve",
-    "used": "használt"
+    "used": "használt",
+    "Code on GitHub": "Kód a GitHubon",
+    "Commands": "Parancsok",
+    "In numbers": "Számokban",
+    "Usage": "Használat",
+    "come": "gyere",
+    "records": "Rekordok"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -16601,7 +16685,13 @@
     "Link my Discord": "Collega il mio Discord",
     "answer": "risposta",
     "posted": "pubblicato",
-    "used": "utilizzato"
+    "used": "utilizzato",
+    "Code on GitHub": "Codice su GitHub",
+    "Commands": "Comandi",
+    "In numbers": "Nei numeri",
+    "Usage": "Utilizzo",
+    "come": "come",
+    "records": "record"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -17777,7 +17867,13 @@
     "Link my Discord": "Discordを連携",
     "answer": "回答",
     "posted": "投稿済み",
-    "used": "使用"
+    "used": "使用",
+    "Code on GitHub": "GitHubのコード",
+    "Commands": "コマンド",
+    "In numbers": "数字で見る",
+    "Usage": "使用率",
+    "come": "来る",
+    "records": "記録"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -18717,7 +18813,13 @@
     "Link my Discord": "Discord-ымды байланыстыру",
     "answer": "жауап",
     "posted": "жарияланған",
-    "used": "пайдаланылған"
+    "used": "пайдаланылған",
+    "Code on GitHub": "GitHub-тағы код",
+    "Commands": "Командалар",
+    "In numbers": "Сандарда",
+    "Usage": "Қолданылуы",
+    "come": "келу",
+    "records": "рекордтар"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -19897,7 +19999,13 @@
     "Link my Discord": "내 Discord 연결하기",
     "answer": "답변",
     "posted": "게시됨",
-    "used": "사용됨"
+    "used": "사용됨",
+    "Code on GitHub": "GitHub의 코드",
+    "Commands": "명령어",
+    "In numbers": "숫자로",
+    "Usage": "사용량",
+    "come": "오세요",
+    "records": "기록"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -21073,7 +21181,13 @@
     "Link my Discord": "Susieti mano „Discord“",
     "answer": "atsakymas",
     "posted": "paskelbta",
-    "used": "naudojama"
+    "used": "naudojama",
+    "Code on GitHub": "Kodas GitHub",
+    "Commands": "Komandos",
+    "In numbers": "Skaičiais",
+    "Usage": "Naudojimas",
+    "come": "ateikite",
+    "records": "rekordai"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -22236,7 +22350,13 @@
     "Link my Discord": "Saistīt manu Discord",
     "answer": "atbilde",
     "posted": "publicēts",
-    "used": "izmantots"
+    "used": "izmantots",
+    "Code on GitHub": "Kods vietnē GitHub",
+    "Commands": "Komandas",
+    "In numbers": "Skaitļos",
+    "Usage": "Lietojums",
+    "come": "nākt",
+    "records": "rekordi"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -23414,7 +23534,13 @@
     "Link my Discord": "Mijn Discord koppelen",
     "answer": "antwoord",
     "posted": "geplaatst",
-    "used": "gebruikt"
+    "used": "gebruikt",
+    "Code on GitHub": "Code op GitHub",
+    "Commands": "Opdrachten",
+    "In numbers": "In cijfers",
+    "Usage": "Gebruik",
+    "come": "komen",
+    "records": "records"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -24583,7 +24709,13 @@
     "Link my Discord": "Koble til Discord-kontoen min",
     "answer": "svar",
     "posted": "lagt ut",
-    "used": "brukt"
+    "used": "brukt",
+    "Code on GitHub": "Kode på GitHub",
+    "Commands": "Kommandoer",
+    "In numbers": "I tall",
+    "Usage": "Bruk",
+    "come": "komme",
+    "records": "rekorder"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -25749,7 +25881,13 @@
     "Link my Discord": "Połącz z Discordem",
     "answer": "odpowiedź",
     "posted": "opublikowano",
-    "used": "używany"
+    "used": "używany",
+    "Code on GitHub": "Kod na GitHubie",
+    "Commands": "Komendy",
+    "In numbers": "W liczbach",
+    "Usage": "Użycie",
+    "come": "przyjdź",
+    "records": "rekordy"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -26908,7 +27046,13 @@
     "Link my Discord": "Vincular meu Discord",
     "answer": "resposta",
     "posted": "publicado",
-    "used": "usado"
+    "used": "usado",
+    "Code on GitHub": "Código no GitHub",
+    "Commands": "Comandos",
+    "In numbers": "Em números",
+    "Usage": "Utilização",
+    "come": "venha",
+    "records": "registos"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -28068,7 +28212,13 @@
     "Link my Discord": "Conectează-mi Discordul",
     "answer": "răspuns",
     "posted": "postat",
-    "used": "folosit"
+    "used": "folosit",
+    "Code on GitHub": "Cod pe GitHub",
+    "Commands": "Comenzi",
+    "In numbers": "În cifre",
+    "Usage": "Utilizare",
+    "come": "vin",
+    "records": "recorduri"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -29216,7 +29366,13 @@
     "Link my Discord": "Привязать мой Discord",
     "answer": "ответ",
     "posted": "опубликовано",
-    "used": "использовано"
+    "used": "использовано",
+    "Code on GitHub": "Код на GitHub",
+    "Commands": "Команды",
+    "In numbers": "В цифрах",
+    "Usage": "Использование",
+    "come": "приходить",
+    "records": "рекорды"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -30159,7 +30315,13 @@
     "Link my Discord": "Prepojiť môj Discord",
     "answer": "odpoveď",
     "posted": "zverejnené",
-    "used": "použité"
+    "used": "použité",
+    "Code on GitHub": "Koda na GitHubu",
+    "Commands": "Ukazi",
+    "In numbers": "V številkah",
+    "Usage": "Uporaba",
+    "come": "pridi",
+    "records": "rekordi"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -31332,7 +31494,13 @@
     "Link my Discord": "Poveži moj Discord",
     "answer": "odgovor",
     "posted": "objavljeno",
-    "used": "korišćeno"
+    "used": "korišćeno",
+    "Code on GitHub": "Код на GitHub-у",
+    "Commands": "Команде",
+    "In numbers": "У бројкама",
+    "Usage": "Употреба",
+    "come": "дођите",
+    "records": "рекорди"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -32511,7 +32679,13 @@
     "Link my Discord": "Koppla min Discord",
     "answer": "svar",
     "posted": "publicerat",
-    "used": "används"
+    "used": "används",
+    "Code on GitHub": "Kod på GitHub",
+    "Commands": "Kommandon",
+    "In numbers": "I siffror",
+    "Usage": "Användning",
+    "come": "kom",
+    "records": "rekord"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -33685,7 +33859,13 @@
     "Link my Discord": "ลิงก์ Discord ของฉัน",
     "answer": "คำตอบ",
     "posted": "โพสต์แล้ว",
-    "used": "ใช้แล้ว"
+    "used": "ใช้แล้ว",
+    "Code on GitHub": "โค้ดบน GitHub",
+    "Commands": "คำสั่ง",
+    "In numbers": "ในรูปตัวเลข",
+    "Usage": "การใช้งาน",
+    "come": "มา",
+    "records": "สถิติ"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -34627,7 +34807,13 @@
     "Link my Discord": "I-link ang Discord ko",
     "answer": "sagot",
     "posted": "nai-post",
-    "used": "ginamit"
+    "used": "ginamit",
+    "Code on GitHub": "Code sa GitHub",
+    "Commands": "Mga command",
+    "In numbers": "Sa mga numero",
+    "Usage": "Paggamit",
+    "come": "dumating",
+    "records": "mga rekord"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -35798,7 +35984,13 @@
     "Link my Discord": "Discord'umu bağla",
     "answer": "cevap",
     "posted": "paylaşıldı",
-    "used": "kullanıldı"
+    "used": "kullanıldı",
+    "Code on GitHub": "GitHub'daki kod",
+    "Commands": "Komutlar",
+    "In numbers": "Sayılarla",
+    "Usage": "Kullanım",
+    "come": "gel",
+    "records": "Kayıtlar"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -36961,7 +37153,13 @@
     "Link my Discord": "Прив’язати мій Discord",
     "answer": "відповідь",
     "posted": "опубліковано",
-    "used": "використано"
+    "used": "використано",
+    "Code on GitHub": "Код на GitHub",
+    "Commands": "Команди",
+    "In numbers": "У цифрах",
+    "Usage": "Використання",
+    "come": "приходьте",
+    "records": "рекорди"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -38113,7 +38311,13 @@
     "Link my Discord": "Liên kết Discord của tôi",
     "answer": "câu trả lời",
     "posted": "đã đăng",
-    "used": "đã sử dụng"
+    "used": "đã sử dụng",
+    "Code on GitHub": "Mã nguồn trên GitHub",
+    "Commands": "Lệnh",
+    "In numbers": "Theo số liệu",
+    "Usage": "Sử dụng",
+    "come": "đến",
+    "records": "thành tích"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -39287,6 +39491,12 @@
     "Link my Discord": "关联我的 Discord",
     "answer": "回答",
     "posted": "发布于",
-    "used": "已使用"
+    "used": "已使用",
+    "Code on GitHub": "GitHub 上的代码",
+    "Commands": "命令",
+    "In numbers": "数据统计",
+    "Usage": "使用情况",
+    "come": "来",
+    "records": "记录"
   }
 }

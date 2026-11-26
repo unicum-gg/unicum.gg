@@ -1,0 +1,13 @@
+{
+  "title": "Theo số liệu",
+  "players": "Người chơi",
+  "battles": "Trận đấu đã gửi",
+  "active-week": "Đang gửi trong tuần này",
+  "active-month": "Đang gửi trong tháng này",
+  "battles-sent": "Trận đấu đã gửi",
+  "battles-sent-last-30-days": "Trận đấu được gửi mỗi ngày trong 30 ngày qua",
+  "players-sending": "Người chơi đang gửi",
+  "players-sending-last-30-days": "Người chơi gửi trận đấu mỗi ngày trong 30 ngày qua",
+  "region-line": "{players} người chơi, {battles} trận đấu",
+  "note": "Một người chơi được tính khi họ đã gửi một trận đấu hoặc nhà chứa xe. Mỗi trận đấu được tính một lần, bất kể có bao nhiêu người chơi trong đó sử dụng mod."
+}

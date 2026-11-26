@@ -1,0 +1,13 @@
+{
+  "title": "Skaitļos",
+  "players": "Spēlētāji",
+  "battles": "Nosūtītās kaujas",
+  "active-week": "Nosūta šonedēļ",
+  "active-month": "Nosūta šomēnes",
+  "battles-sent": "Nosūtītās kaujas",
+  "battles-sent-last-30-days": "Dienā nosūtītās kaujas, pēdējās 30 dienas",
+  "players-sending": "Spēlētāji, kas nosūta",
+  "players-sending-last-30-days": "Spēlētāji, kas dienā nosūta kaujas, pēdējās 30 dienas",
+  "region-line": "{players} spēlētāji, {battles} kaujas",
+  "note": "Spēlētājs tiek uzskaitīts, tiklīdz ir nosūtījis kauju vai savu garāžu. Katra kauja tiek skaitīta vienu reizi neatkarīgi no tā, cik tajā esošo spēlētāju izmanto mod."
+}

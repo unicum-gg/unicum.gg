@@ -1,0 +1,6 @@
+{
+  "title": "Estatísticas de utilização",
+  "description": "Quantas pessoas utilizam {name}: contas, leitores com sessão iniciada hoje, esta semana e este mês, serviços vinculados, o mod e o Bot do Discord. Lido a partir dos nossos próprios registos e publicado na íntegra.",
+  "og-title": "Utilização",
+  "og-subtitle": "Contas, leitores, mod e bot"
+}

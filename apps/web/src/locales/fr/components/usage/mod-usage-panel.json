@@ -1,0 +1,13 @@
+{
+  "title": "En chiffres",
+  "players": "Joueurs",
+  "battles": "Batailles envoyées",
+  "active-week": "Envoi cette semaine",
+  "active-month": "Envoi ce mois-ci",
+  "battles-sent": "Batailles envoyées",
+  "battles-sent-last-30-days": "Batailles envoyées par jour au cours des 30 derniers jours",
+  "players-sending": "Joueurs envoyant des données",
+  "players-sending-last-30-days": "Joueurs envoyant des batailles par jour au cours des 30 derniers jours",
+  "region-line": "{players} joueurs, {battles} batailles",
+  "note": "Un joueur est comptabilisé dès qu’il a envoyé une bataille ou son garage. Chaque bataille est comptabilisée une fois, quel que soit le nombre de joueurs qui utilisent le mod."
+}

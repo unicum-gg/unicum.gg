@@ -1,0 +1,13 @@
+{
+  "title": "Nei numeri",
+  "players": "Giocatori",
+  "battles": "Battaglie inviate",
+  "active-week": "Invio questa settimana",
+  "active-month": "Invio questo mese",
+  "battles-sent": "Battaglie inviate",
+  "battles-sent-last-30-days": "Battaglie inviate al giorno, ultimi 30 giorni",
+  "players-sending": "Giocatori che inviano",
+  "players-sending-last-30-days": "Giocatori che inviano battaglie al giorno, ultimi 30 giorni",
+  "region-line": "{players} giocatori, {battles} battaglie",
+  "note": "Un giocatore viene conteggiato dopo aver inviato una battaglia o la propria officina. Ogni battaglia viene conteggiata una sola volta, indipendentemente da quanti giocatori presenti la utilizzino."
+}

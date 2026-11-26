@@ -1,0 +1,13 @@
+{
+  "title": "Számokban",
+  "players": "Játékosok",
+  "battles": "Elküldött csaták",
+  "active-week": "Ezen a héten küldő játékosok",
+  "active-month": "Ebben a hónapban küldő játékosok",
+  "battles-sent": "Elküldött csaták",
+  "battles-sent-last-30-days": "Naponta elküldött csaták az elmúlt 30 napban",
+  "players-sending": "Küldő játékosok",
+  "players-sending-last-30-days": "Naponta csatát küldő játékosok az elmúlt 30 napban",
+  "region-line": "{players} játékos, {battles} csata",
+  "note": "Egy játékos akkor számít, ha elküldött egy csatát vagy a garázsát. Minden csata egyszer számít, függetlenül attól, hogy hány benne részt vevő játékos használja a modot."
+}

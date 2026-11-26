@@ -1,0 +1,10 @@
+{
+  "title": "In Zahlen",
+  "servers": "Server",
+  "servers-last-30-days": "Server, auf denen der Bot in den letzten 30 Tagen aktiv war",
+  "commands": "Befehle",
+  "commands-last-30-days": "Pro Tag beantwortete Befehle in den letzten 30 Tagen",
+  "commands-month": "Befehle diesen Monat",
+  "commands-all-time": "Befehle seit Beginn der Zählung",
+  "note": "Discord behält für keine der beiden Zahlen einen Verlauf, daher werden beide von uns aufgezeichnet und beginnen mit dem Start der Aufzeichnung."
+}

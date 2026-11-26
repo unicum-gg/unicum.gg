@@ -8,7 +8,7 @@
   "col": {
     "build": "세팅",
     "player": "플레이어",
-    "usage": "사용 비율",
+    "usage": "사용량",
     "damage": "피해량",
     "winrate": "WR",
     "player-winrate": "플레이어 WR",

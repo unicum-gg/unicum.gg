@@ -1,0 +1,13 @@
+{
+  "title": "숫자로",
+  "players": "플레이어",
+  "battles": "전송된 전투",
+  "active-week": "이번 주 전송 중",
+  "active-month": "이번 달 전송 중",
+  "battles-sent": "전송된 전투",
+  "battles-sent-last-30-days": "최근 30일 동안 하루에 전송된 전투",
+  "players-sending": "전송 중인 플레이어들",
+  "players-sending-last-30-days": "최근 30일 동안 하루에 전투를 전송한 플레이어들",
+  "region-line": "플레이어 {players}명, 전투 {battles}회",
+  "note": "플레이어는 전투 또는 차고를 한 번 전송하면 집계됩니다. 각 전투는 그 안에 있는 플레이어들 중 몇 명이 mod를 실행하는지와 관계없이 한 번만 집계됩니다."
+}

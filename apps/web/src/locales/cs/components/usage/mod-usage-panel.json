@@ -1,0 +1,13 @@
+{
+  "title": "V číslech",
+  "players": "Hráči",
+  "battles": "Odeslané bitvy",
+  "active-week": "Odesílání tento týden",
+  "active-month": "Odesílání tento měsíc",
+  "battles-sent": "Odeslané bitvy",
+  "battles-sent-last-30-days": "Odeslané bitvy za den, za posledních 30 dní",
+  "players-sending": "Hráči odesílající bitvy",
+  "players-sending-last-30-days": "Hráči odesílající bitvy za den, za posledních 30 dní",
+  "region-line": "{players} hráčů, {battles} bitev",
+  "note": "Hráč se započítá, jakmile odešle bitvu nebo svou garáž. Každá bitva se započítá jednou, bez ohledu na to, kolik hráčů v ní mod používá."
+}

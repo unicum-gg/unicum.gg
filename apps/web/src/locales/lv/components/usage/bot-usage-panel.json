@@ -1,0 +1,10 @@
+{
+  "title": "Skaitļos",
+  "servers": "Serveri",
+  "servers-last-30-days": "Serveri, kuros atrodas bots, pēdējās 30 dienas",
+  "commands": "Komandas",
+  "commands-last-30-days": "Dienā atbildētās komandas, pēdējās 30 dienas",
+  "commands-month": "Šomēnes izpildītās komandas",
+  "commands-all-time": "Komandas kopš skaitīšanas sākuma",
+  "note": "Discord nepatur neviena rādītāja vēsturi, tāpēc abus reģistrējam mēs, un to skaitīšana sākas, kad sākās ierakstīšana."
+}

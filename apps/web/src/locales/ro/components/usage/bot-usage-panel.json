@@ -1,0 +1,10 @@
+{
+  "title": "În cifre",
+  "servers": "Servere",
+  "servers-last-30-days": "Servere pe care se află botul, în ultimele 30 de zile",
+  "commands": "Comenzi",
+  "commands-last-30-days": "Comenzi la care s-a răspuns pe zi, în ultimele 30 de zile",
+  "commands-month": "Comenzi în această lună",
+  "commands-all-time": "Comenzi de la începutul numărării",
+  "note": "Discord nu păstrează istoricul niciuneia dintre cele două cifre, așa că ambele sunt înregistrate de noi și încep din momentul în care a început înregistrarea."
+}

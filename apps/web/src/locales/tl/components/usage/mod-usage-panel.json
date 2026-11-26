@@ -1,0 +1,13 @@
+{
+  "title": "Sa mga numero",
+  "players": "Mga manlalaro",
+  "battles": "Mga labang ipinadala",
+  "active-week": "Nagpapadala ngayong linggo",
+  "active-month": "Nagpapadala ngayong buwan",
+  "battles-sent": "Mga labang ipinadala",
+  "battles-sent-last-30-days": "Mga laban na ipinadala bawat araw, sa nakalipas na 30 araw",
+  "players-sending": "Mga manlalarong nagpapadala",
+  "players-sending-last-30-days": "Mga manlalarong nagpapadala ng mga laban bawat araw, sa nakalipas na 30 araw",
+  "region-line": "{players} mga manlalaro, {battles} mga laban",
+  "note": "Nabibilang ang isang manlalaro kapag nakapagpadala na siya ng isang laban o ng kanyang garahe. Isang beses binibilang ang bawat laban, gaano man karami sa mga manlalarong kasama rito ang gumagamit ng mod."
+}

@@ -1,0 +1,13 @@
+{
+  "title": "In cijfers",
+  "players": "Spelers",
+  "battles": "Gevechten verzonden",
+  "active-week": "Deze week verzonden",
+  "active-month": "Deze maand verzonden",
+  "battles-sent": "Gevechten verzonden",
+  "battles-sent-last-30-days": "Dagelijks verzonden gevechten, laatste 30 dagen",
+  "players-sending": "Spelers die verzenden",
+  "players-sending-last-30-days": "Spelers die dagelijks gevechten verzenden, laatste 30 dagen",
+  "region-line": "{players} spelers, {battles} gevechten",
+  "note": "Een speler telt mee zodra die een gevecht of de garage heeft verzonden. Elk gevecht telt eenmaal mee, ongeacht hoeveel spelers erin de mod gebruiken."
+}

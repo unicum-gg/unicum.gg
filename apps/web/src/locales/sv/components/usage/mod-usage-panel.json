@@ -1,0 +1,13 @@
+{
+  "title": "I siffror",
+  "players": "Spelare",
+  "battles": "Skickade strider",
+  "active-week": "Skickar den här veckan",
+  "active-month": "Skickar den här månaden",
+  "battles-sent": "Skickade strider",
+  "battles-sent-last-30-days": "Skickade strider per dag, senaste 30 dagar",
+  "players-sending": "Spelare som skickar",
+  "players-sending-last-30-days": "Spelare som skickar strider per dag, senaste 30 dagar",
+  "region-line": "{players} spelare, {battles} strider",
+  "note": "En spelare räknas när de har skickat en strid eller sitt garage. Varje strid räknas en gång, oavsett hur många av spelarna i den som kör moden."
+}

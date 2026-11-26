@@ -1,0 +1,10 @@
+{
+  "title": "Numeroina",
+  "servers": "Palvelimet",
+  "servers-last-30-days": "Palvelimet, joissa botti on, viimeiset 30 päivää",
+  "commands": "Komennot",
+  "commands-last-30-days": "Päivittäin vastatut komennot, viimeiset 30 päivää",
+  "commands-month": "Komennot tässä kuussa",
+  "commands-all-time": "Komennot laskennan alusta lähtien",
+  "note": "Discord ei säilytä kummankaan luvun historiaa, joten me tallennamme molemmat, ja niiden laskenta alkaa tallennuksen alusta."
+}

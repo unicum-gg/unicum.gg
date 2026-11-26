@@ -1,0 +1,10 @@
+{
+  "title": "V številkah",
+  "servers": "Servery",
+  "servers-last-30-days": "Servery, v katerih je bot, zadnjih 30 dni",
+  "commands": "Ukazi",
+  "commands-last-30-days": "Odgovorjeni ukazi na dan, zadnjih 30 dni",
+  "commands-month": "Ukazi ta mesec",
+  "commands-all-time": "Ukazi od začetka štetja",
+  "note": "Discord ne ohranja zgodovine nobenega od teh podatkov, zato oba beležimo mi, nahrávanie pa se začne, ko se je začelo beleženje."
+}

@@ -1,0 +1,10 @@
+{
+  "title": "V číslech",
+  "servers": "Servery",
+  "servers-last-30-days": "Servery, na kterých je bot, za posledních 30 dní",
+  "commands": "Příkazy",
+  "commands-last-30-days": "Příkazy zodpovězené za den, za posledních 30 dní",
+  "commands-month": "Příkazy tento měsíc",
+  "commands-all-time": "Příkazy od začátku počítání",
+  "note": "Discord neuchovává historii ani jednoho údaje, takže oba zaznamenáváme my a jejich záznam začíná ve chvíli, kdy začalo nahrávání."
+}

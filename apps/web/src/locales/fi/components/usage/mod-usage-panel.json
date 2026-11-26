@@ -1,0 +1,13 @@
+{
+  "title": "Numeroina",
+  "players": "Pelaajat",
+  "battles": "Lähetetyt taistelut",
+  "active-week": "Lähettämässä tällä viikolla",
+  "active-month": "Lähettämässä tässä kuussa",
+  "battles-sent": "Lähetetyt taistelut",
+  "battles-sent-last-30-days": "Päivittäin lähetetyt taistelut, viimeiset 30 päivää",
+  "players-sending": "Lähettävät pelaajat",
+  "players-sending-last-30-days": "Pelaajat, jotka lähettävät taisteluita päivittäin, viimeiset 30 päivää",
+  "region-line": "{players} pelaajaa, {battles} taistelua",
+  "note": "Pelaaja lasketaan, kun hän on lähettänyt taistelun tai tallinsa. Jokainen taistelu lasketaan kerran riippumatta siitä, kuinka moni siihen osallistunut pelaaja käyttää modia."
+}

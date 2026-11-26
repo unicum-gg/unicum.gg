@@ -1,0 +1,13 @@
+{
+  "title": "In Zahlen",
+  "players": "Spieler",
+  "battles": "Gesendete Gefechte",
+  "active-week": "Diese Woche sendend",
+  "active-month": "Diesen Monat sendend",
+  "battles-sent": "Gesendete Gefechte",
+  "battles-sent-last-30-days": "Pro Tag gesendete Gefechte in den letzten 30 Tagen",
+  "players-sending": "Sendende Spieler",
+  "players-sending-last-30-days": "Pro Tag Gefechte sendende Spieler in den letzten 30 Tagen",
+  "region-line": "{players} Spieler, {battles} Gefechte",
+  "note": "Ein Spieler wird gezählt, sobald er ein Gefecht oder seine Garage gesendet hat. Jedes Gefecht wird einmal gezählt, unabhängig davon, wie viele der daran beteiligten Spieler die Mod verwenden."
+}

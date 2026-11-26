@@ -1,0 +1,10 @@
+{
+  "title": "Theo số liệu",
+  "servers": "Máy chủ",
+  "servers-last-30-days": "Máy chủ có bot tham gia trong 30 ngày qua",
+  "commands": "Lệnh",
+  "commands-last-30-days": "Lệnh được trả lời mỗi ngày trong 30 ngày qua",
+  "commands-month": "Lệnh trong tháng này",
+  "commands-all-time": "Lệnh kể từ khi bắt đầu tính",
+  "note": "Discord không giữ lịch sử của một trong hai số liệu, vì vậy cả hai đều được chúng tôi ghi nhận và bắt đầu từ khi việc ghi nhận bắt đầu."
+}

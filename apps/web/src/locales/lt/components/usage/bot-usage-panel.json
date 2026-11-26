@@ -1,0 +1,10 @@
+{
+  "title": "Skaičiais",
+  "servers": "Serveriai",
+  "servers-last-30-days": "Serveriai, kuriuose yra botas, per pastarąsias 30 dienų",
+  "commands": "Komandos",
+  "commands-last-30-days": "Per dieną atsakytos komandos per pastarąsias 30 dienų",
+  "commands-month": "Šio mėnesio komandos",
+  "commands-all-time": "Komandos nuo skaičiavimo pradžios",
+  "note": "Discord neišlaiko nė vieno iš šių rodiklių istorijos, todėl abu juos fiksuojame mes, o jų pradžia sutampa su įrašymo pradžia."
+}

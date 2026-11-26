@@ -1,0 +1,13 @@
+{
+  "title": "W liczbach",
+  "players": "Gracze",
+  "battles": "Wysłano bitwy",
+  "active-week": "Wysyłanie w tym tygodniu",
+  "active-month": "Wysyłanie w tym miesiącu",
+  "battles-sent": "Wysłano bitwy",
+  "battles-sent-last-30-days": "Wysłane bitwy dziennie, ostatnie 30 dni",
+  "players-sending": "Gracze wysyłający",
+  "players-sending-last-30-days": "Gracze wysyłający bitwy dziennie, ostatnie 30 dni",
+  "region-line": "{players} graczy, {battles} bitew",
+  "note": "Gracz jest uwzględniany, gdy wyśle bitwę lub swój garaż. Każda bitwa jest liczona raz, niezależnie od tego, ilu grających w niej graczy korzysta z moda."
+}

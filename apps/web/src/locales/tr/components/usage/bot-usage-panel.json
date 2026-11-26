@@ -1,0 +1,10 @@
+{
+  "title": "Sayılarla",
+  "servers": "Sunucular",
+  "servers-last-30-days": "Botun bulunduğu sunucular, son 30 gün",
+  "commands": "Komutlar",
+  "commands-last-30-days": "Günlük yanıtlanan komutlar, son 30 gün",
+  "commands-month": "Bu ayki komutlar",
+  "commands-all-time": "Sayımın başladığı tarihten bu yana komutlar",
+  "note": "Discord her iki değer için de geçmiş tutmuyor, bu nedenle ikisi de tarafımızca kaydediliyor ve kayıt başladığında başlıyor."
+}

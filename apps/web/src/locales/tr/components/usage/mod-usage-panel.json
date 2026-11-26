@@ -1,0 +1,13 @@
+{
+  "title": "Sayılarla",
+  "players": "Oyuncular",
+  "battles": "Gönderilen savaşlar",
+  "active-week": "Bu hafta gönderim yapanlar",
+  "active-month": "Bu ay gönderim yapanlar",
+  "battles-sent": "Gönderilen savaşlar",
+  "battles-sent-last-30-days": "Günlük gönderilen savaşlar, son 30 gün",
+  "players-sending": "Gönderim yapan oyuncular",
+  "players-sending-last-30-days": "Günlük savaş gönderen oyuncular, son 30 gün",
+  "region-line": "{players} oyuncu, {battles} savaş",
+  "note": "Bir oyuncu, bir savaş veya garajını gönderdikten sonra sayılır. Savaşta kaç oyuncu mod kullanırsa kullansın, her savaş bir kez sayılır."
+}

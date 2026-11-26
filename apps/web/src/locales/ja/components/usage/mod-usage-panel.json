@@ -1,0 +1,13 @@
+{
+  "title": "数字で見る",
+  "players": "プレイヤー",
+  "battles": "送信済み戦闘",
+  "active-week": "今週送信中",
+  "active-month": "今月送信中",
+  "battles-sent": "送信済み戦闘",
+  "battles-sent-last-30-days": "1日あたりの送信済み戦闘数、過去30 日間",
+  "players-sending": "送信中のプレイヤー",
+  "players-sending-last-30-days": "1日あたりに戦闘を送信しているプレイヤー数、過去30 日間",
+  "region-line": "{players}人のプレイヤー、{battles}戦闘",
+  "note": "プレイヤーは、戦闘またはガレージを送信すると1人として数えられます。各戦闘は、その中の何人のプレイヤーがmodを実行しているかにかかわらず、1回として数えられます。"
+}
