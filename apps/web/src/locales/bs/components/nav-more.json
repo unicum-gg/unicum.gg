@@ -5,6 +5,10 @@
       "label": "Turniri",
       "description": "Žrijebovi, sastavi i rezultati po regijama"
     },
+    "calendar": {
+      "label": "Kalendar",
+      "description": "Zvanični događaji, turniri i rasprodaje, dan po dan"
+    },
     "servers": {
       "label": "Serveri",
       "description": "Igrači online, sada i kroz vrijeme"
@@ -24,10 +28,6 @@
     "api": {
       "label": "API",
       "description": "Besplatni javni REST API, ključ nije potreban"
-    },
-    "badges": {
-      "label": "Znakovi",
-      "description": "Svaka značka koju igrač ili klan može zaraditi i način zarade"
     },
     "glossary": {
       "label": "Rječnik",

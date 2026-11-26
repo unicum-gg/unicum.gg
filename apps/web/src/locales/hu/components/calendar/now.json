@@ -1,0 +1,6 @@
+{
+  "title": "A játékban zajlik",
+  "from": "Tól/Től: {day}",
+  "until": "Eddig: {day}",
+  "see-all": "Naptár megtekintése"
+}

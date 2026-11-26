@@ -5,6 +5,10 @@
       "label": "Toernooien",
       "description": "Toernooischema’s, deelnemerslijsten en resultaten, per regio"
     },
+    "calendar": {
+      "label": "Kalender",
+      "description": "Officiële evenementen, toernooien en aanbiedingen, dag per dag"
+    },
     "servers": {
       "label": "Servers",
       "description": "Spelers online, nu en in de loop van de tijd"
@@ -24,10 +28,6 @@
     "api": {
       "label": "API",
       "description": "Gratis openbare REST API, geen sleutel vereist"
-    },
-    "badges": {
-      "label": "Badges",
-      "description": "Alle emblemen die een speler of clan kan verdienen, plus hoe je ze verdient"
     },
     "glossary": {
       "label": "Glossarium",

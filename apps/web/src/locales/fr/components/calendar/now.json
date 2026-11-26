@@ -1,0 +1,6 @@
+{
+  "title": "En jeu",
+  "from": "De {day}",
+  "until": "Jusqu’au {day}",
+  "see-all": "Voir le calendrier"
+}

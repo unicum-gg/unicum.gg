@@ -5,6 +5,10 @@
       "label": "Mga torneo",
       "description": "Mga bracket, roster at resulta, bawat rehiyon"
     },
+    "calendar": {
+      "label": "Kalendaryo",
+      "description": "Mga opisyal na kaganapan, mga torneo at sale, araw-araw"
+    },
     "servers": {
       "label": "Mga server",
       "description": "Mga manlalarong online, ngayon at sa paglipas ng oras"
@@ -24,10 +28,6 @@
     "api": {
       "label": "API",
       "description": "Libreng pampublikong REST API, hindi kailangan ng key"
-    },
-    "badges": {
-      "label": "Mga badge",
-      "description": "Bawat insignia na maaaring makuha ng manlalaro o klano, at kung paano"
     },
     "glossary": {
       "label": "Glosaryo",

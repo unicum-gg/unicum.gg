@@ -5,6 +5,10 @@
       "label": "Turnaukset",
       "description": "Kaaviot, kokoonpanot ja tulokset alueittain"
     },
+    "calendar": {
+      "label": "Kalenteri",
+      "description": "Viralliset tapahtumat, turnaukset ja tarjoukset päivä päivältä"
+    },
     "servers": {
       "label": "Palvelimet",
       "description": "Paikalla olevat pelaajat nyt ja ajan mittaan"
@@ -24,10 +28,6 @@
     "api": {
       "label": "API",
       "description": "Ilmainen julkinen REST API, avainta ei tarvita"
-    },
-    "badges": {
-      "label": "Merkit",
-      "description": "Jokainen pelaajan tai klaanin ansaittavissa oleva vaakuna ja sen ansaintatapa"
     },
     "glossary": {
       "label": "Sanasto",

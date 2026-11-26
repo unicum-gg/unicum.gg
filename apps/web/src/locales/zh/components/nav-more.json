@@ -5,6 +5,10 @@
       "label": "赛事",
       "description": "按地区查看赛程、参赛名单和结果"
     },
+    "calendar": {
+      "label": "日历",
+      "description": "按天查看官方活动、锦标赛和促销活动"
+    },
     "servers": {
       "label": "服务器",
       "description": "当前及历史在线玩家数"
@@ -24,10 +28,6 @@
     "api": {
       "label": "API",
       "description": "免费公共 REST API，无需密钥"
-    },
-    "badges": {
-      "label": "徽章",
-      "description": "玩家或军团可以获得的每个徽章，以及获得方式"
     },
     "glossary": {
       "label": "词汇表",

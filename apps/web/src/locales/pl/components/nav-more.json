@@ -5,6 +5,10 @@
       "label": "Turnieje",
       "description": "Drabinki, składy i wyniki według regionów"
     },
+    "calendar": {
+      "label": "Kalendarz",
+      "description": "Oficjalne wydarzenia, turnieje i wyprzedaże, dzień po dniu"
+    },
     "servers": {
       "label": "Serwery",
       "description": "Gracze online, obecnie i na przestrzeni czasu"
@@ -24,10 +28,6 @@
     "api": {
       "label": "API",
       "description": "Darmowe publiczne REST API, bez wymaganego klucza"
-    },
-    "badges": {
-      "label": "Odznaki",
-      "description": "Wszystkie odznaki, które może zdobyć gracz lub klan, oraz sposoby ich zdobycia"
     },
     "glossary": {
       "label": "Słownik",

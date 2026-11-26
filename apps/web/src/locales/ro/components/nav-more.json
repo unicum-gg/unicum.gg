@@ -5,6 +5,10 @@
       "label": "Turneele",
       "description": "Grile, loturi și rezultate, pentru fiecare regiune"
     },
+    "calendar": {
+      "label": "Calendar",
+      "description": "Evenimente oficiale, turnee și reduceri, zi de zi"
+    },
     "servers": {
       "label": "Servere",
       "description": "Jucători online, acum și în timp"
@@ -24,10 +28,6 @@
     "api": {
       "label": "API",
       "description": "API REST public gratuit, fără cheie necesară"
-    },
-    "badges": {
-      "label": "Insigne",
-      "description": "Fiecare emblemă pe care o poate câștiga un jucător sau clan și modul de obținere"
     },
     "glossary": {
       "label": "Glossar",

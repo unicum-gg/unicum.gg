@@ -5,6 +5,10 @@
       "label": "Turniere",
       "description": "Turnierbäume, Teamaufstellungen und Ergebnisse nach Region"
     },
+    "calendar": {
+      "label": "Kalender",
+      "description": "Offizielle Ereignisse, Turniere und Verkäufe, Tag für Tag"
+    },
     "servers": {
       "label": "Server",
       "description": "Spieler online, jetzt und im Zeitverlauf"
@@ -24,10 +28,6 @@
     "api": {
       "label": "API",
       "description": "Kostenlos nutzbare öffentliche REST-API, kein Schlüssel erforderlich"
-    },
-    "badges": {
-      "label": "Abzeichen",
-      "description": "Alle Wappen, die Spieler oder Clans verdienen können, und wie das geht"
     },
     "glossary": {
       "label": "Glossar",

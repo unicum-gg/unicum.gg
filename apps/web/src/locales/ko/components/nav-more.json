@@ -5,6 +5,10 @@
       "label": "토너먼트",
       "description": "지역별 대진표, 로스터 및 결과"
     },
+    "calendar": {
+      "label": "캘린더",
+      "description": "공식 이벤트, 토너먼트 및 세일을 날짜별로"
+    },
     "servers": {
       "label": "서버들",
       "description": "현재 및 시간별 온라인 플레이어"
@@ -24,10 +28,6 @@
     "api": {
       "label": "API",
       "description": "키가 필요 없는 무료 공개 REST API"
-    },
-    "badges": {
-      "label": "배지",
-      "description": "플레이어나 클랜이 획득할 수 있는 모든 문장과 획득 방법"
     },
     "glossary": {
       "label": "용어집",

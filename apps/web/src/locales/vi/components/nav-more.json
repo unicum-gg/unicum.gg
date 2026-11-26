@@ -5,6 +5,10 @@
       "label": "Tour đấu",
       "description": "Bảng đấu, danh sách đội và kết quả theo từng khu vực"
     },
+    "calendar": {
+      "label": "Lịch",
+      "description": "Các sự kiện chính thức, giải đấu và đợt khuyến mãi, được liệt kê theo từng ngày"
+    },
     "servers": {
       "label": "Máy chủ",
       "description": "Người chơi trực tuyến, hiện tại và theo thời gian"
@@ -24,10 +28,6 @@
     "api": {
       "label": "API",
       "description": "REST API công khai miễn phí, không yêu cầu khóa"
-    },
-    "badges": {
-      "label": "Huy hiệu",
-      "description": "Mọi huy hiệu mà người chơi hoặc Clan có thể kiếm được và cách kiếm"
     },
     "glossary": {
       "label": "Thuật ngữ",

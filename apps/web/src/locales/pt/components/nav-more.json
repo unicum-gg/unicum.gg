@@ -5,6 +5,10 @@
       "label": "Torneios",
       "description": "Chaves, plantéis e resultados, região a região"
     },
+    "calendar": {
+      "label": "Calendário",
+      "description": "Eventos oficiais, torneios e ofertas, dia a dia"
+    },
     "servers": {
       "label": "Servidores",
       "description": "Jogadores online, agora e ao longo do tempo"
@@ -24,10 +28,6 @@
     "api": {
       "label": "API",
       "description": "API REST pública e gratuita, sem necessidade de chave"
-    },
-    "badges": {
-      "label": "Emblemas",
-      "description": "Todos os emblemas que um jogador ou clã pode conquistar e como conquistá-los"
     },
     "glossary": {
       "label": "Glossário",

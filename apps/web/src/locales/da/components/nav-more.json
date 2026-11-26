@@ -5,6 +5,10 @@
       "label": "Turneringer",
       "description": "Turneringstræer, deltagerlister og resultater, region for region"
     },
+    "calendar": {
+      "label": "Kalender",
+      "description": "Officielle begivenheder, turneringer og udsalg, dag for dag"
+    },
     "servers": {
       "label": "Servere",
       "description": "Spillere online, nu og over tid"
@@ -24,10 +28,6 @@
     "api": {
       "label": "API",
       "description": "Gratis offentlig REST API, ingen nøgle kræves"
-    },
-    "badges": {
-      "label": "Mærker",
-      "description": "Alle mærker, en spiller eller klan kan optjene, og hvordan"
     },
     "glossary": {
       "label": "Ordbog",

@@ -5,6 +5,10 @@
       "label": "Tornák",
       "description": "Ágak, keretek és eredmények régiónként"
     },
+    "calendar": {
+      "label": "Naptár",
+      "description": "Hivatalos események, versenyek és akciók napról napra"
+    },
     "servers": {
       "label": "Szerverek",
       "description": "Online játékosok, most és időben"
@@ -24,10 +28,6 @@
     "api": {
       "label": "API",
       "description": "Ingyenes nyilvános REST API, nincs szükség kulcsra"
-    },
-    "badges": {
-      "label": "Jelek",
-      "description": "Minden címer, amelyet egy játékos vagy klán megszerezhet, és hogyan"
     },
     "glossary": {
       "label": "Szótár",

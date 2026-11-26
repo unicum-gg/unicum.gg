@@ -5,6 +5,10 @@
       "label": "トーナメント",
       "description": "地域ごとのトーナメント表、登録名簿、結果"
     },
+    "calendar": {
+      "label": "カレンダー",
+      "description": "公式イベント、トーナメント、セールを日ごとに確認できます"
+    },
     "servers": {
       "label": "サーバー",
       "description": "現在および時間推移のオンラインプレイヤー数"
@@ -24,10 +28,6 @@
     "api": {
       "label": "API",
       "description": "キー不要の無料公開REST API"
-    },
-    "badges": {
-      "label": "バッジ",
-      "description": "プレイヤーまたはクランが獲得できるすべてのクレストと獲得方法"
     },
     "glossary": {
       "label": "用語集",

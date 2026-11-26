@@ -5,6 +5,10 @@
       "label": "Turnuvalar",
       "description": "Bölge bölge fikstürler, kadrolar ve sonuçlar"
     },
+    "calendar": {
+      "label": "Takvim",
+      "description": "Resmi etkinlikler, turnuvalar ve satışlar, gün gün"
+    },
     "servers": {
       "label": "Sunucular",
       "description": "Şu anda ve zaman içindeki çevrimiçi oyuncular"
@@ -24,10 +28,6 @@
     "api": {
       "label": "API",
       "description": "Ücretsiz herkese açık REST API, anahtar gerekmez"
-    },
-    "badges": {
-      "label": "Rozetler",
-      "description": "Bir oyuncunun veya klanın kazanabileceği her arma ve nasıl kazanılacağı"
     },
     "glossary": {
       "label": "Sözlük",

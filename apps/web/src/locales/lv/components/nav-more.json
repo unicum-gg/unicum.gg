@@ -5,6 +5,10 @@
       "label": "Turnīri",
       "description": "Režģi, sastāvi un rezultāti katram reģionam"
     },
+    "calendar": {
+      "label": "Kalendārs",
+      "description": "Oficiālie notikumi, turnīri un izpārdošanas pa dienām"
+    },
     "servers": {
       "label": "Serveri",
       "description": "Tiešsaistes spēlētāji tagad un laika gaitā"
@@ -24,10 +28,6 @@
     "api": {
       "label": "API",
       "description": "Bezmaksas publiska REST API, atslēga nav nepieciešama"
-    },
-    "badges": {
-      "label": "Zīmes",
-      "description": "Katra nozīmīte, ko spēlētājs vai klans var nopelnīt, un kā to izdarīt"
     },
     "glossary": {
       "label": "Vārdu krājums",
