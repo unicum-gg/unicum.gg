@@ -5,5 +5,7 @@
   "n-random-events": "{count, plural, one {# random event} other {# random events}}",
   "random-events": "Random events",
   "size": "Size",
-  "team-size": "Team size"
+  "team-size": "Team size",
+  "retired": "Retired",
+  "retired-span": "In the game from update {first} to update {last}"
 }

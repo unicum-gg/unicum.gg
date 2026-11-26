@@ -1,4 +1,6 @@
 {
   "random-events": "Random events might change this map mid-battle",
-  "minimap-alt": "{map} minimap"
+  "minimap-alt": "{map} minimap",
+  "retired-until": "Until {version}",
+  "retired-span": "In the game from update {first} to update {last}"
 }

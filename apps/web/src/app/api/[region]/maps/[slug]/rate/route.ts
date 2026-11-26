@@ -41,7 +41,7 @@ const limiter = createRateLimiter({
 
 /**
  * Rate a map
- * @description Cast or revise this account's opinion of a map. Requires a signed-in Wargaming account that has played enough of the game: unlike the vehicle ratings, the gate cannot read a record on the subject, because Wargaming publishes no per-arena record for anybody, so it reads the account's lifetime battle count instead and refuses with 403 below the threshold. The rotation is what makes that fair rather than arbitrary: nobody chooses where they are sent, so exposure follows from playing at all. One opinion per account per map, so sending again replaces the previous one rather than adding to it. The evidence the vote rests on (the account's battles, its trailing 30 days, its win rate and rating) is copied onto it at the moment it is cast, and the client version is stamped, so an opinion stays attached to the layout it was formed on. A written opinion is queued for moderation and never published here; the stars count immediately. The vote is recorded under the caller's own region, whatever region the page was opened on. 401 when signed out, 403 when the record is too thin, 404 for an unknown map.
+ * @description Cast or revise this account's opinion of a map. Requires a signed-in Wargaming account that has played enough of the game: unlike the vehicle ratings, the gate cannot read a record on the subject, because Wargaming publishes no per-arena record for anybody, so it reads the account's lifetime battle count instead and refuses with 403 below the threshold. The rotation is what makes that fair rather than arbitrary: nobody chooses where they are sent, so exposure follows from playing at all. One opinion per account per map, so sending again replaces the previous one rather than adding to it. The evidence the vote rests on (the account's battles, its trailing 30 days, its win rate and rating) is copied onto it at the moment it is cast, and the client version is stamped, so an opinion stays attached to the layout it was formed on. A written opinion is queued for moderation and never published here; the stars count immediately. The vote is recorded under the caller's own region, whatever region the page was opened on. 401 when signed out, 403 when the record is too thin, 404 for an unknown map, 409 for a map the game no longer ships.
  * @pathParams mapParams
  * @body MapRateBody
  * @response MapRateResponse
@@ -75,6 +75,9 @@ export async function POST(
 
   const map = await getMapDetailBySlug(region, decodeURIComponent(slug));
   if (!map) return Response.json({ error: "not_found" }, { status: 404 });
+  // A rating is a verdict on ground the voter is sent to today, which nobody is
+  // on a map the game no longer ships. The page offers no form for one either.
+  if (map.retired) return Response.json({ error: "map_retired" }, { status: 409 });
 
   const detail: Partial<Record<MapRatingAxis, number>> = {};
   const put = (axis: MapRatingAxis, value: number | null | undefined) => {

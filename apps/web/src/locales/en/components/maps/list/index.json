@@ -5,5 +5,7 @@
   "no-maps-match-your-filters": "No maps match your filters.",
   "search": "Search among {count} maps",
   "search-label": "Search maps",
-  "special-map": "Special map"
+  "special-map": "Special map",
+  "retired-maps": "Retired maps",
+  "retired-maps-intro": "{count, plural, one {# map has} other {# maps have}} left the game. Each is shown as it was in the last update that had it."
 }

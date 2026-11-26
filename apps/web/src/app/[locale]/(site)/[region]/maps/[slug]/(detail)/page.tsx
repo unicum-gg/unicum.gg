@@ -138,7 +138,7 @@ export async function loadMapTab(
     loadMapHistory(region, detail.slug),
     loadMapStatisticsSummary(region, detail.slug, locale),
   ]);
-  const available = availableMapTabs(history, statistics);
+  const available = availableMapTabs(detail, history, statistics);
   if (!available.includes(tab))
     redirect(
       localizePath(

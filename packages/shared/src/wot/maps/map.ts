@@ -12,6 +12,16 @@ export type MapModeGeometry = {
   controlPoint: MapMarker | null;
 };
 
+/** When a map the game no longer ships was in it. Versions are three-part, the
+ * form the map history uses (`0.8.11`). */
+export type MapRetirement = {
+  firstVersion: string;
+  lastVersion: string;
+  /** When the last version carrying it shipped, as an ISO date: the last month
+   * it could be played. Null when that version could not be dated. */
+  lastDate: string | null;
+};
+
 export type MapSummary = {
   arenaId: string;
   slug: string;
@@ -40,6 +50,10 @@ export type MapSummary = {
    * the gallery reads them here to draw the right minimap on the right tab and
    * link straight to the matching view. */
   variants: MapVariantSummary[];
+  /** Set on a map the current client no longer ships, which the catalogue reads
+   * from the archived clients rather than from today's: when it was in the game.
+   * Null for every map that can be played today. */
+  retired: MapRetirement | null;
 };
 
 /** One variant of a map, as the gallery needs it. */

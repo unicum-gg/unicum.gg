@@ -5,14 +5,22 @@ import { gameModeFromRaw } from "./game-modes";
 import type { MapPoint } from "./geometry";
 import { mapPoiType, MapPoiType } from "./points-of-interest";
 import { buildRandomEvents } from "./random-events";
-import { MIRROR_TRACKING_START } from "../mirror-tracking";
 
 /**
  * The oldest game version the map history covers. A map already in the client
  * then predates our tracking, so all we can say is that it was added *before*
  * that update.
+ *
+ * Earlier than the tanks' (`MIRROR_TRACKING_START`): the maps also read the
+ * mirror's `ARCHIVE` branch. Not its first version (0.6.2) but 0.7.4, the first
+ * whose arena definitions carry a `gameplayTypes` block: before it a definition
+ * holds the play area and no base or spawn at all, so it describes no map the
+ * history can diff, and the backfill starts where the geometry does.
  */
-export const MAP_HISTORY_TRACKING_START = MIRROR_TRACKING_START;
+export const MAP_HISTORY_TRACKING_START = {
+  version: "0.7.4",
+  date: "2012-06-01",
+} as const;
 
 /**
  * A point of a map's geometry, in metres from the bottom-left corner of the play

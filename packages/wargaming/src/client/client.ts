@@ -18,6 +18,7 @@ import { StrongholdResource } from "../stronghold/wot";
 import { TournamentsResource } from "../tournaments/wot/resource";
 import { SourceVehiclesResource } from "../source/wot/vehicles";
 import { SourceArenasResource } from "../source/wot/arenas";
+import { SourceArchivedArenasResource } from "../source/wot/archived-arenas";
 import { SourceSpecsResource } from "../source/wot/specs";
 import { SourceEquipmentResource } from "../source/wot/equipment";
 import { SourceCrewResource } from "../source/wot/crew";
@@ -90,6 +91,8 @@ class PortalSurface {
 class SourceSurface {
   readonly vehicles: SourceVehiclesResource;
   readonly arenas: SourceArenasResource;
+  /** The maps the game no longer ships, as they were when they left. */
+  readonly archivedArenas: SourceArchivedArenasResource;
   readonly specs: SourceSpecsResource;
   readonly equipment: SourceEquipmentResource;
   readonly crew: SourceCrewResource;
@@ -100,6 +103,7 @@ class SourceSurface {
   constructor(transport: Transport, region: Region) {
     this.vehicles = new SourceVehiclesResource(transport, region);
     this.arenas = new SourceArenasResource(transport, region);
+    this.archivedArenas = new SourceArchivedArenasResource(transport);
     this.specs = new SourceSpecsResource(transport, region);
     this.equipment = new SourceEquipmentResource(transport, region);
     this.crew = new SourceCrewResource(transport, region);

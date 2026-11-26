@@ -79,7 +79,7 @@ export default async function MapLayout({
         }}
         region={region}
         positions={positions}
-        available={availableMapTabs(history, statistics)}
+        available={availableMapTabs(detail, history, statistics)}
         counts={mapTabCounts(detail, videos, history, statistics)}
       >
         {children}

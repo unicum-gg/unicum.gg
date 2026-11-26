@@ -4,6 +4,7 @@ import { useLocale } from "@onruntime/translations/react";
 import { numberFormat } from "@/lib/format";
 
 import {
+  ArchiveIcon,
   ArrowsOutCardinalIcon,
   WarningIcon,
 } from "@phosphor-icons/react/dist/ssr";
@@ -113,6 +114,22 @@ export function MapCard({
             <MapCommonTestBadge size={12} />
             {tGame("features.common-test")}
           </span>
+        )}
+        {map.retired && (
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <span className="absolute bottom-2 left-2 inline-flex items-center gap-1 rounded-full bg-black/60 px-2 py-1 text-[11px] font-medium text-fd-foreground backdrop-blur-sm">
+                <ArchiveIcon weight="fill" className="size-3" />
+                {tCard("retired-until", { version: map.retired.lastVersion })}
+              </span>
+            </TooltipTrigger>
+            <TooltipContent>
+              {tCard("retired-span", {
+                first: map.retired.firstVersion,
+                last: map.retired.lastVersion,
+              })}
+            </TooltipContent>
+          </Tooltip>
         )}
         <Tooltip>
           <TooltipTrigger asChild>

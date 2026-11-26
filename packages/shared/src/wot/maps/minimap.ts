@@ -1,4 +1,4 @@
-import { iconUrl } from "@unicum.gg/wargaming";
+import { ArchivedMinimapBranch, iconUrl } from "@unicum.gg/wargaming";
 
 // Our own mirror of the game's top-down minimaps, extracted from the client at
 // full 2048² (see the `unicum-gg/wot.maps` repo). Keyed by the exact arena id,
@@ -15,10 +15,32 @@ export const WOT_MAPS_BRANCH = "WG";
 // branch instead of falling through to a placeholder.
 export const WOT_MAPS_BRANCH_CT = "WG_CT";
 
+// The retired maps' branch of the same mirror, cut from the archived clients:
+// the live branches only hold what today's client ships.
+export const WOT_MAPS_BRANCH_ARCHIVE = "ARCHIVE";
+
 /** HD (2048²) top-down minimap on the wot.maps mirror, keyed by arena id. Not
  * every arena has one; the client falls back to a placeholder on a 404. */
 export function minimapUrl(arenaId: string): string {
   return `https://cdn.jsdelivr.net/gh/${WOT_MAPS_REPO}@${WOT_MAPS_BRANCH}/maps/${arenaId}.webp`;
+}
+
+/**
+ * A retired map's minimap: the archive branch for the ones cut from an archived
+ * client, the live one for a map pulled since that mirror began (it keeps what
+ * it published). With no image anywhere, the live URL, which 404s onto the
+ * component's placeholder like any other missing minimap.
+ */
+export function retiredMinimapUrl(arenaId: string, branch: ArchivedMinimapBranch | null): string {
+  return branch === ArchivedMinimapBranch.Archive
+    ? `https://cdn.jsdelivr.net/gh/${WOT_MAPS_REPO}@${WOT_MAPS_BRANCH_ARCHIVE}/maps/${arenaId}.webp`
+    : minimapUrl(arenaId);
+}
+
+/** An image the archive branch keeps for the map history (a minimap as it was
+ * at one version), from the path the history records. */
+export function archivedMinimapUrl(path: string): string {
+  return `https://cdn.jsdelivr.net/gh/${WOT_MAPS_REPO}@${WOT_MAPS_BRANCH_ARCHIVE}/${path}`;
 }
 
 /** The same mirror image on the Common Test branch, or null when the URL is not

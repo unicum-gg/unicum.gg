@@ -6,6 +6,7 @@ import { numberFormat } from "@/lib/format";
 import type { Icon } from "@phosphor-icons/react";
 import { Fragment, type ReactNode, useMemo, useState } from "react";
 import {
+  ArchiveIcon,
   ArrowsOutCardinalIcon,
   ClockIcon,
   CompassIcon,
@@ -201,6 +202,12 @@ export function MapShell({
     events.length > 0
       ? t("n-random-events", { count: events.length })
       : null,
+    detail.retired
+      ? t("retired-span", {
+          first: detail.retired.firstVersion,
+          last: detail.retired.lastVersion,
+        })
+      : null,
   ].filter((v): v is string => Boolean(v));
 
   return (
@@ -218,6 +225,12 @@ export function MapShell({
               {/* The whole map is on the test client alone, not just a layout of
                 * it, so the crest belongs beside its name. */}
               {detail.commonTest && <MapCommonTestBadge size={18} />}
+              {detail.retired && (
+                <span className="inline-flex shrink-0 items-center gap-1 rounded-full border border-fd-border px-2 py-0.5 text-xs font-medium text-fd-muted-foreground">
+                  <ArchiveIcon weight="fill" className="size-3.5" />
+                  {t("retired")}
+                </span>
+              )}
               <MapActionsMenu
                 region={region}
                 slug={detail.slug}

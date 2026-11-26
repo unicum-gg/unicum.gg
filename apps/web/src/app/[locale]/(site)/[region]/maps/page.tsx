@@ -86,10 +86,13 @@ export async function renderMapsIndex(
   const { t } = await getTranslation("components/maps/list/copy", locale);
   const { t: tGame } = await getTranslation("game/vocabulary", locale);
   const copy = mapsTabCopy(activeTab, t, tGame);
+  // The intro counts the maps that can be played today; the retired ones have a
+  // section and a count of their own further down.
+  const live = maps.filter((m) => !m.retired);
   const shown =
     activeTab === BATTLE_ALL
-      ? maps.length
-      : maps.filter((m) => m.battleTypes.includes(activeTab)).length;
+      ? live.length
+      : live.filter((m) => m.battleTypes.includes(activeTab)).length;
 
   return (
     <div className="mx-auto w-full max-w-7xl">

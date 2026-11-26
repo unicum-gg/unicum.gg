@@ -162,7 +162,7 @@ export function MapsGallery({
     [maps, battleType],
   );
 
-  const filtered = useMemo(() => {
+  const matching = useMemo(() => {
     const q = query.trim().toLowerCase();
     return maps.filter((m) => {
       if (battleType !== BATTLE_ALL && !m.battleTypes.includes(battleType)) {
@@ -176,6 +176,11 @@ export function MapsGallery({
       return true;
     });
   }, [maps, battleType, query, camoSel, modeSel]);
+  // The maps the game no longer ships come after the ones it does, in a section
+  // of their own, under the same tab and filters: a retired Frontline map is
+  // still a Frontline map, it just cannot be played any more.
+  const filtered = useMemo(() => matching.filter((m) => !m.retired), [matching]);
+  const retired = useMemo(() => matching.filter((m) => m.retired), [matching]);
 
   // The href carries the battle type alone, so it is what crawlers follow and
   // what Next prefetches. The click adds the current search and camo/mode
@@ -257,24 +262,46 @@ export function MapsGallery({
       </div>
 
       <div className="border-t border-fd-border p-4">
-        {filtered.length === 0 ? (
+        {matching.length === 0 ? (
           <p className="py-16 text-center text-fd-muted-foreground">
             {t("no-maps-match-your-filters")}</p>
         ) : (
           <TooltipProvider delayDuration={100}>
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-              {filtered.map((map) => (
-                <MapCard
-                  key={map.arenaId}
-                  map={map}
-                  region={region}
-                  {...cardView(battleType, map)}
-                />
-              ))}
-            </div>
+            {filtered.length > 0 && (
+              <MapGrid maps={filtered} region={region} battleType={battleType} />
+            )}
+            {retired.length > 0 && (
+              <section className={cn(filtered.length > 0 && "mt-10")}>
+                <h2 className="font-heading text-lg font-semibold text-fd-foreground">
+                  {t("retired-maps")}
+                </h2>
+                <p className="mb-4 mt-1 text-sm text-fd-muted-foreground">
+                  {t("retired-maps-intro", { count: retired.length })}
+                </p>
+                <MapGrid maps={retired} region={region} battleType={battleType} />
+              </section>
+            )}
           </TooltipProvider>
         )}
       </div>
     </Panel>
+  );
+}
+
+function MapGrid({
+  maps,
+  region,
+  battleType,
+}: {
+  maps: MapSummary[];
+  region: Region;
+  battleType: BattleTab;
+}) {
+  return (
+    <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+      {maps.map((map) => (
+        <MapCard key={map.arenaId} map={map} region={region} {...cardView(battleType, map)} />
+      ))}
+    </div>
   );
 }

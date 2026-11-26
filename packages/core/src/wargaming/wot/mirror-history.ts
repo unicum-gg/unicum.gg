@@ -18,6 +18,15 @@ import {
 
 const GITHUB_API = "https://api.github.com";
 
+/**
+ * The mirror branch holding the versions before it began (0.6.2 to 1.12.1),
+ * one commit per version, rebuilt from the archived clients by `wot.build`'s
+ * `generate-archive`. Same tree and same commit subjects as a live branch, so
+ * everything here reads it unchanged. Not a `WotSrcBranch`: no region is
+ * served from it.
+ */
+export const ARCHIVE_SRC_BRANCH = "ARCHIVE";
+
 /** A game version and the mirror commit that best represents it (its latest
  * build, i.e. the final state of that version). */
 export type VersionCommit = { gameVersion: string; sha: string; date: string };
@@ -121,7 +130,7 @@ export function transportAt(sha: string): Transport {
  */
 export async function listVersionCommits(
   region: Region = Region.EU,
-  branchOverride?: WotSrcBranch,
+  branchOverride?: WotSrcBranch | typeof ARCHIVE_SRC_BRANCH,
 ): Promise<VersionCommit[]> {
   const branch = branchOverride ?? BRANCH_BY_REGION[region];
   const token = process.env.GITHUB_TOKEN;
@@ -148,7 +157,10 @@ export async function listVersionCommits(
     }[];
     if (commits.length === 0) break;
     for (const c of commits) {
-      const m = /v\.(\d+\.\d+\.\d+)\.\d+/.exec(c.commit.message);
+      // Two subject formats: the upstream mirror's `v.2.3.1.1 #910`, then
+      // `update EU sources to 2.4.1.5498` since `wot.build` writes the branch.
+      // Reading only the first silently ended every backfill at 2.3.1.
+      const m = /(?:v\.|sources to )(\d+\.\d+\.\d+)\.\d+/.exec(c.commit.message);
       if (!m) continue;
       const gameVersion = m[1];
       const date = c.commit.committer?.date ?? c.commit.author.date;

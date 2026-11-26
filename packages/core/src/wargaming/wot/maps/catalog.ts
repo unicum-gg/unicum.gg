@@ -1,6 +1,12 @@
-import type { Region, WotSrcArena } from "@unicum.gg/wargaming";
+import type {
+  ArenaRetirement,
+  Region,
+  WotSrcArena,
+  WotSrcRetiredArena,
+} from "@unicum.gg/wargaming";
 import {
   buildMapSlugIndex,
+  withRetiredSlugs,
   ctMinimapUrl,
   minimapUrl,
   resolveMapName,
@@ -23,6 +29,11 @@ export type MapCatalog = {
   /** The arenas the live client only declares: it ships no space for them, so
    * they can only be played on the Common Test. */
   testOnlyArenas: Set<string>;
+  /** The maps the game no longer ships, read from the archived clients, keyed
+   * by arena id: when each was in the game. They are in `arenas` and the slug
+   * index like any other map, so a page, a replay or a feed row naming one
+   * resolves it; this is what tells them apart. */
+  retired: Map<string, ArenaRetirement>;
 };
 
 // The catalogue derives from static client scripts (only a game patch changes
@@ -37,7 +48,7 @@ const REDIS_TTL_SECONDS = 24 * 60 * 60;
 // resolution changes, since the names are resolved before the array is
 // serialized and a stale payload would keep serving the previous spelling (and
 // therefore the previous slugs) for a day.
-const SHAPE_VERSION = 5;
+const SHAPE_VERSION = 6;
 const redisKey = (region: Region) => `mapcatalog:v${SHAPE_VERSION}:${region}`;
 const cache = new Map<Region, { value: MapCatalog; expiresAt: number }>();
 // One build per region at a time, like the Clan Wars pool next door. The memo
@@ -56,6 +67,8 @@ type CatalogPayload = {
   arenas: WotSrcArena[];
   /** Arena ids the live client declares without shipping their space. */
   testOnly: string[];
+  /** The maps the game no longer ships, name-sorted, none of them live. */
+  retired: WotSrcRetiredArena[];
 };
 
 function catalogFromArenas(payload: CatalogPayload): MapCatalog {
@@ -89,11 +102,16 @@ function catalogFromArenas(payload: CatalogPayload): MapCatalog {
   // back in rather than left at the end (the sitemap reads this order).
   if (orphans) maps.sort((a, b) => a.name.localeCompare(b.name));
   const listed = orphans ? new Map(maps.map((a) => [a.arenaId, a])) : byId;
+  // The retired maps are cards of their own and never folded (the folded
+  // variants were left out of them upstream). They come after the live ones,
+  // which is also the order the sitemap lists them in.
+  for (const arena of payload.retired) listed.set(arena.arenaId, arena);
   return {
     arenas: listed,
-    index: buildMapSlugIndex(maps),
+    index: withRetiredSlugs(buildMapSlugIndex(maps), payload.retired),
     variantArenas,
     testOnlyArenas: new Set(payload.testOnly),
+    retired: new Map(payload.retired.map((a) => [a.arenaId, a.retired])),
   };
 }
 
@@ -191,11 +209,31 @@ export function resolveArenaNames(raw: WotSrcArena[]): Set<string> {
   return unnamed;
 }
 
+/**
+ * Give a retired map a name of its own when it shares one with a live map or
+ * another retired one, by appending the last version it was in: "Province
+ * (0.9.12)" beside today's Province, "Ruinberg (1.20.1)" for the event copy of
+ * Ruinberg that ran that update. The event copies are named exactly as the map
+ * they reskin, so without it the gallery holds two cards reading "Ruinberg" and
+ * nothing to tell them apart. A version rather than words, so the name needs no
+ * translation, and it also gives the slug something to read.
+ */
+function disambiguateRetired(retired: WotSrcRetiredArena[], live: WotSrcArena[]): void {
+  const taken = new Map<string, number>();
+  for (const arena of live) taken.set(arena.name, (taken.get(arena.name) ?? 0) + 1);
+  const retiredCount = new Map<string, number>();
+  for (const arena of retired) retiredCount.set(arena.name, (retiredCount.get(arena.name) ?? 0) + 1);
+  for (const arena of retired) {
+    if (!taken.has(arena.name) && (retiredCount.get(arena.name) ?? 0) < 2) continue;
+    arena.name = `${arena.name} (${arena.retired.lastVersion})`;
+  }
+}
+
 // After name resolution, distinct maps carry distinct names, so this only folds
 // away true duplicates (the same map shipped under two ids), keeping the
 // shortest, canonical id.
-function dedupeByName(arenas: WotSrcArena[]): WotSrcArena[] {
-  const byName = new Map<string, WotSrcArena>();
+function dedupeByName<T extends WotSrcArena>(arenas: T[]): T[] {
+  const byName = new Map<string, T>();
   for (const arena of arenas) {
     const existing = byName.get(arena.name);
     if (!existing || arena.arenaId.length < existing.arenaId.length) {
@@ -239,12 +277,39 @@ async function buildMapCatalog(region: Region): Promise<MapCatalog> {
     }
   }
 
-  const raw = await wg.region(region).source.arenas.catalog();
-  resolveArenaNames(raw);
+  const source = wg.region(region).source;
+  const [live, archived] = await Promise.all([
+    source.arenas.catalog(),
+    // The archive is a bonus over the live maps, so it fails open: a mirror
+    // blip costs the retired maps for a day, never the catalogue.
+    source.archivedArenas.catalog().catch(() => [] as WotSrcRetiredArena[]),
+  ]);
+  // An arena the live client defines again is not retired, whatever the
+  // archive says: the seasonal maps leave and come back every year. One it only
+  // NAMES is: the client keeps naming maps years after pulling them (Kharkov),
+  // which gave them a card with no geometry, and the archive has the real one.
+  const liveIds = new Set(live.filter((a) => a.hasDefinition).map((a) => a.arenaId));
+  // A folded variant is not a map either, retired or not: the seasonal
+  // Waffenträger reskins leave on every x.x.1 and come back the next update, and
+  // listed as retired maps they turned each departure into "Redshire removed
+  // from the game". Left out, the history readers fold their rows onto the base
+  // map as before ("Waffenträger version removed").
+  const retiredRaw = archived.filter(
+    (a) => !liveIds.has(a.arenaId) && !variantOf(a.arenaId)?.foldedIntoBase,
+  );
+  const retiredIds = new Set(retiredRaw.map((a) => a.arenaId));
+  const raw = live.filter((a) => a.hasDefinition || !retiredIds.has(a.arenaId));
+  // Named in one pass so a retired variant borrows its base map's name
+  // ("Murovanka (Waffenträger)") wherever that base is.
+  resolveArenaNames([...raw, ...retiredRaw]);
   const arenas = dedupeByName(raw).sort((a, b) => a.name.localeCompare(b.name));
+  disambiguateRetired(retiredRaw, arenas);
   const payload: CatalogPayload = {
     arenas,
     testOnly: await findTestOnlyArenas(arenas.map((a) => a.arenaId)),
+    // Deduped among themselves only: a retired map sharing a live map's name is
+    // a different map that once carried it (the pre-1.0 Province).
+    retired: dedupeByName(retiredRaw).sort((a, b) => a.name.localeCompare(b.name)),
   };
   const value = catalogFromArenas(payload);
   cache.set(region, { value, expiresAt: Date.now() + CACHE_TTL_MS });

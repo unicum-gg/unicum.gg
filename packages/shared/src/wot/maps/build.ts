@@ -1,14 +1,15 @@
-import type { ArenaGameplay, ArenaPoint, WotSrcArena } from "@unicum.gg/wargaming";
+import type { ArenaGameplay, ArenaPoint, ArenaRetirement, WotSrcArena } from "@unicum.gg/wargaming";
 import { BattleType, battleTypesForArena, variantOf } from "./battle-types";
 import { mapCamouflage } from "./camouflage";
 import { gameModeFromRaw, MAP_GAME_MODE_LABEL, MapGameMode } from "./game-modes";
 import { projectPoint, type MapPoint } from "./geometry";
-import { minimapUrl, onslaughtMinimapUrl } from "./minimap";
+import { minimapUrl, onslaughtMinimapUrl, retiredMinimapUrl } from "./minimap";
 import { buildRandomEvents, hasRandomEventLayers } from "./random-events";
 import type {
   MapDetail,
   MapModeGeometry,
   MapOnslaught,
+  MapRetirement,
   MapSummary,
   MapVariantLayout,
   MapVariantSummary,
@@ -151,6 +152,7 @@ function summaryOf(
   hasRandomEvents: boolean,
   variants: MapVariantSummary[],
   commonTest: boolean,
+  retired: ArenaRetirement | null,
 ): MapSummary {
   const { size } = dimensions(arena);
   return {
@@ -161,11 +163,24 @@ function summaryOf(
     sizeMeters: size,
     modes: distinctModes(arena.gameplay),
     battleTypes,
-    minimapUrl: minimapUrl(arena.arenaId),
+    minimapUrl: retired
+      ? retiredMinimapUrl(arena.arenaId, retired.minimap)
+      : minimapUrl(arena.arenaId),
     bases: primaryBases(arena),
     hasRandomEvents,
     commonTest,
     variants,
+    retired: retired ? retirementOf(retired) : null,
+  };
+}
+
+// The wire carries when the map was in the game; which mirror branch draws it is
+// already spent on `minimapUrl`.
+function retirementOf(retired: ArenaRetirement): MapRetirement {
+  return {
+    firstVersion: retired.firstVersion,
+    lastVersion: retired.lastVersion,
+    lastDate: retired.lastDate,
   };
 }
 
@@ -229,6 +244,7 @@ export function buildMapSummary(
   extraBattleTypes: BattleType[] = [],
   variantArenas: WotSrcArena[] = [],
   testOnlyArenas: ReadonlySet<string> = new Set(),
+  retired: ArenaRetirement | null = null,
 ): MapSummary {
   const battleTypes = allBattleTypes(arena, extraBattleTypes);
   return summaryOf(
@@ -238,6 +254,7 @@ export function buildMapSummary(
     runsRandomEvents(arena, battleTypes),
     variantSummaries(variantArenas, testOnlyArenas),
     testOnlyArenas.has(arena.arenaId),
+    retired,
   );
 }
 
@@ -254,6 +271,7 @@ export function buildMapDetail(
   extraBattleTypes: BattleType[] = [],
   variantArenas: WotSrcArena[] = [],
   testOnlyArenas: ReadonlySet<string> = new Set(),
+  retired: ArenaRetirement | null = null,
 ): MapDetail {
   const { width, height } = dimensions(arena);
   const battleTypes = allBattleTypes(arena, extraBattleTypes);
@@ -268,6 +286,7 @@ export function buildMapDetail(
       randomEvents.length > 0,
       variantSummaries(variantArenas, testOnlyArenas),
       testOnlyArenas.has(arena.arenaId),
+      retired,
     ),
     description: arena.description,
     roundLength: arena.roundLength,

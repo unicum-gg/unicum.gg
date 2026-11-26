@@ -222,15 +222,19 @@ export function mapStatisticsBattles(
  * Statistics comes and goes the same way: with no recorded battle in the
  * window there is no figure to draw, and an empty tab would only say that
  * nobody running the mod played there lately, which is no fact about the map.
+ *
+ * A retired map has no Community tab: a rating is a verdict on ground the voter
+ * is sent to today, and nobody is sent to a map the game no longer ships.
  */
 export function availableMapTabs(
+  detail: Pick<MapDetail, "retired">,
   history: MapHistoryData,
   statistics: MapStatisticsPayload | null,
 ): MapDetailTab[] {
   return [
     MapDetailTab.Videos,
     ...(mapStatisticsBattles(statistics) > 0 ? [MapDetailTab.Statistics] : []),
-    MapDetailTab.Community,
+    ...(detail.retired ? [] : [MapDetailTab.Community]),
     ...(history?.tracked ? [MapDetailTab.History] : []),
   ];
 }

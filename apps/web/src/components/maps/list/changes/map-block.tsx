@@ -1,6 +1,7 @@
 "use client";
 
 
+import { useLocale } from "@onruntime/translations/react";
 import Link from "@/components/link";
 import { GlossaryLabel } from "@/components/glossary/label";
 import { MapCommonTestBadge } from "@/components/maps/common-test-badge";
@@ -58,11 +59,16 @@ export function MapBlock({
   const { t } = useTranslation("components/maps/list/changes/map-block");
   const { t: tChange } = useTranslation("components/maps/change-format");
   const { t: tGame } = useTranslation("game/vocabulary");
+  const { locale } = useLocale();
   const changes = map.changes.map((c) =>
-    formatMapChange(c.field, c.previous, c.next, pending, {
-      t: tChange,
-      tGame,
-    }),
+    formatMapChange(
+      c.field,
+      c.previous,
+      c.next,
+      pending,
+      { t: tChange, tGame },
+      locale,
+    ),
   );
   if (changes.length === 0) return null;
 

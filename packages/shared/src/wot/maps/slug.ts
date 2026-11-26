@@ -51,3 +51,28 @@ export function buildMapSlugIndex(
   }
   return { slugToId, idToSlug };
 }
+
+/**
+ * Add the retired maps to an index built from the live ones, without touching a
+ * single live slug.
+ *
+ * `buildMapSlugIndex` settles a collision by suffixing every arena involved, and
+ * a retired map often shares its name with the live one that replaced it (the
+ * pre-1.0 Province beside the HD one), so indexing the two together would move
+ * the live map's URL. Here the live slugs are fixed and only the retired map
+ * gives way, taking its arena id as a suffix whenever its clean slug is taken.
+ */
+export function withRetiredSlugs(
+  index: MapSlugIndex,
+  retired: readonly { arenaId: string; name: string }[],
+): MapSlugIndex {
+  const slugToId = new Map(index.slugToId);
+  const idToSlug = new Map(index.idToSlug);
+  for (const { arenaId, name } of retired) {
+    const base = slugifyMapName(name) || arenaId;
+    const slug = slugToId.has(base) ? `${base}-${arenaId.toLowerCase()}` : base;
+    slugToId.set(slug, arenaId);
+    idToSlug.set(arenaId, slug);
+  }
+  return { slugToId, idToSlug };
+}

@@ -30,6 +30,24 @@ export const mapVariantSummary = z
     description: "One variant of a map, as the gallery reads it.",
   });
 
+export const mapRetirement = z
+  .object({
+    firstVersion: z.string().meta({
+      description: "The first game version that shipped the map (three-part, e.g. `0.7.0`).",
+    }),
+    lastVersion: z.string().meta({
+      description: "The last game version that shipped the map.",
+    }),
+    lastDate: z.string().nullable().meta({
+      description:
+        "When that last version shipped, as an ISO date: the last month the map could be played. Null when that version could not be dated.",
+    }),
+  })
+  .meta({
+    id: "MapRetirement",
+    description: "When a map the game no longer ships was in it.",
+  });
+
 export const mapSummary = z
   .object({
     arenaId: z.string(),
@@ -53,6 +71,10 @@ export const mapSummary = z
     variants: z.array(mapVariantSummary).meta({
       description:
         "The arenas the client ships under this map's name for a mode of their own (Waffenträger, Last Stand, Story Mode, Onslaught night), each a view of this map rather than a map.",
+    }),
+    retired: mapRetirement.nullable().meta({
+      description:
+        "Set on a map the current client no longer ships, read from the archived clients: when it was in the game. Null for a map that can be played today.",
     }),
   })
   .meta({ id: "MapSummary", description: "A battle map's gallery summary." });
