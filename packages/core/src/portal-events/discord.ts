@@ -1,4 +1,6 @@
 import { createHash } from "node:crypto";
+import { APP_IDENTITY } from "@unicum.gg/shared";
+import { Region } from "@unicum.gg/wargaming";
 import type { Announcement } from "@unicum.gg/core/discord/announce";
 import { clamp } from "@unicum.gg/core/discord/announce";
 import { isEverywhere, regionsLabel, type PortalEventGroup } from "./group";
@@ -87,11 +89,23 @@ const utc = (at: Date) =>
     minute: "2-digit",
   }) + " UTC";
 
+/**
+ * Our calendar page for the entry's regions: the region's own when it runs on
+ * one, the region-less page (EU's) when it runs on several. Every event and
+ * card links back to it, which is the point of announcing on our server.
+ */
+export function calendarPageUrl(group: PortalEventGroup): string {
+  const only = group.regions.length === 1 ? group.regions[0] : null;
+  const path = only && only !== Region.EU ? `/${only}/calendar` : "/calendar";
+  return `${APP_IDENTITY.URL}${path}`;
+}
+
 function eventDescription(group: PortalEventGroup): string {
   const { lead } = group;
   const lines = [`${emoji(lead.icon)} ${lead.category} · ${regionsLabel(group.regions)}`];
   lines.push(`${utc(lead.startAt)} to ${utc(lead.endAt)}`);
   lines.push("", "Source: official Wargaming calendar", lead.link);
+  lines.push("", `Every event, day by day: ${calendarPageUrl(group)}`);
   return clamp(lines.join("\n"), EVENT_LIMITS.description);
 }
 
@@ -104,7 +118,14 @@ export function eventHash(group: PortalEventGroup): string {
   const { start, end } = eventWindow(group);
   return createHash("sha1")
     .update(
-      [eventName(group), start.toISOString(), end.toISOString(), group.lead.link, group.regions.join()].join("|"),
+      [
+        eventName(group),
+        start.toISOString(),
+        end.toISOString(),
+        group.lead.link,
+        group.regions.join(),
+        calendarPageUrl(group),
+      ].join("|"),
     )
     .digest("hex");
 }
@@ -171,6 +192,7 @@ export function eventAnnouncement(
     buttons: [
       { label: "Read the news", url: lead.link },
       ...(eventUrl ? [{ label: "Event", url: eventUrl }] : []),
+      { label: "Calendar", url: calendarPageUrl(group) },
     ],
   };
 }
