@@ -61,6 +61,7 @@ export * from "./server-online";
 export * from "./player-activity";
 export * from "./player-distribution";
 export * from "./portal-events";
+export * from "./portal-monthly-events";
 export * from "./tier-winrate";
 export * from "./mode-economy";
 export * from "./battle-comments";
