@@ -13,6 +13,10 @@
       "label": "服务器",
       "description": "当前及历史在线玩家数"
     },
+    "badges": {
+      "label": "徽章",
+      "description": "玩家或军团可以赚取的每个徽章，以及如何赚取"
+    },
     "bot": {
       "label": "Discord 机器人",
       "description": "通过斜杠命令查询玩家、军团和坦克数据"

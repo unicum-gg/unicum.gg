@@ -13,6 +13,10 @@
       "label": "Serveri",
       "description": "Tiešsaistes spēlētāji tagad un laika gaitā"
     },
+    "badges": {
+      "label": "Zīmes",
+      "description": "Katra emblēma, ko spēlētājs vai klans var nopelnīt, un kā"
+    },
     "bot": {
       "label": "Discord bots",
       "description": "Spēlētāju, klanu un tanku statistika kā slīpsvītras komandas"

@@ -13,6 +13,10 @@
       "label": "Servery",
       "description": "Hráči online nyní i v průběhu času"
     },
+    "badges": {
+      "label": "Odznaky",
+      "description": "Každý znak, který může hráč nebo klan získat, a jak na to"
+    },
     "bot": {
       "label": "Discord bot",
       "description": "Hráč, klan a Tank: statistiky dostupné jako lomítkové příkazy"

@@ -13,6 +13,10 @@
       "label": "Sunucular",
       "description": "Şu anda ve zaman içindeki çevrimiçi oyuncular"
     },
+    "badges": {
+      "label": "Rozetler",
+      "description": "Bir oyuncunun veya klanın kazanabileceği her arma ve nasıl"
+    },
     "bot": {
       "label": "Discord botu",
       "description": "Eğik çizgi komutlarıyla oyuncu, klan ve tank istatistikleri"

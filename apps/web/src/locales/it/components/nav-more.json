@@ -13,6 +13,10 @@
       "label": "Server",
       "description": "Giocatori online, ora e nel tempo"
     },
+    "badges": {
+      "label": "Distintivi",
+      "description": "Ogni stemma che un giocatore o un clan può guadagnare e come"
+    },
     "bot": {
       "label": "Discord bot",
       "description": "Statistiche di giocatori, clan e carri tramite comandi slash"

@@ -13,6 +13,10 @@
       "label": "Palvelimet",
       "description": "Paikalla olevat pelaajat nyt ja ajan mittaan"
     },
+    "badges": {
+      "label": "Merkit",
+      "description": "Kaikki vaakunat, jotka pelaaja tai klaani voi ansaita, ja miten"
+    },
     "bot": {
       "label": "Discord-botti",
       "description": "Pelaaja-, klaani- ja panssarivaunutilastot slash-komentoina"

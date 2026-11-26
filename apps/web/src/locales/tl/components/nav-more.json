@@ -13,6 +13,10 @@
       "label": "Mga server",
       "description": "Mga manlalarong online, ngayon at sa paglipas ng oras"
     },
+    "badges": {
+      "label": "Mga badge",
+      "description": "Bawat sagisag na maaaring kitain ng isang manlalaro o klano, at kung paano"
+    },
     "bot": {
       "label": "Discord bot",
       "description": "Istatistika ng manlalaro, klano at tank bilang slash command"

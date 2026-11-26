@@ -13,6 +13,10 @@
       "label": "Servers",
       "description": "Играчи на мрежи, сада и кроз време"
     },
+    "badges": {
+      "label": "Bedževi",
+      "description": "Сваки амблем који играч или клан може да заради и како"
+    },
     "bot": {
       "label": "Discord bot",
       "description": "Статистика играча, клана и тенка као slash команде"

@@ -13,6 +13,10 @@
       "label": "Serveurs",
       "description": "Joueurs en ligne, actuellement et au fil du temps"
     },
+    "badges": {
+      "label": "Badges",
+      "description": "Chaque blason qu’un joueur ou un clan peut gagner, et comment l’obtenir"
+    },
     "bot": {
       "label": "Bot Discord",
       "description": "Statistiques des joueurs, des clans et des chars sous forme de commandes slash"

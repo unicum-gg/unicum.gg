@@ -13,6 +13,10 @@
       "label": "Servidores",
       "description": "Jogadores online, agora e ao longo do tempo"
     },
+    "badges": {
+      "label": "Emblemas",
+      "description": "Cada emblema que um jogador ou clã pode conquistar e como"
+    },
     "bot": {
       "label": "Bot do Discord",
       "description": "Estatísticas de jogadores, clãs e tanques através de comandos de barra"

@@ -13,6 +13,10 @@
       "label": "Máy chủ",
       "description": "Người chơi trực tuyến, hiện tại và theo thời gian"
     },
+    "badges": {
+      "label": "Huy hiệu",
+      "description": "Mỗi biểu trưng mà người chơi hoặc Clan có thể kiếm được và cách kiếm chúng"
+    },
     "bot": {
       "label": "Bot Discord",
       "description": "Thống kê người chơi, Clan và xe tăng dưới dạng lệnh slash"

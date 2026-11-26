@@ -13,6 +13,10 @@
       "label": "Servere",
       "description": "Jucători online, acum și în timp"
     },
+    "badges": {
+      "label": "Insigne",
+      "description": "Fiecare emblemă pe care o poate câștiga un jucător sau un clan și cum să o câștigi"
+    },
     "bot": {
       "label": "Discord bot",
       "description": "Statistici despre jucători, clanuri și tancuri sub formă de comenzi slash"

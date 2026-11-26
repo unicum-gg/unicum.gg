@@ -13,6 +13,10 @@
       "label": "Serwery",
       "description": "Gracze online, obecnie i na przestrzeni czasu"
     },
+    "badges": {
+      "label": "Odznaki",
+      "description": "Zdobądź każdy emblemat jako gracz lub klan i sprawdź, jak to zrobić"
+    },
     "bot": {
       "label": "Bot Discord",
       "description": "Statystyki graczy, klanów i czołgów jako polecenia slash"

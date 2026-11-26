@@ -1769,6 +1769,8 @@
   "components/nav-more:items.calendar.description": "61757b063b99",
   "components/nav-more:items.servers.label": "acca64b83535",
   "components/nav-more:items.servers.description": "9b6b1276b465",
+  "components/nav-more:items.badges.label": "2c578dc888bc",
+  "components/nav-more:items.badges.description": "53af7fad8228",
   "components/nav-more:items.bot.label": "0d0d2858ac9c",
   "components/nav-more:items.bot.description": "9ff6e03377e0",
   "components/nav-more:items.mod.label": "f3dbb02e40cb",

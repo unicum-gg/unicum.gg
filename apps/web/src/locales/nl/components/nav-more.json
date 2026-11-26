@@ -13,6 +13,10 @@
       "label": "Servers",
       "description": "Spelers online, nu en in de loop van de tijd"
     },
+    "badges": {
+      "label": "Badges",
+      "description": "Elk embleem dat een speler of clan kan verdienen, en hoe"
+    },
     "bot": {
       "label": "Discord bot",
       "description": "Statistieken van spelers, clans en tanks als slashcommando’s"

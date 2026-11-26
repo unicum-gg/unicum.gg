@@ -13,6 +13,10 @@
       "label": "서버들",
       "description": "현재 및 시간별 온라인 플레이어"
     },
+    "badges": {
+      "label": "배지",
+      "description": "플레이어나 클랜이 획득할 수 있는 모든 문장과 획득 방법"
+    },
     "bot": {
       "label": "Discord 봇",
       "description": "슬래시 명령으로 확인하는 플레이어, 클랜 및 전차 통계"

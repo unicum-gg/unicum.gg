@@ -13,6 +13,10 @@
       "label": "Serveriai",
       "description": "Prisijungę žaidėjai dabar ir laikui bėgant"
     },
+    "badges": {
+      "label": "Ženkleliai",
+      "description": "Kiekvienas herbas, kurį gali uždirbti žaidėjas arba klanas, ir kaip tai padaryti"
+    },
     "bot": {
       "label": "Discord bot",
       "description": "Žaidėjų, klanų ir tankų statistika kaip pasvirojo brūkšnio komandos"

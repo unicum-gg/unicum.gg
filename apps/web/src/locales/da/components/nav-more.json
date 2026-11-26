@@ -13,6 +13,10 @@
       "label": "Servere",
       "description": "Spillere online, nu og over tid"
     },
+    "badges": {
+      "label": "Mærker",
+      "description": "Alle emblemer, som en spiller eller klan kan optjene, og hvordan"
+    },
     "bot": {
       "label": "Discord bot",
       "description": "Spiller-, klan- og kampvognsstatistik som slash-kommandoer"
