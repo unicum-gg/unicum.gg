@@ -1,10 +1,9 @@
 "use client";
 
 import type { z } from "zod";
-import { ArrowRight } from "lucide-react";
 import type { Region } from "@unicum.gg/wargaming";
 import type { TankSpotlightResponse } from "@/app/api/[region]/tanks/spotlight/schema.api";
-import Link from "@/components/link";
+import { PanelHeaderLink } from "@/components/panel-header-link";
 import { CommonTestBadge } from "@/components/entity/badges/common-test-badge";
 import {
   Panel,
@@ -41,8 +40,9 @@ export function TankSpotlight({
   if (tanks.length === 0) return null;
   return (
     <Panel>
-      <PanelHeader>
+      <PanelHeader className="flex flex-wrap items-center justify-between gap-2">
         <PanelTitle>{t("title")}</PanelTitle>
+        {moreHref ? <PanelHeaderLink href={moreHref}>{t("see-all")}</PanelHeaderLink> : null}
       </PanelHeader>
       <PanelContent className="px-4 py-4">
         {/* `grid-cols-2` spelled out: an implicit column is sized to its
@@ -64,17 +64,6 @@ export function TankSpotlight({
             </li>
           ))}
         </ul>
-        {moreHref ? (
-          <div className="mt-3 flex justify-end">
-            <Link
-              href={moreHref}
-              className="inline-flex items-center gap-1.5 text-xs text-fd-muted-foreground transition-colors hover:text-fd-foreground"
-            >
-              {t("see-all")}
-              <ArrowRight className="size-3.5" />
-            </Link>
-          </div>
-        ) : null}
       </PanelContent>
     </Panel>
   );

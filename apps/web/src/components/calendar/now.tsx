@@ -2,9 +2,9 @@
 
 import { calendarKind, calendarTitle } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
-import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "@/components/link";
+import { PanelHeaderLink } from "@/components/panel-header-link";
 import { Panel, PanelContent, PanelHeader, PanelTitle } from "@/components/panel";
 import ROUTES from "@/constants/routes";
 import { useFormat } from "@/hooks/use-format";
@@ -36,8 +36,9 @@ export function CalendarNow({
 
   return (
     <Panel>
-      <PanelHeader>
+      <PanelHeader className="flex flex-wrap items-center justify-between gap-2">
         <PanelTitle>{t("title")}</PanelTitle>
+        <PanelHeaderLink href={href}>{t("see-all")}</PanelHeaderLink>
       </PanelHeader>
       <PanelContent className="px-4 py-4">
         <ul className="grid grid-cols-2 gap-3 lg:grid-cols-4">
@@ -80,15 +81,6 @@ export function CalendarNow({
             );
           })}
         </ul>
-        <div className="mt-3 flex justify-end">
-          <Link
-            href={href}
-            className="inline-flex items-center gap-1.5 text-xs text-fd-muted-foreground transition-colors hover:text-fd-foreground"
-          >
-            {t("see-all")}
-            <ArrowRight className="size-3.5" />
-          </Link>
-        </div>
       </PanelContent>
     </Panel>
   );
