@@ -41,14 +41,8 @@ export function footerColumns(
   const clans = sections.find((s) => s.id === "clans")!;
   const tanks = sections.find((s) => s.id === "tanks")!;
   const maps = sections.find((s) => s.id === "maps")!;
-  // A section holding a single page does not earn a column of its own, the same
-  // rule the navbar applies to its dropdowns: a heading with one entry under it
-  // reads as a column someone forgot to finish. Its link joins the first column,
-  // which is already where the region's own pages live. Tournaments is one of
-  // those, so it needs no entry of its own here.
-  const singlePage = sections
-    .filter((s) => s.links.length === 1)
-    .flatMap((s) => s.links);
+  const tournaments = sections.find((s) => s.id === "tournaments")!;
+  const servers = sections.find((s) => s.id === "servers")!;
 
   return [
     {
@@ -61,12 +55,22 @@ export function footerColumns(
         { label: t("links.top-tanks"), href: ROUTES.TANKS(region) },
         ...clans.links.slice(1), // Stronghold, Advances
         ...players.links.slice(1), // 3 Marks, Onslaught, Rampage
-        ...singlePage, // Server population, Tournaments
-        { label: t("links.calendar"), href: ROUTES.CALENDAR(region) },
       ],
     },
     { title: t("columns.tanks"), links: tanks.links },
     { title: t("columns.maps"), links: maps.links },
+    {
+      // The pages about the game that belong to no catalogue: the navbar's
+      // More menu holds them too. Their sections hold a page each, which used
+      // to send them to the end of the leaderboards, where they were not.
+      title: t("columns.game"),
+      links: [
+        ...tournaments.links,
+        { label: t("links.calendar"), href: ROUTES.CALENDAR(region) },
+        ...servers.links,
+        { label: t("links.glossary"), href: ROUTES.GLOSSARY },
+      ],
+    },
     {
       // The ways to read our data without opening the site.
       title: t("columns.integrations"),
@@ -78,12 +82,12 @@ export function footerColumns(
       ],
     },
     {
-      // What the site is rather than what it shows: how much of the playerbase
-      // we track, who pays for it, where the code lives, whether it is up.
+      // What the site is rather than what it shows: its own badges, how much
+      // of the playerbase we track, who pays for it, where the code lives,
+      // whether it is up.
       title: t("columns.project"),
       links: [
         { label: t("links.badges"), href: ROUTES.BADGES },
-        { label: t("links.glossary"), href: ROUTES.GLOSSARY },
         { label: t("links.coverage"), href: ROUTES.COVERAGE(region) },
         { label: t("links.support"), href: ROUTES.SUPPORT },
         { label: t("links.source"), href: APP.EXTERNAL.GITHUB, external: true },

@@ -55,7 +55,7 @@ export function Footer() {
         className={`relative flex h-8 w-full ${styles.borderX} diagonal-pattern`}
       />
       <footer className="screen-line-before border-x border-fd-border">
-        <div className="grid grid-cols-2 gap-8 p-4 pb-8 sm:grid-cols-3 lg:grid-cols-7">
+        <div className="grid grid-cols-2 gap-8 p-4 pb-8 sm:grid-cols-3 lg:grid-cols-8">
           <div className="col-span-2 flex flex-col gap-4">
             <Link href={ROUTES.HOME(region)} className="flex items-center gap-2">
               <Image
@@ -93,7 +93,7 @@ export function Footer() {
                     <Link
                       href={link.href}
                       className={`text-sm ${styles.linkHover}`}
-                      // Seven columns of links nobody is about to click, which
+                      // Six columns of links nobody is about to click, which
                       // Next was fetching whole because nothing in this tree
                       // draws a loading boundary. See `prefetch` in
                       // `@/components/link`.
