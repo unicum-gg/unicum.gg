@@ -41,7 +41,7 @@ function extraBattleTypes(
 /** Every battle map on a region as a lightweight gallery summary, name-sorted.
  * The catalogue is region-scoped but essentially identical across regions. */
 export async function listMapSummaries(region: Region): Promise<MapSummary[]> {
-  const [{ arenas, index, variantArenas, testOnlyArenas }, clanWars] =
+  const [{ arenas, index, variantArenas, testOnlyArenas, retired }, clanWars] =
     await Promise.all([
       getMapCatalog(region),
       getClanWarsArenaIds(region),
@@ -58,6 +58,7 @@ export async function listMapSummaries(region: Region): Promise<MapSummary[]> {
           extraBattleTypes(arena.arenaId, clanWars, variants),
           variants,
           testOnlyArenas,
+          retired.get(arena.arenaId) ?? null,
         ),
       );
     }
@@ -89,7 +90,7 @@ function detailFrom(
   slug: string,
   clanWars: ReadonlySet<string>,
 ): MapDetail | null {
-  const { arenas, index, variantArenas, testOnlyArenas } = catalog;
+  const { arenas, index, variantArenas, testOnlyArenas, retired } = catalog;
   const arenaId = arenaIdOf(catalog, slug);
   if (arenaId === undefined) return null;
   const arena = arenas.get(arenaId);
@@ -101,6 +102,7 @@ function detailFrom(
     extraBattleTypes(arenaId, clanWars, variants),
     variants,
     testOnlyArenas,
+    retired.get(arenaId) ?? null,
   );
 }
 
@@ -164,6 +166,7 @@ export async function resolveBattleMap(
     [],
     catalog.variantArenas.get(arenaId) ?? [],
     catalog.testOnlyArenas,
+    catalog.retired.get(arenaId) ?? null,
   );
   return {
     arenaId,
@@ -404,14 +407,21 @@ function buildOverlays(arena: WotSrcArena): Record<string, ArenaOverlay> {
 export async function minimapsByArena(
   region: Region,
 ): Promise<Map<string, ArenaDrawing>> {
-  const { arenas, index, variantArenas, testOnlyArenas } =
+  const { arenas, index, variantArenas, testOnlyArenas, retired } =
     await getMapCatalog(region);
   const out = new Map<string, ArenaDrawing>();
   for (const arena of arenas.values()) {
     const slug = index.idToSlug.get(arena.arenaId);
     if (!slug) continue;
     const variants = variantArenas.get(arena.arenaId) ?? [];
-    const summary = buildMapSummary(arena, slug, [], variants, testOnlyArenas);
+    const summary = buildMapSummary(
+      arena,
+      slug,
+      [],
+      variants,
+      testOnlyArenas,
+      retired.get(arena.arenaId) ?? null,
+    );
     out.set(arena.arenaId, {
       minimapUrl: summary.minimapUrl,
       bounds: arena.boundingBox ?? null,
@@ -437,3 +447,4 @@ export async function minimapsByArena(
   }
   return out;
 }
+export * from "./legacy-minimaps";

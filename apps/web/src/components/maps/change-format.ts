@@ -1,6 +1,13 @@
 import type { TranslateFunction } from "@onruntime/translations";
+import type {
+  ArchivedMapAspect,
+  ArchivedObjectKind,
+  ArchivedObjectsChange,
+  ArchivedReliefChange,
+} from "@unicum.gg/wargaming";
 import { battleTypeName, mapModeName } from "@/components/game-name";
 import {
+  archivedMinimapUrl,
   displayMapValue,
   MAP_VARIANT_PREFIX,
   MAP_PRESENT,
@@ -81,9 +88,78 @@ export type FormattedMapChange = {
   /** The marker positions of a geometry change, in metres from the play area's
    * bottom-left corner, for the before/after overlay. */
   markers: { before: MapHistoryPoint[]; after: MapHistoryPoint[] } | null;
+  /** The minimap before and after, for a minimap the update redrew, each with
+   * the word that captions it. */
+  images: { before: { src: string; label: string }; after: { src: string; label: string } } | null;
+  /** A change drawn over the newer minimap (the ground that moved, the
+   * objects built or pulled down): the minimap, the transparent layer on top,
+   * and what each colour means. */
+  overlay: {
+    base: string;
+    layer: string | null;
+    legend: { color: MapOverlayColor; label: string }[];
+  } | null;
   /** One line stating the change, for the feed and for screen readers. */
   summary: string;
 };
+
+/** The colours the archive draws its overlays in, for the legend. */
+export enum MapOverlayColor {
+  Raised = "raised",
+  Lowered = "lowered",
+  Added = "added",
+  Removed = "removed",
+}
+
+function parseJson<T>(raw: string | null): T | null {
+  if (!raw) return null;
+  try {
+    return JSON.parse(raw) as T;
+  } catch {
+    return null;
+  }
+}
+
+function metres(value: number, locale?: string): string {
+  return new Intl.NumberFormat(locale, { maximumFractionDigits: 0 }).format(value);
+}
+
+/** "12 buildings, 3 fences", largest first. */
+function objectCounts(
+  counts: Partial<Record<ArchivedObjectKind, number>>,
+  w: MapChangeWording,
+  locale?: string,
+): string {
+  const parts = Object.entries(counts)
+    .filter(([, n]) => n && n > 0)
+    .sort((a, b) => (b[1] ?? 0) - (a[1] ?? 0))
+    .map(([kind, count]) => w.t(`object.${kind}`, { count }));
+  return new Intl.ListFormat(locale, { type: "unit", style: "short" }).format(parts);
+}
+
+function reliefSummary(change: ArchivedReliefChange, w: MapChangeWording, locale?: string): string {
+  if (change.rebuilt) return w.t("summary.relief-rebuilt");
+  if (change.threshold > 1) {
+    return w.t("summary.relief-rework", { max: metres(Math.max(change.rise, change.drop), locale) });
+  }
+  const rise = metres(change.rise, locale);
+  const drop = metres(change.drop, locale);
+  if (change.rise >= 1 && change.drop >= 1) return w.t("summary.relief-both", { rise, drop });
+  if (change.drop > change.rise) return w.t("summary.relief-lowered", { drop });
+  return w.t("summary.relief-raised", { rise });
+}
+
+function objectsSummary(change: ArchivedObjectsChange, w: MapChangeWording, locale?: string): string {
+  if (change.rebuilt) return w.t("summary.objects-rebuilt");
+  const lines: string[] = [];
+  if (Object.values(change.added).some(Boolean)) {
+    lines.push(w.t("summary.objects-added", { list: objectCounts(change.added, w, locale) }));
+  }
+  if (Object.values(change.removed).some(Boolean)) {
+    lines.push(w.t("summary.objects-removed", { list: objectCounts(change.removed, w, locale) }));
+  }
+  return lines.join(" · ");
+}
 
 /** "gained"/"lost" phrasing for the properties that are simply there or not. */
 function presenceSummary(
@@ -152,6 +228,8 @@ export function formatMapChange(
   /** The catalogues the change is worded from. Optional so a caller with no
    * reader (a test, a script) still gets the English the resolver built. */
   wording?: MapChangeWording,
+  /** The reader's language, for the figures a change states. */
+  locale?: string,
 ): FormattedMapChange {
   const meta = resolveMapChangeField(field);
   const w: MapChangeWording = wording ?? {
@@ -159,7 +237,90 @@ export function formatMapChange(
     tGame: ((k: string) => k) as TranslateFunction,
   };
   const name = wording ? fieldName(meta, w) : meta.label;
-  const base = { field, label: name, kind: meta.kind };
+  const base = { field, label: name, kind: meta.kind, images: null, overlay: null };
+
+  // The look of the map, which no definition describes: where the ground
+  // moved, what was built or pulled down, and the rest the update touched.
+  if (meta.kind === MapChangeKind.Visuals) {
+    // A row from before the aspects were recorded holds a byte count.
+    const parsed = parseJson<unknown>(next);
+    const aspects = Array.isArray(parsed) ? (parsed as ArchivedMapAspect[]) : [];
+    const list = new Intl.ListFormat(locale, { type: "conjunction" }).format(
+      aspects.map((a) => w.t(`aspect.${a}`)),
+    );
+    const summary = list.charAt(0).toLocaleUpperCase(locale) + list.slice(1);
+    return { ...base, before: null, after: null, markers: null, summary };
+  }
+  if (meta.kind === MapChangeKind.Relief) {
+    const change = parseJson<ArchivedReliefChange>(next);
+    if (!change) return { ...base, before: null, after: null, markers: null, summary: name };
+    return {
+      ...base,
+      before: null,
+      after: null,
+      markers: null,
+      overlay: change.overlay
+        ? {
+            base: archivedMinimapUrl(change.base),
+            layer: archivedMinimapUrl(change.overlay),
+            legend: [
+              { color: MapOverlayColor.Raised, label: w.t("legend.raised") },
+              { color: MapOverlayColor.Lowered, label: w.t("legend.lowered") },
+            ],
+          }
+        : null,
+      summary: reliefSummary(change, w, locale),
+    };
+  }
+  if (meta.kind === MapChangeKind.Objects) {
+    const change = parseJson<ArchivedObjectsChange>(next);
+    if (!change) return { ...base, before: null, after: null, markers: null, summary: name };
+    return {
+      ...base,
+      before: null,
+      after: null,
+      markers: null,
+      overlay: change.overlay
+        ? {
+            base: archivedMinimapUrl(change.base),
+            layer: archivedMinimapUrl(change.overlay),
+            legend: [
+              { color: MapOverlayColor.Added, label: w.t("legend.added") },
+              { color: MapOverlayColor.Removed, label: w.t("legend.removed") },
+            ],
+          }
+        : null,
+      summary: objectsSummary(change, w, locale),
+    };
+  }
+  if (meta.kind === MapChangeKind.Span) {
+    // The update's look was measured between two clients further apart than
+    // it: said beside the terrain and objects it qualifies.
+    const span = parseJson<{ from: string; through: string }>(next);
+    return {
+      ...base,
+      before: null,
+      after: null,
+      markers: null,
+      summary: span ? w.t("summary.measured-between", span) : name,
+    };
+  }
+  if (meta.kind === MapChangeKind.Minimap) {
+    return {
+      ...base,
+      before: null,
+      after: null,
+      markers: null,
+      images:
+        previous && next
+          ? {
+              before: { src: archivedMinimapUrl(previous), label: w.t("image.before") },
+              after: { src: archivedMinimapUrl(next), label: w.t("image.after") },
+            }
+          : null,
+      summary: w.t("summary.minimap-redrawn"),
+    };
+  }
 
   if (meta.kind === MapChangeKind.Geometry) {
     const markers = { before: parseMarkers(previous), after: parseMarkers(next) };

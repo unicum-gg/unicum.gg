@@ -32,4 +32,19 @@ export const MapHistoryResponse = z.object({
     description: "The Common Test build these pending changes were read from.",
   }),
   testChanges: z.array(mapChange),
+  minimaps: z
+    .array(
+      z.object({
+        version: z.string(),
+        through: z.string().meta({
+          description: "The last game version this image is known to hold for.",
+        }),
+        url: z.string(),
+      }),
+    )
+    .optional()
+    .meta({
+      description:
+        "The map's minimap as the archived full clients drew it (0.6.2 to 0.9.7, and 1.15.0), one image per version that redrew it, oldest first: the minimap of a version is the newest image at or below it, while the version is at or below that image's through.",
+    }),
 });

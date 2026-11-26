@@ -20,4 +20,6 @@ export type MapHistoryData = {
   tracked: boolean;
   testVersion: string | null;
   testChanges: { field: string; previous: string | null; next: string | null }[];
+  /** Optional: a payload cached before the field existed carries none. */
+  minimaps?: { version: string; through: string; url: string }[];
 } | null;

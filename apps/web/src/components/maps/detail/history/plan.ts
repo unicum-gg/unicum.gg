@@ -2,6 +2,7 @@ import {
   MAP_AREA_MAP,
   MAP_AREA_ONSLAUGHT,
   MAP_VARIANT_PREFIX,
+  MAP_VISUAL_HISTORY_START,
   mapChangeArea,
   type MapChangeArea,
   type MapDetail,
@@ -84,4 +85,86 @@ export function hasVersionMinimap(
   area: MapChangeArea,
 ): boolean {
   return plan(detail, changes, area) !== null;
+}
+
+/** The minimap a version's markers are drawn on: the one in the game at that
+ * version; else the last one known before it, named by its own version
+ * (`nearest`); else the latest one, flagged. */
+export type VersionMinimapImage = {
+  src: string | null;
+  latest: boolean;
+  /** Set when the image is not that version's but the last one known before. */
+  nearest?: string;
+};
+
+/** `1.19.1` against `1.9.0`, numerically: a string comparison puts 1.19 first. */
+/** Update 1.0 rebuilt every map in HD, many of them with a new layout. */
+const HD_REWORK = "1.0.0";
+
+export function compareGameVersions(a: string, b: string): number {
+  const pa = a.split(".").map(Number);
+  const pb = b.split(".").map(Number);
+  for (let i = 0; i < Math.max(pa.length, pb.length); i++) {
+    const d = (pa[i] ?? 0) - (pb[i] ?? 0);
+    if (d !== 0) return d;
+  }
+  return 0;
+}
+
+/**
+ * For each version, newest first, the minimap its changes were made on.
+ *
+ * Today's minimap is the right picture back to the last time it was redrawn,
+ * and every redraw since the archive starts is a row holding the image before
+ * it. So walking back from the newest version, a redraw hands its older image
+ * to every version below it, until the next redraw. Before the installs start,
+ * the archived full clients (0.6.2 to 0.9.7, and 1.15.0) left one image per
+ * redraw (`legacy`), the newest at or below a version being the one it was
+ * played on, as long as the version is within what that image is known to
+ * hold for (`through`). Where nothing survives (0.9.8 to 1.14), a version is
+ * drawn on the last image known before it, and the picture names that image's
+ * version, except across update 1.0, which rebuilt every map: a version after
+ * it whose last known image is from before takes the first HD image instead
+ * (1.15.0), the map it was really played on far more likely than the 2014 one.
+ * Only with no image before it at all does a version keep the latest one,
+ * flagged. `src` null means the map's own current image.
+ */
+export function minimapEras(
+  versions: { gameVersion: string; changes: FormattedMapChange[] }[],
+  legacy: { version: string; through: string; url: string }[] = [],
+): Map<string, VersionMinimapImage> {
+  const out = new Map<string, VersionMinimapImage>();
+  let era: string | null = null;
+  for (const { gameVersion, changes } of versions) {
+    if (compareGameVersions(gameVersion, MAP_VISUAL_HISTORY_START) < 0) {
+      const newest = legacy.findLast((m) => compareGameVersions(m.version, gameVersion) <= 0);
+      const drawn =
+        newest && compareGameVersions(gameVersion, newest.through) <= 0 ? newest : undefined;
+      // The last image before the version, unless update 1.0 lies between the
+      // two: it rebuilt every map, so an SD image says nothing about an HD
+      // version, and the first HD image after it is the closer picture.
+      const crossesRework =
+        newest &&
+        compareGameVersions(gameVersion, HD_REWORK) >= 0 &&
+        compareGameVersions(newest.version, HD_REWORK) < 0;
+      const fallback = crossesRework
+        ? (legacy.find((m) => compareGameVersions(m.version, HD_REWORK) >= 0) ?? newest)
+        : newest;
+      out.set(
+        gameVersion,
+        drawn
+          ? { src: drawn.url, latest: false }
+          : fallback
+            ? { src: fallback.url, latest: false, nearest: fallback.version }
+            : { src: null, latest: true },
+      );
+      continue;
+    }
+    const redraw = changes.find(
+      (c) => c.images && mapChangeArea(c.field) === MAP_AREA_MAP,
+    );
+    out.set(gameVersion, { src: redraw?.images?.after.src ?? era, latest: false });
+    if (redraw?.images) era = redraw.images.before.src;
+  }
+  return out;
 }

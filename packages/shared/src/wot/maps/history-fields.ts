@@ -17,6 +17,18 @@ export enum MapChangeKind {
   Geometry = "geometry",
   /** The map itself entering or leaving the client. */
   Presence = "presence",
+  /** The other parts of the map's look an update touched (sky, sound,
+   * models...), which the arena definition does not describe. */
+  Visuals = "visuals",
+  /** The minimap redrawn, kept as the image before and after. */
+  Minimap = "minimap",
+  /** The ground reshaped, drawn over the newer minimap. */
+  Relief = "relief",
+  /** Objects built or pulled down, drawn over the newer minimap. */
+  Objects = "objects",
+  /** The versions a visual change was measured between, when no client
+   * survives for the update it is filed under (the 1.0 rework). */
+  Span = "span",
 }
 
 /**
@@ -29,6 +41,34 @@ export enum MapChangeKind {
  * exactly what a reader wants to see there.
  */
 export const MAP_PRESENCE_FIELD = "presence";
+
+/**
+ * The field recording the rest of what an update touched in a map's files:
+ * `next` is a JSON array of `ArchivedMapAspect` (the sky and lighting, the
+ * sound, the models...). Read by `wot.build` from which package entries
+ * changed, for the updates whose delta of the map's packages was a rework
+ * rather than a repack (see its `lib/visual-history.ts`).
+ */
+export const MAP_VISUALS_FIELD = "visuals";
+/** The field recording a redrawn minimap: `previous` and `next` are the two
+ * images, as paths on the archive branch of the minimap mirror. */
+export const MAP_MINIMAP_FIELD = "minimap";
+/** The first update whose map packages the archive holds, so the first one a
+ * redrawn minimap can be detected from. Before it, the minimap a version was
+ * played on is not known. */
+export const MAP_VISUAL_HISTORY_START = "1.19.1";
+/** The field recording where the ground moved: `next` is a JSON
+ * `ArchivedReliefChange` (the overlay, the newer minimap it is drawn on, the
+ * highest rise and the deepest drop). */
+export const MAP_RELIEF_FIELD = "relief";
+/** The field recording what was built or pulled down: `next` is a JSON
+ * `ArchivedObjectsChange` (counts per kind and, unless the map was rebuilt
+ * wholesale, the overlay of dots). */
+export const MAP_OBJECTS_FIELD = "objects";
+/** The field saying that a version's terrain, objects and minimap were
+ * measured across a stretch no client survives in: `next` is a JSON
+ * `{ from, through }` naming the two clients compared. */
+export const MAP_VISUAL_SPAN_FIELD = "visualSpan";
 
 /** How to display one tracked map value.
  *
@@ -55,6 +95,7 @@ export type MapFieldDescriptor = {
  * battle types and random events are absent on purpose: those name themselves,
  * from the game's own vocabulary or from the event's own text. */
 export type MapFieldName =
+  | "measured"
   | "width"
   | "height"
   | "round-length"
@@ -71,7 +112,11 @@ export type MapFieldName =
   | "artillery-headquarters"
   | "comms-centers"
   | "observation-posts"
-  | "points-of-interest";
+  | "points-of-interest"
+  | "visuals"
+  | "minimap"
+  | "relief"
+  | "objects";
 
 /** A tracked scalar, keyed by its `MapSnapshotData` field. */
 export type TrackedMapField = MapFieldDescriptor & {
@@ -306,6 +351,21 @@ export function resolveMapChangeField(key: string): MapFieldDescriptor {
   if (scalar) return scalar;
   if (key === MAP_PRESENCE_FIELD) {
     return { label: "In the game", kind: MapChangeKind.Presence, name: "presence" };
+  }
+  if (key === MAP_VISUALS_FIELD) {
+    return { label: "Also reworked", kind: MapChangeKind.Visuals, name: "visuals" };
+  }
+  if (key === MAP_RELIEF_FIELD) {
+    return { label: "Terrain", kind: MapChangeKind.Relief, name: "relief" };
+  }
+  if (key === MAP_OBJECTS_FIELD) {
+    return { label: "Objects", kind: MapChangeKind.Objects, name: "objects" };
+  }
+  if (key === MAP_VISUAL_SPAN_FIELD) {
+    return { label: "Measured", kind: MapChangeKind.Span, name: "measured" };
+  }
+  if (key === MAP_MINIMAP_FIELD) {
+    return { label: "Minimap", kind: MapChangeKind.Minimap, name: "minimap" };
   }
 
   if (key.startsWith(MAP_MODE_PREFIX)) {

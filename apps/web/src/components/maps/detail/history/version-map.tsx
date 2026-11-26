@@ -1,6 +1,5 @@
 "use client";
 
-import { ArrowsOutSimpleIcon } from "@phosphor-icons/react/dist/ssr";
 import { useId } from "react";
 import { useTranslation } from "@/hooks/use-translation";
 import {
@@ -18,18 +17,15 @@ import {
   HistoryMarker,
   iconFor,
 } from "@/components/maps/detail/history/marker";
+import { MapImageDialog } from "@/components/maps/detail/history/image-dialog";
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { cn } from "@/lib/utils";
+  MapLegendBand,
+  MapPictureBadge,
+} from "@/components/maps/detail/history/legend-band";
 import type { FormattedMapChange } from "@/components/maps/change-format";
 import {
   plan,
+  type VersionMinimapImage,
   type VersionPlan,
 } from "@/components/maps/detail/history/plan";
 
@@ -45,10 +41,13 @@ import {
 function VersionMinimapCanvas({
   detail,
   drawn,
+  minimap,
   large,
 }: {
   detail: MapDetail;
   drawn: VersionPlan;
+  /** The map's minimap at that version, when the area is the map's own. */
+  minimap?: VersionMinimapImage;
   large?: boolean;
 }) {
   const { t } = useTranslation("components/maps/detail/history/version-map");
@@ -92,7 +91,7 @@ function VersionMinimapCanvas({
   return (
     <div className="relative aspect-square w-full overflow-hidden">
       <MinimapImage
-        src={onslaught?.minimapUrl ?? detail.minimapUrl}
+        src={onslaught?.minimapUrl ?? minimap?.src ?? detail.minimapUrl}
         arenaId={onslaught?.arenaId ?? detail.arenaId}
         alt={`${detail.name} minimap`}
         sizes={
@@ -166,25 +165,24 @@ function VersionMinimapCanvas({
           );
         });
       })}
-      <div
-        className={cn(
-          "absolute inset-x-0 bottom-0 flex items-center justify-center gap-4 bg-black/55 py-1 text-white",
-          large ? "gap-6 py-2 text-sm" : "text-[11px]",
-        )}
-      >
-        <span className="flex items-center gap-1.5">
-          <span
-            className={cn("rounded-full bg-white/45", large ? "size-3" : "size-2.5")}
-          />
-          {t("before")}
-        </span>
-        <span className="flex items-center gap-1.5">
-          <span
-            className={cn("rounded-full bg-white", large ? "size-3" : "size-2.5")}
-          />
-          {t("after")}
-        </span>
-      </div>
+      {large ? null : (
+        <MapPictureBadge>
+          {onslaught
+            ? t("badge")
+            : minimap?.nearest
+              ? t("badge-nearest", { version: minimap.nearest })
+              : minimap?.latest
+                ? t("badge-latest")
+                : t("badge")}
+        </MapPictureBadge>
+      )}
+      <MapLegendBand
+        large={large}
+        items={[
+          { label: t("before"), className: "bg-white/45" },
+          { label: t("after"), className: "bg-white" },
+        ]}
+      />
     </div>
   );
 }
@@ -212,6 +210,7 @@ export function VersionMinimap({
   changes,
   area,
   context,
+  minimap,
 }: {
   detail: MapDetail;
   changes: FormattedMapChange[];
@@ -220,6 +219,8 @@ export function VersionMinimap({
   /** What the rows beside it are, named by the panel that holds them (an update,
    * or the running test build), for the enlarged view's own heading. */
   context?: string;
+  /** The minimap that version was played on (see `minimapEras`). */
+  minimap?: VersionMinimapImage;
 }) {
   const { t } = useTranslation("components/maps/detail/history/version-map");
   const { t: tGame } = useTranslation("game/vocabulary");
@@ -234,33 +235,13 @@ export function VersionMinimap({
     .join(" · ");
 
   return (
-    <Dialog>
-      <DialogTrigger
-        // `block` because a button is inline by default, which would leave the
-        // square map sitting on a text baseline inside the column.
-        className="group relative block w-full cursor-zoom-in"
-        aria-label={t("enlarge", { map: name })}
-      >
-        <VersionMinimapCanvas detail={detail} drawn={drawn} />
-        <span className="pointer-events-none absolute top-2 right-2 flex size-7 items-center justify-center rounded-full bg-black/55 text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
-          <ArrowsOutSimpleIcon className="size-4" />
-        </span>
-      </DialogTrigger>
-      {/* Sized off the viewport's shorter side, less the heading's own height,
-          so the square never pushes the dialog taller than the screen. The
-          height it is allowed is the dialog's own cap (`100dvh` less its 1rem
-          gutter on each side) rather than a figure of its own, or the square
-          would ask for a few pixels more than the cap grants on a short
-          screen and the whole dialog would scroll to give them. */}
-      <DialogContent className="w-[min(95vw,calc(100dvh-7.5rem))] max-w-[min(95vw,calc(100dvh-7.5rem))] gap-0 p-0 sm:max-w-[min(95vw,calc(100dvh-7.5rem))]">
-        <DialogHeader className="px-4 pt-4 pr-14 pb-3">
-          <DialogTitle>{name}</DialogTitle>
-          {subtitle ? <DialogDescription>{subtitle}</DialogDescription> : null}
-        </DialogHeader>
-        <div className="border-t border-fd-border">
-          <VersionMinimapCanvas detail={detail} drawn={drawn} large />
-        </div>
-      </DialogContent>
-    </Dialog>
+    <MapImageDialog
+      title={name}
+      subtitle={subtitle || undefined}
+      label={t("enlarge", { map: name })}
+      preview={<VersionMinimapCanvas detail={detail} drawn={drawn} minimap={minimap} />}
+    >
+      <VersionMinimapCanvas detail={detail} drawn={drawn} minimap={minimap} large />
+    </MapImageDialog>
   );
 }

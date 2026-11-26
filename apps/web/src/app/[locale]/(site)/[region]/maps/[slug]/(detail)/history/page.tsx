@@ -67,6 +67,7 @@ async function MapHistoryPage({
       removedVersion={history.removedVersion}
       removedAt={history.removedAt}
       present={history.present}
+      legacyMinimaps={history.minimaps}
       locale={locale}
     />
   );

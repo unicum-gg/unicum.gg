@@ -5,6 +5,9 @@ import {
   ChangesDiscordBanner,
   ChangesFeed,
 } from "@/components/discord/changes-banner";
+import { MapOverlayPicture, type MapOverlayLayer } from "./overlay-picture";
+import { MinimapRedrawnRow } from "./redrawn-row";
+import { mapName } from "@/components/game-name";
 import { GlossaryLabel } from "@/components/glossary/label";
 import {
   Panel,
@@ -21,10 +24,16 @@ import {
   areaLabel,
   areaRank,
 } from "@/components/maps/detail/history/areas";
-import { hasVersionMinimap } from "@/components/maps/detail/history/plan";
+import { MapLifecyclePanel } from "./lifecycle-panel";
+import {
+  compareGameVersions,
+  hasVersionMinimap,
+  minimapEras,
+  type VersionMinimapImage,
+} from "@/components/maps/detail/history/plan";
 import { VersionMinimap } from "@/components/maps/detail/history/version-map";
 import {
-  MAP_HISTORY_TRACKING_START,
+  MapChangeKind,
   MAP_AREA_MAP,
   mapChangeArea,
   type MapChangeArea,
@@ -43,28 +52,41 @@ export type MapHistoryVersion = {
 };
 
 /** The minimap's own column, divided from the changes by the same rule the rest
- * of the site uses between a subject and its rows. Empty (and rule-less) when
- * the area has nothing to draw. */
+ * of the site uses between a subject and its rows: the moved markers, and the
+ * ground and objects the update reworked, each its own picture. Empty (and
+ * rule-less) when the area has nothing to draw. */
 function MinimapColumn({
   detail,
   changes,
   area,
   context,
+  title,
+  minimap,
 }: {
   detail: MapDetail;
   changes: FormattedMapChange[];
   area: MapChangeArea;
   context?: string;
+  title: string;
+  minimap?: VersionMinimapImage;
 }) {
-  if (!hasVersionMinimap(detail, changes, area)) return null;
+  const markers = hasVersionMinimap(detail, changes, area);
+  const layers = overlayLayers(changes);
+  if (!markers && layers.length === 0) return null;
   return (
-    <div className="border-t border-fd-border sm:border-t-0 sm:border-l">
-      <VersionMinimap
-        detail={detail}
-        changes={changes}
-        area={area}
-        context={context}
-      />
+    <div className="divide-y divide-fd-border border-t border-fd-border sm:border-t-0 sm:border-l">
+      {markers ? (
+        <VersionMinimap
+          detail={detail}
+          changes={changes}
+          area={area}
+          context={context}
+          minimap={area === MAP_AREA_MAP ? minimap : undefined}
+        />
+      ) : null}
+      {layers.map((layer) => (
+        <MapOverlayPicture key={layer.id} shown={layer} title={title} subtitle={context} />
+      ))}
     </div>
   );
 }
@@ -84,6 +106,7 @@ async function VersionChanges({
   detail,
   changes,
   context,
+  minimap,
   locale,
 }: {
   detail: MapDetail;
@@ -91,9 +114,13 @@ async function VersionChanges({
   /** Which update (or test build) these rows are, for the enlarged minimap's
    * heading: the dialog covers the panel that says so. */
   context?: string;
+  /** The minimap this version was played on (see `minimapEras`). */
+  minimap?: VersionMinimapImage;
   locale: string;
 }) {
   const { t: tGame } = await getTranslation("game/vocabulary", locale);
+  const { t: tMaps } = await getTranslation("game/maps", locale);
+  const title = mapName(detail.arenaId, detail.name, tMaps);
   // The areas a version actually touched, in the order the rows come in: the map
   // first (its own changes are keyed without a prefix), then its Onslaught area,
   // then one per variant. Derived rather than listed, so a new kind of variant
@@ -118,15 +145,24 @@ async function VersionChanges({
           ) : null}
           <div className="grid sm:grid-cols-[minmax(0,1fr)_16rem]">
             <ul className="divide-y divide-fd-border">
-              {rows.map((change) => (
-                <ChangeRow key={change.field} change={change} />
-              ))}
+              {[...rows]
+                .sort((a, b) => overlayRank(a) - overlayRank(b))
+                .map((change) => (
+                  <ChangeRow
+                    key={change.field}
+                    change={change}
+                    title={title}
+                    subtitle={context}
+                  />
+                ))}
             </ul>
             <MinimapColumn
               detail={detail}
               changes={rows}
               area={area}
               context={context}
+              title={title}
+              minimap={minimap}
             />
           </div>
         </div>
@@ -135,7 +171,49 @@ async function VersionChanges({
   );
 }
 
-function ChangeRow({ change }: { change: FormattedMapChange }) {
+/** The terrain leads, then the objects, then everything else: a reshaped hill
+ * changes how a map plays, where most of the objects an update moves are rocks
+ * and fences. */
+const overlayRank = (change: FormattedMapChange) =>
+  change.kind === MapChangeKind.Relief ? 0 : change.kind === MapChangeKind.Objects ? 1 : 2;
+
+/** The rows drawn over the minimap, one picture each. */
+function overlayLayers(rows: FormattedMapChange[]): MapOverlayLayer[] {
+  return [...rows].sort((a, b) => overlayRank(a) - overlayRank(b)).flatMap((change) =>
+    change.overlay?.layer
+      ? [
+          {
+            id: change.field,
+            label: change.label,
+            summary: change.summary,
+            base: change.overlay.base,
+            layer: change.overlay.layer,
+            legend: change.overlay.legend,
+          },
+        ]
+      : [],
+  );
+}
+
+function ChangeRow({
+  change,
+  title,
+  subtitle,
+}: {
+  change: FormattedMapChange;
+  title: string;
+  subtitle?: string;
+}) {
+  if (change.images)
+    return (
+      <MinimapRedrawnRow
+        label={change.label}
+        summary={change.summary}
+        images={change.images}
+        title={title}
+        subtitle={subtitle}
+      />
+    );
   return (
     <li className="flex items-baseline justify-between gap-4 px-4 py-2.5 text-sm">
       <span className="text-fd-muted-foreground">
@@ -178,10 +256,13 @@ export async function MapChangesHistory({
   removedVersion,
   removedAt,
   present,
+  legacyMinimaps,
   locale,
 }: {
   detail: MapDetail;
   versions: MapHistoryVersion[];
+  /** The minimaps the archived full clients drew, oldest first. */
+  legacyMinimaps?: { version: string; through: string; url: string }[];
   /** The Common Test build `testChanges` was read from, null when none runs. */
   testVersion: string | null;
   /** What the running test is about to change about this map. Not history: it
@@ -209,13 +290,36 @@ export async function MapChangesHistory({
     .map((version) => ({
       version,
       changes: version.changes.map((c) =>
-        formatMapChange(c.field, c.previous, c.next, false, wording),
+        formatMapChange(c.field, c.previous, c.next, false, wording, locale),
       ),
     }))
     .filter((s) => s.changes.length > 0);
 
+  // The version the map entered in is asked for too, whether or not it holds a
+  // section of its own, so the panel below can show the map as it arrived.
+  const eraVersions = sections.map(({ version, changes }) => ({
+    gameVersion: version.gameVersion,
+    changes,
+  }));
+  if (addedVersion && !eraVersions.some((v) => v.gameVersion === addedVersion)) {
+    eraVersions.push({ gameVersion: addedVersion, changes: [] });
+    eraVersions.sort((a, b) => compareGameVersions(b.gameVersion, a.gameVersion));
+  }
+  const eras = minimapEras(eraVersions, legacyMinimaps);
+  // The map as it entered the game: the minimap of that version, or for a map
+  // already there when tracking began, the oldest archived one. Nothing when
+  // that image is not known, since today's would answer a different question.
+  const arrival = addedVersion ? eras.get(addedVersion) : undefined;
+  const arrivalImage = addedVersion
+    ? arrival && !arrival.latest && !arrival.nearest
+      ? { src: arrival.src ?? detail.minimapUrl, label: addedVersion }
+      : null
+    : legacyMinimaps?.[0]
+      ? { src: legacyMinimaps[0].url, label: legacyMinimaps[0].version }
+      : null;
+
   const pending = testChanges.map((c) =>
-    formatMapChange(c.field, c.previous, c.next, true, wording),
+    formatMapChange(c.field, c.previous, c.next, true, wording, locale),
   );
 
   return (
@@ -287,6 +391,7 @@ export async function MapChangesHistory({
                 changes={changes}
                 locale={locale}
                 context={t("update", { version: version.gameVersion })}
+                minimap={eras.get(version.gameVersion)}
               />
             </PanelContent>
           </Panel>
@@ -294,78 +399,20 @@ export async function MapChangesHistory({
       ))}
 
       {sections.length > 0 || pending.length > 0 ? <PanelSeparator /> : null}
-      <Panel>
-        <PanelHeader>
-          <PanelTitle as="h3" className="text-base">{t("in-the-game")}</PanelTitle>
-        </PanelHeader>
-        <PanelContent className="p-0">
-          <ul className="divide-y divide-fd-border">
-            {addedVersion ? (
-              <LifecycleRow
-                label={t("added")}
-                version={addedVersion}
-                at={addedAt}
-                locale={locale}
-              />
-            ) : (
-              // Already in the client when tracking started: the real date is
-              // unknown, so all we can say is that it came before.
-              <LifecycleRow
-                label={t("added")}
-                version={MAP_HISTORY_TRACKING_START.version}
-                at={null}
-                before
-                locale={locale}
-              />
-            )}
-            {!present && removedVersion ? (
-              <LifecycleRow
-                label={t("removed")}
-                version={removedVersion}
-                at={removedAt}
-                locale={locale}
-              />
-            ) : null}
-          </ul>
-        </PanelContent>
-      </Panel>
+      <MapLifecyclePanel
+        detail={detail}
+        addedVersion={addedVersion}
+        addedAt={addedAt}
+        removedVersion={removedVersion}
+        removedAt={removedAt}
+        present={present}
+        arrivalImage={arrivalImage}
+        locale={locale}
+      />
       <PanelSeparator />
       <Panel>
         <ChangesDiscordBanner feed={ChangesFeed.Maps} locale={locale} />
       </Panel>
     </>
-  );
-}
-
-async function LifecycleRow({
-  label,
-  version,
-  at,
-  before = false,
-  locale,
-}: {
-  label: string;
-  version: string;
-  at: string | Date | null;
-  before?: boolean;
-  locale: string;
-}) {
-  const { t } = await getTranslation(
-    "components/maps/detail/history/index",
-    locale,
-  );
-  const date = (pattern: string) => dateFormat(locale, pattern);
-  return (
-    <li className="flex items-center justify-between gap-4 px-4 py-2.5 text-sm">
-      <span className="text-fd-muted-foreground">{label}</span>
-      <span className="font-medium">
-        {t(before ? "before-update" : "update", { version })}
-        {at ? (
-          <span className="ml-2 text-xs font-normal text-fd-muted-foreground">
-            {date(DATE_PATTERN).format(new Date(at))}
-          </span>
-        ) : null}
-      </span>
-    </li>
   );
 }

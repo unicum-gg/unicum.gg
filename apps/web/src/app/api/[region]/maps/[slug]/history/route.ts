@@ -1,4 +1,4 @@
-import { getMapDetailBySlug } from "@unicum.gg/core/wargaming/wot/maps";
+import { getLegacyMinimaps, getMapDetailBySlug } from "@unicum.gg/core/wargaming/wot/maps";
 import { getMapHistory } from "@unicum.gg/core/wargaming/wot/maps/history-read";
 import { getMapTestChanges } from "@unicum.gg/core/wargaming/wot/maps/test-changes";
 import { jsonResponse } from "@/services/openapi/json-response";
@@ -39,13 +39,14 @@ async function GET__perf(
       ...map.variants.map((v) => (v.commonTest ? v.arenaId : null)),
     ].filter((id) => id !== null),
   );
-  const [history, test] = await Promise.all([
+  const [history, test, legacy] = await Promise.all([
     getMapHistory(
       map.arenaId,
       map.variants.map((v) => v.arenaId),
       testOnly,
     ),
     getMapTestChanges(map.arenaId),
+    getLegacyMinimaps(region, map.arenaId),
   ]);
   return jsonResponse(
     MapHistoryResponse,
@@ -70,6 +71,7 @@ async function GET__perf(
           (row) => !test.changes.some((c) => c.field === row.field),
         ),
       ],
+      minimaps: legacy,
     },
     { headers: { "cache-control": "public, max-age=600" } },
   );

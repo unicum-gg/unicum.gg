@@ -16,7 +16,12 @@
     "artillery-headquarters": "Artillery Headquarters",
     "comms-centers": "Comms Centers",
     "observation-posts": "Observation Posts",
-    "points-of-interest": "Points of interest"
+    "points-of-interest": "Points of interest",
+    "visuals": "Also reworked",
+    "minimap": "Minimap",
+    "relief": "Terrain",
+    "objects": "Objects",
+    "measured": "Measured"
   },
   "summary": {
     "added": "{name} added",
@@ -34,7 +39,45 @@
     "moved": "{name} moved",
     "count-changed": "{name}: {before} → {after}",
     "value-changed": "{name}: {before} → {after}",
-    "value-set": "{name}: {after}"
+    "value-set": "{name}: {after}",
+    "minimap-redrawn": "Redrawn",
+    "relief-both": "Raised up to {rise} m, lowered up to {drop} m",
+    "relief-raised": "Raised up to {rise} m",
+    "relief-lowered": "Lowered up to {drop} m",
+    "relief-rework": "Reshaped across much of the map, up to {max} m",
+    "objects-added": "Added: {list}",
+    "objects-removed": "Removed: {list}",
+    "objects-rebuilt": "Rebuilt across the map",
+    "relief-rebuilt": "Reshaped across the whole map",
+    "measured-between": "Compared between update {from} and update {through}: no game client in between survives"
   },
-  "name-with-mode": "{name} ({mode})"
+  "name-with-mode": "{name} ({mode})",
+  "image": {
+    "before": "Before",
+    "after": "After"
+  },
+  "object": {
+    "buildings": "{count, plural, one {# building} other {# buildings}}",
+    "fences": "{count, plural, one {# fence or wall} other {# fences and walls}}",
+    "rocks": "{count, plural, one {# rock} other {# rocks}}",
+    "military": "{count, plural, one {# military object} other {# military objects}}",
+    "bridges": "{count, plural, one {# bridge} other {# bridges}}",
+    "vegetation": "{count, plural, one {# tree or bush} other {# trees and bushes}}",
+    "props": "{count, plural, one {# other object} other {# other objects}}"
+  },
+  "aspect": {
+    "ground": "ground textures",
+    "sky": "sky and lighting",
+    "sound": "sound",
+    "water": "water",
+    "effects": "effects",
+    "vegetation": "vegetation",
+    "models": "models and textures"
+  },
+  "legend": {
+    "raised": "Raised",
+    "lowered": "Lowered",
+    "added": "Added",
+    "removed": "Removed"
+  }
 }

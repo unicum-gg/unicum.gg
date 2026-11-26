@@ -1,5 +1,8 @@
 {
   "after": "After",
+  "badge": "Positions",
+  "badge-latest": "Positions · latest minimap",
+  "badge-nearest": "Positions · minimap {version}",
   "before": "Before",
   "enlarge": "Enlarge the {map} minimap"
 }

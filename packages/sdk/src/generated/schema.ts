@@ -2610,7 +2610,7 @@ export interface paths {
         put?: never;
         /**
          * Rate a map
-         * @description Cast or revise this account's opinion of a map. Requires a signed-in Wargaming account that has played enough of the game: unlike the vehicle ratings, the gate cannot read a record on the subject, because Wargaming publishes no per-arena record for anybody, so it reads the account's lifetime battle count instead and refuses with 403 below the threshold. The rotation is what makes that fair rather than arbitrary: nobody chooses where they are sent, so exposure follows from playing at all. One opinion per account per map, so sending again replaces the previous one rather than adding to it. The evidence the vote rests on (the account's battles, its trailing 30 days, its win rate and rating) is copied onto it at the moment it is cast, and the client version is stamped, so an opinion stays attached to the layout it was formed on. A written opinion is queued for moderation and never published here; the stars count immediately. The vote is recorded under the caller's own region, whatever region the page was opened on. 401 when signed out, 403 when the record is too thin, 404 for an unknown map.
+         * @description Cast or revise this account's opinion of a map. Requires a signed-in Wargaming account that has played enough of the game: unlike the vehicle ratings, the gate cannot read a record on the subject, because Wargaming publishes no per-arena record for anybody, so it reads the account's lifetime battle count instead and refuses with 403 below the threshold. The rotation is what makes that fair rather than arbitrary: nobody chooses where they are sent, so exposure follows from playing at all. One opinion per account per map, so sending again replaces the previous one rather than adding to it. The evidence the vote rests on (the account's battles, its trailing 30 days, its win rate and rating) is copied onto it at the moment it is cast, and the client version is stamped, so an opinion stays attached to the layout it was formed on. A written opinion is queued for moderation and never published here; the stars count immediately. The vote is recorded under the caller's own region, whatever region the page was opened on. 401 when signed out, 403 when the record is too thin, 404 for an unknown map, 409 for a map the game no longer ships.
          */
         post: operations["post-{region}-maps-{slug}-rate"];
         delete?: never;
@@ -5109,6 +5109,8 @@ export interface components {
             commonTest: boolean;
             /** @description The map's variants in full, each its own arena drawn as its own view. */
             variants: components["schemas"]["mapVariantLayout"][];
+            /** @description Set on a map the current client no longer ships, read from the archived clients: when it was in the game. Null for a map that can be played today. */
+            retired: components["schemas"]["MapRetirement"] | null;
             description: string;
             /** @description Battle timer in seconds. */
             roundLength: number;
@@ -5152,6 +5154,13 @@ export interface components {
             /** @description The Common Test build these pending changes were read from. */
             testVersion: string | null;
             testChanges: components["schemas"]["MapChange"][];
+            /** @description The map's minimap as the archived full clients drew it (0.6.2 to 0.9.7, and 1.15.0), one image per version that redrew it, oldest first: the minimap of a version is the newest image at or below it, while the version is at or below that image's through. */
+            minimaps?: {
+                version: string;
+                /** @description The last game version this image is known to hold for. */
+                through: string;
+                url: string;
+            }[];
         };
         /** @description The changes a game version made to a map, with when they were recorded. */
         MapHistoryVersion: {
@@ -5422,6 +5431,15 @@ export interface components {
             camouflage: string;
             minimap_url: string;
         };
+        /** @description When a map the game no longer ships was in it. */
+        MapRetirement: {
+            /** @description The first game version that shipped the map (three-part, e.g. `0.7.0`). */
+            firstVersion: string;
+            /** @description The last game version that shipped the map. */
+            lastVersion: string;
+            /** @description When that last version shipped, as an ISO date: the last month the map could be played. Null when that version could not be dated. */
+            lastDate: string | null;
+        };
         mapReview: {
             id: number;
             nickname: string;
@@ -5556,6 +5574,8 @@ export interface components {
             commonTest: boolean;
             /** @description The arenas the client ships under this map's name for a mode of their own (Waffenträger, Last Stand, Story Mode, Onslaught night), each a view of this map rather than a map. */
             variants: components["schemas"]["MapVariantSummary"][];
+            /** @description Set on a map the current client no longer ships, read from the archived clients: when it was in the game. Null for a map that can be played today. */
+            retired: components["schemas"]["MapRetirement"] | null;
         };
         MapTankStats: {
             tankId: number;
