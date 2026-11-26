@@ -46,6 +46,10 @@ export type PortalCalendar = {
 };
 
 const DAY_MS = 86_400_000;
+
+/** Rows captured before the parser made images absolute hold `//host/...`. */
+const absoluteImage = (src: string | null): string | null =>
+  !src ? null : src.startsWith("//") ? `https:${src}` : src;
 const utcDay = (date: string) => new Date(`${date}T00:00:00Z`);
 
 /**
@@ -128,7 +132,7 @@ export async function readPortalCalendar(region: Region): Promise<PortalCalendar
       : undefined;
     if (twin) {
       twin.descriptions = { ...row.descriptions, ...twin.descriptions };
-      twin.banner ??= row.image;
+      twin.banner ??= absoluteImage(row.image);
       continue;
     }
     entries.push({
@@ -144,7 +148,7 @@ export async function readPortalCalendar(region: Region): Promise<PortalCalendar
       end,
       allDay: true,
       link: row.link,
-      banner: row.image,
+      banner: absoluteImage(row.image),
       thumbnail: null,
       discordEventId: null,
     });

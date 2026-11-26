@@ -64,6 +64,11 @@ const attr = (attrs: string, name: string) =>
   new RegExp(`${name}="([^"]*)"`).exec(attrs)?.[1] ?? null;
 
 const DATE = /^\d{4}-\d{2}-\d{2}$/;
+
+/** The editors write some images protocol-relative (`//eu-wotp.wgcdn.co/...`),
+ * which no consumer outside a browser page can load as is. */
+const absoluteImage = (src: string | null): string | null =>
+  !src ? null : src.startsWith("//") ? `https:${src}` : src;
 const BUTTON = /<a\b[^>]*(?:event-btn|cta-button)[^>]*>/;
 
 /**
@@ -123,7 +128,7 @@ export function parseMonthlyCalendar(html: string, origin: string): PortalMonthl
       startDate,
       endDate,
       description: paragraphs.join("\n\n"),
-      image: popup ? attr(popup[1], "data-preview-image") : null,
+      image: absoluteImage(popup ? attr(popup[1], "data-preview-image") : null),
       link,
     });
   }
