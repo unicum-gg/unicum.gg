@@ -1,6 +1,8 @@
 {
   "kind": {
     "event": "Etkinlik",
+    "competitive": "Rekabetçi",
+    "livestream": "Canlı yayın",
     "battle-pass": "Savaş Bileti",
     "specials": "Fırsatlar",
     "update": "Güncelleme",
@@ -14,6 +16,6 @@
     "lands": "{when} ulaşır",
     "landed": "{when} ulaştı"
   },
-  "read-the-news": "Haberleri oku",
+  "read-the-news": "Daha fazla bilgi edin",
   "remind-me": "Discord’da hatırlatıcı al"
 }

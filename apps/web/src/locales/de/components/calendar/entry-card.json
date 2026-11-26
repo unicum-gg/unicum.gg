@@ -1,9 +1,11 @@
 {
   "kind": {
     "event": "Ereignis",
+    "competitive": "Kompetitiv",
+    "livestream": "Livestream",
     "battle-pass": "Gefechtspass",
     "specials": "Specials",
-    "update": "Aktualisierung",
+    "update": "Aktualisieren",
     "other": "Sonstiges"
   },
   "live": "Live",
@@ -14,6 +16,6 @@
     "lands": "Erscheint {when}",
     "landed": "Erschienen {when}"
   },
-  "read-the-news": "Nachrichten lesen",
+  "read-the-news": "Mehr erfahren",
   "remind-me": "Lass dich auf Discord erinnern"
 }

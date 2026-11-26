@@ -1,6 +1,8 @@
 {
   "kind": {
     "event": "Begivenhed",
+    "competitive": "Konkurrencepræget",
+    "livestream": "Livestream",
     "battle-pass": "Kamp Pas",
     "specials": "Særtilbud",
     "update": "Opdatering",
@@ -14,6 +16,6 @@
     "lands": "Ankommer {when}",
     "landed": "Ankom {when}"
   },
-  "read-the-news": "Læs nyheden",
+  "read-the-news": "Få mere at vide",
   "remind-me": "Få en påmindelse på Discord"
 }

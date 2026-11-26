@@ -1,7 +1,7 @@
 {
   "title": "World of Tanks {calendar}",
   "calendar": "이벤트 캘린더",
-  "intro": "모든 공식 {label} 이벤트, 할인, 전투 패스 시즌 및 업데이트를 내 시간대에 맞춰 확인하세요. 워게이밍은 현재 주만 표시하므로, 항목이 사라진 후에도 모든 항목의 기록을 유지합니다.",
-  "recorded-since": "{date}부터 매시간 기록됨.",
+  "intro": "워게이밍 자체 캘린더에서 읽어 온 모든 공식 {label} 이벤트, 토너먼트, 실시간 방송, 세일, 전투 패스 시즌 및 업데이트를 사용자의 시간대에 맞춰 확인할 수 있으며, 삭제된 후에도 유지됨.",
+  "recorded-since": "{date}까지 뒤로 거슬러 올라감.",
   "event-description": "게임에서 플레이하는 공식 World of Tanks {label} 이벤트입니다."
 }

@@ -1,6 +1,8 @@
 {
   "kind": {
     "event": "Εκδήλωση",
+    "competitive": "Ανταγωνιστικό",
+    "livestream": "Ζωντανή ροή",
     "battle-pass": "Πάσο Μάχης",
     "specials": "Προσφορές",
     "update": "Ενημέρωση",
@@ -14,6 +16,6 @@
     "lands": "Καταλήγει {when}",
     "landed": "Κατέληξε {when}"
   },
-  "read-the-news": "Διαβάστε τα νέα",
+  "read-the-news": "Μάθετε περισσότερα",
   "remind-me": "Λάβετε υπενθύμιση στο Discord"
 }

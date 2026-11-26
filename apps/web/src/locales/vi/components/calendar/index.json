@@ -1,7 +1,7 @@
 {
   "title": "{calendar} World of Tanks",
   "calendar": "lịch sự kiện",
-  "intro": "Mọi {label} chính thức, đợt giảm giá, mùa Trận đấu Pass và bản cập nhật, theo múi giờ của bạn. Wargaming chỉ hiển thị tuần hiện tại, vì vậy chúng tôi giữ lại mọi mục sau khi chúng biến mất.",
-  "recorded-since": "Được ghi nhận mỗi giờ kể từ {date}.",
+  "intro": "Mọi sự kiện {label} chính thức, giải đấu, phát trực tiếp, đợt giảm giá, mùa Trận đấu Pass và bản cập nhật, theo múi giờ của bạn, được đọc từ lịch của Wargaming và đã giữ lại ngay cả khi bị gỡ xuống.",
+  "recorded-since": "Quay lại từ {date}.",
   "event-description": "Một sự kiện {label} chính thức của World of Tanks, được chơi trong trò chơi."
 }

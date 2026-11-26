@@ -1,7 +1,7 @@
 {
   "title": "World of Tanks {calendar}",
   "calendar": "notikumu kalendārs",
-  "intro": "Katrs oficiāls {label} notikums, izpārdošana, Kaujas pases sezona un atjauninājums jūsu laika joslā. Wargaming rāda tikai pašreizējo nedēļu, tāpēc mēs saglabājam katru ierakstu, kad tas pazūd.",
-  "recorded-since": "Reģistrēts katru stundu kopš {date}.",
+  "intro": "Visi oficiālie {label} notikumi, turnīri, tiešraides, izpārdošanas, Kaujas pases sezonas un atjauninājumi jūsu laika joslā, lasāmi Wargaming pašu kalendāros un saglabāti pēc to noņemšanas.",
+  "recorded-since": "Ieraksti sniedzas atpakaļ līdz {date}.",
   "event-description": "Oficiāls World of Tanks {label} notikums, kas spēlēts spēlē."
 }

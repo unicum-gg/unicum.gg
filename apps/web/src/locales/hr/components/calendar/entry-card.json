@@ -1,6 +1,8 @@
 {
   "kind": {
     "event": "Događaj",
+    "competitive": "Natjecateljski",
+    "livestream": "Prijenos uživo",
     "battle-pass": "Propusnica za bitku",
     "specials": "Akcije",
     "update": "Obnovi",
@@ -14,6 +16,6 @@
     "lands": "Slijeće {when}",
     "landed": "Sletjelo {when}"
   },
-  "read-the-news": "Pročitaj vijesti",
+  "read-the-news": "Saznajte više",
   "remind-me": "Primaj podsjetnik na Discordu"
 }

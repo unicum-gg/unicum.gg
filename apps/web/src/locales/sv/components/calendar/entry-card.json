@@ -1,9 +1,11 @@
 {
   "kind": {
     "event": "Evenemang",
+    "competitive": "Tävlingsinriktad",
+    "livestream": "Livestream",
     "battle-pass": "Stridspass",
     "specials": "Evenemang",
-    "update": "Uppdatering",
+    "update": "Uppdatera",
     "other": "Övrigt"
   },
   "live": "Live",
@@ -14,6 +16,6 @@
     "lands": "Landar {when}",
     "landed": "Landade {when}"
   },
-  "read-the-news": "Läs nyheten",
+  "read-the-news": "Läs mer",
   "remind-me": "Få en påminnelse på Discord"
 }

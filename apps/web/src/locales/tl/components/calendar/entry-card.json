@@ -1,9 +1,11 @@
 {
   "kind": {
     "event": "Kaganapan",
+    "competitive": "Mapagkumpitensya",
+    "livestream": "Livestream",
     "battle-pass": "Labanan Pass",
     "specials": "Mga espesyal na alok",
-    "update": "Update",
+    "update": "I-update",
     "other": "Iba pa"
   },
   "live": "Live",
@@ -14,6 +16,6 @@
     "lands": "Dumarating {when}",
     "landed": "Dumating {when}"
   },
-  "read-the-news": "Basahin ang balita",
+  "read-the-news": "Matuto pa",
   "remind-me": "Magpaalala sa Discord"
 }

@@ -1,6 +1,8 @@
 {
   "kind": {
     "event": "Оқиға",
+    "competitive": "Бәсекелі",
+    "livestream": "Тікелей эфир",
     "battle-pass": "Шайқас билеті",
     "specials": "Арнайы ұсыныстар",
     "update": "Жаңарту",
@@ -14,6 +16,6 @@
     "lands": "{when} қонады",
     "landed": "{when} қонды"
   },
-  "read-the-news": "Жаңалықты оқу",
+  "read-the-news": "Толығырақ оқу",
   "remind-me": "Discord-та еске салғыш алу"
 }

@@ -1,9 +1,11 @@
 {
   "kind": {
     "event": "Hendelse",
+    "competitive": "Konkurransepreget",
+    "livestream": "Direktestrømming",
     "battle-pass": "Kamp Pass",
     "specials": "Spesialer",
-    "update": "Oppdatering",
+    "update": "Oppdatér",
     "other": "Annet"
   },
   "live": "Live",
@@ -14,6 +16,6 @@
     "lands": "Lander {when}",
     "landed": "Landet {when}"
   },
-  "read-the-news": "Les nyhetene",
+  "read-the-news": "Les mer",
   "remind-me": "Få en påminnelse på Discord"
 }

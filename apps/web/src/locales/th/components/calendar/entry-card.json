@@ -1,9 +1,11 @@
 {
   "kind": {
     "event": "กิจกรรม",
+    "competitive": "การแข่งขัน",
+    "livestream": "สตรีมสด",
     "battle-pass": "บัตรผ่านการรบ",
     "specials": "ช่วงพิเศษ",
-    "update": "อัปเดต",
+    "update": "ปรับ",
     "other": "อื่นๆ"
   },
   "live": "สด",
@@ -14,6 +16,6 @@
     "lands": "ลง {when}",
     "landed": "ลงแล้ว {when}"
   },
-  "read-the-news": "อ่านข่าว",
+  "read-the-news": "เรียนรู้เพิ่มเติม",
   "remind-me": "รับการแจ้งเตือนบน Discord"
 }

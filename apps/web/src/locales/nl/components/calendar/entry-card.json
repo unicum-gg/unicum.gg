@@ -1,6 +1,8 @@
 {
   "kind": {
     "event": "Evenement",
+    "competitive": "Competitief",
+    "livestream": "Livestream",
     "battle-pass": "Gevechtspas",
     "specials": "Acties",
     "update": "Updaten",
@@ -14,6 +16,6 @@
     "lands": "Verschijnt {when}",
     "landed": "Verscheen {when}"
   },
-  "read-the-news": "Lees het nieuws",
+  "read-the-news": "Meer informatie",
   "remind-me": "Ontvang een herinnering op Discord"
 }

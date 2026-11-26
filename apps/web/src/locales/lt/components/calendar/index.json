@@ -1,7 +1,7 @@
 {
   "title": "World of Tanks {calendar}",
   "calendar": "Renginių kalendorius",
-  "intro": "Kiekvienas oficialus {label} įvykis, išpardavimas, Mūšio leidimo sezonas ir atnaujinimas jūsų laiko juostoje. Wargaming rodo tik dabartinę savaitę, todėl išlaikome kiekvieno įrašo rekordą, kai jis dingsta.",
-  "recorded-since": "Užfiksuotas kas valandą nuo {date}.",
+  "intro": "Kiekvienas oficialus {label} įvykis, turnyras, tiesioginis srautas, išpardavimas, Mūšio leidimo sezonas ir atnaujinimas jūsų vietos laiko juostoje, kurį galima skaityti Wargaming kalendoriuose ir kuris išlaikytas net po pašalinimo.",
+  "recorded-since": "Siekia atgal iki {date}.",
   "event-description": "Oficialus World of Tanks {label} įvykis, žaistas žaidime."
 }

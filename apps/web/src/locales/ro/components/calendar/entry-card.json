@@ -1,9 +1,11 @@
 {
   "kind": {
     "event": "Eveniment",
+    "competitive": "Competitiv",
+    "livestream": "Stream live",
     "battle-pass": "Bătălie Pass",
     "specials": "Speciale",
-    "update": "Actualizare",
+    "update": "Actualizează",
     "other": "Altele"
   },
   "live": "Live",
@@ -14,6 +16,6 @@
     "lands": "Devine disponibil {when}",
     "landed": "A devenit disponibil {when}"
   },
-  "read-the-news": "Citește știrea",
+  "read-the-news": "Află mai multe",
   "remind-me": "Primește un memento pe Discord"
 }

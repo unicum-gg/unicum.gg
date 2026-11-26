@@ -1,7 +1,7 @@
 {
   "title": "World of Tanks {calendar}",
   "calendar": "Arrangementskalender",
-  "intro": "Alle offisielle {label}-hendelser, salg, Kamp Pass-sesonger og oppdateringer i din egen tidssone. Wargaming viser bare den nåværende uken, så vi beholder en oppføring av hver hendelse når den er borte.",
-  "recorded-since": "Registrert hver time siden {date}.",
+  "intro": "Alle offisielle {label}-hendelser, turneringer, direktestrømminger, salg, Kamp Pass-sesonger og oppdateringer, i din egen tidssone, lest fra Wargamings egne kalendere og beholdt etter at de er tatt ned.",
+  "recorded-since": "Går tilbake til {date}.",
   "event-description": "En offisiell hendelse for {label}, spilt i spillet."
 }

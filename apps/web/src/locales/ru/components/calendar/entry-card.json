@@ -1,6 +1,8 @@
 {
   "kind": {
     "event": "Событие",
+    "competitive": "Соревновательный",
+    "livestream": "Стрим",
     "battle-pass": "Боевой пропуск",
     "specials": "Акции",
     "update": "Обновление",
@@ -14,6 +16,6 @@
     "lands": "Оказывается {when}",
     "landed": "Оказалось {when}"
   },
-  "read-the-news": "Читать новости",
+  "read-the-news": "Подробнее",
   "remind-me": "Получить напоминание в Discord"
 }

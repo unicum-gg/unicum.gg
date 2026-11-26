@@ -1,6 +1,8 @@
 {
   "kind": {
     "event": "Esemény",
+    "competitive": "Kompetitív",
+    "livestream": "Élő közvetítés",
     "battle-pass": "Csata Bérlet",
     "specials": "Akciók",
     "update": "Frissítés",
@@ -14,6 +16,6 @@
     "lands": "Érkezik: {when}",
     "landed": "Megérkezett: {when}"
   },
-  "read-the-news": "Olvasd el a hírt",
+  "read-the-news": "További információ",
   "remind-me": "Kapj emlékeztetőt Discordon"
 }

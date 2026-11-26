@@ -1,9 +1,11 @@
 {
   "kind": {
     "event": "Събитие",
+    "competitive": "състезателен",
+    "livestream": "Стрийм на живо",
     "battle-pass": "Боен пропуск",
     "specials": "Акции",
-    "update": "Актуализация",
+    "update": "Обнови",
     "other": "Други"
   },
   "live": "На живо",
@@ -14,6 +16,6 @@
     "lands": "Попада {when}",
     "landed": "Попадна {when}"
   },
-  "read-the-news": "Прочети новината",
+  "read-the-news": "Научете повече",
   "remind-me": "Получи напомняне в Discord"
 }

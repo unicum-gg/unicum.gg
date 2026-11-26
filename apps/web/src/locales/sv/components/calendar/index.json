@@ -1,7 +1,7 @@
 {
   "title": "World of Tanks-kalender för {calendar}",
   "calendar": "evenemangskalender",
-  "intro": "Alla officiella evenemang för {label}, reor, Stridspassäsonger och uppdateringar i din egen tidszon. Wargaming visar bara den aktuella veckan, så vi behåller en post över varje evenemang när det har försvunnit.",
-  "recorded-since": "Registrerad varje timme sedan {date}.",
+  "intro": "Varje officiellt {label}-evenemang, turnering, livestream, rea, säsong av Stridspass och uppdatering, i din egen tidszon, läst från Wargamings egna kalendrar, där Wargaming behöll dem efter att de var tagna bort.",
+  "recorded-since": "Tillbaka till {date}.",
   "event-description": "Ett officiellt World of Tanks-evenemang för {label} som spelas i spelet."
 }

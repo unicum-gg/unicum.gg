@@ -1,6 +1,8 @@
 {
   "kind": {
     "event": "イベント",
+    "competitive": "競技",
+    "livestream": "ライブ配信",
     "battle-pass": "戦闘パス",
     "specials": "スペシャル",
     "update": "更新",
@@ -14,6 +16,6 @@
     "lands": "{when}に到達",
     "landed": "{when}に到達済み"
   },
-  "read-the-news": "ニュースを読む",
+  "read-the-news": "詳しく見る",
   "remind-me": "Discordでリマインダーを受け取る"
 }

@@ -1,6 +1,8 @@
 {
   "kind": {
     "event": "Падзея",
+    "competitive": "Спаборніцкая",
+    "livestream": "Анлайн-стрым",
     "battle-pass": "Баявы пропуск",
     "specials": "Спецпрапановы",
     "update": "Абнаўленне",
@@ -14,6 +16,6 @@
     "lands": "Трапляе {when}",
     "landed": "Трапіла {when}"
   },
-  "read-the-news": "Чытаць навіны",
+  "read-the-news": "Даведацца больш",
   "remind-me": "Атрымліваць напамін у Discord"
 }

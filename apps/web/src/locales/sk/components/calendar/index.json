@@ -1,7 +1,7 @@
 {
   "title": "Koledar World of Tanks {calendar}",
   "calendar": "Koledar dogodkov",
-  "intro": "Vsaka uradna udalosť {label}, razprodaja, sezóna Bitke Prepustnice in aktualizacija v vašem časovnem pasu. Wargaming prikazuje samo aktualni teden, zato ohranimo záznam vsakega vnosa, ko izgine.",
-  "recorded-since": "Zaznamenano vsako uro od {date}.",
+  "intro": "Vsak uradni dogodek igre {label}, turnir, prenos v živo, razprodaja, sezona bojne prepustnice in posodobitev v vašem časovnem pasu, preberemo iz Wargamingovih lastnih koledarjev in ohranimo tudi po njihovi odstranitvi.",
+  "recorded-since": "Podatki segajo nazaj do {date}.",
   "event-description": "Uradna udalosť World of Tanks {label}, odigrana v igri."
 }

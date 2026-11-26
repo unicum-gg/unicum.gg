@@ -1,7 +1,7 @@
 {
   "title": "World of Tanks {calendar}",
   "calendar": "Eseménynaptár",
-  "intro": "Minden hivatalos {label} esemény, akció, Csata Bérlet-szezon és frissítés a saját időzónádban. Wargaming csak a jelenlegi hetet jeleníti meg, ezért minden bejegyzést megtartunk, miután eltűnik.",
-  "recorded-since": "Óránként rögzítve: {date} óta.",
+  "intro": "Minden hivatalos {label}-esemény, verseny, élő közvetítés, akció, Csata Bérlet-szezon és frissítés, a saját időzónádban, a Wargaming saját naptáraiból olvasva és az eltávolításuk után is megtartva.",
+  "recorded-since": "Vissza egészen {date} időpontjáig.",
   "event-description": "Egy hivatalos World of Tanks {label} esemény, amelyet a játékban játszanak."
 }

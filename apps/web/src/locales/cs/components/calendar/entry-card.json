@@ -1,9 +1,11 @@
 {
   "kind": {
     "event": "Událost",
+    "competitive": "Soutěžní",
+    "livestream": "Živý stream",
     "battle-pass": "Battle Pass",
     "specials": "Speciály",
-    "update": "Aktualizace",
+    "update": "Aktualizovat",
     "other": "Jiný"
   },
   "live": "Živě",
@@ -14,6 +16,6 @@
     "lands": "Přistane {when}",
     "landed": "Přistálo {when}"
   },
-  "read-the-news": "Přečíst novinky",
+  "read-the-news": "Zjistit více",
   "remind-me": "Získat připomenutí na Discordu"
 }

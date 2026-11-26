@@ -1,6 +1,8 @@
 {
   "kind": {
     "event": "Sự kiện",
+    "competitive": "Thi đấu",
+    "livestream": "Phát trực tiếp",
     "battle-pass": "Trận đấu Pass",
     "specials": "Sự kiện đặc biệt",
     "update": "Cập nhật",
@@ -14,6 +16,6 @@
     "lands": "Đổ bộ {when}",
     "landed": "Đã đổ bộ {when}"
   },
-  "read-the-news": "Đọc tin tức",
+  "read-the-news": "Tìm hiểu thêm",
   "remind-me": "Nhận lời nhắc trên Discord"
 }

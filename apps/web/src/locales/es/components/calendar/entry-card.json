@@ -1,9 +1,11 @@
 {
   "kind": {
     "event": "Evento",
+    "competitive": "Competitivo",
+    "livestream": "Directo",
     "battle-pass": "Pase de batalla",
     "specials": "Ofertas especiales",
-    "update": "Actualización",
+    "update": "Actualizar",
     "other": "Otro"
   },
   "live": "En vivo",
@@ -14,6 +16,6 @@
     "lands": "Llega {when}",
     "landed": "Llegó {when}"
   },
-  "read-the-news": "Leer las noticias",
+  "read-the-news": "Más información",
   "remind-me": "Recibir un recordatorio en Discord"
 }

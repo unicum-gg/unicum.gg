@@ -1,6 +1,8 @@
 {
   "kind": {
     "event": "Notikums",
+    "competitive": "Sacensību",
+    "livestream": "Tiešraide",
     "battle-pass": "Kaujas pase",
     "specials": "Akcijas",
     "update": "Atjauninājums",
@@ -14,6 +16,6 @@
     "lands": "Trāpa {when}",
     "landed": "Trāpīja {when}"
   },
-  "read-the-news": "Lasīt jaunumus",
+  "read-the-news": "Uzzināt vairāk",
   "remind-me": "Saņemt atgādinājumu Discord"
 }

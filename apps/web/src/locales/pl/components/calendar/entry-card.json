@@ -1,9 +1,11 @@
 {
   "kind": {
     "event": "Wydarzenie",
+    "competitive": "Rywalizacyjne",
+    "livestream": "Stream na żywo",
     "battle-pass": "Przepustka bitewna",
     "specials": "Promocje",
-    "update": "Aktualizacja",
+    "update": "Odśwież",
     "other": "Inne"
   },
   "live": "Na żywo",
@@ -14,6 +16,6 @@
     "lands": "Trafia {when}",
     "landed": "Trafiło {when}"
   },
-  "read-the-news": "Czytaj wiadomości",
+  "read-the-news": "Dowiedz się więcej",
   "remind-me": "Otrzymaj przypomnienie na Discordzie"
 }

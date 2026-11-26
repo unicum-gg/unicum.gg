@@ -1,7 +1,7 @@
 {
   "title": "World of Tanks: {calendar}",
   "calendar": "calendário de eventos",
-  "intro": "Todos os eventos oficiais de {label}, promoções, temporadas do Passe de Batalha e atualizações, no seu próprio fuso horário. A Wargaming só mostra a semana atual, por isso mantemos um registo de todas as entradas depois de desaparecerem.",
-  "recorded-since": "Registado a cada hora desde {date}.",
+  "intro": "Todos os eventos oficiais de {label}, torneios, transmissões ao vivo, promoções, temporadas do Passe de Batalha e atualizações, no seu próprio fuso horário, lidos nos próprios calendários da Wargaming e mantidos depois de serem retirados.",
+  "recorded-since": "Voltando a {date}.",
   "event-description": "Um evento oficial de World of Tanks em {label}, jogado no jogo."
 }

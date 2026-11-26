@@ -1,12 +1,14 @@
 {
   "kind": {
     "event": "Подія",
+    "competitive": "Змагальний",
+    "livestream": "Стрім наживо",
     "battle-pass": "Бойова перепустка",
     "specials": "Акції",
     "update": "Оновлення",
     "other": "Інше"
   },
-  "live": "Наживо",
+  "live": "Живий",
   "status": {
     "starts": "Початок {when}",
     "ends": "Завершення {when}",
@@ -14,6 +16,6 @@
     "lands": "Посідає {when}",
     "landed": "Посіло {when}"
   },
-  "read-the-news": "Читати новини",
+  "read-the-news": "Дізнатися більше",
   "remind-me": "Отримати нагадування в Discord"
 }

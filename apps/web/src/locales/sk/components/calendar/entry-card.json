@@ -1,6 +1,8 @@
 {
   "kind": {
     "event": "Udalosť",
+    "competitive": "Tekmovalni",
+    "livestream": "Prenos v živo",
     "battle-pass": "Bitka Prepustnica",
     "specials": "Posebne ponudbe",
     "update": "Posodobitev",
@@ -14,6 +16,6 @@
     "lands": "Prispe {when}",
     "landed": "Prispelo {when}"
   },
-  "read-the-news": "Preberite novice",
+  "read-the-news": "Izvedi več",
   "remind-me": "Prejmi opomnik na Discordu"
 }

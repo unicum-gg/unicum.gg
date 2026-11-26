@@ -1,7 +1,7 @@
 {
   "title": "World of Tanks {calendar}",
   "calendar": "календар догађаја",
-  "intro": "Сваки званично {label} догађај, распродаја, сезона Bitka Пропусница и ажурирање, у вашој временској зони. Wargaming приказује само тренутну недељу, па задржавамо рекорд сваке ставке када нестане.",
-  "recorded-since": "Забележено сваког сата од {date}.",
+  "intro": "Svi zvanični događaji u okviru {label}, turniri, strimovi uživo, rasprodaje, sezone Bitke Пропусnice i ažuriranja, u vašoj vremenskoj zoni, preuzeti iz sopstvenih Wargaming kalendara i sačuvani kada budu uzeti van mreže.",
+  "recorded-since": "Seže nazad do {date}.",
   "event-description": "Званично {label} догађај за World of Tanks, одиграно у игри."
 }

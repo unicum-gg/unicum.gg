@@ -1,9 +1,11 @@
 {
   "kind": {
     "event": "इवेंट",
+    "competitive": "प्रतिस्पर्धी",
+    "livestream": "लाइव स्ट्रीम",
     "battle-pass": "बैटल पास",
     "specials": "विशेष ऑफ़र",
-    "update": "अपडेट",
+    "update": "अपडेट करें",
     "other": "अन्य"
   },
   "live": "सीधा",
@@ -14,6 +16,6 @@
     "lands": "उतरता है {when}",
     "landed": "उतर चुका है {when}"
   },
-  "read-the-news": "समाचार पढ़ें",
+  "read-the-news": "और जानें",
   "remind-me": "Discord पर रिमाइंडर पाएँ"
 }

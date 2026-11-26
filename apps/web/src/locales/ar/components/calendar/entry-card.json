@@ -1,6 +1,8 @@
 {
   "kind": {
     "event": "حدث",
+    "competitive": "تنافسي",
+    "livestream": "البث المباشر",
     "battle-pass": "بطاقة المعركة",
     "specials": "العروض الخاصة",
     "update": "تحديث",
@@ -14,6 +16,6 @@
     "lands": "يصل {when}",
     "landed": "وصل {when}"
   },
-  "read-the-news": "اقرأ الأخبار",
+  "read-the-news": "تعرّف على المزيد",
   "remind-me": "احصل على تذكير في Discord"
 }

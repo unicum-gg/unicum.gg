@@ -1,7 +1,7 @@
 {
   "title": "World of Tanks: {calendar}",
   "calendar": "Kalendarz wydarzeń",
-  "intro": "Każde oficjalne wydarzenie {label}, wyprzedaż, sezon Przepustki bitewnej i aktualizacja, w Twojej strefie czasowej. Wargaming pokazuje tylko obecny tydzień, więc zachowujemy wpis o każdym wydarzeniu, gdy już zniknie.",
-  "recorded-since": "Zarejestrowane co godzinę od {date}.",
+  "intro": "Wszystkie oficjalne wydarzenia {label}, turnieje, streamy na żywo, wyprzedaże, sezony Przepustki bitewnej i aktualizacje, we własnej strefie czasowej, odczytane z własnych kalendarzy Wargaming i zachowane po ich usunięciu.",
+  "recorded-since": "Sięga wstecz do {date}.",
   "event-description": "Oficjalne wydarzenie World of Tanks {label}, rozegrane w grze."
 }

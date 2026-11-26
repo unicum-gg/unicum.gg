@@ -1,7 +1,7 @@
 {
   "title": "World of Tanks {calendar}",
   "calendar": "Eventkalender",
-  "intro": "Jedes offizielle Ereignis von {label}, jedes Angebot, jede Gefechtspass-Saison und jede Aktualisierung in deiner eigenen Zeitzone. Wargaming zeigt nur die aktuelle Woche an, deshalb behalten wir jeden Eintrag, sobald er verschwunden ist.",
-  "recorded-since": "Seit {date} wird stündlich aufgezeichnet.",
+  "intro": "Alle offiziellen {label}-Ereignisse, Turniere, Livestreams, Angebote, Gefechtspass-Saisons und Aktualisierungen, in deiner Zeitzone, aus den eigenen Kalendern von Wargaming gelesen und beibehalten, nachdem sie entfernt wurden.",
+  "recorded-since": "Bis {date} zurück.",
   "event-description": "Ein offizielles Ereignis von {label}, das im Spiel stattfindet."
 }

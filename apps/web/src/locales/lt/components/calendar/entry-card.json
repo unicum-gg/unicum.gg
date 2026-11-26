@@ -1,6 +1,8 @@
 {
   "kind": {
     "event": "Įvykis",
+    "competitive": "Varžybinis",
+    "livestream": "Tiesioginis srautas",
     "battle-pass": "Mūšio leidimas",
     "specials": "Akcijos",
     "update": "Atnaujinti",
@@ -14,6 +16,6 @@
     "lands": "Patenka {when}",
     "landed": "Pateko {when}"
   },
-  "read-the-news": "Skaityti naujienas",
+  "read-the-news": "Sužinoti daugiau",
   "remind-me": "Gauti priminimą Discord"
 }

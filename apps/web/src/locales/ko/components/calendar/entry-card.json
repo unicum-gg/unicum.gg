@@ -1,6 +1,8 @@
 {
   "kind": {
     "event": "이벤트",
+    "competitive": "경쟁",
+    "livestream": "실시간 방송",
     "battle-pass": "전투 패스",
     "specials": "이벤트",
     "update": "업데이트",
@@ -14,6 +16,6 @@
     "lands": "{when}에 도착합니다",
     "landed": "{when}에 도착했습니다"
   },
-  "read-the-news": "뉴스 읽기",
+  "read-the-news": "더 알아보기",
   "remind-me": "Discord에서 알림 받기"
 }

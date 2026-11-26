@@ -1,7 +1,7 @@
 {
   "title": "World of Tanksin {calendar}",
   "calendar": "tapahtumakalenteri",
-  "intro": "Kaikki viralliset {label}-tapahtumat, tarjoukset, Taistelu Passi -kaudet ja päivitykset omalla aikavyöhykkeelläsi. Wargaming näyttää vain nykyisen viikon, joten säilytämme jokaisen merkinnän sen poistumisen jälkeen.",
-  "recorded-since": "Tallennettu joka tunti alkaen {date}.",
+  "intro": "Kaikki viralliset {label}-tapahtumat, turnaukset, live-striimit, alennusmyynnit, Taistelu Passi -kaudet ja päivitykset omalla aikavyöhykkeelläsi, luettu Wargamingin omista kalentereista ja säilytetty sen jälkeen, kun ne on otettu pois.",
+  "recorded-since": "Ulottuu takaisin päivämäärään {date}.",
   "event-description": "Virallinen World of Tanksin {label}-tapahtuma, joka pelataan pelissä."
 }
