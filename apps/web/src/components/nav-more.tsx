@@ -3,13 +3,13 @@
 import type { ReactNode } from "react";
 import {
   BookOpenIcon,
+  CalendarDotsIcon,
   FileCodeIcon,
   PlugsConnectedIcon,
   PulseIcon,
   PuzzlePieceIcon,
   RankingIcon,
   RobotIcon,
-  SealCheckIcon,
 } from "@phosphor-icons/react/dist/ssr";
 import { NavMoreMenu } from "@/components/nav-more-menu";
 import ROUTES from "@/constants/routes";
@@ -53,12 +53,14 @@ export function NavMore() {
         item("bot", ROUTES.BOT, <RobotIcon />),
         item("mcp", ROUTES.MCP, <PlugsConnectedIcon />),
         item("api", ROUTES.DOCS, <FileCodeIcon />),
-        // Pages about the game itself. Two are regional, which is why this
+        // Pages about the game itself. Three are regional, which is why this
         // menu is a Client Component.
         item("tournaments", ROUTES.TOURNAMENTS(region), <RankingIcon />),
+        item("calendar", ROUTES.CALENDAR(region), <CalendarDotsIcon />),
         item("servers", ROUTES.SERVERS(region), <PulseIcon />),
-        item("badges", ROUTES.BADGES, <SealCheckIcon />),
         item("glossary", ROUTES.GLOSSARY, <BookOpenIcon />),
+        // Badges gave its card to the calendar: the row is the pages about the
+        // game, and the badges are the site's own. The footer still links it.
         // Not "Support us": the top strip shows it on every page, in the brand
         // colour, and the footer links it too. A ninth card also left a row
         // with one card on it.

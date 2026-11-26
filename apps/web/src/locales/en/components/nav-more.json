@@ -5,6 +5,10 @@
       "label": "Tournaments",
       "description": "Brackets, rosters and results, region by region"
     },
+    "calendar": {
+      "label": "Calendar",
+      "description": "Official events, tournaments and sales, day by day"
+    },
     "servers": {
       "label": "Servers",
       "description": "Players online, now and over time"
@@ -24,10 +28,6 @@
     "api": {
       "label": "API",
       "description": "Free public REST API, no key required"
-    },
-    "badges": {
-      "label": "Badges",
-      "description": "Every crest a player or clan can earn, and how"
     },
     "glossary": {
       "label": "Glossary",
