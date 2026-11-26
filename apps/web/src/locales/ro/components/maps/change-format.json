@@ -16,7 +16,12 @@
     "artillery-headquarters": "Cartierul general al artileriei",
     "comms-centers": "Centre de comunicații",
     "observation-posts": "Posturi de observație",
-    "points-of-interest": "Puncte de interes"
+    "points-of-interest": "Puncte de interes",
+    "visuals": "Refăcute, de asemenea",
+    "minimap": "Mini-hartă",
+    "relief": "Teren",
+    "objects": "Obiecte",
+    "measured": "Măsurat"
   },
   "summary": {
     "added": "S-a adăugat {name}",
@@ -34,7 +39,45 @@
     "moved": "S-a efectuat o mutare pentru {name}",
     "count-changed": "{name}: {before} → {after}",
     "value-changed": "{name}: {before} → {after}",
-    "value-set": "{name}: {after}"
+    "value-set": "{name}: {after}",
+    "minimap-redrawn": "Reproiectată",
+    "relief-both": "Ridicat cu până la {rise} m, coborât cu până la {drop} m",
+    "relief-raised": "Ridicat cu până la {rise} m",
+    "relief-lowered": "Coborât cu până la {drop} m",
+    "relief-rework": "Reconfigurat în toate zonele importante ale hărții, cu până la {max} m",
+    "objects-added": "Adăugat: {list}",
+    "objects-removed": "Eliminat: {list}",
+    "objects-rebuilt": "Reconstruit în toate zonele hărții",
+    "relief-rebuilt": "Reconfigurat pe întregul teritoriu al hărții",
+    "measured-between": "Comparat între actualizarea {from} și actualizarea {through}: nu mai există niciun client de joc intermediar"
   },
-  "name-with-mode": "{name} ({mode})"
+  "name-with-mode": "{name} ({mode})",
+  "image": {
+    "before": "Înainte de",
+    "after": "După"
+  },
+  "object": {
+    "buildings": "{count, plural, one {# clădire} few {# clădiri} other {# clădiri}}",
+    "fences": "{count, plural, one {# gard sau zid} few {# garduri și ziduri} other {# garduri și ziduri}}",
+    "rocks": "{count, plural, one {# piatră} few {# pietre} other {# pietre}}",
+    "military": "{count, plural, one {# obiect militar} few {# obiecte militare} other {# obiecte militare}}",
+    "bridges": "{count, plural, one {# pod} few {# poduri} other {# poduri}}",
+    "vegetation": "{count, plural, one {# copac sau tufiș} few {# copaci și tufișuri} other {# copaci și tufișuri}}",
+    "props": "{count, plural, one {# alt obiect} few {# alte obiecte} other {# alte obiecte}}"
+  },
+  "aspect": {
+    "ground": "texturile solului",
+    "sky": "cerul și iluminarea",
+    "sound": "sunetul",
+    "water": "apa",
+    "effects": "efectele",
+    "vegetation": "vegetația",
+    "models": "modelele și texturile"
+  },
+  "legend": {
+    "raised": "Ridicat",
+    "lowered": "Coborât",
+    "added": "Adăugat",
+    "removed": "Eliminat"
+  }
 }

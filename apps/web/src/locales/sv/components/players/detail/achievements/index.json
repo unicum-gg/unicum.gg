@@ -5,7 +5,7 @@
   "filter-earned": "Intjänat",
   "filter-missing": "Saknade",
   "filter-obtainable": "Tillgängliga",
-  "filter-retired": "Utgångna",
+  "filter-retired": "Pensionerade",
   "no-achievement-matches-these-filters": "Ingen utmärkelse matchar dessa filter.",
   "search-achievements": "Hitta prestationer",
   "search-among-n-achievements": "Hitta bland {count} prestationer"

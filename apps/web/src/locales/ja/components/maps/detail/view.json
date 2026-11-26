@@ -5,5 +5,7 @@
   "n-random-events": "{count, plural, other {#件のランダムイベント}}",
   "random-events": "ランダムイベント",
   "size": "サイズ",
-  "team-size": "チームサイズ"
+  "team-size": "チームサイズ",
+  "retired": "退役",
+  "retired-span": "更新 {first} から更新 {last} までゲーム内"
 }

@@ -16,7 +16,12 @@
     "artillery-headquarters": "Артилерийски щаб",
     "comms-centers": "Центрове за комуникации",
     "observation-posts": "Наблюдателни постове",
-    "points-of-interest": "Важни точки"
+    "points-of-interest": "Важни точки",
+    "visuals": "Също преработено",
+    "minimap": "Миникарта",
+    "relief": "Терен",
+    "objects": "Обекти",
+    "measured": "Измерено"
   },
   "summary": {
     "added": "Добавено: {name}",
@@ -34,7 +39,45 @@
     "moved": "Преместено: {name}",
     "count-changed": "{name}: {before} → {after}",
     "value-changed": "{name}: {before} → {after}",
-    "value-set": "{name}: {after}"
+    "value-set": "{name}: {after}",
+    "minimap-redrawn": "Прерисувана",
+    "relief-both": "Събрано до {rise} м, понижено до {drop} м",
+    "relief-raised": "Събрано до {rise} м",
+    "relief-lowered": "Понижено до {drop} м",
+    "relief-rework": "Преоформено навсякъде по картата, до {max} м",
+    "objects-added": "Добавено: {list}",
+    "objects-removed": "Премахнато: {list}",
+    "objects-rebuilt": "Изградено наново навсякъде по картата",
+    "relief-rebuilt": "Преоформено по цялата карта",
+    "measured-between": "Сравнено между актуализация {from} и актуализация {through}: между тях не е останал клиент на играта"
   },
-  "name-with-mode": "{name} ({mode})"
+  "name-with-mode": "{name} ({mode})",
+  "image": {
+    "before": "Преди",
+    "after": "След"
+  },
+  "object": {
+    "buildings": "{count, plural, one {# сграда} other {# сгради}}",
+    "fences": "{count, plural, one {# ограда или стена} other {# огради и стени}}",
+    "rocks": "{count, plural, one {# скала} other {# скали}}",
+    "military": "{count, plural, one {# военен обект} other {# военни обекти}}",
+    "bridges": "{count, plural, one {# мост} other {# мостове}}",
+    "vegetation": "{count, plural, one {# дърво или храст} other {# дървета и храсти}}",
+    "props": "{count, plural, one {# друг обект} other {# други обекти}}"
+  },
+  "aspect": {
+    "ground": "текстури на терена",
+    "sky": "небе и осветление",
+    "sound": "звук",
+    "water": "вода",
+    "effects": "ефекти",
+    "vegetation": "растителност",
+    "models": "модели и текстури"
+  },
+  "legend": {
+    "raised": "Събрано",
+    "lowered": "Понижено",
+    "added": "Добавено",
+    "removed": "Премахнато"
+  }
 }

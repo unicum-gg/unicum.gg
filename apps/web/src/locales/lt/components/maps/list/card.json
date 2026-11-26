@@ -1,4 +1,6 @@
 {
   "random-events": "Atsitiktiniai įvykiai gali pakeisti šį žemėlapį mūšio metu",
-  "minimap-alt": "{map} mini žemėlapis"
+  "minimap-alt": "{map} mini žemėlapis",
+  "retired-until": "Iki {version}",
+  "retired-span": "Žaidime nuo atnaujinimo {first} iki atnaujinimo {last}"
 }

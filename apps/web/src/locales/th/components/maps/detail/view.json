@@ -5,5 +5,7 @@
   "n-random-events": "{count, plural, other {# กิจกรรมสุ่ม}}",
   "random-events": "เหตุการณ์สุ่ม",
   "size": "ขนาด",
-  "team-size": "ขนาดทีม"
+  "team-size": "ขนาดทีม",
+  "retired": "เลิกใช้แล้ว",
+  "retired-span": "ในเกมตั้งแต่อัปเดต {first} ถึงอัปเดต {last}"
 }

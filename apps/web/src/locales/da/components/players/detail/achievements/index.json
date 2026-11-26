@@ -5,7 +5,7 @@
   "filter-earned": "Optjent",
   "filter-missing": "Mangler",
   "filter-obtainable": "Kan optjenes",
-  "filter-retired": "Udgåede",
+  "filter-retired": "Udgået",
   "no-achievement-matches-these-filters": "Ingen præstation matcher disse filtre.",
   "search-achievements": "Søg bedrifter",
   "search-among-n-achievements": "Søg blandt {count} præstationer"

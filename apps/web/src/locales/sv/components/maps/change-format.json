@@ -16,7 +16,12 @@
     "artillery-headquarters": "Artillerihögkvarter",
     "comms-centers": "Kommunikationscentraler",
     "observation-posts": "Observationsposter",
-    "points-of-interest": "Nyckelpunkter"
+    "points-of-interest": "Nyckelpunkter",
+    "visuals": "Även omarbetad",
+    "minimap": "Minikarta",
+    "relief": "Terräng",
+    "objects": "Objekt",
+    "measured": "Uppmätt"
   },
   "summary": {
     "added": "{name} tillagd",
@@ -34,7 +39,45 @@
     "moved": "{name} förflyttad",
     "count-changed": "{name}: {before} → {after}",
     "value-changed": "{name}: {before} → {after}",
-    "value-set": "{name}: {after}"
+    "value-set": "{name}: {after}",
+    "minimap-redrawn": "Omdragen",
+    "relief-both": "Insamlat upp till {rise} m, sänkt upp till {drop} m",
+    "relief-raised": "Insamlat upp till {rise} m",
+    "relief-lowered": "Sänkt upp till {drop} m",
+    "relief-rework": "Omformad över större delen av kartan, upp till {max} m",
+    "objects-added": "Tillagda: {list}",
+    "objects-removed": "Borttagna: {list}",
+    "objects-rebuilt": "Återskapade över kartan",
+    "relief-rebuilt": "Omformad över hela kartan",
+    "measured-between": "Jämfört mellan uppdatering {from} och uppdatering {through}: ingen spelklient däremellan överlever"
   },
-  "name-with-mode": "{name} ({mode})"
+  "name-with-mode": "{name} ({mode})",
+  "image": {
+    "before": "Före",
+    "after": "Efter"
+  },
+  "object": {
+    "buildings": "{count, plural, one {# byggnad} other {# byggnader}}",
+    "fences": "{count, plural, one {# stängsel eller mur} other {# stängsel och murar}}",
+    "rocks": "{count, plural, one {# sten} other {# stenar}}",
+    "military": "{count, plural, one {# militärt objekt} other {# militära objekt}}",
+    "bridges": "{count, plural, one {# bro} other {# broar}}",
+    "vegetation": "{count, plural, one {# träd eller buske} other {# träd och buskar}}",
+    "props": "{count, plural, one {# annat objekt} other {# andra objekt}}"
+  },
+  "aspect": {
+    "ground": "marktexturer",
+    "sky": "himmel och belysning",
+    "sound": "ljud",
+    "water": "vatten",
+    "effects": "effekter",
+    "vegetation": "vegetation",
+    "models": "modeller och texturer"
+  },
+  "legend": {
+    "raised": "Insamlat",
+    "lowered": "Sänkt",
+    "added": "Tillagda",
+    "removed": "Borttagna"
+  }
 }

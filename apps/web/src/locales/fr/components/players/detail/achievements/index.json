@@ -5,7 +5,7 @@
   "filter-earned": "Gagné",
   "filter-missing": "Manquants",
   "filter-obtainable": "À gagner",
-  "filter-retired": "Retirés",
+  "filter-retired": "Retiré",
   "no-achievement-matches-these-filters": "Aucun accomplissement ne correspond à ces filtres.",
   "search-achievements": "Chercher des faits d’armes",
   "search-among-n-achievements": "Chercher parmi {count} succès"

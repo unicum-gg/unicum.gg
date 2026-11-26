@@ -5,5 +5,7 @@
   "no-maps-match-your-filters": "Ingen kort matcher dine filtre.",
   "search": "Søg blandt {count} kort",
   "search-label": "Søg kort",
-  "special-map": "Særligt kort"
+  "special-map": "Særligt kort",
+  "retired-maps": "Udgåede kort",
+  "retired-maps-intro": "{count, plural, one {# kort forlod} other {# kort forlod}} spillet. Hvert kort vises, som det så ud i den seneste opdatering, hvor det fandtes."
 }

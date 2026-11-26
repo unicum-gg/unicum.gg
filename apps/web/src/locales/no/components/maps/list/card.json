@@ -1,4 +1,6 @@
 {
   "random-events": "Tilfeldige hendelser kan endre dette kartet under kampen",
-  "minimap-alt": "{map} minimap"
+  "minimap-alt": "{map} minimap",
+  "retired-until": "Frem til {version}",
+  "retired-span": "I spillet fra oppdatering {first} til oppdatering {last}"
 }

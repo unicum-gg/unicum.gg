@@ -5,7 +5,7 @@
   "filter-earned": "Opptjent",
   "filter-missing": "Mangler",
   "filter-obtainable": "Oppnåelig",
-  "filter-retired": "Utgått",
+  "filter-retired": "Utfaset",
   "no-achievement-matches-these-filters": "Ingen prestasjoner samsvarer med disse filtrene.",
   "search-achievements": "Søk etter utmerkelser",
   "search-among-n-achievements": "Søk blant {count} prestasjoner"

@@ -5,7 +5,7 @@
   "filter-earned": "Obtenido",
   "filter-missing": "Faltantes",
   "filter-obtainable": "Obtenibles",
-  "filter-retired": "Retirados",
+  "filter-retired": "Retirado",
   "no-achievement-matches-these-filters": "Ningún logro coincide con estos filtros.",
   "search-achievements": "Buscar logros",
   "search-among-n-achievements": "Buscar entre {count} logros"

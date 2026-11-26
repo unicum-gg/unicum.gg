@@ -16,7 +16,12 @@
     "artillery-headquarters": "Artilleriehauptquartier",
     "comms-centers": "Kommunikationszentren",
     "observation-posts": "Beobachtungsposten",
-    "points-of-interest": "Sonderziele"
+    "points-of-interest": "Sonderziele",
+    "visuals": "Ebenfalls überarbeitet",
+    "minimap": "Minikarte",
+    "relief": "Gelände",
+    "objects": "Objekte",
+    "measured": "Gemessen"
   },
   "summary": {
     "added": "{name} hinzugefügt",
@@ -34,7 +39,45 @@
     "moved": "{name} verschoben",
     "count-changed": "{name}: {before} → {after}",
     "value-changed": "{name}: {before} → {after}",
-    "value-set": "{name}: {after}"
+    "value-set": "{name}: {after}",
+    "minimap-redrawn": "Neu gezeichnet",
+    "relief-both": "Bis zu {rise} m erhöht, bis zu {drop} m abgesenkt",
+    "relief-raised": "Bis zu {rise} m erhöht",
+    "relief-lowered": "Bis zu {drop} m abgesenkt",
+    "relief-rework": "Über weite Teile der Karte umgestaltet, bis zu {max} m",
+    "objects-added": "Hinzugefügt: {list}",
+    "objects-removed": "Entfernt: {list}",
+    "objects-rebuilt": "Über die ganze Karte hinweg neu aufgebaut",
+    "relief-rebuilt": "Über die ganze Karte hinweg umgestaltet",
+    "measured-between": "Verglichen zwischen Aktualisierung {from} und Aktualisierung {through}: Nein, kein Spiel-Client dazwischen überlebt"
   },
-  "name-with-mode": "{name} ({mode})"
+  "name-with-mode": "{name} ({mode})",
+  "image": {
+    "before": "Vorher",
+    "after": "Nachher"
+  },
+  "object": {
+    "buildings": "{count, plural, one {# Gebäude} other {# Gebäude}}",
+    "fences": "{count, plural, one {# Zaun oder Mauer} other {# Zäune und Mauern}}",
+    "rocks": "{count, plural, one {# Felsen} other {# Felsen}}",
+    "military": "{count, plural, one {# militärisches Objekt} other {# militärische Objekte}}",
+    "bridges": "{count, plural, one {# Brücke} other {# Brücken}}",
+    "vegetation": "{count, plural, one {# Baum oder Busch} other {# Bäume und Büsche}}",
+    "props": "{count, plural, one {# sonstiges Objekt} other {# sonstige Objekte}}"
+  },
+  "aspect": {
+    "ground": "Bodentexturen",
+    "sky": "Himmel und Beleuchtung",
+    "sound": "Ton",
+    "water": "Wasser",
+    "effects": "Effekte",
+    "vegetation": "Vegetation",
+    "models": "Modelle und Texturen"
+  },
+  "legend": {
+    "raised": "Erhöht",
+    "lowered": "Abgesenkt",
+    "added": "Hinzugefügt",
+    "removed": "Entfernt"
+  }
 }

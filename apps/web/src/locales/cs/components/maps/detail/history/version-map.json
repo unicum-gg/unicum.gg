@@ -1,5 +1,8 @@
 {
   "after": "Po",
+  "badge": "Pozice",
+  "badge-latest": "Pozice · nejnovější minimapa",
+  "badge-nearest": "Pozice · minimapa {version}",
   "before": "Před",
   "enlarge": "Zvětšit minimapu mapy {map}"
 }

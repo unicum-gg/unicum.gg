@@ -16,7 +16,12 @@
     "artillery-headquarters": "Tykistön päämaja",
     "comms-centers": "Viestintäkeskukset",
     "observation-posts": "Tähystyspaikat",
-    "points-of-interest": "Kohdealueet"
+    "points-of-interest": "Kohdealueet",
+    "visuals": "Myös uudistettu",
+    "minimap": "Minikartta",
+    "relief": "Maasto",
+    "objects": "Objektit",
+    "measured": "Mitattu"
   },
   "summary": {
     "added": "{name} lisätty",
@@ -34,7 +39,45 @@
     "moved": "Siirto tehty: {name}",
     "count-changed": "{name}: {before} → {after}",
     "value-changed": "{name}: {before} → {after}",
-    "value-set": "{name}: {after}"
+    "value-set": "{name}: {after}",
+    "minimap-redrawn": "Piirretty uudelleen",
+    "relief-both": "Kerätty enintään {rise} m, laskettu enintään {drop} m",
+    "relief-raised": "Kerätty enintään {rise} m",
+    "relief-lowered": "Laskettu enintään {drop} m",
+    "relief-rework": "Muotoiltu uudelleen yli suuren osan kartasta, enintään {max} m",
+    "objects-added": "Lisätty: {list}",
+    "objects-removed": "Poistettu: {list}",
+    "objects-rebuilt": "Rakennettu uudelleen koko kartalla",
+    "relief-rebuilt": "Muotoiltu uudelleen koko kartalla",
+    "measured-between": "Verrattu päivityksen {from} ja päivityksen {through} välillä: yksikään välissä ollut pelin asiakasohjelma ei ole säilynyt"
   },
-  "name-with-mode": "{name} ({mode})"
+  "name-with-mode": "{name} ({mode})",
+  "image": {
+    "before": "Ennen",
+    "after": "Jälkeen"
+  },
+  "object": {
+    "buildings": "{count, plural, one {# rakennus} other {# rakennusta}}",
+    "fences": "{count, plural, one {# aita tai muuri} other {# aitaa tai muuria}}",
+    "rocks": "{count, plural, one {# kivi} other {# kiveä}}",
+    "military": "{count, plural, one {# sotilasobjekti} other {# sotilasobjektia}}",
+    "bridges": "{count, plural, one {# silta} other {# siltaa}}",
+    "vegetation": "{count, plural, one {# puu tai pensas} other {# puuta tai pensasta}}",
+    "props": "{count, plural, one {# muu objekti} other {# muuta objektia}}"
+  },
+  "aspect": {
+    "ground": "maaston tekstuurit",
+    "sky": "taivas ja valaistus",
+    "sound": "ääni",
+    "water": "vesi",
+    "effects": "tehosteet",
+    "vegetation": "kasvillisuus",
+    "models": "mallit ja tekstuurit"
+  },
+  "legend": {
+    "raised": "Kerätty",
+    "lowered": "Laskettu",
+    "added": "Lisätty",
+    "removed": "Poistettu"
+  }
 }

@@ -16,7 +16,12 @@
     "artillery-headquarters": "กองบัญชาการปืนใหญ่",
     "comms-centers": "ศูนย์สื่อสาร",
     "observation-posts": "จุดสังเกตการณ์",
-    "points-of-interest": "จุดสนใจ"
+    "points-of-interest": "จุดสนใจ",
+    "visuals": "ปรับปรุงใหม่ด้วย",
+    "minimap": "แผนที่ย่อ",
+    "relief": "ภูมิประเทศ",
+    "objects": "วัตถุ",
+    "measured": "วัดแล้ว"
   },
   "summary": {
     "added": "เพิ่ม {name} แล้ว",
@@ -34,7 +39,45 @@
     "moved": "{name} มีการเคลื่อนที่",
     "count-changed": "{name}: {before} → {after}",
     "value-changed": "{name}: {before} → {after}",
-    "value-set": "{name}: {after}"
+    "value-set": "{name}: {after}",
+    "minimap-redrawn": "วาดใหม่แล้ว",
+    "relief-both": "ระดมทุนได้สูงสุด {rise} ม. และลดระดับลงสูงสุด {drop} ม.",
+    "relief-raised": "ระดมทุนได้สูงสุด {rise} ม.",
+    "relief-lowered": "ลดระดับลงสูงสุด {drop} ม.",
+    "relief-rework": "ปรับรูปทรงใหม่ทั่วแผนที่ สูงสุด {max} ม.",
+    "objects-added": "เพิ่มแล้ว: {list}",
+    "objects-removed": "นำออกแล้ว: {list}",
+    "objects-rebuilt": "สร้างใหม่ทั่วแผนที่",
+    "relief-rebuilt": "ปรับรูปทรงใหม่ทั่วทั้งแผนที่",
+    "measured-between": "เปรียบเทียบระหว่างอัปเดต {from} และอัปเดต {through}: ไม่มีไคลเอนต์เกมใดในระหว่างนั้นที่ยังคงอยู่"
   },
-  "name-with-mode": "{name} ({mode})"
+  "name-with-mode": "{name} ({mode})",
+  "image": {
+    "before": "ก่อน",
+    "after": "หลังจาก"
+  },
+  "object": {
+    "buildings": "{count, plural, other {# อาคาร}}",
+    "fences": "{count, plural, other {# รั้วหรือกำแพง}}",
+    "rocks": "{count, plural, other {# ก้อนหิน}}",
+    "military": "{count, plural, other {# วัตถุทางทหาร}}",
+    "bridges": "{count, plural, other {# สะพาน}}",
+    "vegetation": "{count, plural, other {# ต้นไม้หรือพุ่มไม้}}",
+    "props": "{count, plural, other {# วัตถุอื่น}}"
+  },
+  "aspect": {
+    "ground": "พื้นผิวภูมิประเทศ",
+    "sky": "ท้องฟ้าและแสง",
+    "sound": "เสียง",
+    "water": "น้ำ",
+    "effects": "เอฟเฟกต์",
+    "vegetation": "พืชพรรณ",
+    "models": "โมเดลและพื้นผิว"
+  },
+  "legend": {
+    "raised": "ระดมทุนได้",
+    "lowered": "ลดระดับลงแล้ว",
+    "added": "เพิ่มแล้ว",
+    "removed": "นำออกแล้ว"
+  }
 }

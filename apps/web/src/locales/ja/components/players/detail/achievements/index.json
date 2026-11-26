@@ -5,7 +5,7 @@
   "filter-earned": "獲得",
   "filter-missing": "未獲得",
   "filter-obtainable": "獲得可能",
-  "filter-retired": "廃止済み",
+  "filter-retired": "退役",
   "no-achievement-matches-these-filters": "条件に一致する実績はありません。",
   "search-achievements": "検索実績パッチ",
   "search-among-n-achievements": "{count}件の実績から検索"

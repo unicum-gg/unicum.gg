@@ -1,5 +1,8 @@
 {
   "after": "După",
-  "before": "Înainte",
+  "badge": "Poziții",
+  "badge-latest": "Poziții · mini-harta cea mai recentă",
+  "badge-nearest": "Poziții · mini-harta versiunii {version}",
+  "before": "Înainte de",
   "enlarge": "Mărește mini-harta pentru {map}"
 }

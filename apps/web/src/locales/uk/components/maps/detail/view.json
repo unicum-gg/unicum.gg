@@ -5,5 +5,7 @@
   "n-random-events": "{count, plural, one {# випадкова подія} few {# випадкові події} many {# випадкових подій} other {# випадкових подій}}",
   "random-events": "Випадкові події",
   "size": "Розмір",
-  "team-size": "Розмір команди"
+  "team-size": "Розмір команди",
+  "retired": "Виведено з гри",
+  "retired-span": "У грі від оновлення {first} до оновлення {last}"
 }

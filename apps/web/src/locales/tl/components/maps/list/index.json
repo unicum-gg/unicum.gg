@@ -5,5 +5,7 @@
   "no-maps-match-your-filters": "Walang mapang tumutugma sa iyong mga filter.",
   "search": "Maghanap sa {count} mga mapa",
   "search-label": "Maghanap ng mga mapa",
-  "special-map": "Espesyal na mapa"
+  "special-map": "Espesyal na mapa",
+  "retired-maps": "Mga retiradong mapa",
+  "retired-maps-intro": "{count, plural, one {# mapa ang natitira sa laro} other {# mga mapa ang natitira sa laro}}. Ang bawat isa ay ipinakita ayon sa anyo nito sa pinakahuling update kung kailan ito kasama."
 }

@@ -16,7 +16,12 @@
     "artillery-headquarters": "火炮总部",
     "comms-centers": "通讯中心",
     "observation-posts": "观察哨",
-    "points-of-interest": "焦点位置"
+    "points-of-interest": "焦点位置",
+    "visuals": "也已重制",
+    "minimap": "小地图",
+    "relief": "地形",
+    "objects": "物体",
+    "measured": "测量"
   },
   "summary": {
     "added": "{name}已添加",
@@ -34,7 +39,45 @@
     "moved": "{name}已移动",
     "count-changed": "{name}：{before} → {after}",
     "value-changed": "{name}：{before} → {after}",
-    "value-set": "{name}：{after}"
+    "value-set": "{name}：{after}",
+    "minimap-redrawn": "已重新绘制",
+    "relief-both": "已筹集至 {rise} 米，降低至 {drop} 米",
+    "relief-raised": "已筹集至 {rise} 米",
+    "relief-lowered": "降低至 {drop} 米",
+    "relief-rework": "地图大部分区域已重塑，最高达 {max} 米",
+    "objects-added": "新增：{list}",
+    "objects-removed": "移除：{list}",
+    "objects-rebuilt": "已在整个地图中重建",
+    "relief-rebuilt": "已重塑整个地图",
+    "measured-between": "对比更新 {from} 与更新 {through}：中间没有任何游戏客户端版本存续"
   },
-  "name-with-mode": "{name}（{mode}）"
+  "name-with-mode": "{name}（{mode}）",
+  "image": {
+    "before": "之前",
+    "after": "之后"
+  },
+  "object": {
+    "buildings": "{count, plural, other {# 座建筑物}}",
+    "fences": "{count, plural, other {# 道围栏或墙}}",
+    "rocks": "{count, plural, other {# 块岩石}}",
+    "military": "{count, plural, other {# 个军事物体}}",
+    "bridges": "{count, plural, other {# 座桥}}",
+    "vegetation": "{count, plural, other {# 棵树或灌木}}",
+    "props": "{count, plural, other {# 个其他物体}}"
+  },
+  "aspect": {
+    "ground": "地面纹理",
+    "sky": "天空与光照",
+    "sound": "声音",
+    "water": "水体",
+    "effects": "效果",
+    "vegetation": "植被",
+    "models": "模型与纹理"
+  },
+  "legend": {
+    "raised": "已筹集",
+    "lowered": "已降低",
+    "added": "新增",
+    "removed": "移除"
+  }
 }

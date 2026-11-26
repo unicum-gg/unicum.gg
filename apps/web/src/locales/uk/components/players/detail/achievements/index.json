@@ -5,7 +5,7 @@
   "filter-earned": "Зароблено",
   "filter-missing": "Відсутні",
   "filter-obtainable": "Доступні",
-  "filter-retired": "Вилучені",
+  "filter-retired": "Виведено з гри",
   "no-achievement-matches-these-filters": "Жодне досягнення не відповідає цим фільтрам.",
   "search-achievements": "Шукати Досягнення",
   "search-among-n-achievements": "Пошук серед {count} досягнень"

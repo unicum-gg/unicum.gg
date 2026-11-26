@@ -1,5 +1,8 @@
 {
-  "after": "후",
-  "before": "전",
+  "after": "이후",
+  "badge": "위치",
+  "badge-latest": "위치 · 최신 미니맵",
+  "badge-nearest": "위치 · 미니맵 {version}",
+  "before": "이전",
   "enlarge": "{map} 미니맵 확대"
 }

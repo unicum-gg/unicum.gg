@@ -5,5 +5,7 @@
   "n-random-events": "{count, plural, one {# rastgele etkinlik} other {# rastgele etkinlikler}}",
   "random-events": "Rastgele etkinlikler",
   "size": "Boyut",
-  "team-size": "Takım boyutu"
+  "team-size": "Takım boyutu",
+  "retired": "Emekliye ayrıldı",
+  "retired-span": "Oyunda {first} güncellemesinden {last} güncellemesine kadar"
 }

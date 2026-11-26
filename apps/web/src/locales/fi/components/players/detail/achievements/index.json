@@ -5,7 +5,7 @@
   "filter-earned": "Ansaitut",
   "filter-missing": "Puuttuvat",
   "filter-obtainable": "Saatavilla",
-  "filter-retired": "Poistetut",
+  "filter-retired": "Käytöstä poistettu",
   "no-achievement-matches-these-filters": "Mikään saavutus ei vastaa näitä suodattimia.",
   "search-achievements": "Etsi saavutuksia",
   "search-among-n-achievements": "Hae {count} saavutuksen joukosta"

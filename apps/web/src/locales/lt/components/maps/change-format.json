@@ -16,7 +16,12 @@
     "artillery-headquarters": "Artilerijos būstinė",
     "comms-centers": "Ryšių centrai",
     "observation-posts": "Stebėjimo postai",
-    "points-of-interest": "Svarbūs taškai"
+    "points-of-interest": "Svarbūs taškai",
+    "visuals": "Taip pat perdaryta",
+    "minimap": "Minižemėlapis",
+    "relief": "Reljefas",
+    "objects": "Objektai",
+    "measured": "Išmatuota"
   },
   "summary": {
     "added": "{name} pridėta",
@@ -34,7 +39,45 @@
     "moved": "{name} perkelta",
     "count-changed": "{name}: {before} → {after}",
     "value-changed": "{name}: {before} → {after}",
-    "value-set": "{name}: {after}"
+    "value-set": "{name}: {after}",
+    "minimap-redrawn": "Perbraižytas",
+    "relief-both": "Padidinta iki {rise} m, sumažinta iki {drop} m",
+    "relief-raised": "Padidinta iki {rise} m",
+    "relief-lowered": "Sumažinta iki {drop} m",
+    "relief-rework": "Pertvarkyta didžioji žemėlapio dalis, iki {max} m",
+    "objects-added": "Pridėta: {list}",
+    "objects-removed": "Pašalinta: {list}",
+    "objects-rebuilt": "Pertvarkyta visoje žemėlapio teritorijoje",
+    "relief-rebuilt": "Pertvarkyta visame žemėlapyje",
+    "measured-between": "Palyginta tarp atnaujinimo {from} ir atnaujinimo {through}: tarp jų nebeišliko nė vienas žaidimo klientas"
   },
-  "name-with-mode": "{name} ({mode})"
+  "name-with-mode": "{name} ({mode})",
+  "image": {
+    "before": "Prieš",
+    "after": "Po"
+  },
+  "object": {
+    "buildings": "{count, plural, one {# pastatas} few {# pastatai} other {# pastatų}}",
+    "fences": "{count, plural, one {# tvora arba siena} few {# tvoros arba sienos} other {# tvorų arba sienų}}",
+    "rocks": "{count, plural, one {# akmuo} few {# akmenys} other {# akmenų}}",
+    "military": "{count, plural, one {# karinis objektas} few {# kariniai objektai} other {# karinių objektų}}",
+    "bridges": "{count, plural, one {# tiltas} few {# tiltai} other {# tiltų}}",
+    "vegetation": "{count, plural, one {# medis arba krūmas} few {# medžiai ir krūmai} other {# medžių ir krūmų}}",
+    "props": "{count, plural, one {# kitas objektas} few {# kiti objektai} other {# kitų objektų}}"
+  },
+  "aspect": {
+    "ground": "Žemės tekstūros",
+    "sky": "Dangus ir apšvietimas",
+    "sound": "Garsas",
+    "water": "Vanduo",
+    "effects": "Efektai",
+    "vegetation": "Augmenija",
+    "models": "Modeliai ir tekstūros"
+  },
+  "legend": {
+    "raised": "Padidinta",
+    "lowered": "Sumažinta",
+    "added": "Pridėta",
+    "removed": "Pašalinta"
+  }
 }

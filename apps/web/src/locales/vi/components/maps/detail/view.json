@@ -5,5 +5,7 @@
   "n-random-events": "{count, plural, other {# sự kiện ngẫu nhiên}}",
   "random-events": "Sự kiện ngẫu nhiên",
   "size": "Kích thước",
-  "team-size": "Kích thước đội"
+  "team-size": "Kích thước đội",
+  "retired": "Đã ngừng sử dụng",
+  "retired-span": "Trong game từ bản cập nhật {first} đến bản cập nhật {last}"
 }

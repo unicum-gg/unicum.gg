@@ -16,7 +16,12 @@
     "artillery-headquarters": "Topçu Karargâhı",
     "comms-centers": "İletişim merkezleri",
     "observation-posts": "Gözetleme noktaları",
-    "points-of-interest": "İlgi noktaları"
+    "points-of-interest": "İlgi noktaları",
+    "visuals": "Görseller de yeniden işlendi",
+    "minimap": "Mini harita",
+    "relief": "Arazi",
+    "objects": "Nesneler",
+    "measured": "Ölçüldü"
   },
   "summary": {
     "added": "{name} eklendi",
@@ -34,7 +39,45 @@
     "moved": "{name} hareket ettirildi",
     "count-changed": "{name}: {before} → {after}",
     "value-changed": "{name}: {before} → {after}",
-    "value-set": "{name}: {after}"
+    "value-set": "{name}: {after}",
+    "minimap-redrawn": "Yeniden çizildi",
+    "relief-both": "En fazla {rise} m toplandı, en fazla {drop} m düşürüldü",
+    "relief-raised": "En fazla {rise} m toplandı",
+    "relief-lowered": "En fazla {drop} m düşürüldü",
+    "relief-rework": "Haritanın büyük bölümünde yeniden şekillendirildi, en fazla {max} m",
+    "objects-added": "Eklendi: {list}",
+    "objects-removed": "Kaldırıldı: {list}",
+    "objects-rebuilt": "Harita genelinde yeniden oluşturuldu",
+    "relief-rebuilt": "Haritanın tümü genelinde yeniden şekillendirildi",
+    "measured-between": "Güncelleme {from} ile güncelleme {through} arasında karşılaştırıldı: aradaki hiçbir oyun istemcisi mevcut değil"
   },
-  "name-with-mode": "{name} ({mode})"
+  "name-with-mode": "{name} ({mode})",
+  "image": {
+    "before": "Önce",
+    "after": "Sonra"
+  },
+  "object": {
+    "buildings": "{count, plural, other {# bina}}",
+    "fences": "{count, plural, other {# çit veya duvar}}",
+    "rocks": "{count, plural, other {# kaya}}",
+    "military": "{count, plural, other {# askerî nesne}}",
+    "bridges": "{count, plural, other {# köprü}}",
+    "vegetation": "{count, plural, other {# ağaç veya çalı}}",
+    "props": "{count, plural, other {# diğer nesne}}"
+  },
+  "aspect": {
+    "ground": "zemin dokuları",
+    "sky": "gökyüzü ve aydınlatma",
+    "sound": "ses",
+    "water": "su",
+    "effects": "etkiler",
+    "vegetation": "bitki örtüsü",
+    "models": "modeller ve dokular"
+  },
+  "legend": {
+    "raised": "Toplanan",
+    "lowered": "Düşürülen",
+    "added": "Eklendi",
+    "removed": "Kaldırıldı"
+  }
 }

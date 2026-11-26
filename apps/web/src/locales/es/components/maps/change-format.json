@@ -16,7 +16,12 @@
     "artillery-headquarters": "Cuartel general de artillería",
     "comms-centers": "Centros de comunicaciones",
     "observation-posts": "Puestos de observación",
-    "points-of-interest": "Puntos de interés"
+    "points-of-interest": "Puntos de interés",
+    "visuals": "También rediseñado",
+    "minimap": "Minimapa",
+    "relief": "Terreno",
+    "objects": "Objetos",
+    "measured": "Medido"
   },
   "summary": {
     "added": "Se ha añadido {name}",
@@ -34,7 +39,45 @@
     "moved": "Se ha movido {name}",
     "count-changed": "{name}: {before} → {after}",
     "value-changed": "{name}: {before} → {after}",
-    "value-set": "{name}: {after}"
+    "value-set": "{name}: {after}",
+    "minimap-redrawn": "Redibujado",
+    "relief-both": "Aumentado hasta {rise} m, reducido hasta {drop} m",
+    "relief-raised": "Aumentado hasta {rise} m",
+    "relief-lowered": "Reducido hasta {drop} m",
+    "relief-rework": "Remodelado en gran parte del mapa, hasta {max} m",
+    "objects-added": "Añadido: {list}",
+    "objects-removed": "Eliminado: {list}",
+    "objects-rebuilt": "Reconstruido en todo el mapa",
+    "relief-rebuilt": "Remodelado en todo el mapa",
+    "measured-between": "Comparado entre la actualización {from} y la actualización {through}: no sobrevive ningún cliente del juego intermedio"
   },
-  "name-with-mode": "{name} ({mode})"
+  "name-with-mode": "{name} ({mode})",
+  "image": {
+    "before": "Antes",
+    "after": "Después"
+  },
+  "object": {
+    "buildings": "{count, plural, one {# edificio} other {# edificios}}",
+    "fences": "{count, plural, one {# valla o muro} other {# vallas y muros}}",
+    "rocks": "{count, plural, one {# roca} other {# rocas}}",
+    "military": "{count, plural, one {# objeto militar} other {# objetos militares}}",
+    "bridges": "{count, plural, one {# puente} other {# puentes}}",
+    "vegetation": "{count, plural, one {# árbol o arbusto} other {# árboles y arbustos}}",
+    "props": "{count, plural, one {# otro objeto} other {# otros objetos}}"
+  },
+  "aspect": {
+    "ground": "texturas del terreno",
+    "sky": "cielo e iluminación",
+    "sound": "sonido",
+    "water": "agua",
+    "effects": "efectos",
+    "vegetation": "vegetación",
+    "models": "modelos y texturas"
+  },
+  "legend": {
+    "raised": "Aumentado",
+    "lowered": "Reducido",
+    "added": "Añadido",
+    "removed": "Eliminado"
+  }
 }

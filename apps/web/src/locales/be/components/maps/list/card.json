@@ -1,4 +1,6 @@
 {
   "random-events": "Выпадковыя падзеі могуць змяніць гэтую карту пасярод бою",
-  "minimap-alt": "Міні-карта {map}"
+  "minimap-alt": "Міні-карта {map}",
+  "retired-until": "Да {version}",
+  "retired-span": "У гульні з абнаўлення {first} да абнаўлення {last}"
 }

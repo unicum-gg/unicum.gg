@@ -1,5 +1,8 @@
 {
   "after": "Po",
+  "badge": "Pozície",
+  "badge-latest": "Pozície · najnovší minizemljevid",
+  "badge-nearest": "Pozície · minizemljevid pre verziu {version}",
   "before": "Pred",
   "enlarge": "Povečaj minizemljevid zemljevida {map}"
 }

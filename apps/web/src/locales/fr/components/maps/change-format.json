@@ -16,7 +16,12 @@
     "artillery-headquarters": "Quartier général de l’artillerie",
     "comms-centers": "Centres de communication",
     "observation-posts": "Postes d’observation",
-    "points-of-interest": "Points d’intérêt"
+    "points-of-interest": "Points d’intérêt",
+    "visuals": "Également remanié",
+    "minimap": "Minicarte",
+    "relief": "Terrain",
+    "objects": "Objets",
+    "measured": "Mesuré"
   },
   "summary": {
     "added": "Ajouté : {name}",
@@ -34,7 +39,45 @@
     "moved": "Déplacement de {name}",
     "count-changed": "{name} : {before} → {after}",
     "value-changed": "{name} : {before} → {after}",
-    "value-set": "{name} : {after}"
+    "value-set": "{name} : {after}",
+    "minimap-redrawn": "Redessinée",
+    "relief-both": "Collecté jusqu’à {rise} m, abaissé jusqu’à {drop} m",
+    "relief-raised": "Collecté jusqu’à {rise} m",
+    "relief-lowered": "Abaissé jusqu’à {drop} m",
+    "relief-rework": "Remodelé sur une grande partie de la carte, jusqu’à {max} m",
+    "objects-added": "Ajouté : {list}",
+    "objects-removed": "Supprimé : {list}",
+    "objects-rebuilt": "Reconstruit sur toute la carte",
+    "relief-rebuilt": "Remodelé sur toute la carte",
+    "measured-between": "Comparaison entre la mise à jour {from} et la mise à jour {through} : aucun client du jeu intermédiaire ne subsiste"
   },
-  "name-with-mode": "{name} ({mode})"
+  "name-with-mode": "{name} ({mode})",
+  "image": {
+    "before": "Avant",
+    "after": "Après"
+  },
+  "object": {
+    "buildings": "{count, plural, one {# bâtiment} other {# bâtiments}}",
+    "fences": "{count, plural, one {# clôture ou mur} other {# clôtures et murs}}",
+    "rocks": "{count, plural, one {# rocher} other {# rochers}}",
+    "military": "{count, plural, one {# objet militaire} other {# objets militaires}}",
+    "bridges": "{count, plural, one {# pont} other {# ponts}}",
+    "vegetation": "{count, plural, one {# arbre ou buisson} other {# arbres et buissons}}",
+    "props": "{count, plural, one {# autre objet} other {# autres objets}}"
+  },
+  "aspect": {
+    "ground": "Textures du sol",
+    "sky": "Ciel et éclairage",
+    "sound": "Son",
+    "water": "Eau",
+    "effects": "Effets",
+    "vegetation": "Végétation",
+    "models": "Modèles et textures"
+  },
+  "legend": {
+    "raised": "Collecté",
+    "lowered": "Abaissé",
+    "added": "Ajouté",
+    "removed": "Supprimé"
+  }
 }

@@ -5,5 +5,7 @@
   "n-random-events": "{count, plural, other {# 随机活动}}",
   "random-events": "随机事件",
   "size": "大小",
-  "team-size": "队伍规模"
+  "team-size": "队伍规模",
+  "retired": "退役",
+  "retired-span": "更新 {first} 至更新 {last} 期间游戏内"
 }

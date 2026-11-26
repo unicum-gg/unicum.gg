@@ -16,7 +16,12 @@
     "artillery-headquarters": "自走砲本部",
     "comms-centers": "通信センター",
     "observation-posts": "観測所",
-    "points-of-interest": "戦術サークル"
+    "points-of-interest": "戦術サークル",
+    "visuals": "こちらも改修済み",
+    "minimap": "ミニマップ",
+    "relief": "地形",
+    "objects": "オブジェクト",
+    "measured": "計測済み"
   },
   "summary": {
     "added": "{name}を追加",
@@ -34,7 +39,45 @@
     "moved": "{name}を移動",
     "count-changed": "{name}: {before} → {after}",
     "value-changed": "{name}: {before} → {after}",
-    "value-set": "{name}: {after}"
+    "value-set": "{name}: {after}",
+    "minimap-redrawn": "描き直し済み",
+    "relief-both": "最大 {rise} m上昇、最大 {drop} m低下",
+    "relief-raised": "最大 {rise} m上昇",
+    "relief-lowered": "最大 {drop} m低下",
+    "relief-rework": "マップ全体にわたって形状を変更、最大 {max} m",
+    "objects-added": "追加: {list}",
+    "objects-removed": "削除: {list}",
+    "objects-rebuilt": "マップ全体を再構築",
+    "relief-rebuilt": "マップ全体にわたって形状を変更",
+    "measured-between": "更新 {from} と更新 {through} の間で比較、その間のゲームクライアントは残っていません"
   },
-  "name-with-mode": "{name}（{mode}）"
+  "name-with-mode": "{name}（{mode}）",
+  "image": {
+    "before": "変更前",
+    "after": "変更後"
+  },
+  "object": {
+    "buildings": "{count, plural, other {# 個の建物}}",
+    "fences": "{count, plural, other {# 個の柵または壁}}",
+    "rocks": "{count, plural, other {# 個の岩}}",
+    "military": "{count, plural, other {# 個の軍事オブジェクト}}",
+    "bridges": "{count, plural, other {# 本の橋}}",
+    "vegetation": "{count, plural, other {# 個の木または茂み}}",
+    "props": "{count, plural, other {# 個のその他のオブジェクト}}"
+  },
+  "aspect": {
+    "ground": "地面のテクスチャ",
+    "sky": "空とライティング",
+    "sound": "サウンド",
+    "water": "水",
+    "effects": "効果",
+    "vegetation": "植生",
+    "models": "モデルとテクスチャ"
+  },
+  "legend": {
+    "raised": "上昇",
+    "lowered": "低下",
+    "added": "追加",
+    "removed": "削除"
+  }
 }

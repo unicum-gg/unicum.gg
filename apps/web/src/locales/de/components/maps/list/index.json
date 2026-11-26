@@ -5,5 +5,7 @@
   "no-maps-match-your-filters": "Keine Karten entsprechen den ausgewählten Filtern.",
   "search": "Suchen in {count} Karten",
   "search-label": "Karten suchen",
-  "special-map": "Spezialkarte"
+  "special-map": "Spezialkarte",
+  "retired-maps": "Ausgemusterte Karten",
+  "retired-maps-intro": "{count, plural, one {# Karte ist} other {# Karten sind}} aus dem Spiel desertiert. Jede wird so angezeigt, wie sie in der letzten Aktualisierung aussah, in der sie enthalten war."
 }

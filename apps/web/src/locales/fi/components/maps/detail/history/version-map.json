@@ -1,5 +1,8 @@
 {
   "after": "Jälkeen",
+  "badge": "Sijainnit",
+  "badge-latest": "Sijainnit · viimeisin minikartta",
+  "badge-nearest": "Sijainnit · minikartta {version}",
   "before": "Ennen",
   "enlarge": "Suurenna {map}-minikarttaa"
 }

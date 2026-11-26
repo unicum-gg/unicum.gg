@@ -16,7 +16,12 @@
     "artillery-headquarters": "Artilleriehoofdkwartier",
     "comms-centers": "Communicatiecentra",
     "observation-posts": "Observatieposten",
-    "points-of-interest": "Belangrijke locaties"
+    "points-of-interest": "Belangrijke locaties",
+    "visuals": "Ook herwerkt",
+    "minimap": "Minimap",
+    "relief": "Terrein",
+    "objects": "Objecten",
+    "measured": "Gemeten"
   },
   "summary": {
     "added": "{name} toegevoegd",
@@ -34,7 +39,45 @@
     "moved": "Verplaatsing van {name}",
     "count-changed": "{name}: {before} → {after}",
     "value-changed": "{name}: {before} → {after}",
-    "value-set": "{name}: {after}"
+    "value-set": "{name}: {after}",
+    "minimap-redrawn": "Opnieuw getekend",
+    "relief-both": "Opgehaald tot {rise} m, verlaagd tot {drop} m",
+    "relief-raised": "Opgehaald tot {rise} m",
+    "relief-lowered": "Verlaagd tot {drop} m",
+    "relief-rework": "Over een groot deel van de kaart opnieuw vormgegeven, tot {max} m",
+    "objects-added": "Toegevoegd: {list}",
+    "objects-removed": "Verwijderd: {list}",
+    "objects-rebuilt": "Over de hele kaart opnieuw opgebouwd",
+    "relief-rebuilt": "Over de gehele kaart opnieuw vormgegeven",
+    "measured-between": "Gemeten tussen update {from} en update {through}: geen spelclient ertussen is overgebleven"
   },
-  "name-with-mode": "{name} ({mode})"
+  "name-with-mode": "{name} ({mode})",
+  "image": {
+    "before": "Voor",
+    "after": "Na"
+  },
+  "object": {
+    "buildings": "{count, plural, one {# gebouw} other {# gebouwen}}",
+    "fences": "{count, plural, one {# hek of muur} other {# hekken en muren}}",
+    "rocks": "{count, plural, one {# rots} other {# rotsen}}",
+    "military": "{count, plural, one {# militair object} other {# militaire objecten}}",
+    "bridges": "{count, plural, one {# brug} other {# bruggen}}",
+    "vegetation": "{count, plural, one {# boom of struik} other {# bomen en struiken}}",
+    "props": "{count, plural, one {# ander object} other {# andere objecten}}"
+  },
+  "aspect": {
+    "ground": "grondtexturen",
+    "sky": "lucht en verlichting",
+    "sound": "geluid",
+    "water": "water",
+    "effects": "effecten",
+    "vegetation": "vegetatie",
+    "models": "modellen en texturen"
+  },
+  "legend": {
+    "raised": "Opgehaald",
+    "lowered": "Verlaagd",
+    "added": "Toegevoegd",
+    "removed": "Verwijderd"
+  }
 }

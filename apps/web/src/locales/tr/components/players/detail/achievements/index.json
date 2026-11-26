@@ -5,7 +5,7 @@
   "filter-earned": "Kazanılan",
   "filter-missing": "Eksik",
   "filter-obtainable": "Kazanılabilir",
-  "filter-retired": "Emekli",
+  "filter-retired": "Emekliye ayrıldı",
   "no-achievement-matches-these-filters": "Bu filtrelerle eşleşen başarı yok.",
   "search-achievements": "Başarıları ara",
   "search-among-n-achievements": "{count} başarı arasında ara"

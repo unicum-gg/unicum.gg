@@ -10,7 +10,7 @@
   "of-that-total": "전체 중",
   "pledges-cover": "현재 후원 약정으로 월 비용을 충당할 수 있습니다.",
   "raised-amount": "모금된 {amount}",
-  "raised-label": "모금된",
+  "raised-label": "상승",
   "run-at-a-loss": "{name}은(는) {since}부터 적자로 운영되고 있습니다.",
   "run-rate": "월 운영비: 약정 {pledged}/월, 운영 비용 {cost}/월",
   "spent-since-launch": "출시 후 지출",

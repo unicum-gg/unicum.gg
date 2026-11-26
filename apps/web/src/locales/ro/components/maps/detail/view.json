@@ -5,5 +5,7 @@
   "n-random-events": "{count, plural, one {# eveniment aleatoriu} few {# evenimente aleatorii} other {# de evenimente aleatorii}}",
   "random-events": "Evenimente aleatorii",
   "size": "Dimensiune",
-  "team-size": "Dimensiune echipă"
+  "team-size": "Dimensiune echipă",
+  "retired": "Retras",
+  "retired-span": "În joc de la actualizarea {first} până la actualizarea {last}"
 }

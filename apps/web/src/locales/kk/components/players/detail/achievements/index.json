@@ -5,7 +5,7 @@
   "filter-earned": "Алынған",
   "filter-missing": "Жетіспейтін",
   "filter-obtainable": "Алуға болатын",
-  "filter-retired": "Айналымнан алынған",
+  "filter-retired": "Қолданыстан шығарылған",
   "no-achievement-matches-these-filters": "Бұл сүзгілерге сәйкес жетістік жоқ.",
   "search-achievements": "Жетістіктерді іздеу",
   "search-among-n-achievements": "{count} жетістік арасынан іздеу"

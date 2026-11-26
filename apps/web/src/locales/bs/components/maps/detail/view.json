@@ -5,5 +5,7 @@
   "n-random-events": "{count, plural, one {# nasumični događaj} few {# nasumična događaja} other {# nasumičnih događaja}}",
   "random-events": "Nasumični događaji",
   "size": "Veličina",
-  "team-size": "Veličina tima"
+  "team-size": "Veličina tima",
+  "retired": "Povučeno",
+  "retired-span": "U igri od ažuriranja {first} do ažuriranja {last}"
 }

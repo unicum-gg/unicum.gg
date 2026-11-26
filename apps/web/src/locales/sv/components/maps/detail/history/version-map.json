@@ -1,5 +1,8 @@
 {
   "after": "Efter",
+  "badge": "Positioner",
+  "badge-latest": "Positioner · senaste minikarta",
+  "badge-nearest": "Positioner · minikarta {version}",
   "before": "Före",
   "enlarge": "Förstora minikartan för {map}"
 }

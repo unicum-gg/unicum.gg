@@ -5,5 +5,7 @@
   "no-maps-match-your-filters": "Jokie žemėlapiai neatitinka jūsų filtrų.",
   "search": "Ieškoti tarp {count} žemėlapių",
   "search-label": "Paieška žemėlapių",
-  "special-map": "Specialus žemėlapis"
+  "special-map": "Specialus žemėlapis",
+  "retired-maps": "Nebenaudojami žemėlapiai",
+  "retired-maps-intro": "{count, plural, one {# žemėlapis išėjo iš žaidimo.} few {# žemėlapiai išėjo iš žaidimo.} other {# žemėlapių išėjo iš žaidimo.}} Kiekvienas rodomas toks, koks buvo paskutiniame atnaujinime, kuriame jis buvo."
 }

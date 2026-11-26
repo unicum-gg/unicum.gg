@@ -5,5 +5,7 @@
   "no-maps-match-your-filters": "Egyetlen térkép sem felel meg a szűrőknek.",
   "search": "Keresés {count} térkép között",
   "search-label": "Keresés Pályák",
-  "special-map": "Speciális térkép"
+  "special-map": "Speciális térkép",
+  "retired-maps": "Visszavonva lévő pályák",
+  "retired-maps-intro": "{count, plural, one {# pálya távozott a játékból} other {# pálya távozott a játékból}} Mindegyik a legutóbbi olyan frissítés állapotában van megjelenítve, amelyben még szerepelt."
 }

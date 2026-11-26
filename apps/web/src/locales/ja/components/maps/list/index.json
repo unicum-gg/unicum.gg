@@ -5,5 +5,7 @@
   "no-maps-match-your-filters": "条件に一致するマップはありません。",
   "search": "{count}マップから検索",
   "search-label": "マップを検索",
-  "special-map": "特殊マップ"
+  "special-map": "特殊マップ",
+  "retired-maps": "退役マップ",
+  "retired-maps-intro": "{count, plural, other {# マップがゲームから退出中です。各マップは、そのマップが含まれていた最後の更新時点の状態で表示済みです。}}"
 }

@@ -5,5 +5,7 @@
   "n-random-events": "{count, plural, one {# random na kaganapan} other {# mga random na kaganapan}}",
   "random-events": "Random na kaganapan",
   "size": "Sukat",
-  "team-size": "Sukat ng koponan"
+  "team-size": "Sukat ng koponan",
+  "retired": "Retirado",
+  "retired-span": "Sa laro mula sa update {first} hanggang sa update {last}"
 }

@@ -5,5 +5,7 @@
   "n-random-events": "{count, plural, one {# evento casuale} other {# eventi casuali}}",
   "random-events": "Eventi casuali",
   "size": "Dimensione",
-  "team-size": "Dimensione della squadra"
+  "team-size": "Dimensione della squadra",
+  "retired": "Ritirato",
+  "retired-span": "In gioco dall’aggiornamento {first} all’aggiornamento {last}"
 }

@@ -16,7 +16,12 @@
     "artillery-headquarters": "Artilērijas štābs",
     "comms-centers": "Sakaru centri",
     "observation-posts": "Novērošanas posteņi",
-    "points-of-interest": "Galvenie punkti"
+    "points-of-interest": "Galvenie punkti",
+    "visuals": "Arī pārveidots",
+    "minimap": "Minikarte",
+    "relief": "Reljefs",
+    "objects": "Objekti",
+    "measured": "Izmērīts"
   },
   "summary": {
     "added": "{name} pievienots",
@@ -34,7 +39,45 @@
     "moved": "{name} pārvietots",
     "count-changed": "{name}: {before} → {after}",
     "value-changed": "{name}: {before} → {after}",
-    "value-set": "{name}: {after}"
+    "value-set": "{name}: {after}",
+    "minimap-redrawn": "Pārzīmēts",
+    "relief-both": "Palielināts līdz {rise} m, pazemināts līdz {drop} m",
+    "relief-raised": "Palielināts līdz {rise} m",
+    "relief-lowered": "Pazemināts līdz {drop} m",
+    "relief-rework": "Pārveidots visā lielākajā kartes daļā, līdz {max} m",
+    "objects-added": "Pievienots: {list}",
+    "objects-removed": "Noņemts: {list}",
+    "objects-rebuilt": "Pārbūvēts visā kartē",
+    "relief-rebuilt": "Pārveidots visā kartē",
+    "measured-between": "Salīdzināts starp atjauninājumu {from} un atjauninājumu {through}: starp tiem nav saglabājies neviens spēles klients"
   },
-  "name-with-mode": "{name} ({mode})"
+  "name-with-mode": "{name} ({mode})",
+  "image": {
+    "before": "Pirms",
+    "after": "Pēc"
+  },
+  "object": {
+    "buildings": "{count, plural, one {# ēka} other {# ēkas}}",
+    "fences": "{count, plural, one {# žogs vai siena} other {# žogi un sienas}}",
+    "rocks": "{count, plural, one {# klints} other {# klintis}}",
+    "military": "{count, plural, one {# militārais objekts} other {# militārie objekti}}",
+    "bridges": "{count, plural, one {# tilts} other {# tilti}}",
+    "vegetation": "{count, plural, one {# koks vai krūms} other {# koki un krūmi}}",
+    "props": "{count, plural, one {# cits objekts} other {# citi objekti}}"
+  },
+  "aspect": {
+    "ground": "zemes tekstūras",
+    "sky": "debesis un apgaismojums",
+    "sound": "skaņa",
+    "water": "ūdens",
+    "effects": "efekti",
+    "vegetation": "veģetācija",
+    "models": "modeļi un tekstūras"
+  },
+  "legend": {
+    "raised": "Palielināts",
+    "lowered": "Pazemināts",
+    "added": "Pievienots",
+    "removed": "Noņemts"
+  }
 }

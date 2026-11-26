@@ -5,5 +5,7 @@
   "n-random-events": "{count, plural, other {#개 무작위 이벤트}}",
   "random-events": "무작위 이벤트",
   "size": "크기",
-  "team-size": "팀 크기"
+  "team-size": "팀 크기",
+  "retired": "퇴역",
+  "retired-span": "업데이트 {first}부터 업데이트 {last}까지 게임 내"
 }

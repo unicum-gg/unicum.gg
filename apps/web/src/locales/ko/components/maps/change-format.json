@@ -16,7 +16,12 @@
     "artillery-headquarters": "자주포 사령부",
     "comms-centers": "통신 센터",
     "observation-posts": "관측소",
-    "points-of-interest": "거점"
+    "points-of-interest": "거점",
+    "visuals": "또한 재작업됨",
+    "minimap": "미니맵",
+    "relief": "지형",
+    "objects": "오브젝트",
+    "measured": "측정됨"
   },
   "summary": {
     "added": "{name} 추가됨",
@@ -34,7 +39,45 @@
     "moved": "{name} 이동됨",
     "count-changed": "{name}: {before} → {after}",
     "value-changed": "{name}: {before} → {after}",
-    "value-set": "{name}: {after}"
+    "value-set": "{name}: {after}",
+    "minimap-redrawn": "다시 그려짐",
+    "relief-both": "최대 {rise}m 상승, 최대 {drop}m 드롭",
+    "relief-raised": "최대 {rise}m 상승",
+    "relief-lowered": "최대 {drop}m 낮아짐",
+    "relief-rework": "지도 전체 상당 부분이 재구성됨, 최대 {max}m",
+    "objects-added": "추가: {list}",
+    "objects-removed": "제거: {list}",
+    "objects-rebuilt": "지도 전체에서 재건됨",
+    "relief-rebuilt": "지도 전체가 재구성됨",
+    "measured-between": "업데이트 {from}과 업데이트 {through} 사이 비교: 그 사이 게임 클라이언트는 남아 있지 않음"
   },
-  "name-with-mode": "{name} ({mode})"
+  "name-with-mode": "{name} ({mode})",
+  "image": {
+    "before": "이전",
+    "after": "이후"
+  },
+  "object": {
+    "buildings": "{count, plural, other {#개 건물}}",
+    "fences": "{count, plural, other {#개 울타리 또는 벽}}",
+    "rocks": "{count, plural, other {#개 바위}}",
+    "military": "{count, plural, other {#개 군사 오브젝트}}",
+    "bridges": "{count, plural, other {#개 다리}}",
+    "vegetation": "{count, plural, other {#개 나무 또는 덤불}}",
+    "props": "{count, plural, other {#개 기타 오브젝트}}"
+  },
+  "aspect": {
+    "ground": "지면 텍스처",
+    "sky": "하늘 및 조명",
+    "sound": "사운드",
+    "water": "물",
+    "effects": "효과",
+    "vegetation": "식생",
+    "models": "모델 및 텍스처"
+  },
+  "legend": {
+    "raised": "상승",
+    "lowered": "낮아짐",
+    "added": "추가",
+    "removed": "제거"
+  }
 }

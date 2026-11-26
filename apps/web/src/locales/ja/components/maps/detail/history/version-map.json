@@ -1,5 +1,8 @@
 {
-  "after": "後",
-  "before": "前",
+  "after": "変更後",
+  "badge": "位置",
+  "badge-latest": "位置 · 最新のミニマップ",
+  "badge-nearest": "位置 · ミニマップ {version}",
+  "before": "変更前",
   "enlarge": "{map}のミニマップを拡大"
 }

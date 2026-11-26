@@ -16,7 +16,12 @@
     "artillery-headquarters": "Artillerihovedkvarter",
     "comms-centers": "Sambandssentraler",
     "observation-posts": "Observasjonsposter",
-    "points-of-interest": "Interessepunkter"
+    "points-of-interest": "Interessepunkter",
+    "visuals": "Også omarbeidet",
+    "minimap": "Minikart",
+    "relief": "Terreng",
+    "objects": "Objekter",
+    "measured": "Målt"
   },
   "summary": {
     "added": "{name} lagt til",
@@ -34,7 +39,45 @@
     "moved": "{name} flyttet",
     "count-changed": "{name}: {before} → {after}",
     "value-changed": "{name}: {before} → {after}",
-    "value-set": "{name}: {after}"
+    "value-set": "{name}: {after}",
+    "minimap-redrawn": "Tegnet på nytt",
+    "relief-both": "Innsamlet opptil {rise} m, senket opptil {drop} m",
+    "relief-raised": "Innsamlet opptil {rise} m",
+    "relief-lowered": "Senket opptil {drop} m",
+    "relief-rework": "Omformet på tvers av store deler av kartet, opptil {max} m",
+    "objects-added": "Lagt til: {list}",
+    "objects-removed": "Fjernet: {list}",
+    "objects-rebuilt": "Gjenoppbygd på tvers av kartet",
+    "relief-rebuilt": "Omformet på tvers av hele kartet",
+    "measured-between": "Sammenlignet mellom oppdatering {from} og oppdatering {through}: ingen spillklient imellom overlever"
   },
-  "name-with-mode": "{name} ({mode})"
+  "name-with-mode": "{name} ({mode})",
+  "image": {
+    "before": "Før",
+    "after": "Etter"
+  },
+  "object": {
+    "buildings": "{count, plural, one {# bygning} other {# bygninger}}",
+    "fences": "{count, plural, one {# gjerde eller vegg} other {# gjerder og vegger}}",
+    "rocks": "{count, plural, one {# stein} other {# steiner}}",
+    "military": "{count, plural, one {# militært objekt} other {# militære objekter}}",
+    "bridges": "{count, plural, one {# bro} other {# broer}}",
+    "vegetation": "{count, plural, one {# tre eller busk} other {# trær og busker}}",
+    "props": "{count, plural, one {# annet objekt} other {# andre objekter}}"
+  },
+  "aspect": {
+    "ground": "bakketeksturer",
+    "sky": "himmel og belysning",
+    "sound": "lyd",
+    "water": "vann",
+    "effects": "effekter",
+    "vegetation": "vegetasjon",
+    "models": "modeller og teksturer"
+  },
+  "legend": {
+    "raised": "Innsamlet",
+    "lowered": "Senket",
+    "added": "Lagt til",
+    "removed": "Fjernet"
+  }
 }

@@ -5,5 +5,7 @@
   "n-random-events": "{count, plural, one {# véletlenszerű esemény} other {# véletlenszerű események}}",
   "random-events": "Véletlenszerű események",
   "size": "Méret",
-  "team-size": "Csapatméret"
+  "team-size": "Csapatméret",
+  "retired": "Visszavonva",
+  "retired-span": "A játékban {first} frissítéstől {last} frissítésig"
 }

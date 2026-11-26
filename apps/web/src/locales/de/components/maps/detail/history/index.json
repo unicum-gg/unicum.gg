@@ -6,7 +6,7 @@
   "in-the-game": "Im Spiel",
   "n-changes": "{count, plural, one {# Änderung} other {# Änderungen}}",
   "not-released-wargaming-can-still": "Noch nicht veröffentlicht. Wargaming kann all dies noch ändern oder verwerfen, bevor das Update erscheint.",
-  "removed": "Entfernen",
+  "removed": "Entfernt",
   "title": "Änderungen an {map}",
   "update": "Aktualisieren {version}"
 }

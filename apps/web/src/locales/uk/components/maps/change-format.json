@@ -16,7 +16,12 @@
     "artillery-headquarters": "Артилерійський штаб",
     "comms-centers": "Центри зв’язку",
     "observation-posts": "Спостережні пости",
-    "points-of-interest": "Ключові позиції"
+    "points-of-interest": "Ключові позиції",
+    "visuals": "Також перероблено",
+    "minimap": "Мінікарта",
+    "relief": "Рельєф",
+    "objects": "Об’єкти",
+    "measured": "Виміряно"
   },
   "summary": {
     "added": "{name} додано",
@@ -34,7 +39,45 @@
     "moved": "{name} переміщено",
     "count-changed": "{name}: {before} → {after}",
     "value-changed": "{name}: {before} → {after}",
-    "value-set": "{name}: {after}"
+    "value-set": "{name}: {after}",
+    "minimap-redrawn": "Перемальовано",
+    "relief-both": "Зібрано до {rise} м, знижено до {drop} м",
+    "relief-raised": "Зібрано до {rise} м",
+    "relief-lowered": "Знижено до {drop} м",
+    "relief-rework": "Змінено форму на значній частині мапи, до {max} м",
+    "objects-added": "Додано: {list}",
+    "objects-removed": "Видалено: {list}",
+    "objects-rebuilt": "Перебудовано по всьому",
+    "relief-rebuilt": "Змінено форму по всьому",
+    "measured-between": "Порівняно між оновленням {from} та оновленням {through}: між ними не збереглося жодного клієнта гри"
   },
-  "name-with-mode": "{name} ({mode})"
+  "name-with-mode": "{name} ({mode})",
+  "image": {
+    "before": "До",
+    "after": "Після"
+  },
+  "object": {
+    "buildings": "{count, plural, one {# будівля} few {# будівлі} many {# будівель} other {# будівлі}}",
+    "fences": "{count, plural, one {# паркан або стіна} few {# паркани та стіни} many {# парканів та стін} other {# парканів та стін}}",
+    "rocks": "{count, plural, one {# камінь} few {# камені} many {# каменів} other {# каменів}}",
+    "military": "{count, plural, one {# військовий об’єкт} few {# військові об’єкти} many {# військових об’єктів} other {# військових об’єктів}}",
+    "bridges": "{count, plural, one {# міст} few {# мости} many {# мостів} other {# мостів}}",
+    "vegetation": "{count, plural, one {# дерево або кущ} few {# дерева та кущі} many {# дерев та кущів} other {# дерев та кущів}}",
+    "props": "{count, plural, one {# інший об’єкт} few {# інші об’єкти} many {# інших об’єктів} other {# інших об’єктів}}"
+  },
+  "aspect": {
+    "ground": "текстури землі",
+    "sky": "небо та освітлення",
+    "sound": "звук",
+    "water": "вода",
+    "effects": "ефекти",
+    "vegetation": "рослинність",
+    "models": "моделі та текстури"
+  },
+  "legend": {
+    "raised": "Зібрано",
+    "lowered": "Знижено",
+    "added": "Додано",
+    "removed": "Видалено"
+  }
 }

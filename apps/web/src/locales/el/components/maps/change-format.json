@@ -16,7 +16,12 @@
     "artillery-headquarters": "Αρχηγείο Πυροβολικού",
     "comms-centers": "Κέντρα επικοινωνιών",
     "observation-posts": "Παρατηρητήρια",
-    "points-of-interest": "Σημεία-κλειδιά"
+    "points-of-interest": "Σημεία-κλειδιά",
+    "visuals": "Επίσης αναδιαμορφώθηκε",
+    "minimap": "Μίνι χάρτης",
+    "relief": "Έδαφος",
+    "objects": "Αντικείμενα",
+    "measured": "Μετρήθηκε"
   },
   "summary": {
     "added": "{name} προστέθηκε",
@@ -34,7 +39,45 @@
     "moved": "{name}: έγινε κίνηση",
     "count-changed": "{name}: {before} → {after}",
     "value-changed": "{name}: {before} → {after}",
-    "value-set": "{name}: {after}"
+    "value-set": "{name}: {after}",
+    "minimap-redrawn": "Επανασχεδιάστηκε",
+    "relief-both": "Αυξήθηκε έως {rise} m, μειώθηκε έως {drop} m",
+    "relief-raised": "Αυξήθηκε έως {rise} m",
+    "relief-lowered": "Μειώθηκε έως {drop} m",
+    "relief-rework": "Αναδιαμορφώθηκε σε μεγάλο μέρος του χάρτη, έως {max} m",
+    "objects-added": "Προστέθηκε: {list}",
+    "objects-removed": "Αφαιρέθηκε: {list}",
+    "objects-rebuilt": "Ανακατασκευάστηκε σε όλο τον χάρτη",
+    "relief-rebuilt": "Αναδιαμορφώθηκε σε ολόκληρο τον χάρτη",
+    "measured-between": "Συγκρίθηκε μεταξύ της ενημέρωσης {from} και της ενημέρωσης {through}: κανένας ενδιάμεσος πελάτης παιχνιδιού δεν παραμένει"
   },
-  "name-with-mode": "{name} ({mode})"
+  "name-with-mode": "{name} ({mode})",
+  "image": {
+    "before": "Πριν",
+    "after": "Μετά"
+  },
+  "object": {
+    "buildings": "{count, plural, one {# κτίριο} other {# κτίρια}}",
+    "fences": "{count, plural, one {# φράχτης ή τοίχος} other {# φράχτες και τοίχοι}}",
+    "rocks": "{count, plural, one {# βράχος} other {# βράχοι}}",
+    "military": "{count, plural, one {# στρατιωτικό αντικείμενο} other {# στρατιωτικά αντικείμενα}}",
+    "bridges": "{count, plural, one {# γέφυρα} other {# γέφυρες}}",
+    "vegetation": "{count, plural, one {# δέντρο ή θάμνος} other {# δέντρα και θάμνοι}}",
+    "props": "{count, plural, one {# άλλο αντικείμενο} other {# άλλα αντικείμενα}}"
+  },
+  "aspect": {
+    "ground": "υφές εδάφους",
+    "sky": "ουρανός και φωτισμός",
+    "sound": "ήχος",
+    "water": "νερό",
+    "effects": "εφέ",
+    "vegetation": "βλάστηση",
+    "models": "μοντέλα και υφές"
+  },
+  "legend": {
+    "raised": "Αυξήθηκε",
+    "lowered": "Μειώθηκε",
+    "added": "Προστέθηκε",
+    "removed": "Αφαιρέθηκε"
+  }
 }

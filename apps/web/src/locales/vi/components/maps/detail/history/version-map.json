@@ -1,5 +1,8 @@
 {
   "after": "Sau",
+  "badge": "Vị trí",
+  "badge-latest": "Vị trí · bản đồ nhỏ mới nhất",
+  "badge-nearest": "Vị trí · bản đồ nhỏ {version}",
   "before": "Trước",
   "enlarge": "Phóng to bản đồ nhỏ của {map}"
 }

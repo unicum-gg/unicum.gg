@@ -10,7 +10,7 @@
   "of-that-total": "من ذلك الإجمالي",
   "pledges-cover": "تغطي التعهدات الآن الفاتورة الشهرية.",
   "raised-amount": "{amount} تم جمعها",
-  "raised-label": "تم جمعها",
+  "raised-label": "مرفوع",
   "run-at-a-loss": "يعمل {name} بخسارة منذ {since}.",
   "run-rate": "معدل التشغيل الشهري: تعهدات بقيمة {pledged}/شهريًا مقابل {cost}/شهريًا للتشغيل.",
   "spent-since-launch": "الإنفاق منذ الإطلاق",

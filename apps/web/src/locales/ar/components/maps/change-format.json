@@ -16,7 +16,12 @@
     "artillery-headquarters": "مقر المدفعية",
     "comms-centers": "مراكز الاتصالات",
     "observation-posts": "مراكز المراقبة",
-    "points-of-interest": "نقاط الاهتمام"
+    "points-of-interest": "نقاط الاهتمام",
+    "visuals": "أُعيدت صياغتها أيضًا",
+    "minimap": "الخريطة المصغرة",
+    "relief": "التضاريس",
+    "objects": "العناصر",
+    "measured": "مقيسة"
   },
   "summary": {
     "added": "تمت إضافة {name}",
@@ -34,7 +39,45 @@
     "moved": "تم تحريك {name}",
     "count-changed": "تم تغيير {name}: {before} → {after}",
     "value-changed": "تم تغيير {name}: {before} → {after}",
-    "value-set": "تم تعيين {name}: {after}"
+    "value-set": "تم تعيين {name}: {after}",
+    "minimap-redrawn": "أُعيد رسمها",
+    "relief-both": "مرفوعة حتى {rise} م، ومخفضة حتى {drop} م",
+    "relief-raised": "مرفوعة حتى {rise} م",
+    "relief-lowered": "مخفضة حتى {drop} م",
+    "relief-rework": "أُعيد تشكيلها عبر جزء كبير من الخريطة، حتى {max} م",
+    "objects-added": "تمت الإضافة: {list}",
+    "objects-removed": "تمت الإزالة: {list}",
+    "objects-rebuilt": "أُعيد بناؤها عبر الخريطة",
+    "relief-rebuilt": "أُعيد تشكيلها عبر الخريطة كاملة",
+    "measured-between": "مقارنة بين التحديث {from} والتحديث {through}: لا يبقى أي عميل للعبة بينهما"
   },
-  "name-with-mode": "{name} ({mode})"
+  "name-with-mode": "{name} ({mode})",
+  "image": {
+    "before": "قبل",
+    "after": "بعد"
+  },
+  "object": {
+    "buildings": "{count, plural, zero {# مبنى} one {# مبنى} two {# مبنيان} few {# مبانٍ} many {# مبنى} other {# مبنى}}",
+    "fences": "{count, plural, zero {# سياج أو جدار} one {# سياج أو جدار} two {# سياجان أو جداران} few {# أسوار وجدران} many {# سياجًا وجدرانًا} other {# سياج أو جدار}}",
+    "rocks": "{count, plural, zero {# صخرة} one {# صخرة} two {# صخرتان} few {# صخور} many {# صخرة} other {# صخرة}}",
+    "military": "{count, plural, zero {# عنصر عسكري} one {# عنصر عسكري} two {# عنصران عسكريان} few {# عناصر عسكرية} many {# عنصرًا عسكريًا} other {# عنصر عسكري}}",
+    "bridges": "{count, plural, zero {# جسر} one {# جسر} two {# جسران} few {# جسور} many {# جسرًا} other {# جسر}}",
+    "vegetation": "{count, plural, zero {# شجرة أو شجيرة} one {# شجرة أو شجيرة} two {# شجرتان أو شجيرتان} few {# أشجار وشجيرات} many {# شجرة وشجيرة} other {# شجرة أو شجيرة}}",
+    "props": "{count, plural, zero {# عنصر آخر} one {# عنصر آخر} two {# عنصران آخران} few {# عناصر أخرى} many {# عنصرًا آخر} other {# عنصر آخر}}"
+  },
+  "aspect": {
+    "ground": "خامات الأرض",
+    "sky": "السماء والإضاءة",
+    "sound": "الصوت",
+    "water": "الماء",
+    "effects": "التأثيرات",
+    "vegetation": "النباتات",
+    "models": "النماذج والخامات"
+  },
+  "legend": {
+    "raised": "مرفوع",
+    "lowered": "مخفض",
+    "added": "تمت الإضافة",
+    "removed": "تمت الإزالة"
+  }
 }

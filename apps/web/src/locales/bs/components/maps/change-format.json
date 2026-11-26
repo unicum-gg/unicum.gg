@@ -16,7 +16,12 @@
     "artillery-headquarters": "Artiljerijski štab",
     "comms-centers": "Komunikacijski centri",
     "observation-posts": "Osmatračnice",
-    "points-of-interest": "Tačke interesa"
+    "points-of-interest": "Tačke interesa",
+    "visuals": "Također izmijenjeno",
+    "minimap": "Minimapa",
+    "relief": "Teren",
+    "objects": "Objekti",
+    "measured": "Izmjereno"
   },
   "summary": {
     "added": "Dodano: {name}",
@@ -34,7 +39,45 @@
     "moved": "Premješteno: {name}",
     "count-changed": "{name}: {before} → {after}",
     "value-changed": "{name}: {before} → {after}",
-    "value-set": "{name}: {after}"
+    "value-set": "{name}: {after}",
+    "minimap-redrawn": "Ponovo nacrtano",
+    "relief-both": "Prikupljeno do {rise} m, spušteno do {drop} m",
+    "relief-raised": "Prikupljeno do {rise} m",
+    "relief-lowered": "Spušteno do {drop} m",
+    "relief-rework": "Preoblikovano širom većeg dijela mape, do {max} m",
+    "objects-added": "Dodano: {list}",
+    "objects-removed": "Uklonjeno: {list}",
+    "objects-rebuilt": "Ponovo izgrađeno širom mape",
+    "relief-rebuilt": "Preoblikovano širom cijele mape",
+    "measured-between": "Upoređeno između ažuriranja {from} i ažuriranja {through}: nijedan klijent igre između njih nije sačuvan"
   },
-  "name-with-mode": "{name} ({mode})"
+  "name-with-mode": "{name} ({mode})",
+  "image": {
+    "before": "Prije",
+    "after": "Nakon"
+  },
+  "object": {
+    "buildings": "{count, plural, one {# zgrada} few {# zgrade} other {# zgrada}}",
+    "fences": "{count, plural, one {# ograda ili zid} few {# ograde ili zida} other {# ograda i zidova}}",
+    "rocks": "{count, plural, one {# stijena} few {# stijene} other {# stijena}}",
+    "military": "{count, plural, one {# vojni objekat} few {# vojna objekta} other {# vojnih objekata}}",
+    "bridges": "{count, plural, one {# most} few {# mosta} other {# mostova}}",
+    "vegetation": "{count, plural, one {# drvo ili grm} few {# drveta ili grma} other {# drveća i grmlja}}",
+    "props": "{count, plural, one {# drugi objekat} few {# druga objekta} other {# drugih objekata}}"
+  },
+  "aspect": {
+    "ground": "teksture tla",
+    "sky": "nebo i osvjetljenje",
+    "sound": "zvuk",
+    "water": "voda",
+    "effects": "efekti",
+    "vegetation": "vegetacija",
+    "models": "modeli i teksture"
+  },
+  "legend": {
+    "raised": "Prikupljeno",
+    "lowered": "Spušteno",
+    "added": "Dodano",
+    "removed": "Uklonjeno"
+  }
 }

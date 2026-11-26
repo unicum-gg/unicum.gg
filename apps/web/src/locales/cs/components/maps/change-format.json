@@ -16,7 +16,12 @@
     "artillery-headquarters": "Dělostřelecké velitelství",
     "comms-centers": "Komunikační centra",
     "observation-posts": "Pozorovací stanoviště",
-    "points-of-interest": "Body zájmu"
+    "points-of-interest": "Body zájmu",
+    "visuals": "Také přepracováno",
+    "minimap": "Minimapa",
+    "relief": "Terén",
+    "objects": "Objekty",
+    "measured": "Změřeno"
   },
   "summary": {
     "added": "Přidáno: {name}",
@@ -34,7 +39,45 @@
     "moved": "Přesunuto: {name}",
     "count-changed": "{name}: {before} → {after}",
     "value-changed": "{name}: {before} → {after}",
-    "value-set": "{name}: {after}"
+    "value-set": "{name}: {after}",
+    "minimap-redrawn": "Překresleno",
+    "relief-both": "Navýšeno až o {rise} m, sníženo až o {drop} m",
+    "relief-raised": "Navýšeno až o {rise} m",
+    "relief-lowered": "Sníženo až o {drop} m",
+    "relief-rework": "Přepracováno napříč velkou částí mapy, až o {max} m",
+    "objects-added": "Přidáno: {list}",
+    "objects-removed": "Odstraněno: {list}",
+    "objects-rebuilt": "Přebudováno napříč mapou",
+    "relief-rebuilt": "Přepracováno napříč celou mapou",
+    "measured-between": "Porovnáno mezi aktualizací {from} a aktualizací {through}: žádný herní klient mezi nimi nepřežil"
   },
-  "name-with-mode": "{name} ({mode})"
+  "name-with-mode": "{name} ({mode})",
+  "image": {
+    "before": "Před",
+    "after": "Po"
+  },
+  "object": {
+    "buildings": "{count, plural, one {# budova} few {# budovy} many {# budov} other {# budov}}",
+    "fences": "{count, plural, one {# plot nebo zeď} few {# ploty nebo zdi} many {# plotů nebo zdí} other {# plotů nebo zdí}}",
+    "rocks": "{count, plural, one {# skála} few {# skály} many {# skal} other {# skal}}",
+    "military": "{count, plural, one {# vojenský objekt} few {# vojenské objekty} many {# vojenských objektů} other {# vojenských objektů}}",
+    "bridges": "{count, plural, one {# most} few {# mosty} many {# mostů} other {# mostů}}",
+    "vegetation": "{count, plural, one {# strom nebo keř} few {# stromy a keře} many {# stromů a keřů} other {# stromů a keřů}}",
+    "props": "{count, plural, one {# jiný objekt} few {# jiné objekty} many {# jiných objektů} other {# jiných objektů}}"
+  },
+  "aspect": {
+    "ground": "textury terénu",
+    "sky": "obloha a osvětlení",
+    "sound": "zvuk",
+    "water": "voda",
+    "effects": "efekty",
+    "vegetation": "vegetace",
+    "models": "modely a textury"
+  },
+  "legend": {
+    "raised": "Navýšeno",
+    "lowered": "Sníženo",
+    "added": "Přidáno",
+    "removed": "Odstraněno"
+  }
 }

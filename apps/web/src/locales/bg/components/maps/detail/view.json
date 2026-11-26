@@ -5,5 +5,7 @@
   "n-random-events": "{count, plural, one {# случайно събитие} other {# случайни събития}}",
   "random-events": "Случайни събития",
   "size": "Размер",
-  "team-size": "Размер на отбора"
+  "team-size": "Размер на отбора",
+  "retired": "Изведено от употреба",
+  "retired-span": "В играта от актуализация {first} до актуализация {last}"
 }

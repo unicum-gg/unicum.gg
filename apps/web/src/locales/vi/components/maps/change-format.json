@@ -16,7 +16,12 @@
     "artillery-headquarters": "Sở chỉ huy Pháo binh",
     "comms-centers": "Trung tâm liên lạc",
     "observation-posts": "Đài quan sát",
-    "points-of-interest": "Điểm then chốt"
+    "points-of-interest": "Điểm then chốt",
+    "visuals": "Cũng được làm lại",
+    "minimap": "Bản đồ nhỏ",
+    "relief": "Địa hình",
+    "objects": "Vật thể",
+    "measured": "Đã đo"
   },
   "summary": {
     "added": "Đã thêm {name}",
@@ -34,7 +39,45 @@
     "moved": "Đã di chuyển {name}",
     "count-changed": "{name}: {before} → {after}",
     "value-changed": "{name}: {before} → {after}",
-    "value-set": "{name}: {after}"
+    "value-set": "{name}: {after}",
+    "minimap-redrawn": "Đã vẽ lại",
+    "relief-both": "Đã huy động lên đến {rise} m, hạ xuống đến {drop} đợt",
+    "relief-raised": "Đã huy động lên đến {rise} m",
+    "relief-lowered": "Đã hạ xuống đến {drop} đợt",
+    "relief-rework": "Đã định hình lại trên khắp phần lớn bản đồ, tối đa {max} m",
+    "objects-added": "Đã thêm: {list}",
+    "objects-removed": "Đã xóa: {list}",
+    "objects-rebuilt": "Đã xây dựng lại trên khắp bản đồ",
+    "relief-rebuilt": "Đã định hình lại trên toàn bộ bản đồ",
+    "measured-between": "Đã so sánh giữa bản cập nhật {from} và bản cập nhật {through}: không có máy khách trò chơi nào ở giữa còn tồn tại"
   },
-  "name-with-mode": "{name} ({mode})"
+  "name-with-mode": "{name} ({mode})",
+  "image": {
+    "before": "Trước",
+    "after": "Sau"
+  },
+  "object": {
+    "buildings": "{count, plural, other {# tòa nhà}}",
+    "fences": "{count, plural, other {# hàng rào hoặc tường}}",
+    "rocks": "{count, plural, other {# tảng đá}}",
+    "military": "{count, plural, other {# vật thể quân sự}}",
+    "bridges": "{count, plural, other {# cây cầu}}",
+    "vegetation": "{count, plural, other {# cây hoặc bụi cây}}",
+    "props": "{count, plural, other {# vật thể khác}}"
+  },
+  "aspect": {
+    "ground": "kết cấu mặt đất",
+    "sky": "bầu trời và ánh sáng",
+    "sound": "âm thanh",
+    "water": "nước",
+    "effects": "hiệu ứng",
+    "vegetation": "thảm thực vật",
+    "models": "mô hình và kết cấu"
+  },
+  "legend": {
+    "raised": "Đã huy động",
+    "lowered": "Đã hạ xuống",
+    "added": "Đã thêm",
+    "removed": "Đã xóa"
+  }
 }

@@ -5,5 +5,7 @@
   "no-maps-match-your-filters": "Filtrelerinle eşleşen harita yok.",
   "search": "{count} harita arasında ara",
   "search-label": "Haritaları ara",
-  "special-map": "Özel harita"
+  "special-map": "Özel harita",
+  "retired-maps": "Emekliye ayrılan haritalar",
+  "retired-maps-intro": "{count, plural, one {# harita oyundan ayrıldı} other {# harita oyundan ayrıldı}}. Her biri, bulunduğu son güncellemedeki hâliyle gösterildi."
 }

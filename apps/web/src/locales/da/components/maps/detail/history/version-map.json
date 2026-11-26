@@ -1,5 +1,8 @@
 {
   "after": "Efter",
+  "badge": "Positioner",
+  "badge-latest": "Positioner · seneste minikort",
+  "badge-nearest": "Positioner · minikort {version}",
   "before": "Før",
   "enlarge": "Forstør minikortet for {map}"
 }

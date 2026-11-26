@@ -5,7 +5,7 @@
   "filter-earned": "Спечелени",
   "filter-missing": "Липсващи",
   "filter-obtainable": "Получими",
-  "filter-retired": "Оттеглени",
+  "filter-retired": "Изведено от употреба",
   "no-achievement-matches-these-filters": "Няма постижения, съответстващи на тези филтри.",
   "search-achievements": "Търсене на постижения",
   "search-among-n-achievements": "Търсене сред {count} постижения"

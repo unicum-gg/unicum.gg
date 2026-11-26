@@ -16,7 +16,12 @@
     "artillery-headquarters": "Артиллерия штабы",
     "comms-centers": "Байланыс орталықтары",
     "observation-posts": "Бақылау бекеттері",
-    "points-of-interest": "Қызығушылық нүктелері"
+    "points-of-interest": "Қызығушылық нүктелері",
+    "visuals": "Сондай-ақ қайта өңделген",
+    "minimap": "Миникарта",
+    "relief": "Жер бедері",
+    "objects": "Объектілер",
+    "measured": "Өлшенген"
   },
   "summary": {
     "added": "{name} қосылды",
@@ -34,7 +39,45 @@
     "moved": "{name} ауысты",
     "count-changed": "{name}: {before} → {after}",
     "value-changed": "{name}: {before} → {after}",
-    "value-set": "{name}: {after}"
+    "value-set": "{name}: {after}",
+    "minimap-redrawn": "Қайта сызылған",
+    "relief-both": "{rise} м-ге дейін жиналған, {drop} м-ге дейін түсуі өзгертілген",
+    "relief-raised": "{rise} м-ге дейін жиналған",
+    "relief-lowered": "{drop} м-ге дейін түсірілген",
+    "relief-rework": "Картаның көп бөлігі бойынша пішіні өзгертілді, ең көбі {max} м",
+    "objects-added": "Қосылған: {list}",
+    "objects-removed": "Жойылған: {list}",
+    "objects-rebuilt": "Карта бойынша қайта жасалған",
+    "relief-rebuilt": "Бүкіл карта бойынша пішіні өзгертілді",
+    "measured-between": "{from} жаңартуы мен {through} жаңартуы арасында салыстырылды: аралықтағы ойын клиенттерінің ешқайсысы сақталмаған"
   },
-  "name-with-mode": "{name} ({mode})"
+  "name-with-mode": "{name} ({mode})",
+  "image": {
+    "before": "Бұрын",
+    "after": "Кейін"
+  },
+  "object": {
+    "buildings": "{count, plural, other {# ғимарат}}",
+    "fences": "{count, plural, other {# қоршау немесе қабырға}}",
+    "rocks": "{count, plural, other {# тас}}",
+    "military": "{count, plural, other {# әскери нысан}}",
+    "bridges": "{count, plural, other {# көпір}}",
+    "vegetation": "{count, plural, other {# ағаш немесе бұта}}",
+    "props": "{count, plural, other {# басқа нысан}}"
+  },
+  "aspect": {
+    "ground": "жер текстуралары",
+    "sky": "аспан және жарықтандыру",
+    "sound": "дыбыс",
+    "water": "су",
+    "effects": "әсерлер",
+    "vegetation": "өсімдіктер",
+    "models": "модельдер мен текстуралар"
+  },
+  "legend": {
+    "raised": "Жиналған",
+    "lowered": "Түсірілген",
+    "added": "Қосылған",
+    "removed": "Жойылған"
+  }
 }

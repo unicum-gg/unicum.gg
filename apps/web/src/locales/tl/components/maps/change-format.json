@@ -16,7 +16,12 @@
     "artillery-headquarters": "Punong-tanggapan ng Artilerya",
     "comms-centers": "Mga sentro ng komunikasyon",
     "observation-posts": "Mga puwesto ng pagmamasid",
-    "points-of-interest": "Mga punto ng interes"
+    "points-of-interest": "Mga punto ng interes",
+    "visuals": "Binago rin",
+    "minimap": "Minimapa",
+    "relief": "Lupain",
+    "objects": "Mga bagay",
+    "measured": "Sinukat"
   },
   "summary": {
     "added": "Idinagdag: {name}",
@@ -34,7 +39,45 @@
     "moved": "Galaw: {name}",
     "count-changed": "{name}: {before} → {after}",
     "value-changed": "{name}: {before} → {after}",
-    "value-set": "{name}: {after}"
+    "value-set": "{name}: {after}",
+    "minimap-redrawn": "Muling iginuhit",
+    "relief-both": "Itinaas nang hanggang {rise} m, ibinaba nang hanggang {drop} m",
+    "relief-raised": "Itinaas nang hanggang {rise} m",
+    "relief-lowered": "Ibinaba nang hanggang {drop} m",
+    "relief-rework": "Muling hinubog sa lahat ng bahagi ng mapa, nang hanggang {max} m",
+    "objects-added": "Idinagdag: {list}",
+    "objects-removed": "Inalis: {list}",
+    "objects-rebuilt": "Muling binuo sa lahat ng bahagi ng mapa",
+    "relief-rebuilt": "Muling hinubog sa buong mapa",
+    "measured-between": "Inihambing sa pagitan ng update {from} at update {through}: walang client ng laro sa pagitan na nananatili"
   },
-  "name-with-mode": "{name} ({mode})"
+  "name-with-mode": "{name} ({mode})",
+  "image": {
+    "before": "Bago",
+    "after": "Pagkatapos"
+  },
+  "object": {
+    "buildings": "{count, plural, one {# gusali} other {# gusali}}",
+    "fences": "{count, plural, one {# bakod o pader} other {# bakod at pader}}",
+    "rocks": "{count, plural, one {# bato} other {# bato}}",
+    "military": "{count, plural, one {# bagay na militar} other {# bagay na militar}}",
+    "bridges": "{count, plural, one {# tulay} other {# tulay}}",
+    "vegetation": "{count, plural, one {# puno o palumpong} other {# puno at palumpong}}",
+    "props": "{count, plural, one {# ibang bagay} other {# ibang bagay}}"
+  },
+  "aspect": {
+    "ground": "mga texture ng lupa",
+    "sky": "langit at ilaw",
+    "sound": "tunog",
+    "water": "tubig",
+    "effects": "mga epekto",
+    "vegetation": "mga halaman",
+    "models": "mga modelo at texture"
+  },
+  "legend": {
+    "raised": "Itinaas",
+    "lowered": "Ibinaba",
+    "added": "Idinagdag",
+    "removed": "Inalis"
+  }
 }

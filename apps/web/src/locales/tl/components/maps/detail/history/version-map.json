@@ -1,5 +1,8 @@
 {
   "after": "Pagkatapos",
+  "badge": "Mga posisyon",
+  "badge-latest": "Mga posisyon · pinakabagong minimapa",
+  "badge-nearest": "Mga posisyon · minimapa {version}",
   "before": "Bago",
   "enlarge": "Palakihin ang minimapa ng {map}"
 }

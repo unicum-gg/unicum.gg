@@ -5,5 +5,7 @@
   "no-maps-match-your-filters": "Neviena karte neatbilst taviem filtriem.",
   "search": "Meklēt starp {count} kartēm",
   "search-label": "Meklēt kartes",
-  "special-map": "Īpaša karte"
+  "special-map": "Īpaša karte",
+  "retired-maps": "No aprites izņemtās kartes",
+  "retired-maps-intro": "{count, plural, one {# karte izgāja no spēles.} other {# kartes izgāja no spēles.}} Katra ir parādīta tāda, kāda tā bija pēdējā atjauninājumā, kurā tā bija."
 }

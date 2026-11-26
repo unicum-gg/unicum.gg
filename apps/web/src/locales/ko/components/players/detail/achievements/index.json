@@ -5,7 +5,7 @@
   "filter-earned": "획득",
   "filter-missing": "미획득",
   "filter-obtainable": "획득 가능",
-  "filter-retired": "폐지됨",
+  "filter-retired": "퇴역",
   "no-achievement-matches-these-filters": "이 필터와 일치하는 업적이 없습니다.",
   "search-achievements": "검색 공적",
   "search-among-n-achievements": "업적 {count}개 중 검색"

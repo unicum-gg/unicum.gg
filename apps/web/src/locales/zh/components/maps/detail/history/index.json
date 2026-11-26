@@ -1,5 +1,5 @@
 {
-  "added": "添加",
+  "added": "新增",
   "before-update": "更新{version}之前",
   "common-test": "公共测试",
   "every-update-that-changed-this": "每次改变这张地图的更新，最新的在前，数据直接读取自游戏客户端本身。",

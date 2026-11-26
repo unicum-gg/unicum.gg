@@ -5,7 +5,7 @@
   "filter-earned": "Získané",
   "filter-missing": "Chybějící",
   "filter-obtainable": "Lze získat",
-  "filter-retired": "Vyřazené",
+  "filter-retired": "Vyřazeno",
   "no-achievement-matches-these-filters": "Těmto filtrům neodpovídá žádný úspěch.",
   "search-achievements": "Hledat úspěchy",
   "search-among-n-achievements": "Hledat mezi {count} úspěchy"

@@ -5,5 +5,7 @@
   "n-random-events": "{count, plural, zero {# nejaušu notikumu} one {# nejaušs notikums} other {# nejauši notikumi}}",
   "random-events": "Neviendabīgi notikumi",
   "size": "Izmērs",
-  "team-size": "Komandas lielums"
+  "team-size": "Komandas lielums",
+  "retired": "Izņemts no aprites",
+  "retired-span": "Spēlē no atjauninājuma {first} līdz atjauninājumam {last}"
 }

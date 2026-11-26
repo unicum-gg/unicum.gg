@@ -1,4 +1,6 @@
 {
   "random-events": "قد تغيّر الأحداث العشوائية هذه الخريطة أثناء المعركة",
-  "minimap-alt": "الخريطة المصغّرة لـ {map}"
+  "minimap-alt": "الخريطة المصغّرة لـ {map}",
+  "retired-until": "حتى {version}",
+  "retired-span": "في اللعبة من التحديث {first} إلى التحديث {last}"
 }

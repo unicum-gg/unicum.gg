@@ -5,5 +5,7 @@
   "no-maps-match-your-filters": "Ingen kart samsvarer med filtrene dine.",
   "search": "Søk blant {count} kart",
   "search-label": "Søk kart",
-  "special-map": "Spesialkart"
+  "special-map": "Spesialkart",
+  "retired-maps": "Utfasede kart",
+  "retired-maps-intro": "{count, plural, one {# kart har} other {# kart har}} forlatt spillet. Hvert kart vises slik det var i den siste oppdateringen som hadde det."
 }

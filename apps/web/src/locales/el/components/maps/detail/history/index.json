@@ -6,7 +6,7 @@
   "in-the-game": "Στο παιχνίδι",
   "n-changes": "{count, plural, one {# αλλαγή} other {# αλλαγές}}",
   "not-released-wargaming-can-still": "Δεν έχει κυκλοφορήσει. Η Wargaming μπορεί ακόμη να αλλάξει ή να απορρίψει οτιδήποτε από αυτά πριν κυκλοφορήσει η ενημέρωση.",
-  "removed": "Αφαίρεση",
+  "removed": "Αφαιρέθηκε",
   "title": "Αλλαγές στον {map}",
   "update": "Ενημέρωση {version}"
 }

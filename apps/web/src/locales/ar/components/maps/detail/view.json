@@ -5,5 +5,7 @@
   "n-random-events": "{count, plural, zero {# حدث عشوائي} one {# حدث عشوائي} two {# حدثان عشوائيان} few {# أحداث عشوائية} many {# حدثًا عشوائيًا} other {# حدث عشوائي}}",
   "random-events": "أحداث عشوائية",
   "size": "حجم",
-  "team-size": "حجم الفريق"
+  "team-size": "حجم الفريق",
+  "retired": "متقاعد",
+  "retired-span": "في اللعبة من التحديث {first} إلى التحديث {last}"
 }

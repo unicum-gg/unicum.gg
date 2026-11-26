@@ -5,5 +5,7 @@
   "no-maps-match-your-filters": "Không có bản đồ nào khớp với bộ lọc của bạn.",
   "search": "Tìm kiếm trong {count} bản đồ",
   "search-label": "Tìm kiếm bản đồ",
-  "special-map": "Bản đồ đặc biệt"
+  "special-map": "Bản đồ đặc biệt",
+  "retired-maps": "Bản đồ đã ngừng sử dụng",
+  "retired-maps-intro": "{count, plural, other {# bản đồ đã thoát khỏi trò chơi. Mỗi bản đồ được hiển thị như trong bản cập nhật cuối cùng có bản đồ đó.}}"
 }

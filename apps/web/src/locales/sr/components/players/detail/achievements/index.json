@@ -5,7 +5,7 @@
   "filter-earned": "Зарађено",
   "filter-missing": "Недостајуће",
   "filter-obtainable": "Доступне",
-  "filter-retired": "Повучене",
+  "filter-retired": "Повучено",
   "no-achievement-matches-these-filters": "Ниједно достигнуће не одговара овим филтерима.",
   "search-achievements": "Pretraži dostignuća",
   "search-among-n-achievements": "Претражи међу {count} достигнућа"

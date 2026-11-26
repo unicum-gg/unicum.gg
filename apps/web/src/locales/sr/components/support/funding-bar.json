@@ -10,7 +10,7 @@
   "of-that-total": "од тог укупног износа",
   "pledges-cover": "Обећања сада покривају месечни рачун.",
   "raised-amount": "{amount} prikupljeno",
-  "raised-label": "Prikupljeno",
+  "raised-label": "Прикупљено",
   "run-at-a-loss": "{name} послује са губитком од {since}.",
   "run-rate": "Месечни темпо: обећано {pledged}/месечно у односу на {cost}/месечно за рад.",
   "spent-since-launch": "Потрошено од покретања",

@@ -6,7 +6,7 @@
   "in-the-game": "Sa laro",
   "n-changes": "{count, plural, one {# pagbabago} other {# mga pagbabago}}",
   "not-released-wargaming-can-still": "Hindi pa inilalabas. Maaari pa ring baguhin o alisin ng Wargaming ang alinman dito bago ipadala ang update.",
-  "removed": "Alisin",
+  "removed": "Inalis",
   "title": "Mga pagbabago sa {map}",
   "update": "Pag-update {version}"
 }

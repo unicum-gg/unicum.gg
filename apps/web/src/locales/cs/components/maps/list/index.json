@@ -5,5 +5,7 @@
   "no-maps-match-your-filters": "Žádné mapy neodpovídají vašim filtrům.",
   "search": "Hledat mezi {count} mapami",
   "search-label": "Hledat mapy",
-  "special-map": "Speciální mapa"
+  "special-map": "Speciální mapa",
+  "retired-maps": "Vyřazené mapy",
+  "retired-maps-intro": "{count, plural, one {# mapa odešla ze hry} few {# mapy odešly ze hry} many {# map odešlo ze hry} other {# map odešlo ze hry}}. Každá je zobrazena v podobě z poslední aktualizace, ve které byla ve hře."
 }

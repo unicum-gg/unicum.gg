@@ -5,5 +5,7 @@
   "no-maps-match-your-filters": "Nijedna mapa ne odgovara tvojim filtrima.",
   "search": "Pretraži među {count} mapa",
   "search-label": "Traži Mape",
-  "special-map": "Posebna karta"
+  "special-map": "Posebna karta",
+  "retired-maps": "Povučene mape",
+  "retired-maps-intro": "{count, plural, one {# mapa je} few {# mape su} other {# mapa je}} napustilo igru. Svaka je prikazana onako kako je izgledala u posljednjem ažuriranju u kojem je bila dostupna."
 }

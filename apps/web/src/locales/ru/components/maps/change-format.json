@@ -16,7 +16,12 @@
     "artillery-headquarters": "Артиллерийский штаб",
     "comms-centers": "Центры связи",
     "observation-posts": "Наблюдательные пункты",
-    "points-of-interest": "Ключевые позиции"
+    "points-of-interest": "Ключевые позиции",
+    "visuals": "Также переработано",
+    "minimap": "Миникарта",
+    "relief": "Рельеф",
+    "objects": "Объекты",
+    "measured": "Измерено"
   },
   "summary": {
     "added": "Добавлено: {name}",
@@ -34,7 +39,45 @@
     "moved": "Перемещение: {name}",
     "count-changed": "{name}: {before} → {after}",
     "value-changed": "{name}: {before} → {after}",
-    "value-set": "{name}: {after}"
+    "value-set": "{name}: {after}",
+    "minimap-redrawn": "Перерисовано",
+    "relief-both": "Повышено до {rise} м, понижено до {drop} м",
+    "relief-raised": "Повышено до {rise} м",
+    "relief-lowered": "Понижено до {drop} м",
+    "relief-rework": "Изменено по большей части карты, до {max} м",
+    "objects-added": "Добавлено: {list}",
+    "objects-removed": "Удалено: {list}",
+    "objects-rebuilt": "Перестроено по всему полю карты",
+    "relief-rebuilt": "Изменено по всей карте",
+    "measured-between": "Сравнение между обновлением {from} и обновлением {through}: между ними не сохранился ни один клиент игры"
   },
-  "name-with-mode": "{name} ({mode})"
+  "name-with-mode": "{name} ({mode})",
+  "image": {
+    "before": "До",
+    "after": "После"
+  },
+  "object": {
+    "buildings": "{count, plural, one {# здание} few {# здания} many {# зданий} other {# зданий}}",
+    "fences": "{count, plural, one {# ограда или стена} few {# ограды и стены} many {# оград и стен} other {# оград и стен}}",
+    "rocks": "{count, plural, one {# камень} few {# камня} many {# камней} other {# камней}}",
+    "military": "{count, plural, one {# военный объект} few {# военных объекта} many {# военных объектов} other {# военных объектов}}",
+    "bridges": "{count, plural, one {# мост} few {# моста} many {# мостов} other {# мостов}}",
+    "vegetation": "{count, plural, one {# дерево или куст} few {# дерева или куста} many {# деревьев или кустов} other {# деревьев или кустов}}",
+    "props": "{count, plural, one {# другой объект} few {# других объекта} many {# других объектов} other {# других объектов}}"
+  },
+  "aspect": {
+    "ground": "текстуры земли",
+    "sky": "небо и освещение",
+    "sound": "звук",
+    "water": "вода",
+    "effects": "эффекты",
+    "vegetation": "растительность",
+    "models": "модели и текстуры"
+  },
+  "legend": {
+    "raised": "Повышено",
+    "lowered": "Понижено",
+    "added": "Добавлено",
+    "removed": "Удалено"
+  }
 }

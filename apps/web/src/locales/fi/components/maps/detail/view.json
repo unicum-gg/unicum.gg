@@ -5,5 +5,7 @@
   "n-random-events": "{count, plural, one {# satunnainen tapahtuma} other {# satunnaiset tapahtumat}}",
   "random-events": "Satunnaiset tapahtumat",
   "size": "Koko",
-  "team-size": "Tiikokoko"
+  "team-size": "Tiikokoko",
+  "retired": "Käytöstä poistettu",
+  "retired-span": "Pelissä päivityksestä {first} päivitykseen {last}"
 }

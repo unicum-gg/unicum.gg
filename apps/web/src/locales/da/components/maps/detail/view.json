@@ -5,5 +5,7 @@
   "n-random-events": "{count, plural, one {# tilfældig begivenhed} other {# tilfældige begivenheder}}",
   "random-events": "Tilfældige begivenheder",
   "size": "Størrelse",
-  "team-size": "Teamstørrelse"
+  "team-size": "Teamstørrelse",
+  "retired": "Udgået",
+  "retired-span": "I spillet fra opdatering {first} til opdatering {last}"
 }

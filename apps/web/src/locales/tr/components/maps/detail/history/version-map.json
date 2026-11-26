@@ -1,5 +1,8 @@
 {
   "after": "Sonra",
+  "badge": "Konumlar",
+  "badge-latest": "Konumlar · en yeni mini harita",
+  "badge-nearest": "Konumlar · mini harita {version}",
   "before": "Önce",
   "enlarge": "{map} mini haritasını büyüt"
 }

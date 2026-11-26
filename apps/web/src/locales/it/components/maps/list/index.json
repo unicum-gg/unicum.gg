@@ -5,5 +5,7 @@
   "no-maps-match-your-filters": "Nessuna mappa corrisponde ai filtri selezionati.",
   "search": "Cerca tra {count} mappe",
   "search-label": "Trova mappe",
-  "special-map": "Mappa speciale"
+  "special-map": "Mappa speciale",
+  "retired-maps": "Mappe ritirate",
+  "retired-maps-intro": "{count, plural, one {# mappa ha lasciato il gioco} other {# mappe hanno lasciato il gioco}}. Ognuna è mostrata come nell’ultimo aggiornamento in cui era presente."
 }

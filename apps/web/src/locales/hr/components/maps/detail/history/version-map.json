@@ -1,5 +1,8 @@
 {
   "after": "Nakon",
+  "badge": "Pozicije",
+  "badge-latest": "Pozicije · najnovija minimapa",
+  "badge-nearest": "Pozicije · minimapa {version}",
   "before": "Prije",
   "enlarge": "Povećaj minimapu za {map}"
 }

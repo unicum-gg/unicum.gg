@@ -949,7 +949,14 @@
     "Today": "اليوم",
     "calendar": "التقويم",
     "entry": "عنصر",
-    "official": "رسمي"
+    "official": "رسمي",
+    "Added": "تمت الإضافة",
+    "After": "بعد",
+    "Before": "قبل",
+    "Latest": "الأحدث",
+    "Raised": "مرفوع",
+    "Removed": "تمت الإزالة",
+    "Retired": "متقاعد"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1902,7 +1909,14 @@
     "Today": "Сёння",
     "calendar": "каляндар",
     "entry": "запіс",
-    "official": "афіцыйны"
+    "official": "афіцыйны",
+    "Added": "Дададзена",
+    "After": "Пасля",
+    "Before": "Да",
+    "Latest": "Апошнія",
+    "Raised": "Сабрана",
+    "Removed": "Выдалена",
+    "Retired": "Выведзены"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -3072,7 +3086,14 @@
     "Pass": "Боен пропуск",
     "calendar": "календар",
     "entry": "запис",
-    "official": "официален"
+    "official": "официален",
+    "Added": "Добавено",
+    "After": "След",
+    "Before": "Преди",
+    "Latest": "Последно",
+    "Raised": "Събрано",
+    "Removed": "Премахнато",
+    "Retired": "Изведено от употреба"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -4033,7 +4054,14 @@
     "Today": "Danas",
     "calendar": "kalendar",
     "entry": "stavka",
-    "official": "zvanično"
+    "official": "zvanično",
+    "Added": "Dodano",
+    "After": "Nakon",
+    "Before": "Prije",
+    "Latest": "Najnovije",
+    "Raised": "Prikupljeno",
+    "Removed": "Uklonjeno",
+    "Retired": "Povučeno"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -5215,7 +5243,14 @@
     "Pass": "Battle Pass",
     "calendar": "kalendář",
     "entry": "položka",
-    "official": "oficiální"
+    "official": "oficiální",
+    "Added": "Přidáno",
+    "After": "Po",
+    "Before": "Před",
+    "Latest": "Nejnovější",
+    "Raised": "Navýšeno",
+    "Removed": "Odstraněno",
+    "Retired": "Vyřazeno"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -6403,7 +6438,14 @@
     "Pass": "Pas",
     "calendar": "kalender",
     "entry": "indlæg",
-    "official": "officiel"
+    "official": "officiel",
+    "Added": "Tilføjet",
+    "After": "Efter",
+    "Before": "Før",
+    "Latest": "Seneste",
+    "Raised": "Indsamlet",
+    "Removed": "Fjernet",
+    "Retired": "Udgået"
   },
   "de": {
     "(optional)": "(optional)",
@@ -7584,7 +7626,14 @@
     "Pass": "Pass",
     "calendar": "Kalender",
     "entry": "Eintrag",
-    "official": "offiziell"
+    "official": "offiziell",
+    "Added": "Hinzugefügt",
+    "After": "Nach",
+    "Before": "Vor",
+    "Latest": "Neueste",
+    "Raised": "Erhöht",
+    "Removed": "Entfernt",
+    "Retired": "Ausgemustert"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -8771,7 +8820,14 @@
     "Pass": "Πάσο",
     "calendar": "ημερολόγιο",
     "entry": "καταχώριση",
-    "official": "επίσημο"
+    "official": "επίσημο",
+    "Added": "Προστέθηκε",
+    "After": "Μετά",
+    "Before": "Πριν",
+    "Latest": "Πιο πρόσφατη",
+    "Raised": "Αυξήθηκε",
+    "Removed": "Αφαιρέθηκε",
+    "Retired": "Αποσύρθηκε"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -9939,7 +9995,14 @@
     "Pass": "Pase",
     "calendar": "calendario",
     "entry": "entrada",
-    "official": "oficial"
+    "official": "oficial",
+    "Added": "Añadido",
+    "After": "Después",
+    "Before": "Antes",
+    "Latest": "Último",
+    "Raised": "Aumentado",
+    "Removed": "Eliminado",
+    "Retired": "Retirado"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -11131,7 +11194,14 @@
     "Pass": "Passi",
     "calendar": "kalenteri",
     "entry": "merkintä",
-    "official": "virallinen"
+    "official": "virallinen",
+    "Added": "Lisätty",
+    "After": "Jälkeen",
+    "Before": "Ennen",
+    "Latest": "Viimeisin",
+    "Raised": "Kerätty",
+    "Removed": "Poistettu",
+    "Retired": "Käytöstä poistettu"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -12301,7 +12371,14 @@
     "Pass": "Passe",
     "calendar": "calendrier",
     "entry": "entrée",
-    "official": "officiel"
+    "official": "officiel",
+    "Added": "Ajouté",
+    "After": "Après",
+    "Before": "Avant",
+    "Latest": "Dernier",
+    "Raised": "Collecté",
+    "Removed": "Supprimé",
+    "Retired": "Retiré"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -13255,7 +13332,14 @@
     "Today": "आज",
     "calendar": "कैलेंडर",
     "entry": "प्रविष्टि",
-    "official": "आधिकारिक"
+    "official": "आधिकारिक",
+    "Added": "जोड़ा गया",
+    "After": "बाद",
+    "Before": "पहले",
+    "Latest": "नवीनतम",
+    "Raised": "बढ़ाया गया",
+    "Removed": "हटाया गया",
+    "Retired": "रिटायर किया गया"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -14440,7 +14524,14 @@
     "Pass": "Propusnica",
     "calendar": "kalendar",
     "entry": "stavka",
-    "official": "službeni"
+    "official": "službeni",
+    "Added": "Dodano",
+    "After": "Nakon",
+    "Before": "Prije",
+    "Latest": "Najnovije",
+    "Raised": "Povećano",
+    "Removed": "Uklonjeno",
+    "Retired": "Povučeno"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -15627,7 +15718,14 @@
     "Pass": "Bérlet",
     "calendar": "naptár",
     "entry": "bejegyzés",
-    "official": "hivatalos"
+    "official": "hivatalos",
+    "Added": "Hozzáadva",
+    "After": "Utána",
+    "Before": "Előtte",
+    "Latest": "Legújabb",
+    "Raised": "Megemelve",
+    "Removed": "Eltávolítva",
+    "Retired": "Visszavonva"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -16810,7 +16908,14 @@
     "Pass": "Pass",
     "calendar": "calendario",
     "entry": "voce",
-    "official": "ufficiale"
+    "official": "ufficiale",
+    "Added": "Aggiunto",
+    "After": "Dopo",
+    "Before": "Prima",
+    "Latest": "Più recente",
+    "Raised": "Raccolti",
+    "Removed": "Rimosso",
+    "Retired": "Ritirato"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -18000,7 +18105,14 @@
     "Pass": "パス",
     "calendar": "カレンダー",
     "entry": "項目",
-    "official": "公式"
+    "official": "公式",
+    "Added": "追加",
+    "After": "変更後",
+    "Before": "変更前",
+    "Latest": "最新",
+    "Raised": "上昇",
+    "Removed": "削除",
+    "Retired": "退役"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -18954,7 +19066,14 @@
     "Today": "Бүгін",
     "calendar": "күнтізбе",
     "entry": "жазба",
-    "official": "ресми"
+    "official": "ресми",
+    "Added": "Қосылған",
+    "After": "Кейін",
+    "Before": "Бұрын",
+    "Latest": "Соңғы",
+    "Raised": "Жиналған",
+    "Removed": "Жойылған",
+    "Retired": "Қолданыстан шығарылған"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -20148,7 +20267,14 @@
     "Pass": "패스",
     "calendar": "캘린더",
     "entry": "항목",
-    "official": "공식"
+    "official": "공식",
+    "Added": "추가",
+    "After": "이후",
+    "Before": "이전",
+    "Latest": "최신",
+    "Raised": "상승",
+    "Removed": "제거",
+    "Retired": "퇴역"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -21338,7 +21464,14 @@
     "Pass": "Mūšio leidimas",
     "calendar": "kalendorius",
     "entry": "įrašas",
-    "official": "oficialus"
+    "official": "oficialus",
+    "Added": "Pridėta",
+    "After": "Po",
+    "Before": "Prieš",
+    "Latest": "Naujausia",
+    "Raised": "Padidinta",
+    "Removed": "Pašalinta",
+    "Retired": "Nebenaudojamas"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -22515,7 +22648,14 @@
     "Pass": "Pase",
     "calendar": "kalendārs",
     "entry": "ieraksts",
-    "official": "oficiāls"
+    "official": "oficiāls",
+    "Added": "Pievienots",
+    "After": "Pēc",
+    "Before": "Pirms",
+    "Latest": "Jaunākais",
+    "Raised": "Palielināts",
+    "Removed": "Noņemts",
+    "Retired": "Izņemts no aprites"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -23707,7 +23847,14 @@
     "Pass": "Pas",
     "calendar": "kalender",
     "entry": "item",
-    "official": "officieel"
+    "official": "officieel",
+    "Added": "Toegevoegd",
+    "After": "Na",
+    "Before": "Voor",
+    "Latest": "Laatste",
+    "Raised": "Opgehaald",
+    "Removed": "Verwijderd",
+    "Retired": "Uit dienst"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -24890,7 +25037,14 @@
     "Pass": "Pass",
     "calendar": "kalender",
     "entry": "oppføring",
-    "official": "offisiell"
+    "official": "offisiell",
+    "Added": "Lagt til",
+    "After": "Etter",
+    "Before": "Før",
+    "Latest": "Nyeste",
+    "Raised": "Innsamlet",
+    "Removed": "Fjernet",
+    "Retired": "Utfaset"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -26070,7 +26224,14 @@
     "Pass": "Przepustka",
     "calendar": "kalendarz",
     "entry": "wpis",
-    "official": "oficjalne"
+    "official": "oficjalne",
+    "Added": "Dodano",
+    "After": "Po",
+    "Before": "Przed",
+    "Latest": "Najnowsza",
+    "Raised": "Zebrano",
+    "Removed": "Usunięto",
+    "Retired": "Wycofana"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -27243,7 +27404,14 @@
     "Pass": "Passe",
     "calendar": "calendário",
     "entry": "entrada",
-    "official": "oficial"
+    "official": "oficial",
+    "Added": "Adicionado",
+    "After": "Depois",
+    "Before": "Antes",
+    "Latest": "Mais recente",
+    "Raised": "Arrecadado",
+    "Removed": "Removido",
+    "Retired": "Retirado"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -28417,7 +28585,14 @@
     "Pass": "Pass",
     "calendar": "calendar",
     "entry": "intrare",
-    "official": "oficial"
+    "official": "oficial",
+    "Added": "Adăugat",
+    "After": "După",
+    "Before": "Înainte de",
+    "Latest": "Recent",
+    "Raised": "Ridicat",
+    "Removed": "Eliminat",
+    "Retired": "Retras"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -29579,7 +29754,14 @@
     "Pass": "Боевой пропуск",
     "calendar": "календарь",
     "entry": "событие",
-    "official": "официальный"
+    "official": "официальный",
+    "Added": "Добавлено",
+    "After": "После",
+    "Before": "До",
+    "Latest": "Последнее",
+    "Raised": "Повышено",
+    "Removed": "Удалено",
+    "Retired": "Выведено"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -30536,7 +30718,14 @@
     "Today": "Danes",
     "calendar": "koledar",
     "entry": "vnos",
-    "official": "uradni"
+    "official": "uradni",
+    "Added": "Pridané",
+    "After": "Po",
+    "Before": "Pred",
+    "Latest": "Najnovšie",
+    "Raised": "Vyzbierané",
+    "Removed": "Odstránené",
+    "Retired": "Vyradené"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -31723,7 +31912,14 @@
     "Pass": "Пропусница",
     "calendar": "календар",
     "entry": "ставка",
-    "official": "званично"
+    "official": "званично",
+    "Added": "Додато",
+    "After": "После",
+    "Before": "Пре",
+    "Latest": "Најновије",
+    "Raised": "Прикупљено",
+    "Removed": "Уклоњено",
+    "Retired": "Повучено"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -32916,7 +33112,14 @@
     "Pass": "Stridspass",
     "calendar": "kalender",
     "entry": "post",
-    "official": "officiell"
+    "official": "officiell",
+    "Added": "Tillagda",
+    "After": "Efter",
+    "Before": "Före",
+    "Latest": "Senaste",
+    "Raised": "Insamlat",
+    "Removed": "Borttagna",
+    "Retired": "Pensionerade"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -34104,7 +34307,14 @@
     "Pass": "บัตรผ่าน",
     "calendar": "ปฏิทิน",
     "entry": "รายการ",
-    "official": "ทางการ"
+    "official": "ทางการ",
+    "Added": "เพิ่มแล้ว",
+    "After": "หลังจาก",
+    "Before": "ก่อน",
+    "Latest": "ล่าสุด",
+    "Raised": "ระดมทุนได้",
+    "Removed": "นำออกแล้ว",
+    "Retired": "เลิกใช้แล้ว"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -35060,7 +35270,14 @@
     "Today": "Ngayon",
     "calendar": "kalendaryo",
     "entry": "tala",
-    "official": "opisyal"
+    "official": "opisyal",
+    "Added": "Idinagdag",
+    "After": "Pagkatapos",
+    "Before": "Bago",
+    "Latest": "Pinakabago",
+    "Raised": "Itinaas",
+    "Removed": "Inalis",
+    "Retired": "Retirado"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -36245,7 +36462,14 @@
     "Pass": "Savaş Bileti",
     "calendar": "takvim",
     "entry": "kayıt",
-    "official": "resmi"
+    "official": "resmi",
+    "Added": "Eklendi",
+    "After": "Sonra",
+    "Before": "Önce",
+    "Latest": "En yeni",
+    "Raised": "Toplanan",
+    "Removed": "Kaldırıldı",
+    "Retired": "Emekliye ayrıldı"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -37422,7 +37646,14 @@
     "Pass": "Бойовий пропуск",
     "calendar": "календар",
     "entry": "подія",
-    "official": "офіційний"
+    "official": "офіційний",
+    "Added": "Додано",
+    "After": "Після",
+    "Before": "До",
+    "Latest": "Остання",
+    "Raised": "Зібрано",
+    "Removed": "Видалено",
+    "Retired": "Виведено з гри"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -38588,7 +38819,14 @@
     "Pass": "Pass",
     "calendar": "lịch",
     "entry": "mục",
-    "official": "chính thức"
+    "official": "chính thức",
+    "Added": "Đã thêm",
+    "After": "Sau",
+    "Before": "Trước",
+    "Latest": "Mới nhất",
+    "Raised": "Đã huy động",
+    "Removed": "Đã xóa",
+    "Retired": "Đã ngừng sử dụng"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -39776,6 +40014,13 @@
     "Pass": "通行证",
     "calendar": "日历",
     "entry": "条目",
-    "official": "官方"
+    "official": "官方",
+    "Added": "新增",
+    "After": "之后",
+    "Before": "之前",
+    "Latest": "最新",
+    "Raised": "已筹集",
+    "Removed": "移除",
+    "Retired": "退役"
   }
 }

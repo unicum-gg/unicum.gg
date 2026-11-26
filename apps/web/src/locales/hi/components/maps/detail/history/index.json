@@ -6,7 +6,7 @@
   "in-the-game": "गेम में",
   "n-changes": "{count, plural, one {# बदलाव} other {# बदलाव}}",
   "not-released-wargaming-can-still": "जारी नहीं किया गया। अपडेट आने से पहले Wargaming इसमें से कुछ भी बदल या ड्रॉप कर सकता है।",
-  "removed": "हटाएं",
+  "removed": "हटाया गया",
   "title": "मैप {map} में बदलाव",
   "update": "अद्यतन {version}"
 }

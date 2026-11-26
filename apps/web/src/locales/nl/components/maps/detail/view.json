@@ -5,5 +5,7 @@
   "n-random-events": "{count, plural, one {# willekeurig evenement} other {# willekeurige evenementen}}",
   "random-events": "Willekeurige evenementen",
   "size": "Grootte",
-  "team-size": "Teamgrootte"
+  "team-size": "Teamgrootte",
+  "retired": "Uit dienst",
+  "retired-span": "In het spel van update {first} tot update {last}"
 }

@@ -5,7 +5,7 @@
   "filter-earned": "Заработано",
   "filter-missing": "Отсутствуют",
   "filter-obtainable": "Можно получить",
-  "filter-retired": "Выведены",
+  "filter-retired": "Выведено",
   "no-achievement-matches-these-filters": "Нет достижений, соответствующих этим фильтрам.",
   "search-achievements": "Искать достижения",
   "search-among-n-achievements": "Поиск среди достижений: {count}"

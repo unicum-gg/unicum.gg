@@ -16,7 +16,12 @@
     "artillery-headquarters": "Tüzérségi főhadiszállás",
     "comms-centers": "Kommunikációs központok",
     "observation-posts": "Megfigyelőállások",
-    "points-of-interest": "Fontos pontok"
+    "points-of-interest": "Fontos pontok",
+    "visuals": "Szintén átdolgozva",
+    "minimap": "Minitérkép",
+    "relief": "Terep",
+    "objects": "Objektumok",
+    "measured": "Mért"
   },
   "summary": {
     "added": "{name} hozzáadva",
@@ -34,7 +39,45 @@
     "moved": "{name} mozgás",
     "count-changed": "{name}: {before} → {after}",
     "value-changed": "{name}: {before} → {after}",
-    "value-set": "{name}: {after}"
+    "value-set": "{name}: {after}",
+    "minimap-redrawn": "Újrarajzolva",
+    "relief-both": "Legfeljebb {rise} m-rel megemelve, legfeljebb {drop} m-es ledobással",
+    "relief-raised": "Legfeljebb {rise} m-rel megemelve",
+    "relief-lowered": "Legfeljebb {drop} m-es ledobással",
+    "relief-rework": "A pálya nagy részén átformálva, legfeljebb {max} m-rel",
+    "objects-added": "Hozzáadva: {list}",
+    "objects-removed": "Eltávolítva: {list}",
+    "objects-rebuilt": "Újjáépítve szerte a pályán",
+    "relief-rebuilt": "Átformálva a pálya egészén",
+    "measured-between": "Összehasonlítás {from} és {through} frissítés között: közben egyetlen játék-kliens sem maradt fenn"
   },
-  "name-with-mode": "{name} ({mode})"
+  "name-with-mode": "{name} ({mode})",
+  "image": {
+    "before": "Előtte",
+    "after": "Utána"
+  },
+  "object": {
+    "buildings": "{count, plural, one {# épület} other {# épület}}",
+    "fences": "{count, plural, one {# kerítés vagy fal} other {# kerítés és fal}}",
+    "rocks": "{count, plural, one {# szikla} other {# szikla}}",
+    "military": "{count, plural, one {# katonai objektum} other {# katonai objektum}}",
+    "bridges": "{count, plural, one {# híd} other {# híd}}",
+    "vegetation": "{count, plural, one {# fa vagy bokor} other {# fa és bokor}}",
+    "props": "{count, plural, one {# egyéb objektum} other {# egyéb objektum}}"
+  },
+  "aspect": {
+    "ground": "talajtextúrák",
+    "sky": "égbolt és világítás",
+    "sound": "hang",
+    "water": "víz",
+    "effects": "effektek",
+    "vegetation": "növényzet",
+    "models": "modellek és textúrák"
+  },
+  "legend": {
+    "raised": "Megemelve",
+    "lowered": "Lejjebb engedve",
+    "added": "Hozzáadva",
+    "removed": "Eltávolítva"
+  }
 }

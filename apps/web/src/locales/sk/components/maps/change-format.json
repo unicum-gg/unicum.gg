@@ -16,7 +16,12 @@
     "artillery-headquarters": "Topniški štab",
     "comms-centers": "Komunikačné centrá",
     "observation-posts": "Pozorovacie stanovištia",
-    "points-of-interest": "Body záujmu"
+    "points-of-interest": "Body záujmu",
+    "visuals": "Taktiež prepracované",
+    "minimap": "Minizemljevid",
+    "relief": "Teren",
+    "objects": "Objekty",
+    "measured": "Zmerané"
   },
   "summary": {
     "added": "{name}: dodano",
@@ -34,7 +39,45 @@
     "moved": "{name}: presun",
     "count-changed": "Počet {name}: {before} → {after}",
     "value-changed": "Hodnota {name}: {before} → {after}",
-    "value-set": "Hodnota {name}: {after}"
+    "value-set": "Hodnota {name}: {after}",
+    "minimap-redrawn": "Prekreslené",
+    "relief-both": "Vyzbierané až do výšky {rise} m, znížené až o {drop} m",
+    "relief-raised": "Vyzbierané až do výšky {rise} m",
+    "relief-lowered": "Znížené až o {drop} m",
+    "relief-rework": "Prepracované po väčšej časti mapy, až do {max} m",
+    "objects-added": "Pridané: {list}",
+    "objects-removed": "Odstránené: {list}",
+    "objects-rebuilt": "Obnovené po celej mape",
+    "relief-rebuilt": "Prepracované po celej mape",
+    "measured-between": "Porovnané medzi aktualizáciou {from} a aktualizáciou {through}: žiadny vtedajší klient hry sa nezachoval"
   },
-  "name-with-mode": "{name} ({mode})"
+  "name-with-mode": "{name} ({mode})",
+  "image": {
+    "before": "Pred",
+    "after": "Po"
+  },
+  "object": {
+    "buildings": "{count, plural, one {# budova} few {# budovy} other {# budov}}",
+    "fences": "{count, plural, one {# plot alebo múr} few {# ploty alebo múry} other {# plotov alebo múrov}}",
+    "rocks": "{count, plural, one {# skala} few {# skaly} other {# skál}}",
+    "military": "{count, plural, one {# vojenský objekt} few {# vojenské objekty} other {# vojenských objektov}}",
+    "bridges": "{count, plural, one {# most} few {# mosty} other {# mostov}}",
+    "vegetation": "{count, plural, one {# strom alebo krík} few {# stromy alebo kríky} other {# stromov alebo kríkov}}",
+    "props": "{count, plural, one {# iný objekt} few {# iné objekty} other {# iných objektov}}"
+  },
+  "aspect": {
+    "ground": "textúry terénu",
+    "sky": "obloha a osvetlenie",
+    "sound": "zvuk",
+    "water": "voda",
+    "effects": "efekty",
+    "vegetation": "vegetácia",
+    "models": "modely a textúry"
+  },
+  "legend": {
+    "raised": "Vyzbierané",
+    "lowered": "Znížené",
+    "added": "Pridané",
+    "removed": "Odstránené"
+  }
 }

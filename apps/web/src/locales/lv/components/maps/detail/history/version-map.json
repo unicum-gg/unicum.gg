@@ -1,5 +1,8 @@
 {
   "after": "Pēc",
+  "badge": "Pozīcijas",
+  "badge-latest": "Pozīcijas · jaunākā minikarte",
+  "badge-nearest": "Pozīcijas · minikarte {version}",
   "before": "Pirms",
   "enlarge": "Palielināt kartes {map} minikarti"
 }

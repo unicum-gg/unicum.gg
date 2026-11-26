@@ -5,5 +5,7 @@
   "n-random-events": "{count, plural, one {# slumpmässigt evenemang} other {# slumpmässiga evenemang}}",
   "random-events": "Slumpevenemang",
   "size": "Storlek",
-  "team-size": "Lagstorlek"
+  "team-size": "Lagstorlek",
+  "retired": "Pensionerade",
+  "retired-span": "I spelet från uppdatering {first} till uppdatering {last}"
 }

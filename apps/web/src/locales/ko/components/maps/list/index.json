@@ -5,5 +5,7 @@
   "no-maps-match-your-filters": "필터와 일치하는 지도가 없습니다.",
   "search": "지도 {count}개 중 검색",
   "search-label": "지도 검색",
-  "special-map": "특별 지도"
+  "special-map": "특별 지도",
+  "retired-maps": "퇴역 지도",
+  "retired-maps-intro": "{count, plural, other {# 지도는 게임에서 퇴장했습니다. 각 지도는 해당 지도가 포함된 마지막 업데이트 당시의 모습으로 표시됩니다.}}"
 }

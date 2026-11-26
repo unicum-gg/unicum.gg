@@ -5,5 +5,7 @@
   "n-random-events": "{count, plural, one {# náhodná událost} few {# náhodné události} many {# náhodných událostí} other {# náhodných událostí}}",
   "random-events": "Náhodné události",
   "size": "Velikost",
-  "team-size": "Velikost týmu"
+  "team-size": "Velikost týmu",
+  "retired": "Vyřazeno",
+  "retired-span": "Ve hře od aktualizace {first} do aktualizace {last}"
 }

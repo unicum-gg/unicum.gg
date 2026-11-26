@@ -1,5 +1,8 @@
 {
-  "after": "Után",
-  "before": "Előtt",
+  "after": "Utána",
+  "badge": "Pozíciók",
+  "badge-latest": "Pozíciók · legújabb minitérkép",
+  "badge-nearest": "Pozíciók · {version} minitérkép",
+  "before": "Előtte",
   "enlarge": "Nagyítsd ki {map} minitérképét"
 }

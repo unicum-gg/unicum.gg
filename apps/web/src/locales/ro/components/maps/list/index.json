@@ -5,5 +5,7 @@
   "no-maps-match-your-filters": "Nicio hartă nu corespunde filtrelor tale.",
   "search": "Caută printre {count} hărți",
   "search-label": "Caută Hărţile",
-  "special-map": "Hartă specială"
+  "special-map": "Hartă specială",
+  "retired-maps": "Hărți retrase",
+  "retired-maps-intro": "{count, plural, one {# hartă a ieşit din joc} few {# hărți au ieşit din joc} other {# hărți au ieşit din joc}}. Fiecare este afișată așa cum era în ultima actualizare în care era disponibilă."
 }

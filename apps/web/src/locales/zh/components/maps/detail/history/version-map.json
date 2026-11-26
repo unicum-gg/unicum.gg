@@ -1,5 +1,8 @@
 {
   "after": "之后",
+  "badge": "位置",
+  "badge-latest": "位置 · 最新小地图",
+  "badge-nearest": "位置 · 小地图 {version}",
   "before": "之前",
   "enlarge": "放大 {map} 的小地图"
 }

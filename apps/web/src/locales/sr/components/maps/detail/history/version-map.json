@@ -1,5 +1,8 @@
 {
-  "after": "Након",
+  "after": "После",
+  "badge": "Позиције",
+  "badge-latest": "Позиције · Најновије mini-mapa",
+  "badge-nearest": "Позиције · mini-mapa {version}",
   "before": "Пре",
   "enlarge": "Uvećaj mini-mapu mape {map}"
 }

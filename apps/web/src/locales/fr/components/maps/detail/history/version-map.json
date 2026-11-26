@@ -1,5 +1,8 @@
 {
   "after": "Après",
+  "badge": "Positions",
+  "badge-latest": "Positions · dernière minicarte",
+  "badge-nearest": "Positions · minicarte {version}",
   "before": "Avant",
   "enlarge": "Agrandir la minicarte de {map}"
 }

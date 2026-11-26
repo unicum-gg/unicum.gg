@@ -10,7 +10,7 @@
   "of-that-total": "af det samlede beløb",
   "pledges-cover": "Tilsagnene dækker nu den månedlige regning.",
   "raised-amount": "{amount} rejst",
-  "raised-label": "Rejst",
+  "raised-label": "Indsamlet",
   "run-at-a-loss": "{name} har kørt med underskud siden {since}.",
   "run-rate": "Månedligt niveau: {pledged}/md. lovet mod {cost}/md. for driften.",
   "spent-since-launch": "Brugt siden lanceringen",

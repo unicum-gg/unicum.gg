@@ -5,5 +5,7 @@
   "no-maps-match-your-filters": "Inga kartor matchar dina filter.",
   "search": "Hitta bland {count} kartor",
   "search-label": "Hitta kartor",
-  "special-map": "Specialkarta"
+  "special-map": "Specialkarta",
+  "retired-maps": "Pensionerade kartor",
+  "retired-maps-intro": "{count, plural, one {# karta är borta från spelet} other {# kartor är borta från spelet}}. Varje karta visas som den såg ut i den senaste uppdatering som hade den."
 }

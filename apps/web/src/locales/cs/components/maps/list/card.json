@@ -1,4 +1,6 @@
 {
   "random-events": "Náhodné události mohou tuto mapu během bitvy změnit",
-  "minimap-alt": "Minimap {map}"
+  "minimap-alt": "Minimap {map}",
+  "retired-until": "Do {version}",
+  "retired-span": "Ve hře od aktualizace {first} do aktualizace {last}"
 }

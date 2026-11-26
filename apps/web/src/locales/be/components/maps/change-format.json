@@ -16,7 +16,12 @@
     "artillery-headquarters": "Штаб артылерыі",
     "comms-centers": "Цэнтры сувязі",
     "observation-posts": "Назіральныя пункты",
-    "points-of-interest": "Ачкі цікавасці"
+    "points-of-interest": "Ачкі цікавасці",
+    "visuals": "Таксама перапрацавана",
+    "minimap": "Міні-карта",
+    "relief": "Рэльеф",
+    "objects": "Аб’екты",
+    "measured": "Вымерана"
   },
   "summary": {
     "added": "{name} дададзены",
@@ -34,7 +39,45 @@
     "moved": "Перамяшчэнне {name}",
     "count-changed": "{name}: {before} → {after}",
     "value-changed": "{name}: {before} → {after}",
-    "value-set": "{name}: {after}"
+    "value-set": "{name}: {after}",
+    "minimap-redrawn": "Перамалявана",
+    "relief-both": "Сабрана да {rise} м і паніжана да {drop} м",
+    "relief-raised": "Сабрана да {rise} м",
+    "relief-lowered": "Паніжана да {drop} м",
+    "relief-rework": "Зменены рэльеф па ўсім полі карты, да {max} м",
+    "objects-added": "Дададзена: {list}",
+    "objects-removed": "Выдалена: {list}",
+    "objects-rebuilt": "Перабудавана па ўсім полі карты",
+    "relief-rebuilt": "Рэльеф зменены па ўсім полі карты",
+    "measured-between": "Параўнана паміж абнаўленнем {from} і абнаўленнем {through}: ніводная прамежкавая версія кліента гульні не захавалася"
   },
-  "name-with-mode": "{name} ({mode})"
+  "name-with-mode": "{name} ({mode})",
+  "image": {
+    "before": "Да",
+    "after": "Пасля"
+  },
+  "object": {
+    "buildings": "{count, plural, one {# будынак} few {# будынкі} many {# будынкаў} other {# будынка}}",
+    "fences": "{count, plural, one {# плот або сцяна} few {# платы або сцены} many {# платоў і сцен} other {# плотаў і сцен}}",
+    "rocks": "{count, plural, one {# камень} few {# камяні} many {# камянёў} other {# каменя}}",
+    "military": "{count, plural, one {# ваенны аб’ект} few {# ваенныя аб’екты} many {# ваенных аб’ектаў} other {# ваеннага аб’екта}}",
+    "bridges": "{count, plural, one {# мост} few {# масты} many {# мастоў} other {# моста}}",
+    "vegetation": "{count, plural, one {# дрэва або куст} few {# дрэвы або кусты} many {# дрэў і кустоў} other {# дрэва або куста}}",
+    "props": "{count, plural, one {# іншы аб’ект} few {# іншыя аб’екты} many {# іншых аб’ектаў} other {# іншага аб’екта}}"
+  },
+  "aspect": {
+    "ground": "тэкстуры зямлі",
+    "sky": "неба і асвятленне",
+    "sound": "гук",
+    "water": "вада",
+    "effects": "эфекты",
+    "vegetation": "расліннасць",
+    "models": "мадэлі і тэкстуры"
+  },
+  "legend": {
+    "raised": "Сабрана",
+    "lowered": "Паніжана",
+    "added": "Дададзена",
+    "removed": "Выдалена"
+  }
 }

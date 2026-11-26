@@ -16,7 +16,12 @@
     "artillery-headquarters": "तोपखाना मुख्यालय",
     "comms-centers": "संचार केंद्र",
     "observation-posts": "निगरानी चौकियां",
-    "points-of-interest": "रुचि के बिंदु"
+    "points-of-interest": "रुचि के बिंदु",
+    "visuals": "इसके अलावा पुनः तैयार किया गया",
+    "minimap": "मिनीमैप",
+    "relief": "भूभाग",
+    "objects": "वस्तुएँ",
+    "measured": "मापा गया"
   },
   "summary": {
     "added": "{name} जोड़ा गया",
@@ -34,7 +39,45 @@
     "moved": "{name} का स्थान बदला गया",
     "count-changed": "{name}: {before} → {after}",
     "value-changed": "{name}: {before} → {after}",
-    "value-set": "{name}: {after}"
+    "value-set": "{name}: {after}",
+    "minimap-redrawn": "फिर से बनाया गया",
+    "relief-both": "{rise} मीटर तक बढ़ाया गया, {drop} मीटर तक कम किया गया",
+    "relief-raised": "{rise} मीटर तक बढ़ाया गया",
+    "relief-lowered": "{drop} मीटर तक कम किया गया",
+    "relief-rework": "नक्शे के बड़े हिस्से में {max} मीटर तक नया आकार दिया गया",
+    "objects-added": "जोड़ा गया: {list}",
+    "objects-removed": "हटाया गया: {list}",
+    "objects-rebuilt": "नक्शे भर में फिर से बनाया गया",
+    "relief-rebuilt": "पूरे नक्शे भर में नया आकार दिया गया",
+    "measured-between": "अपडेट {from} और अपडेट {through} के बीच तुलना की गई, बीच का कोई गेम क्लाइंट अब उपलब्ध नहीं है"
   },
-  "name-with-mode": "{name} ({mode})"
+  "name-with-mode": "{name} ({mode})",
+  "image": {
+    "before": "पहले",
+    "after": "बाद"
+  },
+  "object": {
+    "buildings": "{count, plural, one {# इमारत} other {# इमारतें}}",
+    "fences": "{count, plural, one {# बाड़ या दीवार} other {# बाड़ और दीवारें}}",
+    "rocks": "{count, plural, one {# चट्टान} other {# चट्टानें}}",
+    "military": "{count, plural, one {# सैन्य वस्तु} other {# सैन्य वस्तुएँ}}",
+    "bridges": "{count, plural, one {# पुल} other {# पुल}}",
+    "vegetation": "{count, plural, one {# पेड़ या झाड़ी} other {# पेड़ और झाड़ियाँ}}",
+    "props": "{count, plural, one {# अन्य वस्तु} other {# अन्य वस्तुएँ}}"
+  },
+  "aspect": {
+    "ground": "ज़मीन की टेक्सचर",
+    "sky": "आकाश और रोशनी",
+    "sound": "ध्वनि",
+    "water": "पानी",
+    "effects": "प्रभाव",
+    "vegetation": "वनस्पति",
+    "models": "मॉडल और टेक्सचर"
+  },
+  "legend": {
+    "raised": "बढ़ाया गया",
+    "lowered": "कम किया गया",
+    "added": "जोड़ा गया",
+    "removed": "हटाया गया"
+  }
 }

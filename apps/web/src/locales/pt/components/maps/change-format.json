@@ -16,7 +16,12 @@
     "artillery-headquarters": "Quartel-General da Artilharia",
     "comms-centers": "Centros de comunicação",
     "observation-posts": "Postos de observação",
-    "points-of-interest": "Pontos de interesse"
+    "points-of-interest": "Pontos de interesse",
+    "visuals": "Também reformulado",
+    "minimap": "Minimapa",
+    "relief": "Terreno",
+    "objects": "Objetos",
+    "measured": "Medido"
   },
   "summary": {
     "added": "{name} adicionado",
@@ -34,7 +39,45 @@
     "moved": "{name} movido",
     "count-changed": "{name}: {before} → {after}",
     "value-changed": "{name}: {before} → {after}",
-    "value-set": "{name}: {after}"
+    "value-set": "{name}: {after}",
+    "minimap-redrawn": "Redesenhado",
+    "relief-both": "Arrecadado até {rise} m, rebaixado até {drop} m",
+    "relief-raised": "Arrecadado até {rise} m",
+    "relief-lowered": "Rebaixado até {drop} m",
+    "relief-rework": "Reformulado em toda a parte do mapa, até {max} m",
+    "objects-added": "Adicionado: {list}",
+    "objects-removed": "Removido: {list}",
+    "objects-rebuilt": "Reconstruído em toda a parte do mapa",
+    "relief-rebuilt": "Reformulado em todo o mapa",
+    "measured-between": "Comparado entre a atualização {from} e a atualização {through}: não sobrevive nenhum cliente do jogo entre elas"
   },
-  "name-with-mode": "{name} ({mode})"
+  "name-with-mode": "{name} ({mode})",
+  "image": {
+    "before": "Antes",
+    "after": "Depois"
+  },
+  "object": {
+    "buildings": "{count, plural, one {# edifício} other {# edifícios}}",
+    "fences": "{count, plural, one {# cerca ou muro} other {# cercas e muros}}",
+    "rocks": "{count, plural, one {# rocha} other {# rochas}}",
+    "military": "{count, plural, one {# objeto militar} other {# objetos militares}}",
+    "bridges": "{count, plural, one {# ponte} other {# pontes}}",
+    "vegetation": "{count, plural, one {# árvore ou arbusto} other {# árvores e arbustos}}",
+    "props": "{count, plural, one {# outro objeto} other {# outros objetos}}"
+  },
+  "aspect": {
+    "ground": "texturas do terreno",
+    "sky": "céu e iluminação",
+    "sound": "som",
+    "water": "água",
+    "effects": "efeitos",
+    "vegetation": "vegetação",
+    "models": "modelos e texturas"
+  },
+  "legend": {
+    "raised": "Arrecadado",
+    "lowered": "Rebaixado",
+    "added": "Adicionado",
+    "removed": "Removido"
+  }
 }

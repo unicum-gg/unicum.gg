@@ -1,5 +1,8 @@
 {
   "after": "Po",
+  "badge": "Pozicijos",
+  "badge-latest": "Pozicijos · naujausias minižemėlapis",
+  "badge-nearest": "Pozicijos · minižemėlapis {version}",
   "before": "Prieš",
   "enlarge": "Padidinti {map} minižemėlapį"
 }

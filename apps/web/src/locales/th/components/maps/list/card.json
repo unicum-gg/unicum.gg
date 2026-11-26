@@ -1,4 +1,6 @@
 {
   "random-events": "เหตุการณ์สุ่มอาจเปลี่ยนแผนที่นี้ระหว่างการรบ",
-  "minimap-alt": "แผนที่ย่อของ {map}"
+  "minimap-alt": "แผนที่ย่อของ {map}",
+  "retired-until": "จนถึง {version}",
+  "retired-span": "ในเกมตั้งแต่อัปเดต {first} ถึงอัปเดต {last}"
 }

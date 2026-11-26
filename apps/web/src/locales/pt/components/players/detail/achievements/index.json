@@ -5,7 +5,7 @@
   "filter-earned": "Obtida",
   "filter-missing": "Ausentes",
   "filter-obtainable": "Conquistáveis",
-  "filter-retired": "Retirados",
+  "filter-retired": "Retirado",
   "no-achievement-matches-these-filters": "Nenhuma conquista corresponde a estes filtros.",
   "search-achievements": "Pesquisar conquistas",
   "search-among-n-achievements": "Pesquisar entre {count} conquistas"

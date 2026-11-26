@@ -16,7 +16,12 @@
     "artillery-headquarters": "Quartier generale dell’artiglieria",
     "comms-centers": "Centri di comunicazione",
     "observation-posts": "Postazioni di osservazione",
-    "points-of-interest": "Punti di interesse"
+    "points-of-interest": "Punti di interesse",
+    "visuals": "Anche rielaborato",
+    "minimap": "Minimappa",
+    "relief": "Terreno",
+    "objects": "Oggetti",
+    "measured": "Misurato"
   },
   "summary": {
     "added": "Aggiunto {name}",
@@ -34,7 +39,45 @@
     "moved": "Movimento di {name}",
     "count-changed": "{name}: {before} → {after}",
     "value-changed": "{name}: {before} → {after}",
-    "value-set": "{name}: {after}"
+    "value-set": "{name}: {after}",
+    "minimap-redrawn": "Ridisegnata",
+    "relief-both": "Raccolti fino a {rise} m, abbassati fino a {drop} m",
+    "relief-raised": "Raccolti fino a {rise} m",
+    "relief-lowered": "Abbassati fino a {drop} m",
+    "relief-rework": "Rimodellato attraverso gran parte della mappa, fino a {max} m",
+    "objects-added": "Aggiunto: {list}",
+    "objects-removed": "Rimosso: {list}",
+    "objects-rebuilt": "Ricostruito attraverso la mappa",
+    "relief-rebuilt": "Rimodellato attraverso l’intera mappa",
+    "measured-between": "Confrontato tra l’aggiornamento {from} e l’aggiornamento {through}: nessun client di gioco intermedio sopravvive"
   },
-  "name-with-mode": "{name} ({mode})"
+  "name-with-mode": "{name} ({mode})",
+  "image": {
+    "before": "Prima",
+    "after": "Dopo"
+  },
+  "object": {
+    "buildings": "{count, plural, one {# edificio} other {# edifici}}",
+    "fences": "{count, plural, one {# recinzione o muro} other {# recinzioni e muri}}",
+    "rocks": "{count, plural, one {# roccia} other {# rocce}}",
+    "military": "{count, plural, one {# oggetto militare} other {# oggetti militari}}",
+    "bridges": "{count, plural, one {# ponte} other {# ponti}}",
+    "vegetation": "{count, plural, one {# albero o cespuglio} other {# alberi e cespugli}}",
+    "props": "{count, plural, one {# altro oggetto} other {# altri oggetti}}"
+  },
+  "aspect": {
+    "ground": "texture del terreno",
+    "sky": "cielo e illuminazione",
+    "sound": "suono",
+    "water": "acqua",
+    "effects": "effetti",
+    "vegetation": "vegetazione",
+    "models": "modelli e texture"
+  },
+  "legend": {
+    "raised": "Raccolti",
+    "lowered": "Abbassati",
+    "added": "Aggiunto",
+    "removed": "Rimosso"
+  }
 }

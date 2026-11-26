@@ -5,7 +5,7 @@
   "filter-earned": "megszerzett",
   "filter-missing": "Hiányzó",
   "filter-obtainable": "Megszerezhető",
-  "filter-retired": "Visszavont",
+  "filter-retired": "Visszavonva",
   "no-achievement-matches-these-filters": "Egyetlen eredmény sem felel meg ezeknek a szűrőknek.",
   "search-achievements": "Kitüntetések keresése",
   "search-among-n-achievements": "Keresés {count} eredmény között"

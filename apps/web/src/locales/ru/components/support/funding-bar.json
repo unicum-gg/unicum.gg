@@ -10,7 +10,7 @@
   "of-that-total": "от этой суммы",
   "pledges-cover": "Обещанные взносы теперь покрывают ежемесячный счёт.",
   "raised-amount": "Собрано {amount}",
-  "raised-label": "Собрано",
+  "raised-label": "Повышено",
   "run-at-a-loss": "{name} работает в убыток с {since}.",
   "run-rate": "Ежемесячный темп: взносы {pledged}/мес. против расходов {cost}/мес.",
   "spent-since-launch": "Потрачено с момента запуска",

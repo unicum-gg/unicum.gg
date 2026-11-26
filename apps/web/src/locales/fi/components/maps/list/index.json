@@ -5,5 +5,7 @@
   "no-maps-match-your-filters": "Mikään kartta ei vastaa suodattimiasi.",
   "search": "Hae {count} kartan joukosta",
   "search-label": "Etsi kartat",
-  "special-map": "Erikoiskartta"
+  "special-map": "Erikoiskartta",
+  "retired-maps": "Käytöstä poistetut kartat",
+  "retired-maps-intro": "{count, plural, one {# kartta poistui pelistä} other {# karttaa poistui pelistä}}. Kukin niistä on näytetty sellaisena kuin se oli viimeisimmässä päivityksessä, jossa se oli."
 }

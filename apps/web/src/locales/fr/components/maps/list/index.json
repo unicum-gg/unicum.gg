@@ -5,5 +5,7 @@
   "no-maps-match-your-filters": "Aucune carte ne correspond à vos filtres.",
   "search": "Rechercher parmi {count} cartes",
   "search-label": "Chercher des cartes",
-  "special-map": "Carte spéciale"
+  "special-map": "Carte spéciale",
+  "retired-maps": "Cartes retirées",
+  "retired-maps-intro": "{count, plural, one {# carte a quitté le jeu} other {# cartes ont quitté le jeu}}. Chacune est affichée telle qu’elle apparaissait lors de la dernière mise à jour où elle était présente."
 }

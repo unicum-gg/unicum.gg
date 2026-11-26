@@ -10,7 +10,7 @@
   "of-that-total": "占总额",
   "pledges-cover": "目前的承诺捐款已覆盖月度账单。",
   "raised-amount": "筹集了{amount}",
-  "raised-label": "筹集",
+  "raised-label": "已筹集",
   "run-at-a-loss": "{name}自{since}以来一直在亏损运营。",
   "run-rate": "月度运营速度：已承诺{pledged}/月，运营成本为{cost}/月。",
   "spent-since-launch": "上线以来支出",

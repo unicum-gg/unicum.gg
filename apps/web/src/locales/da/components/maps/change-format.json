@@ -16,7 +16,12 @@
     "artillery-headquarters": "Artillerihovedkvarter",
     "comms-centers": "Kommunikationscentre",
     "observation-posts": "Observationsposter",
-    "points-of-interest": "Vigtige positioner"
+    "points-of-interest": "Vigtige positioner",
+    "visuals": "Også omarbejdet",
+    "minimap": "Minikort",
+    "relief": "Terræn",
+    "objects": "Objekter",
+    "measured": "Målt"
   },
   "summary": {
     "added": "Tilføjet: {name}",
@@ -34,7 +39,45 @@
     "moved": "Flyttet: {name}",
     "count-changed": "{name}: {before} → {after}",
     "value-changed": "{name}: {before} → {after}",
-    "value-set": "{name}: {after}"
+    "value-set": "{name}: {after}",
+    "minimap-redrawn": "Tegnet om",
+    "relief-both": "Indsamlet op til {rise} m, sænket op til {drop} m",
+    "relief-raised": "Indsamlet op til {rise} m",
+    "relief-lowered": "Sænket op til {drop} m",
+    "relief-rework": "Omformet på tværs af en stor del af kortet, op til {max} m",
+    "objects-added": "Tilføjet: {list}",
+    "objects-removed": "Fjernet: {list}",
+    "objects-rebuilt": "Genopbygget på tværs af kortet",
+    "relief-rebuilt": "Omformet på tværs af hele kortet",
+    "measured-between": "Sammenlignet mellem opdatering {from} og opdatering {through}: ingen spilklient imellem findes længere"
   },
-  "name-with-mode": "{name} ({mode})"
+  "name-with-mode": "{name} ({mode})",
+  "image": {
+    "before": "Før",
+    "after": "Efter"
+  },
+  "object": {
+    "buildings": "{count, plural, one {# bygning} other {# bygninger}}",
+    "fences": "{count, plural, one {# hegn eller mur} other {# hegn og mure}}",
+    "rocks": "{count, plural, one {# sten} other {# sten}}",
+    "military": "{count, plural, one {# militært objekt} other {# militære objekter}}",
+    "bridges": "{count, plural, one {# bro} other {# broer}}",
+    "vegetation": "{count, plural, one {# træ eller busk} other {# træer og buske}}",
+    "props": "{count, plural, one {# andet objekt} other {# andre objekter}}"
+  },
+  "aspect": {
+    "ground": "jordteksturer",
+    "sky": "himmel og belysning",
+    "sound": "lyd",
+    "water": "vand",
+    "effects": "effekter",
+    "vegetation": "vegetation",
+    "models": "modeller og teksturer"
+  },
+  "legend": {
+    "raised": "Indsamlet",
+    "lowered": "Sænket",
+    "added": "Tilføjet",
+    "removed": "Fjernet"
+  }
 }
