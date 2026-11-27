@@ -107,6 +107,7 @@ export function MapCard({
           alt={tCard("minimap-alt", { map: map.name })}
           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
           className="transition-transform duration-300 group-hover:scale-105"
+          emptyLabel={map.retired ? tCard("no-minimap") : undefined}
         />
         {!variant && <ThumbBases bases={map.bases} />}
         {(variant ? variant.commonTest : map.commonTest) && (
@@ -124,10 +125,12 @@ export function MapCard({
               </span>
             </TooltipTrigger>
             <TooltipContent>
-              {tCard("retired-span", {
-                first: map.retired.firstVersion,
-                last: map.retired.lastVersion,
-              })}
+              {map.retired.firstVersion === map.retired.lastVersion
+                ? tCard("retired-single", { version: map.retired.lastVersion })
+                : tCard("retired-span", {
+                    first: map.retired.firstVersion,
+                    last: map.retired.lastVersion,
+                  })}
             </TooltipContent>
           </Tooltip>
         )}

@@ -233,6 +233,7 @@ export function MinimapViewer({
           alt={`${detail.name} minimap`}
           sizes="(max-width: 1024px) 100vw, 640px"
           priority
+          emptyLabel={detail.retired ? t("no-minimap") : undefined}
         />
         {eventLayers.length > 0 && (
           <MinimapLayers urls={eventLayers} />

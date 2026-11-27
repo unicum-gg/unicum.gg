@@ -5,6 +5,7 @@
   "control-point": "Control point",
   "danger-zone": "Danger zone:",
   "grid": "Grid",
+  "no-minimap": "No minimap of this map has survived in the archives.",
   "random-events": "Random events",
   "team": "Team {n}"
 }

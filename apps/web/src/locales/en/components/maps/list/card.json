@@ -1,6 +1,8 @@
 {
-  "random-events": "Random events might change this map mid-battle",
   "minimap-alt": "{map} minimap",
+  "no-minimap": "No minimap survives",
+  "random-events": "Random events might change this map mid-battle",
+  "retired-span": "In the game from update {first} to update {last}",
   "retired-until": "Until {version}",
-  "retired-span": "In the game from update {first} to update {last}"
+  "retired-single": "In the game in update {version} only"
 }

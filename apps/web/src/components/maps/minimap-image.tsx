@@ -28,6 +28,7 @@ export function MinimapImage({
   sizes,
   priority,
   className,
+  emptyLabel,
 }: {
   /** The minimap to show, usually the arena's HD one but sometimes a mode
    * variant (the Onslaught play area has its own image). */
@@ -41,6 +42,9 @@ export function MinimapImage({
   sizes?: string;
   priority?: boolean;
   className?: string;
+  /** Said under the placeholder when no image could be found, where the
+   * caller knows why (a retired map no archive kept a minimap of). */
+  emptyLabel?: string;
 }) {
   const [failed, setFailed] = useState<string[]>([]);
   // The test branch of the same mirror, for an arena the live client declares
@@ -71,11 +75,14 @@ export function MinimapImage({
     return (
       <div
         className={cn(
-          "flex items-center justify-center bg-fd-muted text-fd-muted-foreground",
+          // Filling the box like the image it stands in for (`fill` is
+          // absolutely positioned), or it sits at the top of the frame.
+          "absolute inset-0 flex flex-col items-center justify-center gap-2 bg-fd-muted p-3 text-center text-fd-muted-foreground",
           className,
         )}
       >
         <MapTrifoldIcon className="size-1/4 opacity-40" />
+        {emptyLabel ? <span className="text-xs">{emptyLabel}</span> : null}
       </div>
     );
   }
