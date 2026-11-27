@@ -6,5 +6,6 @@
   "size": "आकार",
   "team-size": "टीम का आकार",
   "retired": "रिटायर किया गया",
-  "retired-span": "गेम में अपडेट {first} से अपडेट {last} तक"
+  "retired-span": "गेम में अपडेट {first} से अपडेट {last} तक",
+  "retired-single": "केवल अपडेट {version} में गेम में"
 }

@@ -6,5 +6,6 @@
   "size": "Veličina",
   "team-size": "Veličina tima",
   "retired": "Повучено",
-  "retired-span": "U igri од ажурирања {first} до ажурирања {last}"
+  "retired-span": "U igri од ажурирања {first} до ажурирања {last}",
+  "retired-single": "U igri samo u ажурирање {version}"
 }

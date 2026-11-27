@@ -6,5 +6,6 @@
   "size": "Kích thước",
   "team-size": "Kích thước đội",
   "retired": "Đã ngừng sử dụng",
-  "retired-span": "Trong game từ bản cập nhật {first} đến bản cập nhật {last}"
+  "retired-span": "Trong game từ bản cập nhật {first} đến bản cập nhật {last}",
+  "retired-single": "Trong game chỉ có ở bản cập nhật {version}"
 }

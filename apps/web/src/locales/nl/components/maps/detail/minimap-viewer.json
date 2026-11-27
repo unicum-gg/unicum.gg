@@ -5,6 +5,7 @@
   "control-point": "Controlepunt",
   "danger-zone": "Gevarenzone:",
   "grid": "Raster",
+  "no-minimap": "Geen minimap van deze kaart heeft de archieven overleefd.",
   "random-events": "Willekeurige evenementen",
   "team": "Team {n}"
 }

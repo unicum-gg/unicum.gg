@@ -1,6 +1,8 @@
 {
-  "random-events": "Случајни догађаји могу променити ову мапу усред битке",
   "minimap-alt": "Мини-мапа за {map}",
+  "no-minimap": "Nema preživeli mini-mapa",
+  "random-events": "Случајни догађаји могу променити ову мапу усред битке",
+  "retired-span": "U igri од ажурирања {first} до ажурирања {last}",
   "retired-until": "До верзије {version}",
-  "retired-span": "U igri од ажурирања {first} до ажурирања {last}"
+  "retired-single": "U igri samo u ажурирање {version}"
 }

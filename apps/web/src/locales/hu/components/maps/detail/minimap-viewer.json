@@ -5,6 +5,7 @@
   "control-point": "Ellenőrzőpont",
   "danger-zone": "Veszélyzóna:",
   "grid": "Rács",
+  "no-minimap": "A pálya egyetlen minitérképe sem élte túl az archívumba kerülést.",
   "random-events": "Véletlenszerű események",
   "team": "Csapat {n}"
 }

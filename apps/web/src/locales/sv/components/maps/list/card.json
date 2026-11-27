@@ -1,6 +1,8 @@
 {
-  "random-events": "Slumpevenemang kan förändra den här kartan mitt under striden",
   "minimap-alt": "Minikarta över {map}",
+  "no-minimap": "Ingen minikarta finns kvar",
+  "random-events": "Slumpevenemang kan förändra den här kartan mitt under striden",
+  "retired-span": "I spelet från uppdatering {first} till uppdatering {last}",
   "retired-until": "Till {version}",
-  "retired-span": "I spelet från uppdatering {first} till uppdatering {last}"
+  "retired-single": "Endast i spelet i uppdatering {version}"
 }

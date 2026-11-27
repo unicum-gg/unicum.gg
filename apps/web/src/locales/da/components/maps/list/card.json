@@ -1,6 +1,8 @@
 {
-  "random-events": "Tilfældige begivenheder kan ændre dette kort midt i kampen",
   "minimap-alt": "Minikort over {map}",
+  "no-minimap": "Intet minikort overlevede",
+  "random-events": "Tilfældige begivenheder kan ændre dette kort midt i kampen",
+  "retired-span": "I spillet fra opdatering {first} til opdatering {last}",
   "retired-until": "Indtil {version}",
-  "retired-span": "I spillet fra opdatering {first} til opdatering {last}"
+  "retired-single": "Kun i spillet i opdatering {version}"
 }

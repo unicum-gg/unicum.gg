@@ -6,5 +6,6 @@
   "size": "Розмір",
   "team-size": "Розмір команди",
   "retired": "Виведено з гри",
-  "retired-span": "У грі від оновлення {first} до оновлення {last}"
+  "retired-span": "У грі від оновлення {first} до оновлення {last}",
+  "retired-single": "У грі лише у версії оновлення {version}"
 }

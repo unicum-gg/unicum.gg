@@ -1,6 +1,8 @@
 {
-  "random-events": "Nejauši notikumi kaujas laikā var mainīt šo karti",
   "minimap-alt": "{map} minikarte",
+  "no-minimap": "Nav izdzīvotas minikartes",
+  "random-events": "Nejauši notikumi kaujas laikā var mainīt šo karti",
+  "retired-span": "Spēlē no atjauninājuma {first} līdz atjauninājumam {last}",
   "retired-until": "Līdz {version}",
-  "retired-span": "Spēlē no atjauninājuma {first} līdz atjauninājumam {last}"
+  "retired-single": "Spēlē tikai atjauninājumā {version}"
 }

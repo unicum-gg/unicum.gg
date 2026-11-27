@@ -6,5 +6,6 @@
   "size": "サイズ",
   "team-size": "チームサイズ",
   "retired": "退役",
-  "retired-span": "更新 {first} から更新 {last} までゲーム内"
+  "retired-span": "更新 {first} から更新 {last} までゲーム内",
+  "retired-single": "ゲーム内ではバージョン{version}の更新時のみ"
 }

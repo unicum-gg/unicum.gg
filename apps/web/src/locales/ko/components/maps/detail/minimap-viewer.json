@@ -5,6 +5,7 @@
   "control-point": "점령 지점",
   "danger-zone": "위험 구역:",
   "grid": "그리드",
+  "no-minimap": "이 지도의 미니맵은 기록 보관소에 생존해 있지 않습니다.",
   "random-events": "무작위 이벤트",
   "team": "팀 {n}"
 }

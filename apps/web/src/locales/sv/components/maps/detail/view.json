@@ -6,5 +6,6 @@
   "size": "Storlek",
   "team-size": "Lagstorlek",
   "retired": "Pensionerade",
-  "retired-span": "I spelet från uppdatering {first} till uppdatering {last}"
+  "retired-span": "I spelet från uppdatering {first} till uppdatering {last}",
+  "retired-single": "Endast i spelet i uppdatering {version}"
 }

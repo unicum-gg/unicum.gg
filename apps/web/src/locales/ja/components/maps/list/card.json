@@ -1,6 +1,8 @@
 {
-  "random-events": "ランダムイベントによって戦闘中にこのマップが変化する場合があります",
   "minimap-alt": "{map}のミニマップ",
+  "no-minimap": "生還したミニマップはありません",
+  "random-events": "ランダムイベントによって戦闘中にこのマップが変化する場合があります",
+  "retired-span": "更新 {first} から更新 {last} までゲーム内",
   "retired-until": "バージョン {version}まで",
-  "retired-span": "更新 {first} から更新 {last} までゲーム内"
+  "retired-single": "ゲーム内ではバージョン{version}の更新時のみ"
 }

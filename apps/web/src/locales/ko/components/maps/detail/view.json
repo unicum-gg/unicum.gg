@@ -6,5 +6,6 @@
   "size": "크기",
   "team-size": "팀 크기",
   "retired": "퇴역",
-  "retired-span": "업데이트 {first}부터 업데이트 {last}까지 게임 내"
+  "retired-span": "업데이트 {first}부터 업데이트 {last}까지 게임 내",
+  "retired-single": "업데이트 {version}의 게임 내에서만"
 }

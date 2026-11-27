@@ -5,6 +5,7 @@
   "control-point": "Punto ng kontrol",
   "danger-zone": "Mapanganib na sona:",
   "grid": "Ihahayag",
+  "no-minimap": "Walang minimapa ng mapang ito ang nakaligtas sa mga archive.",
   "random-events": "Random na kaganapan",
   "team": "Koponan {n}"
 }

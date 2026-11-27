@@ -1,0 +1,10 @@
+{
+  "closed-body": "Affichez-le à nouveau pour voir où les joueurs se positionnent sur cette carte.",
+  "closed-title": "Guide de positionnement masqué",
+  "mod": "Installer le mod",
+  "none-body": "Aucune bataille sur cette carte n’a encore été enregistrée. Installez le mod et vos batailles ici permettront de renseigner les positions des joueurs.",
+  "none-title": "Aucune position pour le moment",
+  "open": "Afficher le guide",
+  "retired-body": "Cette carte n’est plus dans le jeu, aucune bataille sur celle-ci ne peut donc être enregistrée.",
+  "retired-title": "Aucune position"
+}

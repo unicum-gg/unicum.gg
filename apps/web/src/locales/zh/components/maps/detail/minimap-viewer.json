@@ -5,6 +5,7 @@
   "control-point": "控制点",
   "danger-zone": "危险区域：",
   "grid": "网格",
+  "no-minimap": "档案中没有存活的此地图小地图。",
   "random-events": "随机事件",
   "team": "队伍 {n}"
 }

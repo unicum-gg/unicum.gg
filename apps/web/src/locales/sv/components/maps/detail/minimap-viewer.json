@@ -5,6 +5,7 @@
   "control-point": "Kontrollpunkt",
   "danger-zone": "Farozon:",
   "grid": "Rutnät",
+  "no-minimap": "Ingen minikarta överlevde i arkiven.",
   "random-events": "Slumpevenemang",
   "team": "Lag {n}"
 }

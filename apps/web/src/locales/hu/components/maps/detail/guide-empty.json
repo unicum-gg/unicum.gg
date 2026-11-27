@@ -1,0 +1,10 @@
+{
+  "closed-body": "Megjelenítés újra, hogy lássa, hol állnak fel a játékosok ezen a pályán.",
+  "closed-title": "Helyezkedési útmutató elrejtve",
+  "mod": "Mod telepítése",
+  "none-body": "Ezen a pályán még egyetlen csata sincs rögzítve. Telepítse a modot, és az itt vívott csaták alapján láthatóvá válik, hol állnak fel a játékosok.",
+  "none-title": "Még nincsenek pozíciók",
+  "open": "Útmutató megjelenítése",
+  "retired-body": "Ez a pálya már nincs a játékban, ezért nem lehet rajta csatát rögzíteni.",
+  "retired-title": "Nincsenek pozíciók"
+}

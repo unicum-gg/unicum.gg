@@ -6,5 +6,6 @@
   "size": "Dimensiune",
   "team-size": "Dimensiune echipă",
   "retired": "Retras",
-  "retired-span": "În joc de la actualizarea {first} până la actualizarea {last}"
+  "retired-span": "În joc de la actualizarea {first} până la actualizarea {last}",
+  "retired-single": "Doar în joc, în actualizarea {version}"
 }

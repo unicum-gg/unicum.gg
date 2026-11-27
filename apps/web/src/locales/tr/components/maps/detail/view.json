@@ -6,5 +6,6 @@
   "size": "Boyut",
   "team-size": "Takım boyutu",
   "retired": "Emekliye ayrıldı",
-  "retired-span": "Oyunda {first} güncellemesinden {last} güncellemesine kadar"
+  "retired-span": "Oyunda {first} güncellemesinden {last} güncellemesine kadar",
+  "retired-single": "Yalnızca {version} güncellemesinde oyunda"
 }

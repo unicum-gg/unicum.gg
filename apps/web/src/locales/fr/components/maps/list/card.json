@@ -1,6 +1,8 @@
 {
-  "random-events": "Des événements aléatoires peuvent modifier cette carte en cours de bataille",
   "minimap-alt": "Mini-carte de {map}",
+  "no-minimap": "Aucune minicarte n’a survécu",
+  "random-events": "Des événements aléatoires peuvent modifier cette carte en cours de bataille",
+  "retired-span": "En jeu de la mise à jour {first} à la mise à jour {last}",
   "retired-until": "Jusqu’à la version {version}",
-  "retired-span": "En jeu de la mise à jour {first} à la mise à jour {last}"
+  "retired-single": "En jeu uniquement dans la mise à jour {version}"
 }

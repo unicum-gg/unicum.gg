@@ -5,6 +5,7 @@
   "control-point": "Point de contrôle",
   "danger-zone": "Zone dangereuse :",
   "grid": "Grille",
+  "no-minimap": "Aucune minicarte de cette carte n’a survécu dans les archives.",
   "random-events": "Événements aléatoires",
   "team": "Équipe {n}"
 }

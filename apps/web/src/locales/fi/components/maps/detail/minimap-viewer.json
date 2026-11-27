@@ -5,6 +5,7 @@
   "control-point": "Valtauspiste",
   "danger-zone": "Vaaravyöhyke:",
   "grid": "Ruudukko",
+  "no-minimap": "Yksikään tämän kartan minikartta ei selviytynyt arkistoihin.",
   "random-events": "Satunnaiset tapahtumat",
   "team": "Joukkue {n}"
 }

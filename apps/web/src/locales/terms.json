@@ -956,7 +956,9 @@
     "Latest": "الأحدث",
     "Raised": "مرفوع",
     "Removed": "تمت الإزالة",
-    "Retired": "متقاعد"
+    "Retired": "متقاعد",
+    "positions": "المراكز",
+    "survived": "نجا"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1916,7 +1918,9 @@
     "Latest": "Апошнія",
     "Raised": "Сабрана",
     "Removed": "Выдалена",
-    "Retired": "Выведзены"
+    "Retired": "Выведзены",
+    "positions": "пазіцыі",
+    "survived": "выжыў"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -3093,7 +3097,9 @@
     "Latest": "Последно",
     "Raised": "Събрано",
     "Removed": "Премахнато",
-    "Retired": "Изведено от употреба"
+    "Retired": "Изведено от употреба",
+    "positions": "позиции",
+    "survived": "оцелели"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -4061,7 +4067,9 @@
     "Latest": "Najnovije",
     "Raised": "Prikupljeno",
     "Removed": "Uklonjeno",
-    "Retired": "Povučeno"
+    "Retired": "Povučeno",
+    "positions": "pozicije",
+    "survived": "preživio"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -5250,7 +5258,9 @@
     "Latest": "Nejnovější",
     "Raised": "Navýšeno",
     "Removed": "Odstraněno",
-    "Retired": "Vyřazeno"
+    "Retired": "Vyřazeno",
+    "positions": "pozice",
+    "survived": "přežil"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -6445,7 +6455,9 @@
     "Latest": "Seneste",
     "Raised": "Indsamlet",
     "Removed": "Fjernet",
-    "Retired": "Udgået"
+    "Retired": "Udgået",
+    "positions": "positioner",
+    "survived": "overlevede"
   },
   "de": {
     "(optional)": "(optional)",
@@ -7633,7 +7645,9 @@
     "Latest": "Neueste",
     "Raised": "Erhöht",
     "Removed": "Entfernt",
-    "Retired": "Ausgemustert"
+    "Retired": "Ausgemustert",
+    "positions": "Positionen",
+    "survived": "Überlebt"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -8827,7 +8841,9 @@
     "Latest": "Πιο πρόσφατη",
     "Raised": "Αυξήθηκε",
     "Removed": "Αφαιρέθηκε",
-    "Retired": "Αποσύρθηκε"
+    "Retired": "Αποσύρθηκε",
+    "positions": "θέσεις",
+    "survived": "επιβίωσε"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -10002,7 +10018,9 @@
     "Latest": "Último",
     "Raised": "Aumentado",
     "Removed": "Eliminado",
-    "Retired": "Retirado"
+    "Retired": "Retirado",
+    "positions": "posiciones",
+    "survived": "sobrevivió"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -11201,7 +11219,9 @@
     "Latest": "Viimeisin",
     "Raised": "Kerätty",
     "Removed": "Poistettu",
-    "Retired": "Käytöstä poistettu"
+    "Retired": "Käytöstä poistettu",
+    "positions": "sijoitukset",
+    "survived": "selviytyi"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -12378,7 +12398,9 @@
     "Latest": "Dernier",
     "Raised": "Collecté",
     "Removed": "Supprimé",
-    "Retired": "Retiré"
+    "Retired": "Retiré",
+    "positions": "positions",
+    "survived": "survécu"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -13339,7 +13361,9 @@
     "Latest": "नवीनतम",
     "Raised": "बढ़ाया गया",
     "Removed": "हटाया गया",
-    "Retired": "रिटायर किया गया"
+    "Retired": "रिटायर किया गया",
+    "positions": "पोज़ीशन",
+    "survived": "जीवित बचा"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -14531,7 +14555,9 @@
     "Latest": "Najnovije",
     "Raised": "Povećano",
     "Removed": "Uklonjeno",
-    "Retired": "Povučeno"
+    "Retired": "Povučeno",
+    "positions": "pozicije",
+    "survived": "preživio"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -15725,7 +15751,9 @@
     "Latest": "Legújabb",
     "Raised": "Megemelve",
     "Removed": "Eltávolítva",
-    "Retired": "Visszavonva"
+    "Retired": "Visszavonva",
+    "positions": "pozíciók",
+    "survived": "túlélte"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -16915,7 +16943,9 @@
     "Latest": "Più recente",
     "Raised": "Raccolti",
     "Removed": "Rimosso",
-    "Retired": "Ritirato"
+    "Retired": "Ritirato",
+    "positions": "posizioni",
+    "survived": "sopravvissuto"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -18112,7 +18142,9 @@
     "Latest": "最新",
     "Raised": "上昇",
     "Removed": "削除",
-    "Retired": "退役"
+    "Retired": "退役",
+    "positions": "ポジション",
+    "survived": "生還"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -19073,7 +19105,9 @@
     "Latest": "Соңғы",
     "Raised": "Жиналған",
     "Removed": "Жойылған",
-    "Retired": "Қолданыстан шығарылған"
+    "Retired": "Қолданыстан шығарылған",
+    "positions": "позициялар",
+    "survived": "аман қалды"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -20274,7 +20308,9 @@
     "Latest": "최신",
     "Raised": "상승",
     "Removed": "제거",
-    "Retired": "퇴역"
+    "Retired": "퇴역",
+    "positions": "위치",
+    "survived": "생존"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -21471,7 +21507,9 @@
     "Latest": "Naujausia",
     "Raised": "Padidinta",
     "Removed": "Pašalinta",
-    "Retired": "Nebenaudojamas"
+    "Retired": "Nebenaudojamas",
+    "positions": "pozicijos",
+    "survived": "išgyveno"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -22655,7 +22693,9 @@
     "Latest": "Jaunākais",
     "Raised": "Palielināts",
     "Removed": "Noņemts",
-    "Retired": "Izņemts no aprites"
+    "Retired": "Izņemts no aprites",
+    "positions": "pozīcijas",
+    "survived": "izdzīvotas"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -23854,7 +23894,9 @@
     "Latest": "Laatste",
     "Raised": "Opgehaald",
     "Removed": "Verwijderd",
-    "Retired": "Uit dienst"
+    "Retired": "Uit dienst",
+    "positions": "posities",
+    "survived": "overleefd"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -25044,7 +25086,9 @@
     "Latest": "Nyeste",
     "Raised": "Innsamlet",
     "Removed": "Fjernet",
-    "Retired": "Utfaset"
+    "Retired": "Utfaset",
+    "positions": "plasseringer",
+    "survived": "overlevde"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -26231,7 +26275,9 @@
     "Latest": "Najnowsza",
     "Raised": "Zebrano",
     "Removed": "Usunięto",
-    "Retired": "Wycofana"
+    "Retired": "Wycofana",
+    "positions": "pozycje",
+    "survived": "przetrwał"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -27411,7 +27457,9 @@
     "Latest": "Mais recente",
     "Raised": "Arrecadado",
     "Removed": "Removido",
-    "Retired": "Retirado"
+    "Retired": "Retirado",
+    "positions": "posições",
+    "survived": "sobreviveu"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -28592,7 +28640,9 @@
     "Latest": "Recent",
     "Raised": "Ridicat",
     "Removed": "Eliminat",
-    "Retired": "Retras"
+    "Retired": "Retras",
+    "positions": "poziții",
+    "survived": "supraviețuit"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -29761,7 +29811,9 @@
     "Latest": "Последнее",
     "Raised": "Повышено",
     "Removed": "Удалено",
-    "Retired": "Выведено"
+    "Retired": "Выведено",
+    "positions": "позиции",
+    "survived": "выжил"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -30725,7 +30777,9 @@
     "Latest": "Najnovšie",
     "Raised": "Vyzbierané",
     "Removed": "Odstránené",
-    "Retired": "Vyradené"
+    "Retired": "Vyradené",
+    "positions": "položaji",
+    "survived": "preživel"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -31919,7 +31973,9 @@
     "Latest": "Најновије",
     "Raised": "Прикупљено",
     "Removed": "Уклоњено",
-    "Retired": "Повучено"
+    "Retired": "Повучено",
+    "positions": "pozicije",
+    "survived": "preživeli"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -33119,7 +33175,9 @@
     "Latest": "Senaste",
     "Raised": "Insamlat",
     "Removed": "Borttagna",
-    "Retired": "Pensionerade"
+    "Retired": "Pensionerade",
+    "positions": "positioner",
+    "survived": "överlevde"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -34314,7 +34372,9 @@
     "Latest": "ล่าสุด",
     "Raised": "ระดมทุนได้",
     "Removed": "นำออกแล้ว",
-    "Retired": "เลิกใช้แล้ว"
+    "Retired": "เลิกใช้แล้ว",
+    "positions": "ตำแหน่ง",
+    "survived": "รอดชีวิต"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -35277,7 +35337,9 @@
     "Latest": "Pinakabago",
     "Raised": "Itinaas",
     "Removed": "Inalis",
-    "Retired": "Retirado"
+    "Retired": "Retirado",
+    "positions": "posisyon",
+    "survived": "nakaligtas"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -36469,7 +36531,9 @@
     "Latest": "En yeni",
     "Raised": "Toplanan",
     "Removed": "Kaldırıldı",
-    "Retired": "Emekliye ayrıldı"
+    "Retired": "Emekliye ayrıldı",
+    "positions": "pozisyonlar",
+    "survived": "hayatta kaldı"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -37653,7 +37717,9 @@
     "Latest": "Остання",
     "Raised": "Зібрано",
     "Removed": "Видалено",
-    "Retired": "Виведено з гри"
+    "Retired": "Виведено з гри",
+    "positions": "позиції",
+    "survived": "вижив"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -38826,7 +38892,9 @@
     "Latest": "Mới nhất",
     "Raised": "Đã huy động",
     "Removed": "Đã xóa",
-    "Retired": "Đã ngừng sử dụng"
+    "Retired": "Đã ngừng sử dụng",
+    "positions": "vị trí",
+    "survived": "sống sót"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -40021,6 +40089,8 @@
     "Latest": "最新",
     "Raised": "已筹集",
     "Removed": "移除",
-    "Retired": "退役"
+    "Retired": "退役",
+    "positions": "位置",
+    "survived": "存活"
   }
 }

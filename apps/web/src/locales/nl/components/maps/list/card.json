@@ -1,6 +1,8 @@
 {
-  "random-events": "Willekeurige evenementen kunnen deze kaart midden in het gevecht veranderen",
   "minimap-alt": "{map} minimap",
+  "no-minimap": "Geen minimap overleefd",
+  "random-events": "Willekeurige evenementen kunnen deze kaart midden in het gevecht veranderen",
+  "retired-span": "In het spel van update {first} tot update {last}",
   "retired-until": "Tot en met {version}",
-  "retired-span": "In het spel van update {first} tot update {last}"
+  "retired-single": "Alleen in het spel in update {version}"
 }

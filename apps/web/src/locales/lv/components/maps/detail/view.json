@@ -6,5 +6,6 @@
   "size": "Izmērs",
   "team-size": "Komandas lielums",
   "retired": "Izņemts no aprites",
-  "retired-span": "Spēlē no atjauninājuma {first} līdz atjauninājumam {last}"
+  "retired-span": "Spēlē no atjauninājuma {first} līdz atjauninājumam {last}",
+  "retired-single": "Spēlē tikai atjauninājumā {version}"
 }

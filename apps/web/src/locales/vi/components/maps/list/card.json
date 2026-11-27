@@ -1,6 +1,8 @@
 {
-  "random-events": "Các sự kiện ngẫu nhiên có thể thay đổi bản đồ giữa trận đấu",
   "minimap-alt": "Bản đồ nhỏ của {map}",
+  "no-minimap": "Không có bản đồ nhỏ nào còn sống sót",
+  "random-events": "Các sự kiện ngẫu nhiên có thể thay đổi bản đồ giữa trận đấu",
+  "retired-span": "Trong game từ bản cập nhật {first} đến bản cập nhật {last}",
   "retired-until": "Đến {version}",
-  "retired-span": "Trong game từ bản cập nhật {first} đến bản cập nhật {last}"
+  "retired-single": "Trong game chỉ có ở bản cập nhật {version}"
 }

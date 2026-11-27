@@ -5,6 +5,7 @@
   "control-point": "Ponto de controle",
   "danger-zone": "Zona de perigo:",
   "grid": "Grade",
+  "no-minimap": "Nenhum minimapa deste mapa sobreviveu nos arquivos.",
   "random-events": "Eventos aleatórios",
   "team": "Equipa {n}"
 }

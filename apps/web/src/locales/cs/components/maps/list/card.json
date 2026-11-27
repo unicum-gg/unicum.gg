@@ -1,6 +1,8 @@
 {
-  "random-events": "Náhodné události mohou tuto mapu během bitvy změnit",
   "minimap-alt": "Minimap {map}",
+  "no-minimap": "Žádná minimapa nepřežila",
+  "random-events": "Náhodné události mohou tuto mapu během bitvy změnit",
+  "retired-span": "Ve hře od aktualizace {first} do aktualizace {last}",
   "retired-until": "Do {version}",
-  "retired-span": "Ve hře od aktualizace {first} do aktualizace {last}"
+  "retired-single": "Ve hře pouze v aktualizaci {version}"
 }

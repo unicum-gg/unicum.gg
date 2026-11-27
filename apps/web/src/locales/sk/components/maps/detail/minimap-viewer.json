@@ -5,6 +5,7 @@
   "control-point": "Kontrolna točka",
   "danger-zone": "Nebezpečná zóna:",
   "grid": "Mriežka",
+  "no-minimap": "V archívoch neprežil žiadny minizemljevid tejto mapy.",
   "random-events": "Náhodné udalosti",
   "team": "Tím {n}"
 }

@@ -5,6 +5,7 @@
   "control-point": "Kontrolpunkt",
   "danger-zone": "Farezone:",
   "grid": "Gitter",
+  "no-minimap": "Intet minikort over dette kort overlevede i arkiverne.",
   "random-events": "Tilfældige begivenheder",
   "team": "Hold {n}"
 }

@@ -1,6 +1,8 @@
 {
-  "random-events": "Tilfeldige hendelser kan endre dette kartet under kampen",
   "minimap-alt": "{map} minimap",
+  "no-minimap": "Ingen minikart overlevde",
+  "random-events": "Tilfeldige hendelser kan endre dette kartet under kampen",
+  "retired-span": "I spillet fra oppdatering {first} til oppdatering {last}",
   "retired-until": "Frem til {version}",
-  "retired-span": "I spillet fra oppdatering {first} til oppdatering {last}"
+  "retired-single": "Kun i spillet i oppdatering {version}"
 }

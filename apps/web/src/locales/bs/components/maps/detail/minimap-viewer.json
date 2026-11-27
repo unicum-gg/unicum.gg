@@ -5,6 +5,7 @@
   "control-point": "Kontrolna tačka",
   "danger-zone": "Opasna zona:",
   "grid": "Mreža",
+  "no-minimap": "U arhivi nije preživjela nijedna minimapa ove mape.",
   "random-events": "Nasumični događaji",
   "team": "Tim {n}"
 }

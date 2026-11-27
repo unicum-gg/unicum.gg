@@ -6,5 +6,6 @@
   "size": "حجم",
   "team-size": "حجم الفريق",
   "retired": "متقاعد",
-  "retired-span": "في اللعبة من التحديث {first} إلى التحديث {last}"
+  "retired-span": "في اللعبة من التحديث {first} إلى التحديث {last}",
+  "retired-single": "في اللعبة، في التحديث {version} فقط"
 }

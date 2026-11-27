@@ -6,5 +6,6 @@
   "size": "Памер",
   "team-size": "Памер каманды",
   "retired": "Выведзены",
-  "retired-span": "У гульні з абнаўлення {first} да абнаўлення {last}"
+  "retired-span": "У гульні з абнаўлення {first} да абнаўлення {last}",
+  "retired-single": "Толькі ў гульні, у абнаўленні {version}"
 }

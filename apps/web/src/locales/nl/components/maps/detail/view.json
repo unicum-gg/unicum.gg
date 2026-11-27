@@ -6,5 +6,6 @@
   "size": "Grootte",
   "team-size": "Teamgrootte",
   "retired": "Uit dienst",
-  "retired-span": "In het spel van update {first} tot update {last}"
+  "retired-span": "In het spel van update {first} tot update {last}",
+  "retired-single": "Alleen in het spel in update {version}"
 }

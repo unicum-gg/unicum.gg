@@ -1,0 +1,10 @@
+{
+  "closed-body": "Näytä se uudelleen nähdäksesi, missä pelaajat asettuvat tällä kartalla.",
+  "closed-title": "Sijoittumisopas piilotettu",
+  "mod": "Asenna mod",
+  "none-body": "Tällä kartalla ei ole vielä tallennettu yhtäkään taistelua. Asenna mod, niin täällä käydyt taistelut näyttävät, missä pelaajat asettuvat.",
+  "none-title": "Ei sijoituksia vielä",
+  "open": "Näytä opas",
+  "retired-body": "Tämä kartta ei ole enää pelissä, joten siitä ei voida tallentaa taistelua.",
+  "retired-title": "Ei sijoituksia"
+}

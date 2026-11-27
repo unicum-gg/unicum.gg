@@ -6,5 +6,6 @@
   "size": "Размер",
   "team-size": "Размер команды",
   "retired": "Выведено",
-  "retired-span": "В игре с обновления {first} по обновление {last}"
+  "retired-span": "В игре с обновления {first} по обновление {last}",
+  "retired-single": "Только в игре, в обновлении {version}"
 }

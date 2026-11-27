@@ -6,5 +6,6 @@
   "size": "Velikost",
   "team-size": "Velikost týmu",
   "retired": "Vyřazeno",
-  "retired-span": "Ve hře od aktualizace {first} do aktualizace {last}"
+  "retired-span": "Ve hře od aktualizace {first} do aktualizace {last}",
+  "retired-single": "Ve hře pouze v aktualizaci {version}"
 }

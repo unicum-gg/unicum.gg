@@ -6,5 +6,6 @@
   "size": "Dydis",
   "team-size": "Komandos dydis",
   "retired": "Nebenaudojamas",
-  "retired-span": "Žaidime nuo atnaujinimo {first} iki atnaujinimo {last}"
+  "retired-span": "Žaidime nuo atnaujinimo {first} iki atnaujinimo {last}",
+  "retired-single": "Tik žaidime, naudojant atnaujinimą {version}"
 }

@@ -6,5 +6,6 @@
   "size": "Tamanho",
   "team-size": "Tamanho da equipe",
   "retired": "Retirado",
-  "retired-span": "No jogo desde a atualização {first} até a atualização {last}"
+  "retired-span": "No jogo desde a atualização {first} até a atualização {last}",
+  "retired-single": "No jogo somente na atualização {version}"
 }

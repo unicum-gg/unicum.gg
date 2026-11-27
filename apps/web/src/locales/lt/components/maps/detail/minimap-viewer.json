@@ -5,6 +5,7 @@
   "control-point": "Valdymo taškas",
   "danger-zone": "Pavojaus zona:",
   "grid": "Tinklas",
+  "no-minimap": "Šio žemėlapio minižemėlapis archyvuose neišgyveno.",
   "random-events": "Atsitiktiniai įvykiai",
   "team": "Komanda {n}"
 }

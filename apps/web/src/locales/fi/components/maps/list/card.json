@@ -1,6 +1,8 @@
 {
-  "random-events": "Satunnaiset tapahtumat voivat muuttaa tätä karttaa kesken taistelun",
   "minimap-alt": "Kartan {map} minimappi",
+  "no-minimap": "Yksikään minikartta ei selviytynyt",
+  "random-events": "Satunnaiset tapahtumat voivat muuttaa tätä karttaa kesken taistelun",
+  "retired-span": "Pelissä päivityksestä {first} päivitykseen {last}",
   "retired-until": "Versioon {version} asti",
-  "retired-span": "Pelissä päivityksestä {first} päivitykseen {last}"
+  "retired-single": "Pelissä vain päivityksessä {version}"
 }

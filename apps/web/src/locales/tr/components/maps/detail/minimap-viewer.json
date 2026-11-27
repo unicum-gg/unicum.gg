@@ -5,6 +5,7 @@
   "control-point": "Kontrol noktası",
   "danger-zone": "Tehlike bölgesi:",
   "grid": "Kılavuz",
+  "no-minimap": "Bu haritanın mini haritası arşivlerde hayatta kalmadı.",
   "random-events": "Rastgele etkinlikler",
   "team": "Ekip {n}"
 }

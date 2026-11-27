@@ -6,7 +6,7 @@
   "in-the-game": "ゲーム内",
   "n-changes": "{count, plural, other {#件の変更}}",
   "not-released-wargaming-can-still": "未リリース。更新が配信される前に、Wargamingはこれらを変更またはドロップする可能性があります。",
-  "removed": "削除済み",
+  "removed": "削除",
   "title": "{map}の変更",
   "update": "更新 {version}"
 }

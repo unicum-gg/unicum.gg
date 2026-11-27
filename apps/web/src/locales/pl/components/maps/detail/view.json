@@ -6,5 +6,6 @@
   "size": "Rozmiar",
   "team-size": "Wielkość drużyny",
   "retired": "Wycofana",
-  "retired-span": "W grze od aktualizacji {first} do aktualizacji {last}"
+  "retired-span": "W grze od aktualizacji {first} do aktualizacji {last}",
+  "retired-single": "Tylko w grze w aktualizacji {version}"
 }

@@ -5,6 +5,7 @@
   "control-point": "制圧ポイント",
   "danger-zone": "危険地帯:",
   "grid": "グリッド",
+  "no-minimap": "このマップのミニマップはアーカイブに生還していません。",
   "random-events": "ランダムイベント",
   "team": "チーム {n}"
 }

@@ -6,5 +6,6 @@
   "size": "Méret",
   "team-size": "Csapatméret",
   "retired": "Visszavonva",
-  "retired-span": "A játékban {first} frissítéstől {last} frissítésig"
+  "retired-span": "A játékban {first} frissítéstől {last} frissítésig",
+  "retired-single": "A játékban csak a {version} verziójú frissítésben"
 }

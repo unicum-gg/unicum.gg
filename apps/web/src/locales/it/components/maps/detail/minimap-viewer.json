@@ -5,6 +5,7 @@
   "control-point": "Punto di controllo",
   "danger-zone": "Zona pericolosa:",
   "grid": "Griglia",
+  "no-minimap": "Negli archivi non è sopravvissuta alcuna minimappa di questa mappa.",
   "random-events": "Eventi casuali",
   "team": "Squadra {n}"
 }

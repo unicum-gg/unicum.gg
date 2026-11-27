@@ -1,6 +1,8 @@
 {
-  "random-events": "रैंडम इवेंट्स युद्ध के बीच इस मानचित्र को बदल सकते हैं",
   "minimap-alt": "{map} मिनीमैप",
+  "no-minimap": "कोई मिनीमैप जीवित नहीं बचा",
+  "random-events": "रैंडम इवेंट्स युद्ध के बीच इस मानचित्र को बदल सकते हैं",
+  "retired-span": "गेम में अपडेट {first} से अपडेट {last} तक",
   "retired-until": "संस्करण {version} तक",
-  "retired-span": "गेम में अपडेट {first} से अपडेट {last} तक"
+  "retired-single": "केवल अपडेट {version} में गेम में"
 }

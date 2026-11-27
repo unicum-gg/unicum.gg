@@ -6,5 +6,6 @@
   "size": "Sukat",
   "team-size": "Sukat ng koponan",
   "retired": "Retirado",
-  "retired-span": "Sa laro mula sa update {first} hanggang sa update {last}"
+  "retired-span": "Sa laro mula sa update {first} hanggang sa update {last}",
+  "retired-single": "Sa laro lamang noong update na {version}"
 }

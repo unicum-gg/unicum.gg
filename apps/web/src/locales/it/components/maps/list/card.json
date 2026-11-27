@@ -1,6 +1,8 @@
 {
-  "random-events": "Gli eventi casuali potrebbero modificare questa mappa durante la battaglia",
   "minimap-alt": "Minimappa di {map}",
+  "no-minimap": "Non è sopravvissuta alcuna minimappa",
+  "random-events": "Gli eventi casuali potrebbero modificare questa mappa durante la battaglia",
+  "retired-span": "In gioco dall’aggiornamento {first} all’aggiornamento {last}",
   "retired-until": "Fino alla versione {version}",
-  "retired-span": "In gioco dall’aggiornamento {first} all’aggiornamento {last}"
+  "retired-single": "Solo in gioco nell’aggiornamento {version}"
 }

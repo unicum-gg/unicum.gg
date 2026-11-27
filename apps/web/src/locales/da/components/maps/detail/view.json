@@ -6,5 +6,6 @@
   "size": "Størrelse",
   "team-size": "Teamstørrelse",
   "retired": "Udgået",
-  "retired-span": "I spillet fra opdatering {first} til opdatering {last}"
+  "retired-span": "I spillet fra opdatering {first} til opdatering {last}",
+  "retired-single": "Kun i spillet i opdatering {version}"
 }

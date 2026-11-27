@@ -1,6 +1,8 @@
 {
-  "random-events": "Rastgele etkinlikler savaşın ortasında bu haritayı değiştirebilir",
   "minimap-alt": "{map} mini haritası",
+  "no-minimap": "Mini harita hayatta kalmadı",
+  "random-events": "Rastgele etkinlikler savaşın ortasında bu haritayı değiştirebilir",
+  "retired-span": "Oyunda {first} güncellemesinden {last} güncellemesine kadar",
   "retired-until": "{version} sürümüne kadar",
-  "retired-span": "Oyunda {first} güncellemesinden {last} güncellemesine kadar"
+  "retired-single": "Yalnızca {version} güncellemesinde oyunda"
 }

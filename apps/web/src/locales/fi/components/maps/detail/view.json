@@ -6,5 +6,6 @@
   "size": "Koko",
   "team-size": "Tiikokoko",
   "retired": "Käytöstä poistettu",
-  "retired-span": "Pelissä päivityksestä {first} päivitykseen {last}"
+  "retired-span": "Pelissä päivityksestä {first} päivitykseen {last}",
+  "retired-single": "Pelissä vain päivityksessä {version}"
 }

@@ -5,6 +5,7 @@
   "control-point": "Kontrollpunkt",
   "danger-zone": "Gefahrenzone:",
   "grid": "Raster",
+  "no-minimap": "Keine Minikarte dieser Karte ist in den Archiven erhalten geblieben.",
   "random-events": "Zufallsereignisse",
   "team": "Team {n}"
 }

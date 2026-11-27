@@ -6,5 +6,6 @@
   "size": "大小",
   "team-size": "队伍规模",
   "retired": "退役",
-  "retired-span": "更新 {first} 至更新 {last} 期间游戏内"
+  "retired-span": "更新 {first} 至更新 {last} 期间游戏内",
+  "retired-single": "仅在{version}版本更新时的游戏内"
 }
