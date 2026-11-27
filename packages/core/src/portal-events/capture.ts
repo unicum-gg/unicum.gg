@@ -5,14 +5,22 @@ import { db } from "@unicum.gg/core/db";
 import { wg } from "@unicum.gg/core/wargaming/client";
 import { PORTAL_EVENTS_LANGUAGE, PORTAL_EVENTS_LANGUAGES } from "./languages";
 import { paced, readPastChallenge } from "./paced";
+import { isPortalLink } from "./article-slug";
 
 /**
  * The article a widget entry points at, without its language segment, so the
  * same entry read in French and in English lands on one key.
  * `https://worldoftanks.eu/fr/news/specials/x/` → `/news/specials/x/`.
+ *
+ * A link off the portal keeps its host (`www.tiktok.com/@x`): the editors link
+ * outside Wargaming too, and two such links sharing a path are not one entry.
+ * The portal's own host is dropped so the regions' copies of one article still
+ * share a key, which is what groups them into one Discord event.
  */
 export function articlePath(link: string, language: string): string {
-  const { pathname } = new URL(link);
+  const url = new URL(link);
+  const { pathname } = url;
+  if (!isPortalLink(url)) return `${url.hostname}${pathname}`;
   const prefix = `/${language}/`;
   return pathname.startsWith(prefix) ? pathname.slice(prefix.length - 1) : pathname;
 }

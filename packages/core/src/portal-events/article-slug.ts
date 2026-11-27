@@ -1,3 +1,8 @@
+/** A Wargaming portal of any region: links elsewhere (TikTok, Twitch) are not
+ * articles, and the editors link across regions (Asia entries to `.eu`). */
+export const isPortalLink = (url: URL) =>
+  /(^|\.)worldoftanks\.(eu|com|asia)$/.test(url.hostname);
+
 /**
  * The article a calendar entry points at, by the last segment of its path
  * (`wci-finals-2026`), which is what tells the two sources' copies of one entry
@@ -12,13 +17,17 @@
  */
 export function articleSlug(linkOrPath: string | null): string | null {
   if (!linkOrPath) return null;
-  let pathname: string;
+  let url: URL;
   try {
-    pathname = new URL(linkOrPath, "https://worldoftanks.eu").pathname;
+    url = new URL(linkOrPath, "https://worldoftanks.eu");
   } catch {
     return null;
   }
-  const segments = pathname.split("/").filter(Boolean);
-  // Only news articles: a Tankopedia page or a Twitch channel names no entry.
-  return segments.includes("news") ? (segments.at(-1) ?? null) : null;
+  if (!isPortalLink(url)) return null;
+  const segments = url.pathname.split("/").filter(Boolean);
+  const slug = segments.at(-1);
+  // Only news articles: a Tankopedia page names no entry. And not the editors'
+  // `/news/updates/PLACEHOLDER/`, which every unwritten article would share.
+  if (!segments.includes("news") || !slug || slug.toLowerCase() === "placeholder") return null;
+  return slug;
 }
