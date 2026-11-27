@@ -37,10 +37,33 @@ export function retiredMinimapUrl(arenaId: string, branch: ArchivedMinimapBranch
     : minimapUrl(arenaId);
 }
 
-/** An image the archive branch keeps for the map history (a minimap as it was
- * at one version), from the path the history records. */
+/**
+ * How many branches the history's images are spread over. jsDelivr refuses to
+ * serve anything from a branch past 50 MB, and the history alone is twice that
+ * (a minimap per redraw since 0.6.2, plus every rework's overlays), so each map
+ * lives on `ARCHIVE_HISTORY_<n>`, picked from its arena id. `wot.build`'s
+ * `publish-archive` spreads them with the same function: change one, change
+ * both, and republish.
+ */
+export const ARCHIVE_HISTORY_SHARDS = 8;
+
+/** Which `ARCHIVE_HISTORY_<n>` branch holds a map's history images. */
+export function archiveHistoryShard(arenaId: string): number {
+  let sum = 0;
+  for (let i = 0; i < arenaId.length; i++) sum += arenaId.charCodeAt(i);
+  return sum % ARCHIVE_HISTORY_SHARDS;
+}
+
+/** An image the archive keeps for the map history (a minimap as it was at one
+ * version, a rework's overlay), from the path the history records
+ * (`history/<arena>/<file>`). */
 export function archivedMinimapUrl(path: string): string {
-  return `https://cdn.jsdelivr.net/gh/${WOT_MAPS_REPO}@${WOT_MAPS_BRANCH_ARCHIVE}/${path}`;
+  const arenaId = /^history\/([^/]+)\//.exec(path)?.[1];
+  const branch =
+    arenaId === undefined
+      ? WOT_MAPS_BRANCH_ARCHIVE
+      : `${WOT_MAPS_BRANCH_ARCHIVE}_HISTORY_${archiveHistoryShard(arenaId)}`;
+  return `https://cdn.jsdelivr.net/gh/${WOT_MAPS_REPO}@${branch}/${path}`;
 }
 
 /** The same mirror image on the Common Test branch, or null when the URL is not
