@@ -8,7 +8,7 @@ import {
   variantOf,
 } from "@unicum.gg/shared";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 // Minimap render with a graceful fallback: a handful of arenas (event-only
@@ -29,6 +29,7 @@ export function MinimapImage({
   priority,
   className,
   emptyLabel,
+  children,
 }: {
   /** The minimap to show, usually the arena's HD one but sometimes a mode
    * variant (the Onslaught play area has its own image). */
@@ -45,6 +46,9 @@ export function MinimapImage({
   /** Said under the placeholder when no image could be found, where the
    * caller knows why (a retired map no archive kept a minimap of). */
   emptyLabel?: string;
+  /** Drawn over the image only when there is one: markers placed on an empty
+   * square point at nothing. */
+  children?: ReactNode;
 }) {
   const [failed, setFailed] = useState<string[]>([]);
   // The test branch of the same mirror, for an arena the live client declares
@@ -87,15 +91,18 @@ export function MinimapImage({
     );
   }
   return (
-    <Image
-      key={active}
-      src={active}
-      alt={alt}
-      fill
-      sizes={sizes}
-      priority={priority}
-      onError={() => setFailed((f) => [...f, active])}
-      className={cn("object-cover", className)}
-    />
+    <>
+      <Image
+        key={active}
+        src={active}
+        alt={alt}
+        fill
+        sizes={sizes}
+        priority={priority}
+        onError={() => setFailed((f) => [...f, active])}
+        className={cn("object-cover", className)}
+      />
+      {children}
+    </>
   );
 }

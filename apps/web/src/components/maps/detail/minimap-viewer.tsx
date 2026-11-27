@@ -234,20 +234,21 @@ export function MinimapViewer({
           sizes="(max-width: 1024px) 100vw, 640px"
           priority
           emptyLabel={detail.retired ? t("no-minimap") : undefined}
-        />
-        {eventLayers.length > 0 && (
-          <MinimapLayers urls={eventLayers} />
-        )}
-        {showGrid && hasGrid && <MinimapGrid cols={gridCols} rows={gridRows} />}
-        {view && (
-          <Overlay
-            geometry={view}
-            capX={capX}
-            capY={capY}
-            mapWidth={width}
-            mapHeight={height}
-          />
-        )}
+        >
+          {eventLayers.length > 0 && (
+            <MinimapLayers urls={eventLayers} />
+          )}
+          {showGrid && hasGrid && <MinimapGrid cols={gridCols} rows={gridRows} />}
+          {view && (
+            <Overlay
+              geometry={view}
+              capX={capX}
+              capY={capY}
+              mapWidth={width}
+              mapHeight={height}
+            />
+          )}
+        </MinimapImage>
         <GuideOverlay state={guideState} guide={guide} />
       </div>
 

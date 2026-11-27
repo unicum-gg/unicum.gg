@@ -108,8 +108,9 @@ export function MapCard({
           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
           className="transition-transform duration-300 group-hover:scale-105"
           emptyLabel={map.retired ? tCard("no-minimap") : undefined}
-        />
-        {!variant && <ThumbBases bases={map.bases} />}
+        >
+          {!variant && <ThumbBases bases={map.bases} />}
+        </MinimapImage>
         {(variant ? variant.commonTest : map.commonTest) && (
           <span className="absolute bottom-2 left-2 inline-flex items-center gap-1 rounded-full bg-black/60 px-2 py-1 text-[11px] font-medium text-fd-foreground backdrop-blur-sm">
             <MapCommonTestBadge size={12} />
