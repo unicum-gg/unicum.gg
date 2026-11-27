@@ -66,6 +66,33 @@ const mapVariantRedirects = [
 ]);
 
 /**
+ * The retired arenas taken off the gallery for having neither a name nor a
+ * minimap: event battlefields of 0.9.8 to 1.18 that only the decompiled client
+ * describes, carded under their raw id over an empty square for a day. Nothing
+ * replaces them, so each lands on the gallery rather than on a 404, in the
+ * reader's language: these redirects run before the proxy strips the prefix.
+ */
+const unlistedRetiredMapRedirects = [
+  "102-race", "108-normandy-se20", "111-paris", "112-eiffel-tower",
+  "116-himmelball", "117-canyon-ish", "119-lostcityball", "119-moon-pool",
+  "119-turning-point-if", "120-kharkiv-halloween", "120-moscowball",
+  "122-frozen-land", "122-somme", "123-dalny-gg", "125-highground-v",
+  "126-asia-ravine-ish", "130-anykey-if", "132-abruzzo", "136-kassel",
+].flatMap((slug) =>
+  ["", "/:locale([a-z]{2})"].flatMap((prefix) => {
+    const to = prefix ? "/:locale" : "";
+    return [
+      {
+        source: `${prefix}/:region(eu|na|asia)/maps/${slug}/:tab*`,
+        destination: `${to}/:region/maps`,
+        permanent: true,
+      },
+      { source: `${prefix}/maps/${slug}/:tab*`, destination: `${to}/maps`, permanent: true },
+    ];
+  }),
+);
+
+/**
  * The Steel Hunter rename.
  *
  * The board, the profile tab and the endpoint were published as Steel Hunter
@@ -201,6 +228,7 @@ export const redirects: NextConfig["redirects"] = async () => [
   // one. They are views of their base map now, and the slug is gone with the
   // card, so each old URL keeps its readers by landing on the view it named.
   ...mapVariantRedirects,
+  ...unlistedRetiredMapRedirects,
   ...rampageRenameRedirects,
   ...mrbRemovalRedirects,
   // Creator vanity URLs (`/remi`) are deliberately NOT here any more. They are

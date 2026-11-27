@@ -48,7 +48,7 @@ const REDIS_TTL_SECONDS = 24 * 60 * 60;
 // resolution changes, since the names are resolved before the array is
 // serialized and a stale payload would keep serving the previous spelling (and
 // therefore the previous slugs) for a day.
-const SHAPE_VERSION = 9;
+const SHAPE_VERSION = 10;
 const redisKey = (region: Region) => `mapcatalog:v${SHAPE_VERSION}:${region}`;
 const cache = new Map<Region, { value: MapCatalog; expiresAt: number }>();
 // One build per region at a time, like the Clan Wars pool next door. The memo
@@ -313,18 +313,25 @@ async function buildMapCatalog(region: Region): Promise<MapCatalog> {
   };
   const notMaps = /(?:^|_)(?:test|testmap|tutorial)(?:_|$)/i;
   const archivedIds = archived.map((a) => a.arenaId);
-  const listedRetired = retiredRaw.filter(
+  const candidates = retiredRaw.filter(
     (a) =>
       !notMaps.test(a.arenaId) &&
       !a.retired.hangar &&
       !isVersionOf(a.arenaId, liveIds) &&
       !isVersionOf(a.arenaId, archivedIds),
   );
-  const retiredIds = new Set(listedRetired.map((a) => a.arenaId));
-  const raw = live.filter((a) => a.hasDefinition || !retiredIds.has(a.arenaId));
+  const candidateIds = new Set(candidates.map((a) => a.arenaId));
+  const raw = live.filter((a) => a.hasDefinition || !candidateIds.has(a.arenaId));
   // Named in one pass so a retired variant borrows its base map's name
   // ("Murovanka (Waffenträger)") wherever that base is.
-  resolveArenaNames([...raw, ...listedRetired]);
+  const unnamed = resolveArenaNames([...raw, ...candidates]);
+  // A retired arena with neither a name nor a minimap is one nobody could
+  // recognise: the event battlefields of 0.9.8 to 1.18, which only the
+  // decompiled client describes, carded as "102 Race" over an empty square. It
+  // comes back the day an archive gives it either.
+  const listedRetired = candidates.filter(
+    (a) => !unnamed.has(a.arenaId) || a.retired.minimap !== null,
+  );
   const arenas = dedupeByName(raw).sort((a, b) => a.name.localeCompare(b.name));
   disambiguateRetired(listedRetired, arenas);
   const payload: CatalogPayload = {
