@@ -4,7 +4,7 @@ import { useLocale } from "@onruntime/translations/react";
 import { numberFormat } from "@/lib/format";
 
 import type { Icon } from "@phosphor-icons/react";
-import { Fragment, type ReactNode, useMemo, useState } from "react";
+import { type ReactNode, useMemo, useState } from "react";
 import {
   ArchiveIcon,
   ArrowsOutCardinalIcon,
@@ -25,6 +25,7 @@ import {
 } from "@/components/maps/detail/views";
 import { useGuide, useGuideView } from "@/components/maps/detail/minimap-guide";
 import { GuidePanel } from "@/components/maps/detail/minimap-guide-panel";
+import { GuideEmpty } from "@/components/maps/detail/guide-empty";
 import { Panel, PanelContent, PanelSeparator } from "@/components/panel";
 import { MapDetailTabs } from "@/components/maps/detail/tab-bar";
 import type { MapDetailTab } from "@/components/maps/detail/tabs";
@@ -45,6 +46,9 @@ function roundClock(seconds: number): string {
   return `${m}:${s.toString().padStart(2, "0")}`;
 }
 
+/** One of the map's facts in the header's row: its icon and its value, the
+ * label said on hover and to a screen reader, since the icon already says it
+ * to everyone else. */
 function Stat({
   icon: Icon,
   label,
@@ -55,15 +59,11 @@ function Stat({
   value: ReactNode;
 }) {
   return (
-    <div className="flex items-center gap-3">
-      <Icon className="size-5 shrink-0 text-fd-muted-foreground" />
-      <div className="flex flex-col">
-        <span className="text-xs uppercase tracking-wide text-fd-muted-foreground">
-          {label}
-        </span>
-        <span className="font-medium text-fd-foreground">{value}</span>
-      </div>
-    </div>
+    <span className="inline-flex items-center gap-1.5" title={label}>
+      <Icon className="size-4 shrink-0 text-fd-muted-foreground" aria-hidden />
+      <span className="sr-only">{label}: </span>
+      <span className="font-medium text-fd-foreground">{value}</span>
+    </span>
   );
 }
 
@@ -193,20 +193,17 @@ export function MapShell({
   // the line goes away with the rest of the view-synced stats when it is picked.
   const events = detail.randomEvents;
   const showEvents = events.length > 0 && !onslaught;
-  const hasAnyStat = hasSize || hasTime || hasTeam || hasModes || showEvents;
   const metaParts = [
     t("camouflage", {
       camouflage: tGame(`map-camouflage.${detail.camouflage}`),
     }),
-    hasSize ? `${detail.widthMeters} × ${detail.heightMeters} m` : null,
-    events.length > 0
-      ? t("n-random-events", { count: events.length })
-      : null,
     detail.retired
-      ? t("retired-span", {
-          first: detail.retired.firstVersion,
-          last: detail.retired.lastVersion,
-        })
+      ? detail.retired.firstVersion === detail.retired.lastVersion
+        ? t("retired-single", { version: detail.retired.lastVersion })
+        : t("retired-span", {
+            first: detail.retired.firstVersion,
+            last: detail.retired.lastVersion,
+          })
       : null,
   ].filter((v): v is string => Boolean(v));
 
@@ -237,14 +234,61 @@ export function MapShell({
                 name={detail.name}
               />
             </div>
-            <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 border-t border-fd-border px-4 py-2 text-xs text-fd-muted-foreground">
-              {metaParts.map((part, i) => (
-                <Fragment key={part}>
-                  {i > 0 && <span className="text-fd-border">·</span>}
-                  <span>{part}</span>
-                </Fragment>
-              ))}
-            </div>
+            {/* The map's facts and its blurb sit under its name rather than in
+                the column beside the minimap, which the positioning guide
+                already makes taller than the map. The facts still follow the
+                view selected below: Onslaught swaps the play area and the team
+                size. */}
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-fd-border px-4 py-3 text-sm">
+                {metaParts.map((part) => (
+                  <span key={part} className="text-fd-muted-foreground">
+                    {part}
+                  </span>
+                ))}
+                {hasSize && (
+                  <Stat
+                    icon={ArrowsOutCardinalIcon}
+                    label={t("size")}
+                    value={
+                      <>
+                        {width} × {height} m{" "}
+                        <span className="font-normal text-fd-muted-foreground">
+                          ({numberFormat(locale).format(width * height)} m²)
+                        </span>
+                      </>
+                    }
+                  />
+                )}
+                {hasTime && (
+                  <Stat
+                    icon={ClockIcon}
+                    label={t("battle-time")}
+                    value={roundClock(detail.roundLength)}
+                  />
+                )}
+                {hasTeam && (
+                  <Stat
+                    icon={UsersIcon}
+                    label={t("team-size")}
+                    value={`${teamSize} v ${teamSize}`}
+                  />
+                )}
+                {hasModes && (
+                  <Stat icon={CompassIcon} label={t("mode")} value={modesValue} />
+                )}
+                {showEvents && (
+                  <Stat
+                    icon={WarningIcon}
+                    label={t("random-events")}
+                    value={events.map((e) => e.name).join(", ")}
+                  />
+                )}
+              </div>
+            {detail.description && (
+              <p className="border-t border-fd-border px-4 py-3 text-sm leading-relaxed text-fd-muted-foreground">
+                {detail.description}
+              </p>
+            )}
           </header>
         </PanelContent>
       </Panel>
@@ -262,62 +306,18 @@ export function MapShell({
               onActiveViewChange={setActiveKey}
             />
 
-            <aside className="flex flex-col divide-y divide-fd-border border-t border-fd-border lg:border-t-0 lg:border-l">
-              {guideOpen && (
+            {/* The column is always there, so the minimap keeps one width from
+                map to map: the guide when it has something to show, else a
+                word on why not. */}
+            <aside className="border-t border-fd-border lg:border-t-0 lg:border-l">
+              {guideOpen ? (
                 <GuidePanel state={guideState} guide={guide} view={activeView} />
-              )}
-              {/* The map's own facts stay under the guide rather than giving
-                  way to it: the guide is open by default, and hiding them
-                  would leave them on no page at all. */}
-              {hasAnyStat && (
-                <div className="flex flex-col gap-4 p-4">
-                  {hasSize && (
-                    <Stat
-                      icon={ArrowsOutCardinalIcon}
-                      label={t("size")}
-                      value={
-                        <>
-                          {width} × {height} m{" "}
-                          <span className="text-sm font-normal text-fd-muted-foreground">
-                            ({numberFormat(locale).format(width * height)} m²)
-                          </span>
-                        </>
-                      }
-                    />
-                  )}
-                  {hasTime && (
-                    <Stat
-                      icon={ClockIcon}
-                      label={t("battle-time")}
-                      value={roundClock(detail.roundLength)}
-                    />
-                  )}
-                  {hasTeam && (
-                    <Stat
-                      icon={UsersIcon}
-                      label={t("team-size")}
-                      value={`${teamSize} v ${teamSize}`}
-                    />
-                  )}
-                  {hasModes && (
-                    <Stat icon={CompassIcon} label={t("mode")} value={modesValue} />
-                  )}
-                  {showEvents && (
-                    <Stat
-                      icon={WarningIcon}
-                      label={t("random-events")}
-                      value={events.map((e) => e.name).join(", ")}
-                    />
-                  )}
-                </div>
-              )}
-
-              {detail.description && (
-                <div className="p-4">
-                  <p className="text-sm leading-relaxed text-fd-muted-foreground">
-                    {detail.description}
-                  </p>
-                </div>
+              ) : (
+                <GuideEmpty
+                  available={guideAvailable}
+                  retired={Boolean(detail.retired)}
+                  onOpen={() => guideState.setOpen(true)}
+                />
               )}
             </aside>
           </div>
