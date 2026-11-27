@@ -35,6 +35,12 @@ export type ArenaRetirement = {
    * played. An ISO date, null when that version could not be dated. */
   lastDate: string | null;
   minimap: ArchivedMinimapBranch | null;
+  /** Whether the definition is a garage's rather than a battlefield's: its
+   * music, ambience or sound banks are the hangar's (`hangar_h20_music`,
+   * `ev_2020_secret_event_hangar.bnk`). The client defines its seasonal
+   * garages as arenas too, with a placeholder `ctf` block, so nothing else in
+   * the file tells them apart. */
+  hangar: boolean;
 };
 
 export type WotSrcRetiredArena = WotSrcArena & { retired: ArenaRetirement };
@@ -222,6 +228,7 @@ export class SourceArchivedArenasResource {
               entry.minimap && MINIMAP_BRANCHES.has(entry.minimap)
                 ? (entry.minimap as ArchivedMinimapBranch)
                 : null,
+            hangar: /<(?:wwmusic|wwambientSound|bank)>[^<]*hangar/i.test(xml),
           };
           return { ...arena, retired };
         } catch {

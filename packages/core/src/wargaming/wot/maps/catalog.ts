@@ -48,7 +48,7 @@ const REDIS_TTL_SECONDS = 24 * 60 * 60;
 // resolution changes, since the names are resolved before the array is
 // serialized and a stale payload would keep serving the previous spelling (and
 // therefore the previous slugs) for a day.
-const SHAPE_VERSION = 6;
+const SHAPE_VERSION = 9;
 const redisKey = (region: Region) => `mapcatalog:v${SHAPE_VERSION}:${region}`;
 const cache = new Map<Region, { value: MapCatalog; expiresAt: number }>();
 // One build per region at a time, like the Clan Wars pool next door. The memo
@@ -297,19 +297,42 @@ async function buildMapCatalog(region: Region): Promise<MapCatalog> {
   const retiredRaw = archived.filter(
     (a) => !liveIds.has(a.arenaId) && !variantOf(a.arenaId)?.foldedIntoBase,
   );
-  const retiredIds = new Set(retiredRaw.map((a) => a.arenaId));
+  // Most of what the archive holds is not a map that left the game but a
+  // version of one: the event arenas are shipped under the map's own id plus a
+  // suffix (`18_cliff_rts_1x1` for Art of Strategy, `35_steppes_lunar_26`,
+  // `01_karelia_fp` in winter, the Steel Hunter `251_br_battle_city3_ls_2_0`),
+  // named after the map, and listed as retired cards they made the gallery a
+  // column of Cliffs, Airfields and Arzagirs beside the maps they copy. So an
+  // arena whose id extends a live map's is that map, and one that extends a
+  // retired map's is the same retired map shipped again: only the arena it
+  // extends is listed. Internal test spaces, the tutorials and the seasonal
+  // garages (which the client defines as arenas too) are no map at all.
+  const isVersionOf = (id: string, of: Iterable<string>) => {
+    for (const base of of) if (id.startsWith(`${base}_`)) return true;
+    return false;
+  };
+  const notMaps = /(?:^|_)(?:test|testmap|tutorial)(?:_|$)/i;
+  const archivedIds = archived.map((a) => a.arenaId);
+  const listedRetired = retiredRaw.filter(
+    (a) =>
+      !notMaps.test(a.arenaId) &&
+      !a.retired.hangar &&
+      !isVersionOf(a.arenaId, liveIds) &&
+      !isVersionOf(a.arenaId, archivedIds),
+  );
+  const retiredIds = new Set(listedRetired.map((a) => a.arenaId));
   const raw = live.filter((a) => a.hasDefinition || !retiredIds.has(a.arenaId));
   // Named in one pass so a retired variant borrows its base map's name
   // ("Murovanka (Waffenträger)") wherever that base is.
-  resolveArenaNames([...raw, ...retiredRaw]);
+  resolveArenaNames([...raw, ...listedRetired]);
   const arenas = dedupeByName(raw).sort((a, b) => a.name.localeCompare(b.name));
-  disambiguateRetired(retiredRaw, arenas);
+  disambiguateRetired(listedRetired, arenas);
   const payload: CatalogPayload = {
     arenas,
     testOnly: await findTestOnlyArenas(arenas.map((a) => a.arenaId)),
     // Deduped among themselves only: a retired map sharing a live map's name is
     // a different map that once carried it (the pre-1.0 Province).
-    retired: dedupeByName(retiredRaw).sort((a, b) => a.name.localeCompare(b.name)),
+    retired: dedupeByName(listedRetired).sort((a, b) => a.name.localeCompare(b.name)),
   };
   const value = catalogFromArenas(payload);
   cache.set(region, { value, expiresAt: Date.now() + CACHE_TTL_MS });

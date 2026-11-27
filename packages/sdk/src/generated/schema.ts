@@ -5047,7 +5047,7 @@ export interface components {
          * @description Top-level battle type a map belongs to.
          * @enum {string}
          */
-        mapBattleTypeField: "random" | "battle_royale" | "frontline" | "onslaught" | "onslaught_night" | "grand_battle" | "clan_wars" | "waffentrager" | "last_stand" | "black_signal" | "arcade" | "story_mode" | "training";
+        mapBattleTypeField: "random" | "battle_royale" | "frontline" | "onslaught" | "onslaught_night" | "grand_battle" | "clan_wars" | "waffentrager" | "last_stand" | "mapbox" | "black_signal" | "arcade" | "story_mode" | "training";
         mapBracketVerdict: {
             bracket: components["schemas"]["voterBracketField"];
             votes: number;

@@ -15,6 +15,7 @@ export enum BattleType {
   ClanWars = "clan_wars",
   Waffentrager = "waffentrager",
   LastStand = "last_stand",
+  Mapbox = "mapbox",
   // The event modes the client's packs declare, written by
   // `scripts/generate-event-modes` between these two lines. Edit above them.
   // generated:event-battle-types
@@ -41,6 +42,7 @@ export const BATTLE_TYPE_LABEL: Record<BattleType, string> = {
   [BattleType.ClanWars]: "Clan Wars",
   [BattleType.Waffentrager]: "Waffenträger",
   [BattleType.LastStand]: "Last Stand",
+  [BattleType.Mapbox]: "Mapbox",
   // generated:event-battle-type-labels
   [BattleType.BlackSignal]: "Black Signal",
   // end:event-battle-type-labels
@@ -114,6 +116,16 @@ const VARIANT_RULES: {
     re: /^(.*)_scc$/,
     tag: "Story Mode",
     battleType: BattleType.StoryMode,
+    foldedIntoBase: true,
+  },
+  // `_mb` = a map as the Mapbox survey played it (1.20.1, 1.26.1): the mode
+  // where players tried a reworked layout and rated it before it shipped. Its
+  // own arena under the map's own name, so listed apart it read as a second
+  // Himmelsdorf retired from the game; it is that map's test layout.
+  {
+    re: /^(.*)_mb$/,
+    tag: "Mapbox",
+    battleType: BattleType.Mapbox,
     foldedIntoBase: true,
   },
   // `_comp7_nb` = the night version of a map for Onslaught, shipped as its own

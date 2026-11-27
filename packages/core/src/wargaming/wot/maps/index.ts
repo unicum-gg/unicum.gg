@@ -69,10 +69,43 @@ export async function listMapSummaries(region: Region): Promise<MapSummary[]> {
 /** A URL slug or a bare arena id, resolved against the catalogue to the arena
  * it addresses. Undefined for an id the catalogue does not carry. */
 function arenaIdOf(catalog: MapCatalog, slug: string): string | undefined {
+  const key = slug.toLowerCase();
   return (
-    catalog.index.slugToId.get(slug.toLowerCase()) ??
-    (catalog.arenas.has(slug) ? slug : undefined)
+    catalog.index.slugToId.get(key) ??
+    (catalog.arenas.has(slug) ? slug : undefined) ??
+    formerVersionOf(catalog, key)
   );
+}
+
+/**
+ * The map a page that no longer exists was a version of, so its URL lands on
+ * that map rather than on a 404 (the caller then 308s to the canonical slug).
+ *
+ * Those pages are the event versions and repeat shipments the catalogue once
+ * listed as retired maps of their own, under three slug shapes: the map's name
+ * plus the version it left in (`steppes-2-1-1`) or a word (`karelia-winter`),
+ * and the humanized id of an arena that had no name (`18-cliff-rts-1x1`), whose
+ * id extends the map's (`18_cliff`). Only a known map is ever returned, so an
+ * unknown slug still reads as one.
+ */
+function formerVersionOf(catalog: MapCatalog, slug: string): string | undefined {
+  const named = /^(.+)-\d+-\d+-\d+$/.exec(slug);
+  if (named) {
+    const base = catalog.index.slugToId.get(named[1]);
+    if (base) return base;
+  }
+  const words = slug.split("-");
+  for (let end = words.length - 1; end > 0; end--) {
+    const base = catalog.index.slugToId.get(words.slice(0, end).join("-"));
+    if (base) return base;
+  }
+  const id = slug.replace(/-/g, "_");
+  let best: string | undefined;
+  for (const arenaId of catalog.arenas.keys()) {
+    const lower = arenaId.toLowerCase();
+    if (id.startsWith(`${lower}_`) && (!best || arenaId.length > best.length)) best = arenaId;
+  }
+  return best;
 }
 
 /** For a caller that reads no `battleTypes`: the one field the Clan Wars pool
